@@ -1,0 +1,10 @@
+{
+  "Name": "StardropPoolMinigame",
+  "Author": "andyruwruw",
+  "Version": "1.0.0",
+  "Description": "Play pool (8-ball) with NPC or a friend.",
+  "UniqueID": "andyruwruw.StardropPoolMinigame",
+  "EntryDll": "StardropPoolMinigame.dll",
+  "MinimumApiVersion": "3.0.0",
+  "UpdateKeys": []
+}

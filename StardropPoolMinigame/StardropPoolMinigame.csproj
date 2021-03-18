@@ -48,11 +48,44 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\BallType.cs" />
+    <Compile Include="Enums\GameKey.cs" />
+    <Compile Include="Enums\GameState.cs" />
+    <Compile Include="Objects\Ball.cs" />
+    <Compile Include="Objects\Cue.cs" />
+    <Compile Include="Objects\IBall.cs" />
+    <Compile Include="IPlayer.cs" />
+    <Compile Include="Objects\ICue.cs" />
+    <Compile Include="Objects\IPocket.cs" />
+    <Compile Include="Objects\ITable.cs" />
+    <Compile Include="ModEntry.cs" />
+    <Compile Include="Objects\Pocket.cs" />
+    <Compile Include="Objects\Table.cs" />
+    <Compile Include="Opponents\Gus.cs" />
+    <Compile Include="Opponents\IOpponent.cs" />
+    <Compile Include="Opponents\Sam.cs" />
+    <Compile Include="Opponents\Sebastian.cs" />
+    <Compile Include="Powerups\BigPockets.cs" />
+    <Compile Include="Powerups\Guards.cs" />
+    <Compile Include="Powerups\IPowerup.cs" />
+    <Compile Include="Powerups\Slam.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Render\StardewDrawDialogueScene.cs" />
+    <Compile Include="Render\StardewDrawSummaryScene.cs" />
+    <Compile Include="Render\StardewDrawTitleScreen.cs" />
+    <Compile Include="Render\IDraw.cs" />
+    <Compile Include="Render\IDrawFactory.cs" />
+    <Compile Include="Render\StardewDrawFactory.cs" />
+    <Compile Include="Render\StardewDrawGameScene.cs" />
+    <Compile Include="Scenes\IScene.cs" />
+    <Compile Include="StardropPoolMinigame.cs" />
+    <Compile Include="Scenes\TitleScene.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="manifest.json" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Pathoschild.Stardew.ModBuildConfig.3.2.2\build\Pathoschild.Stardew.ModBuildConfig.targets" Condition="Exists('..\packages\Pathoschild.Stardew.ModBuildConfig.3.2.2\build\Pathoschild.Stardew.ModBuildConfig.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
