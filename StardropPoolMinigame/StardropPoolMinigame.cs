@@ -15,23 +15,25 @@ namespace StardropPoolMinigame
 {
     class StardropPoolMinigame : IMinigame
     {
+        public static int screenWidth = 400;
+        public static int screenHeight = 220;
+
         private IScene _title;
         private IScene _dialogue;
         private IScene _game;
         private IScene _summary;
 
-        private IDraw _titleDrawer;
-        private IDraw _dialogueDrawer;
-        private IDraw _gameDrawer;
-        private IDraw _summaryDrawer;
+        private DrawProxy _drawer;
 
+        
         private GameState _gameState;
 
         public StardropPoolMinigame()
         {
             this.InitializeScenes();
-            this.InitializeRenderers();
             this.InitializeState();
+
+            this._drawer = new DrawProxy();
 
             this.GetCurrentScene().Start();
         }
@@ -89,13 +91,12 @@ namespace StardropPoolMinigame
 		public void draw(SpriteBatch b)
         {
             Console.Info("Trying to draw");
-            this.GetCurrentDrawer().draw(this.GetCurrentScene(), b);
+            this._drawer.draw(this._gameState, this.GetCurrentScene(), b);
         }
 
 		public void changeScreenSize()
         {
-            this.screenWidth = 400;
-            this.screenHeight = 220;
+            
         }
 
 		public void unload()
@@ -133,15 +134,6 @@ namespace StardropPoolMinigame
             this._summary = new SummaryScene();
         }
 
-        private void InitializeRenderers()
-        {
-            IDrawFactory drawFactory = new StardewDrawFactory();
-            this._titleDrawer = drawFactory.GetTitleSceneDrawer();
-            this._dialogueDrawer = drawFactory.GetDialogueSceneDrawer();
-            this._gameDrawer = drawFactory.GetGameSceneDrawer();
-            this._summaryDrawer = drawFactory.GetSummarySceneDrawer();
-        }
-
         private void InitializeState()
         {
             this._gameState = GameState.Title;
@@ -161,23 +153,6 @@ namespace StardropPoolMinigame
                     return this._summary;
                 default:
                     return this._title;
-            }
-        }
-
-        private IDraw GetCurrentDrawer()
-        {
-            switch (this._gameState)
-            {
-                case GameState.Prebattle:
-                    return this._dialogueDrawer;
-                case GameState.Ingame:
-                    return this._gameDrawer;
-                case GameState.Postbattle:
-                    return this._dialogueDrawer;
-                case GameState.Summary:
-                    return this._summaryDrawer;
-                default:
-                    return this._titleDrawer;
             }
         }
     }

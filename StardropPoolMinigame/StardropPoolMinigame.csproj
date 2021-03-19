@@ -73,6 +73,7 @@
     <Compile Include="Powerups\IPowerup.cs" />
     <Compile Include="Powerups\Slam.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Render\DrawProxy.cs" />
     <Compile Include="Render\StardewDrawDialogueScene.cs" />
     <Compile Include="Render\StardewDrawSummaryScene.cs" />
     <Compile Include="Render\StardewDrawTitleScreen.cs" />
