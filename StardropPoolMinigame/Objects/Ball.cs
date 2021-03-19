@@ -1,9 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StardropPoolMinigame.Objects
 {
@@ -15,15 +10,11 @@ namespace StardropPoolMinigame.Objects
 
         private Point _motion;
 
-        private Color _color;
+        private int _number;
 
-        private BallType _type;
-
-        public Ball(Color color, BallType type)
+        public Ball(int number)
         {
-            this._color = color;
-            this._type = type;
-
+            this._number = number;
             this._position = new Point(0, 0);
             this._motion = new Point(0, 0);
         }
@@ -38,9 +29,41 @@ namespace StardropPoolMinigame.Objects
             return this._motion;
         }
 
+        public int GetNumber()
+        {
+            return this._number;
+        }
+
         public Color GetColor()
         {
-            return this._color;
+            switch ((this._number - 1) % 8)
+            {
+                case 0:
+                    return Color.Yellow;
+                case 1:
+                    return Color.Blue;
+                case 2:
+                    return Color.Red;
+                case 3:
+                    return Color.Purple;
+                case 4:
+                    return Color.Orange;
+                case 5:
+                    return Color.Green;
+                case 6:
+                    return Color.Maroon;
+                default:
+                    return Color.Black;
+            }
+        }
+
+        public BallType GetBallType()
+        {
+            if (this._number <= 8)
+            {
+                return BallType.Solid;
+            }
+            return BallType.Stripped;
         }
     }
 }

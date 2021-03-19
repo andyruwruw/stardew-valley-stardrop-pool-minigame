@@ -16,7 +16,8 @@ namespace StardropPoolMinigame.Scenes
 
         public void Start()
         {
-            Game1.changeMusicTrack("poppy");
+            Console.Info("Starting");
+            Game1.changeMusicTrack("poppy", track_interruptable: false, Game1.MusicContext.MiniGame);
         }
     }
 }

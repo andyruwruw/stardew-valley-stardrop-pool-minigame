@@ -19,6 +19,7 @@ namespace StardropPoolMinigame
 
         public override void Entry(IModHelper helper)
         {
+            Console.SetMonitor(this.Monitor);
             helper.Events.Input.ButtonPressed += this.OnButtonPressed;
         }
 
@@ -35,8 +36,8 @@ namespace StardropPoolMinigame
 
         private void startGame()
         {
-            
-            this.Monitor.Log("Hello pool table", LogLevel.Info);
+            Console.Info("Hello pool table");
+            Game1.currentMinigame = new StardropPoolMinigame();
         }
 
         private bool IsPoolTable()

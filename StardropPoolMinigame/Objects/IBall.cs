@@ -9,5 +9,14 @@ namespace StardropPoolMinigame
 {
     interface IBall
     {
+        Point GetPosition();
+
+        Point GetMotion();
+
+        int GetNumber();
+
+        Color GetColor();
+
+        BallType GetBallType();
     }
 }

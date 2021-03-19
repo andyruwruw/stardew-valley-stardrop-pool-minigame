@@ -14,7 +14,7 @@ namespace StardropPoolMinigame.Render
 
         public void draw(IScene scene, SpriteBatch batch)
         {
-            throw new NotImplementedException();
+            Console.Info("Draw");
         }
     }
 }

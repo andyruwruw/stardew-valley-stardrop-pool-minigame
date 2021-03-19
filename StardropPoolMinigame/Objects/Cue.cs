@@ -15,10 +15,7 @@ namespace StardropPoolMinigame.Objects
 
         private Point _power;
 
-        public Cue()
-        {
-
-        }
+        public Cue() { }
 
         public void SetAnchor(Point anchor)
         {
@@ -33,10 +30,6 @@ namespace StardropPoolMinigame.Objects
         public void SetPower(Point power)
         {
             this._power = power;
-        }
-
-        public void Reset()
-        {
         }
     }
 }
