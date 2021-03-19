@@ -77,7 +77,10 @@
     <Compile Include="Render\IDrawFactory.cs" />
     <Compile Include="Render\StardewDrawFactory.cs" />
     <Compile Include="Render\StardewDrawGameScene.cs" />
+    <Compile Include="Scenes\DialogueScene.cs" />
+    <Compile Include="Scenes\GameScene.cs" />
     <Compile Include="Scenes\IScene.cs" />
+    <Compile Include="Scenes\SummaryScene.cs" />
     <Compile Include="StardropPoolMinigame.cs" />
     <Compile Include="Scenes\TitleScene.cs" />
   </ItemGroup>
