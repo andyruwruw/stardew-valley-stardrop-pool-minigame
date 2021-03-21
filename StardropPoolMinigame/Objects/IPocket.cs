@@ -8,5 +8,6 @@ namespace StardropPoolMinigame
 {
     interface IPocket
     {
+        int GetId();
     }
 }

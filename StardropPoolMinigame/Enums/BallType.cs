@@ -10,5 +10,7 @@ namespace StardropPoolMinigame
     {
         Solid,
         Stripped,
+        Any,
+        White,
     }
 }

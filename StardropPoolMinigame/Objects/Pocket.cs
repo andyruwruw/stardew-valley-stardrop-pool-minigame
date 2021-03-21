@@ -8,5 +8,16 @@ namespace StardropPoolMinigame.Objects
 {
     class Pocket : IPocket
     {
+        private int _id;
+
+        public Pocket(int id)
+        {
+            this._id = id;
+        }
+
+        public int GetId()
+        {
+            return this._id;
+        }
     }
 }

@@ -5,19 +5,11 @@ using StardewValley;
 using StardewValley.Minigames;
 using StardropPoolMinigame.Render;
 using StardropPoolMinigame.Scenes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StardropPoolMinigame
 {
     class StardropPoolMinigame : IMinigame
     {
-        public static int screenWidth = 400;
-        public static int screenHeight = 220;
-
         private IScene _title;
         private IScene _dialogue;
         private IScene _game;
@@ -30,62 +22,102 @@ namespace StardropPoolMinigame
 
         public StardropPoolMinigame()
         {
+            Console.Info("Init");
             this.InitializeScenes();
             this.InitializeState();
 
             this._drawer = new DrawProxy();
 
+            this._drawer.changeScreenSize();
+            Console.Info("Finished Init");
             this.GetCurrentScene().Start();
         }
 
 		public bool tick(GameTime time)
         {
-            return true;
+            Console.Info("Tick");
+            return false;
         }
 
 		public bool overrideFreeMouseMovement()
         {
+            Console.Info("Override Free Mouse Movement");
             return true;
         }
 
 		public bool doMainGameUpdates()
         {
+            Console.Info("Do Main Game Updates");
+
+            if (this.GetCurrentScene().HasNewScene())
+            {
+                Console.Info("New Scene");
+                IScene newScene = this.GetCurrentScene().GetNewScene();
+
+                if (newScene is TitleScene)
+                {
+                    Console.Info("Title");
+                    this._title = newScene;
+                    this._gameState = GameState.Title;
+                } else if (newScene is DialogueScene && this.GetCurrentScene() is TitleScene)
+                {
+                    Console.Info("PreBattle");
+                    this._dialogue = newScene;
+                    this._gameState = GameState.Prebattle;
+                } else if (newScene is DialogueScene && this.GetCurrentScene() is GameScene)
+                {
+                    Console.Info("PostBattle");
+                    this._dialogue = newScene;
+                    this._gameState = GameState.Postbattle;
+                } else if (newScene is GameScene)
+                {
+                    Console.Info("Game");
+                    this._game = newScene;
+                    this._gameState = GameState.Ingame;
+                } else if (newScene is SummaryScene)
+                {
+                    Console.Info("Summary");
+                    this._summary = newScene;
+                    this._gameState = GameState.Summary;
+                }
+            }
             return false;
         }
 
 		public void receiveLeftClick(int x, int y, bool playSound = true)
         {
-
+            Console.Info("Recieved Left Click");
+            this.GetCurrentScene().ReceiveLeftClick(x, y, playSound);
         }
 
 		public void leftClickHeld(int x, int y)
         {
-
+            Console.Info("Recieved Left Click Held");
         }
 
 		public void receiveRightClick(int x, int y, bool playSound = true)
         {
-
+            Console.Info("Recieved Right Click");
         }
 
 		public void releaseLeftClick(int x, int y)
         {
-
+            Console.Info("Recieved Left Click Release");
         }
 
 		public void releaseRightClick(int x, int y)
         {
-
+            Console.Info("Recieved Right Click Release");
         }
 
 		public void receiveKeyPress(Keys k)
         {
-
+            Console.Info("Recieved Key press");
         }
 
 		public void receiveKeyRelease(Keys k)
         {
-
+            Console.Info("Recieved Key release");
         }
 
 		public void draw(SpriteBatch b)
@@ -96,18 +128,20 @@ namespace StardropPoolMinigame
 
 		public void changeScreenSize()
         {
-            
+            Console.Info("Change Screen Size");
+            this._drawer.changeScreenSize();
         }
 
 		public void unload()
         {
+            Console.Info("Unload");
             Game1.stopMusicTrack(Game1.MusicContext.MiniGame);
             Game1.player.faceDirection(0);
         }
 
 		public void receiveEventPoke(int data)
         {
-
+            Console.Info("Recieved Event Poke");
         }
 
 		public string minigameId()
@@ -117,6 +151,7 @@ namespace StardropPoolMinigame
 
 		public bool forceQuit()
         {
+            Console.Info("Force Quit");
             this.unload();
             return true;
         }

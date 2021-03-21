@@ -7,7 +7,12 @@ using System.Threading.Tasks;
 
 namespace StardropPoolMinigame
 {
-    class IPlayer
+    interface IPlayer
     {
+        bool IsComputer();
+
+        void SetBallType(BallType ballType);
+
+        BallType GetBallType();
     }
 }

@@ -1,32 +1,56 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using StardewValley;
 
 namespace StardropPoolMinigame.Objects
 {
     class Ball : IBall
     {
-        public static int radius = 5;
+        public static int Radius = 5;
 
-        private Point _position;
+        private Vector2 _position;
 
-        private Point _motion;
+        private Vector2 _velocity;
+
+        private Vector2 _acceleration;
 
         private int _number;
 
-        public Ball(int number)
+        public Ball(int number, Vector2 position)
         {
             this._number = number;
-            this._position = new Point(0, 0);
-            this._motion = new Point(0, 0);
+            this._position = position;
+            this._velocity = new Vector2(0, 0);
+            this._acceleration = new Vector2(0, 0);
         }
 
-        public Point GetPosition()
+        public void Update()
+        {
+            this._position = Vector2.Add(this._position, this._velocity);
+            this._velocity = Vector2.Add(this._velocity, this._acceleration);
+
+            this.UpdateAcceleration();
+        }
+
+        public void UpdateAcceleration()
+        {
+            this._acceleration = new Vector2(0, 0);
+            
+        }
+
+        public void Draw(SpriteBatch batch)
+        {
+            batch.Draw(Game1.staminaRect, new Microsoft.Xna.Framework.Rectangle((int)this._position.X, (int)this._position.Y, Ball.Radius, Ball.Radius), Game1.staminaRect.Bounds, Color.Blue, 0f, Vector2.Zero, SpriteEffects.None, 0.0001f);
+        }
+
+        public Vector2 GetPosition()
         {
             return this._position;
         }
 
-        public Point GetMotion()
+        public Vector2 GetVelocity()
         {
-            return this._motion;
+            return this._velocity;
         }
 
         public int GetNumber()
@@ -36,6 +60,11 @@ namespace StardropPoolMinigame.Objects
 
         public Color GetColor()
         {
+            if (this._number == 0)
+            {
+                return Color.White;
+            }
+
             switch ((this._number - 1) % 8)
             {
                 case 0:
@@ -59,6 +88,11 @@ namespace StardropPoolMinigame.Objects
 
         public BallType GetBallType()
         {
+            if (this._number == 0)
+            {
+                return BallType.White;
+            }
+
             if (this._number <= 8)
             {
                 return BallType.Solid;

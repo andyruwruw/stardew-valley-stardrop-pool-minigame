@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StardropPoolMinigame
+namespace StardropPoolMinigame.Enums
 {
-    public enum GameKey
+    public enum MainEvent
     {
-
+        GameScene,
     }
 }

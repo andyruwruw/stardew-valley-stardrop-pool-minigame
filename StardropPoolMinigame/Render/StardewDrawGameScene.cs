@@ -1,10 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using StardropPoolMinigame.Scenes;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StardropPoolMinigame.Render
 {
@@ -14,7 +10,12 @@ namespace StardropPoolMinigame.Render
 
         public void draw(IScene scene, SpriteBatch batch)
         {
-            throw new NotImplementedException();
+            IList<IBall> balls = ((GameScene)scene).GetBalls();
+
+            foreach (IBall ball in balls)
+            {
+                ball.Draw(batch);
+            }
         }
     }
 }

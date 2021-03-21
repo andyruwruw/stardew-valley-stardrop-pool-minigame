@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StardropPoolMinigame.Structures;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,10 +9,12 @@ namespace StardropPoolMinigame.Rules
 {
     interface IRules
     {
-        IBall[] GenerateInitialBalls();
+        QuadTree GenerateInitialBalls();
 
-        GameEvent BallPocketed(IBall[] ball, IPocket pocket, IBall[] remaining, IPocket target = null);
+        ITable GenerateTable();
 
-        GameEvent[] NoBallHit(IBall[] remaining);
+        IList<GameEvent> BallPocketed(IPlayer player, IList<IBall> balls, IPocket pocket, IList<IBall> remaining, IPocket target = null);
+
+        IList<GameEvent> NoBallHit(IList<IBall> remaining);
     }
 }

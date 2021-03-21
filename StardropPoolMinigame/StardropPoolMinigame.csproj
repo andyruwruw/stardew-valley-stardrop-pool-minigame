@@ -50,23 +50,26 @@
   <ItemGroup>
     <Compile Include="Enums\BallType.cs" />
     <Compile Include="Enums\GameEvent.cs" />
-    <Compile Include="Enums\GameKey.cs" />
     <Compile Include="Enums\GameState.cs" />
+    <Compile Include="Enums\MainEvent.cs" />
     <Compile Include="Helpers\Monitor.cs" />
+    <Compile Include="Helpers\PointVector.cs" />
     <Compile Include="Objects\Ball.cs" />
     <Compile Include="Objects\Cue.cs" />
     <Compile Include="Objects\IBall.cs" />
-    <Compile Include="IPlayer.cs" />
+    <Compile Include="Player\IPlayer.cs" />
     <Compile Include="Objects\ICue.cs" />
     <Compile Include="Objects\IPocket.cs" />
     <Compile Include="Objects\ITable.cs" />
     <Compile Include="ModEntry.cs" />
     <Compile Include="Objects\Pocket.cs" />
     <Compile Include="Objects\Table.cs" />
+    <Compile Include="Opponents\Abigail.cs" />
     <Compile Include="Opponents\Gus.cs" />
     <Compile Include="Opponents\IOpponent.cs" />
     <Compile Include="Opponents\Sam.cs" />
     <Compile Include="Opponents\Sebastian.cs" />
+    <Compile Include="Player\Player.cs" />
     <Compile Include="Powerups\BigPockets.cs" />
     <Compile Include="Powerups\GhostBall.cs" />
     <Compile Include="Powerups\Guards.cs" />
@@ -89,6 +92,10 @@
     <Compile Include="Scenes\SummaryScene.cs" />
     <Compile Include="StardropPoolMinigame.cs" />
     <Compile Include="Scenes\TitleScene.cs" />
+    <Compile Include="Structures\Circle.cs" />
+    <Compile Include="Structures\IRange.cs" />
+    <Compile Include="Structures\QuadTree.cs" />
+    <Compile Include="Structures\Rectangle.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="manifest.json" />

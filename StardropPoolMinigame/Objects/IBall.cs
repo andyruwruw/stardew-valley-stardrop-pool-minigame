@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,11 @@ namespace StardropPoolMinigame
 {
     interface IBall
     {
-        Point GetPosition();
+        void Draw(SpriteBatch batch);
 
-        Point GetMotion();
+        Vector2 GetPosition();
+
+        Vector2 GetVelocity();
 
         int GetNumber();
 

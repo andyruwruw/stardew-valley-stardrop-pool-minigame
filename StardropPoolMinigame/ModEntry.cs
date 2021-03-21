@@ -28,7 +28,7 @@ namespace StardropPoolMinigame
             if (!Context.IsWorldReady)
                 return;
 
-            if (e.Button.IsActionButton() && this.IsPoolTable())
+            if (e.Button.IsActionButton()) //  && this.IsPoolTable()
             {
                 this.startGame();
             }
