@@ -12,7 +12,7 @@ namespace StardropPoolMinigame.Render
     {
         public StardewDrawSummaryScene() { }
 
-        public void draw(IScene scene, SpriteBatch batch)
+        public void Draw(IScene scene, SpriteBatch batch)
         {
             throw new NotImplementedException();
         }

@@ -8,18 +8,18 @@ using StardewModdingAPI.Utilities;
 using StardewValley;
 using StardewValley.Objects;
 using StardewValley.TerrainFeatures;
+using StardropPoolMinigame.Messages;
 using xTile.Tiles;
 
 namespace StardropPoolMinigame
 {
     public class ModEntry : Mod
     {
-        private IList IS_POOL_TABLE_FRONT = new List<int>() { 1415, 1416, 1417, 1418, 1419 };
-        private IList IS_POOL_TABLE_BUILDING = new List<int>() { 1447, 1448, 1449, 1450, 1451, 1479, 1480, 1481, 1482, 1483 };
-
         public override void Entry(IModHelper helper)
         {
+            Multiplayer.SetHelper(helper);
             Console.SetMonitor(this.Monitor);
+
             helper.Events.Input.ButtonPressed += this.OnButtonPressed;
         }
 
@@ -28,7 +28,7 @@ namespace StardropPoolMinigame
             if (!Context.IsWorldReady)
                 return;
 
-            if (e.Button.IsActionButton()) //  && this.IsPoolTable()
+            if (e.Button.IsActionButton()) //  && PoolTableDetector.IsPoolTable()
             {
                 this.startGame();
             }
@@ -36,26 +36,24 @@ namespace StardropPoolMinigame
 
         private void startGame()
         {
-            Console.Info("Hello pool table");
             Game1.currentMinigame = new StardropPoolMinigame();
         }
 
-        private bool IsPoolTable()
+        private void OnModMessageRecieved(object sender, ModMessageReceivedEventArgs e)
         {
-            Vector2 mousePosition = Utility.PointToVector2(Game1.getMousePosition()) + new Vector2(Game1.viewport.X, Game1.viewport.Y);
-            int clickX = (int)Math.Floor(mousePosition.X / Game1.tileSize) * 64;
-            int clickY = (int)Math.Floor(mousePosition.Y / Game1.tileSize) * 64;
-
-            Tile front = Game1.currentLocation.map.GetLayer("Front").PickTile(new xTile.Dimensions.Location(clickX, clickY), Game1.viewport.Size);
-            Tile building = Game1.currentLocation.map.GetLayer("Buildings").PickTile(new xTile.Dimensions.Location(clickX, clickY), Game1.viewport.Size);
-
-            if ((front != null && IS_POOL_TABLE_FRONT.Contains(front.TileIndex)) ||
-                building != null && IS_POOL_TABLE_BUILDING.Contains(building.TileIndex))
+            if (e.FromModID == this.ModManifest.UniqueID)
             {
-                return true;
-            }
+                IModMessage message;
 
-            return false;
+                switch(e.Type)
+                {
+                    case "Test":
+                        message = e.ReadAs<IModMessage>();
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
     }
 }

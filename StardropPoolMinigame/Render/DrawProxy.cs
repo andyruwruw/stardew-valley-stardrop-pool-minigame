@@ -38,24 +38,22 @@ namespace StardropPoolMinigame.Render
         {
             batch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend, SamplerState.PointClamp, null, null);
 
-            batch.Draw(Game1.staminaRect, new Rectangle((int)this._upperLeft.X, (int)this._upperLeft.Y, DrawProxy.screenWidth, DrawProxy.screenHeight), Game1.staminaRect.Bounds, Color.Red, 0f, Vector2.Zero, SpriteEffects.None, 0.0001f);
-
             switch (state)
             {
                 case GameState.Prebattle:
-                    this._dialogueDrawer.draw(scene, batch);
+                    this._dialogueDrawer.Draw(scene, batch);
                     break;
                 case GameState.Ingame:
-                    this._gameDrawer.draw(scene, batch);
+                    this._gameDrawer.Draw(scene, batch);
                     break;
                 case GameState.Postbattle:
-                    this._dialogueDrawer.draw(scene, batch);
+                    this._dialogueDrawer.Draw(scene, batch);
                     break;
                 case GameState.Summary:
-                    this._summaryDrawer.draw(scene, batch);
+                    this._summaryDrawer.Draw(scene, batch);
                     break;
                 default:
-                    this._titleDrawer.draw(scene, batch);
+                    this._titleDrawer.Draw(scene, batch);
                     break;
             }
 

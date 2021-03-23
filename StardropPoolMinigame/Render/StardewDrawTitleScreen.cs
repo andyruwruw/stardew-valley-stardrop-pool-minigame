@@ -22,9 +22,9 @@ namespace StardropPoolMinigame.Render
             this.townInterior = Game1.content.Load<Texture2D>("Maps\\townInterior");
         }
 
-        public void draw(IScene scene, SpriteBatch batch)
+        public void Draw(IScene scene, SpriteBatch batch)
         {
-            Console.Info("Draw");
+
         }
 
         private void DrawBackground(IScene scene, SpriteBatch batch)

@@ -4,17 +4,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StardropPoolMinigame.Player
+namespace StardropPoolMinigame.Players
 {
     class Player : IPlayer
     {
+        private string _name;
+
+        private bool _isMe;
+
         private bool _isComputer;
+
+        private long _playerId;
 
         private BallType _ballType;
 
-        public Player(bool isComputer)
+        private string _music;
+
+        public Player(string name, bool isMe, bool isComputer, long playerId, string music = "movieTheater")
         {
+            this._name = name;
+            this._isMe = isMe;
             this._isComputer = isComputer;
+            this._playerId = playerId;
+            this._music = music;
         }
 
         public bool IsComputer()
@@ -30,6 +42,21 @@ namespace StardropPoolMinigame.Player
         public BallType GetBallType()
         {
             return this._ballType;
+        }
+
+        public virtual string GetMusicId()
+        {
+            return this._music;
+        }
+
+        public bool IsMe()
+        {
+            throw new NotImplementedException();
+        }
+
+        public long GetPlayerId()
+        {
+            throw new NotImplementedException();
         }
     }
 }

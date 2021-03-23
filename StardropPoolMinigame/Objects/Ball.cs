@@ -6,7 +6,7 @@ namespace StardropPoolMinigame.Objects
 {
     class Ball : IBall
     {
-        public static int Radius = 5;
+        public static int Radius = 15;
 
         private Vector2 _position;
 
@@ -40,7 +40,7 @@ namespace StardropPoolMinigame.Objects
 
         public void Draw(SpriteBatch batch)
         {
-            batch.Draw(Game1.staminaRect, new Microsoft.Xna.Framework.Rectangle((int)this._position.X, (int)this._position.Y, Ball.Radius, Ball.Radius), Game1.staminaRect.Bounds, Color.Blue, 0f, Vector2.Zero, SpriteEffects.None, 0.0001f);
+            batch.Draw(Game1.staminaRect, new Microsoft.Xna.Framework.Rectangle((int)this._position.X, (int)this._position.Y, Ball.Radius, Ball.Radius), Game1.staminaRect.Bounds, this.GetColor(), 0f, Vector2.Zero, SpriteEffects.None, 0.0001f);
         }
 
         public Vector2 GetPosition()

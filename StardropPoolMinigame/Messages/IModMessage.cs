@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StardropPoolMinigame.Opponents
+namespace StardropPoolMinigame.Messages
 {
-    class Sebastian : IOpponent
+    public interface IModMessage
     {
+        string GetMessageType();
     }
 }

@@ -1,5 +1,6 @@
 ﻿using StardewValley;
 using StardropPoolMinigame.Objects;
+using StardropPoolMinigame.Players;
 using StardropPoolMinigame.Rules;
 using StardropPoolMinigame.Structures;
 using System;
@@ -10,19 +11,19 @@ using System.Threading.Tasks;
 
 namespace StardropPoolMinigame.Scenes
 {
-    class GameScene : IScene
+    class GameScene : Scene
     {
         private IRules _rules;
-
-        private bool _hasNewScene;
-
-        private IScene _newScene;
 
         private ITable _table;
 
         private QuadTree _balls;
 
-        public GameScene(IRules rules = null)
+        private IList<IPlayer> _players;
+
+        private int turn;
+
+        public GameScene(IPlayer player1, IPlayer player2, IRules rules = null) : base()
         {
             if (rules == null)
             {
@@ -34,26 +35,28 @@ namespace StardropPoolMinigame.Scenes
 
             this._table = this._rules.GenerateTable();
             this._balls = this._rules.GenerateInitialBalls();
+
+            this._players = new List<IPlayer>();
+            this._players.Add(player1);
+            this._players.Add(player2);
+
+            if (player2.IsComputer())
+            {
+                turn = 0;
+            } else
+            {
+                Random rnd = new Random();
+                turn = rnd.Next(0, 2);
+            }
         }
 
-        public void Start()
+        public override void Start()
         {
-            Game1.changeMusicTrack("poppy");
+            Game1.changeMusicTrack("ragtime");
         }
 
-        public void ReceiveLeftClick(int x, int y, bool playSound = true)
+        public override void ReceiveLeftClick(int x, int y, bool playSound = true)
         {
-        }
-
-        public bool HasNewScene()
-        {
-            return this._hasNewScene;
-        }
-
-        public IScene GetNewScene()
-        {
-            this._hasNewScene = false;
-            return this._newScene;
         }
 
         public IList<IBall> GetBalls()

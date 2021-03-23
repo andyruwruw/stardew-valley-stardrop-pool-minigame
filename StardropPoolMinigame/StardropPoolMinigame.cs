@@ -35,20 +35,16 @@ namespace StardropPoolMinigame
 
 		public bool tick(GameTime time)
         {
-            Console.Info("Tick");
             return false;
         }
 
 		public bool overrideFreeMouseMovement()
         {
-            Console.Info("Override Free Mouse Movement");
             return true;
         }
 
 		public bool doMainGameUpdates()
         {
-            Console.Info("Do Main Game Updates");
-
             if (this.GetCurrentScene().HasNewScene())
             {
                 Console.Info("New Scene");
@@ -112,7 +108,7 @@ namespace StardropPoolMinigame
 
 		public void receiveKeyPress(Keys k)
         {
-            Console.Info("Recieved Key press");
+            Console.Info($"Recieved Key press {k.GetType()} {k.GetTypeCode()} {k.ToString()}");
         }
 
 		public void receiveKeyRelease(Keys k)
@@ -122,7 +118,6 @@ namespace StardropPoolMinigame
 
 		public void draw(SpriteBatch b)
         {
-            Console.Info("Trying to draw");
             this._drawer.draw(this._gameState, this.GetCurrentScene(), b);
         }
 
@@ -164,9 +159,6 @@ namespace StardropPoolMinigame
         private void InitializeScenes()
         {
             this._title = new TitleScene();
-            this._dialogue = new DialogueScene();
-            this._game = new GameScene();
-            this._summary = new SummaryScene();
         }
 
         private void InitializeState()

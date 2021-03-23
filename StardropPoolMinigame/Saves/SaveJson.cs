@@ -4,9 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StardropPoolMinigame.Opponents
+namespace StardropPoolMinigame.Saves
 {
-    class Sam : IOpponent
+    class SaveJson
     {
+        public SaveJson()
+        {
+
+        }
     }
 }

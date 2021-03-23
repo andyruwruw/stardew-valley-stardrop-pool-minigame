@@ -1,4 +1,5 @@
-﻿using StardropPoolMinigame.Structures;
+﻿using StardropPoolMinigame.Players;
+using StardropPoolMinigame.Structures;
 using System;
 using System.Collections.Generic;
 using System.Linq;

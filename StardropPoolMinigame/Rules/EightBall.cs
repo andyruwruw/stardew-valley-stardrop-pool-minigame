@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using StardropPoolMinigame.Objects;
+using StardropPoolMinigame.Players;
 using StardropPoolMinigame.Structures;
 using System;
 using System.Collections.Generic;
@@ -25,15 +26,18 @@ namespace StardropPoolMinigame.Rules
 
             int diamond = width / 8;
 
-            QuadTree balls = new QuadTree(new Structures.Rectangle(0, 0, width, height));
+            QuadTree balls = new QuadTree(new Structures.Rectangle(Table.Width / 2, Table.Height / 2, width, height));
+            int count = 0;
 
             // White
-            balls.Insert(new Ball(0, new Vector2(diamond * 2, height / 2)));
+            balls.Insert(new Ball(count, new Vector2(diamond * 2, height / 2)));
+            count += 1;
 
-            int ballsCreated = 2;
             Queue<Tuple<bool, IBall>> regularBalls = new Queue<Tuple<bool, IBall>>();
+            
 
-            regularBalls.Enqueue(new Tuple<bool, IBall>(true, new Ball(1, new Vector2(diamond * 6, height / 2))));
+            regularBalls.Enqueue(new Tuple<bool, IBall>(true, new Ball(count, new Vector2(diamond * 6, height / 2))));
+            count += 1;
 
             do
             {
@@ -41,21 +45,21 @@ namespace StardropPoolMinigame.Rules
                 bool isLeft = nextItem.Item1;
                 IBall current = nextItem.Item2;
 
-                if (ballsCreated < 15)
+                if (balls.Count < 16)
                 {
                     balls.Insert(current);
 
-                    // Create right
-                    regularBalls.Enqueue(new Tuple<bool, IBall>(false, new Ball(ballsCreated, Vector2.Add(current.GetPosition(), new Vector2((float)Math.Sqrt(Math.Pow(Ball.Radius * 2, 2) - Math.Pow(Ball.Radius, 2)), Ball.Radius)))));
-                    ballsCreated += 1;
-
                     if (isLeft)
                     {
-                        regularBalls.Enqueue(new Tuple<bool, IBall>(true, new Ball(ballsCreated, Vector2.Add(current.GetPosition(), new Vector2((float)Math.Sqrt(Math.Pow(Ball.Radius * 2, 2) - Math.Pow(Ball.Radius, 2)), Ball.Radius * -1)))));
-                        ballsCreated += 1;
+                        regularBalls.Enqueue(new Tuple<bool, IBall>(true, new Ball(this.GetNumberFromCount(count), Vector2.Add(current.GetPosition(), new Vector2((float)Math.Sqrt(Math.Pow(Ball.Radius * 2, 2) - Math.Pow(Ball.Radius, 2)), Ball.Radius)))));
+                        count += 1;
                     }
+
+                    // Create right
+                    regularBalls.Enqueue(new Tuple<bool, IBall>(false, new Ball(this.GetNumberFromCount(count), Vector2.Add(current.GetPosition(), new Vector2((float)Math.Sqrt(Math.Pow(Ball.Radius * 2, 2) - Math.Pow(Ball.Radius, 2)), Ball.Radius * -1)))));
+                    count += 1;
                 }
-            } while (regularBalls.Count > 0 && ballsCreated < 15);
+            } while (regularBalls.Count > 0 && balls.Count < 16);
 
             return balls;
         }
@@ -99,7 +103,6 @@ namespace StardropPoolMinigame.Rules
                     } else
                     {
                         bool lost = false;
-                        bool won = false;
 
                         foreach (IBall ball in remaining)
                         {
@@ -147,6 +150,21 @@ namespace StardropPoolMinigame.Rules
             IList<GameEvent> events = new List<GameEvent>();
             events.Add(GameEvent.Scratch);
             return events;
+        }
+
+        private int GetNumberFromCount(int count)
+        {
+            if (count < 5)
+            {
+                return count;
+            } else if (count == 5)
+            {
+                return 8;
+            } else if (count > 5 && count < 9)
+            {
+                return count - 1;
+            }
+            return count;
         }
     }
 }

@@ -1,4 +1,7 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using StardewValley;
+using StardropPoolMinigame.Objects;
 using StardropPoolMinigame.Scenes;
 using System.Collections.Generic;
 
@@ -8,8 +11,10 @@ namespace StardropPoolMinigame.Render
     {
         public StardewDrawGameScene() { }
 
-        public void draw(IScene scene, SpriteBatch batch)
+        public void Draw(IScene scene, SpriteBatch batch)
         {
+            ((GameScene)scene).GetTable().Draw(batch);
+
             IList<IBall> balls = ((GameScene)scene).GetBalls();
 
             foreach (IBall ball in balls)

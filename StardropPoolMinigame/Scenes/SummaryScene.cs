@@ -7,35 +7,20 @@ using System.Threading.Tasks;
 
 namespace StardropPoolMinigame.Scenes
 {
-    class SummaryScene : IScene
+    class SummaryScene : Scene
     {
-        private bool _hasNewScene;
-
-        private IScene _newScene;
-
-        public SummaryScene()
+        public SummaryScene() : base()
         {
 
         }
 
-        public void Start()
+        public override void Start()
         {
             Game1.changeMusicTrack("poppy");
         }
 
-        public void ReceiveLeftClick(int x, int y, bool playSound = true)
+        public override void ReceiveLeftClick(int x, int y, bool playSound = true)
         {
-        }
-
-        public bool HasNewScene()
-        {
-            return this._hasNewScene;
-        }
-
-        public IScene GetNewScene()
-        {
-            this._hasNewScene = false;
-            return this._newScene;
         }
     }
 }

@@ -10,6 +10,6 @@ namespace StardropPoolMinigame.Render
 {
     interface IDraw
     {
-        void draw(IScene scene, SpriteBatch batch);
+        void Draw(IScene scene, SpriteBatch batch);
     }
 }
