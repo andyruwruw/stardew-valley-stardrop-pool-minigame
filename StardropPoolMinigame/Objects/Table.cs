@@ -17,7 +17,7 @@ namespace StardropPoolMinigame.Objects
 
         public void Draw(SpriteBatch batch)
         {
-            batch.Draw(Game1.staminaRect, new Rectangle(0, 0, Table.Width, Table.Height), Game1.staminaRect.Bounds, Color.Purple, 0f, Vector2.Zero, SpriteEffects.None, 0.0001f);
+            batch.Draw(Game1.staminaRect, new Rectangle(0, 0, Table.Width, Table.Height), Game1.staminaRect.Bounds, Color.Gray, 0f, Vector2.Zero, SpriteEffects.None, 0.0001f);
         }
     }
 }

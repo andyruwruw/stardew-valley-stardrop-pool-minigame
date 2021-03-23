@@ -21,7 +21,9 @@ namespace StardropPoolMinigame.Scenes
 
         private IList<IPlayer> _players;
 
-        private int turn;
+        private int _turn;
+
+        private TurnState _turnState;
 
         public GameScene(IPlayer player1, IPlayer player2, IRules rules = null) : base()
         {
@@ -42,17 +44,19 @@ namespace StardropPoolMinigame.Scenes
 
             if (player2.IsComputer())
             {
-                turn = 0;
+                this._turn = 0;
             } else
             {
                 Random rnd = new Random();
-                turn = rnd.Next(0, 2);
+                this._turn = rnd.Next(0, 2);
             }
+
+            this._turnState = TurnState.Start;
         }
 
         public override void Start()
         {
-            Game1.changeMusicTrack("ragtime");
+            Game1.changeMusicTrack(this._players[1].GetMusicId(), track_interruptable: false, Game1.MusicContext.MiniGame);
         }
 
         public override void ReceiveLeftClick(int x, int y, bool playSound = true)

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StardropPoolMinigame.Messages
 {
-    public interface IModMessage
+    class ChangeTurnState : IModMessage
     {
     }
 }

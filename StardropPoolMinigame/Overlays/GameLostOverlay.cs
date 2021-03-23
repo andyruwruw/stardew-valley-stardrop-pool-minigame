@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StardropPoolMinigame.Messages
+namespace StardropPoolMinigame.Overlays
 {
-    public interface IModMessage
+    class GameLostOverlay
     {
     }
 }

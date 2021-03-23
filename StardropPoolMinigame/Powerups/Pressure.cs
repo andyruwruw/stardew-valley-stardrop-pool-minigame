@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StardropPoolMinigame.Messages
+namespace StardropPoolMinigame.Powerups
 {
-    public interface IModMessage
+    class Pressure
     {
     }
 }

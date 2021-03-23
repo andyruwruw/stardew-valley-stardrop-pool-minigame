@@ -14,5 +14,6 @@ namespace StardropPoolMinigame
         SelectingPower,
         MovingBalls,
         Results,
+        PowerUpSelect,
     }
 }

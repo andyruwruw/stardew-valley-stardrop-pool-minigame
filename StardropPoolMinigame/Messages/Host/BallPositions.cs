@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace StardropPoolMinigame.Messages
 {
-    public interface IModMessage
+    class BallPositions : IModMessage
     {
+
     }
 }
