@@ -72,5 +72,15 @@ namespace StardropPoolMinigame.Scenes
         {
             return this._table;
         }
+
+        public bool isMyTurn()
+        {
+            return this._turn == 0;
+        }
+
+        public TurnState GetTurnState()
+        {
+            return this._turnState;
+        }
     }
 }

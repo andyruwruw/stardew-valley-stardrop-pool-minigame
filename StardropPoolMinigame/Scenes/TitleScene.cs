@@ -46,16 +46,5 @@ namespace StardropPoolMinigame.Scenes
         {
             return this._state;
         }
-
-        public bool HasNewScene()
-        {
-            return this._hasNewScene;
-        }
-
-        public IScene GetNewScene()
-        {
-            this._hasNewScene = false;
-            return this._newScene;
-        }
     }
 }

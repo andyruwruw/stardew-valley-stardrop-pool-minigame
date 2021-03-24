@@ -49,14 +49,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\BallType.cs" />
+    <Compile Include="Enums\CueState.cs" />
     <Compile Include="Enums\GameEvent.cs" />
     <Compile Include="Enums\GameState.cs" />
     <Compile Include="Enums\MainEvent.cs" />
     <Compile Include="Enums\TurnState.cs" />
+    <Compile Include="Helpers\DrawMath.cs" />
     <Compile Include="Helpers\Monitor.cs" />
     <Compile Include="Helpers\Multiplayer.cs" />
     <Compile Include="Helpers\PointVector.cs" />
     <Compile Include="Helpers\PoolTableDetector.cs" />
+    <Compile Include="Helpers\VectorMath.cs" />
     <Compile Include="Messages\AcceptChallenge.cs" />
     <Compile Include="Messages\ChangeTurnState.cs" />
     <Compile Include="Messages\CreateChallenge.cs" />

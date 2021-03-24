@@ -21,6 +21,11 @@ namespace StardropPoolMinigame.Render
             {
                 ball.Draw(batch);
             }
+
+            if (((GameScene)scene).isMyTurn() && ((GameScene)scene).GetTurnState() == TurnState.SelectingAngle)
+            {
+
+            }
         }
     }
 }

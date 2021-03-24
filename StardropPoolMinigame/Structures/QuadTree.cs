@@ -59,6 +59,8 @@ namespace StardropPoolMinigame.Structures
         /// </summary>
         private QuadTree _southEast;
 
+        private IBall _cueBall;
+
         /// <summary>
         /// Instantiates a QuadTree
         /// </summary>
@@ -86,6 +88,10 @@ namespace StardropPoolMinigame.Structures
         /// <returns>Whether point was added successfully</returns>
         public bool Insert(IBall point)
         {
+            if (this._isRoot && point.GetNumber() == 0) {
+                this._cueBall = point;
+            }
+            
             if (!this._boundary.Contains(point.GetPosition()))
             {
                 return false;
@@ -156,6 +162,11 @@ namespace StardropPoolMinigame.Structures
             }
 
             return found;
+        }
+
+        public IBall GetCueBall()
+        {
+            return this._cueBall;
         }
 
         /// <summary>

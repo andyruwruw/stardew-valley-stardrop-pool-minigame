@@ -56,9 +56,9 @@ namespace StardropPoolMinigame
             return Game1.IsMultiplayer && Multiplayer.PlayablePeers.Count > 0;
         }
 
-        public static void Send(IModMessage message)
+        public static void Send(string messageType, IModMessage message)
         {
-            Multiplayer.helper.Multiplayer.SendMessage(message, message.GetMessageType(), modIDs: new[] { "andyruwruw.StardropPoolMinigame" });
+            Multiplayer.helper.Multiplayer.SendMessage(message, messageType, modIDs: new[] { "andyruwruw.StardropPoolMinigame" });
         }
     }
 }

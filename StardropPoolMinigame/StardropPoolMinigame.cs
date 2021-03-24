@@ -17,24 +17,24 @@ namespace StardropPoolMinigame
 
         private DrawProxy _drawer;
 
-        
         private GameState _gameState;
+
+        private Vector2 _mouse;
 
         public StardropPoolMinigame()
         {
-            Console.Info("Init");
             this.InitializeScenes();
             this.InitializeState();
 
-            this._drawer = new DrawProxy();
+            DrawMath.ChangeScreenSize();
 
-            this._drawer.changeScreenSize();
-            Console.Info("Finished Init");
+            this._drawer = new DrawProxy();
             this.GetCurrentScene().Start();
         }
 
 		public bool tick(GameTime time)
         {
+            this._mouse = new Vector2(Game1.getMouseX(), Game1.getMouseY());
             return false;
         }
 
@@ -108,7 +108,12 @@ namespace StardropPoolMinigame
 
 		public void receiveKeyPress(Keys k)
         {
-            Console.Info($"Recieved Key press {k.GetType()} {k.GetTypeCode()} {k.ToString()}");
+            Console.Info($"Recieved Key release {k.ToString()}");
+            if (k.ToString() == "Escape")
+            {
+                Console.Info("Force Quit");
+                this.forceQuit();
+            }
         }
 
 		public void receiveKeyRelease(Keys k)
@@ -123,13 +128,11 @@ namespace StardropPoolMinigame
 
 		public void changeScreenSize()
         {
-            Console.Info("Change Screen Size");
-            this._drawer.changeScreenSize();
+            DrawMath.ChangeScreenSize();
         }
 
 		public void unload()
         {
-            Console.Info("Unload");
             Game1.stopMusicTrack(Game1.MusicContext.MiniGame);
             Game1.player.faceDirection(0);
         }
@@ -146,8 +149,8 @@ namespace StardropPoolMinigame
 
 		public bool forceQuit()
         {
-            Console.Info("Force Quit");
             this.unload();
+            Game1.currentMinigame = null;
             return true;
         }
 
