@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StardropPoolMinigame.Objects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,8 @@ namespace StardropPoolMinigame.Players
 
         private string _music;
 
+        private ICue _cue;
+
         public Player(string name, bool isMe, bool isComputer, long playerId, string music = "movieTheater")
         {
             this._name = name;
@@ -27,6 +30,8 @@ namespace StardropPoolMinigame.Players
             this._isComputer = isComputer;
             this._playerId = playerId;
             this._music = music;
+
+            this._cue = new Cue();
         }
 
         public bool IsComputer()
@@ -57,6 +62,11 @@ namespace StardropPoolMinigame.Players
         public long GetPlayerId()
         {
             throw new NotImplementedException();
+        }
+
+        public ICue GetCue()
+        {
+            return this._cue;
         }
     }
 }

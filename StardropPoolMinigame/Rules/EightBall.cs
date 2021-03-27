@@ -19,24 +19,17 @@ namespace StardropPoolMinigame.Rules
 
         public QuadTree GenerateInitialBalls()
         {
-            int wallThickness = 18 * 2;
-
-            int width = Table.Width - wallThickness;
-            int height = Table.Height - wallThickness;
-
-            int diamond = width / 8;
-
-            QuadTree balls = new QuadTree(new Structures.Rectangle(Table.Width / 2, Table.Height / 2, width, height));
+            QuadTree balls = new QuadTree(new Structures.Rectangle(Table.InnerWidth / 2, Table.InnerHeight / 2, Table.InnerWidth, Table.InnerHeight));
             int count = 0;
 
             // White
-            balls.Insert(new Ball(count, new Vector2(diamond * 2, height / 2)));
+            balls.Insert(new Ball(count, new Vector2(Table.DiamondPadding * 2, Table.InnerHeight / 2)));
             count += 1;
 
             Queue<Tuple<bool, IBall>> regularBalls = new Queue<Tuple<bool, IBall>>();
             
 
-            regularBalls.Enqueue(new Tuple<bool, IBall>(true, new Ball(count, new Vector2(diamond * 6, height / 2))));
+            regularBalls.Enqueue(new Tuple<bool, IBall>(true, new Ball(count, new Vector2(Table.DiamondPadding * 6, Table.InnerHeight / 2))));
             count += 1;
 
             do
@@ -51,12 +44,12 @@ namespace StardropPoolMinigame.Rules
 
                     if (isLeft)
                     {
-                        regularBalls.Enqueue(new Tuple<bool, IBall>(true, new Ball(this.GetNumberFromCount(count), Vector2.Add(current.GetPosition(), new Vector2((float)Math.Sqrt(Math.Pow(Ball.Radius * 2, 2) - Math.Pow(Ball.Radius, 2)), Ball.Radius)))));
+                        regularBalls.Enqueue(new Tuple<bool, IBall>(true, new Ball(this.GetNumberFromCount(count), Vector2.Add(current.GetPosition(), new Vector2((float)Math.Sqrt(Math.Pow(Ball.Radius * 2, 2) - Math.Pow(Ball.Radius, 2)) * (float)1.01, Ball.Radius) * (float)1.01))));
                         count += 1;
                     }
 
                     // Create right
-                    regularBalls.Enqueue(new Tuple<bool, IBall>(false, new Ball(this.GetNumberFromCount(count), Vector2.Add(current.GetPosition(), new Vector2((float)Math.Sqrt(Math.Pow(Ball.Radius * 2, 2) - Math.Pow(Ball.Radius, 2)), Ball.Radius * -1)))));
+                    regularBalls.Enqueue(new Tuple<bool, IBall>(false, new Ball(this.GetNumberFromCount(count), Vector2.Add(current.GetPosition(), new Vector2((float)Math.Sqrt(Math.Pow(Ball.Radius * 2, 2) - Math.Pow(Ball.Radius, 2)) * (float)1.01, Ball.Radius * (float)-1.01)))));
                     count += 1;
                 }
             } while (regularBalls.Count > 0 && balls.Count < 16);

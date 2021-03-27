@@ -18,5 +18,10 @@ namespace StardropPoolMinigame
         {
             return (float)Math.Atan2(vector.Y, vector.X);
         }
+
+        public static double Modulo(double a, double b)
+        {
+            return a - b * Math.Floor(a / b);
+        }
     }
 }

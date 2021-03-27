@@ -10,6 +10,8 @@ namespace StardropPoolMinigame.Scenes
     {
         void Start();
 
+        void Update();
+
         void ReceiveLeftClick(int x, int y, bool playSound = true);
 
         bool HasNewScene();

@@ -19,6 +19,11 @@ namespace StardropPoolMinigame.Scenes
             Game1.changeMusicTrack("poppy");
         }
 
+        public override void Update()
+        {
+
+        }
+
         public override void ReceiveLeftClick(int x, int y, bool playSound = true)
         {
         }

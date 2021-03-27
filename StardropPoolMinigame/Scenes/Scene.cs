@@ -27,8 +27,10 @@ namespace StardropPoolMinigame.Scenes
             return this._hasNewScene;
         }
 
-        public abstract void ReceiveLeftClick(int x, int y, bool playSound = true);
-
         public abstract void Start();
+
+        public abstract void Update();
+
+        public abstract void ReceiveLeftClick(int x, int y, bool playSound = true);
     }
 }

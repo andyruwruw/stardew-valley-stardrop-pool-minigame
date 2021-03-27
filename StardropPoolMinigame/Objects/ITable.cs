@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
+using StardropPoolMinigame.Structures;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,7 @@ namespace StardropPoolMinigame
     interface ITable
     {
         void Draw(SpriteBatch batch);
+
+        IList<Rectangle> GetBorders();
     }
 }

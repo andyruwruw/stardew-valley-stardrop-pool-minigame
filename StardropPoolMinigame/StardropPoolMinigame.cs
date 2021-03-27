@@ -23,6 +23,8 @@ namespace StardropPoolMinigame
 
         public StardropPoolMinigame()
         {
+            Textures.LoadTextures();
+
             this.InitializeScenes();
             this.InitializeState();
 
@@ -47,36 +49,31 @@ namespace StardropPoolMinigame
         {
             if (this.GetCurrentScene().HasNewScene())
             {
-                Console.Info("New Scene");
                 IScene newScene = this.GetCurrentScene().GetNewScene();
 
                 if (newScene is TitleScene)
                 {
-                    Console.Info("Title");
                     this._title = newScene;
                     this._gameState = GameState.Title;
                 } else if (newScene is DialogueScene && this.GetCurrentScene() is TitleScene)
                 {
-                    Console.Info("PreBattle");
                     this._dialogue = newScene;
                     this._gameState = GameState.Prebattle;
                 } else if (newScene is DialogueScene && this.GetCurrentScene() is GameScene)
                 {
-                    Console.Info("PostBattle");
                     this._dialogue = newScene;
                     this._gameState = GameState.Postbattle;
                 } else if (newScene is GameScene)
                 {
-                    Console.Info("Game");
                     this._game = newScene;
                     this._gameState = GameState.Ingame;
                 } else if (newScene is SummaryScene)
                 {
-                    Console.Info("Summary");
                     this._summary = newScene;
                     this._gameState = GameState.Summary;
                 }
             }
+            this.GetCurrentScene().Update();
             return false;
         }
 

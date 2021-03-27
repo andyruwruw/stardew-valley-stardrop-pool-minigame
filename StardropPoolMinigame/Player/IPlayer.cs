@@ -1,4 +1,5 @@
-﻿using StardropPoolMinigame.Powerups;
+﻿using StardropPoolMinigame.Objects;
+using StardropPoolMinigame.Powerups;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,5 +21,7 @@ namespace StardropPoolMinigame.Players
         string GetMusicId();
 
         long GetPlayerId();
+
+        ICue GetCue();
     }
 }

@@ -3,13 +3,8 @@
   "Changes": [  
     { 
       "Action": "Load",
-      "Target": "Maps/spring_z_extras,Maps/summer_z_extras,Maps/fall_z_extras,Maps/winter_z_extras,Maps/EmilyBedEvent,Maps/Festivals,Maps/VanillaCraftables,Maps/VanillaCursors,Maps/VanillaFloors,Maps/VanillaFurniture,Maps/VanillaSpringObjects,Maps/VanillaWallsAndFloors,Maps/z_SVEbuildingShadow,Maps/z_MinecartCaveShadows,Maps/z_FireLight,Maps/AuroraVineyardPicture,Maps/StardustFarmPicture,Maps/z_SVE_Halloween2Shadow,Maps/zcompactbathroom_tiles,Maps/z_RailwayTilesheet,Maps/z_CastleVillage,Maps/z_Leaves_Roofs,Maps/z_Leaves,Maps/z_mine,Maps/z_RedEyes,Maps/GuntherExpedition2_Shadows,Maps/LostWoods_Shadow,Maps/ForestWest_Shadow,Maps/MovieTheater_Blank,Maps/SpriteSpring_Effects,Maps/z_WizardTowerLights,Maps/z_WizardBasementLights,Maps/z_CalderaLights,Maps/IridiumQuarry_Shadow,Maps/zGrandpasFarm_UnderCanopyShadow,Maps/zGrandpasFarm_CanopyShadow,Maps/ZuzuCity",
-      "FromFile": "Assets/Tilesheets/{{TargetWithoutPath}}.png"
-    },
-    {
-      "Action": "Load",
-      "Target": "Characters/Monsters/CorruptMummy",
-      "FromFile": "assets/CharacterFiles/OverworldSprites/Monsters/CorruptMummy.png"
+      "Target": "Minigames/stardropPool",
+      "FromFile": "Assets/Tilesheets/stardropPool.png"
     }
   ]
 }

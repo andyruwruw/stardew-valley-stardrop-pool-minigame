@@ -168,6 +168,11 @@ namespace StardropPoolMinigame.Structures
         {
             return this._cueBall;
         }
+        
+        public Rectangle GetBoundary()
+        {
+            return this._boundary;
+        }
 
         /// <summary>
         /// Subdivides the QuadTree into quadrants.
