@@ -160,10 +160,10 @@ namespace StardropPoolMinigame.Objects
                 }
             }
 
-            //foreach(Structures.Rectangle border in this.GetBorders())
-            //{
-            //    batch.Draw(Game1.staminaRect, new Rectangle((int)DrawMath.InnerTableToRaw(border.GetNorthWest()).X, (int)DrawMath.InnerTableToRaw(border.GetNorthWest()).Y, (int)border.GetWidth(), (int)border.GetHeight()), Game1.staminaRect.Bounds, Color.Purple, 0f, Vector2.Zero, SpriteEffects.None, 0.0101f) ;
-            //}
+            foreach (Structures.Rectangle border in this.GetBorders())
+            {
+                batch.Draw(Game1.staminaRect, new Rectangle((int)DrawMath.InnerTableToRaw(border.GetNorthWest()).X, (int)DrawMath.InnerTableToRaw(border.GetNorthWest()).Y, (int)border.GetWidth(), (int)border.GetHeight()), Game1.staminaRect.Bounds, Color.Purple, 0f, Vector2.Zero, SpriteEffects.None, 0.0101f);
+            }
         }
 
         public IList<Structures.Rectangle> GetBorders()
@@ -171,25 +171,68 @@ namespace StardropPoolMinigame.Objects
             IList<Structures.Rectangle> borders = new List<Structures.Rectangle>();
 
             // NorthWest
-            borders.Add(new Structures.Rectangle((Table.InnerWidth / 4) + 5, Table.WallThickness / -2, (Table.InnerWidth / 2) - (Table.PocketWidth * (float)1.8), Table.WallThickness));
+            borders.Add(new Structures.Rectangle(
+                (Table.InnerWidth / 4) + 5,
+                Table.WallThickness / -2,
+                (Table.InnerWidth / 2) - (Table.PocketWidth * (float)1.8),
+                Table.WallThickness)
+            );
 
             // NorthWestSmall
-            borders.Add(new Structures.Rectangle((Textures.TileSize * 2) + 3 * DrawMath.PixelZoomAdjustement, Table.WallThickness / -9 * 5, 27 * DrawMath.PixelZoomAdjustement, 30 * DrawMath.PixelZoomAdjustement));
+            borders.Add(new Structures.Rectangle(
+                (Textures.TileSize * 2) + 3 * DrawMath.PixelZoomAdjustement,
+                Table.WallThickness / -9 * 5,
+                27 * DrawMath.PixelZoomAdjustement,
+                30 * DrawMath.PixelZoomAdjustement)
+            );
 
             // NorthEast
-            borders.Add(new Structures.Rectangle((Table.InnerWidth / 4) * 3 - 5, Table.WallThickness / -2, (Table.InnerWidth / 2) - (Table.PocketWidth * (float)1.8), Table.WallThickness));
+            borders.Add(new Structures.Rectangle(
+                (Table.InnerWidth / 4) * 3 - 5,
+                Table.WallThickness / -2,
+                (Table.InnerWidth / 2) - (Table.PocketWidth * (float)1.8),
+                Table.WallThickness)
+            );
+
+            // NorthEastSmall
+            borders.Add(new Structures.Rectangle(
+                Table.InnerWidth - (Textures.TileSize * 2) - 3 * DrawMath.PixelZoomAdjustement,
+                Table.WallThickness / -9 * 5,
+                27 * DrawMath.PixelZoomAdjustement,
+                30 * DrawMath.PixelZoomAdjustement)
+            );
 
             // SouthWest
-            borders.Add(new Structures.Rectangle((Table.InnerWidth / 4) + 5, Table.InnerHeight + (Table.WallThickness / 2), (Table.InnerWidth / 2) - (Table.PocketWidth * (float)1.8), Table.WallThickness));
+            borders.Add(new Structures.Rectangle(
+                (Table.InnerWidth / 4) + 5,
+                Table.InnerHeight + (Table.WallThickness / 2),
+                (Table.InnerWidth / 2) - (Table.PocketWidth * (float)1.8),
+                Table.WallThickness)
+            );
 
             // SouthEast
-            borders.Add(new Structures.Rectangle((Table.InnerWidth / 4) * 3 - 5, Table.InnerHeight + (Table.WallThickness / 2), (Table.InnerWidth / 2) - (Table.PocketWidth * (float)1.8), Table.WallThickness));
+            borders.Add(new Structures.Rectangle(
+                (Table.InnerWidth / 4) * 3 - 5,
+                Table.InnerHeight + (Table.WallThickness / 2),
+                (Table.InnerWidth / 2) - (Table.PocketWidth * (float)1.8),
+                Table.WallThickness)
+            );
 
             // West
-            borders.Add(new Structures.Rectangle(Table.WallThickness / -2, (Table.InnerHeight / 2), Table.WallThickness, Table.InnerHeight - (Table.PocketWidth * 2)));
+            borders.Add(new Structures.Rectangle(
+                Table.WallThickness / -2,
+                (Table.InnerHeight / 2),
+                Table.WallThickness,
+                Table.InnerHeight - (Table.PocketWidth * 2))
+            );
 
             // East
-            borders.Add(new Structures.Rectangle(Table.InnerWidth + (Table.WallThickness / 2), (Table.InnerHeight / 2), Table.WallThickness, Table.InnerHeight - (Table.PocketWidth * 2)));
+            borders.Add(new Structures.Rectangle(
+                Table.InnerWidth + (Table.WallThickness / 2),
+                (Table.InnerHeight / 2),
+                Table.WallThickness,
+                Table.InnerHeight - (Table.PocketWidth * 2))
+            );
 
             return borders;
         }
