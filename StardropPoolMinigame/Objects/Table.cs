@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using StardewValley;
 using StardropPoolMinigame.Render;
+using StardropPoolMinigame.Structures;
 using System;
 using System.Collections.Generic;
 
@@ -24,6 +25,8 @@ namespace StardropPoolMinigame.Objects
         public static int InnerHeight = Table.Height - WallThickness * 2;
 
         public static int DiamondPadding = Table.InnerWidth / 8;
+
+        public static int PocketRadius = Ball.Radius + 5;
 
         public Table()
         {
@@ -51,10 +54,10 @@ namespace StardropPoolMinigame.Objects
                         continue;
                     }
 
-                    Rectangle textureSource;
+                    Microsoft.Xna.Framework.Rectangle textureSource;
 
                     bool hasFront = true;
-                    Rectangle frontSource;
+                    Microsoft.Xna.Framework.Rectangle frontSource;
 
                     int size = 32;
 
@@ -151,24 +154,79 @@ namespace StardropPoolMinigame.Objects
                         frontSource = Textures.Felt;
                     }
 
-                    batch.Draw(Textures.TileSheet, new Rectangle((int)northWestRaw.X, (int)northWestRaw.Y, size * Table.Scale, size * Table.Scale), textureSource, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 0.0010f);
+                    batch.Draw(Textures.TileSheet, new Microsoft.Xna.Framework.Rectangle((int)northWestRaw.X, (int)northWestRaw.Y, size * Table.Scale, size * Table.Scale), textureSource, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 0.0010f);
 
                     if (hasFront)
                     {
-                        batch.Draw(Textures.TileSheet, new Rectangle((int)northWestRaw.X, (int)northWestRaw.Y, size * Table.Scale, size * Table.Scale), frontSource, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 0.0025f);
+                        batch.Draw(Textures.TileSheet, new Microsoft.Xna.Framework.Rectangle((int)northWestRaw.X, (int)northWestRaw.Y, size * Table.Scale, size * Table.Scale), frontSource, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 0.0025f);
                     }
                 }
             }
 
             foreach (Structures.Rectangle border in this.GetBorders())
             {
-                batch.Draw(Game1.staminaRect, new Rectangle((int)DrawMath.InnerTableToRaw(border.GetNorthWest()).X, (int)DrawMath.InnerTableToRaw(border.GetNorthWest()).Y, (int)border.GetWidth(), (int)border.GetHeight()), Game1.staminaRect.Bounds, Color.Purple, 0f, Vector2.Zero, SpriteEffects.None, 0.0101f);
+                batch.Draw(Game1.staminaRect, new Microsoft.Xna.Framework.Rectangle((int)DrawMath.InnerTableToRaw(border.GetNorthWest()).X, (int)DrawMath.InnerTableToRaw(border.GetNorthWest()).Y, (int)border.GetWidth(), (int)border.GetHeight()), Game1.staminaRect.Bounds, Color.Purple, 0f, Vector2.Zero, SpriteEffects.None, 0.0101f);
             }
         }
 
-        public IList<Structures.Rectangle> GetBorders()
+        public IList<IPocket> GetPockets()
         {
-            IList<Structures.Rectangle> borders = new List<Structures.Rectangle>();
+            IList<IPocket> pockets = new List<IPocket>();
+            // Adding in clockwise order from NorthWest
+            // NorthWest
+            pockets.Add(new Pocket(
+                0,
+                Table.PocketRadius / -2,
+                Table.PocketRadius / -2,
+                Table.PocketRadius)
+            );
+
+            // North
+            pockets.Add(new Pocket(
+                1,
+                Table.InnerWidth / 2,
+                Table.PocketRadius / -2,
+                Table.PocketRadius)
+            );
+
+            // NorthEast
+            pockets.Add(new Pocket(
+                2,
+                Table.InnerWidth + (Table.PocketRadius / -2),
+                Table.PocketRadius / -2,
+                Table.PocketRadius)
+            );
+
+            // SouthEast
+            pockets.Add(new Pocket(
+                3,
+                Table.InnerWidth + (Table.PocketRadius / -2),
+                Table.InnerHeight + (Table.PocketRadius / -2),
+                Table.PocketRadius)
+            );
+
+            // South
+            pockets.Add(new Pocket(
+                4,
+                Table.InnerWidth / 2,
+                Table.InnerHeight + (Table.PocketRadius / -2),
+                Table.PocketRadius)
+            );
+
+            // SouthWest
+            pockets.Add(new Pocket(
+                5,
+                Table.PocketRadius / -2,
+                Table.InnerHeight + (Table.PocketRadius / -2),
+                Table.PocketRadius)
+            );
+
+            return pockets;
+        }
+
+        public IList<IRange> GetBorders()
+        {
+            IList<IRange> borders = new List<IRange>();
 
             // NorthWest
             borders.Add(new Structures.Rectangle(

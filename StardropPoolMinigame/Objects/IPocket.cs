@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StardropPoolMinigame.Structures;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,10 @@ namespace StardropPoolMinigame
 {
     interface IPocket
     {
+        bool IsPocketed(IBall ball);
+
         int GetId();
+
+        Circle GetBoundary();
     }
 }

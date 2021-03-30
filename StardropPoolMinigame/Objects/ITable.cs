@@ -12,6 +12,8 @@ namespace StardropPoolMinigame
     {
         void Draw(SpriteBatch batch);
 
-        IList<Rectangle> GetBorders();
+        IList<IPocket> GetPockets();
+
+        IList<IRange> GetBorders();
     }
 }

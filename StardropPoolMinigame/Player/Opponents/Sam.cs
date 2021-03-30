@@ -8,6 +8,6 @@ namespace StardropPoolMinigame.Players
 {
     class Sam : Player
     {
-        public Sam() : base("Sam", false, true, Multiplayer.helper.Multiplayer.GetNewID(), "ragtime") { }
+        public Sam() : base("Sam", false, true, Multiplayer.helper.Multiplayer.GetNewID(), Sounds.SamTheme) { }
     }
 }

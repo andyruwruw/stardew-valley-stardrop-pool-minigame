@@ -171,19 +171,32 @@ namespace StardropPoolMinigame.Objects
             return BallType.Stripped;
         }
 
+        public void SetPosition(Vector2 position)
+        {
+            this._position = position;
+        }
+
+        public void Pocket()
+        {
+            Game1.playSound(Sounds.BallPocketed);
+        }
+
         private void UpdateAcceleration()
         {
             this._acceleration = new Vector2(0, 0);
 
             float movement = Math.Abs(this._velocity.X) + Math.Abs(this._velocity.Y);
-
+            
+            // Reduce movement to 0 if below threshhold
             if (movement < Feel.MinimumSpeed && movement > 0)
             {
                 this._velocity = new Vector2(0, 0);
             } else
             {
+                // Apply friction
                 Vector2 friction = Vector2.Multiply(this._velocity, new Vector2(Feel.FrictionPerDistance, Feel.FrictionPerDistance));
 
+                // Apply ramping friction
                 if (movement <= Feel.ShortStopStart && movement > 0)
                 {
                     Vector2 normalizedVelocity = new Vector2(this._velocity.X, this._velocity.Y);
@@ -197,6 +210,7 @@ namespace StardropPoolMinigame.Objects
                 Vector2 minimum = Vector2.Min(new Vector2(0, 0), new Vector2(this._velocity.X * -1, this._velocity.Y * -1));
                 Vector2 maximum = Vector2.Max(new Vector2(0, 0), new Vector2(this._velocity.X * -1, this._velocity.Y * -1));
 
+                // Ensure friction does not exceed velocity
                 Vector2.Clamp(friction, minimum, maximum);
 
                 this._acceleration = Vector2.Add(this._acceleration, friction);
@@ -207,21 +221,32 @@ namespace StardropPoolMinigame.Objects
         {
             Circle ridgidBody = new Circle(this._position.X, this._position.Y, Ball.Radius);
 
-            IList<Structures.Rectangle> borders = table.GetBorders();
+            IList<IRange> borders = table.GetBorders();
 
-            foreach (Structures.Rectangle border in borders)
+            foreach (IRange border in borders)
             {
-                if (border.Intersects(ridgidBody))
+                if (border is Structures.Rectangle)
                 {
-                    Game1.playSound(Sounds.Bounce);
-                    if ((this._position.X < border.GetWest() || this._position.X > border.GetEast()) && this._position.Y < border.GetSouth() && this._position.Y > border.GetNorth())
+                    if (border.Intersects(ridgidBody))
                     {
-                        this._velocity = new Vector2(this._velocity.X * -1, this._velocity.Y);
-                    }
+                        Game1.playSound(Sounds.BallBounce);
 
-                    if ((this._position.Y < border.GetNorth() || this._position.Y > border.GetSouth()) && this._position.X < border.GetEast() && this._position.X > border.GetWest())
-                    {
-                        this._velocity = new Vector2(this._velocity.X, this._velocity.Y * -1);
+                        // Alter Velocity
+                        if ((this._position.Y < ((Structures.Rectangle)border).GetNorth() ||
+                            this._position.Y > ((Structures.Rectangle)border).GetSouth()) &&
+                            this._position.X < ((Structures.Rectangle)border).GetEast() &&
+                            this._position.X > ((Structures.Rectangle)border).GetWest())
+                        {
+                            this._velocity = new Vector2(this._velocity.X, this._velocity.Y * -1);
+                        }
+
+                        if ((this._position.X < ((Structures.Rectangle)border).GetWest() ||
+                            this._position.X > ((Structures.Rectangle)border).GetEast()) &&
+                            this._position.Y < ((Structures.Rectangle)border).GetSouth() &&
+                            this._position.Y > ((Structures.Rectangle)border).GetNorth())
+                        {
+                            this._velocity = new Vector2(this._velocity.X * -1, this._velocity.Y);
+                        }
                     }
                 }
             }
@@ -229,17 +254,20 @@ namespace StardropPoolMinigame.Objects
 
         private void UpdateOrientation()
         {
+            // Do not update if not moving
             if (this._velocity.X == 0 && this._velocity.Y == 0)
             {
                 return;
             }
 
+            // New orientation
             this._xOrientation = this._xOrientation + this._velocity.X;
             this._yOrientation = this._yOrientation + this._velocity.Y;
 
             bool xSwapped = false;
             bool ySwapped = false;
 
+            // Modulo new orientation
             if (Math.Abs(this._xOrientation) > 3 * Feel.OrientationChange)
             {
                 this._xOrientation = VectorMath.Modulo(((int)Math.Round(this._xOrientation) + 3 * Feel.OrientationChange), 6 * Feel.OrientationChange) - 3 * Feel.OrientationChange;
@@ -251,6 +279,7 @@ namespace StardropPoolMinigame.Objects
                 ySwapped = true;
             }
 
+            // Switch to complementary side.
             if (xSwapped && !ySwapped)
             {
                 this._yOrientation = this._yOrientation * -1;
@@ -271,13 +300,17 @@ namespace StardropPoolMinigame.Objects
                     continue;
                 }
 
+                // If they are overlapping
                 if ((Math.Sqrt((Math.Pow(this._position.X - ball.GetPosition().X, 2) + Math.Pow(this._position.Y - ball.GetPosition().Y, 2)))) < Ball.Radius * 2)
                 {
+                    // Find angle between balls
                     double diff = Ball.Radius * 2 - (Math.Sqrt((Math.Pow(this._position.X - ball.GetPosition().X, 2) + Math.Pow(this._position.Y - ball.GetPosition().Y, 2))));
                     Vector2 angle = Vector2.Subtract(ball.GetPosition(), this._position);
                     angle.Normalize();
 
+                    // Move them out of the way
                     this._position = Vector2.Subtract(this._position, Vector2.Multiply(angle, new Vector2((float)diff + 1, (float)diff + 1)));
+                    // ball.SetPosition(Vector2.Subtract(ball.GetPosition(), Vector2.Multiply(angle, new Vector2(((float)diff + 1) * -1, ((float)diff + 1) * -1))));
                 }
             }
         }
@@ -300,6 +333,51 @@ namespace StardropPoolMinigame.Objects
             {
                 this._position.Y = Table.InnerHeight - Ball.Radius;
             }
+        }
+
+        public override bool Equals(object obj)
+        {
+            return this.Equals(obj as Ball);
+        }
+
+        public bool Equals(Ball p)
+        {
+            if (System.Object.ReferenceEquals(p, null))
+            {
+                return false;
+            }
+            if (System.Object.ReferenceEquals(this, p))
+            {
+                return true;
+            }
+            if (this.GetType() != p.GetType())
+            {
+                return false;
+            }
+            return (this._number == p.GetNumber());
+        }
+
+        public override int GetHashCode()
+        {
+            return this._number * 0x00010000;
+        }
+
+        public static bool operator ==(Ball lhs, Ball rhs)
+        {
+            if (System.Object.ReferenceEquals(lhs, null))
+            {
+                if (System.Object.ReferenceEquals(rhs, null))
+                {
+                    return true;
+                }
+                return false;
+            }
+            return lhs.Equals(rhs);
+        }
+
+        public static bool operator !=(Ball lhs, Ball rhs)
+        {
+            return !(lhs == rhs);
         }
     }
 }

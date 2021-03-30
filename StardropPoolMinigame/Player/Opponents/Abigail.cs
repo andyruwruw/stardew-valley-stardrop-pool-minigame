@@ -8,6 +8,6 @@ namespace StardropPoolMinigame.Players
 {
     class Abigail : Player
     {
-        public Abigail() : base("Abigail", false, true, Multiplayer.helper.Multiplayer.GetNewID(), "cowboy_boss") { }
+        public Abigail() : base("Abigail", false, true, Multiplayer.helper.Multiplayer.GetNewID(), Sounds.AbigailTheme) { }
     }
 }

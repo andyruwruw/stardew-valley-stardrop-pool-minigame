@@ -36,5 +36,9 @@ namespace StardropPoolMinigame
         void SetVelocity(Vector2 velocity);
 
         float GetMassMultiplyer();
+
+        void SetPosition(Vector2 position);
+
+        void Pocket();
     }
 }

@@ -135,6 +135,9 @@
     <Compile Include="Structures\IRange.cs" />
     <Compile Include="Structures\QuadTree.cs" />
     <Compile Include="Structures\Rectangle.cs" />
+    <Compile Include="Structures\Triangle.cs" />
+    <Compile Include="UserInterface\BallButton.cs" />
+    <Compile Include="UserInterface\IButton.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="manifest.json" />

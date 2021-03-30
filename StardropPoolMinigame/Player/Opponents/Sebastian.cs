@@ -8,6 +8,6 @@ namespace StardropPoolMinigame.Players
 {
     class Sebastian : Player
     {
-        public Sebastian() : base("Sebastian", false, true, Multiplayer.helper.Multiplayer.GetNewID(), "crane_game") { }
+        public Sebastian() : base("Sebastian", false, true, Multiplayer.helper.Multiplayer.GetNewID(), Sounds.SebastianTheme) { }
     }
 }

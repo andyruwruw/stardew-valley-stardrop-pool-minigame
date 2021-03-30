@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using StardewValley;
 using StardropPoolMinigame.Scenes;
 using System;
@@ -24,7 +25,7 @@ namespace StardropPoolMinigame.Render
 
         public void Draw(IScene scene, SpriteBatch batch)
         {
-
+            batch.Draw(Game1.staminaRect, new Rectangle((int)DrawMath.GetGameDisplayNorthWest().X, (int)DrawMath.GetGameDisplayNorthWest().Y, (int)DrawMath.AdjustedScreenWidth, (int)DrawMath.AdjustedScreenHeight), Game1.staminaRect.Bounds, Color.LightGoldenrodYellow, 0f, Vector2.Zero, SpriteEffects.None, 0.0001f);
         }
 
         private void DrawBackground(IScene scene, SpriteBatch batch)

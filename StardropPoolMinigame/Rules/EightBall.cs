@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using StardropPoolMinigame.Objects;
 using StardropPoolMinigame.Players;
+using StardropPoolMinigame.Powerups;
 using StardropPoolMinigame.Structures;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,11 @@ namespace StardropPoolMinigame.Rules
         public EightBall()
         {
 
+        }
+
+        public ITable GenerateTable()
+        {
+            return new Table();
         }
 
         public QuadTree GenerateInitialBalls()
@@ -57,9 +63,23 @@ namespace StardropPoolMinigame.Rules
             return balls;
         }
 
-        public ITable GenerateTable()
+        public IList<GameEvent> NoBallHit(IList<IBall> remaining)
         {
-            return new Table();
+            IList<GameEvent> events = new List<GameEvent>();
+            events.Add(GameEvent.Scratch);
+            return events;
+        }
+
+        public IList<GameEvent> FirstBallHit(IPlayer player, IBall ball)
+        {
+            IList<GameEvent> events = new List<GameEvent>();
+
+            if (ball.GetBallType() != player.GetBallType())
+            {
+                events.Add(GameEvent.Scratch);
+            }
+
+            return events;
         }
 
         public IList<GameEvent> BallPocketed(IPlayer player, IList<IBall> balls, IPocket pocket, IList<IBall> remaining, IPocket target = null)
@@ -138,12 +158,10 @@ namespace StardropPoolMinigame.Rules
             return events;
         }
 
-        public IList<GameEvent> NoBallHit(IList<IBall> remaining)
-        {
-            IList<GameEvent> events = new List<GameEvent>();
-            events.Add(GameEvent.Scratch);
-            return events;
-        }
+        //public IPowerup GeneratePowerup()
+        //{
+        //    return new BigPockets();
+        //}
 
         private int GetNumberFromCount(int count)
         {

@@ -23,13 +23,13 @@ namespace StardropPoolMinigame.Players
 
         private ICue _cue;
 
-        public Player(string name, bool isMe, bool isComputer, long playerId, string music = "movieTheater")
+        public Player(string name, bool isMe, bool isComputer, long playerId, string music = null)
         {
             this._name = name;
             this._isMe = isMe;
             this._isComputer = isComputer;
-            this._playerId = playerId;
-            this._music = music;
+            this._playerId = playerId; 
+            this._music = music == null ? Sounds.GameTheme : music;
 
             this._cue = new Cue();
         }

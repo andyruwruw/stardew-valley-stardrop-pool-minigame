@@ -29,7 +29,7 @@ namespace StardropPoolMinigame.Scenes
 
         public override void Start()
         {
-            Game1.changeMusicTrack("movieTheater", track_interruptable: false, Game1.MusicContext.MiniGame);
+            Game1.changeMusicTrack(Sounds.GameTheme, track_interruptable: false, Game1.MusicContext.MiniGame);
         }
 
         public override void Update()
@@ -39,7 +39,7 @@ namespace StardropPoolMinigame.Scenes
 
         public override void ReceiveLeftClick(int x, int y, bool playSound = true)
         {
-            IPlayer me = new Player(Game1.player.Name, true, false, 0, "movieTheater");
+            IPlayer me = new Player(Game1.player.Name, true, false, 0, Sounds.GameTheme);
 
             this._opponent = new Sebastian();
 

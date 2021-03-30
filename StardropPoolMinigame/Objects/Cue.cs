@@ -113,7 +113,7 @@ namespace StardropPoolMinigame.Objects
 
                     if (offset > 150 && VectorMath.Modulo(Game1.ticks, 250) == 0)
                     {
-                        Game1.playSound("furnace");
+                        Game1.playSound(Sounds.CueFullCharge);
                     }
                 }
 
@@ -159,12 +159,12 @@ namespace StardropPoolMinigame.Objects
 
         public void LockAngle()
         {
-            Game1.playSound(Sounds.LockAngle);
+            Game1.playSound(Sounds.CueLockAngle);
         }
 
         public void LockPower()
         {
-            Game1.playSound(Sounds.LockPower);
+            Game1.playSound(Sounds.CueLockPower);
         }
 
         public void BallHit()

@@ -121,6 +121,25 @@ namespace StardropPoolMinigame.Structures
             return false;
         }
 
+        public bool Remove(IBall point)
+        {
+            if (this._points.Contains(point))
+            {
+                this._points.Remove(point);
+                return true;
+            }
+
+            if (this._divided)
+            {
+                return (this._northEast.Remove(point) ||
+                    this._northWest.Remove(point) ||
+                    this._southEast.Remove(point) ||
+                    this._southWest.Remove(point));
+            }
+
+            return false;
+        }
+
         /// <summary>
         /// Retrieves all points within a given <see cref="IRange"/>.
         /// </summary>

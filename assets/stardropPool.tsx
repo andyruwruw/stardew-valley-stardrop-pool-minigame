@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.5" tiledversion="1.5.0" name="stardropPool" tilewidth="225" tileheight="80" tilecount="104" columns="0">
+<tileset version="1.5" tiledversion="1.5.0" name="stardropPool" tilewidth="128" tileheight="32" tilecount="108" columns="0">
  <grid orientation="orthogonal" width="1" height="1"/>
  <tile id="0">
   <image width="16" height="16" source="ball-base-black.png"/>
@@ -253,9 +253,6 @@
  <tile id="83">
   <image width="16" height="16" source="ball-stripes-n2-n2.png"/>
  </tile>
- <tile id="84">
-  <image width="32" height="32" source="bottom-edge.png"/>
- </tile>
  <tile id="87">
   <image width="32" height="32" source="bottom-pocket.png"/>
  </tile>
@@ -276,18 +273,6 @@
  </tile>
  <tile id="93">
   <image width="16" height="16" source="felt.png"/>
- </tile>
- <tile id="94">
-  <image width="32" height="32" source="left-edge.png"/>
- </tile>
- <tile id="95">
-  <image width="225" height="80" source="logo.png"/>
- </tile>
- <tile id="96">
-  <image width="32" height="32" source="right-edge.png"/>
- </tile>
- <tile id="97">
-  <image width="32" height="32" source="top-edge.png"/>
  </tile>
  <tile id="98">
   <image width="32" height="32" source="top-left-edge.png"/>
@@ -312,5 +297,32 @@
  </tile>
  <tile id="105">
   <image width="32" height="32" source="bottom-left-edge-front.png"/>
+ </tile>
+ <tile id="110">
+  <image width="48" height="32" source="logo.png"/>
+ </tile>
+ <tile id="115">
+  <image width="32" height="32" source="bottom-edge.png"/>
+ </tile>
+ <tile id="116">
+  <image width="32" height="32" source="bottom-edge-front.png"/>
+ </tile>
+ <tile id="117">
+  <image width="32" height="32" source="left-edge.png"/>
+ </tile>
+ <tile id="118">
+  <image width="32" height="32" source="left-edge-front.png"/>
+ </tile>
+ <tile id="119">
+  <image width="32" height="32" source="right-edge.png"/>
+ </tile>
+ <tile id="120">
+  <image width="32" height="32" source="right-edge-front.png"/>
+ </tile>
+ <tile id="121">
+  <image width="32" height="32" source="top-edge.png"/>
+ </tile>
+ <tile id="123">
+  <image width="32" height="32" source="top-edge-front.png"/>
  </tile>
 </tileset>
