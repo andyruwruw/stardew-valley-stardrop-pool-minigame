@@ -8,14 +8,14 @@ namespace StardropPoolMinigame
 {
     public enum GameEvent
     {
-        ChoseStripes,
-        ChoseSolids,
-        ScoredPoint,
-        SamePlayer,
-        NextPlayer,
-        GavePoint,
-        Scratch,
-        Lose,
-        Win,
+        ChoseStripes = 0,
+        ChoseSolids = 1,
+        ScoredPoint = 2,
+        SamePlayer = 3,
+        NextPlayer = 4,
+        GavePoint = 5,
+        Scratch = 6,
+        Lose = 7,
+        Win = 8,
     }
 }

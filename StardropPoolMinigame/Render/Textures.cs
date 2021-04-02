@@ -15,6 +15,8 @@ namespace StardropPoolMinigame.Render
 
         public static Texture2D TileSheet;
 
+        public static Rectangle Logo = new Rectangle(0, Textures.TileSize * 12, Textures.TileSize * 3, Textures.TileSize * 2);
+
         public static void LoadTextures()
         {
            Textures.TileSheet = Game1.content.Load<Texture2D>("Minigames\\stardropPool");

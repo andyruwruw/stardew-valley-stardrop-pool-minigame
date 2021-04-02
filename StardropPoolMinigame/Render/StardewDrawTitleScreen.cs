@@ -26,6 +26,13 @@ namespace StardropPoolMinigame.Render
         public void Draw(IScene scene, SpriteBatch batch)
         {
             batch.Draw(Game1.staminaRect, new Rectangle((int)DrawMath.GetGameDisplayNorthWest().X, (int)DrawMath.GetGameDisplayNorthWest().Y, (int)DrawMath.AdjustedScreenWidth, (int)DrawMath.AdjustedScreenHeight), Game1.staminaRect.Bounds, Color.LightGoldenrodYellow, 0f, Vector2.Zero, SpriteEffects.None, 0.0001f);
+
+            this.DrawBackground(scene, batch);
+
+            if (((TitleScene)scene).GetState() == TitleState.Main)
+            {
+                this.DrawTitle(batch);
+            }
         }
 
         private void DrawBackground(IScene scene, SpriteBatch batch)
@@ -33,9 +40,9 @@ namespace StardropPoolMinigame.Render
 
         }
 
-        public void DrawTitle(IScene scene, SpriteBatch batch)
+        public void DrawTitle(SpriteBatch batch)
         {
-            
+            // batch.Draw(Textures.TileSheet, new Rectangle(0, 0, 48, 32), Textures.Logo, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 0.0010f);
         }
 
         public void DrawWaiting(IScene scene, SpriteBatch batch)

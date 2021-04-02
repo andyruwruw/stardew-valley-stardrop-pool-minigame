@@ -79,28 +79,23 @@ namespace StardropPoolMinigame
 
 		public void receiveLeftClick(int x, int y, bool playSound = true)
         {
-            Console.Info("Recieved Left Click");
             this.GetCurrentScene().ReceiveLeftClick(x, y, playSound);
         }
 
 		public void leftClickHeld(int x, int y)
         {
-            Console.Info("Recieved Left Click Held");
         }
 
 		public void receiveRightClick(int x, int y, bool playSound = true)
         {
-            Console.Info("Recieved Right Click");
         }
 
 		public void releaseLeftClick(int x, int y)
         {
-            Console.Info("Recieved Left Click Release");
         }
 
 		public void releaseRightClick(int x, int y)
         {
-            Console.Info("Recieved Right Click Release");
         }
 
 		public void receiveKeyPress(Keys k)
@@ -115,7 +110,6 @@ namespace StardropPoolMinigame
 
 		public void receiveKeyRelease(Keys k)
         {
-            Console.Info("Recieved Key release");
         }
 
 		public void draw(SpriteBatch b)
@@ -136,7 +130,6 @@ namespace StardropPoolMinigame
 
 		public void receiveEventPoke(int data)
         {
-            Console.Info("Recieved Event Poke");
         }
 
 		public string minigameId()

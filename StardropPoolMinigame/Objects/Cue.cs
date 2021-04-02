@@ -92,38 +92,22 @@ namespace StardropPoolMinigame.Objects
                 batch.Draw(Textures.TileSheet, new Rectangle(offsetX + 10 * (int)DrawMath.PixelZoomAdjustement, offsetY + 10 * (int)DrawMath.PixelZoomAdjustement, Cue.Width, Cue.Height), Textures.CueShadow, Color.White, radians, new Vector2(-10 * DrawMath.PixelZoomAdjustement, 8), SpriteEffects.None, 0.0019f);
             } else if (this._cueState == CueState.Power)
             {
-                // Distance from mouse to perpendicular line to angle intersecting at cue ball.
-                double distance = (Math.Abs(((this._angle.X * -1) - anchor.X) * (anchor.Y - y) - (anchor.X - x) * (this._angle.Y - anchor.Y))) / (Math.Sqrt(Math.Pow((this._angle.X * -1) - anchor.X, 2) + Math.Pow(this._angle.Y - anchor.Y, 2)));
-                double offset = this._angle.X * DrawMath.PixelZoomAdjustement * 4;
-                
-                double fx = (Vector2.Add(anchor, this._angle).X * -1) - anchor.X;
-                double fy = (Vector2.Add(anchor, this._angle).Y * -1) - anchor.Y;
+                // Vector2 relativeMouse = DrawMath.RawRelativeToInnerTable(new Vector2(x, y));
 
-                double valid = fx * (Vector2.Add(anchor, this._angle).Y - anchor.Y) - fy * (Vector2.Add(anchor, this._angle).X - anchor.X);
-                double side = fx * (y - anchor.Y) - fy * (x - anchor.X);
+                double distance = Math.Sqrt(Math.Pow(x - anchor.X, 2) + Math.Pow(y - anchor.Y, 2));
+                this._power = (float)distance / 200;
 
-                if ((valid > 0 && side > 0) ||
-                    (valid < 0 && side < 0))
+
+                if (distance > 150 && VectorMath.Modulo(Game1.ticks, 250) == 0)
                 {
-                    double growth = .03;
-                    double capacity = 200;
-
-                    // Logistic Growth
-                    offset = capacity / (1 + Math.Pow(Math.E, (growth * -1) * (distance - capacity))) * DrawMath.PixelZoomAdjustement;
-
-                    if (offset > 150 && VectorMath.Modulo(Game1.ticks, 250) == 0)
-                    {
-                        Game1.playSound(Sounds.CueFullCharge);
-                    }
+                    Game1.playSound(Sounds.CueFullCharge);
                 }
 
-                this._power = (float)offset / 200;
+                int jiggleX = (int)Math.Round((Math.Sin((double)Game1.ticks / this._power / 150) + (Math.Sin((double)Game1.ticks))) * this._power / 150);
+                int jiggleY = (int)Math.Round((Math.Cos((double)Game1.ticks / this._power / 150) + (Math.Sin((double)Game1.ticks))) * this._power / 150);
 
-                int jiggleX = (int)Math.Round((Math.Sin((double)Game1.ticks / offset / 150) + (Math.Sin((double)Game1.ticks))) * offset / 150);
-                int jiggleY = (int)Math.Round((Math.Cos((double)Game1.ticks / offset / 150) + (Math.Sin((double)Game1.ticks))) * offset / 150);
-
-                int offsetX = (int)(anchor.X + this._angle.X  * offset) + jiggleX;
-                int offsetY = (int)(anchor.Y + this._angle.Y * offset) + jiggleY + 8 * Table.Scale;
+                int offsetX = (int)(anchor.X + this._angle.X  * Math.Round(this._power * 200)) + jiggleX;
+                int offsetY = (int)(anchor.Y + this._angle.Y * Math.Round(this._power * 200)) + jiggleY;
 
                 float radians = VectorMath.VectorToRadians(this._angle);
 

@@ -11,13 +11,6 @@ namespace StardropPoolMinigame.Scenes
 {
     class TitleScene : Scene
     {
-        public enum TitleState
-        {
-            Main,
-            Waiting,
-            OpponentSelect,
-        }
-
         private TitleState _state;
 
         private IPlayer _opponent;

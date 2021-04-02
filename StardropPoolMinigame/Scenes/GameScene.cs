@@ -282,12 +282,15 @@ namespace StardropPoolMinigame.Scenes
                         {
                             ball.Pocket();
                             this._pocketedBalls.Add(ball);
-                            balls.Remove(ball);
                             newTree.Remove(ball);
 
-                            this._events = (this._events.Concat(this._rules.BallPocketed(this.GetCurrentPlayer(), new List<IBall>() { ball }, pocket, balls))).ToList<GameEvent>();
+                            this._events = (this._events.Concat(this._rules.BallPocketed(this.GetCurrentPlayer(), new List<IBall>() { ball }, pocket, balls.ToList().FindAll(b => b != ball)))).ToList<GameEvent>();
                         }
                     }
+                }
+
+                foreach (GameEvent thing in this._events) {
+                    Console.Info($"Event: {thing.ToString()}");
                 }
 
                 this._balls = newTree;

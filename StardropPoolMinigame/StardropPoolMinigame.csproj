@@ -53,6 +53,7 @@
     <Compile Include="Enums\CueState.cs" />
     <Compile Include="Enums\GameEvent.cs" />
     <Compile Include="Enums\GameState.cs" />
+    <Compile Include="Enums\TitleState.cs" />
     <Compile Include="Helpers\Layers.cs" />
     <Compile Include="Enums\MainEvent.cs" />
     <Compile Include="Enums\TurnState.cs" />
