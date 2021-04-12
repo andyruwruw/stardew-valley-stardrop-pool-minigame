@@ -67,6 +67,9 @@ namespace StardropPoolMinigame.Structures
                 double edges = Math.Pow(xDist - (((Rectangle)other).GetWidth() / 2), 2) + Math.Pow(yDist - (((Rectangle)other).GetHeight() / 2), 2);
 
                 return edges <= Math.Pow(this._radius, 2);
+            } else if (other is Triangle)
+            {
+                return other.Intersects(this);
             }
             return false;
         }

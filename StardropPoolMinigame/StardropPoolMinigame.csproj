@@ -138,6 +138,7 @@
     <Compile Include="Structures\Rectangle.cs" />
     <Compile Include="Structures\Triangle.cs" />
     <Compile Include="UserInterface\BallButton.cs" />
+    <Compile Include="UserInterface\Button.cs" />
     <Compile Include="UserInterface\IButton.cs" />
   </ItemGroup>
   <ItemGroup>

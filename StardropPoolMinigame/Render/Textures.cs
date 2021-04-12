@@ -15,70 +15,147 @@ namespace StardropPoolMinigame.Render
 
         public static Texture2D TileSheet;
 
-        public static Rectangle Logo = new Rectangle(0, Textures.TileSize * 12, Textures.TileSize * 3, Textures.TileSize * 2);
-
         public static void LoadTextures()
         {
-           Textures.TileSheet = Game1.content.Load<Texture2D>("Minigames\\stardropPool");
+            Textures.TileSheet = Game1.content.Load<Texture2D>("Minigames\\stardropPool");
         }
+
+        public static Rectangle Logo = new Rectangle(0, Textures.TileSize * 12, Textures.TileSize * 3, Textures.TileSize * 2);
 
         public static Rectangle GetPocketTexture(CardinalDirection direction)
         {
             int tileSizeMultiplyer = 2;
 
+            int row;
+            int col;
+
             switch(direction)
             {
                 case CardinalDirection.North:
-                    return new Rectangle(0, Textures.TileSize * 10, Textures.TileSize * tileSizeMultiplyer, Textures.TileSize * tileSizeMultiplyer);
+                    row = 8;
+                    col = 4;
+                    break;
                 case CardinalDirection.South:
-                    return new Rectangle(0, Textures.TileSize * 12, Textures.TileSize * tileSizeMultiplyer, Textures.TileSize * tileSizeMultiplyer);
+                    row = 10;
+                    col = 4;
+                    break;
                 case CardinalDirection.NorthWest:
-                    return new Rectangle(Textures.TileSize * 8, Textures.TileSize * 8, Textures.TileSize * tileSizeMultiplyer, Textures.TileSize * tileSizeMultiplyer);
+                    row = 8;
+                    col = 0;
+                    break;
                 case CardinalDirection.NorthEast:
-                    return new Rectangle(Textures.TileSize * 4, Textures.TileSize * 10, Textures.TileSize * tileSizeMultiplyer, Textures.TileSize * tileSizeMultiplyer);
+                    row = 8;
+                    col = 8;
+                    break;
                 case CardinalDirection.SouthWest:
-                    return new Rectangle(Textures.TileSize * 4, Textures.TileSize * 12, Textures.TileSize * tileSizeMultiplyer, Textures.TileSize * tileSizeMultiplyer);
+                    row = 10;
+                    col = 8;
+                    break;
                 default:
-                    return new Rectangle(Textures.TileSize * 8, Textures.TileSize * 10, Textures.TileSize * tileSizeMultiplyer, Textures.TileSize * tileSizeMultiplyer);
+                    row = 10;
+                    col = 0;
+                    break;
             }
+
+            return new Rectangle(Textures.TileSize * col, Textures.TileSize * row, Textures.TileSize * tileSizeMultiplyer, Textures.TileSize * tileSizeMultiplyer);
         }
 
         public static Rectangle GetPocketFrontTexture(CardinalDirection direction)
         {
             int tileSizeMultiplyer = 2;
 
+            int row;
+            int col;
+
             switch (direction)
             {
                 case CardinalDirection.North:
-                    return new Rectangle(Textures.TileSize * 2, Textures.TileSize * 10, Textures.TileSize * tileSizeMultiplyer, Textures.TileSize * tileSizeMultiplyer);
+                    row = 8;
+                    col = 6;
+                    break;
                 case CardinalDirection.South:
-                    return new Rectangle(Textures.TileSize * 2, Textures.TileSize * 12, Textures.TileSize * tileSizeMultiplyer, Textures.TileSize * tileSizeMultiplyer);
+                    row = 10;
+                    col = 6;
+                    break;
                 case CardinalDirection.NorthWest:
-                    return new Rectangle(Textures.TileSize * 10, Textures.TileSize * 8, Textures.TileSize * tileSizeMultiplyer, Textures.TileSize * tileSizeMultiplyer);
+                    row = 8;
+                    col = 2;
+                    break;
                 case CardinalDirection.NorthEast:
-                    return new Rectangle(Textures.TileSize * 6, Textures.TileSize * 10, Textures.TileSize * tileSizeMultiplyer, Textures.TileSize * tileSizeMultiplyer);
+                    row = 8;
+                    col = 10;
+                    break;
                 case CardinalDirection.SouthWest:
-                    return new Rectangle(Textures.TileSize * 6, Textures.TileSize * 12, Textures.TileSize * tileSizeMultiplyer, Textures.TileSize * tileSizeMultiplyer);
+                    row = 10;
+                    col = 10;
+                    break;
                 default:
-                    return new Rectangle(Textures.TileSize * 10, Textures.TileSize * 10, Textures.TileSize * tileSizeMultiplyer, Textures.TileSize * tileSizeMultiplyer);
+                    row = 10;
+                    col = 2;
+                    break;
             }
+
+            return new Rectangle(Textures.TileSize * col, Textures.TileSize * row, Textures.TileSize * tileSizeMultiplyer, Textures.TileSize * tileSizeMultiplyer);
         }
 
         public static Rectangle GetTableEdgeTexture(CardinalDirection direction)
         {
             int tileSizeMultiplyer = 2;
 
+            int row;
+            int col;
+
             switch (direction)
             {
                 case CardinalDirection.North:
-                    return new Rectangle(Textures.TileSize * 4, Textures.TileSize * 8, Textures.TileSize * tileSizeMultiplyer, Textures.TileSize * tileSizeMultiplyer);
+                    row = 0;
+                    col = 12;
+                    break;
                 case CardinalDirection.South:
-                    return new Rectangle(0, Textures.TileSize * 8, Textures.TileSize * tileSizeMultiplyer, Textures.TileSize * tileSizeMultiplyer);
+                    row = 4;
+                    col = 12;
+                    break;
                 case CardinalDirection.West:
-                    return new Rectangle(Textures.TileSize * 2, Textures.TileSize * 8, Textures.TileSize * tileSizeMultiplyer, Textures.TileSize * tileSizeMultiplyer);
+                    row = 2;
+                    col = 12;
+                    break;
                 default:
-                    return new Rectangle(Textures.TileSize * 6, Textures.TileSize * 8, Textures.TileSize * tileSizeMultiplyer, Textures.TileSize * tileSizeMultiplyer);
+                    row = 6;
+                    col = 12;
+                    break;
             }
+
+            return new Rectangle(Textures.TileSize * col, Textures.TileSize * row, Textures.TileSize * tileSizeMultiplyer, Textures.TileSize * tileSizeMultiplyer);
+        }
+
+        public static Rectangle GetTableEdgeFrontTexture(CardinalDirection direction)
+        {
+            int tileSizeMultiplyer = 2;
+
+            int row;
+            int col;
+
+            switch (direction)
+            {
+                case CardinalDirection.North:
+                    row = 0;
+                    col = 14;
+                    break;
+                case CardinalDirection.South:
+                    row = 4;
+                    col = 14;
+                    break;
+                case CardinalDirection.West:
+                    row = 2;
+                    col = 14;
+                    break;
+                default:
+                    row = 6;
+                    col = 14;
+                    break;
+            }
+
+            return new Rectangle(Textures.TileSize * col, Textures.TileSize * row, Textures.TileSize * tileSizeMultiplyer, Textures.TileSize * tileSizeMultiplyer);
         }
 
         public static Rectangle Felt = new Rectangle(Textures.TileSize * 10, 0, Textures.TileSize, Textures.TileSize);
@@ -145,7 +222,6 @@ namespace StardropPoolMinigame.Render
             }
 
             // Default
-            Console.Info("Could not find the right tile for Core");
             return new Rectangle(Textures.TileSize * originX, Textures.TileSize * originY, Textures.TileSize, Textures.TileSize);
         }
 
@@ -182,12 +258,11 @@ namespace StardropPoolMinigame.Render
             }
 
             // Default
-            Console.Info("Could not find the right tile for Stripes");
             return new Rectangle(Textures.TileSize * originX, Textures.TileSize * originY, Textures.TileSize, Textures.TileSize);
         }
 
-        public static Rectangle Cue = new Rectangle(Textures.TileSize * 8, Textures.TileSize * 12, Textures.TileSize * 8, Textures.TileSize);
+        public static Rectangle Cue = new Rectangle(Textures.TileSize * 3, Textures.TileSize * 12, Textures.TileSize * 8, Textures.TileSize);
 
-        public static Rectangle CueShadow = new Rectangle(Textures.TileSize * 8, Textures.TileSize * 13, Textures.TileSize * 8, Textures.TileSize);
+        public static Rectangle CueShadow = new Rectangle(Textures.TileSize * 3, Textures.TileSize * 13, Textures.TileSize * 8, Textures.TileSize);
     }
 }

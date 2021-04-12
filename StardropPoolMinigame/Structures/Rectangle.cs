@@ -1,4 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using StardewValley;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -238,6 +240,11 @@ namespace StardropPoolMinigame.Structures
         public Rectangle GetSouthEastRange()
         {
             return new Rectangle(this._x + this._width / 4, this._y + this._height / 4, this._width / 2, this._height / 2);
+        }
+
+        public void Draw(SpriteBatch batch)
+        {
+            batch.Draw(Game1.staminaRect, new Microsoft.Xna.Framework.Rectangle((int)DrawMath.InnerTableToRaw(this.GetNorthWest()).X, (int)DrawMath.InnerTableToRaw(this.GetNorthWest()).Y, (int)this.GetWidth(), (int)this.GetHeight()), Game1.staminaRect.Bounds, Color.Purple, 0f, Vector2.Zero, SpriteEffects.None, 0.0101f);
         }
     }
 }

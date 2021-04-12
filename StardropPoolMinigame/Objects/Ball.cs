@@ -225,12 +225,12 @@ namespace StardropPoolMinigame.Objects
 
             foreach (IRange border in borders)
             {
-                if (border is Structures.Rectangle)
+                if (border.Intersects(ridgidBody))
                 {
-                    if (border.Intersects(ridgidBody))
-                    {
-                        Game1.playSound(Sounds.BallBounce);
+                    Game1.playSound(Sounds.BallBounce);
 
+                    if (border is Structures.Rectangle)
+                    {
                         // Alter Velocity
                         if ((this._position.Y < ((Structures.Rectangle)border).GetNorth() ||
                             this._position.Y > ((Structures.Rectangle)border).GetSouth()) &&
@@ -247,6 +247,10 @@ namespace StardropPoolMinigame.Objects
                         {
                             this._velocity = new Vector2(this._velocity.X * -1, this._velocity.Y);
                         }
+                    } else if (border is Triangle)
+                    {
+                        Console.Info("Bouncing off Triangle");
+                        this._velocity = ((Triangle)border).Bounce(ridgidBody, this._velocity);
                     }
                 }
             }

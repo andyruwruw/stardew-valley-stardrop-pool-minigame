@@ -92,9 +92,11 @@ namespace StardropPoolMinigame.Objects
                 batch.Draw(Textures.TileSheet, new Rectangle(offsetX + 10 * (int)DrawMath.PixelZoomAdjustement, offsetY + 10 * (int)DrawMath.PixelZoomAdjustement, Cue.Width, Cue.Height), Textures.CueShadow, Color.White, radians, new Vector2(-10 * DrawMath.PixelZoomAdjustement, 8), SpriteEffects.None, 0.0019f);
             } else if (this._cueState == CueState.Power)
             {
-                // Vector2 relativeMouse = DrawMath.RawRelativeToInnerTable(new Vector2(x, y));
-
                 double distance = Math.Sqrt(Math.Pow(x - anchor.X, 2) + Math.Pow(y - anchor.Y, 2));
+                if (distance > 200)
+                {
+                    distance = 200;
+                }
                 this._power = (float)distance / 200;
 
 
