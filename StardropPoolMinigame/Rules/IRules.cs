@@ -1,10 +1,8 @@
-﻿using StardropPoolMinigame.Players;
+﻿using StardropPoolMinigame.Entities;
+using StardropPoolMinigame.Enums;
+using StardropPoolMinigame.Players;
 using StardropPoolMinigame.Structures;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StardropPoolMinigame.Rules
 {

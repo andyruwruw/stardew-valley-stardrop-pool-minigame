@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace StardropPoolMinigame
+﻿namespace StardropPoolMinigame.Enums
 {
+    /// <summary>
+    /// Events that are generated based on the rules
+    /// </summary>
     public enum GameEvent
     {
         ChoseStripes = 0,

@@ -8,11 +8,11 @@ namespace StardropPoolMinigame.Scenes
 {
     interface IScene
     {
-        void Start();
-
         void Update();
 
-        void ReceiveLeftClick(int x, int y, bool playSound = true);
+        void ReceiveLeftClick();
+
+        void ReceiveRightClick();
 
         bool HasNewScene();
 

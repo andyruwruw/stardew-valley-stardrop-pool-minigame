@@ -1,5 +1,4 @@
-﻿using StardewValley;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,25 +6,31 @@ using System.Threading.Tasks;
 
 namespace StardropPoolMinigame.Scenes
 {
-    class SummaryScene : Scene
+    class SummaryScene: IScene
     {
-        public SummaryScene() : base()
+        public void Update()
         {
 
         }
 
-        public override void Start()
-        {
-            Game1.changeMusicTrack("poppy");
-        }
-
-        public override void Update()
+        public void ReceiveLeftClick()
         {
 
         }
 
-        public override void ReceiveLeftClick(int x, int y, bool playSound = true)
+        public void ReceiveRightClick()
         {
+
+        }
+
+        public bool HasNewScene()
+        {
+            return true;
+        }
+
+        public IScene GetNewScene()
+        {
+            return new DialogScene();
         }
     }
 }

@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using Microsoft.Xna.Framework;
+﻿using StardewValley;
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
-using StardewModdingAPI.Utilities;
-using StardewValley;
-using StardewValley.Objects;
-using StardewValley.TerrainFeatures;
-using StardropPoolMinigame.Messages;
-using xTile.Tiles;
+using StardropPoolMinigame.Helpers;
+using StardropPoolMinigame.Detect;
 
 namespace StardropPoolMinigame
 {
@@ -17,8 +10,8 @@ namespace StardropPoolMinigame
     {
         public override void Entry(IModHelper helper)
         {
-            Multiplayer.SetHelper(helper);
-            Console.SetMonitor(this.Monitor);
+            // Multiplayer.SetHelper(helper);
+            Logger.SetMonitor(this.Monitor);
 
             helper.Events.Input.ButtonPressed += this.OnButtonPressed;
         }
@@ -26,34 +19,19 @@ namespace StardropPoolMinigame
         private void OnButtonPressed(object sender, ButtonPressedEventArgs e)
         {
             if (!Context.IsWorldReady)
-                return;
-
-            if (e.Button.IsActionButton()) //  && PoolTableDetector.IsPoolTable()
             {
-                this.startGame();
+                return;
+            }
+
+            if (e.Button.IsActionButton() && Use.IsPoolTable())
+            {
+                this.StartGame();
             }
         }
 
-        private void startGame()
+        private void StartGame()
         {
             Game1.currentMinigame = new StardropPoolMinigame();
-        }
-
-        private void OnModMessageRecieved(object sender, ModMessageReceivedEventArgs e)
-        {
-            if (e.FromModID == this.ModManifest.UniqueID)
-            {
-                IModMessage message;
-
-                switch(e.Type)
-                {
-                    case "Test":
-                        message = e.ReadAs<IModMessage>();
-                        break;
-                    default:
-                        break;
-                }
-            }
         }
     }
 }

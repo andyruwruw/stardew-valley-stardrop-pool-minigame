@@ -1,17 +1,13 @@
 ﻿using StardewModdingAPI;
 using StardewValley;
 using StardropPoolMinigame.Messages;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace StardropPoolMinigame
+namespace StardropPoolMinigame.Helpers
 {
-    public class Multiplayer
+    class Multiplayer
     {
-        public static IModHelper helper;
+        public static IModHelper Helper;
 
         public static IList<IMultiplayerPeer> PlayablePeers;
 
@@ -19,23 +15,23 @@ namespace StardropPoolMinigame
 
         public static void SetHelper(IModHelper helper)
         {
-            Multiplayer.helper = helper;
+            Helper = helper;
         }
 
         public static bool CanPlayMultiplayer()
         {
-            Multiplayer.PlayablePeers = new List<IMultiplayerPeer>();
-            Multiplayer.UnplayablePeers = new List<IMultiplayerPeer>();
+            PlayablePeers = new List<IMultiplayerPeer>();
+            UnplayablePeers = new List<IMultiplayerPeer>();
 
             if (Game1.IsMultiplayer)
             {
-                foreach(IMultiplayerPeer peer in Multiplayer.helper.Multiplayer.GetConnectedPlayers())
+                foreach (IMultiplayerPeer peer in Helper.Multiplayer.GetConnectedPlayers())
                 {
                     bool added = false;
 
                     if (peer.HasSmapi)
                     {
-                        foreach(IMultiplayerPeerMod mod in peer.Mods)
+                        foreach (IMultiplayerPeerMod mod in peer.Mods)
                         {
                             if (mod.Name == "StardewPoolMinigame")
                             {
@@ -58,7 +54,15 @@ namespace StardropPoolMinigame
 
         public static void Send(string messageType, IModMessage message)
         {
-            Multiplayer.helper.Multiplayer.SendMessage(message, messageType, modIDs: new[] { "andyruwruw.StardropPoolMinigame" });
+            Helper.Multiplayer.SendMessage(
+                message,
+                messageType,
+                modIDs: new[] { "andyruwruw.StardropPoolMinigame" });
+        }
+
+        public static long GetNewMultiplayerId()
+        {
+            return Helper.Multiplayer.GetNewID();
         }
     }
 }

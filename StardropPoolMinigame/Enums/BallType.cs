@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace StardropPoolMinigame
+﻿namespace StardropPoolMinigame.Enums
 {
+    /// <summary>
+    /// Ball type of billiards ball, namely striped, solid or cue ball
+    /// </summary>
     public enum BallType
     {
-        Solid,
-        Stripped,
-        Any,
-        White,
+        Any = 0,
+        White = 1,
+        Solid = 2,
+        Stripped = 3,
     }
 }
