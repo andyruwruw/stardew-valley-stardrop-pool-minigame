@@ -3,7 +3,6 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using StardewValley;
 using StardewValley.Minigames;
-using StardropPoolMinigame.Constants;
 using StardropPoolMinigame.Controller;
 using StardropPoolMinigame.Render;
 using StardropPoolMinigame.Scenes;
@@ -17,16 +16,10 @@ namespace StardropPoolMinigame
         /// </summary>
         private IScene _scene;
 
-        /// <summary>
-        /// Handles drawing of each scene
-        /// </summary>
-        private IRenderer _renderer;
-
         public StardropPoolMinigame()
         {
             Textures.LoadTextures();
             this._scene = new MenuScene();
-            this._renderer = new Renderer();
         }
 
         public string minigameId()
@@ -47,13 +40,9 @@ namespace StardropPoolMinigame
             return false;
         }
 
-        public void changeScreenSize()
-        {
-        }
-
         public void draw(SpriteBatch batch)
         {
-            this._renderer.Draw(batch, this._scene);
+            this._scene.GetRenderer().Draw(batch, this._scene);
         }
 
         public void receiveLeftClick(int x, int y, bool playSound = true)
@@ -87,6 +76,10 @@ namespace StardropPoolMinigame
             this.unload();
             Game1.currentMinigame = null;
             return true;
+        }
+
+        public void changeScreenSize()
+        {
         }
 
         public void leftClickHeld(int x, int y)

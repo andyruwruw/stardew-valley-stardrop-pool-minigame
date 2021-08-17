@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace StardropPoolMinigame.Scenes.Menu.States
+﻿namespace StardropPoolMinigame.Scenes.States
 {
     class MainPage: MenuPage
     {
+        public MainPage(): base()
+        {
+
+        }
+
+        public void Update()
+        {
+
+        }
     }
 }

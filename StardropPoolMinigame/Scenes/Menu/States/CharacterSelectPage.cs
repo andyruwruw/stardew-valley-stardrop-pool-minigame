@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace StardropPoolMinigame.Scenes.Menu.States
+﻿namespace StardropPoolMinigame.Scenes.States
 {
-    interface CharacterSelectPage: MenuPage
+    class CharacterSelectPage: MenuPage
     {
+        public CharacterSelectPage(): base()
+        {
+
+        }
+
+        public void Update()
+        {
+
+        }
     }
 }

@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using StardropPoolMinigame.Enums;
 
-namespace StardropPoolMinigame.Game.States
+namespace StardropPoolMinigame.Scenes.States
 {
     class Turn
     {
+        private TurnState _turnState;
+
+        public Turn()
+        {
+            this._turnState = TurnState.Start;
+        }
     }
 }

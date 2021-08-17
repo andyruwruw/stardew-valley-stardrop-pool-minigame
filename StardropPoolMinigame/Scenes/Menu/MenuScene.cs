@@ -1,40 +1,31 @@
-﻿using StardropPoolMinigame.Enums;
-using StardropPoolMinigame.Helpers;
+﻿using StardropPoolMinigame.Render.Scenes;
+using StardropPoolMinigame.Scenes.States;
 
 namespace StardropPoolMinigame.Scenes
 {
-    class MenuScene : IScene
+    class MenuScene : Scene
     {
         private MenuPage _page;
 
-        public MenuScene()
+        public MenuScene() : base()
         {
-            this._page = MenuPage.Main;
+            this.SetRenderer(new MenuSceneRenderer());
+            this._page = new MainPage();
         }
 
-        public void Update()
+        public override void Update()
         {
-            Logger.Info("MENU UPDATE");
+            this._page.Update();
         }
 
-        public void ReceiveLeftClick()
-        {
-
-        }
-
-        public void ReceiveRightClick()
+        public override void ReceiveLeftClick()
         {
 
         }
 
-        public bool HasNewScene()
+        public override void ReceiveRightClick()
         {
-            return false;
-        }
 
-        public IScene GetNewScene()
-        {
-            return new DialogScene();
         }
 
         public MenuPage GetMenuPage()

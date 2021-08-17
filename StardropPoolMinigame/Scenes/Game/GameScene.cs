@@ -1,13 +1,15 @@
 ﻿using StardropPoolMinigame.Entities;
 using StardropPoolMinigame.Enums;
 using StardropPoolMinigame.Players;
+using StardropPoolMinigame.Render.Scenes;
 using StardropPoolMinigame.Rules;
+using StardropPoolMinigame.Scenes.States;
 using StardropPoolMinigame.Structures;
 using System.Collections.Generic;
 
 namespace StardropPoolMinigame.Scenes
 {
-    class GameScene: IScene
+    class GameScene : Scene
     {
         private IRules _rules;
 
@@ -19,7 +21,7 @@ namespace StardropPoolMinigame.Scenes
 
         private IList<IBall> _pocketedBalls;
 
-        private TurnState _turnState;
+        private Turn _turn;
 
         private IList<GameEvent> _events;
 
@@ -27,55 +29,44 @@ namespace StardropPoolMinigame.Scenes
 
         public GameScene(IPlayer player1, IPlayer player2, IRules rules = null) : base()
         {
+            this.SetRenderer(new GameSceneRenderer());
+
             this._players = new List<IPlayer>();
             this._players.Add(player1);
             this._players.Add(player2);
 
             this._rules = rules == null ? new EightBall() : rules;
-
             this._table = this._rules.GenerateTable();
             this._balls = this._rules.GenerateInitialBalls();
             this._pocketedBalls = new List<IBall>();
-
-            this._turnState = TurnState.Start;
             this._events = new List<GameEvent>();
-
             this._isFinished = false;
+
+            this._turn = new Turn();
         }
 
-        public void Update()
+        public override void Update()
         {
 
         }
 
-        public void ReceiveLeftClick()
+        public override void ReceiveLeftClick()
         {
 
         }
 
-        public void ReceiveRightClick()
+        public override void ReceiveRightClick()
         {
 
         }
-
-        public bool HasNewScene()
-        {
-            return true;
-        }
-
-        public IScene GetNewScene()
-        {
-            return new MenuScene();
-        }
-
         public bool IsGameFinished()
         {
             return this._isFinished;
         }
 
-        public TurnState GetTurnState()
+        public Turn GetTurn()
         {
-            return this._turnState;
+            return this._turn;
         }
 
         private void PlayMusic()

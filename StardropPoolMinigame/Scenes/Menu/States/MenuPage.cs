@@ -1,12 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace StardropPoolMinigame.Scenes.Menu.States
+﻿namespace StardropPoolMinigame.Scenes.States
 {
-    interface MenuPage
+    class MenuPage: IMenuPage
     {
+        private MenuPage _newPage;
+
+        public MenuPage()
+        {
+            this._newPage = null;
+        }
+
+        public void Update()
+        {
+
+        }
+
+        public bool HasNewPage()
+        {
+            return this._newPage != null;
+        }
+
+        public MenuPage GetNewPage()
+        {
+            return this._newPage;
+        }
+
+        public virtual void ReceiveLeftClick()
+        {
+
+        }
+
+        public virtual void ReceiveRightClick()
+        {
+
+        }
     }
 }

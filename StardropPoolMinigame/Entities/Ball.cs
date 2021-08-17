@@ -27,7 +27,7 @@ namespace StardropPoolMinigame.Entities
             this._range = new Circle(center, GameConstants.BALL_RADIUS);
             this._velocity = new Vector2(0, 0);
             this._acceleration = new Vector2(0, 0);
-            this._orientation = new Orientation();
+            this._orientation = new Orientation(GameConstants.BALL_RADIUS);
             this._massMultiplier = 1;
         }
 
@@ -42,6 +42,7 @@ namespace StardropPoolMinigame.Entities
             Vector2 newVelocity = Vector2.Add(this._velocity, this._acceleration);
 
             this._range.SetCenter(newPosition);
+            this._orientation.Roll(this._velocity);
             this._velocity = newVelocity;
         }
 
