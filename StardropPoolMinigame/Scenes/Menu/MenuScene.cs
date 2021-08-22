@@ -1,5 +1,7 @@
-﻿using StardropPoolMinigame.Render.Scenes;
+﻿using StardropPoolMinigame.Behaviors.Attributes;
+using StardropPoolMinigame.Render.Scenes;
 using StardropPoolMinigame.Scenes.States;
+using System.Collections.Generic;
 
 namespace StardropPoolMinigame.Scenes
 {
@@ -9,7 +11,6 @@ namespace StardropPoolMinigame.Scenes
 
         public MenuScene() : base()
         {
-            this.SetRenderer(new MenuSceneRenderer());
             this._page = new MainPage();
         }
 
@@ -31,6 +32,16 @@ namespace StardropPoolMinigame.Scenes
         public MenuPage GetMenuPage()
         {
             return this._page;
+        }
+
+        public override ISceneRenderer GetRenderer()
+        {
+            return new MenuSceneRenderer(this);
+        }
+
+        public override string GetKey()
+        {
+            return "menu-scene";
         }
     }
 }

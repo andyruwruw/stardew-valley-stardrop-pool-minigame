@@ -1,10 +1,11 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using StardropPoolMinigame.Render.Drawers;
 using StardropPoolMinigame.Scenes;
+using System.Collections.Generic;
 
 namespace StardropPoolMinigame.Render.Scenes
 {
     interface ISceneRenderer
     {
-        void Draw(SpriteBatch batch, IScene scene);
+        IList<IDrawer> GetEntities();
     }
 }

@@ -5,19 +5,15 @@ namespace StardropPoolMinigame.Constants
 {
     class RenderConstants
     {
-        public static int MINGAME_SCREEN_HEIGHT_PIXELS = 226;
-
-        public static int MINIGAME_SCREEN_WIDTH_PIXELS = 400;
-
         /// <summary>
         /// The height of the mingame window
         /// </summary>
-        public static int MINIGAME_SCREEN_HEIGHT = 800;
+        public static int MINIGAME_SCREEN_HEIGHT = 896;
 
         /// <summary>
         /// The width of the mingame window
         /// </summary>
-        public static int MINIGAME_SCREEN_WIDTH = 1000;
+        public static int MINIGAME_SCREEN_WIDTH = 1600;
 
         /// <summary>
         /// SDV zoom settings

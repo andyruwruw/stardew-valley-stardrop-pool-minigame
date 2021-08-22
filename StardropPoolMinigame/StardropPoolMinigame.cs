@@ -12,14 +12,34 @@ namespace StardropPoolMinigame
     class StardropPoolMinigame : IMinigame
     {
         /// <summary>
+        /// Entering scene
+        /// </summary>
+        private IScene _enteringScene;
+
+        /// <summary>
         /// Current scene
         /// </summary>
-        private IScene _scene;
+        private IScene _currentScene;
+
+        /// <summary>
+        /// Exiting scene
+        /// </summary>
+        private IScene _exitingScene;
+
+        /// <summary>
+        /// Renders scene entities
+        /// </summary>
+        private Renderer _renderer;
 
         public StardropPoolMinigame()
         {
             Textures.LoadTextures();
-            this._scene = new MenuScene();
+
+            this._enteringScene = new MenuScene();
+            this._currentScene = null;
+            this._exitingScene = null;
+
+            this._renderer = new Renderer();
         }
 
         public string minigameId()
@@ -35,24 +55,41 @@ namespace StardropPoolMinigame
 
 		public bool doMainGameUpdates()
         {
-            this._scene.Update();
+            if (this._enteringScene != null)
+            {
+                this._enteringScene.Update();
+            }
+            if (this._currentScene != null)
+            {
+                this._currentScene.Update();
+            }
+            if (this._exitingScene != null)
+            {
+                this._exitingScene.Update();
+            }
 
             return false;
         }
 
         public void draw(SpriteBatch batch)
         {
-            this._scene.GetRenderer().Draw(batch, this._scene);
+            this._renderer.Draw(batch, this._enteringScene, this._currentScene, this._exitingScene);
         }
 
         public void receiveLeftClick(int x, int y, bool playSound = true)
         {
-            this._scene.ReceiveLeftClick();
+            if (this._currentScene != null)
+            {
+                this._currentScene.ReceiveLeftClick();
+            }
         }
 
 		public void receiveRightClick(int x, int y, bool playSound = true)
         {
-            this._scene.ReceiveRightClick();
+            if (this._currentScene != null)
+            {
+                this._currentScene.ReceiveRightClick();
+            }
         }
 
         public void receiveKeyPress(Keys k)

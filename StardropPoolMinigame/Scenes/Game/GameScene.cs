@@ -29,8 +29,6 @@ namespace StardropPoolMinigame.Scenes
 
         public GameScene(IPlayer player1, IPlayer player2, IRules rules = null) : base()
         {
-            this.SetRenderer(new GameSceneRenderer());
-
             this._players = new List<IPlayer>();
             this._players.Add(player1);
             this._players.Add(player2);
@@ -67,6 +65,11 @@ namespace StardropPoolMinigame.Scenes
         public Turn GetTurn()
         {
             return this._turn;
+        }
+
+        public override ISceneRenderer GetRenderer()
+        {
+            return new GameSceneRenderer(this);
         }
 
         private void PlayMusic()

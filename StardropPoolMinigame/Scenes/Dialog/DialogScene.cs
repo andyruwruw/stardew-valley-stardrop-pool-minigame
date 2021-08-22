@@ -11,7 +11,6 @@ namespace StardropPoolMinigame.Scenes
     {
         public DialogScene(): base()
         {
-            this.SetRenderer(new DialogSceneRenderer());
         }
 
         public override void Update()
@@ -27,6 +26,11 @@ namespace StardropPoolMinigame.Scenes
         public override void ReceiveRightClick()
         {
 
+        }
+
+        public override ISceneRenderer GetRenderer()
+        {
+            return new DialogSceneRenderer(this);
         }
     }
 }

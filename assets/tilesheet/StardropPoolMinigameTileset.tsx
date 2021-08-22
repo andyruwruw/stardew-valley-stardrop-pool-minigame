@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.5" tiledversion="1.6.0" name="StardropPoolMinigameTileset" tilewidth="64" tileheight="64" tilecount="63" columns="0">
+<tileset version="1.5" tiledversion="1.6.0" name="StardropPoolMinigameTileset" tilewidth="400" tileheight="128" tilecount="99" columns="0">
  <grid orientation="orthogonal" width="1" height="1"/>
  <tile id="0">
   <image width="16" height="16" source="../png/ball/ball-colors/ball-color-blue.png"/>
@@ -28,104 +28,8 @@
  <tile id="8">
   <image width="16" height="16" source="../png/ball/ball-colors/ball-color-black.png"/>
  </tile>
- <tile id="9">
-  <image width="16" height="16" source="../png/ball/ball-cores/ball-core-150-n30.png"/>
- </tile>
- <tile id="10">
-  <image width="16" height="16" source="../png/ball/ball-cores/ball-core-000-000.png"/>
- </tile>
- <tile id="11">
-  <image width="16" height="16" source="../png/ball/ball-cores/ball-core-000-030.png"/>
- </tile>
- <tile id="12">
-  <image width="16" height="16" source="../png/ball/ball-cores/ball-core-000-060.png"/>
- </tile>
- <tile id="13">
-  <image width="16" height="16" source="../png/ball/ball-cores/ball-core-000-090.png"/>
- </tile>
- <tile id="14">
-  <image width="16" height="16" source="../png/ball/ball-cores/ball-core-000-n30.png"/>
- </tile>
- <tile id="15">
-  <image width="16" height="16" source="../png/ball/ball-cores/ball-core-000-n60.png"/>
- </tile>
- <tile id="16">
-  <image width="16" height="16" source="../png/ball/ball-cores/ball-core-030-000.png"/>
- </tile>
- <tile id="17">
-  <image width="16" height="16" source="../png/ball/ball-cores/ball-core-030-030.png"/>
- </tile>
- <tile id="18">
-  <image width="16" height="16" source="../png/ball/ball-cores/ball-core-030-n30.png"/>
- </tile>
- <tile id="19">
-  <image width="16" height="16" source="../png/ball/ball-cores/ball-core-045-060.png"/>
- </tile>
- <tile id="20">
-  <image width="16" height="16" source="../png/ball/ball-cores/ball-core-045-n60.png"/>
- </tile>
- <tile id="21">
-  <image width="16" height="16" source="../png/ball/ball-cores/ball-core-060-000.png"/>
- </tile>
- <tile id="22">
-  <image width="16" height="16" source="../png/ball/ball-cores/ball-core-060-030.png"/>
- </tile>
- <tile id="23">
-  <image width="16" height="16" source="../png/ball/ball-cores/ball-core-060-n30.png"/>
- </tile>
- <tile id="24">
-  <image width="16" height="16" source="../png/ball/ball-cores/ball-core-090-000.png"/>
- </tile>
- <tile id="25">
-  <image width="16" height="16" source="../png/ball/ball-cores/ball-core-090-030.png"/>
- </tile>
- <tile id="26">
-  <image width="16" height="16" source="../png/ball/ball-cores/ball-core-090-060.png"/>
- </tile>
- <tile id="27">
-  <image width="16" height="16" source="../png/ball/ball-cores/ball-core-090-n30.png"/>
- </tile>
- <tile id="28">
-  <image width="16" height="16" source="../png/ball/ball-cores/ball-core-090-n60.png"/>
- </tile>
- <tile id="29">
-  <image width="16" height="16" source="../png/ball/ball-cores/ball-core-120-000.png"/>
- </tile>
- <tile id="30">
-  <image width="16" height="16" source="../png/ball/ball-cores/ball-core-120-030.png"/>
- </tile>
- <tile id="31">
-  <image width="16" height="16" source="../png/ball/ball-cores/ball-core-120-n30.png"/>
- </tile>
- <tile id="32">
-  <image width="16" height="16" source="../png/ball/ball-cores/ball-core-135-060.png"/>
- </tile>
- <tile id="33">
-  <image width="16" height="16" source="../png/ball/ball-cores/ball-core-135-n60.png"/>
- </tile>
- <tile id="34">
-  <image width="16" height="16" source="../png/ball/ball-cores/ball-core-150-000.png"/>
- </tile>
- <tile id="35">
-  <image width="16" height="16" source="../png/ball/ball-cores/ball-core-150-030.png"/>
- </tile>
  <tile id="36">
   <image width="16" height="16" source="../png/ball/ball-stripes/ball-stripes-000-n60.png"/>
- </tile>
- <tile id="37">
-  <image width="16" height="16" source="../png/ball/ball-stripes/ball-stripes-000-000.png"/>
- </tile>
- <tile id="38">
-  <image width="16" height="16" source="../png/ball/ball-stripes/ball-stripes-000-030.png"/>
- </tile>
- <tile id="39">
-  <image width="16" height="16" source="../png/ball/ball-stripes/ball-stripes-000-060.png"/>
- </tile>
- <tile id="40">
-  <image width="16" height="16" source="../png/ball/ball-stripes/ball-stripes-000-090.png"/>
- </tile>
- <tile id="41">
-  <image width="16" height="16" source="../png/ball/ball-stripes/ball-stripes-000-n30.png"/>
  </tile>
  <tile id="42">
   <image width="16" height="16" source="../png/ball/ball-shader.png"/>
@@ -189,5 +93,209 @@
  </tile>
  <tile id="62">
   <image width="32" height="32" source="../png/Table/left-edge.png"/>
+ </tile>
+ <tile id="63">
+  <image width="32" height="32" source="../png/table/top-pocket.png"/>
+ </tile>
+ <tile id="64">
+  <image width="64" height="64" source="../png/background/floor/floor-tiles-high-res.png"/>
+ </tile>
+ <tile id="65">
+  <image width="400" height="128" source="../png/background/wall/bar-shelves-repeated.png"/>
+ </tile>
+ <tile id="66">
+  <image width="128" height="16" source="../png/cue/abigails-cue.png"/>
+ </tile>
+ <tile id="67">
+  <image width="128" height="16" source="../png/cue/base-cue.png"/>
+ </tile>
+ <tile id="68">
+  <image width="128" height="16" source="../png/cue/gus-cue.png"/>
+ </tile>
+ <tile id="69">
+  <image width="128" height="16" source="../png/cue/sams-cue.png"/>
+ </tile>
+ <tile id="70">
+  <image width="128" height="16" source="../png/cue/sebastians-cue.png"/>
+ </tile>
+ <tile id="71">
+  <image width="112" height="32" source="../png/ui/game/ball-border-box.png"/>
+ </tile>
+ <tile id="72">
+  <image width="16" height="16" source="../png/ui/game/ball-border-box-supports.png"/>
+ </tile>
+ <tile id="73">
+  <image width="128" height="80" source="../png/ui/menu/game-title.png"/>
+ </tile>
+ <tile id="74">
+  <image width="80" height="16" source="../png/ui/menu/buttons/button-text/abigail-text.png"/>
+ </tile>
+ <tile id="75">
+  <image width="80" height="16" source="../png/ui/menu/buttons/button-text/abigail-text-hover.png"/>
+ </tile>
+ <tile id="76">
+  <image width="80" height="16" source="../png/ui/menu/buttons/button-text/challenge-text.png"/>
+ </tile>
+ <tile id="77">
+  <image width="80" height="16" source="../png/ui/menu/buttons/button-text/challenge-text-hover.png"/>
+ </tile>
+ <tile id="78">
+  <image width="80" height="16" source="../png/ui/menu/buttons/button-text/gallery-text.png"/>
+ </tile>
+ <tile id="79">
+  <image width="80" height="16" source="../png/ui/menu/buttons/button-text/gallery-text-hover.png"/>
+ </tile>
+ <tile id="80">
+  <image width="80" height="16" source="../png/ui/menu/buttons/button-text/gus-text.png"/>
+ </tile>
+ <tile id="81">
+  <image width="80" height="16" source="../png/ui/menu/buttons/button-text/gus-text-hover.png"/>
+ </tile>
+ <tile id="82">
+  <image width="80" height="16" source="../png/ui/menu/buttons/button-text/multiplayer-text.png"/>
+ </tile>
+ <tile id="83">
+  <image width="80" height="16" source="../png/ui/menu/buttons/button-text/multiplayer-text-hover.png"/>
+ </tile>
+ <tile id="84">
+  <image width="80" height="16" source="../png/ui/menu/buttons/button-text/play-text.png"/>
+ </tile>
+ <tile id="85">
+  <image width="80" height="16" source="../png/ui/menu/buttons/button-text/play-text-hover.png"/>
+ </tile>
+ <tile id="86">
+  <image width="80" height="16" source="../png/ui/menu/buttons/button-text/sam-text.png"/>
+ </tile>
+ <tile id="87">
+  <image width="80" height="16" source="../png/ui/menu/buttons/button-text/sam-text-hover.png"/>
+ </tile>
+ <tile id="88">
+  <image width="80" height="16" source="../png/ui/menu/buttons/button-text/sebastian-text.png"/>
+ </tile>
+ <tile id="89">
+  <image width="80" height="16" source="../png/ui/menu/buttons/button-text/sebastian-text-hover.png"/>
+ </tile>
+ <tile id="90">
+  <image width="80" height="16" source="../png/ui/menu/buttons/button-text/settings-text.png"/>
+ </tile>
+ <tile id="91">
+  <image width="80" height="16" source="../png/ui/menu/buttons/button-text/settings-text-hover.png"/>
+ </tile>
+ <tile id="92">
+  <image width="80" height="16" source="../png/ui/menu/buttons/button-text/unknown-text.png"/>
+ </tile>
+ <tile id="93">
+  <image width="16" height="16" source="../png/ui/menu/effects/cursor-1.png"/>
+ </tile>
+ <tile id="94">
+  <image width="16" height="16" source="../png/ui/menu/effects/cursor-2.png"/>
+ </tile>
+ <tile id="95">
+  <image width="16" height="16" source="../png/ui/menu/effects/cursor-3.png"/>
+ </tile>
+ <tile id="96">
+  <image width="16" height="16" source="../png/ui/menu/effects/cursor-4.png"/>
+ </tile>
+ <tile id="97">
+  <image width="128" height="16" source="../png/ui/menu/titles/character-select-title.png"/>
+ </tile>
+ <tile id="98">
+  <image width="16" height="16" source="../png/ball/ball-cores/ball-core-000-000.png"/>
+ </tile>
+ <tile id="99">
+  <image width="16" height="16" source="../png/ball/ball-cores/ball-core-000-030.png"/>
+ </tile>
+ <tile id="100">
+  <image width="16" height="16" source="../png/ball/ball-cores/ball-core-000-060.png"/>
+ </tile>
+ <tile id="101">
+  <image width="16" height="16" source="../png/ball/ball-cores/ball-core-000-090.png"/>
+ </tile>
+ <tile id="102">
+  <image width="16" height="16" source="../png/ball/ball-cores/ball-core-000-n30.png"/>
+ </tile>
+ <tile id="103">
+  <image width="16" height="16" source="../png/ball/ball-cores/ball-core-000-n60.png"/>
+ </tile>
+ <tile id="104">
+  <image width="16" height="16" source="../png/ball/ball-cores/ball-core-030-000.png"/>
+ </tile>
+ <tile id="105">
+  <image width="16" height="16" source="../png/ball/ball-cores/ball-core-030-030.png"/>
+ </tile>
+ <tile id="106">
+  <image width="16" height="16" source="../png/ball/ball-cores/ball-core-030-n30.png"/>
+ </tile>
+ <tile id="107">
+  <image width="16" height="16" source="../png/ball/ball-cores/ball-core-045-060.png"/>
+ </tile>
+ <tile id="108">
+  <image width="16" height="16" source="../png/ball/ball-cores/ball-core-045-n60.png"/>
+ </tile>
+ <tile id="109">
+  <image width="16" height="16" source="../png/ball/ball-cores/ball-core-060-000.png"/>
+ </tile>
+ <tile id="110">
+  <image width="16" height="16" source="../png/ball/ball-cores/ball-core-060-030.png"/>
+ </tile>
+ <tile id="111">
+  <image width="16" height="16" source="../png/ball/ball-cores/ball-core-060-n30.png"/>
+ </tile>
+ <tile id="112">
+  <image width="16" height="16" source="../png/ball/ball-cores/ball-core-090-000.png"/>
+ </tile>
+ <tile id="113">
+  <image width="16" height="16" source="../png/ball/ball-cores/ball-core-090-030.png"/>
+ </tile>
+ <tile id="114">
+  <image width="16" height="16" source="../png/ball/ball-cores/ball-core-090-060.png"/>
+ </tile>
+ <tile id="115">
+  <image width="16" height="16" source="../png/ball/ball-cores/ball-core-090-n30.png"/>
+ </tile>
+ <tile id="116">
+  <image width="16" height="16" source="../png/ball/ball-cores/ball-core-090-n60.png"/>
+ </tile>
+ <tile id="117">
+  <image width="16" height="16" source="../png/ball/ball-cores/ball-core-120-000.png"/>
+ </tile>
+ <tile id="118">
+  <image width="16" height="16" source="../png/ball/ball-cores/ball-core-120-030.png"/>
+ </tile>
+ <tile id="119">
+  <image width="16" height="16" source="../png/ball/ball-cores/ball-core-120-n30.png"/>
+ </tile>
+ <tile id="120">
+  <image width="16" height="16" source="../png/ball/ball-cores/ball-core-135-060.png"/>
+ </tile>
+ <tile id="121">
+  <image width="16" height="16" source="../png/ball/ball-cores/ball-core-135-n60.png"/>
+ </tile>
+ <tile id="122">
+  <image width="16" height="16" source="../png/ball/ball-cores/ball-core-150-000.png"/>
+ </tile>
+ <tile id="123">
+  <image width="16" height="16" source="../png/ball/ball-cores/ball-core-150-030.png"/>
+ </tile>
+ <tile id="124">
+  <image width="16" height="16" source="../png/ball/ball-cores/ball-core-150-n30.png"/>
+ </tile>
+ <tile id="125">
+  <image width="16" height="16" source="../png/ball/ball-stripes/ball-stripes-000-000.png"/>
+ </tile>
+ <tile id="126">
+  <image width="16" height="16" source="../png/ball/ball-stripes/ball-stripes-000-030.png"/>
+ </tile>
+ <tile id="127">
+  <image width="16" height="16" source="../png/ball/ball-stripes/ball-stripes-000-060.png"/>
+ </tile>
+ <tile id="128">
+  <image width="16" height="16" source="../png/ball/ball-stripes/ball-stripes-000-090.png"/>
+ </tile>
+ <tile id="129">
+  <image width="16" height="16" source="../png/ball/ball-stripes/ball-stripes-000-n30.png"/>
+ </tile>
+ <tile id="130">
+  <image width="16" height="16" source="../png/ball/ball-stripes/ball-stripes-000-n60.png"/>
  </tile>
 </tileset>

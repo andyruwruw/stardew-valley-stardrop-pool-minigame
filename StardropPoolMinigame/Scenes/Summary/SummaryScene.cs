@@ -4,9 +4,11 @@ namespace StardropPoolMinigame.Scenes
 {
     class SummaryScene: Scene
     {
-        public SummaryScene() : base()
+        private IScene _gameScene;
+
+        public SummaryScene(GameScene gameScene) : base()
         {
-            this.SetRenderer(new SummarySceneRenderer());
+            this._gameScene = gameScene;
         }
 
         public override void Update()
@@ -22,6 +24,16 @@ namespace StardropPoolMinigame.Scenes
         public override void ReceiveRightClick()
         {
 
+        }
+
+        public override ISceneRenderer GetRenderer()
+        {
+            return new SummarySceneRenderer(this);
+        }
+
+        public override string GetKey()
+        {
+            return "summary-scene";
         }
     }
 }

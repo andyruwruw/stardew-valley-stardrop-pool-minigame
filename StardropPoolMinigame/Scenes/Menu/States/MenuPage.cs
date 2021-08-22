@@ -1,15 +1,21 @@
-﻿namespace StardropPoolMinigame.Scenes.States
+﻿using StardropPoolMinigame.Behaviors.Attributes;
+using System.Collections.Generic;
+
+namespace StardropPoolMinigame.Scenes.States
 {
     class MenuPage: IMenuPage
     {
-        private MenuPage _newPage;
+        protected MenuPage _newPage;
+
+        protected IList<Hoverable> _hoverables;
 
         public MenuPage()
         {
             this._newPage = null;
+            this._hoverables = new List<Hoverable>();
         }
 
-        public void Update()
+        public virtual void Update()
         {
 
         }
@@ -22,6 +28,11 @@
         public MenuPage GetNewPage()
         {
             return this._newPage;
+        }
+
+        public IList<Hoverable> GetHoverables()
+        {
+            return this._hoverables;
         }
 
         public virtual void ReceiveLeftClick()

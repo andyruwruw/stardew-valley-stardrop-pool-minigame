@@ -9,10 +9,6 @@ namespace StardropPoolMinigame.Scenes
 {
     interface IScene
     {
-        void TransitionEnter();
-
-        void TransitionExit();
-        
         void Update();
 
         void ReceiveLeftClick();
@@ -24,5 +20,7 @@ namespace StardropPoolMinigame.Scenes
         bool HasNewScene();
 
         IScene GetNewScene();
+
+        string GetKey();
     }
 }

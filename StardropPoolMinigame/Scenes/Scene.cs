@@ -9,23 +9,11 @@ namespace StardropPoolMinigame.Scenes
 {
     class Scene: IScene
     {
-        private IScene _newScene;
-
-        private ISceneRenderer _renderer;
+        protected IScene _newScene;
 
         public Scene()
         {
             this._newScene = null;
-        }
-
-        public void TransitionEnter()
-        {
-
-        }
-
-        public void TransitionExit()
-        {
-
         }
 
         public virtual void Update()
@@ -45,7 +33,7 @@ namespace StardropPoolMinigame.Scenes
 
         public virtual ISceneRenderer GetRenderer()
         {
-            return this._renderer;
+            return null;
         }
 
         public bool HasNewScene()
@@ -58,9 +46,9 @@ namespace StardropPoolMinigame.Scenes
             return this._newScene;
         }
 
-        protected void SetRenderer(ISceneRenderer renderer)
+        public virtual string GetKey()
         {
-            this._renderer = renderer;
+            return "unnamed-scene";
         }
     }
 }
