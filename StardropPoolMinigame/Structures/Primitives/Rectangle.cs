@@ -26,6 +26,11 @@ namespace StardropPoolMinigame.Primitives
                 point.Y < this.GetNorthY());
         }
 
+        public Microsoft.Xna.Framework.Rectangle GetXnaRectangle()
+        {
+            return new Microsoft.Xna.Framework.Rectangle((int)this._anchor.X, (int)this._anchor.Y, (int)this._width, (int)this._height);
+        }
+
         public Vector2 GetAnchor()
         {
             return this._anchor;

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using StardewValley;
 using StardropPoolMinigame.Constants;
 using StardropPoolMinigame.Entities;
 
@@ -26,6 +27,20 @@ namespace StardropPoolMinigame.Render.Drawers
                 this.GetScale(),
                 this.GetEffects(),
                 this.GetLayerDepth());
+
+            batch.Draw(
+                Game1.staminaRect,
+                this._entity.GetRawBoundary().GetXnaRectangle(),
+                Game1.staminaRect.Bounds,
+                Color.LightGoldenrodYellow,
+                0f,
+                Vector2.Zero,
+                SpriteEffects.None,
+                0.0001f);
+
+            Ball ball = this._entity.GetBall();
+
+            ball.GetDrawer().Draw(batch);
         }
 
         public BallButton GetEntity()
