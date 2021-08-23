@@ -9,21 +9,178 @@ namespace StardropPoolMinigame.Render
     {
         public static Texture2D TileSheet;
 
-        public static Texture2D AbigailPortraitTilesheet;
+        public static Texture2D PortraitAbigailTilesheet;
 
-        public static Texture2D GusPortraitTilesheet;
+        public static Texture2D PortraitGusTilesheet;
 
-        public static Texture2D SamPortraitTilesheet;
+        public static Texture2D PortraitSamTilesheet;
 
-        public static Texture2D SebastianPortraitTilesheet;
+        public static Texture2D PortraitSebastianTilesheet;
 
         public static void LoadTextures()
         {
-            Textures.TileSheet = Game1.content.Load<Texture2D>("Minigames\\stardropPool");
-            Textures.AbigailPortraitTilesheet = Game1.content.Load<Texture2D>("Portraits\\Abigail");
-            Textures.GusPortraitTilesheet = Game1.content.Load<Texture2D>("Portraits\\Gus");
-            Textures.SamPortraitTilesheet = Game1.content.Load<Texture2D>("Portraits\\Sam");
-            Textures.SebastianPortraitTilesheet = Game1.content.Load<Texture2D>("Portraits\\Sebastian");
+            TileSheet = Game1.content.Load<Texture2D>("Minigames\\stardropPool");
+            PortraitAbigailTilesheet = Game1.content.Load<Texture2D>("Portraits\\Abigail");
+            PortraitGusTilesheet = Game1.content.Load<Texture2D>("Portraits\\Gus");
+            PortraitSamTilesheet = Game1.content.Load<Texture2D>("Portraits\\Sam");
+            PortraitSebastianTilesheet = Game1.content.Load<Texture2D>("Portraits\\Sebastian");
+        }
+
+        public static Rectangle GetBallCoreBounds(Vector2 orientation)
+        {
+            if (orientation.Y == 90)
+            {
+                return BALL_CORE_0_90;
+            }
+            if (orientation.Y == 60)
+            {
+                if (orientation.X == 0)
+                {
+                    return BALL_CORE_0_60;
+                }
+                if (orientation.X == 45)
+                {
+                    return BALL_CORE_45_60;
+                }
+                if (orientation.X == 90)
+                {
+                    return BALL_CORE_90_60;
+                }
+                if (orientation.X == 135)
+                {
+                    return BALL_CORE_135_60;
+                }
+            }
+            if (orientation.Y == 30)
+            {
+                if (orientation.X == 0)
+                {
+                    return BALL_CORE_0_30;
+                }
+                if (orientation.X == 30)
+                {
+                    return BALL_CORE_30_30;
+                }
+                if (orientation.X == 60)
+                {
+                    return BALL_CORE_60_30;
+                }
+                if (orientation.X == 90)
+                {
+                    return BALL_CORE_90_30;
+                }
+                if (orientation.X == 120)
+                {
+                    return BALL_CORE_120_30;
+                }
+                if (orientation.X == 150)
+                {
+                    return BALL_CORE_150_30;
+                }
+            }
+            if (orientation.Y == 0)
+            {
+                if (orientation.X == 0)
+                {
+                    return BALL_CORE_0_0;
+                }
+                if (orientation.X == 30)
+                {
+                    return BALL_CORE_30_0;
+                }
+                if (orientation.X == 60)
+                {
+                    return BALL_CORE_60_0;
+                }
+                if (orientation.X == 90)
+                {
+                    return BALL_CORE_90_0;
+                }
+                if (orientation.X == 120)
+                {
+                    return BALL_CORE_120_0;
+                }
+                if (orientation.X == 150)
+                {
+                    return BALL_CORE_150_0;
+                }
+            }
+            if (orientation.Y == -30)
+            {
+                if (orientation.X == 0)
+                {
+                    return BALL_CORE_0_N30;
+                }
+                if (orientation.X == 30)
+                {
+                    return BALL_CORE_30_N30;
+                }
+                if (orientation.X == 60)
+                {
+                    return BALL_CORE_60_N30;
+                }
+                if (orientation.X == 90)
+                {
+                    return BALL_CORE_90_N30;
+                }
+                if (orientation.X == 120)
+                {
+                    return BALL_CORE_120_N30;
+                }
+                if (orientation.X == 150)
+                {
+                    return BALL_CORE_150_N30;
+                }
+            }
+            if (orientation.Y == -60)
+            {
+                if (orientation.X == 0)
+                {
+                    return BALL_CORE_0_N60;
+                }
+                if (orientation.X == 45)
+                {
+                    return BALL_CORE_45_N60;
+                }
+                if (orientation.X == 90)
+                {
+                    return BALL_CORE_90_N60;
+                }
+                if (orientation.X == 135)
+                {
+                    return BALL_CORE_135_N60;
+                }
+            }
+            return BALL_CORE_0_0;
+        }
+
+        public static Rectangle GetBallStripesBounds(Vector2 orientation)
+        {
+            if (orientation.Y == 90)
+            {
+                return BALL_STRIPES_0_90;
+            }
+            if (orientation.Y == 60)
+            {
+                return BALL_STRIPES_0_60;
+            }
+            if (orientation.Y == 30)
+            {
+                return BALL_STRIPES_0_30;
+            }
+            if (orientation.Y == 0)
+            {
+                return BALL_STRIPES_0_0;
+            }
+            if (orientation.Y == -30)
+            {
+                return BALL_STRIPES_0_N30;
+            }
+            if (orientation.Y == -60)
+            {
+                return BALL_STRIPES_0_N60;
+            }
+            return BALL_STRIPES_0_0;
         }
 
         public static Rectangle BACKGROUND_BAR_SHELVES_BOUNDS = new Rectangle(0, 0, RenderConstants.TILE_SIZE * 25, RenderConstants.TILE_SIZE * 8);
@@ -56,25 +213,25 @@ namespace StardropPoolMinigame.Render
 
         public static Rectangle BALL_CORE_0_90 = new Rectangle(RenderConstants.TILE_SIZE * 25, RenderConstants.TILE_SIZE * 0, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
 
-        public static Rectangle BALL_CORE_0_n30 = new Rectangle(RenderConstants.TILE_SIZE * 25, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+        public static Rectangle BALL_CORE_0_N30 = new Rectangle(RenderConstants.TILE_SIZE * 25, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
 
-        public static Rectangle BALL_CORE_0_n60 = new Rectangle(RenderConstants.TILE_SIZE * 25, RenderConstants.TILE_SIZE * 5, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+        public static Rectangle BALL_CORE_0_N60 = new Rectangle(RenderConstants.TILE_SIZE * 25, RenderConstants.TILE_SIZE * 5, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
 
         public static Rectangle BALL_CORE_30_0 = new Rectangle(RenderConstants.TILE_SIZE * 26, RenderConstants.TILE_SIZE * 3, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
 
         public static Rectangle BALL_CORE_30_30 = new Rectangle(RenderConstants.TILE_SIZE * 26, RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
 
-        public static Rectangle BALL_CORE_30_n30 = new Rectangle(RenderConstants.TILE_SIZE * 26, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+        public static Rectangle BALL_CORE_30_N30 = new Rectangle(RenderConstants.TILE_SIZE * 26, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
 
         public static Rectangle BALL_CORE_45_60 = new Rectangle(RenderConstants.TILE_SIZE * 26, RenderConstants.TILE_SIZE * 1, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
 
-        public static Rectangle BALL_CORE_45_n60 = new Rectangle(RenderConstants.TILE_SIZE * 26, RenderConstants.TILE_SIZE * 5, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+        public static Rectangle BALL_CORE_45_N60 = new Rectangle(RenderConstants.TILE_SIZE * 26, RenderConstants.TILE_SIZE * 5, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
 
         public static Rectangle BALL_CORE_60_0 = new Rectangle(RenderConstants.TILE_SIZE * 27, RenderConstants.TILE_SIZE * 3, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
 
         public static Rectangle BALL_CORE_60_30 = new Rectangle(RenderConstants.TILE_SIZE * 27, RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
 
-        public static Rectangle BALL_CORE_60_n30 = new Rectangle(RenderConstants.TILE_SIZE * 27, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+        public static Rectangle BALL_CORE_60_N30 = new Rectangle(RenderConstants.TILE_SIZE * 27, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
 
         public static Rectangle BALL_CORE_90_0 = new Rectangle(RenderConstants.TILE_SIZE * 28, RenderConstants.TILE_SIZE * 3, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
 
@@ -82,25 +239,25 @@ namespace StardropPoolMinigame.Render
 
         public static Rectangle BALL_CORE_90_60 = new Rectangle(RenderConstants.TILE_SIZE * 27, RenderConstants.TILE_SIZE * 1, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
 
-        public static Rectangle BALL_CORE_90_n30 = new Rectangle(RenderConstants.TILE_SIZE * 28, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+        public static Rectangle BALL_CORE_90_N30 = new Rectangle(RenderConstants.TILE_SIZE * 28, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
 
-        public static Rectangle BALL_CORE_90_n60 = new Rectangle(RenderConstants.TILE_SIZE * 27, RenderConstants.TILE_SIZE * 5, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+        public static Rectangle BALL_CORE_90_N60 = new Rectangle(RenderConstants.TILE_SIZE * 27, RenderConstants.TILE_SIZE * 5, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
 
         public static Rectangle BALL_CORE_120_0 = new Rectangle(RenderConstants.TILE_SIZE * 29, RenderConstants.TILE_SIZE * 3, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
 
         public static Rectangle BALL_CORE_120_30 = new Rectangle(RenderConstants.TILE_SIZE * 29, RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
 
-        public static Rectangle BALL_CORE_120_n30 = new Rectangle(RenderConstants.TILE_SIZE * 29, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+        public static Rectangle BALL_CORE_120_N30 = new Rectangle(RenderConstants.TILE_SIZE * 29, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
 
         public static Rectangle BALL_CORE_135_60 = new Rectangle(RenderConstants.TILE_SIZE * 28, RenderConstants.TILE_SIZE * 1, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
 
-        public static Rectangle BALL_CORE_135_n60 = new Rectangle(RenderConstants.TILE_SIZE * 28, RenderConstants.TILE_SIZE * 5, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+        public static Rectangle BALL_CORE_135_N60 = new Rectangle(RenderConstants.TILE_SIZE * 28, RenderConstants.TILE_SIZE * 5, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
 
         public static Rectangle BALL_CORE_150_0 = new Rectangle(RenderConstants.TILE_SIZE * 30, RenderConstants.TILE_SIZE * 3, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
 
         public static Rectangle BALL_CORE_150_30 = new Rectangle(RenderConstants.TILE_SIZE * 30, RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
 
-        public static Rectangle BALL_CORE_150_n30 = new Rectangle(RenderConstants.TILE_SIZE * 30, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+        public static Rectangle BALL_CORE_150_N30 = new Rectangle(RenderConstants.TILE_SIZE * 30, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
 
         public static Rectangle BALL_STRIPES_0_0 = new Rectangle(RenderConstants.TILE_SIZE * 25, RenderConstants.TILE_SIZE * 9, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
 
@@ -110,9 +267,9 @@ namespace StardropPoolMinigame.Render
 
         public static Rectangle BALL_STRIPES_0_90 = new Rectangle(RenderConstants.TILE_SIZE * 25, RenderConstants.TILE_SIZE * 6, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
 
-        public static Rectangle BALL_STRIPES_0_n30 = new Rectangle(RenderConstants.TILE_SIZE * 25, RenderConstants.TILE_SIZE * 10, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+        public static Rectangle BALL_STRIPES_0_N30 = new Rectangle(RenderConstants.TILE_SIZE * 25, RenderConstants.TILE_SIZE * 10, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
 
-        public static Rectangle BALL_STRIPES_0_n60 = new Rectangle(RenderConstants.TILE_SIZE * 25, RenderConstants.TILE_SIZE * 11, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+        public static Rectangle BALL_STRIPES_0_N60 = new Rectangle(RenderConstants.TILE_SIZE * 25, RenderConstants.TILE_SIZE * 11, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
 
         public static Rectangle BALL_SHADOW = new Rectangle(RenderConstants.TILE_SIZE * 24, RenderConstants.TILE_SIZE * 14, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
 
@@ -265,6 +422,26 @@ namespace StardropPoolMinigame.Render
         public static Rectangle TABLE_POCKET_SOUTH_EAST_BOUNDS = new Rectangle(RenderConstants.TILE_SIZE * 6, RenderConstants.TILE_SIZE * 23, RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE * 2);
 
         public static Rectangle TABLE_POCKET_SOUTH_WEST_BOUNDS = new Rectangle(RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 23, RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE * 2);
+
+        public static Rectangle TABLE_EDGE_EAST_FRONT_BOUNDS = new Rectangle(RenderConstants.TILE_SIZE * 22, RenderConstants.TILE_SIZE * 23, RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE * 2);
+
+        public static Rectangle TABLE_EDGE_NORTH_FRONT_BOUNDS = new Rectangle(RenderConstants.TILE_SIZE * 22, RenderConstants.TILE_SIZE * 21, RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE * 2);
+
+        public static Rectangle TABLE_EDGE_SOUTH_FRONT_BOUNDS = new Rectangle(RenderConstants.TILE_SIZE * 20, RenderConstants.TILE_SIZE * 23, RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE * 2);
+
+        public static Rectangle TABLE_EDGE_WEST_FRONT_BOUNDS = new Rectangle(RenderConstants.TILE_SIZE * 20, RenderConstants.TILE_SIZE * 21, RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE * 2);
+
+        public static Rectangle TABLE_POCKET_NORTH_FRONT_BOUNDS = new Rectangle(RenderConstants.TILE_SIZE * 18, RenderConstants.TILE_SIZE * 21, RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE * 2);
+
+        public static Rectangle TABLE_POCKET_NORTH_EAST_FRONT_BOUNDS = new Rectangle(RenderConstants.TILE_SIZE * 16, RenderConstants.TILE_SIZE * 21, RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE * 2);
+
+        public static Rectangle TABLE_POCKET_NORTH_WEST_FRONT_BOUNDS = new Rectangle(RenderConstants.TILE_SIZE * 14, RenderConstants.TILE_SIZE * 21, RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE * 2);
+
+        public static Rectangle TABLE_POCKET_SOUTH_FRONT_BOUNDS = new Rectangle(RenderConstants.TILE_SIZE * 18, RenderConstants.TILE_SIZE * 23, RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE * 2);
+
+        public static Rectangle TABLE_POCKET_SOUTH_EAST_FRONT_BOUNDS = new Rectangle(RenderConstants.TILE_SIZE * 16, RenderConstants.TILE_SIZE * 23, RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE * 2);
+
+        public static Rectangle TABLE_POCKET_SOUTH_WEST_FRONT_BOUNDS = new Rectangle(RenderConstants.TILE_SIZE * 14, RenderConstants.TILE_SIZE * 23, RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE * 2);
 
         public static Rectangle TITLE_GAME_BOUNDS = new Rectangle(0, RenderConstants.TILE_SIZE * 12, RenderConstants.TILE_SIZE * 8, RenderConstants.TILE_SIZE * 5);
 

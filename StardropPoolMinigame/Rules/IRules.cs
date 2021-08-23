@@ -8,14 +8,14 @@ namespace StardropPoolMinigame.Rules
 {
     interface IRules
     {
-        ITable GenerateTable();
+        Table GenerateTable();
 
         QuadTree GenerateInitialBalls();
 
-        IList<GameEvent> NoBallHit(IList<IBall> remaining);
+        IList<GameEvent> NoBallHit(IList<Ball> remaining);
 
-        IList<GameEvent> FirstBallHit(IPlayer player, IBall ball);
+        IList<GameEvent> FirstBallHit(IPlayer player, Ball ball);
 
-        IList<GameEvent> BallPocketed(IPlayer player, IList<IBall> balls, IPocket pocket, IList<IBall> remaining, IPocket target = null);
+        IList<GameEvent> BallPocketed(IPlayer player, IList<Ball> balls, Pocket pocket, IList<Ball> remaining, Pocket target = null);
     }
 }

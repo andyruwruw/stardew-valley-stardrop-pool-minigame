@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using StardropPoolMinigame.Enums;
 
 namespace StardropPoolMinigame.Primitives
 {

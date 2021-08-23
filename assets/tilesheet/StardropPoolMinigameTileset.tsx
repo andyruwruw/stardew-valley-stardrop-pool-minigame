@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.5" tiledversion="1.6.0" name="StardropPoolMinigameTileset" tilewidth="400" tileheight="128" tilecount="99" columns="0">
+<tileset version="1.5" tiledversion="1.6.0" name="StardropPoolMinigameTileset" tilewidth="400" tileheight="160" tilecount="109" columns="0">
  <grid orientation="orthogonal" width="1" height="1"/>
  <tile id="0">
   <image width="16" height="16" source="../png/ball/ball-colors/ball-color-blue.png"/>
@@ -61,41 +61,8 @@
  <tile id="51">
   <image width="64" height="64" source="../png/effects/shine-effect.png"/>
  </tile>
- <tile id="52">
-  <image width="32" height="32" source="../png/Table/right-edge.png"/>
- </tile>
- <tile id="53">
-  <image width="32" height="32" source="../png/Table/top-edge.png"/>
- </tile>
- <tile id="54">
-  <image width="32" height="32" source="../png/Table/top-left-edge.png"/>
- </tile>
- <tile id="55">
-  <image width="32" height="32" source="../png/Table/top-pocket.png"/>
- </tile>
- <tile id="56">
-  <image width="32" height="32" source="../png/Table/top-right-edge.png"/>
- </tile>
- <tile id="57">
-  <image width="32" height="32" source="../png/Table/bottom-edge.png"/>
- </tile>
- <tile id="58">
-  <image width="32" height="32" source="../png/Table/bottom-left-edge.png"/>
- </tile>
- <tile id="59">
-  <image width="32" height="32" source="../png/Table/bottom-pocket.png"/>
- </tile>
- <tile id="60">
-  <image width="32" height="32" source="../png/Table/bottom-right-edge.png"/>
- </tile>
  <tile id="61">
   <image width="16" height="16" source="../png/Table/felt.png"/>
- </tile>
- <tile id="62">
-  <image width="32" height="32" source="../png/Table/left-edge.png"/>
- </tile>
- <tile id="63">
-  <image width="32" height="32" source="../png/table/top-pocket.png"/>
  </tile>
  <tile id="64">
   <image width="64" height="64" source="../png/background/floor/floor-tiles-high-res.png"/>
@@ -297,5 +264,68 @@
  </tile>
  <tile id="130">
   <image width="16" height="16" source="../png/ball/ball-stripes/ball-stripes-000-n60.png"/>
+ </tile>
+ <tile id="131">
+  <image width="32" height="32" source="../png/table/bottom-edge.png"/>
+ </tile>
+ <tile id="132">
+  <image width="32" height="32" source="../png/table/bottom-edge-front.png"/>
+ </tile>
+ <tile id="133">
+  <image width="32" height="32" source="../png/table/bottom-left-edge.png"/>
+ </tile>
+ <tile id="134">
+  <image width="32" height="32" source="../png/table/bottom-left-edge-front.png"/>
+ </tile>
+ <tile id="135">
+  <image width="32" height="32" source="../png/table/bottom-pocket.png"/>
+ </tile>
+ <tile id="136">
+  <image width="32" height="32" source="../png/table/bottom-pocket-front.png"/>
+ </tile>
+ <tile id="137">
+  <image width="32" height="32" source="../png/table/bottom-right-edge.png"/>
+ </tile>
+ <tile id="138">
+  <image width="32" height="32" source="../png/table/bottom-right-edge-front.png"/>
+ </tile>
+ <tile id="139">
+  <image width="32" height="32" source="../png/table/left-edge.png"/>
+ </tile>
+ <tile id="140">
+  <image width="32" height="32" source="../png/table/left-edge-front.png"/>
+ </tile>
+ <tile id="141">
+  <image width="32" height="32" source="../png/table/right-edge.png"/>
+ </tile>
+ <tile id="142">
+  <image width="32" height="32" source="../png/table/right-edge-front.png"/>
+ </tile>
+ <tile id="143">
+  <image width="32" height="32" source="../png/table/top-edge.png"/>
+ </tile>
+ <tile id="144">
+  <image width="32" height="32" source="../png/table/top-edge-front.png"/>
+ </tile>
+ <tile id="145">
+  <image width="32" height="32" source="../png/table/top-left-edge.png"/>
+ </tile>
+ <tile id="146">
+  <image width="32" height="32" source="../png/table/top-left-edge-front.png"/>
+ </tile>
+ <tile id="147">
+  <image width="32" height="32" source="../png/table/top-pocket.png"/>
+ </tile>
+ <tile id="148">
+  <image width="32" height="32" source="../png/table/top-pocket-front.png"/>
+ </tile>
+ <tile id="149">
+  <image width="32" height="32" source="../png/table/top-right-edge.png"/>
+ </tile>
+ <tile id="150">
+  <image width="32" height="32" source="../png/table/top-right-edge-front.png"/>
+ </tile>
+ <tile id="151">
+  <image width="288" height="160" source="../png/table/table-shadow.png"/>
  </tile>
 </tileset>

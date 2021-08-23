@@ -1,23 +1,11 @@
-﻿using StardropPoolMinigame.Render.Drawers;
-using StardropPoolMinigame.Scenes;
-using System.Collections.Generic;
+﻿using StardropPoolMinigame.Scenes;
 
 namespace StardropPoolMinigame.Render.Scenes
 {
-    class MenuSceneRenderer : ISceneRenderer
+    class MenuSceneRenderer : SceneRenderer
     {
-        private IScene _scene;
-
-        public MenuSceneRenderer(IScene scene)
+        public MenuSceneRenderer(IScene scene) : base(scene)
         {
-            this._scene = scene;
-        }
-
-        public IList<IDrawer> GetEntities()
-        {
-            IList<IDrawer> entities = new List<IDrawer>();
-
-            return entities;
         }
     }
 }

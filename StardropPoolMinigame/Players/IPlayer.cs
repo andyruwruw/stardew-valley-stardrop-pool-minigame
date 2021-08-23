@@ -17,6 +17,6 @@ namespace StardropPoolMinigame.Players
 
         long GetPlayerId();
 
-        ICue GetCue();
+        Cue GetCue();
     }
 }

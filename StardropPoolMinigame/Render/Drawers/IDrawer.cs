@@ -9,7 +9,7 @@ namespace StardropPoolMinigame.Render.Drawers
 
         Texture2D GetTileSheet();
 
-        Rectangle GetDestination();
+        Vector2 GetDestination();
 
         Rectangle GetSource();
 
@@ -19,7 +19,7 @@ namespace StardropPoolMinigame.Render.Drawers
 
         Vector2 GetOrigin();
 
-        Vector2 GetScale();
+        float GetScale();
 
         SpriteEffects GetEffects();
 

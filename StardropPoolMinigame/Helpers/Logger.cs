@@ -1,7 +1,7 @@
 ﻿using StardewModdingAPI;
 using System;
 
-namespace StardropPoolMinigame.Helpers
+namespace StardropPoolMinigame
 {
     class Logger
     {

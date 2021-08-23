@@ -4,10 +4,11 @@ using StardropPoolMinigame.Constants;
 using StardropPoolMinigame.Attributes;
 using StardropPoolMinigame.Enums;
 using StardropPoolMinigame.Helpers;
+using StardropPoolMinigame.Render.Drawers;
 
 namespace StardropPoolMinigame.Entities
 {
-    class Ball: IBall
+    class Ball : EntityHoverable
     {
         private int _number;
 
@@ -21,7 +22,7 @@ namespace StardropPoolMinigame.Entities
 
         private float _massMultiplier;
 
-        public Ball(int number, Vector2 center)
+        public Ball(int number, Vector2 center) : base(Origin.CenterCenter, center)
         {
             this._number = number;
             this._range = new Circle(center, GameConstants.BALL_RADIUS);
@@ -31,9 +32,10 @@ namespace StardropPoolMinigame.Entities
             this._massMultiplier = 1;
         }
 
-        public void Update()
+        public override void Update()
         {
-            UpdateVectors();
+            this.UpdateVectors();
+            this.UpdateHoverable();
         }
 
         public void UpdateVectors()
@@ -129,6 +131,16 @@ namespace StardropPoolMinigame.Entities
                 default:
                     return BallColor.Black;
             }
+        }
+
+        public override IDrawer GetDrawer()
+        {
+            return new BallDrawer(this);
+        }
+
+        public override string GetId()
+        {
+            return $"ball-{this._id}";
         }
     }
 }

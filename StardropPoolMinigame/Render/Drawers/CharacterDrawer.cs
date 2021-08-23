@@ -1,13 +1,16 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using StardropPoolMinigame.Players;
 
 namespace StardropPoolMinigame.Render.Drawers
 {
-    class CharacterDrawer
+    class ComputerOpponentDrawer: IDrawer
     {
-        public CharacterDrawer()
-        {
+        private ComputerOpponent _entity;
 
+        public ComputerOpponentDrawer(ComputerOpponent character)
+        {
+            this._entity = character;
         }
 
         public void Draw(SpriteBatch batch)
@@ -15,14 +18,19 @@ namespace StardropPoolMinigame.Render.Drawers
 
         }
 
+        public ComputerOpponent GetEntity()
+        {
+            return this._entity;
+        }
+
         public Texture2D GetTileSheet()
         {
             return Textures.TileSheet;
         }
 
-        public Rectangle GetDestination()
+        public Vector2 GetDestination()
         {
-            return new Rectangle();
+            return new Vector2();
         }
 
         public Rectangle GetSource()
@@ -45,9 +53,9 @@ namespace StardropPoolMinigame.Render.Drawers
             return new Vector2(0, 0);
         }
 
-        public Vector2 GetScale()
+        public float GetScale()
         {
-            return new Vector2(1, 1);
+            return 1f;
         }
 
         public SpriteEffects GetEffects()

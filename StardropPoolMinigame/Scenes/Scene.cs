@@ -1,9 +1,6 @@
-﻿using StardropPoolMinigame.Render.Scenes;
-using System;
+﻿using StardropPoolMinigame.Entities;
+using StardropPoolMinigame.Render.Scenes;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StardropPoolMinigame.Scenes
 {
@@ -11,14 +8,17 @@ namespace StardropPoolMinigame.Scenes
     {
         protected IScene _newScene;
 
+        protected IList<IEntity> _entities;
+
         public Scene()
         {
             this._newScene = null;
+            this._entities = new List<IEntity>();
         }
 
         public virtual void Update()
         {
-
+            this.UpdateEntities();
         }
 
         public virtual void ReceiveLeftClick()
@@ -36,6 +36,11 @@ namespace StardropPoolMinigame.Scenes
             return null;
         }
 
+        public virtual IList<IEntity> GetEntities()
+        {
+            return this._entities;
+        }
+
         public bool HasNewScene()
         {
             return this._newScene != null;
@@ -49,6 +54,14 @@ namespace StardropPoolMinigame.Scenes
         public virtual string GetKey()
         {
             return "unnamed-scene";
+        }
+
+        protected void UpdateEntities()
+        {
+            foreach (IEntity entity in this._entities)
+            {
+                entity.Update();
+            }
         }
     }
 }

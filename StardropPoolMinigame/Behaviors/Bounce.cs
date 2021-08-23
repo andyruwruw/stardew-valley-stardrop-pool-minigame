@@ -8,11 +8,11 @@ namespace StardropPoolMinigame.Geometry
 {
     class Bounce
     {
-        private IBall _ball1;
+        private Ball _ball1;
 
-        private IBall _ball2;
+        private Ball _ball2;
 
-        public Bounce(IBall ball1, IBall ball2)
+        public Bounce(Ball ball1, Ball ball2)
         {
             this._ball1 = ball1;
             this._ball2 = ball2;

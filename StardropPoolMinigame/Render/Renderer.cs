@@ -43,23 +43,17 @@ namespace StardropPoolMinigame.Render
 
         private void DrawEntities(SpriteBatch batch, IScene entering, IScene current, IScene exiting)
         {
-            IList<IDrawer> enteringEntities = entering != null ? entering.GetRenderer().GetEntities() : new List<IDrawer>();
-            IList<IDrawer> currentEntities = current != null ? current.GetRenderer().GetEntities() : new List<IDrawer>();
-            IList<IDrawer> exitingEntities = exiting != null ? exiting.GetRenderer().GetEntities() : new List<IDrawer>();
-
-            foreach (IDrawer drawer in enteringEntities)
+            if (entering != null)
             {
-                drawer.Draw(batch);
+                entering.GetRenderer().Draw(batch);
             }
-
-            foreach (IDrawer drawer in currentEntities)
+            if (current != null)
             {
-                drawer.Draw(batch);
+                current.GetRenderer().Draw(batch);
             }
-
-            foreach (IDrawer drawer in exitingEntities)
+            if (exiting != null)
             {
-                drawer.Draw(batch);
+                exiting.GetRenderer().Draw(batch);
             }
         }
     }

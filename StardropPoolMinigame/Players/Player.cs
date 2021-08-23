@@ -1,8 +1,7 @@
-﻿using StardewValley;
+﻿using Microsoft.Xna.Framework;
 using StardropPoolMinigame.Constants;
 using StardropPoolMinigame.Entities;
 using StardropPoolMinigame.Enums;
-using System;
 
 namespace StardropPoolMinigame.Players
 {
@@ -20,7 +19,7 @@ namespace StardropPoolMinigame.Players
 
         private string _music;
 
-        private Entities.ICue _cue;
+        private Cue _cue;
 
         public Player(string name, bool isMe, bool isComputer, long playerId, string music = null)
         {
@@ -30,7 +29,7 @@ namespace StardropPoolMinigame.Players
             this._playerId = playerId;
             this._music = music == null ? SoundConstants.GAME_THEME : music;
             this._ballType = BallType.Any;
-            this._cue = new Cue();
+            this._cue = new Cue(Origin.CenterLeft, new Vector2(0, 0));
         }
 
         public bool IsComputer()
@@ -63,7 +62,7 @@ namespace StardropPoolMinigame.Players
             return this._playerId;
         }
 
-        public Entities.ICue GetCue()
+        public Cue GetCue()
         {
             return this._cue;
         }

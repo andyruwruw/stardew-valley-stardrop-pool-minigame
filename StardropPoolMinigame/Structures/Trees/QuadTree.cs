@@ -25,7 +25,7 @@ namespace StardropPoolMinigame.Structures
         /// <summary>
         /// List of points in QuadTree.
         /// </summary>
-        private IList<IBall> _points;
+        private IList<Ball> _points;
 
         /// <summary>
         /// Whether QuadTree has <see cref="Subdivide">Subdivided</see>.
@@ -60,7 +60,7 @@ namespace StardropPoolMinigame.Structures
         /// <summary>
         /// Reference to cue ball
         /// </summary>
-        private IBall _cueBall;
+        private Ball _cueBall;
 
         /// <summary>
         /// Instantiates a QuadTree
@@ -73,7 +73,7 @@ namespace StardropPoolMinigame.Structures
             this.Count = 0;
             this._boundary = boundary;
             this._capacity = capacity;
-            this._points = new List<IBall>();
+            this._points = new List<Ball>();
             this._divided = false;
             this._isRoot = isRoot;
         }
@@ -87,7 +87,7 @@ namespace StardropPoolMinigame.Structures
         /// 
         /// <param name="point">Point to be inserted</param>
         /// <returns>Whether point was added successfully</returns>
-        public bool Insert(IBall point)
+        public bool Insert(Ball point)
         {
             if (this._isRoot && point.GetNumber() == 0)
             {
@@ -123,7 +123,7 @@ namespace StardropPoolMinigame.Structures
             return false;
         }
 
-        public bool Remove(IBall point)
+        public bool Remove(Ball point)
         {
             if (this._points.Contains(point))
             {
@@ -149,7 +149,7 @@ namespace StardropPoolMinigame.Structures
         /// <param name="range"><see cref="IRange"/> to query</param>
         /// <param name="found">List of found points so far</param>
         /// <returns>List of points found</returns>
-        public IList<IBall> Query(IRange range = null, List<IBall> found = null)
+        public IList<Ball> Query(IRange range = null, List<Ball> found = null)
         {
             if (range == null)
             {
@@ -158,7 +158,7 @@ namespace StardropPoolMinigame.Structures
 
             if (found == null)
             {
-                found = new List<IBall>();
+                found = new List<Ball>();
             }
 
             if (!Intersection.IsIntersecting(range, this._boundary))
@@ -166,7 +166,7 @@ namespace StardropPoolMinigame.Structures
                 return found;
             }
 
-            foreach (IBall ball in this._points)
+            foreach (Ball ball in this._points)
             {
                 if (range.Contains(ball.GetPosition()))
                 {
@@ -185,7 +185,7 @@ namespace StardropPoolMinigame.Structures
             return found;
         }
 
-        public IBall GetCueBall()
+        public Ball GetCueBall()
         {
             return this._cueBall;
         }

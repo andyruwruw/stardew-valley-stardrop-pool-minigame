@@ -1,4 +1,5 @@
-﻿using StardropPoolMinigame.Render.Scenes;
+﻿using StardropPoolMinigame.Entities;
+using StardropPoolMinigame.Render.Scenes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,8 @@ namespace StardropPoolMinigame.Scenes
         void ReceiveRightClick();
 
         ISceneRenderer GetRenderer();
+
+        IList<IEntity> GetEntities();
 
         bool HasNewScene();
 

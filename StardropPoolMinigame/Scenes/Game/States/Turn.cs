@@ -10,5 +10,10 @@ namespace StardropPoolMinigame.Scenes.States
         {
             this._turnState = TurnState.Start;
         }
+
+        public TurnState GetTurnState()
+        {
+            return this._turnState;
+        }
     }
 }

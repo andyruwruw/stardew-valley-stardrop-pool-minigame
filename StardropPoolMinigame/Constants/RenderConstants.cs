@@ -8,17 +8,12 @@ namespace StardropPoolMinigame.Constants
         /// <summary>
         /// The height of the mingame window
         /// </summary>
-        public static int MINIGAME_SCREEN_HEIGHT = 896;
+        public static int MINIGAME_SCREEN_HEIGHT = 224;
 
         /// <summary>
         /// The width of the mingame window
         /// </summary>
-        public static int MINIGAME_SCREEN_WIDTH = 1600;
-
-        /// <summary>
-        /// SDV zoom settings
-        /// </summary>
-        public static float PIXEL_ZOOM_ADJUSTEMENT = 1f;
+        public static int MINIGAME_SCREEN_WIDTH = 400;
 
         /// <summary>
         /// Tile size on tile sheet
@@ -26,11 +21,24 @@ namespace StardropPoolMinigame.Constants
         public static int TILE_SIZE = 16;
 
         /// <summary>
+        /// SDV zoom settings
+        /// </summary>
+        public static float PixelZoomAdjustement()
+        {
+            return 1f / Game1.options.zoomLevel;
+        }
+
+        public static float TileScale()
+        {
+            return 4 * PixelZoomAdjustement();
+        }
+
+        /// <summary>
         /// The height of the mingame window adjusted with zoom settings
         /// </summary>
         public static float AdjustedScreenHeight()
         {
-            return MINIGAME_SCREEN_HEIGHT * PIXEL_ZOOM_ADJUSTEMENT;
+            return MINIGAME_SCREEN_HEIGHT * TileScale();
         }
 
         /// <summary>
@@ -38,7 +46,7 @@ namespace StardropPoolMinigame.Constants
         /// </summary>
         public static float AdjustedScreenWidth()
         {
-            return MINIGAME_SCREEN_WIDTH * PIXEL_ZOOM_ADJUSTEMENT;
+            return MINIGAME_SCREEN_WIDTH * TileScale();
         }
 
         /// <summary>
@@ -102,6 +110,11 @@ namespace StardropPoolMinigame.Constants
             return new Vector2(ViewportWidth() - AdjustedScreenWidthMargin(), ViewportHeight() - AdjustedScreenHeightMargin());
         }
 
+        public static Vector2 PixelArtScaleToRaw(Vector2 point)
+        {
+            return new Vector2(point.X * TileScale() + AdjustedScreenWidthMargin(), point.Y * TileScale() + AdjustedScreenHeightMargin());
+        }
+
         public static Vector2 ConvertMinigameWindowToRaw(Vector2 point)
         {
             return new Vector2(point.X + AdjustedScreenWidthMargin(), point.Y + AdjustedScreenHeightMargin());
@@ -111,5 +124,9 @@ namespace StardropPoolMinigame.Constants
         {
             return new Vector2(point.X - AdjustedScreenWidthMargin(), point.Y - AdjustedScreenHeightMargin());
         }
+
+        public static float BALL_BUTTON_INNER_PADDING = 2f;
+
+        public static float MENU_SCENE_GAME_TITLE_TOP_MARGIN = 6f;
     }
 }

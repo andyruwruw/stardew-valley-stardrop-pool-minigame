@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using StardropPoolMinigame.Constants;
 using StardropPoolMinigame.Entities;
 using StardropPoolMinigame.Enums;
 using StardropPoolMinigame.Players;
@@ -9,9 +10,9 @@ namespace StardropPoolMinigame.Rules
 {
     class NineBall: IRules
     {
-        public ITable GenerateTable()
+        public Table GenerateTable()
         {
-            return new Table();
+            return new Table(Origin.CenterCenter, new Vector2(RenderConstants.MINIGAME_SCREEN_WIDTH / 2, RenderConstants.MINIGAME_SCREEN_HEIGHT / 2));
         }
 
         public QuadTree GenerateInitialBalls()
@@ -21,21 +22,21 @@ namespace StardropPoolMinigame.Rules
             return quadTree;
         }
 
-        public IList<GameEvent> NoBallHit(IList<IBall> remaining)
+        public IList<GameEvent> NoBallHit(IList<Ball> remaining)
         {
             IList<GameEvent> events = new List<GameEvent>();
 
             return events;
         }
 
-        public IList<GameEvent> FirstBallHit(IPlayer player, IBall ball)
+        public IList<GameEvent> FirstBallHit(IPlayer player, Ball ball)
         {
             IList<GameEvent> events = new List<GameEvent>();
 
             return events;
         }
 
-        public IList<GameEvent> BallPocketed(IPlayer player, IList<IBall> balls, IPocket pocket, IList<IBall> remaining, IPocket target = null)
+        public IList<GameEvent> BallPocketed(IPlayer player, IList<Ball> balls, Pocket pocket, IList<Ball> remaining, Pocket target = null)
         {
             IList<GameEvent> events = new List<GameEvent>();
 

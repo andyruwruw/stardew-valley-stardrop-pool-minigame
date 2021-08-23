@@ -15,11 +15,11 @@ namespace StardropPoolMinigame.Scenes
 
         private IList<IPlayer> _players;
 
-        private ITable _table;
+        private Table _table;
 
         private QuadTree _balls;
 
-        private IList<IBall> _pocketedBalls;
+        private IList<Ball> _pocketedBalls;
 
         private Turn _turn;
 
@@ -36,7 +36,7 @@ namespace StardropPoolMinigame.Scenes
             this._rules = rules == null ? new EightBall() : rules;
             this._table = this._rules.GenerateTable();
             this._balls = this._rules.GenerateInitialBalls();
-            this._pocketedBalls = new List<IBall>();
+            this._pocketedBalls = new List<Ball>();
             this._events = new List<GameEvent>();
             this._isFinished = false;
 

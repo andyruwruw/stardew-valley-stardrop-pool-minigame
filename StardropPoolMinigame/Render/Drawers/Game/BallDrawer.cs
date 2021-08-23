@@ -1,18 +1,17 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using StardropPoolMinigame.Constants;
+using StardropPoolMinigame.Entities;
 
 namespace StardropPoolMinigame.Render.Drawers
 {
-    class CueDrawer
+    class BallDrawer : IDrawer
     {
-        public CueDrawer()
-        {
+        private Ball _entity;
 
+        public BallDrawer(Ball ball)
+        {
+            this._entity = ball;
         }
 
         public void Draw(SpriteBatch batch)
@@ -20,14 +19,20 @@ namespace StardropPoolMinigame.Render.Drawers
 
         }
 
+        public Ball GetEntity()
+        {
+            return this._entity;
+        }
+
         public Texture2D GetTileSheet()
         {
             return Textures.TileSheet;
         }
 
-        public Rectangle GetDestination()
+        public Vector2 GetDestination()
         {
-            return new Rectangle();
+            Vector2 topLeft = this._entity.GetTopLeft();
+            return new Vector2(topLeft.X * RenderConstants.TileScale() + RenderConstants.AdjustedScreenWidthMargin(), topLeft.Y * RenderConstants.TileScale() + RenderConstants.AdjustedScreenHeightMargin());
         }
 
         public Rectangle GetSource()
@@ -50,9 +55,9 @@ namespace StardropPoolMinigame.Render.Drawers
             return new Vector2(0, 0);
         }
 
-        public Vector2 GetScale()
+        public float GetScale()
         {
-            return new Vector2(1, 1);
+            return RenderConstants.TileScale();
         }
 
         public SpriteEffects GetEffects()
