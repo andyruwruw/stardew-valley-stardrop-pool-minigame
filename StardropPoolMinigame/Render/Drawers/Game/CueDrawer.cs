@@ -47,7 +47,7 @@ namespace StardropPoolMinigame.Render.Drawers
 
         public float GetRotation()
         {
-            return 1;
+            return 0f;
         }
 
         public Vector2 GetOrigin()
@@ -62,12 +62,12 @@ namespace StardropPoolMinigame.Render.Drawers
 
         public SpriteEffects GetEffects()
         {
-            return new SpriteEffects();
+            return SpriteEffects.None;
         }
 
         public float GetLayerDepth()
         {
-            return 1;
+            return this._entity.GetLayerDepth();
         }
     }
 }

@@ -22,7 +22,17 @@ namespace StardropPoolMinigame.Entities
 
         private float _massMultiplier;
 
-        public Ball(int number, Vector2 center) : base(Origin.CenterCenter, center)
+        public Ball(Vector2 center, float layerDepth, int number, Vector2 orientation) : base(Origin.CenterCenter, center, layerDepth)
+        {
+            this._number = number;
+            this._range = new Circle(center, GameConstants.BALL_RADIUS);
+            this._velocity = new Vector2(0, 0);
+            this._acceleration = new Vector2(0, 0);
+            this._orientation = new Orientation(GameConstants.BALL_RADIUS, orientation.X, orientation.Y);
+            this._massMultiplier = 1;
+        }
+
+        public Ball(Vector2 center, float layerDepth, int number) : base(Origin.CenterCenter, center, layerDepth)
         {
             this._number = number;
             this._range = new Circle(center, GameConstants.BALL_RADIUS);
@@ -100,6 +110,7 @@ namespace StardropPoolMinigame.Entities
             }
             if (this._number > 8)
             {
+                Logger.Info("STRTIPED");
                 return BallType.Stripped;
             }
             return BallType.Any;
@@ -112,25 +123,35 @@ namespace StardropPoolMinigame.Entities
                 return BallColor.White;
             }
 
-            switch (Operators.Modulo((this._number - 1), 8))
+            switch (Operators.Modulo(this._number, 8))
             {
-                case 0:
-                    return BallColor.Yellow;
                 case 1:
-                    return BallColor.Blue;
+                    return BallColor.Yellow;
                 case 2:
-                    return BallColor.Red;
+                    return BallColor.Blue;
                 case 3:
-                    return BallColor.Purple;
+                    return BallColor.Red;
                 case 4:
-                    return BallColor.Orange;
+                    return BallColor.Purple;
                 case 5:
-                    return BallColor.Green;
+                    return BallColor.Orange;
                 case 6:
+                    return BallColor.Green;
+                case 7:
                     return BallColor.Maroon;
                 default:
                     return BallColor.Black;
             }
+        }
+
+        public override float GetTotalWidth()
+        {
+            return GameConstants.BALL_RADIUS * 2;
+        }
+
+        public override float GetTotalHeight()
+        {
+            return GameConstants.BALL_RADIUS * 2;
         }
 
         public override IDrawer GetDrawer()

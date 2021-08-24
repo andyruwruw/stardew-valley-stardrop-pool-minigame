@@ -22,8 +22,8 @@ namespace StardropPoolMinigame.Primitives
         {
             return (point.X > this.GetWestX() &&
                 point.X < this.GetEastX() &&
-                point.Y > this.GetSouthY() &&
-                point.Y < this.GetNorthY());
+                point.Y < this.GetSouthY() &&
+                point.Y > this.GetNorthY());
         }
 
         public Microsoft.Xna.Framework.Rectangle GetXnaRectangle()

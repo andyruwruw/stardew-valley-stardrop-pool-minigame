@@ -4,9 +4,9 @@ using StardropPoolMinigame.Render.Drawers;
 
 namespace StardropPoolMinigame.Entities
 {
-    class Cue: Entity
+    class Cue : EntityStatic
     {
-        public Cue(Origin origin, Vector2 anchor) : base(origin, anchor)
+        public Cue(Origin origin, Vector2 anchor, float layerDepth) : base(origin, anchor, layerDepth)
         {
 
         }

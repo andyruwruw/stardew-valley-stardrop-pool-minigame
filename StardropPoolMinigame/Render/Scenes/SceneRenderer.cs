@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using StardropPoolMinigame.Entities;
-using StardropPoolMinigame.Helpers;
 using StardropPoolMinigame.Render.Drawers;
 using StardropPoolMinigame.Scenes;
 using System.Collections.Generic;
@@ -18,7 +17,6 @@ namespace StardropPoolMinigame.Render.Scenes
 
         public void Draw(SpriteBatch batch)
         {
-            Logger.Info("Drawing Scene Entities");
             IList<IEntity> entities = this.GetEntities();
 
             foreach (IEntity entity in entities)

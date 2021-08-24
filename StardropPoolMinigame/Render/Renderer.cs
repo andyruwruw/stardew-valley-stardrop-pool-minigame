@@ -26,19 +26,19 @@ namespace StardropPoolMinigame.Render
 
         private void DrawBackground(SpriteBatch batch)
         {
-            //batch.Draw(
-            //    Game1.staminaRect,
-            //    new Rectangle(
-            //        (int)RenderConstants.AdjustedScreenWidthMargin(),
-            //        (int)RenderConstants.AdjustedScreenHeightMargin(),
-            //        (int)RenderConstants.AdjustedScreenWidth(),
-            //        (int)RenderConstants.AdjustedScreenHeight()),
-            //    Game1.staminaRect.Bounds,
-            //    Color.LightGoldenrodYellow,
-            //    0f,
-            //    Vector2.Zero,
-            //    SpriteEffects.None,
-            //    0.0001f);
+            batch.Draw(
+                Game1.staminaRect,
+                new Rectangle(
+                    (int)RenderConstants.AdjustedScreenWidthMargin(),
+                    (int)RenderConstants.AdjustedScreenHeightMargin(),
+                    (int)RenderConstants.AdjustedScreenWidth(),
+                    (int)RenderConstants.AdjustedScreenHeight()),
+                Game1.staminaRect.Bounds,
+                Color.Black,
+                0f,
+                Vector2.Zero,
+                SpriteEffects.None,
+                0.0000f);
         }
 
         private void DrawEntities(SpriteBatch batch, IScene entering, IScene current, IScene exiting)

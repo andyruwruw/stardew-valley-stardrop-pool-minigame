@@ -22,6 +22,8 @@ namespace StardropPoolMinigame.Attributes
             this._orientation = Vector2.Add(this._orientation, degrees);
 
             this.Limit();
+
+            Logger.Info($"{this._orientation.X} {this._orientation.Y}");
         }
 
         public Vector2 GetFace()
@@ -34,7 +36,7 @@ namespace StardropPoolMinigame.Attributes
 
             float simplifiedLongitude = (float)Math.Round(this._orientation.X / longitudeDiff) * longitudeDiff;
 
-            return new Vector2(simplifiedLongitude, simplifiedLatitude);
+            return new Vector2(simplifiedLongitude == 180 ? 0 : simplifiedLongitude, simplifiedLatitude);
         }
 
         private void Limit()
@@ -73,7 +75,7 @@ namespace StardropPoolMinigame.Attributes
                 longitudeChanges += 180;
             }
 
-            if (latitudeChanges != 0 && longitudeChanges != 0)
+            if (latitudeChanges != 0 || longitudeChanges != 0)
             {
                 this._orientation = new Vector2(this._orientation.X + longitudeChanges, this._orientation.Y + latitudeChanges);
             }

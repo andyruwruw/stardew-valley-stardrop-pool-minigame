@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using StardropPoolMinigame.Constants;
 using StardropPoolMinigame.Enums;
 using StardropPoolMinigame.Render.Drawers;
 
@@ -12,21 +13,28 @@ namespace StardropPoolMinigame.Entities
 
         protected Vector2 _anchor;
 
-        public Entity(Origin origin, Vector2 anchor)
+        protected float _layerDepth;
+
+        public Entity(Origin origin, Vector2 anchor, float layerDepth)
         {
             this._id = System.Guid.NewGuid().ToString();
             this._origin = origin;
             this._anchor = anchor;
+            this._layerDepth = layerDepth;
         }
 
         public virtual void Update()
         {
-
         }
 
         public virtual string GetId()
         {
             return $"generic-entity-{this._id}";
+        }
+
+        public virtual IDrawer GetDrawer()
+        {
+            return null;
         }
 
         public Origin GetOrigin()
@@ -39,9 +47,9 @@ namespace StardropPoolMinigame.Entities
             return this._anchor;
         }
 
-        public virtual IDrawer GetDrawer()
+        public float GetLayerDepth()
         {
-            return null;
+            return this._layerDepth;
         }
 
         public virtual float GetTotalWidth()
@@ -93,6 +101,23 @@ namespace StardropPoolMinigame.Entities
                 return new Vector2(this._anchor.X - this.GetTotalWidth(), this._anchor.Y - this.GetTotalHeight());
             }
             return this._anchor;
+        }
+
+        public Primitives.Rectangle GetBoundary()
+        {
+            return new Primitives.Rectangle(this.GetTopLeft(), this.GetTotalWidth(), this.GetTotalHeight());
+        }
+
+        public Primitives.Rectangle GetRawBoundary()
+        {
+            Vector2 topLeft = this.GetTopLeft();
+
+            return new Primitives.Rectangle(
+                new Vector2(
+                    topLeft.X * RenderConstants.TileScale() + RenderConstants.AdjustedScreenWidthMargin(),
+                    topLeft.Y * RenderConstants.TileScale() + RenderConstants.AdjustedScreenHeightMargin()),
+                this.GetTotalWidth() * RenderConstants.TileScale(),
+                this.GetTotalHeight() * RenderConstants.TileScale());
         }
     }
 }

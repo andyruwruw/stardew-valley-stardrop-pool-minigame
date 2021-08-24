@@ -1,7 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using StardropPoolMinigame.Enums;
-using StardropPoolMinigame.Primitives;
-using StardropPoolMinigame.Render;
 using StardropPoolMinigame.Render.Drawers;
 
 namespace StardropPoolMinigame.Entities
@@ -10,7 +8,7 @@ namespace StardropPoolMinigame.Entities
     {
         private Microsoft.Xna.Framework.Rectangle _textBounds;
 
-        public Button(Origin origin, Vector2 anchor, Microsoft.Xna.Framework.Rectangle textBounds) : base(origin, anchor)
+        public Button(Origin origin, Vector2 anchor, float layerDepth, Microsoft.Xna.Framework.Rectangle textBounds) : base(origin, anchor, layerDepth)
         {
             this._textBounds = textBounds;
         }
@@ -18,10 +16,6 @@ namespace StardropPoolMinigame.Entities
         public override void Update()
         {
             this.UpdateHoverable();
-            if (this.IsHovered())
-            {
-                Logger.Info("SUP IM GETTING HOVERED");
-            }
         }
 
         public Microsoft.Xna.Framework.Rectangle GetTextBounds()

@@ -46,17 +46,17 @@ namespace StardropPoolMinigame.Render.Drawers
 
         public Rectangle GetSource()
         {
-            return new Rectangle();
+            return Textures.TITLE_GAME_BOUNDS;
         }
 
         public Color GetColor()
         {
-            return new Color();
+            return Color.White;
         }
 
         public float GetRotation()
         {
-            return 1;
+            return 0f;
         }
 
         public Vector2 GetOrigin()
@@ -71,12 +71,12 @@ namespace StardropPoolMinigame.Render.Drawers
 
         public SpriteEffects GetEffects()
         {
-            return new SpriteEffects();
+            return SpriteEffects.None;
         }
 
         public float GetLayerDepth()
         {
-            return 1;
+            return this._entity.GetLayerDepth();
         }
     }
 }

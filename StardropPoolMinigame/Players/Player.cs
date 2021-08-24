@@ -29,7 +29,10 @@ namespace StardropPoolMinigame.Players
             this._playerId = playerId;
             this._music = music == null ? SoundConstants.GAME_THEME : music;
             this._ballType = BallType.Any;
-            this._cue = new Cue(Origin.CenterLeft, new Vector2(0, 0));
+            this._cue = new Cue(
+                Origin.CenterLeft,
+                new Vector2(0, 0),
+                0.0080f);
         }
 
         public bool IsComputer()

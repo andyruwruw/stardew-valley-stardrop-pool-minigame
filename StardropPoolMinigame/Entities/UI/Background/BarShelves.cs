@@ -6,9 +6,9 @@ using StardropPoolMinigame.Render.Drawers.UI;
 
 namespace StardropPoolMinigame.Entities
 {
-    class BarShelves : Entity
+    class BarShelves : EntityStatic
     {
-        public BarShelves(Origin origin, Vector2 anchor) : base(origin, anchor)
+        public BarShelves(Origin origin, Vector2 anchor, float layerDepth) : base(origin, anchor, layerDepth)
         {
         }
 

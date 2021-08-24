@@ -16,6 +16,16 @@ namespace StardropPoolMinigame.Entities
 
         Vector2 GetAnchor();
 
+        float GetLayerDepth();
+
         Vector2 GetTopLeft();
+
+        float GetTotalWidth();
+
+        float GetTotalHeight();
+
+        Primitives.Rectangle GetBoundary();
+
+        Primitives.Rectangle GetRawBoundary();
     }
 }

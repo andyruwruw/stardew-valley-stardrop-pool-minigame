@@ -17,15 +17,24 @@ namespace StardropPoolMinigame.Entities
         /// <param name="anchor">Top left anchor</param>
         /// <param name="textBounds">Bounds for text texture</param>
         /// <param name="ballNumber">Ball to be displayed</param>
-        public BallButton(Origin origin, Vector2 anchor, Rectangle textBounds, int ballNumber) : base(origin, anchor)
+        public BallButton(Origin origin, Vector2 anchor, float layerDepth, Rectangle textBounds, int ballNumber) : base(origin, anchor, layerDepth)
         {
             this._textBounds = textBounds;
-            this._ball = new Ball(ballNumber, new Vector2(anchor.X + GameConstants.BALL_RADIUS, anchor.Y + (textBounds.Height / 2)));
+            this._ball = new Ball(
+                new Vector2(this.GetTopLeft().X + GameConstants.BALL_RADIUS, this.GetTopLeft().Y + (textBounds.Height / 2)),
+                layerDepth,
+                ballNumber,
+                new Vector2(0, -30));
         }
 
         public override void Update()
         {
             this.UpdateHoverable();
+
+            if (this.IsHovered())
+            {
+                this._ball.GetOrientation().Roll(new Vector2(GameConstants.BALL_BUTTON_HOVER_ROTATIONAL_SPEED, 0));
+            }
         }
 
         public Ball GetBall()

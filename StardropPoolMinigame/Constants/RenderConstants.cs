@@ -125,7 +125,13 @@ namespace StardropPoolMinigame.Constants
             return new Vector2(point.X - AdjustedScreenWidthMargin(), point.Y - AdjustedScreenHeightMargin());
         }
 
-        public static float BALL_BUTTON_INNER_PADDING = 2f;
+        public static float BALL_MARGIN_LEFT = 3f;
+
+        public static float BALL_MARGIN_TOP = 3f;
+
+        public static float BALL_BUTTON_INNER_PADDING = 8f;
+
+        public static float BALL_BUTTON_LEFT_OFFSET = 4f;
 
         public static float MENU_SCENE_GAME_TITLE_TOP_MARGIN = 6f;
     }

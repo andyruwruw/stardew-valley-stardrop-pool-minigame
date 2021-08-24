@@ -5,9 +5,9 @@ using StardropPoolMinigame.Render.Drawers;
 
 namespace StardropPoolMinigame.Entities
 {
-    class GameTitle : Entity
+    class GameTitle : EntityStatic
     {
-        public GameTitle(Origin origin, Vector2 anchor) : base(origin, anchor)
+        public GameTitle(Origin origin, Vector2 anchor, float layerDepth) : base(origin, anchor, layerDepth)
         {
         }
 

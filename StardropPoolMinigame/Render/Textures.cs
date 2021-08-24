@@ -26,6 +26,8 @@ namespace StardropPoolMinigame.Render
             PortraitSebastianTilesheet = Game1.content.Load<Texture2D>("Portraits\\Sebastian");
         }
 
+        public static Color TEXT_HOVER_COLOR = new Color(255, 217, 104);
+
         public static Rectangle GetBallCoreBounds(Vector2 orientation)
         {
             if (orientation.Y == 90)
@@ -397,7 +399,7 @@ namespace StardropPoolMinigame.Render
 
         public static Rectangle PORTRAIT_SEBASTIAN_BLUSH_BOUNDS = new Rectangle(0, RenderConstants.TILE_SIZE * 8, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 4);
 
-        public static Rectangle PORTRAIT_SEBASTIAN_ANGRY_BOUNDS = new Rectangle(RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 8, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 4);
+        public static Rectangle PORTRAIT_SEBASTIAN_GLARE_BOUNDS = new Rectangle(RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 8, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 4);
 
         public static Rectangle PORTRAIT_SEBASTIAN_SMURK_BOUNDS = new Rectangle(RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 12, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 4);
 

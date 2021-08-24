@@ -19,7 +19,7 @@ namespace StardropPoolMinigame.Render.Drawers
         {
             batch.Draw(
                 this.GetTileSheet(),
-                this.GetDestination(),
+                this.GetTextDestination(),
                 this.GetSource(),
                 this.GetColor(),
                 this.GetRotation(),
@@ -28,18 +28,7 @@ namespace StardropPoolMinigame.Render.Drawers
                 this.GetEffects(),
                 this.GetLayerDepth());
 
-            batch.Draw(
-                Game1.staminaRect,
-                this._entity.GetRawBoundary().GetXnaRectangle(),
-                Game1.staminaRect.Bounds,
-                Color.LightGoldenrodYellow,
-                0f,
-                Vector2.Zero,
-                SpriteEffects.None,
-                0.0001f);
-
             Ball ball = this._entity.GetBall();
-
             ball.GetDrawer().Draw(batch);
         }
 
@@ -63,7 +52,7 @@ namespace StardropPoolMinigame.Render.Drawers
         {
             if (this._entity.IsHovered())
             {
-                return new Rectangle(0, 0, 0, 0);
+                return this._entity.GetTextBounds();
             }
             return this._entity.GetTextBounds();
         }
@@ -72,7 +61,7 @@ namespace StardropPoolMinigame.Render.Drawers
         {
             if (this._entity.IsHovered())
             {
-                return Color.Yellow;
+                return Textures.TEXT_HOVER_COLOR;
             }
             return Color.White;
         }
@@ -99,7 +88,14 @@ namespace StardropPoolMinigame.Render.Drawers
 
         public float GetLayerDepth()
         {
-            return 1f;
+            return this._entity.GetLayerDepth();
+        }
+        private Vector2 GetTextDestination()
+        {
+            Vector2 topLeft = this._entity.GetTopLeft();
+            return new Vector2(
+                (topLeft.X + (GameConstants.BALL_RADIUS * 2) + RenderConstants.BALL_BUTTON_INNER_PADDING) * RenderConstants.TileScale() + RenderConstants.AdjustedScreenWidthMargin(),
+                topLeft.Y * RenderConstants.TileScale() + RenderConstants.AdjustedScreenHeightMargin());
         }
     }
 }

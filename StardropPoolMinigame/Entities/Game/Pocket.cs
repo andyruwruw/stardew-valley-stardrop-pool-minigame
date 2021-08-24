@@ -6,7 +6,7 @@ namespace StardropPoolMinigame.Entities
 {
     class Pocket : EntityHoverable
     {
-        public Pocket(Origin origin, Vector2 anchor) : base(origin, anchor)
+        public Pocket(Origin origin, Vector2 anchor, float layerDepth) : base(origin, anchor, layerDepth)
         {
 
         }

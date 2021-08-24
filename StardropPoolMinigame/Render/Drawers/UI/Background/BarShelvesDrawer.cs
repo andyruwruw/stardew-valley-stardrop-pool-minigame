@@ -76,7 +76,7 @@ namespace StardropPoolMinigame.Render.Drawers.UI
 
         public float GetLayerDepth()
         {
-            return 1f;
+            return this._entity.GetLayerDepth();
         }
     }
 }

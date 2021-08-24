@@ -37,7 +37,7 @@ namespace StardropPoolMinigame.Constants
         /// <summary>
         /// Radius of pool ball
         /// </summary>
-        public static float BALL_RADIUS = 15;
+        public static float BALL_RADIUS = 5.5f;
 
         /// <summary>
         /// Momentum loss from bouncing off a wall
@@ -69,6 +69,6 @@ namespace StardropPoolMinigame.Constants
         /// </summary>
         public static IList<int> POOL_TABLE_TILE_ID_FRONT = new List<int>() { 1415, 1416, 1417, 1418, 1419 };
 
-
+        public static float BALL_BUTTON_HOVER_ROTATIONAL_SPEED = .2f;
     }
 }
