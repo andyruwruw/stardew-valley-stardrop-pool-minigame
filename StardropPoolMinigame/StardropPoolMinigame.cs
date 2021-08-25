@@ -3,7 +3,10 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using StardewValley;
 using StardewValley.Minigames;
+using StardropPoolMinigame.Constants;
 using StardropPoolMinigame.Controller;
+using StardropPoolMinigame.Enums;
+using StardropPoolMinigame.Helpers;
 using StardropPoolMinigame.Render;
 using StardropPoolMinigame.Scenes;
 
@@ -55,19 +58,9 @@ namespace StardropPoolMinigame
 
 		public bool doMainGameUpdates()
         {
-            if (this._enteringScene != null)
-            {
-                this._enteringScene.Update();
-            }
-            if (this._currentScene != null)
-            {
-                this._currentScene.Update();
-            }
-            if (this._exitingScene != null)
-            {
-                this._exitingScene.Update();
-            }
-
+            this.CheckForNewScenes();
+            this.ShuffleScenes();
+            this.UpdateScenes();
             return false;
         }
 
@@ -104,7 +97,7 @@ namespace StardropPoolMinigame
 
         public void unload()
         {
-            Game1.stopMusicTrack(Game1.MusicContext.MiniGame);
+            Sound.StopMusic();
             Game1.player.faceDirection(0);
         }
 
@@ -142,6 +135,45 @@ namespace StardropPoolMinigame
         public bool overrideFreeMouseMovement()
         {
             return true;
+        }
+
+        private void CheckForNewScenes()
+        {
+            if (this._currentScene != null && this._currentScene.HasNewScene())
+            {
+                this._enteringScene = this._currentScene.GetNewScene();
+                this._exitingScene = this._currentScene;
+                this._currentScene = null;
+            }
+        }
+
+        private void UpdateScenes()
+        {
+            if (this._exitingScene != null)
+            {
+                this._exitingScene.Update();
+            }
+            if (this._currentScene != null)
+            {
+                this._currentScene.Update();
+            }
+            if (this._enteringScene != null)
+            {
+                this._enteringScene.Update();
+            }
+        }
+
+        private void ShuffleScenes()
+        {
+            if (this._exitingScene != null && this._exitingScene.GetTransitionState() == TransitionState.Dead)
+            {
+                this._exitingScene = null;
+            }
+            if (this._enteringScene != null && this._enteringScene.GetTransitionState() == TransitionState.Present)
+            {
+                this._currentScene = this._enteringScene;
+                this._enteringScene = null;
+            }
         }
     }
 }

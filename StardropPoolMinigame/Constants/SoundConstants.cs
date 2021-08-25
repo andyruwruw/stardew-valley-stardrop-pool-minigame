@@ -29,5 +29,9 @@
         public static string SCRATCH = "cancel";
 
         public static string VICTORY = "getNewSpecialItem"; // newRecord
+
+        public static string BOTTON_PRESS = "select";
+
+        public static string BUTTON_HOVER = "shiny4";
     }
 }

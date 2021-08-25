@@ -15,7 +15,9 @@ namespace StardropPoolMinigame.Rules
             return new Table(
                 Origin.CenterCenter,
                 new Vector2(RenderConstants.MINIGAME_SCREEN_WIDTH / 2, RenderConstants.MINIGAME_SCREEN_HEIGHT / 2),
-                0.0030f);
+                0.0030f,
+                null,
+                null);
         }
 
         public QuadTree GenerateInitialBalls()
@@ -39,7 +41,12 @@ namespace StardropPoolMinigame.Rules
             return events;
         }
 
-        public IList<GameEvent> BallPocketed(IPlayer player, IList<Ball> balls, Pocket pocket, IList<Ball> remaining, Pocket target = null)
+        public IList<GameEvent> BallPocketed(
+            IPlayer player,
+            IList<Ball> balls,
+            Pocket pocket,
+            IList<Ball> remaining,
+            Pocket target = null)
         {
             IList<GameEvent> events = new List<GameEvent>();
 

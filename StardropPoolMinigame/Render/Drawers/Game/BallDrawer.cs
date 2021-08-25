@@ -6,76 +6,21 @@ using StardropPoolMinigame.Enums;
 
 namespace StardropPoolMinigame.Render.Drawers
 {
-    class BallDrawer : IDrawer
+    class BallDrawer : Drawer
     {
-        private Ball _entity;
-
-        public BallDrawer(Ball ball)
+        public BallDrawer(Ball ball) : base(ball)
         {
-            this._entity = ball;
         }
 
-        public void Draw(SpriteBatch batch)
+        public override void Draw(SpriteBatch batch)
         {
-            batch.Draw(
-                this.GetTileSheet(),
-                this.GetDestination(),
-                this.GetSource(),
-                this.GetColor(),
-                this.GetRotation(),
-                this.GetOrigin(),
-                this.GetScale(),
-                this.GetEffects(),
-                this.GetLayerDepth());
-
-            batch.Draw(
-                this.GetTileSheet(),
-                this.GetDestination(),
-                this.GetCoreSource(),
-                this.GetColor(),
-                this.GetRotation(),
-                this.GetOrigin(),
-                this.GetScale(),
-                this.GetEffects(),
-                this.GetLayerDepth() + 0.0001f);
-
-            if (this._entity.GetBallType() == BallType.Stripped)
-            {
-                batch.Draw(
-                this.GetTileSheet(),
-                this.GetDestination(),
-                this.GetStripeSource(),
-                this.GetColor(),
-                this.GetRotation(),
-                this.GetOrigin(),
-                this.GetScale(),
-                this.GetEffects(),
-                this.GetLayerDepth() + 0.0001f);
-            }
-
-            batch.Draw(
-                this.GetTileSheet(),
-                this.GetDestination(),
-                Textures.BALL_SHADOW,
-                this.GetColor(),
-                this.GetRotation(),
-                this.GetOrigin(),
-                this.GetScale(),
-                this.GetEffects(),
-                this.GetLayerDepth() + 0.0002f);
+            this.DrawBase(batch);
+            this.DrawCore(batch);
+            this.DrawStripes(batch);
+            this.DrawShadows(batch);
         }
 
-        public Ball GetEntity()
-        {
-            return this._entity;
-        }
-
-        public Texture2D GetTileSheet()
-        {
-            return Textures.TileSheet;
-        }
-
-        public Vector2 GetDestination()
+        protected override Vector2 GetRawDestination()
         {
             Vector2 topLeft = this._entity.GetTopLeft();
             return new Vector2(
@@ -83,19 +28,9 @@ namespace StardropPoolMinigame.Render.Drawers
                 (topLeft.Y - RenderConstants.BALL_MARGIN_TOP) * RenderConstants.TileScale() + RenderConstants.AdjustedScreenHeightMargin());
         }
 
-        public Rectangle GetCoreSource()
+        protected override Rectangle GetRawSource()
         {
-            return Textures.GetBallCoreBounds(this._entity.GetOrientation().GetFace());
-        }
-
-        public Rectangle GetStripeSource()
-        {
-            return Textures.GetBallStripesBounds(this._entity.GetOrientation().GetFace());
-        }
-
-        public Rectangle GetSource()
-        {
-            switch (this._entity.GetBallColor())
+            switch (((Ball)this._entity).GetBallColor())
             {
                 case BallColor.Yellow:
                     return Textures.BALL_COLOR_YELLOW;
@@ -116,34 +51,73 @@ namespace StardropPoolMinigame.Render.Drawers
             }
         }
 
-        public Color GetColor()
+        private void DrawBase(SpriteBatch batch)
         {
-            return Color.White;
+            batch.Draw(
+                this.GetTileSheet(),
+                this.GetDestination(),
+                this.GetSource(),
+                this.GetColor(),
+                this.GetRotation(),
+                this.GetOrigin(),
+                this.GetScale(),
+                this.GetEffects(),
+                this.GetLayerDepth());
         }
 
-        public float GetRotation()
+        private void DrawCore(SpriteBatch batch)
         {
-            return 0f;
+            batch.Draw(
+                this.GetTileSheet(),
+                this.GetDestination(),
+                this.GetCoreSource(),
+                this.GetColor(),
+                this.GetRotation(),
+                this.GetOrigin(),
+                this.GetScale(),
+                this.GetEffects(),
+                this.GetLayerDepth() + 0.0001f);
         }
 
-        public Vector2 GetOrigin()
+        private void DrawStripes(SpriteBatch batch)
         {
-            return new Vector2(0, 0);
+            if (((Ball)this._entity).GetBallType() == BallType.Stripped)
+            {
+                batch.Draw(
+                    this.GetTileSheet(),
+                    this.GetDestination(),
+                    this.GetStripeSource(),
+                    this.GetColor(),
+                    this.GetRotation(),
+                    this.GetOrigin(),
+                    this.GetScale(),
+                    this.GetEffects(),
+                    this.GetLayerDepth() + 0.0001f);
+            }
         }
 
-        public float GetScale()
+        private void DrawShadows(SpriteBatch batch)
         {
-            return RenderConstants.TileScale();
+            batch.Draw(
+                this.GetTileSheet(),
+                this.GetDestination(),
+                Textures.BALL_SHADOW,
+                this.GetColor(),
+                this.GetRotation(),
+                this.GetOrigin(),
+                this.GetScale(),
+                this.GetEffects(),
+                this.GetLayerDepth() + 0.0002f);
         }
 
-        public SpriteEffects GetEffects()
+        private Rectangle GetCoreSource()
         {
-            return SpriteEffects.None;
+            return Textures.GetBallCoreBounds(((Ball)this._entity).GetOrientation().GetFace());
         }
 
-        public float GetLayerDepth()
+        private Rectangle GetStripeSource()
         {
-            return this._entity.GetLayerDepth();
+            return Textures.GetBallStripesBounds(((Ball)this._entity).GetOrientation().GetFace());
         }
     }
 }

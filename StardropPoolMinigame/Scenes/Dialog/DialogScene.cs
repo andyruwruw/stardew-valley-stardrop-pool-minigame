@@ -1,11 +1,4 @@
-﻿using StardropPoolMinigame.Render.Scenes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace StardropPoolMinigame.Scenes
+﻿namespace StardropPoolMinigame.Scenes
 {
     class DialogScene: Scene
     {
@@ -13,24 +6,9 @@ namespace StardropPoolMinigame.Scenes
         {
         }
 
-        public override void Update()
+        public override string GetKey()
         {
-
-        }
-
-        public override void ReceiveLeftClick()
-        {
-
-        }
-
-        public override void ReceiveRightClick()
-        {
-
-        }
-
-        public override ISceneRenderer GetRenderer()
-        {
-            return new DialogSceneRenderer(this);
+            return "dialog-scene";
         }
     }
 }

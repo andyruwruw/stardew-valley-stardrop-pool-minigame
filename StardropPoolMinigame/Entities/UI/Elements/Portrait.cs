@@ -2,6 +2,7 @@
 using StardropPoolMinigame.Enums;
 using StardropPoolMinigame.Render;
 using StardropPoolMinigame.Render.Drawers;
+using StardropPoolMinigame.Render.Filters;
 
 namespace StardropPoolMinigame.Entities
 {
@@ -13,30 +14,52 @@ namespace StardropPoolMinigame.Entities
 
         private PortraitEmotion _emotion;
 
-        public Portrait(Origin origin, Vector2 anchor, float layerDepth, OpponentType name, bool isSilhouette, PortraitEmotion emotion = PortraitEmotion.Default) : base(origin, anchor, layerDepth)
+        public Portrait(
+            Origin origin,
+            Vector2 anchor,
+            float layerDepth,
+            IFilter enteringTransition,
+            IFilter exitingTransition,
+            OpponentType name,
+            bool isSilhouette,
+            PortraitEmotion emotion = PortraitEmotion.Default
+        ) : base(
+            origin,
+            anchor,
+            layerDepth,
+            enteringTransition,
+            exitingTransition)
         {
             this._name = name;
             this._isSilhouette = isSilhouette;
             this._emotion = emotion;
+
+            this.SetDrawer(new PortraitDrawer(this));
         }
 
         public override void Update()
         {
-        }
-
-        public Microsoft.Xna.Framework.Rectangle GetSource()
-        {
-            return Textures.BACKGROUND_BAR_SHELVES_BOUNDS;
+            this.UpdateTransitionState();
         }
 
         public override IDrawer GetDrawer()
         {
-            return new PortraitDrawer(this);
+            return this._drawer;
         }
 
         public override string GetId()
         {
             return $"portrait-{this._id}";
+        }
+
+        public override float GetTotalWidth()
+        {
+            return Textures.PORTRAIT_SAM_DEFAULT_BOUNDS.Width;
+        }
+
+        public override float GetTotalHeight()
+        {
+            return Textures.PORTRAIT_SAM_DEFAULT_BOUNDS.Height;
         }
 
         public OpponentType GetName()

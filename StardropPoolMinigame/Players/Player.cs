@@ -5,7 +5,7 @@ using StardropPoolMinigame.Enums;
 
 namespace StardropPoolMinigame.Players
 {
-    class Player : IPlayer
+    abstract class Player : IPlayer
     {
         private string _name;
 
@@ -21,7 +21,12 @@ namespace StardropPoolMinigame.Players
 
         private Cue _cue;
 
-        public Player(string name, bool isMe, bool isComputer, long playerId, string music = null)
+        public Player(
+            string name,
+            bool isMe,
+            bool isComputer,
+            long playerId,
+            string music = null)
         {
             this._name = name;
             this._isMe = isMe;
@@ -32,7 +37,9 @@ namespace StardropPoolMinigame.Players
             this._cue = new Cue(
                 Origin.CenterLeft,
                 new Vector2(0, 0),
-                0.0080f);
+                0.0080f,
+                null,
+                null);
         }
 
         public bool IsComputer()
@@ -50,11 +57,6 @@ namespace StardropPoolMinigame.Players
             return this._ballType;
         }
 
-        public virtual string GetMusicId()
-        {
-            return this._music;
-        }
-
         public bool IsMe()
         {
             return this._isMe;
@@ -68,6 +70,11 @@ namespace StardropPoolMinigame.Players
         public Cue GetCue()
         {
             return this._cue;
+        }
+
+        public virtual string GetMusicId()
+        {
+            return this._music;
         }
     }
 }

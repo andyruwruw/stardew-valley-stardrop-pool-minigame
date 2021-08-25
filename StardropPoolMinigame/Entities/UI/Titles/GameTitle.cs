@@ -2,27 +2,36 @@
 using StardropPoolMinigame.Enums;
 using StardropPoolMinigame.Render;
 using StardropPoolMinigame.Render.Drawers;
+using StardropPoolMinigame.Render.Filters;
 
 namespace StardropPoolMinigame.Entities
 {
     class GameTitle : EntityStatic
     {
-        public GameTitle(Origin origin, Vector2 anchor, float layerDepth) : base(origin, anchor, layerDepth)
+        public GameTitle(
+            Origin origin,
+            Vector2 anchor,
+            float layerDepth,
+            IFilter enteringTransition,
+            IFilter exitingTransition
+        ) : base(
+            origin,
+            anchor,
+            layerDepth,
+            enteringTransition,
+            exitingTransition)
         {
+            this.SetDrawer(new GameTitleDrawer(this));
         }
 
         public override void Update()
         {
-        }
-
-        public Microsoft.Xna.Framework.Rectangle GetSource()
-        {
-            return Textures.TITLE_GAME_BOUNDS;
+            this.UpdateTransitionState();
         }
 
         public override IDrawer GetDrawer()
         {
-            return new GameTitleDrawer(this);
+            return this._drawer;
         }
 
         public override string GetId()

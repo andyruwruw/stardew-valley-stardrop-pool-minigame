@@ -16,6 +16,11 @@ namespace StardropPoolMinigame.Rules
 
         IList<GameEvent> FirstBallHit(IPlayer player, Ball ball);
 
-        IList<GameEvent> BallPocketed(IPlayer player, IList<Ball> balls, Pocket pocket, IList<Ball> remaining, Pocket target = null);
+        IList<GameEvent> BallPocketed(
+            IPlayer player,
+            IList<Ball> balls,
+            Pocket pocket,
+            IList<Ball> remaining,
+            Pocket target = null);
     }
 }

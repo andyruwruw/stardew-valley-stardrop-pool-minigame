@@ -1,42 +1,19 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using StardropPoolMinigame.Constants;
 using StardropPoolMinigame.Entities;
 using StardropPoolMinigame.Enums;
 
 namespace StardropPoolMinigame.Render.Drawers
 {
-    class PortraitDrawer: IDrawer
+    class PortraitDrawer : Drawer
     {
-        private Portrait _entity;
-
-        public PortraitDrawer(Portrait portrait)
+        public PortraitDrawer(Portrait portrait) : base(portrait)
         {
-            this._entity = portrait;
         }
 
-        public void Draw(SpriteBatch batch)
+        protected override Texture2D GetTileSheet()
         {
-            batch.Draw(
-                this.GetTileSheet(),
-                this.GetDestination(),
-                this.GetSource(),
-                this.GetColor(),
-                this.GetRotation(),
-                this.GetOrigin(),
-                this.GetScale(),
-                this.GetEffects(),
-                this.GetLayerDepth());
-        }
-
-        public Portrait GetEntity()
-        {
-            return this._entity;
-        }
-
-        public Texture2D GetTileSheet()
-        {
-            switch (this._entity.GetName())
+            switch (((Portrait)this._entity).GetName())
             {
                 case OpponentType.Sebastian:
                     return Textures.PortraitSebastianTilesheet;
@@ -49,17 +26,11 @@ namespace StardropPoolMinigame.Render.Drawers
             }
         }
 
-        public Vector2 GetDestination()
+        protected override Rectangle GetRawSource()
         {
-            Vector2 topLeft = this._entity.GetTopLeft();
-            return new Vector2(topLeft.X * RenderConstants.TileScale() + RenderConstants.AdjustedScreenWidthMargin(), topLeft.Y * RenderConstants.TileScale() + RenderConstants.AdjustedScreenHeightMargin());
-        }
-
-        public Rectangle GetSource()
-        {
-            if (this._entity.GetName() == OpponentType.Sam)
+            if (((Portrait)this._entity).GetName() == OpponentType.Sam)
             {
-                switch (this._entity.GetEmotion())
+                switch (((Portrait)this._entity).GetEmotion())
                 {
                     case PortraitEmotion.Blush:
                     case PortraitEmotion.Glad:
@@ -86,9 +57,9 @@ namespace StardropPoolMinigame.Render.Drawers
                         return Textures.PORTRAIT_SAM_DEFAULT_BOUNDS;
                 }
             }
-            if (this._entity.GetName() == OpponentType.Sebastian)
+            if (((Portrait)this._entity).GetName() == OpponentType.Sebastian)
             {
-                switch (this._entity.GetEmotion())
+                switch (((Portrait)this._entity).GetEmotion())
                 {
                     case PortraitEmotion.Confused:
                     case PortraitEmotion.Sad:
@@ -112,9 +83,9 @@ namespace StardropPoolMinigame.Render.Drawers
                         return Textures.PORTRAIT_SEBASTIAN_DEFAULT_BOUNDS;
                 }
             }
-            if (this._entity.GetName() == OpponentType.Abigail)
+            if (((Portrait)this._entity).GetName() == OpponentType.Abigail)
             {
-                switch (this._entity.GetEmotion())
+                switch (((Portrait)this._entity).GetEmotion())
                 {
                     case PortraitEmotion.Smurk:
                     case PortraitEmotion.Glad:
@@ -139,9 +110,9 @@ namespace StardropPoolMinigame.Render.Drawers
                         return Textures.PORTRAIT_ABIGAIL_DEFAULT_BOUNDS;
                 }
             }
-            if (this._entity.GetName() == OpponentType.Gus)
+            if (((Portrait)this._entity).GetName() == OpponentType.Gus)
             {
-                switch (this._entity.GetEmotion())
+                switch (((Portrait)this._entity).GetEmotion())
                 {
                     case PortraitEmotion.Suprised:
                     case PortraitEmotion.Embarassed:
@@ -167,38 +138,13 @@ namespace StardropPoolMinigame.Render.Drawers
             return Textures.PORTRAIT_SAM_DEFAULT_BOUNDS;
         }
 
-        public Color GetColor()
+        protected override Color GetRawColor()
         {
-            if (this._entity.IsSilhouette())
+            if (((Portrait)this._entity).IsSilhouette())
             {
                 return Color.Black;
             }
             return Color.White;
-        }
-
-        public float GetRotation()
-        {
-            return 0f;
-        }
-
-        public Vector2 GetOrigin()
-        {
-            return new Vector2(0, 0);
-        }
-
-        public float GetScale()
-        {
-            return RenderConstants.TileScale();
-        }
-
-        public SpriteEffects GetEffects()
-        {
-            return SpriteEffects.None;
-        }
-
-        public float GetLayerDepth()
-        {
-            return this._entity.GetLayerDepth();
         }
     }
 }

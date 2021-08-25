@@ -5,6 +5,7 @@ using StardropPoolMinigame.Attributes;
 using StardropPoolMinigame.Enums;
 using StardropPoolMinigame.Helpers;
 using StardropPoolMinigame.Render.Drawers;
+using StardropPoolMinigame.Render.Filters;
 
 namespace StardropPoolMinigame.Entities
 {
@@ -22,7 +23,19 @@ namespace StardropPoolMinigame.Entities
 
         private float _massMultiplier;
 
-        public Ball(Vector2 center, float layerDepth, int number, Vector2 orientation) : base(Origin.CenterCenter, center, layerDepth)
+        public Ball(
+            Vector2 center,
+            float layerDepth,
+            IFilter enteringTransition,
+            IFilter exitingTransition,
+            int number,
+            Vector2 orientation
+        ) : base(
+            Origin.CenterCenter,
+            center,
+            layerDepth,
+            enteringTransition,
+            exitingTransition)
         {
             this._number = number;
             this._range = new Circle(center, GameConstants.BALL_RADIUS);
@@ -30,9 +43,22 @@ namespace StardropPoolMinigame.Entities
             this._acceleration = new Vector2(0, 0);
             this._orientation = new Orientation(GameConstants.BALL_RADIUS, orientation.X, orientation.Y);
             this._massMultiplier = 1;
+
+            this.SetDrawer(new BallDrawer(this));
         }
 
-        public Ball(Vector2 center, float layerDepth, int number) : base(Origin.CenterCenter, center, layerDepth)
+        public Ball(
+            Vector2 center,
+            float layerDepth,
+            IFilter enteringTransition,
+            IFilter exitingTransition,
+            int number
+        ) : base(
+            Origin.CenterCenter,
+            center,
+            layerDepth,
+            enteringTransition,
+            exitingTransition)
         {
             this._number = number;
             this._range = new Circle(center, GameConstants.BALL_RADIUS);
@@ -46,6 +72,27 @@ namespace StardropPoolMinigame.Entities
         {
             this.UpdateVectors();
             this.UpdateHoverable();
+            this.UpdateTransitionState();
+        }
+
+        public override float GetTotalWidth()
+        {
+            return GameConstants.BALL_RADIUS * 2;
+        }
+
+        public override float GetTotalHeight()
+        {
+            return GameConstants.BALL_RADIUS * 2;
+        }
+
+        public override IDrawer GetDrawer()
+        {
+            return this._drawer;
+        }
+
+        public override string GetId()
+        {
+            return $"ball-{this._id}";
         }
 
         public void UpdateVectors()
@@ -110,7 +157,6 @@ namespace StardropPoolMinigame.Entities
             }
             if (this._number > 8)
             {
-                Logger.Info("STRTIPED");
                 return BallType.Stripped;
             }
             return BallType.Any;
@@ -142,26 +188,6 @@ namespace StardropPoolMinigame.Entities
                 default:
                     return BallColor.Black;
             }
-        }
-
-        public override float GetTotalWidth()
-        {
-            return GameConstants.BALL_RADIUS * 2;
-        }
-
-        public override float GetTotalHeight()
-        {
-            return GameConstants.BALL_RADIUS * 2;
-        }
-
-        public override IDrawer GetDrawer()
-        {
-            return new BallDrawer(this);
-        }
-
-        public override string GetId()
-        {
-            return $"ball-{this._id}";
         }
     }
 }

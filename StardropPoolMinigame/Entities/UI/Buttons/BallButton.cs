@@ -1,7 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using StardropPoolMinigame.Constants;
 using StardropPoolMinigame.Enums;
+using StardropPoolMinigame.Helpers;
 using StardropPoolMinigame.Render.Drawers;
+using StardropPoolMinigame.Render.Filters;
 
 namespace StardropPoolMinigame.Entities
 {
@@ -17,19 +19,37 @@ namespace StardropPoolMinigame.Entities
         /// <param name="anchor">Top left anchor</param>
         /// <param name="textBounds">Bounds for text texture</param>
         /// <param name="ballNumber">Ball to be displayed</param>
-        public BallButton(Origin origin, Vector2 anchor, float layerDepth, Rectangle textBounds, int ballNumber) : base(origin, anchor, layerDepth)
+        public BallButton(
+            Origin origin,
+            Vector2 anchor,
+            float layerDepth,
+            IFilter enteringTransition,
+            IFilter exitingTransition,
+            Rectangle textBounds,
+            int ballNumber
+        ) : base(
+            origin,
+            anchor,
+            layerDepth,
+            enteringTransition,
+            exitingTransition)
         {
             this._textBounds = textBounds;
             this._ball = new Ball(
                 new Vector2(this.GetTopLeft().X + GameConstants.BALL_RADIUS, this.GetTopLeft().Y + (textBounds.Height / 2)),
                 layerDepth,
+                enteringTransition,
+                exitingTransition,
                 ballNumber,
                 new Vector2(0, -30));
+
+            this.SetDrawer(new BallButtonDrawer(this));
         }
 
         public override void Update()
         {
             this.UpdateHoverable();
+            this.UpdateTransitionState();
 
             if (this.IsHovered())
             {
@@ -37,19 +57,9 @@ namespace StardropPoolMinigame.Entities
             }
         }
 
-        public Ball GetBall()
-        {
-            return this._ball;
-        }
-
-        public Rectangle GetTextBounds()
-        {
-            return this._textBounds;
-        }
-
         public override IDrawer GetDrawer()
         {
-            return new BallButtonDrawer(this);
+            return this._drawer;
         }
 
         public override string GetId()
@@ -65,6 +75,26 @@ namespace StardropPoolMinigame.Entities
         public override float GetTotalHeight()
         {
             return this._textBounds.Height;
+        }
+
+        public override void ClickCallback()
+        {
+            Sound.PlaySound(SoundConstants.BOTTON_PRESS);
+        }
+
+        protected override void HoveredCallback()
+        {
+            Sound.PlaySound(SoundConstants.BUTTON_HOVER);
+        }
+
+        public Ball GetBall()
+        {
+            return this._ball;
+        }
+
+        public Rectangle GetTextBounds()
+        {
+            return this._textBounds;
         }
     }
 }

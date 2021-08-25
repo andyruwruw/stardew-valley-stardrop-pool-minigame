@@ -1,7 +1,6 @@
 ﻿using StardropPoolMinigame.Entities;
 using StardropPoolMinigame.Enums;
 using StardropPoolMinigame.Players;
-using StardropPoolMinigame.Render.Scenes;
 using StardropPoolMinigame.Rules;
 using StardropPoolMinigame.Scenes.States;
 using StardropPoolMinigame.Structures;
@@ -27,7 +26,10 @@ namespace StardropPoolMinigame.Scenes
 
         private bool _isFinished;
 
-        public GameScene(IPlayer player1, IPlayer player2, IRules rules = null) : base()
+        public GameScene(
+            IPlayer player1,
+            IPlayer player2,
+            IRules rules = null) : base()
         {
             this._players = new List<IPlayer>();
             this._players.Add(player1);
@@ -43,20 +45,11 @@ namespace StardropPoolMinigame.Scenes
             this._turn = new Turn();
         }
 
-        public override void Update()
+        public override string GetKey()
         {
-
+            return "game-scene";
         }
 
-        public override void ReceiveLeftClick()
-        {
-
-        }
-
-        public override void ReceiveRightClick()
-        {
-
-        }
         public bool IsGameFinished()
         {
             return this._isFinished;
@@ -65,11 +58,6 @@ namespace StardropPoolMinigame.Scenes
         public Turn GetTurn()
         {
             return this._turn;
-        }
-
-        public override ISceneRenderer GetRenderer()
-        {
-            return new GameSceneRenderer(this);
         }
 
         private void PlayMusic()

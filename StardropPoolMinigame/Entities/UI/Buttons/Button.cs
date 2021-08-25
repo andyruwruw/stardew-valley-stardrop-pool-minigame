@@ -1,6 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
+using StardropPoolMinigame.Constants;
 using StardropPoolMinigame.Enums;
+using StardropPoolMinigame.Helpers;
 using StardropPoolMinigame.Render.Drawers;
+using StardropPoolMinigame.Render.Filters;
 
 namespace StardropPoolMinigame.Entities
 {
@@ -8,24 +11,34 @@ namespace StardropPoolMinigame.Entities
     {
         private Microsoft.Xna.Framework.Rectangle _textBounds;
 
-        public Button(Origin origin, Vector2 anchor, float layerDepth, Microsoft.Xna.Framework.Rectangle textBounds) : base(origin, anchor, layerDepth)
+        public Button(
+            Origin origin,
+            Vector2 anchor,
+            float layerDepth,
+            IFilter enteringTransition,
+            IFilter exitingTransition,
+            Microsoft.Xna.Framework.Rectangle textBounds
+        ) : base(
+            origin,
+            anchor,
+            layerDepth,
+            enteringTransition,
+            exitingTransition)
         {
             this._textBounds = textBounds;
+
+            this.SetDrawer(new ButtonDrawer(this));
         }
 
         public override void Update()
         {
             this.UpdateHoverable();
-        }
-
-        public Microsoft.Xna.Framework.Rectangle GetTextBounds()
-        {
-            return this._textBounds;
+            this.UpdateTransitionState();
         }
 
         public override IDrawer GetDrawer()
         {
-            return new ButtonDrawer(this);
+            return this._drawer;
         }
 
         public override string GetId()
@@ -41,6 +54,21 @@ namespace StardropPoolMinigame.Entities
         public override float GetTotalHeight()
         {
             return this._textBounds.Height;
+        }
+
+        public override void ClickCallback()
+        {
+            Sound.PlaySound(SoundConstants.BOTTON_PRESS);
+        }
+
+        protected override void HoveredCallback()
+        {
+            Sound.PlaySound(SoundConstants.BUTTON_HOVER);
+        }
+
+        public Microsoft.Xna.Framework.Rectangle GetTextBounds()
+        {
+            return this._textBounds;
         }
     }
 }

@@ -19,6 +19,7 @@ namespace StardropPoolMinigame.Render
 
         public static void LoadTextures()
         {
+            Logger.Info("Loading Tilesheets");
             TileSheet = Game1.content.Load<Texture2D>("Minigames\\stardropPool");
             PortraitAbigailTilesheet = Game1.content.Load<Texture2D>("Portraits\\Abigail");
             PortraitGusTilesheet = Game1.content.Load<Texture2D>("Portraits\\Gus");
@@ -27,6 +28,8 @@ namespace StardropPoolMinigame.Render
         }
 
         public static Color TEXT_HOVER_COLOR = new Color(255, 217, 104);
+
+        public static Color MINIGAME_MARGIN_BACKGROUND_COLOR = new Color(5, 3, 4);
 
         public static Rectangle GetBallCoreBounds(Vector2 orientation)
         {

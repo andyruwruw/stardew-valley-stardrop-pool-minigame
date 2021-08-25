@@ -10,7 +10,20 @@
 
         private int _powerAccuracy;
 
-        public ComputerOpponent(string name, long playerId, string music, int confidence, int complexity, int angleAccuracy, int powerAccuracy) : base(name, false, false, playerId, music)
+        public ComputerOpponent(
+            string name,
+            long playerId,
+            string music,
+            int confidence,
+            int complexity,
+            int angleAccuracy,
+            int powerAccuracy
+        ) : base(
+            name,
+            false,
+            false,
+            playerId,
+            music)
         {
             this._confidence = confidence;
             this._complexity = complexity;

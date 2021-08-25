@@ -1,4 +1,5 @@
 ﻿using StardropPoolMinigame.Entities;
+using StardropPoolMinigame.Enums;
 using StardropPoolMinigame.Render.Scenes;
 using System;
 using System.Collections.Generic;
@@ -16,13 +17,13 @@ namespace StardropPoolMinigame.Scenes
 
         void ReceiveRightClick();
 
-        ISceneRenderer GetRenderer();
-
         IList<IEntity> GetEntities();
 
         bool HasNewScene();
 
         IScene GetNewScene();
+
+        TransitionState GetTransitionState();
 
         string GetKey();
     }

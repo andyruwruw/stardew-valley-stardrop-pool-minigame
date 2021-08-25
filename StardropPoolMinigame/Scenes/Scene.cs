@@ -1,18 +1,22 @@
 ﻿using StardropPoolMinigame.Entities;
-using StardropPoolMinigame.Render.Scenes;
+using StardropPoolMinigame.Enums;
+using StardropPoolMinigame.Render.Filters;
 using System.Collections.Generic;
 
 namespace StardropPoolMinigame.Scenes
 {
-    class Scene: IScene
+    abstract class Scene : IScene
     {
         protected IScene _newScene;
+
+        protected TransitionState _transitionState;
 
         protected IList<IEntity> _entities;
 
         public Scene()
         {
             this._newScene = null;
+            this._transitionState = TransitionState.Entering;
             this._entities = new List<IEntity>();
         }
 
@@ -23,17 +27,10 @@ namespace StardropPoolMinigame.Scenes
 
         public virtual void ReceiveLeftClick()
         {
-
         }
 
         public virtual void ReceiveRightClick()
         {
-
-        }
-
-        public virtual ISceneRenderer GetRenderer()
-        {
-            return null;
         }
 
         public virtual IList<IEntity> GetEntities()
@@ -51,16 +48,44 @@ namespace StardropPoolMinigame.Scenes
             return this._newScene;
         }
 
-        public virtual string GetKey()
+        public TransitionState GetTransitionState()
         {
-            return "unnamed-scene";
+            return this._transitionState;
         }
+
+        public abstract string GetKey();
 
         protected void UpdateEntities()
         {
+            bool updateTransition = true;
+
             foreach (IEntity entity in this._entities)
             {
                 entity.Update();
+
+                if (this._transitionState == TransitionState.Entering
+                    && (Transition)entity.GetEnteringTransition() != null
+                    && !(((Transition)entity.GetEnteringTransition()).IsFinished()))
+                {
+                    updateTransition = false;
+                }
+                if (this._transitionState == TransitionState.Exiting
+                    && (Transition)entity.GetExitingTransition() != null
+                    && !(((Transition)entity.GetExitingTransition()).IsFinished()))
+                {
+                    updateTransition = false;
+                }
+            }
+
+            if (this._transitionState != TransitionState.Present && updateTransition)
+            {
+                if (this._transitionState == TransitionState.Entering)
+                {
+                    this._transitionState = TransitionState.Present;
+                } else if (this._transitionState == TransitionState.Exiting)
+                {
+                    this._transitionState = TransitionState.Dead;
+                }
             }
         }
     }

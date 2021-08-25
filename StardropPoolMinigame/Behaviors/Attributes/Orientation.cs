@@ -10,7 +10,10 @@ namespace StardropPoolMinigame.Attributes
 
         private float _circumference;
 
-        public Orientation(float radius, float longitude = 0, float latitude = 0)
+        public Orientation(
+            float radius,
+            float longitude = 0,
+            float latitude = 0)
         {
             this._circumference = (float)(2 * Math.PI * radius);
             this._orientation = new Vector2(longitude, latitude);
@@ -22,8 +25,6 @@ namespace StardropPoolMinigame.Attributes
             this._orientation = Vector2.Add(this._orientation, degrees);
 
             this.Limit();
-
-            Logger.Info($"{this._orientation.X} {this._orientation.Y}");
         }
 
         public Vector2 GetFace()

@@ -1,14 +1,14 @@
 ﻿namespace StardropPoolMinigame.Scenes
 {
-    class MultiplayerScene : Scene
+    class GalleryScene : Scene
     {
-        public MultiplayerScene() : base()
+        public GalleryScene() : base()
         {
         }
 
         public override string GetKey()
         {
-            return "multiplayer-scene";
+            return "gallery-scene";
         }
     }
 }

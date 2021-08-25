@@ -1,11 +1,23 @@
 ﻿using Microsoft.Xna.Framework;
 using StardropPoolMinigame.Enums;
+using StardropPoolMinigame.Render.Filters;
 
 namespace StardropPoolMinigame.Entities
 {
-    class EntityStatic : Entity
+    abstract class EntityStatic : Entity
     {
-        public EntityStatic(Origin origin, Vector2 anchor, float layerDepth) : base(origin, anchor, layerDepth)
+        public EntityStatic(
+            Origin origin,
+            Vector2 anchor,
+            float layerDepth,
+            IFilter enteringTransition,
+            IFilter exitingTransition
+        ) : base(
+            origin,
+            anchor,
+            layerDepth,
+            enteringTransition,
+            exitingTransition)
         {
         }
 
