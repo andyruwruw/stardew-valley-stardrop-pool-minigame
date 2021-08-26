@@ -85,11 +85,6 @@ namespace StardropPoolMinigame.Entities
             return GameConstants.BALL_RADIUS * 2;
         }
 
-        public override IDrawer GetDrawer()
-        {
-            return this._drawer;
-        }
-
         public override string GetId()
         {
             return $"ball-{this._id}";

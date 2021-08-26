@@ -18,9 +18,13 @@ namespace StardropPoolMinigame.Entities
 
         Vector2 GetAnchor();
 
+        void SetAnchor(Vector2 anchor);
+
         float GetLayerDepth();
 
         TransitionState GetTransitionState();
+
+        void SetTransitionState(TransitionState transitionState, bool start = false);
 
         IFilter GetEnteringTransition();
 

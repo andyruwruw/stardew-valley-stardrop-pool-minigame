@@ -10,5 +10,9 @@
         {
             return "dialog-scene";
         }
+
+        protected override void AddEntities()
+        {
+        }
     }
 }

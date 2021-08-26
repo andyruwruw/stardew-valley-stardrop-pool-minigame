@@ -1,18 +1,22 @@
 ﻿using Microsoft.Xna.Framework;
+using StardropPoolMinigame.Constants;
 using StardropPoolMinigame.Enums;
+using StardropPoolMinigame.Helpers;
 using StardropPoolMinigame.Render;
 using StardropPoolMinigame.Render.Drawers;
 using StardropPoolMinigame.Render.Filters;
 
 namespace StardropPoolMinigame.Entities
 {
-    class Portrait : EntityStatic
+    class Portrait : EntityHoverable
     {
         private OpponentType _name;
 
         private bool _isSilhouette;
 
         private PortraitEmotion _emotion;
+
+        private bool _isHoverable;
 
         public Portrait(
             Origin origin,
@@ -22,7 +26,8 @@ namespace StardropPoolMinigame.Entities
             IFilter exitingTransition,
             OpponentType name,
             bool isSilhouette,
-            PortraitEmotion emotion = PortraitEmotion.Default
+            PortraitEmotion emotion = PortraitEmotion.Default,
+            bool isHoverable = false
         ) : base(
             origin,
             anchor,
@@ -33,23 +38,33 @@ namespace StardropPoolMinigame.Entities
             this._name = name;
             this._isSilhouette = isSilhouette;
             this._emotion = emotion;
+            this._isHoverable = isHoverable;
 
             this.SetDrawer(new PortraitDrawer(this));
         }
 
         public override void Update()
         {
+            this.UpdateHoverable();
             this.UpdateTransitionState();
-        }
-
-        public override IDrawer GetDrawer()
-        {
-            return this._drawer;
         }
 
         public override string GetId()
         {
             return $"portrait-{this._id}";
+        }
+
+        public override void ClickCallback()
+        {
+            Sound.PlaySound(SoundConstants.BOTTON_PRESS);
+        }
+
+        protected override void HoveredCallback()
+        {
+            if (this._isHoverable)
+            {
+                Sound.PlaySound(SoundConstants.BUTTON_HOVER);
+            }
         }
 
         public override float GetTotalWidth()
@@ -80,6 +95,16 @@ namespace StardropPoolMinigame.Entities
         public bool IsSilhouette()
         {
             return this._isSilhouette;
+        }
+
+        public void SetSilhouette(bool isSilhouette)
+        {
+            this._isSilhouette = isSilhouette;
+        }
+
+        public void SetExitingTransition(IFilter transition)
+        {
+            this._exitingTransition = transition;
         }
     }
 }

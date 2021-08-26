@@ -1,4 +1,6 @@
-﻿namespace StardropPoolMinigame.Players
+﻿using StardropPoolMinigame.Enums;
+
+namespace StardropPoolMinigame.Players
 {
     class ComputerOpponent : Player
     {
@@ -49,6 +51,21 @@
         public int GetPowerAccuracy()
         {
             return this._powerAccuracy;
+        }
+
+        public static ComputerOpponent GetComputerOpponentFromName(OpponentType name)
+        {
+            switch (name)
+            {
+                case OpponentType.Sebastian:
+                    return new Sebastian();
+                case OpponentType.Abigail:
+                    return new Abigail();
+                case OpponentType.Gus:
+                    return new Gus();
+                default:
+                    return new Sam();
+            }
         }
     }
 }

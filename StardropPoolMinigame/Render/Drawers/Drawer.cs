@@ -31,8 +31,14 @@ namespace StardropPoolMinigame.Render.Drawers
                 this.GetLayerDepth());
         }
 
+        public virtual bool ShouldDraw()
+        {
+            return this._entity.GetTransitionState() != TransitionState.Dead;
+        }
+
         protected virtual Vector2 GetDestination()
         {
+
             Vector2 destination = this.GetRawDestination();
 
             IList<IFilter> filters = this._entity.GetFilters();

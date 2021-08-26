@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using StardropPoolMinigame.Enums;
 using System;
 
 namespace StardropPoolMinigame.Render.Filters
@@ -10,20 +11,26 @@ namespace StardropPoolMinigame.Render.Filters
         public ScaleUp(
             int duration,
             bool keyframeOpacity,
+            TransitionState type,
             float startingScale = 0
-        ) : base(duration, keyframeOpacity)
+        ) : base(
+            duration,
+            keyframeOpacity,
+            type)
         {
             this._startingScale = startingScale;
         }
 
         public ScaleUp(
             int duration,
-            int delay,
             bool keyframeOpacity,
+            TransitionState type,
+            int delay,
             float startingScale = 0
         ) : base(
             duration,
             keyframeOpacity,
+            type,
             delay)
         {
             this._startingScale = startingScale;
@@ -43,18 +50,22 @@ namespace StardropPoolMinigame.Render.Filters
         {
             if (this._keyframeOpacity)
             {
+                float progress = this._type == TransitionState.Entering ? this.GetProgress() : this.GetInvertedProgress();
+
                 return new Color(
-                    color.R,
-                    color.G,
-                    color.B,
-                    (byte)(Math.Round(this.GetProgress() * 255)));
+                    (byte)Math.Round(progress * color.R),
+                    (byte)Math.Round(progress * color.G),
+                    (byte)Math.Round(progress * color.B),
+                    (byte)Math.Round(progress * 255));
             }
             return color;
         }
 
         public override float ExecuteScale(float scale)
         {
-            return this._startingScale + ((1 - this._startingScale) * this.GetProgress());
+            float progress = this._type == TransitionState.Entering ? this.GetProgress() : this.GetInvertedProgress();
+
+            return this._startingScale + ((1 - this._startingScale) * progress);
         }
     }
 }

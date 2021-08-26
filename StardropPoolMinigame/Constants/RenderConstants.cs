@@ -134,5 +134,9 @@ namespace StardropPoolMinigame.Constants
         public static float BALL_BUTTON_LEFT_OFFSET = 4f;
 
         public static float MENU_SCENE_GAME_TITLE_TOP_MARGIN = 6f;
+
+        public static float CURSOR_BOTTOM_MARGIN = 18f;
+
+        public static float CHARACTER_SELECT_NAME_TOP_MARGIN = 18f;
     }
 }

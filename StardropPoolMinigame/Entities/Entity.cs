@@ -64,6 +64,11 @@ namespace StardropPoolMinigame.Entities
             return this._anchor;
         }
 
+        public void SetAnchor(Vector2 anchor)
+        {
+            this._anchor = anchor;
+        }
+
         public float GetLayerDepth()
         {
             return this._layerDepth;
@@ -72,6 +77,25 @@ namespace StardropPoolMinigame.Entities
         public TransitionState GetTransitionState()
         {
             return this._transitionState;
+        }
+
+        public virtual void SetTransitionState(TransitionState transitionState, bool start = false)
+        {
+            this._transitionState = transitionState;
+            if (this._transitionState == TransitionState.Entering
+                && this._enteringTransition != null
+                && start)
+            {
+                ((Transition)this._enteringTransition).ResetTransition();
+                ((Transition)this._enteringTransition).StartTransition(this._id);
+            }
+            if (this._transitionState == TransitionState.Exiting
+                && this._exitingTransition != null
+                && start)
+            {
+                ((Transition)this._exitingTransition).ResetTransition();
+                ((Transition)this._exitingTransition).StartTransition(this._id);
+            }
         }
 
         public IFilter GetEnteringTransition()
@@ -155,8 +179,8 @@ namespace StardropPoolMinigame.Entities
             {
                 this._transitionState = TransitionState.Present;
             } else if (this._transitionState == TransitionState.Exiting
-                && this._exitingTransition != null
-                && ((Transition)this._exitingTransition).IsFinished())
+                && ((this._exitingTransition != null && ((Transition)this._exitingTransition).IsFinished())
+                    || this._exitingTransition == null))
             {
                 this._transitionState = TransitionState.Dead;
             }
@@ -171,11 +195,11 @@ namespace StardropPoolMinigame.Entities
         {
             IList<IFilter> filters = new List<IFilter>();
 
-            if (this.GetTransitionState() == TransitionState.Exiting)
+            if (this.GetTransitionState() == TransitionState.Exiting && this._exitingTransition != null)
             {
                 filters.Add(this._exitingTransition);
             }
-            if (this.GetTransitionState() == TransitionState.Entering)
+            if (this.GetTransitionState() == TransitionState.Entering && this._enteringTransition != null)
             {
                 filters.Add(this._enteringTransition);
             }
@@ -188,11 +212,14 @@ namespace StardropPoolMinigame.Entities
             return filters;
         }
 
+        public virtual IDrawer GetDrawer()
+        {
+            return this._drawer;
+        }
+
         public abstract void Update();
 
         public abstract string GetId();
-
-        public abstract IDrawer GetDrawer();
 
         public abstract float GetTotalWidth();
 

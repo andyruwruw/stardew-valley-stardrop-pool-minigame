@@ -1,4 +1,5 @@
-﻿using StardropPoolMinigame.Helpers;
+﻿using StardropPoolMinigame.Enums;
+using StardropPoolMinigame.Helpers;
 
 namespace StardropPoolMinigame.Render.Filters
 {
@@ -8,19 +9,34 @@ namespace StardropPoolMinigame.Render.Filters
 
         protected int _delay;
 
+        protected TransitionState _type;
+
         protected bool _keyframeOpacity;
 
         protected bool _isFinished;
 
         protected int _endingTick;
 
-        public Transition(int duration, bool keyframeOpacity, int delay = 0) : base()
+        protected bool _delayOnce;
+
+        protected bool _firstExecution;
+
+        public Transition(
+            int duration,
+            bool keyframeOpacity,
+            TransitionState type,
+            int delay = 0,
+            bool delayOnce = false
+        ) : base()
         {
             this._duration = duration;
-            this._delay = delay;
             this._keyframeOpacity = keyframeOpacity;
+            this._type = type;
+            this._delay = delay;
+            this._delayOnce = delayOnce;
             this._key = null;
             this._isFinished = false;
+            this._firstExecution = true;
         }
 
         public override string GetName()
@@ -30,8 +46,9 @@ namespace StardropPoolMinigame.Render.Filters
 
         public override void StartTransition(string key)
         {
-            this._key = $"{key}-filter-{this.GetName()}";
-            this._endingTick = Timer.StartTimer(this._key) + this._delay + this._duration;
+            string transitionType = this._type == TransitionState.Entering ? "entering" : "exiting";
+            this._key = $"{key}-filter-{this.GetName()}-{transitionType}";
+            this._endingTick = Timer.StartTimer(this._key) + this.GetDelay() + this._duration;
         }
 
         protected float GetProgress()
@@ -41,17 +58,18 @@ namespace StardropPoolMinigame.Render.Filters
                 return 1f;
             }
 
-            if (this.GetTimePassed() < this._delay)
+            if (this.GetTimePassed() < this.GetDelay())
             {
                 return 0f;
             }
 
-            float progress = ((float)Timer.CheckTimer(this._key) - this._delay) / (float)this._duration;
+            float progress = ((float)Timer.CheckTimer(this._key) - this.GetDelay()) / (float)this._duration;
 
             if (progress > 1f)
             {
                 Timer.EndTimer(this._key);
                 this._isFinished = true;
+                this._firstExecution = false;
                 return 1f;
             }
             return progress;
@@ -83,6 +101,16 @@ namespace StardropPoolMinigame.Render.Filters
 
             time--;
             return -change / 2 * (time * (time - 2) - 1) + startValue;
+        }
+
+        protected int GetDelay()
+        {
+            if (this._delayOnce && !this._firstExecution)
+            {
+                return 0;
+            }
+
+            return this._delay;
         }
     }
 }

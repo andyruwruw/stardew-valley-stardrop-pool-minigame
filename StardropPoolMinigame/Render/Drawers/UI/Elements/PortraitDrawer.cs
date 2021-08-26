@@ -102,6 +102,7 @@ namespace StardropPoolMinigame.Render.Drawers
                     case PortraitEmotion.Oops:
                     case PortraitEmotion.Shock:
                     case PortraitEmotion.Glare:
+                        Logger.Info("GLARING");
                         return Textures.PORTRAIT_ABIGAIL_GLARE_BOUNDS;
                     case PortraitEmotion.Suprised:
                         return Textures.PORTRAIT_ABIGAIL_SUPRISED_BOUNDS;
@@ -119,7 +120,6 @@ namespace StardropPoolMinigame.Render.Drawers
                     case PortraitEmotion.Shock:
                     case PortraitEmotion.Laugh:
                         return Textures.PORTRAIT_GUS_LAUGH_BOUNDS;
-                    
                     case PortraitEmotion.Oops:
                     case PortraitEmotion.Blush:
                         return Textures.PORTRAIT_GUS_BLUSH_BOUNDS;

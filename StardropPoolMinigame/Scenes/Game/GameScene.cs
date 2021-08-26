@@ -64,5 +64,9 @@ namespace StardropPoolMinigame.Scenes
         {
 
         }
+
+        protected override void AddEntities()
+        {
+        }
     }
 }

@@ -6,22 +6,22 @@ using StardropPoolMinigame.Render.Filters;
 
 namespace StardropPoolMinigame.Entities
 {
-    class Cue : EntityStatic
+    class Cursor : EntityStatic
     {
-        public Cue(
-            Origin origin, 
-            Vector2 anchor, 
+        public Cursor(
+            Origin origin,
+            Vector2 anchor,
             float layerDepth,
-            IFilter enteringTransition,
-            IFilter exitingTransition
+            int delay = 0,
+            bool delayOnce = false
         ) : base(
             origin,
             anchor,
             layerDepth,
-            enteringTransition,
-            exitingTransition)
+            new CursorAnimation(delay, delayOnce),
+            null)
         {
-            this.SetDrawer(new CueDrawer(this));
+            this.SetDrawer(new CursorDrawer(this));
         }
 
         public override void Update()
@@ -29,19 +29,14 @@ namespace StardropPoolMinigame.Entities
             this.UpdateTransitionState();
         }
 
-        public override string GetId()
+        public override float GetTotalHeight()
         {
-            return $"cue-{this._id}";
+            return Textures.CURSOR_BOUNDS.Height;
         }
 
         public override float GetTotalWidth()
         {
-            return Textures.CUE_BASIC_BOUNDS.Width;
-        }
-
-        public override float GetTotalHeight()
-        {
-            return Textures.CUE_BASIC_BOUNDS.Height;
+            return Textures.CURSOR_BOUNDS.Width;
         }
     }
 }

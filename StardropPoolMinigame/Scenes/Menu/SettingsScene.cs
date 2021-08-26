@@ -10,5 +10,9 @@
         {
             return "settings-scene";
         }
+
+        protected override void AddEntities()
+        {
+        }
     }
 }

@@ -6,7 +6,7 @@
 
         public static string CUE_FULL_CHARGE = "furnace";
 
-        public static string CUE_LOCK_POWER = "FishHit";
+        public static string CUE_LOCK_POWER = "fishBite";
 
         public static string CUE_STRIKE = "thudStep";
 
@@ -33,5 +33,7 @@
         public static string BOTTON_PRESS = "select";
 
         public static string BUTTON_HOVER = "shiny4";
+
+        public static string SUBMIT_BUTTON_PRESS = "FishHit";
     }
 }

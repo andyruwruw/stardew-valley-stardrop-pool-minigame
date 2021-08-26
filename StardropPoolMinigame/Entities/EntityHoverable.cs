@@ -41,7 +41,7 @@ namespace StardropPoolMinigame.Entities
 
         protected void UpdateHoverable()
         {
-            if (this._transitionState == TransitionState.Present && this.GetRawBoundary().Contains(Cursor.Position))
+            if (this._transitionState == TransitionState.Present && this.GetRawBoundary().Contains(Mouse.Position))
             {
                 if (!this._isHovered)
                 {

@@ -15,5 +15,9 @@ namespace StardropPoolMinigame.Scenes
         {
             return "summary-scene";
         }
+
+        protected override void AddEntities()
+        {
+        }
     }
 }

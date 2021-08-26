@@ -69,18 +69,25 @@
     <Compile Include="Constants\OpponentConstants.cs" />
     <Compile Include="Constants\RenderConstants.cs" />
     <Compile Include="Constants\SoundConstants.cs" />
-    <Compile Include="Controller\Cursor.cs" />
-    <Compile Include="Data\ModData.cs" />
+    <Compile Include="Controller\Mouse.cs" />
     <Compile Include="Data\SaveJson.cs" />
     <Compile Include="Entities\Game\Ball.cs" />
     <Compile Include="Entities\Game\Cue.cs" />
     <Compile Include="Entities\Game\Pocket.cs" />
     <Compile Include="Entities\Game\Table.cs" />
     <Compile Include="Entities\UI\Background\BarShelves.cs" />
+    <Compile Include="Entities\UI\Background\FloorTiles.cs" />
+    <Compile Include="Entities\UI\Background\Solid.cs" />
     <Compile Include="Entities\UI\Buttons\BallButton.cs" />
     <Compile Include="Entities\UI\Buttons\Button.cs" />
+    <Compile Include="Entities\UI\Buttons\SubmitButton.cs" />
+    <Compile Include="Entities\UI\Elements\Cursor.cs" />
+    <Compile Include="Entities\UI\Elements\PocketedBalls.cs" />
     <Compile Include="Entities\UI\Elements\Portrait.cs" />
+    <Compile Include="Entities\UI\Elements\Rays.cs" />
+    <Compile Include="Entities\UI\Elements\Text.cs" />
     <Compile Include="Entities\UI\Titles\GameTitle.cs" />
+    <Compile Include="Entities\UI\Titles\PageTitle.cs" />
     <Compile Include="Enums\BallColor.cs" />
     <Compile Include="Enums\BallType.cs" />
     <Compile Include="Enums\Direction.cs" />
@@ -95,6 +102,7 @@
     <Compile Include="Helpers\Multiplayer.cs" />
     <Compile Include="Helpers\Operators.cs" />
     <Compile Include="Helpers\Random.cs" />
+    <Compile Include="Helpers\Save.cs" />
     <Compile Include="Helpers\Sound.cs" />
     <Compile Include="Helpers\Timer.cs" />
     <Compile Include="ModEntry.cs" />
@@ -109,20 +117,24 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Render\Drawers\Drawer.cs" />
     <Compile Include="Render\Drawers\Game\BallDrawer.cs" />
+    <Compile Include="Render\Drawers\UI\Background\SolidDrawer.cs" />
+    <Compile Include="Render\Drawers\UI\Elements\CursorDrawer.cs" />
     <Compile Include="Render\Drawers\UI\Elements\PortraitDrawer.cs" />
     <Compile Include="Render\Drawers\Game\CueDrawer.cs" />
     <Compile Include="Render\Drawers\Game\PocketDrawer.cs" />
     <Compile Include="Render\Drawers\IDrawer.cs" />
     <Compile Include="Render\Drawers\Game\TableDrawer.cs" />
-    <Compile Include="Render\Drawers\UI\Background\FloorTiles.cs" />
     <Compile Include="Render\Drawers\UI\Buttons\BallButtonDrawer.cs" />
     <Compile Include="Render\Drawers\UI\Background\BarShelvesDrawer.cs" />
     <Compile Include="Render\Drawers\UI\Buttons\ButtonDrawer.cs" />
+    <Compile Include="Render\Drawers\UI\Elements\TextDrawer.cs" />
     <Compile Include="Render\Drawers\UI\Titles\GameTitleDrawer.cs" />
+    <Compile Include="Render\Drawers\UI\Titles\PageTitleDrawer.cs" />
     <Compile Include="Render\Filters\Animations\Animation.cs" />
     <Compile Include="Render\Filters\Filter.cs" />
     <Compile Include="Render\Filters\IFilter.cs" />
     <Compile Include="Render\Filters\Animations\Wiggle.cs" />
+    <Compile Include="Render\Filters\Transitions\CursorAnimation.cs" />
     <Compile Include="Render\Renderer.cs" />
     <Compile Include="Render\Scenes\ISceneRenderer.cs" />
     <Compile Include="Render\Scenes\SceneRenderer.cs" />
@@ -153,11 +165,11 @@
     <Compile Include="Structures\Trees\QuadTree.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="i18n\default.json" />
     <None Include="manifest.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="i18n\" />
     <Folder Include="Scenes\Game\States\Substates\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

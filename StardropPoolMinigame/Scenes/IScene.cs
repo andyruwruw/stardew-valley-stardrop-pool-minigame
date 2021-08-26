@@ -25,6 +25,8 @@ namespace StardropPoolMinigame.Scenes
 
         TransitionState GetTransitionState();
 
+        void SetTransitionState(TransitionState transitionState);
+
         string GetKey();
     }
 }

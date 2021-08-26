@@ -15,7 +15,7 @@ namespace StardropPoolMinigame
     class StardropPoolMinigame : IMinigame
     {
         /// <summary>
-        /// Entering scene
+        /// Scene undergoing entering transition
         /// </summary>
         private IScene _enteringScene;
 
@@ -25,7 +25,7 @@ namespace StardropPoolMinigame
         private IScene _currentScene;
 
         /// <summary>
-        /// Exiting scene
+        /// Scene undergoing exiting transition
         /// </summary>
         private IScene _exitingScene;
 
@@ -45,6 +45,10 @@ namespace StardropPoolMinigame
             this._renderer = new Renderer();
         }
 
+        /// <summary>
+        /// Unique identifier for minigame
+        /// </summary>
+        /// <returns></returns>
         public string minigameId()
         {
             return "StarDropPoolMinigame";
@@ -52,7 +56,7 @@ namespace StardropPoolMinigame
 
         public bool tick(GameTime time)
         {
-            Cursor.SetPosition(Game1.getMouseX(), Game1.getMouseY());
+            Controller.Mouse.SetPosition(Game1.getMouseX(), Game1.getMouseY());
             return false;
         }
 
@@ -141,9 +145,11 @@ namespace StardropPoolMinigame
         {
             if (this._currentScene != null && this._currentScene.HasNewScene())
             {
+                Logger.Info("New scene");
                 this._enteringScene = this._currentScene.GetNewScene();
                 this._exitingScene = this._currentScene;
                 this._currentScene = null;
+                this._exitingScene.SetTransitionState(TransitionState.Exiting);
             }
         }
 
@@ -167,10 +173,12 @@ namespace StardropPoolMinigame
         {
             if (this._exitingScene != null && this._exitingScene.GetTransitionState() == TransitionState.Dead)
             {
+                Logger.Info("No longer exiting");
                 this._exitingScene = null;
             }
             if (this._enteringScene != null && this._enteringScene.GetTransitionState() == TransitionState.Present)
             {
+                Logger.Info("No longer entering");
                 this._currentScene = this._enteringScene;
                 this._enteringScene = null;
             }

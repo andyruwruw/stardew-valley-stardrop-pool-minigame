@@ -10,5 +10,9 @@
         {
             return "gallery-scene";
         }
+
+        protected override void AddEntities()
+        {
+        }
     }
 }

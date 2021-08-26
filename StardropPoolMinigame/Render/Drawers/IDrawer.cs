@@ -5,5 +5,7 @@ namespace StardropPoolMinigame.Render.Drawers
     interface IDrawer
     {
         void Draw(SpriteBatch batch);
+
+        bool ShouldDraw();
     }
 }

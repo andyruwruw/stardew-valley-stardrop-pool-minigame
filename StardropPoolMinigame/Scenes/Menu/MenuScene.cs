@@ -20,9 +20,6 @@ namespace StardropPoolMinigame.Scenes
         public MenuScene() : base()
         {
             Sound.PlayMusic(SoundConstants.GAME_THEME);
-            this.AddBackground();
-            this.AddTitle();
-            this.AddButtons();
         }
 
         public override void Update()
@@ -60,8 +57,9 @@ namespace StardropPoolMinigame.Scenes
             return "menu-scene";
         }
 
-        private void AddBackground()
+        protected override void AddEntities()
         {
+            // Background
             this._entities.Add(new BarShelves(
                 Origin.TopLeft,
                 new Vector2(0, 0),
@@ -78,7 +76,7 @@ namespace StardropPoolMinigame.Scenes
                 new Vector2(centerX - (portraitSeparation * 2), portraitTopMargin),
                 0.0011f,
                 TransitionConstants.MainMenuScenePortraitEnteringTransition(),
-                null,
+                TransitionConstants.MainMenuSceneActivePortraitExitingTransition(),
                 OpponentType.Sam,
                 true));
 
@@ -108,20 +106,8 @@ namespace StardropPoolMinigame.Scenes
                 null,
                 OpponentType.Gus,
                 true));
-        }
 
-        private void AddTitle()
-        {
-            this._entities.Add(new GameTitle(
-                Origin.TopCenter, 
-                new Vector2(RenderConstants.MINIGAME_SCREEN_WIDTH / 2, RenderConstants.MENU_SCENE_GAME_TITLE_TOP_MARGIN),
-                0.0050f,
-                TransitionConstants.MainMenuSceneGameTitleEnteringTransition(),
-                null));
-        }
-
-        private void AddButtons()
-        {
+            // Buttons
             float spaceHeight = RenderConstants.MINIGAME_SCREEN_HEIGHT - Textures.BACKGROUND_BAR_SHELVES_BOUNDS.Height;
             float buttonHeight = Textures.BUTTON_TEXT_PLAY_BOUNDS.Height;
             float margin = (spaceHeight - (buttonHeight * 4)) / 2;
@@ -132,7 +118,7 @@ namespace StardropPoolMinigame.Scenes
                 new Vector2((RenderConstants.MINIGAME_SCREEN_WIDTH / 2) + RenderConstants.BALL_BUTTON_LEFT_OFFSET, baseY),
                 0.0040f,
                 TransitionConstants.MainMenuSceneButtonEnteringTransition(0),
-                null,
+                TransitionConstants.MainMenuSceneButtonExitingTransition(0),
                 Textures.BUTTON_TEXT_PLAY_BOUNDS,
                 1);
             this._entities.Add(this._playButton);
@@ -142,7 +128,7 @@ namespace StardropPoolMinigame.Scenes
                 new Vector2((RenderConstants.MINIGAME_SCREEN_WIDTH / 2) + RenderConstants.BALL_BUTTON_LEFT_OFFSET, baseY + buttonHeight),
                 0.0040f,
                 TransitionConstants.MainMenuSceneButtonEnteringTransition(1),
-                null,
+                TransitionConstants.MainMenuSceneButtonExitingTransition(1),
                 Textures.BUTTON_TEXT_MULTIPLAYER_BOUNDS,
                 10);
             this._entities.Add(this._multiplayerButton);
@@ -152,7 +138,7 @@ namespace StardropPoolMinigame.Scenes
                 new Vector2((RenderConstants.MINIGAME_SCREEN_WIDTH / 2) + RenderConstants.BALL_BUTTON_LEFT_OFFSET, baseY + (buttonHeight * 2)),
                 0.0040f,
                 TransitionConstants.MainMenuSceneButtonEnteringTransition(2),
-                null,
+                TransitionConstants.MainMenuSceneButtonExitingTransition(2),
                 Textures.BUTTON_TEXT_GALLERY_BOUNDS,
                 3);
             this._entities.Add(this._galleryButton);
@@ -162,10 +148,18 @@ namespace StardropPoolMinigame.Scenes
                 new Vector2((RenderConstants.MINIGAME_SCREEN_WIDTH / 2) + RenderConstants.BALL_BUTTON_LEFT_OFFSET, baseY + (buttonHeight * 3)),
                 0.0040f,
                 TransitionConstants.MainMenuSceneButtonEnteringTransition(3),
-                null,
+                TransitionConstants.MainMenuSceneButtonExitingTransition(3),
                 Textures.BUTTON_TEXT_SETTINGS_BOUNDS,
                 12);
             this._entities.Add(this._settingsButton);
+
+            // Title
+            this._entities.Add(new GameTitle(
+                Origin.TopCenter,
+                new Vector2(RenderConstants.MINIGAME_SCREEN_WIDTH / 2, RenderConstants.MENU_SCENE_GAME_TITLE_TOP_MARGIN),
+                0.0050f,
+                TransitionConstants.MainMenuSceneGameTitleEnteringTransition(),
+                TransitionConstants.MainMenuSceneGameTitleExitingTransition()));
         }
     }
 }

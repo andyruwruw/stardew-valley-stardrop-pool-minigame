@@ -2,7 +2,7 @@
 
 namespace StardropPoolMinigame.Controller
 {
-    class Cursor
+    class Mouse
     {
         /// <summary>
         /// Position of the cursor

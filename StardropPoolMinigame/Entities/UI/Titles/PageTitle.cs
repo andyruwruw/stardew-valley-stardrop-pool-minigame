@@ -1,19 +1,21 @@
 ﻿using Microsoft.Xna.Framework;
 using StardropPoolMinigame.Enums;
-using StardropPoolMinigame.Render;
 using StardropPoolMinigame.Render.Drawers;
 using StardropPoolMinigame.Render.Filters;
 
 namespace StardropPoolMinigame.Entities
 {
-    class Cue : EntityStatic
+    class PageTitle : EntityStatic
     {
-        public Cue(
-            Origin origin, 
-            Vector2 anchor, 
+        Rectangle _textBounds;
+
+        public PageTitle(
+            Origin origin,
+            Vector2 anchor,
             float layerDepth,
             IFilter enteringTransition,
-            IFilter exitingTransition
+            IFilter exitingTransition,
+            Rectangle textBounds
         ) : base(
             origin,
             anchor,
@@ -21,7 +23,8 @@ namespace StardropPoolMinigame.Entities
             enteringTransition,
             exitingTransition)
         {
-            this.SetDrawer(new CueDrawer(this));
+            this._textBounds = textBounds;
+            this.SetDrawer(new PageTitleDrawer(this));
         }
 
         public override void Update()
@@ -29,19 +32,19 @@ namespace StardropPoolMinigame.Entities
             this.UpdateTransitionState();
         }
 
-        public override string GetId()
-        {
-            return $"cue-{this._id}";
-        }
-
         public override float GetTotalWidth()
         {
-            return Textures.CUE_BASIC_BOUNDS.Width;
+            return this._textBounds.Width;
         }
 
         public override float GetTotalHeight()
         {
-            return Textures.CUE_BASIC_BOUNDS.Height;
+            return this._textBounds.Height;
+        }
+
+        public Microsoft.Xna.Framework.Rectangle GetTextBounds()
+        {
+            return this._textBounds;
         }
     }
 }

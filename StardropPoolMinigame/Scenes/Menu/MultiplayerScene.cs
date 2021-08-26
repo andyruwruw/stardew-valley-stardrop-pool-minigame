@@ -10,5 +10,9 @@
         {
             return "multiplayer-scene";
         }
+
+        protected override void AddEntities()
+        {
+        }
     }
 }

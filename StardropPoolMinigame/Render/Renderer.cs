@@ -1,20 +1,34 @@
-﻿using Microsoft.Xna.Framework;
+﻿
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using StardewValley;
 using StardropPoolMinigame.Constants;
 using StardropPoolMinigame.Entities;
+using StardropPoolMinigame.Enums;
 using StardropPoolMinigame.Render.Drawers;
 using StardropPoolMinigame.Scenes;
 using System.Collections.Generic;
 
 namespace StardropPoolMinigame.Render
 {
+    /// <summary>
+    /// Renders entries onto the screen
+    /// </summary>
     class Renderer
     {
+        IList<IEntity> _entities;
+
         public Renderer()
         {
+            this.InicializeStaticEntities();
         }
 
+        /// <summary>
+        /// Draws all entities for scenes
+        /// </summary>
+        /// <param name="batch">XNA Framework SpriteBatch</param>
+        /// <param name="entering">Scene in entry transition</param>
+        /// <param name="current">Current scene</param>
+        /// <param name="exiting">Scene in exit transition</param>
         public void Draw(
             SpriteBatch batch,
             IScene entering,
@@ -28,133 +42,57 @@ namespace StardropPoolMinigame.Render
                 null,
                 null);
 
-            this.DrawBackground(batch);
-            this.DrawEntities(
-                batch,
-                entering,
-                current,
-                exiting);
-            this.DrawForeground(batch);
+            this.DrawStaticEntities(batch);
+
+            if (entering != null)
+            {
+                this.DrawEntities(batch, entering.GetEntities());
+            }
+            if (current != null)
+            {
+                this.DrawEntities(batch, current.GetEntities());
+            }
+            if (exiting != null)
+            {
+                this.DrawEntities(batch, exiting.GetEntities());
+            }
 
             batch.End();
         }
 
-        private void DrawBackground(SpriteBatch batch)
+        /// <summary>
+        /// Draws entries that are always present
+        /// </summary>
+        /// <param name="batch">XNA Framework SpriteBatch</param>
+        private void DrawStaticEntities(SpriteBatch batch)
         {
-            batch.Draw(
-                Game1.staminaRect,
-                new Rectangle(
-                    (int)RenderConstants.AdjustedScreenWidthMargin(),
-                    (int)RenderConstants.AdjustedScreenHeightMargin(),
-                    (int)RenderConstants.AdjustedScreenWidth(),
-                    (int)RenderConstants.AdjustedScreenHeight()),
-                Game1.staminaRect.Bounds,
-                Color.Black,
-                0f,
-                Vector2.Zero,
-                SpriteEffects.None,
-                0.0000f);
+            this.DrawEntities(batch, this._entities);
         }
 
-        private void DrawForeground(SpriteBatch batch)
+        /// <summary>
+        /// Draws the provided set of entries
+        /// </summary>
+        /// <param name="batch">XNA Framework SpriteBatch</param>
+        /// <param name="entities">Entities to be drawn</param>
+        private void DrawEntities(SpriteBatch batch, IList<IEntity> entities)
         {
-            batch.Draw(
-                Game1.staminaRect,
-                new Rectangle(
-                    0,
-                    0,
-                    (int)RenderConstants.AdjustedScreenWidthMargin(),
-                    (int)RenderConstants.ViewportHeight()),
-                Game1.staminaRect.Bounds,
-                Textures.MINIGAME_MARGIN_BACKGROUND_COLOR,
-                0f,
-                Vector2.Zero,
-                SpriteEffects.None,
-                1.0000f);
 
-            batch.Draw(
-                Game1.staminaRect,
-                new Rectangle(
-                    (int)(RenderConstants.AdjustedScreenWidthMargin() + RenderConstants.AdjustedScreenWidth()),
-                    0,
-                    (int)RenderConstants.AdjustedScreenWidthMargin(),
-                    (int)RenderConstants.ViewportHeight()),
-                Game1.staminaRect.Bounds,
-                Textures.MINIGAME_MARGIN_BACKGROUND_COLOR,
-                0f,
-                Vector2.Zero,
-                SpriteEffects.None,
-                1.0000f);
+            IList<IDrawer> drawers = GetDrawersFromEntities(entities);
 
-            batch.Draw(
-                Game1.staminaRect,
-                new Rectangle(
-                    (int)RenderConstants.AdjustedScreenWidthMargin(),
-                    0,
-                    (int)RenderConstants.AdjustedScreenWidth(),
-                    (int)RenderConstants.AdjustedScreenHeightMargin()),
-                Game1.staminaRect.Bounds,
-                Textures.MINIGAME_MARGIN_BACKGROUND_COLOR,
-                0f,
-                Vector2.Zero,
-                SpriteEffects.None,
-                1.0000f);
-
-            batch.Draw(
-                Game1.staminaRect,
-                new Rectangle(
-                    (int)(RenderConstants.AdjustedScreenWidthMargin() + RenderConstants.AdjustedScreenWidth()),
-                    (int)(RenderConstants.AdjustedScreenHeightMargin() + RenderConstants.AdjustedScreenHeight()),
-                    (int)RenderConstants.AdjustedScreenWidth(),
-                    (int)RenderConstants.AdjustedScreenHeightMargin()),
-                Game1.staminaRect.Bounds,
-                Textures.MINIGAME_MARGIN_BACKGROUND_COLOR,
-                0f,
-                Vector2.Zero,
-                SpriteEffects.None,
-                1.0000f);
-        }
-
-        private void DrawEntities(
-            SpriteBatch batch,
-            IScene entering,
-            IScene current,
-            IScene exiting)
-        {
-            if (entering != null)
+            foreach (IDrawer drawer in drawers)
             {
-                IList<IDrawer> drawers = GetDrawersFromEntities(GetEntitiesFromScene(entering));
-
-                foreach (IDrawer drawer in drawers)
-                {
-                    drawer.Draw(batch);
-                }
-            }
-            if (current != null)
-            {
-                IList<IDrawer> drawers = GetDrawersFromEntities(GetEntitiesFromScene(current));
-
-                foreach (IDrawer drawer in drawers)
-                {
-                    drawer.Draw(batch);
-                }
-            }
-            if (exiting != null)
-            {
-                IList<IDrawer> drawers = GetDrawersFromEntities(GetEntitiesFromScene(exiting));
-
-                foreach (IDrawer drawer in drawers)
+                if (drawer.ShouldDraw())
                 {
                     drawer.Draw(batch);
                 }
             }
         }
 
-        private IList<IEntity> GetEntitiesFromScene(IScene scene)
-        {
-            return scene.GetEntities();
-        }
-
+        /// <summary>
+        /// Retrieves list of drawers for a set of entries
+        /// </summary>
+        /// <param name="entities">Entities to be drawn</param>
+        /// <returns>List of drawers</returns>
         private IList<IDrawer> GetDrawersFromEntities(IList<IEntity> entities)
         {
             IList<IDrawer> drawers = new List<IDrawer>();
@@ -165,6 +103,76 @@ namespace StardropPoolMinigame.Render
             }
 
             return drawers;
+        }
+
+        /// <summary>
+        /// Creates static entries
+        /// </summary>
+        private void InicializeStaticEntities()
+        {
+            this._entities = new List<IEntity>();
+
+            // Background
+            this._entities.Add(new Solid(
+                Origin.TopLeft,
+                new Vector2(0, 0),
+                0.0000f,
+                null,
+                null,
+                new Primitives.Rectangle(
+                    new Vector2(RenderConstants.AdjustedScreenWidthMargin(), RenderConstants.AdjustedScreenHeightMargin()),
+                    (int)RenderConstants.AdjustedScreenWidth(),
+                    (int)RenderConstants.AdjustedScreenHeight()),
+                Color.Black));
+
+            // Foreground
+            this._entities.Add(new Solid(
+                Origin.TopLeft,
+                new Vector2(0, 0),
+                1.0000f,
+                null,
+                null,
+                new Primitives.Rectangle(
+                    new Vector2(0, 0),
+                    (int)RenderConstants.AdjustedScreenWidthMargin(),
+                    (int)RenderConstants.AdjustedScreenWidthMargin()),
+                Textures.MINIGAME_MARGIN_BACKGROUND_COLOR));
+
+            this._entities.Add(new Solid(
+                Origin.TopLeft,
+                new Vector2(0, 0),
+                1.0000f,
+                null,
+                null,
+                new Primitives.Rectangle(
+                    new Vector2(RenderConstants.AdjustedScreenWidthMargin() + RenderConstants.AdjustedScreenWidth(), 0),
+                    (int)RenderConstants.AdjustedScreenWidthMargin(),
+                    (int)RenderConstants.ViewportHeight()),
+                Textures.MINIGAME_MARGIN_BACKGROUND_COLOR));
+
+            this._entities.Add(new Solid(
+                Origin.TopLeft,
+                new Vector2(0, 0),
+                1.0000f,
+                null,
+                null,
+                new Primitives.Rectangle(
+                    new Vector2(RenderConstants.AdjustedScreenWidthMargin(), 0),
+                    (int)RenderConstants.AdjustedScreenWidth(),
+                    (int)RenderConstants.AdjustedScreenHeightMargin()),
+                Textures.MINIGAME_MARGIN_BACKGROUND_COLOR));
+
+            this._entities.Add(new Solid(
+                Origin.TopLeft,
+                new Vector2(0, 0),
+                1.0000f,
+                null,
+                null,
+                new Primitives.Rectangle(
+                    new Vector2(RenderConstants.AdjustedScreenWidthMargin() + RenderConstants.AdjustedScreenWidth(), RenderConstants.AdjustedScreenHeightMargin() + RenderConstants.AdjustedScreenHeight()),
+                    (int)RenderConstants.AdjustedScreenWidth(),
+                    (int)RenderConstants.AdjustedScreenHeightMargin()),
+                Textures.MINIGAME_MARGIN_BACKGROUND_COLOR));
         }
     }
 }

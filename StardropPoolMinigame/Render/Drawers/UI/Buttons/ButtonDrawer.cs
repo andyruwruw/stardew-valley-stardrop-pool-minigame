@@ -11,7 +11,16 @@ namespace StardropPoolMinigame.Render.Drawers
 
         protected override Rectangle GetRawSource()
         {
-            return Textures.BACKGROUND_BAR_SHELVES_BOUNDS;
+            return ((Button)this._entity).GetTextBounds();
+        }
+
+        protected override Color GetRawColor()
+        {
+            if (((EntityHoverable)this._entity).IsHovered())
+            {
+                return Textures.TEXT_HOVER_COLOR;
+            }
+            return Color.White;
         }
     }
 }

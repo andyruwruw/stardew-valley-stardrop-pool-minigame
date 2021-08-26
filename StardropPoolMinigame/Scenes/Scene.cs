@@ -18,6 +18,7 @@ namespace StardropPoolMinigame.Scenes
             this._newScene = null;
             this._transitionState = TransitionState.Entering;
             this._entities = new List<IEntity>();
+            this.AddEntities();
         }
 
         public virtual void Update()
@@ -53,7 +54,14 @@ namespace StardropPoolMinigame.Scenes
             return this._transitionState;
         }
 
+        public void SetTransitionState(TransitionState transitionState)
+        {
+            this._transitionState = transitionState;
+        }
+
         public abstract string GetKey();
+
+        protected abstract void AddEntities();
 
         protected void UpdateEntities()
         {
@@ -63,6 +71,14 @@ namespace StardropPoolMinigame.Scenes
             {
                 entity.Update();
 
+                // Set Entity Exiting if Scene Exiting
+                if (this._transitionState == TransitionState.Exiting
+                    && (entity.GetTransitionState() != TransitionState.Exiting && entity.GetTransitionState() != TransitionState.Dead))
+                {
+                    entity.SetTransitionState(TransitionState.Exiting, true);
+                }
+
+                // Check if entities are finished transitioning
                 if (this._transitionState == TransitionState.Entering
                     && (Transition)entity.GetEnteringTransition() != null
                     && !(((Transition)entity.GetEnteringTransition()).IsFinished()))
@@ -77,6 +93,7 @@ namespace StardropPoolMinigame.Scenes
                 }
             }
 
+            // If finished transitioning, update transition state
             if (this._transitionState != TransitionState.Present && updateTransition)
             {
                 if (this._transitionState == TransitionState.Entering)
@@ -84,6 +101,7 @@ namespace StardropPoolMinigame.Scenes
                     this._transitionState = TransitionState.Present;
                 } else if (this._transitionState == TransitionState.Exiting)
                 {
+                    Logger.Info("Scene is dead");
                     this._transitionState = TransitionState.Dead;
                 }
             }

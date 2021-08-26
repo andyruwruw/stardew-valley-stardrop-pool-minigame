@@ -1,23 +1,24 @@
 ﻿using Microsoft.Xna.Framework;
-using StardropPoolMinigame.Constants;
 using StardropPoolMinigame.Enums;
-using StardropPoolMinigame.Helpers;
 using StardropPoolMinigame.Render.Drawers;
 using StardropPoolMinigame.Render.Filters;
 
 namespace StardropPoolMinigame.Entities
 {
-    class Button : EntityHoverable
+    class Text : EntityHoverable
     {
-        private Microsoft.Xna.Framework.Rectangle _textBounds;
+        Rectangle _textBounds;
 
-        public Button(
+        private bool _isHoverable;
+
+        public Text(
             Origin origin,
             Vector2 anchor,
             float layerDepth,
             IFilter enteringTransition,
             IFilter exitingTransition,
-            Microsoft.Xna.Framework.Rectangle textBounds
+            Rectangle textBounds,
+            bool isHoverable = false
         ) : base(
             origin,
             anchor,
@@ -26,8 +27,9 @@ namespace StardropPoolMinigame.Entities
             exitingTransition)
         {
             this._textBounds = textBounds;
+            this._isHoverable = isHoverable;
 
-            this.SetDrawer(new ButtonDrawer(this));
+            this.SetDrawer(new TextDrawer(this));
         }
 
         public override void Update()
@@ -36,9 +38,9 @@ namespace StardropPoolMinigame.Entities
             this.UpdateTransitionState();
         }
 
-        public override string GetId()
+        public override float GetTotalHeight()
         {
-            return $"basic-button-{this._id}";
+            return this._textBounds.Height;
         }
 
         public override float GetTotalWidth()
@@ -46,24 +48,22 @@ namespace StardropPoolMinigame.Entities
             return this._textBounds.Width;
         }
 
-        public override float GetTotalHeight()
-        {
-            return this._textBounds.Height;
-        }
-
         public override void ClickCallback()
         {
-            Sound.PlaySound(SoundConstants.BOTTON_PRESS);
         }
 
         protected override void HoveredCallback()
         {
-            Sound.PlaySound(SoundConstants.BUTTON_HOVER);
         }
 
-        public Microsoft.Xna.Framework.Rectangle GetTextBounds()
+        public Rectangle GetTextBounds()
         {
             return this._textBounds;
+        }
+
+        public void SetTextBounds(Rectangle textBounds)
+        {
+            this._textBounds = textBounds;
         }
     }
 }

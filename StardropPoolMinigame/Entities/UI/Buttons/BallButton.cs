@@ -57,11 +57,6 @@ namespace StardropPoolMinigame.Entities
             }
         }
 
-        public override IDrawer GetDrawer()
-        {
-            return this._drawer;
-        }
-
         public override string GetId()
         {
             return $"ball-button-{this._id}";
@@ -85,6 +80,25 @@ namespace StardropPoolMinigame.Entities
         protected override void HoveredCallback()
         {
             Sound.PlaySound(SoundConstants.BUTTON_HOVER);
+        }
+
+        public override void SetTransitionState(TransitionState transitionState, bool start)
+        {
+            this._transitionState = transitionState;
+            if (this._transitionState == TransitionState.Exiting
+                && this._exitingTransition != null
+                && start)
+            {
+                ((Transition)this._exitingTransition).StartTransition(this._id);
+                this._ball.SetTransitionState(transitionState, true);
+            }
+            if (this._transitionState == TransitionState.Entering
+                && this._enteringTransition != null
+                && start)
+            {
+                ((Transition)this._enteringTransition).StartTransition(this._id);
+                this._ball.SetTransitionState(transitionState, true);
+            }
         }
 
         public Ball GetBall()

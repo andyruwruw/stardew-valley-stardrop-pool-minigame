@@ -27,11 +27,6 @@ namespace StardropPoolMinigame.Entities
             this.UpdateTransitionState();
         }
 
-        public override IDrawer GetDrawer()
-        {
-            return this._drawer;
-        }
-
         public override string GetId()
         {
             return $"pocket-{this._id}";
