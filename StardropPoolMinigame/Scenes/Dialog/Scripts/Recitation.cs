@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StardropPoolMinigame.Enums;
+
 namespace StardropPoolMinigame.Scenes.Dialog.Scripts
 {
     public class Recitation

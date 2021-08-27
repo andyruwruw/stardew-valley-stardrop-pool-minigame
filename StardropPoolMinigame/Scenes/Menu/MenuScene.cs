@@ -119,7 +119,8 @@ namespace StardropPoolMinigame.Scenes
                 0.0040f,
                 TransitionConstants.MainMenuSceneButtonEnteringTransition(0),
                 TransitionConstants.MainMenuSceneButtonExitingTransition(0),
-                Textures.BUTTON_TEXT_PLAY_BOUNDS,
+                Translations.GetTranslation(StringConstants.MENU_BUTTON_MAIN_PLAY),
+                80,
                 1);
             this._entities.Add(this._playButton);
 
@@ -129,7 +130,8 @@ namespace StardropPoolMinigame.Scenes
                 0.0040f,
                 TransitionConstants.MainMenuSceneButtonEnteringTransition(1),
                 TransitionConstants.MainMenuSceneButtonExitingTransition(1),
-                Textures.BUTTON_TEXT_MULTIPLAYER_BOUNDS,
+                Translations.GetTranslation(StringConstants.MENU_BUTTON_MAIN_MULTIPLAYER),
+                80,
                 10);
             this._entities.Add(this._multiplayerButton);
 
@@ -139,7 +141,8 @@ namespace StardropPoolMinigame.Scenes
                 0.0040f,
                 TransitionConstants.MainMenuSceneButtonEnteringTransition(2),
                 TransitionConstants.MainMenuSceneButtonExitingTransition(2),
-                Textures.BUTTON_TEXT_GALLERY_BOUNDS,
+                Translations.GetTranslation(StringConstants.MENU_BUTTON_MAIN_GALLERY),
+                80,
                 3);
             this._entities.Add(this._galleryButton);
 
@@ -149,7 +152,8 @@ namespace StardropPoolMinigame.Scenes
                 0.0040f,
                 TransitionConstants.MainMenuSceneButtonEnteringTransition(3),
                 TransitionConstants.MainMenuSceneButtonExitingTransition(3),
-                Textures.BUTTON_TEXT_SETTINGS_BOUNDS,
+                Translations.GetTranslation(StringConstants.MENU_BUTTON_MAIN_SETTINGS),
+                80,
                 12);
             this._entities.Add(this._settingsButton);
 

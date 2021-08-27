@@ -42,8 +42,7 @@ namespace StardropPoolMinigame.Render.Drawers
 
         protected override Rectangle GetRawSource()
         {
-            // Does not have source
-            return Textures.LOWERCASE_A_BOUNDS;
+            return ((Character)this._entity).GetCharacterBounds();
         }
     }
 }

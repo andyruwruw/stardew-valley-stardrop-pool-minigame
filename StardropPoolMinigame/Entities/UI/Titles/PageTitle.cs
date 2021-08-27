@@ -49,6 +49,12 @@ namespace StardropPoolMinigame.Entities
             return this._text.GetTotalHeight();
         }
 
+        public override void SetTransitionState(TransitionState transitionState, bool start = false)
+        {
+            base.SetTransitionState(transitionState, start);
+            this._text.SetTransitionState(transitionState, true);
+        }
+
         public Text GetText()
         {
             return this._text;

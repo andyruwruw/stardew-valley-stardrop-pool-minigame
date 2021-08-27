@@ -21,7 +21,7 @@ namespace StardropPoolMinigame.Render.Drawers
             SpriteEffects? overrideEffects = null,
             float? overrideLayerDepth = null)
         {
-            ((Button)this._entity).GetText().GetDrawer().Draw(
+            ((BallButton)this._entity).GetText().GetDrawer().Draw(
                 batch,
                 overrideDestination,
                 overrideSource,

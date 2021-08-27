@@ -39,6 +39,7 @@ namespace StardropPoolMinigame.Entities
             enteringTransition,
             exitingTransition)
         {
+            Logger.Info(text);
             this._text = text;
             this._maxWidth = maxWidth;
             this._isCentered = isCentered;
@@ -60,6 +61,22 @@ namespace StardropPoolMinigame.Entities
 
         public override void ClickCallback()
         {
+        }
+
+        public override void SetTransitionState(TransitionState transitionState, bool start = false)
+        {
+            base.SetTransitionState(transitionState, start);
+
+            foreach (Character character in this._characters)
+            {
+                character.SetTransitionState(transitionState, true);
+            }
+        }
+
+        public void SetText(string text)
+        {
+            this._text = text;
+            this.InicializeCharacters();
         }
 
         public IList<Character> GetCharacters()
@@ -89,23 +106,40 @@ namespace StardropPoolMinigame.Entities
             this._characters = new List<Character>();
             this._resultingHeight = 0;
 
+            int characterIndex = 0;
+
             foreach (char character in this._text)
             {
-                string finishedLine = null;
-                int finishedLineLength = 0;
+                IList<string> finishedLines = new List<string>();
+                IList<int> finishedLineLengths = new List<int>();
 
-                if (character == ' ' || character == '\n')
+                if (character == ' ' || character == '\n' || characterIndex == this._text.Length - 1)
                 {
+                    if (characterIndex == this._text.Length - 1)
+                    {
+                        Rectangle characterBounds = Textures.GetCharacterBoundsFromChar(character);
+
+                        word = $"{word}{character}";
+                        wordLength += RenderConstants.FONT_SPACE_BETWEEN_CHARACTERS + characterBounds.Width;
+                    }
+
                     if (lineLength + RenderConstants.FONT_SPACE_WIDTH + wordLength > this._maxWidth)
                     {
-                        finishedLine = line;
-                        finishedLineLength = lineLength;
+                        finishedLines.Add(line);
+                        finishedLineLengths.Add(lineLength);
 
-                        line = $"{word}";
-                        lineLength = wordLength;
-                    } else if (character == '\n') {
-                        finishedLine = $"{line} {word}";
-                        finishedLineLength = lineLength + RenderConstants.FONT_SPACE_WIDTH + wordLength;
+                        if (characterIndex == this._text.Length - 1)
+                        {
+                            finishedLines.Add(word);
+                            finishedLineLengths.Add(wordLength);
+                        } else
+                        {
+                            line = $"{word}";
+                            lineLength = wordLength;
+                        }
+                    } else if (character == '\n' || characterIndex == this._text.Length - 1) {
+                        finishedLines.Add($"{line} {word}");
+                        finishedLineLengths.Add(lineLength + RenderConstants.FONT_SPACE_WIDTH + wordLength);
 
                         line = "";
                         lineLength = 0;
@@ -125,39 +159,45 @@ namespace StardropPoolMinigame.Entities
                     wordLength += RenderConstants.FONT_SPACE_BETWEEN_CHARACTERS + characterBounds.Width;
                 }
 
-                if (finishedLine != null)
+                if (finishedLines.Count > 0)
                 {
-                    int cursor = 0;
-                    int leftMargin = this._isCentered ? (this._maxWidth - finishedLineLength) / 2 : 0;
-
-                    foreach (char lineCharacter in finishedLine)
+                    for (int i = 0; i < finishedLines.Count; i++)
                     {
-                        if (lineCharacter == ' ')
+                        int cursor = 0;
+                        int leftMargin = this._isCentered ? (this._maxWidth - finishedLineLengths[i]) / 2 : 0;
+
+                        foreach (char lineCharacter in finishedLines[i])
                         {
-                            cursor += RenderConstants.FONT_SPACE_WIDTH;
-                        } else
-                        {
-                            this._characters.Add(new Character(
-                                Origin.TopLeft,
-                                new Vector2(
-                                    cursor + RenderConstants.FONT_SPACE_BETWEEN_CHARACTERS + leftMargin,
-                                    lineIndex * (RenderConstants.FONT_CHARACTER_HEIGHT + RenderConstants.FONT_LINE_SPACING)),
-                                this._layerDepth,
-                                this._enteringTransition,
-                                this._exitingTransition,
-                                lineCharacter));
+                            if (lineCharacter == ' ')
+                            {
+                                cursor += RenderConstants.FONT_SPACE_WIDTH;
+                            } else
+                            {
+                                Rectangle characterBounds = Textures.GetCharacterBoundsFromChar(lineCharacter);
+
+                                this._characters.Add(new Character(
+                                    Origin.TopCenter,
+                                    new Vector2(
+                                        this.GetTopLeft().X + cursor + RenderConstants.FONT_SPACE_BETWEEN_CHARACTERS + leftMargin + (characterBounds.Width / 2),
+                                        this.GetTopLeft().Y + lineIndex * (RenderConstants.FONT_CHARACTER_HEIGHT + RenderConstants.FONT_LINE_SPACING)),
+                                    this._layerDepth,
+                                    this._enteringTransition,
+                                    this._exitingTransition,
+                                    lineCharacter));
+
+                                cursor += RenderConstants.FONT_SPACE_BETWEEN_CHARACTERS + characterBounds.Width;
+                            }
                         }
 
-                        Rectangle characterBounds = Textures.GetCharacterBoundsFromChar(lineCharacter);
-                        cursor += RenderConstants.FONT_SPACE_BETWEEN_CHARACTERS + characterBounds.Width;
+                        lineIndex += 1;
+                        this._resultingHeight += RenderConstants.FONT_CHARACTER_HEIGHT + RenderConstants.FONT_LINE_SPACING;
                     }
 
-                    finishedLine = "";
-                    finishedLineLength = 0;
-                    lineIndex += 1;
-
-                    this._resultingHeight += RenderConstants.FONT_CHARACTER_HEIGHT + RenderConstants.FONT_LINE_SPACING;
+                    finishedLines.Clear();
+                    finishedLineLengths.Clear();
                 }
+
+                characterIndex += 1;
             }
         }
     }

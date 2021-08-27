@@ -23,7 +23,7 @@ namespace StardropPoolMinigame.Render
         {
             Logger.Info("Loading Tilesheets");
             TileSheet = Game1.content.Load<Texture2D>("Minigames\\stardropPool");
-            TileSheet = Game1.content.Load<Texture2D>("Minigames\\stardropPoolFont");
+            FontTileSheet = Game1.content.Load<Texture2D>("Minigames\\stardropPoolFont");
             PortraitAbigailTilesheet = Game1.content.Load<Texture2D>("Portraits\\Abigail");
             PortraitGusTilesheet = Game1.content.Load<Texture2D>("Portraits\\Gus");
             PortraitSamTilesheet = Game1.content.Load<Texture2D>("Portraits\\Sam");
@@ -368,7 +368,7 @@ namespace StardropPoolMinigame.Render
 
         public static Rectangle UPPERCASE_V_BOUNDS = new Rectangle(LOWERCASE_V_BOUNDS.X + LOWERCASE_V_BOUNDS.Width, RenderConstants.FONT_CHARACTER_HEIGHT, 7, RenderConstants.FONT_CHARACTER_HEIGHT);
 
-        public static Rectangle LOWERCASE_W_BOUNDS = new Rectangle(UPPERCASE_V_BOUNDS.X + UPPERCASE_V_BOUNDS.Width, RenderConstants.FONT_CHARACTER_HEIGHT * 2, 7, RenderConstants.FONT_CHARACTER_HEIGHT);
+        public static Rectangle LOWERCASE_W_BOUNDS = new Rectangle(0, RenderConstants.FONT_CHARACTER_HEIGHT * 2, 7, RenderConstants.FONT_CHARACTER_HEIGHT);
 
         public static Rectangle UPPERCASE_W_BOUNDS = new Rectangle(LOWERCASE_W_BOUNDS.X + LOWERCASE_W_BOUNDS.Width, RenderConstants.FONT_CHARACTER_HEIGHT * 2, 7, RenderConstants.FONT_CHARACTER_HEIGHT);
 

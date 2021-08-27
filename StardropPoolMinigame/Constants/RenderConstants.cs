@@ -129,9 +129,11 @@ namespace StardropPoolMinigame.Constants
 
         public static int FONT_SPACE_BETWEEN_CHARACTERS = 1;
 
-        public static int FONT_SPACE_WIDTH = 5;
+        public static int FONT_SPACE_WIDTH = 4;
 
         public static int FONT_LINE_SPACING = 3;
+
+        public static int FONT_Y_OFFSET = 2;
 
         public static float BALL_MARGIN_LEFT = 3f;
 

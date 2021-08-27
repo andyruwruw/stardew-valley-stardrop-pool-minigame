@@ -24,7 +24,6 @@ namespace StardropPoolMinigame.Entities
             IFilter exitingTransition,
             string text,
             int maxWidth = int.MaxValue,
-            bool isCentered = false,
             int ballNumber = 1
         ) : base(
             origin,
@@ -41,7 +40,7 @@ namespace StardropPoolMinigame.Entities
                 exitingTransition,
                 text,
                 maxWidth,
-                isCentered,
+                false,
                 true);
 
             this._ball = new Ball(
@@ -90,23 +89,10 @@ namespace StardropPoolMinigame.Entities
             Sound.PlaySound(SoundConstants.BUTTON_HOVER);
         }
 
-        public override void SetTransitionState(TransitionState transitionState, bool start)
+        public override void SetTransitionState(TransitionState transitionState, bool start = false)
         {
-            this._transitionState = transitionState;
-            if (this._transitionState == TransitionState.Exiting
-                && this._exitingTransition != null
-                && start)
-            {
-                ((Transition)this._exitingTransition).StartTransition(this._id);
-                this._ball.SetTransitionState(transitionState, true);
-            }
-            if (this._transitionState == TransitionState.Entering
-                && this._enteringTransition != null
-                && start)
-            {
-                ((Transition)this._enteringTransition).StartTransition(this._id);
-                this._ball.SetTransitionState(transitionState, true);
-            }
+            base.SetTransitionState(transitionState, start);
+            this._ball.SetTransitionState(transitionState, true);
         }
 
         public Ball GetBall()
@@ -114,7 +100,7 @@ namespace StardropPoolMinigame.Entities
             return this._ball;
         }
 
-        public Text GetTextBounds()
+        public Text GetText()
         {
             return this._text;
         }

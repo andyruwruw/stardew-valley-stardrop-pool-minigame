@@ -161,27 +161,27 @@ namespace StardropPoolMinigame.Scenes
             float portraitSeparation = Textures.PORTRAIT_SAM_DEFAULT_BOUNDS.Width;
 
             Vector2 cursorAnchor = new Vector2(centerX - (portraitSeparation * 1.5f), cursorTopMargin);
-            Rectangle selectedOpponentNameBounds = Textures.BUTTON_TEXT_SAM_BOUNDS;
+            string selectedOpponentName = Sam.Name;
 
             switch (this._opponentName)
             {
                 case OpponentType.Sebastian:
                     cursorAnchor = new Vector2(centerX - (portraitSeparation * 0.55f), cursorTopMargin);
-                    selectedOpponentNameBounds = Textures.BUTTON_TEXT_SEBASTIAN_BOUNDS;
+                    selectedOpponentName = Sebastian.Name;
                     break;
                 case OpponentType.Abigail:
                     cursorAnchor = new Vector2(centerX + (portraitSeparation * 0.4f), cursorTopMargin);
-                    selectedOpponentNameBounds = Textures.BUTTON_TEXT_ABIGAIL_BOUNDS;
+                    selectedOpponentName = Abigail.Name;
                     break;
                 case OpponentType.Gus:
                     cursorAnchor = new Vector2(centerX + (portraitSeparation * 1.4f), cursorTopMargin);
-                    selectedOpponentNameBounds = Textures.BUTTON_TEXT_GUS_BOUNDS;
+                    selectedOpponentName = Gus.Name;
                     break;
             }
 
             this._cursor.SetAnchor(cursorAnchor);
             this._cursor.SetTransitionState(TransitionState.Entering, true);
-            this._selectedName.SetTextBounds(selectedOpponentNameBounds);
+            this._selectedName.SetText(selectedOpponentName);
             this._selectedName.SetTransitionState(TransitionState.Entering, true);
         }
 
@@ -268,8 +268,8 @@ namespace StardropPoolMinigame.Scenes
                 0.0050f,
                 TransitionConstants.CharacterSelectSceneOpponentNameEnteringTransition(),
                 null,
-                Textures.BUTTON_TEXT_CHALLENGE_BOUNDS
-            );
+                Translations.GetTranslation(StringConstants.MENU_BUTTON_CHARACTER_SELECT_PLAY),
+                80);
             this._entities.Add(this._challengeButton);
 
             // Feedback
@@ -290,7 +290,8 @@ namespace StardropPoolMinigame.Scenes
                 0.0050f,
                 TransitionConstants.CharacterSelectScenePageTitleEnteringTransition(),
                 null,
-                Textures.TITLE_CHARACTER_SELECT_MENU_BOUNDS));
+                Translations.GetTranslation(StringConstants.MENU_TITLE_CHARACTER_SELECT),
+                128));
 
             this._selectedName = new Text(
                 Origin.TopCenter,
@@ -298,7 +299,9 @@ namespace StardropPoolMinigame.Scenes
                 0.0050f,
                 TransitionConstants.CharacterSelectSceneOpponentNameEnteringTransition(),
                 null,
-                Textures.BUTTON_TEXT_SAM_BOUNDS);
+                Sam.Name,
+                80,
+                true);
             this._entities.Add(this._selectedName);
         }
     }

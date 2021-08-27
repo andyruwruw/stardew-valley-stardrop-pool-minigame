@@ -52,6 +52,7 @@
     <Compile Include="Behaviors\Bounce.cs" />
     <Compile Include="Behaviors\Detectors\Use.cs" />
     <Compile Include="Behaviors\Intersection.cs" />
+    <Compile Include="Constants\StringConstants.cs" />
     <Compile Include="Constants\TransitionConstants.cs" />
     <Compile Include="Entities\Entity.cs" />
     <Compile Include="Entities\EntityStatic.cs" />
@@ -182,10 +183,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Scenes\Game\States\Substates\" />
-    <Folder Include="Entities\UI\Effects\" />
-    <Folder Include="Render\Drawers\UI\Text\" />
-    <Folder Include="Entities\UI\Text\" />
-    <Folder Include="Scenes\Dialog\Scripts\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Pathoschild.Stardew.ModBuildConfig.3.2.2\build\Pathoschild.Stardew.ModBuildConfig.targets" Condition="Exists('..\packages\Pathoschild.Stardew.ModBuildConfig.3.2.2\build\Pathoschild.Stardew.ModBuildConfig.targets')" />
