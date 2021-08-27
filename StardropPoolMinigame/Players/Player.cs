@@ -1,11 +1,12 @@
 ﻿using Microsoft.Xna.Framework;
+using StardewValley;
 using StardropPoolMinigame.Constants;
 using StardropPoolMinigame.Entities;
 using StardropPoolMinigame.Enums;
 
 namespace StardropPoolMinigame.Players
 {
-    abstract class Player : IPlayer
+    class Player : IPlayer
     {
         private string _name;
 
@@ -75,6 +76,15 @@ namespace StardropPoolMinigame.Players
         public virtual string GetMusicId()
         {
             return this._music;
+        }
+
+        public static IPlayer GetMainPlayer()
+        {
+            return new Player(
+                Game1.player.displayName,
+                true,
+                false,
+                Game1.player.uniqueMultiplayerID);
         }
     }
 }

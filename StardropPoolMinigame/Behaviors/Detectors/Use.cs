@@ -14,7 +14,7 @@ namespace StardropPoolMinigame.Detect
         /// <returns>Whether player used pool table</returns>
         public static bool IsPoolTable()
         {
-            if (DevConstants.OVERRIDE_IS_POOL_TABLE)
+            if (DevConstants.OVERRIDE_IS_POOL_TABLE && Game1.currentMinigame == null)
             {
                 return true;
             }

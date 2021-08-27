@@ -1,5 +1,8 @@
 ﻿namespace StardropPoolMinigame.Enums
 {
+    /// <summary>
+    /// States of transitions
+    /// </summary>
     public enum TransitionState
     {
         Entering = 0,

@@ -11,17 +11,26 @@ namespace StardropPoolMinigame.Render.Drawers
         {
         }
 
-        public override void Draw(SpriteBatch batch)
+        public override void Draw(
+            SpriteBatch batch,
+            Vector2? overrideDestination = null,
+            Rectangle? overrideSource = null,
+            Color? overrideColor = null,
+            float? overrideRotation = null,
+            Vector2? overrideOrigin = null,
+            float? overrideScale = null,
+            SpriteEffects? overrideEffects = null,
+            float? overrideLayerDepth = null)
         {
             batch.Draw(
                 this.GetTileSheet(),
                 ((Solid)this._entity).GetXnaDestination(),
-                this.GetSource(),
-                this.GetColor(),
-                this.GetRotation(),
-                this.GetOrigin(),
-                this.GetEffects(),
-                this.GetLayerDepth());
+                this.GetSource(overrideSource),
+                this.GetColor(overrideColor),
+                this.GetRotation(overrideRotation),
+                this.GetOrigin(overrideOrigin),
+                this.GetEffects(overrideEffects),
+                this.GetLayerDepth(overrideLayerDepth));
         }
 
         protected override Texture2D GetTileSheet()

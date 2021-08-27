@@ -54,6 +54,11 @@ namespace StardropPoolMinigame.Entities
             }
         }
 
+        public virtual void Update()
+        {
+            this.UpdateTransitionState();
+        }
+
         public Origin GetOrigin()
         {
             return this._origin;
@@ -216,8 +221,6 @@ namespace StardropPoolMinigame.Entities
         {
             return this._drawer;
         }
-
-        public abstract void Update();
 
         public abstract string GetId();
 

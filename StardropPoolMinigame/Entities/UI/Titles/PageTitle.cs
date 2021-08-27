@@ -7,7 +7,7 @@ namespace StardropPoolMinigame.Entities
 {
     class PageTitle : EntityStatic
     {
-        Rectangle _textBounds;
+        Text _text;
 
         public PageTitle(
             Origin origin,
@@ -15,7 +15,9 @@ namespace StardropPoolMinigame.Entities
             float layerDepth,
             IFilter enteringTransition,
             IFilter exitingTransition,
-            Rectangle textBounds
+            string text,
+            int maxWidth = int.MaxValue,
+            bool isCentered = true
         ) : base(
             origin,
             anchor,
@@ -23,28 +25,33 @@ namespace StardropPoolMinigame.Entities
             enteringTransition,
             exitingTransition)
         {
-            this._textBounds = textBounds;
-            this.SetDrawer(new PageTitleDrawer(this));
-        }
+            this._text = new Text(
+                origin,
+                anchor,
+                layerDepth,
+                enteringTransition,
+                exitingTransition,
+                text,
+                maxWidth,
+                isCentered,
+                false);
 
-        public override void Update()
-        {
-            this.UpdateTransitionState();
+            this.SetDrawer(new PageTitleDrawer(this));
         }
 
         public override float GetTotalWidth()
         {
-            return this._textBounds.Width;
+            return this._text.GetTotalWidth();
         }
 
         public override float GetTotalHeight()
         {
-            return this._textBounds.Height;
+            return this._text.GetTotalHeight();
         }
 
-        public Microsoft.Xna.Framework.Rectangle GetTextBounds()
+        public Text GetText()
         {
-            return this._textBounds;
+            return this._text;
         }
     }
 }

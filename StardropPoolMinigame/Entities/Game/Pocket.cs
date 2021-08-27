@@ -21,12 +21,6 @@ namespace StardropPoolMinigame.Entities
             this.SetDrawer(new PocketDrawer(this));
         }
 
-        public override void Update()
-        {
-            this.UpdateHoverable();
-            this.UpdateTransitionState();
-        }
-
         public override string GetId()
         {
             return $"pocket-{this._id}";

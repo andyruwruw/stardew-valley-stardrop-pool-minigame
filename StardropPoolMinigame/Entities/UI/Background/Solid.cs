@@ -32,11 +32,6 @@ namespace StardropPoolMinigame.Entities
             this.SetDrawer(new SolidDrawer(this));
         }
 
-        public override void Update()
-        {
-            this.UpdateTransitionState();
-        }
-
         public override float GetTotalHeight()
         {
             return this._destination.GetHeight();

@@ -1,5 +1,8 @@
 ﻿namespace StardropPoolMinigame.Enums
 {
+    /// <summary>
+    /// Computer opponent names
+    /// </summary>
     public enum OpponentType
     {
         Sam = 1,

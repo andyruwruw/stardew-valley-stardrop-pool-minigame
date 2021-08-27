@@ -18,6 +18,8 @@ namespace StardropPoolMinigame.Entities
 
         private bool _isHoverable;
 
+        private bool _isOnFire;
+
         public Portrait(
             Origin origin,
             Vector2 anchor,
@@ -27,7 +29,8 @@ namespace StardropPoolMinigame.Entities
             OpponentType name,
             bool isSilhouette,
             PortraitEmotion emotion = PortraitEmotion.Default,
-            bool isHoverable = false
+            bool isHoverable = false,
+            bool isOnFire = false
         ) : base(
             origin,
             anchor,
@@ -39,14 +42,9 @@ namespace StardropPoolMinigame.Entities
             this._isSilhouette = isSilhouette;
             this._emotion = emotion;
             this._isHoverable = isHoverable;
+            this._isOnFire = isOnFire;
 
             this.SetDrawer(new PortraitDrawer(this));
-        }
-
-        public override void Update()
-        {
-            this.UpdateHoverable();
-            this.UpdateTransitionState();
         }
 
         public override string GetId()
@@ -105,6 +103,16 @@ namespace StardropPoolMinigame.Entities
         public void SetExitingTransition(IFilter transition)
         {
             this._exitingTransition = transition;
+        }
+
+        public bool IsOnFire()
+        {
+            return this._isOnFire;
+        }
+
+        public void SetIsOnFire(bool isOnFire)
+        {
+            this._isOnFire = isOnFire;
         }
     }
 }

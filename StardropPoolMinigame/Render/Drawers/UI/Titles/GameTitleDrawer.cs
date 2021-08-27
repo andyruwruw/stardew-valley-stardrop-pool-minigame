@@ -11,9 +11,9 @@ namespace StardropPoolMinigame.Render.Drawers
         {
         }
 
-        protected override Vector2 GetDestination()
+        protected override Vector2 GetDestination(Vector2? overrideDestination = null)
         {
-            Vector2 destination = this.GetRawDestination();
+            Vector2 destination = overrideDestination == null ? this.GetRawDestination() : (Vector2)overrideDestination;
 
             IList<IFilter> filters = this._entity.GetFilters();
 

@@ -5,8 +5,10 @@ namespace StardropPoolMinigame.Players
 {
     class Gus: ComputerOpponent
     {
+        public static string Name = "Gus";
+
         public Gus() : base(
-            "Gus",
+            Name,
             Multiplayer.GetNewMultiplayerId(),
             SoundConstants.GUS_THEME,
             OpponentConstants.GUS_CONFIDENCE,

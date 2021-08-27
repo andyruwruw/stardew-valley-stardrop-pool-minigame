@@ -8,20 +8,27 @@ namespace StardropPoolMinigame.Entities
 {
     class SubmitButton : Button
     {
+        /// <summary>
+        /// Button with different click sound
+        /// </summary>
         public SubmitButton(
             Origin origin,
             Vector2 anchor,
             float layerDepth,
             IFilter enteringTransition,
             IFilter exitingTransition,
-            Microsoft.Xna.Framework.Rectangle textBounds
+            string text,
+            int maxWidth = int.MaxValue,
+            bool isCentered = true
         ) : base(
             origin,
             anchor,
             layerDepth,
             enteringTransition,
             exitingTransition,
-            textBounds)
+            text,
+            maxWidth,
+            isCentered)
         {
         }
 

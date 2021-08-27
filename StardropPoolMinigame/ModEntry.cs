@@ -13,7 +13,8 @@ namespace StardropPoolMinigame
         /// </summary>
         public override void Entry(IModHelper helper)
         {
-            Helpers.Multiplayer.SetHelper(this.Helper);
+            Helpers.Multiplayer.SetHelper(this.Helper.Multiplayer);
+            Translations.SetHelper(this.Helper.Translation);
             Logger.SetMonitor(this.Monitor);
 
             helper.Events.Input.ButtonPressed += this.OnButtonPressed;

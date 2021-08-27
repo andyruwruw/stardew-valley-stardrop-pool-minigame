@@ -8,9 +8,13 @@ using System.Collections.Generic;
 
 namespace StardropPoolMinigame.Rules
 {
-    class NineBall: IRules
+    class NineBall : RuleSet
     {
-        public Table GenerateTable()
+        public NineBall() : base()
+        {
+        }
+
+        public override Table GenerateTable()
         {
             return new Table(
                 Origin.CenterCenter,
@@ -20,28 +24,28 @@ namespace StardropPoolMinigame.Rules
                 null);
         }
 
-        public QuadTree GenerateInitialBalls()
+        public override QuadTree GenerateInitialBalls()
         {
             QuadTree quadTree = new QuadTree(new Primitives.Rectangle(new Vector2(0, 0), 2, 2));
 
             return quadTree;
         }
 
-        public IList<GameEvent> NoBallHit(IList<Ball> remaining)
+        public override IList<GameEvent> NoBallHit(IList<Ball> remaining)
         {
             IList<GameEvent> events = new List<GameEvent>();
 
             return events;
         }
 
-        public IList<GameEvent> FirstBallHit(IPlayer player, Ball ball)
+        public override IList<GameEvent> FirstBallHit(IPlayer player, Ball ball)
         {
             IList<GameEvent> events = new List<GameEvent>();
 
             return events;
         }
 
-        public IList<GameEvent> BallPocketed(
+        public override IList<GameEvent> BallPocketed(
             IPlayer player,
             IList<Ball> balls,
             Pocket pocket,

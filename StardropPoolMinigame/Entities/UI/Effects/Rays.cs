@@ -1,14 +1,13 @@
 ﻿using Microsoft.Xna.Framework;
 using StardropPoolMinigame.Enums;
 using StardropPoolMinigame.Render;
-using StardropPoolMinigame.Render.Drawers;
 using StardropPoolMinigame.Render.Filters;
 
-namespace StardropPoolMinigame.Entities
+namespace StardropPoolMinigame.Entities.UI.Background
 {
-    class GameTitle : EntityStatic
+    class Rays : EntityStatic
     {
-        public GameTitle(
+        public Rays(
             Origin origin,
             Vector2 anchor,
             float layerDepth,
@@ -21,22 +20,16 @@ namespace StardropPoolMinigame.Entities
             enteringTransition,
             exitingTransition)
         {
-            this.SetDrawer(new GameTitleDrawer(this));
-        }
-
-        public override string GetId()
-        {
-            return $"game-title-{this._id}";
-        }
-
-        public override float GetTotalWidth()
-        {
-            return Textures.TITLE_GAME_BOUNDS.Width;
         }
 
         public override float GetTotalHeight()
         {
-            return Textures.TITLE_GAME_BOUNDS.Height;
+            return Textures.EFFECTS_SHINE_BOUNDS.Height;
+        }
+
+        public override float GetTotalWidth()
+        {
+            return Textures.EFFECTS_SHINE_BOUNDS.Width;
         }
     }
 }

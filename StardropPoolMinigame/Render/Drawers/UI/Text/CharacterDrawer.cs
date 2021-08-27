@@ -3,15 +3,15 @@ using StardropPoolMinigame.Entities;
 
 namespace StardropPoolMinigame.Render.Drawers
 {
-    class TextDrawer : Drawer
+    class CharacterDrawer : Drawer
     {
-        public TextDrawer(Text text) : base(text)
+        public CharacterDrawer(Character character) : base(character)
         {
         }
 
         protected override Rectangle GetRawSource()
         {
-            return ((Text)this._entity).GetTextBounds();
+            return ((Character)this._entity).GetCharacterBounds();
         }
     }
 }

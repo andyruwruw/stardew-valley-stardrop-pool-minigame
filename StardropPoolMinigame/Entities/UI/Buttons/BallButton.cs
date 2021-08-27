@@ -11,22 +11,21 @@ namespace StardropPoolMinigame.Entities
     {
         private Ball _ball;
 
-        private Rectangle _textBounds;
+        private Text _text;
 
         /// <summary>
         /// Creates button with rotating ball on hover.
         /// </summary>
-        /// <param name="anchor">Top left anchor</param>
-        /// <param name="textBounds">Bounds for text texture</param>
-        /// <param name="ballNumber">Ball to be displayed</param>
         public BallButton(
             Origin origin,
             Vector2 anchor,
             float layerDepth,
             IFilter enteringTransition,
             IFilter exitingTransition,
-            Rectangle textBounds,
-            int ballNumber
+            string text,
+            int maxWidth = int.MaxValue,
+            bool isCentered = false,
+            int ballNumber = 1
         ) : base(
             origin,
             anchor,
@@ -34,9 +33,19 @@ namespace StardropPoolMinigame.Entities
             enteringTransition,
             exitingTransition)
         {
-            this._textBounds = textBounds;
+            this._text = new Text(
+                origin,
+                new Vector2(anchor.X + (GameConstants.BALL_RADIUS * 2) + RenderConstants.BALL_BUTTON_INNER_PADDING, anchor.Y),
+                layerDepth,
+                enteringTransition,
+                exitingTransition,
+                text,
+                maxWidth,
+                isCentered,
+                true);
+
             this._ball = new Ball(
-                new Vector2(this.GetTopLeft().X + GameConstants.BALL_RADIUS, this.GetTopLeft().Y + (textBounds.Height / 2)),
+                new Vector2(this.GetTopLeft().X + GameConstants.BALL_RADIUS, this.GetTopLeft().Y + (this._text.GetTotalHeight() / 2)),
                 layerDepth,
                 enteringTransition,
                 exitingTransition,
@@ -48,8 +57,7 @@ namespace StardropPoolMinigame.Entities
 
         public override void Update()
         {
-            this.UpdateHoverable();
-            this.UpdateTransitionState();
+            base.Update();
 
             if (this.IsHovered())
             {
@@ -64,12 +72,12 @@ namespace StardropPoolMinigame.Entities
 
         public override float GetTotalWidth()
         {
-            return (int)((GameConstants.BALL_RADIUS * 2) + RenderConstants.BALL_BUTTON_INNER_PADDING + this._textBounds.Width);
+            return (int)((GameConstants.BALL_RADIUS * 2) + RenderConstants.BALL_BUTTON_INNER_PADDING + this._text.GetTotalWidth());
         }
 
         public override float GetTotalHeight()
         {
-            return this._textBounds.Height;
+            return this._text.GetTotalHeight();
         }
 
         public override void ClickCallback()
@@ -106,9 +114,9 @@ namespace StardropPoolMinigame.Entities
             return this._ball;
         }
 
-        public Rectangle GetTextBounds()
+        public Text GetTextBounds()
         {
-            return this._textBounds;
+            return this._text;
         }
     }
 }

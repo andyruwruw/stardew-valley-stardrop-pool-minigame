@@ -5,6 +5,11 @@
       "Action": "Load",
       "Target": "Minigames/stardropPool",
       "FromFile": "Assets/Tilesheets/stardropPool.png"
+    },
+    { 
+      "Action": "Load",
+      "Target": "Minigames/stardropPool",
+      "FromFile": "Assets/Tilesheets/stardropPoolFont.png"
     }
   ]
 }

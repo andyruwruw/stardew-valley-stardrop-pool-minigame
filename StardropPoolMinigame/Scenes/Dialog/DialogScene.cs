@@ -2,8 +2,11 @@
 {
     class DialogScene: Scene
     {
-        public DialogScene(): base()
+        IScene _nextScene;
+
+        public DialogScene(IScene nextScene): base()
         {
+            this._nextScene = nextScene;
         }
 
         public override string GetKey()

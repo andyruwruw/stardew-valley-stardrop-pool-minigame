@@ -71,8 +71,8 @@ namespace StardropPoolMinigame.Entities
         public override void Update()
         {
             this.UpdateVectors();
-            this.UpdateHoverable();
-            this.UpdateTransitionState();
+
+            base.Update();
         }
 
         public override float GetTotalWidth()

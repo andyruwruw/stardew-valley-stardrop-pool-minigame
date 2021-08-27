@@ -17,18 +17,27 @@ namespace StardropPoolMinigame.Render.Drawers
             this._entity = entity;
         }
 
-        public virtual void Draw(SpriteBatch batch)
+        public virtual void Draw(
+            SpriteBatch batch,
+            Vector2? overrideDestination = null,
+            Rectangle? overrideSource = null,
+            Color? overrideColor = null,
+            float? overrideRotation = null,
+            Vector2? overrideOrigin = null,
+            float? overrideScale = null,
+            SpriteEffects? overrideEffects = null,
+            float? overrideLayerDepth = null)
         {
             batch.Draw(
                 this.GetTileSheet(),
-                this.GetDestination(),
-                this.GetSource(),
-                this.GetColor(),
-                this.GetRotation(),
-                this.GetOrigin(),
-                this.GetScale(),
-                this.GetEffects(),
-                this.GetLayerDepth());
+                this.GetDestination(overrideDestination),
+                this.GetSource(overrideSource),
+                this.GetColor(overrideColor),
+                this.GetRotation(overrideRotation),
+                this.GetOrigin(overrideOrigin),
+                this.GetScale(overrideScale),
+                this.GetEffects(overrideEffects),
+                this.GetLayerDepth(overrideLayerDepth));
         }
 
         public virtual bool ShouldDraw()
@@ -36,10 +45,9 @@ namespace StardropPoolMinigame.Render.Drawers
             return this._entity.GetTransitionState() != TransitionState.Dead;
         }
 
-        protected virtual Vector2 GetDestination()
+        protected virtual Vector2 GetDestination(Vector2? overrideDestination = null)
         {
-
-            Vector2 destination = this.GetRawDestination();
+            Vector2 destination = overrideDestination == null ? this.GetRawDestination() : (Vector2)overrideDestination;
 
             IList<IFilter> filters = this._entity.GetFilters();
 
@@ -51,9 +59,9 @@ namespace StardropPoolMinigame.Render.Drawers
             return destination;
         }
 
-        protected Rectangle GetSource()
+        protected Rectangle GetSource(Rectangle? overrideSource = null)
         {
-            Rectangle source = this.GetRawSource();
+            Rectangle source = overrideSource == null ? this.GetRawSource() : (Rectangle)overrideSource;
 
             IList<IFilter> filters = this._entity.GetFilters();
 
@@ -65,9 +73,9 @@ namespace StardropPoolMinigame.Render.Drawers
             return source;
         }
 
-        protected Color GetColor()
+        protected Color GetColor(Color? overrideColor = null)
         {
-            Color color = this.GetRawColor();
+            Color color = overrideColor == null ? this.GetRawColor() : (Color)overrideColor;
 
             IList<IFilter> filters = this._entity.GetFilters();
 
@@ -79,9 +87,9 @@ namespace StardropPoolMinigame.Render.Drawers
             return color;
         }
 
-        protected float GetRotation()
+        protected float GetRotation(float? overrideRotation = null)
         {
-            float rotation = this.GetRawRotation();
+            float rotation = overrideRotation == null ? this.GetRawRotation() : (float)overrideRotation;
 
             IList<IFilter> filters = this._entity.GetFilters();
 
@@ -93,9 +101,9 @@ namespace StardropPoolMinigame.Render.Drawers
             return rotation;
         }
 
-        protected Vector2 GetOrigin()
+        protected Vector2 GetOrigin(Vector2? overrideOrigin = null)
         {
-            Vector2 origin = this.GetRawOrigin();
+            Vector2 origin = overrideOrigin == null ? this.GetRawOrigin(): (Vector2)overrideOrigin;
 
             IList<IFilter> filters = this._entity.GetFilters();
 
@@ -107,9 +115,9 @@ namespace StardropPoolMinigame.Render.Drawers
             return origin;
         }
 
-        protected float GetScale()
+        protected float GetScale(float? overrideScale = null)
         {
-            float scale = this.GetRawScale();
+            float scale = overrideScale == null ? this.GetRawScale() : (float)overrideScale;
 
             IList<IFilter> filters = this._entity.GetFilters();
 
@@ -121,9 +129,9 @@ namespace StardropPoolMinigame.Render.Drawers
             return scale;
         }
 
-        protected SpriteEffects GetEffects()
+        protected SpriteEffects GetEffects(SpriteEffects? overrideEffects = null)
         {
-            SpriteEffects effects = this.GetRawEffects();
+            SpriteEffects effects = overrideEffects == null ? this.GetRawEffects() : (SpriteEffects)overrideEffects;
 
             IList<IFilter> filters = this._entity.GetFilters();
 
@@ -135,9 +143,9 @@ namespace StardropPoolMinigame.Render.Drawers
             return effects;
         }
 
-        protected float GetLayerDepth()
+        protected float GetLayerDepth(float? overrideLayerDepth = null)
         {
-            float layerDepth = this.GetRawLayerDepth();
+            float layerDepth = overrideLayerDepth == null ? this.GetRawLayerDepth() : (float)overrideLayerDepth;
 
             IList<IFilter> filters = this._entity.GetFilters();
 

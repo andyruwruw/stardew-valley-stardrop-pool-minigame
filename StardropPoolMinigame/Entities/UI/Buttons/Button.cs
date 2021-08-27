@@ -9,7 +9,7 @@ namespace StardropPoolMinigame.Entities
 {
     class Button : EntityHoverable
     {
-        private Microsoft.Xna.Framework.Rectangle _textBounds;
+        private Text _text;
 
         public Button(
             Origin origin,
@@ -17,7 +17,9 @@ namespace StardropPoolMinigame.Entities
             float layerDepth,
             IFilter enteringTransition,
             IFilter exitingTransition,
-            Microsoft.Xna.Framework.Rectangle textBounds
+            string text,
+            int maxWidth = int.MaxValue,
+            bool isCentered = true
         ) : base(
             origin,
             anchor,
@@ -25,15 +27,18 @@ namespace StardropPoolMinigame.Entities
             enteringTransition,
             exitingTransition)
         {
-            this._textBounds = textBounds;
+            this._text = new Text(
+                origin,
+                anchor,
+                layerDepth,
+                enteringTransition,
+                exitingTransition,
+                text,
+                maxWidth,
+                isCentered,
+                true);
 
             this.SetDrawer(new ButtonDrawer(this));
-        }
-
-        public override void Update()
-        {
-            this.UpdateHoverable();
-            this.UpdateTransitionState();
         }
 
         public override string GetId()
@@ -43,12 +48,12 @@ namespace StardropPoolMinigame.Entities
 
         public override float GetTotalWidth()
         {
-            return this._textBounds.Width;
+            return this._text.GetTotalWidth();
         }
 
         public override float GetTotalHeight()
         {
-            return this._textBounds.Height;
+            return this._text.GetTotalHeight();
         }
 
         public override void ClickCallback()
@@ -61,9 +66,9 @@ namespace StardropPoolMinigame.Entities
             Sound.PlaySound(SoundConstants.BUTTON_HOVER);
         }
 
-        public Microsoft.Xna.Framework.Rectangle GetTextBounds()
+        public Text GetText()
         {
-            return this._textBounds;
+            return this._text;
         }
     }
 }

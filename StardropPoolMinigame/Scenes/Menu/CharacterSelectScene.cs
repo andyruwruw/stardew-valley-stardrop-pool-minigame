@@ -5,26 +5,61 @@ using StardropPoolMinigame.Enums;
 using StardropPoolMinigame.Helpers;
 using StardropPoolMinigame.Players;
 using StardropPoolMinigame.Render;
+using StardropPoolMinigame.Rules;
 using System.Collections.Generic;
 
 namespace StardropPoolMinigame.Scenes
 {
     class CharacterSelectScene : Scene
     {
+        /// <summary>
+        /// Clickable portrait of Sam
+        /// </summary>
         Portrait _samPortrait;
+
+        /// <summary>
+        /// Clickable portrait of Sebastian
+        /// </summary>
         Portrait _sebastianPortrait;
+
+        /// <summary>
+        /// Clickable portrait of Abigail
+        /// </summary>
         Portrait _abigailPortrait;
+
+        /// <summary>
+        /// Clickable portrait of Gus
+        /// </summary>
         Portrait _gusPortrait;
 
+        /// <summary>
+        /// Accessable list of clickable portraits
+        /// </summary>
         IList<Portrait> _portraits;
 
+        /// <summary>
+        /// Arrow depicting selected opponent
+        /// </summary>
         Cursor _cursor;
+
+        /// <summary>
+        /// Name of hovered or selected opponent
+        /// </summary>
         Text _selectedName;
 
+        /// <summary>
+        /// Submit button to create game
+        /// </summary>
         SubmitButton _challengeButton;
 
+        /// <summary>
+        /// Name of selected opponent
+        /// </summary>
         OpponentType _opponentName;
 
+        /// <summary>
+        /// Class of selected opponent
+        /// </summary>
         ComputerOpponent _opponent;
 
         public CharacterSelectScene() : base()
@@ -99,9 +134,10 @@ namespace StardropPoolMinigame.Scenes
                 }
 
                 portrait.SetTransitionState(TransitionState.Exiting, true);
-
-                this._newScene = new DialogScene();
             }
+
+            IScene gameScene = new GameScene(Player.GetMainPlayer(), this._opponent, RuleSet.GetDefaultRules());
+            this._newScene = new DialogScene(gameScene);
         }
 
         public override void ReceiveRightClick()

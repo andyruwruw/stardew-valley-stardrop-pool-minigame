@@ -5,8 +5,10 @@ namespace StardropPoolMinigame.Players
 {
     class Sam: ComputerOpponent
     {
+        public static string Name = "Sam";
+
         public Sam() : base(
-            "Sam",
+            Name,
             Multiplayer.GetNewMultiplayerId(),
             SoundConstants.SAM_THEME,
             OpponentConstants.SAM_CONFIDENCE,

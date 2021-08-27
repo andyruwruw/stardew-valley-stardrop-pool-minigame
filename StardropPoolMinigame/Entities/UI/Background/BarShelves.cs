@@ -24,11 +24,6 @@ namespace StardropPoolMinigame.Entities
             this.SetDrawer(new BarShelvesDrawer(this));
         }
 
-        public override void Update()
-        {
-            this.UpdateTransitionState();
-        }
-
         public override string GetId()
         {
             return $"bar-shelves-background-{this._id}";

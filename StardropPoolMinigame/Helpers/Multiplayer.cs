@@ -7,13 +7,13 @@ namespace StardropPoolMinigame.Helpers
 {
     class Multiplayer
     {
-        public static IModHelper Helper;
+        public static IMultiplayerHelper Helper;
 
         public static IList<IMultiplayerPeer> PlayablePeers;
 
         public static IList<IMultiplayerPeer> UnplayablePeers;
 
-        public static void SetHelper(IModHelper helper)
+        public static void SetHelper(IMultiplayerHelper helper)
         {
             Helper = helper;
         }
@@ -25,7 +25,7 @@ namespace StardropPoolMinigame.Helpers
 
             if (Game1.IsMultiplayer)
             {
-                foreach (IMultiplayerPeer peer in Helper.Multiplayer.GetConnectedPlayers())
+                foreach (IMultiplayerPeer peer in Helper.GetConnectedPlayers())
                 {
                     bool added = false;
 
@@ -54,7 +54,7 @@ namespace StardropPoolMinigame.Helpers
 
         public static void Send(string messageType, IModMessage message)
         {
-            Helper.Multiplayer.SendMessage(
+            Helper.SendMessage(
                 message,
                 messageType,
                 modIDs: new[] { "andyruwruw.StardropPoolMinigame" });
@@ -62,7 +62,7 @@ namespace StardropPoolMinigame.Helpers
 
         public static long GetNewMultiplayerId()
         {
-            return Helper.Multiplayer.GetNewID();
+            return Helper.GetNewID();
         }
     }
 }

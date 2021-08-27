@@ -24,11 +24,6 @@ namespace StardropPoolMinigame.Entities
             this.SetDrawer(new TableDrawer(this));
         }
 
-        public override void Update()
-        {
-            this.UpdateTransitionState();
-        }
-
         public override string GetId()
         {
             return $"table-{this._id}";

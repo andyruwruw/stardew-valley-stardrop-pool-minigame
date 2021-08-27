@@ -11,14 +11,11 @@
 </p>
 
 <p align="center">
-  Who else gets FMO friday evenings at the Stardrop Saloon
+  Who else gets FOMO friday evenings at the Stardrop Saloon
 </p>
 
 # Stardew Valley Mod: Stardrop Pool Minigame
 
 Turns the pool table into the saloon into a fully functional minigame!
 
-Challenge Sam or Sebastian to a game of 8-Ball. Win, and more difficult oppenents will challenge you.
-
-
-Play a friend or make your way up the NPC in increasing difficulty.
+Play a friend or challenge your way through NPC's in increasing difficulty. Challenge Sam or Sebastian to a game of 8-Ball. Win, and more difficult oppenents will challenge you.

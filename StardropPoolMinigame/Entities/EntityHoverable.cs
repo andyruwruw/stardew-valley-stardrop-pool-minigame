@@ -25,6 +25,12 @@ namespace StardropPoolMinigame.Entities
             this._isHovered = false;
         }
 
+        public override void Update()
+        {
+            this.UpdateHoverable();
+            base.Update();
+        }
+
         public bool IsHovered()
         {
             return this._isHovered;

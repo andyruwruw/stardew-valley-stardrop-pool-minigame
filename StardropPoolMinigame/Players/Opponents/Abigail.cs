@@ -5,8 +5,10 @@ namespace StardropPoolMinigame.Players
 {
     class Abigail: ComputerOpponent
     {
+        public static string Name = "Abigail";
+
         public Abigail() : base(
-            "Abigail",
+            Name,
             Multiplayer.GetNewMultiplayerId(),
             SoundConstants.ABIGAIL_THEME,
             OpponentConstants.ABIGAIL_CONFIDENCE,

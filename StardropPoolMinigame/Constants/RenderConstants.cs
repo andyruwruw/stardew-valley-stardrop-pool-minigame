@@ -125,6 +125,14 @@ namespace StardropPoolMinigame.Constants
             return new Vector2(point.X - AdjustedScreenWidthMargin(), point.Y - AdjustedScreenHeightMargin());
         }
 
+        public static int FONT_CHARACTER_HEIGHT = 9;
+
+        public static int FONT_SPACE_BETWEEN_CHARACTERS = 1;
+
+        public static int FONT_SPACE_WIDTH = 5;
+
+        public static int FONT_LINE_SPACING = 3;
+
         public static float BALL_MARGIN_LEFT = 3f;
 
         public static float BALL_MARGIN_TOP = 3f;

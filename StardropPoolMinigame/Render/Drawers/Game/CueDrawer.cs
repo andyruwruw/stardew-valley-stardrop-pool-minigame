@@ -1,5 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using StardropPoolMinigame.Entities;
 
 namespace StardropPoolMinigame.Render.Drawers
@@ -8,11 +7,6 @@ namespace StardropPoolMinigame.Render.Drawers
     {
         public CueDrawer(Cue cue) : base(cue)
         {
-        }
-
-        public override void Draw(SpriteBatch batch)
-        {
-
         }
 
         protected override Rectangle GetRawSource()

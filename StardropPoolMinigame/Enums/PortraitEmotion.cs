@@ -1,5 +1,8 @@
 ﻿namespace StardropPoolMinigame.Enums
 {
+    /// <summary>
+    /// Emotions depicted by computer opponent portraits
+    /// </summary>
     public enum PortraitEmotion
     {
         Default = 0,

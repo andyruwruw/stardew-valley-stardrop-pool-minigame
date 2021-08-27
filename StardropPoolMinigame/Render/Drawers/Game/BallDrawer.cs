@@ -12,12 +12,51 @@ namespace StardropPoolMinigame.Render.Drawers
         {
         }
 
-        public override void Draw(SpriteBatch batch)
+        public override void Draw(
+            SpriteBatch batch,
+            Vector2? overrideDestination = null,
+            Rectangle? overrideSource = null,
+            Color? overrideColor = null,
+            float? overrideRotation = null,
+            Vector2? overrideOrigin = null,
+            float? overrideScale = null,
+            SpriteEffects? overrideEffects = null,
+            float? overrideLayerDepth = null)
         {
-            this.DrawBase(batch);
-            this.DrawCore(batch);
-            this.DrawStripes(batch);
-            this.DrawShadows(batch);
+            this.DrawBase(
+                batch,
+                overrideDestination,
+                overrideSource,
+                overrideColor,
+                overrideRotation,
+                overrideOrigin,
+                overrideScale,
+                overrideEffects,
+                overrideLayerDepth);
+            this.DrawCore(
+                batch,
+                overrideDestination,
+                overrideRotation,
+                overrideOrigin,
+                overrideScale,
+                overrideEffects,
+                overrideLayerDepth);
+            this.DrawStripes(
+                batch,
+                overrideDestination,
+                overrideRotation,
+                overrideOrigin,
+                overrideScale,
+                overrideEffects,
+                overrideLayerDepth);
+            this.DrawShadows(
+                batch,
+                overrideDestination,
+                overrideRotation,
+                overrideOrigin,
+                overrideScale,
+                overrideEffects,
+                overrideLayerDepth);
         }
 
         protected override Vector2 GetRawDestination()
@@ -51,63 +90,93 @@ namespace StardropPoolMinigame.Render.Drawers
             }
         }
 
-        private void DrawBase(SpriteBatch batch)
+        private void DrawBase(
+            SpriteBatch batch,
+            Vector2? overrideDestination = null,
+            Rectangle? overrideSource = null,
+            Color? overrideColor = null,
+            float? overrideRotation = null,
+            Vector2? overrideOrigin = null,
+            float? overrideScale = null,
+            SpriteEffects? overrideEffects = null,
+            float? overrideLayerDepth = null)
         {
             batch.Draw(
                 this.GetTileSheet(),
-                this.GetDestination(),
-                this.GetSource(),
-                this.GetColor(),
-                this.GetRotation(),
-                this.GetOrigin(),
-                this.GetScale(),
-                this.GetEffects(),
-                this.GetLayerDepth());
+                this.GetDestination(overrideDestination),
+                this.GetSource(overrideSource),
+                this.GetColor(overrideColor),
+                this.GetRotation(overrideRotation),
+                this.GetOrigin(overrideOrigin),
+                this.GetScale(overrideScale),
+                this.GetEffects(overrideEffects),
+                this.GetLayerDepth(overrideLayerDepth));
         }
 
-        private void DrawCore(SpriteBatch batch)
+        private void DrawCore(
+            SpriteBatch batch,
+            Vector2? overrideDestination = null,
+            float? overrideRotation = null,
+            Vector2? overrideOrigin = null,
+            float? overrideScale = null,
+            SpriteEffects? overrideEffects = null,
+            float? overrideLayerDepth = null)
         {
             batch.Draw(
                 this.GetTileSheet(),
-                this.GetDestination(),
+                this.GetDestination(overrideDestination),
                 this.GetCoreSource(),
                 this.GetColor(),
-                this.GetRotation(),
-                this.GetOrigin(),
-                this.GetScale(),
-                this.GetEffects(),
-                this.GetLayerDepth() + 0.0001f);
+                this.GetRotation(overrideRotation),
+                this.GetOrigin(overrideOrigin),
+                this.GetScale(overrideScale),
+                this.GetEffects(overrideEffects),
+                this.GetLayerDepth(overrideLayerDepth) + 0.0001f);
         }
 
-        private void DrawStripes(SpriteBatch batch)
+        private void DrawStripes(
+            SpriteBatch batch,
+            Vector2? overrideDestination = null,
+            float? overrideRotation = null,
+            Vector2? overrideOrigin = null,
+            float? overrideScale = null,
+            SpriteEffects? overrideEffects = null,
+            float? overrideLayerDepth = null)
         {
             if (((Ball)this._entity).GetBallType() == BallType.Stripped)
             {
                 batch.Draw(
                     this.GetTileSheet(),
-                    this.GetDestination(),
+                    this.GetDestination(overrideDestination),
                     this.GetStripeSource(),
                     this.GetColor(),
-                    this.GetRotation(),
-                    this.GetOrigin(),
-                    this.GetScale(),
-                    this.GetEffects(),
-                    this.GetLayerDepth() + 0.0001f);
+                    this.GetRotation(overrideRotation),
+                    this.GetOrigin(overrideOrigin),
+                    this.GetScale(overrideScale),
+                    this.GetEffects(overrideEffects),
+                    this.GetLayerDepth(overrideLayerDepth) + 0.0001f);
             }
         }
 
-        private void DrawShadows(SpriteBatch batch)
+        private void DrawShadows(
+            SpriteBatch batch,
+            Vector2? overrideDestination = null,
+            float? overrideRotation = null,
+            Vector2? overrideOrigin = null,
+            float? overrideScale = null,
+            SpriteEffects? overrideEffects = null,
+            float? overrideLayerDepth = null)
         {
             batch.Draw(
                 this.GetTileSheet(),
-                this.GetDestination(),
+                this.GetDestination(overrideDestination),
                 Textures.BALL_SHADOW,
                 this.GetColor(),
-                this.GetRotation(),
-                this.GetOrigin(),
-                this.GetScale(),
-                this.GetEffects(),
-                this.GetLayerDepth() + 0.0002f);
+                this.GetRotation(overrideRotation),
+                this.GetOrigin(overrideOrigin),
+                this.GetScale(overrideScale),
+                this.GetEffects(overrideEffects),
+                this.GetLayerDepth(overrideLayerDepth) + 0.0002f);
         }
 
         private Rectangle GetCoreSource()
