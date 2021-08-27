@@ -9,6 +9,8 @@ namespace StardropPoolMinigame.Render.Filters
 
         protected int _delay;
 
+        protected int _postDelay;
+
         protected TransitionState _type;
 
         protected bool _keyframeOpacity;
@@ -33,6 +35,7 @@ namespace StardropPoolMinigame.Render.Filters
             this._keyframeOpacity = keyframeOpacity;
             this._type = type;
             this._delay = delay;
+            this._postDelay = 0;
             this._delayOnce = delayOnce;
             this._key = null;
             this._isFinished = false;
@@ -91,6 +94,11 @@ namespace StardropPoolMinigame.Render.Filters
             return this._isFinished;
         }
 
+        public void SetPostDelay(int delay)
+        {
+            this._postDelay = delay;
+        }
+
         protected float EaseOut(float time, float startValue, float change, float duration)
         {
             time /= duration / 2;
@@ -110,7 +118,7 @@ namespace StardropPoolMinigame.Render.Filters
                 return 0;
             }
 
-            return this._delay;
+            return this._delay  + this._postDelay;
         }
     }
 }

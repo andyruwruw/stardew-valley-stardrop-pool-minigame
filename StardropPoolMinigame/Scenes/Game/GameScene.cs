@@ -60,6 +60,11 @@ namespace StardropPoolMinigame.Scenes
             return this._turn;
         }
 
+        public IList<IPlayer> GetPlayers()
+        {
+            return this._players;
+        }
+
         protected override void AddEntities()
         {
             // Background
