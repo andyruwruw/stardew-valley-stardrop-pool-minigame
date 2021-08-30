@@ -11,23 +11,25 @@ namespace StardropPoolMinigame.Entities
 
         private Color _color;
 
+        private bool _isRawCoords;
+
         public Solid(
-            Origin origin,
-            Vector2 anchor,
+            Primitives.Rectangle destination,
             float layerDepth,
             IFilter enteringTransition,
             IFilter exitingTransition,
-            Primitives.Rectangle destination,
-            Color color
+            Color color,
+            bool isRawCoords = false
         ) : base(
-            origin,
-            anchor,
+            Origin.TopLeft,
+            destination.GetNorthWestCorner(),
             layerDepth,
             enteringTransition,
             exitingTransition)
         {
             this._destination = destination;
             this._color = color;
+            this._isRawCoords = isRawCoords;
 
             this.SetDrawer(new SolidDrawer(this));
         }
@@ -52,9 +54,19 @@ namespace StardropPoolMinigame.Entities
             return this._destination.GetXnaRectangle();
         }
 
+        public Rectangle GetRawXnaDestination()
+        {
+            return this._destination.GetRawXnaRectangle();
+        }
+
         public Color GetColor()
         {
             return this._color;
+        }
+
+        public bool IsRawCoords()
+        {
+            return this._isRawCoords;
         }
     }
 }

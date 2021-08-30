@@ -26,12 +26,12 @@ namespace StardropPoolMinigame.Entities
 
         public override float GetTotalHeight()
         {
-            return Textures.CURSOR_BOUNDS.Height;
+            return Textures.Cursor.DEFAULT.Height;
         }
 
         public override float GetTotalWidth()
         {
-            return Textures.CURSOR_BOUNDS.Width;
+            return Textures.Cursor.DEFAULT.Width;
         }
     }
 }

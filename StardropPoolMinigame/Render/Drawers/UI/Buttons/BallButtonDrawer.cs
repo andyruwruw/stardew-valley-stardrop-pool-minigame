@@ -25,7 +25,7 @@ namespace StardropPoolMinigame.Render.Drawers
                 batch,
                 overrideDestination,
                 overrideSource,
-                overrideColor,
+                this.GetRawColor(),
                 overrideRotation,
                 overrideOrigin,
                 overrideScale,
@@ -38,14 +38,14 @@ namespace StardropPoolMinigame.Render.Drawers
 
         protected override Rectangle GetRawSource()
         {
-            return Textures.LOWERCASE_A_BOUNDS;
+            return Textures.Characters.LOWERCASE_A;
         }
 
         protected override Color GetRawColor()
         {
             if (((EntityHoverable)this._entity).IsHovered())
             {
-                return Textures.TEXT_HOVER_COLOR;
+                return Textures.Color.Solid.HOVER_ACCENT;
             }
             return Color.White;
         }

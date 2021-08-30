@@ -29,7 +29,7 @@ namespace StardropPoolMinigame.Render.Drawers
             float? overrideLayerDepth = null)
         {
             batch.Draw(
-                this.GetTileSheet(),
+                this.GetTileset(),
                 this.GetDestination(overrideDestination),
                 this.GetSource(overrideSource),
                 this.GetColor(overrideColor),
@@ -117,7 +117,7 @@ namespace StardropPoolMinigame.Render.Drawers
 
         protected float GetScale(float? overrideScale = null)
         {
-            float scale = overrideScale == null ? this.GetRawScale() : (float)overrideScale;
+            float scale = overrideScale == null ? this.GetRawScale() : (float)overrideScale * RenderConstants.TileScale();
 
             IList<IFilter> filters = this._entity.GetFilters();
 
@@ -172,9 +172,9 @@ namespace StardropPoolMinigame.Render.Drawers
             return this._entity.GetExitingTransition();
         }
 
-        protected virtual Texture2D GetTileSheet()
+        protected virtual Texture2D GetTileset()
         {
-            return Textures.TileSheet;
+            return Textures.Tileset.Default;
         }
 
         protected virtual Vector2 GetRawDestination()

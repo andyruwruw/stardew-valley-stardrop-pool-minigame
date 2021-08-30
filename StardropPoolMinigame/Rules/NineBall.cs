@@ -18,7 +18,7 @@ namespace StardropPoolMinigame.Rules
         {
             return new Table(
                 Origin.CenterCenter,
-                new Vector2(RenderConstants.MINIGAME_SCREEN_WIDTH / 2, RenderConstants.MINIGAME_SCREEN_HEIGHT / 2),
+                new Vector2(RenderConstants.MinigameScreen.WIDTH / 2, RenderConstants.MinigameScreen.HEIGHT / 2),
                 0.0030f,
                 null,
                 null);

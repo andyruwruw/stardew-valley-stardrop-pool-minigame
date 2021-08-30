@@ -1,13 +1,15 @@
 ﻿using Microsoft.Xna.Framework;
 using StardropPoolMinigame.Enums;
 using StardropPoolMinigame.Render;
+using StardropPoolMinigame.Render.Drawers;
 using StardropPoolMinigame.Render.Filters;
+using System.Collections.Generic;
 
-namespace StardropPoolMinigame.Entities.UI.Background
+namespace StardropPoolMinigame.Entities
 {
-    class Rays : EntityStatic
+    class PortraitRays : EntityStatic
     {
-        public Rays(
+        public PortraitRays(
             Origin origin,
             Vector2 anchor,
             float layerDepth,
@@ -20,16 +22,23 @@ namespace StardropPoolMinigame.Entities.UI.Background
             enteringTransition,
             exitingTransition)
         {
+            this.SetDrawer(new PortraitRaysDrawer(this));
         }
 
         public override float GetTotalHeight()
         {
-            return Textures.EFFECTS_SHINE_BOUNDS.Height;
+            return Textures.PORTRAIT_RAYS.Height;
         }
 
         public override float GetTotalWidth()
         {
-            return Textures.EFFECTS_SHINE_BOUNDS.Width;
+            return Textures.PORTRAIT_RAYS.Width;
+        }
+
+        protected override void InicializeFilters()
+        {
+            this._filters = new List<IFilter>();
+            this._filters.Add(new Rotate($"{this.GetId()}-animation", 400));
         }
     }
 }

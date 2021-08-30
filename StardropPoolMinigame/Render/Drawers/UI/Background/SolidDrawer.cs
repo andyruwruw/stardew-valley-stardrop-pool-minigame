@@ -23,8 +23,8 @@ namespace StardropPoolMinigame.Render.Drawers
             float? overrideLayerDepth = null)
         {
             batch.Draw(
-                this.GetTileSheet(),
-                ((Solid)this._entity).GetXnaDestination(),
+                this.GetTileset(),
+                ((Solid)this._entity).IsRawCoords() ? ((Solid)this._entity).GetXnaDestination() : ((Solid)this._entity).GetRawXnaDestination(),
                 this.GetSource(overrideSource),
                 this.GetColor(overrideColor),
                 this.GetRotation(overrideRotation),
@@ -33,7 +33,7 @@ namespace StardropPoolMinigame.Render.Drawers
                 this.GetLayerDepth(overrideLayerDepth));
         }
 
-        protected override Texture2D GetTileSheet()
+        protected override Texture2D GetTileset()
         {
             return Game1.staminaRect;
         }

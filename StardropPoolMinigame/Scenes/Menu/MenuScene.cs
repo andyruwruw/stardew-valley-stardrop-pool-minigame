@@ -19,7 +19,7 @@ namespace StardropPoolMinigame.Scenes
 
         public MenuScene() : base()
         {
-            Sound.PlayMusic(SoundConstants.GAME_THEME);
+            Sound.PlayMusic(SoundConstants.Theme.GAME);
         }
 
         public override void Update()
@@ -67,92 +67,92 @@ namespace StardropPoolMinigame.Scenes
                 null,
                 null));
 
-            float centerX = RenderConstants.MINIGAME_SCREEN_WIDTH / 2;
-            float portraitTopMargin = Textures.BACKGROUND_BAR_SHELVES_BOUNDS.Height - Textures.PORTRAIT_SAM_DEFAULT_BOUNDS.Height;
-            float portraitSeparation = Textures.PORTRAIT_SAM_DEFAULT_BOUNDS.Width;
+            float centerX = RenderConstants.MinigameScreen.WIDTH / 2;
+            float portraitTopMargin = Textures.BAR_SHELVES.Height - Textures.Portrait.Sam.DEFAULT.Height;
+            float portraitSeparation = Textures.Portrait.Sam.DEFAULT.Width;
 
             this._entities.Add(new Portrait(
                 Origin.TopLeft,
                 new Vector2(centerX - (portraitSeparation * 2), portraitTopMargin),
                 0.0011f,
-                TransitionConstants.MainMenuScenePortraitEnteringTransition(),
-                TransitionConstants.MainMenuSceneActivePortraitExitingTransition(),
+                TransitionConstants.MainMenu.Portrait.Entering(),
+                TransitionConstants.MainMenu.Portrait.Exiting(),
                 OpponentType.Sam,
-                true));
+                isSilhouette: true));
 
             this._entities.Add(new Portrait(
                 Origin.TopLeft,
                 new Vector2(centerX - portraitSeparation, portraitTopMargin),
                 0.0011f,
-                TransitionConstants.MainMenuScenePortraitEnteringTransition(),
-                null,
+                TransitionConstants.MainMenu.Portrait.Entering(),
+                TransitionConstants.MainMenu.Portrait.Exiting(),
                 OpponentType.Sebastian,
-                true));
+                isSilhouette: true));
 
             this._entities.Add(new Portrait(
                 Origin.TopLeft,
                 new Vector2(centerX, portraitTopMargin),
                 0.0011f,
-                TransitionConstants.MainMenuScenePortraitEnteringTransition(),
-                null,
+                TransitionConstants.MainMenu.Portrait.Entering(),
+                TransitionConstants.MainMenu.Portrait.Exiting(),
                 OpponentType.Abigail,
-                true));
+                isSilhouette: true));
 
             this._entities.Add(new Portrait(
                 Origin.TopLeft,
                 new Vector2(centerX + portraitSeparation, portraitTopMargin),
                 0.0011f,
-                TransitionConstants.MainMenuScenePortraitEnteringTransition(),
-                null,
+                TransitionConstants.MainMenu.Portrait.Entering(),
+                TransitionConstants.MainMenu.Portrait.Exiting(),
                 OpponentType.Gus,
-                true));
+                isSilhouette: true));
 
             // Buttons
-            float spaceHeight = RenderConstants.MINIGAME_SCREEN_HEIGHT - Textures.BACKGROUND_BAR_SHELVES_BOUNDS.Height;
-            float buttonHeight = Textures.BUTTON_TEXT_PLAY_BOUNDS.Height;
-            float margin = (spaceHeight - (buttonHeight * 4)) / 2;
-            float baseY = margin + Textures.BACKGROUND_BAR_SHELVES_BOUNDS.Height;
+            float spaceHeight = RenderConstants.MinigameScreen.HEIGHT - Textures.BAR_SHELVES.Height;
+            float buttonHeight = RenderConstants.Font.CHARACTER_HEIGHT;
+            float margin = (spaceHeight - (buttonHeight * 4) - RenderConstants.Scenes.MainMenu.BallButton.BUTTON_MARGIN * 3) / 2;
+            float baseY = margin + Textures.BAR_SHELVES.Height;
 
             this._playButton = new BallButton(
                 Origin.TopCenter,
-                new Vector2((RenderConstants.MINIGAME_SCREEN_WIDTH / 2) + RenderConstants.BALL_BUTTON_LEFT_OFFSET, baseY),
+                new Vector2((RenderConstants.MinigameScreen.WIDTH / 2) + RenderConstants.Entities.BallButton.LEFT_OFFSET, baseY),
                 0.0040f,
-                TransitionConstants.MainMenuSceneButtonEnteringTransition(0),
-                TransitionConstants.MainMenuSceneButtonExitingTransition(0),
-                Translations.GetTranslation(StringConstants.MENU_BUTTON_MAIN_PLAY),
+                TransitionConstants.MainMenu.Button.Entering(0),
+                TransitionConstants.MainMenu.Button.Exiting(0),
+                Translations.GetTranslation(StringConstants.Buttons.MainMenu.PLAY),
                 80,
                 1);
             this._entities.Add(this._playButton);
 
             this._multiplayerButton = new BallButton(
                 Origin.TopCenter,
-                new Vector2((RenderConstants.MINIGAME_SCREEN_WIDTH / 2) + RenderConstants.BALL_BUTTON_LEFT_OFFSET, baseY + buttonHeight),
+                new Vector2((RenderConstants.MinigameScreen.WIDTH / 2) + RenderConstants.Entities.BallButton.LEFT_OFFSET, baseY + buttonHeight + RenderConstants.Scenes.MainMenu.BallButton.BUTTON_MARGIN),
                 0.0040f,
-                TransitionConstants.MainMenuSceneButtonEnteringTransition(1),
-                TransitionConstants.MainMenuSceneButtonExitingTransition(1),
-                Translations.GetTranslation(StringConstants.MENU_BUTTON_MAIN_MULTIPLAYER),
+                TransitionConstants.MainMenu.Button.Entering(1),
+                TransitionConstants.MainMenu.Button.Exiting(1),
+                Translations.GetTranslation(StringConstants.Buttons.MainMenu.MULTIPLAYER),
                 80,
                 10);
             this._entities.Add(this._multiplayerButton);
 
             this._galleryButton = new BallButton(
                 Origin.TopCenter,
-                new Vector2((RenderConstants.MINIGAME_SCREEN_WIDTH / 2) + RenderConstants.BALL_BUTTON_LEFT_OFFSET, baseY + (buttonHeight * 2)),
+                new Vector2((RenderConstants.MinigameScreen.WIDTH / 2) + RenderConstants.Entities.BallButton.LEFT_OFFSET, baseY + (buttonHeight * 2) + (RenderConstants.Scenes.MainMenu.BallButton.BUTTON_MARGIN * 2)),
                 0.0040f,
-                TransitionConstants.MainMenuSceneButtonEnteringTransition(2),
-                TransitionConstants.MainMenuSceneButtonExitingTransition(2),
-                Translations.GetTranslation(StringConstants.MENU_BUTTON_MAIN_GALLERY),
+                TransitionConstants.MainMenu.Button.Entering(2),
+                TransitionConstants.MainMenu.Button.Exiting(2),
+                Translations.GetTranslation(StringConstants.Buttons.MainMenu.GALLERY),
                 80,
                 3);
             this._entities.Add(this._galleryButton);
 
             this._settingsButton = new BallButton(
                 Origin.TopCenter,
-                new Vector2((RenderConstants.MINIGAME_SCREEN_WIDTH / 2) + RenderConstants.BALL_BUTTON_LEFT_OFFSET, baseY + (buttonHeight * 3)),
+                new Vector2((RenderConstants.MinigameScreen.WIDTH / 2) + RenderConstants.Entities.BallButton.LEFT_OFFSET, baseY + (buttonHeight * 3) + (RenderConstants.Scenes.MainMenu.BallButton.BUTTON_MARGIN * 3)),
                 0.0040f,
-                TransitionConstants.MainMenuSceneButtonEnteringTransition(3),
-                TransitionConstants.MainMenuSceneButtonExitingTransition(3),
-                Translations.GetTranslation(StringConstants.MENU_BUTTON_MAIN_SETTINGS),
+                TransitionConstants.MainMenu.Button.Entering(3),
+                TransitionConstants.MainMenu.Button.Exiting(3),
+                Translations.GetTranslation(StringConstants.Buttons.MainMenu.SETTINGS),
                 80,
                 12);
             this._entities.Add(this._settingsButton);
@@ -160,10 +160,10 @@ namespace StardropPoolMinigame.Scenes
             // Title
             this._entities.Add(new GameTitle(
                 Origin.TopCenter,
-                new Vector2(RenderConstants.MINIGAME_SCREEN_WIDTH / 2, RenderConstants.MENU_SCENE_GAME_TITLE_TOP_MARGIN),
+                new Vector2(RenderConstants.MinigameScreen.WIDTH / 2, RenderConstants.Scenes.MainMenu.GameTitle.TOP_MARGIN),
                 0.0050f,
-                TransitionConstants.MainMenuSceneGameTitleEnteringTransition(),
-                TransitionConstants.MainMenuSceneGameTitleExitingTransition()));
+                TransitionConstants.MainMenu.GameTitle.Entering(),
+                TransitionConstants.MainMenu.GameTitle.Exiting()));
         }
     }
 }

@@ -57,22 +57,22 @@ namespace StardropPoolMinigame.Geometry
                 Vector2.Multiply(
                     angle, 
                     new Vector2(
-                        (float)momentum * (this._ball2.GetMass() * GameConstants.BALL_TO_BALL_BOUNCE_MOMENTUM_LOSS_MULTIPLIER),
-                        (float)momentum * (this._ball2.GetMass() * GameConstants.BALL_TO_BALL_BOUNCE_MOMENTUM_LOSS_MULTIPLIER))));
+                        (float)momentum * (this._ball2.GetMass() * GameConstants.Ball.BOUNCE_MOMENTUM_LOSS_MULTIPLIER),
+                        (float)momentum * (this._ball2.GetMass() * GameConstants.Ball.BOUNCE_MOMENTUM_LOSS_MULTIPLIER))));
             Vector2 ball2ResultingVelocity = Vector2.Add(
                 this._ball2.GetVelocity(),
                 Vector2.Multiply(
                     angle,
                     new Vector2(
-                        (float)momentum * (this._ball1.GetMass() * GameConstants.BALL_TO_BALL_BOUNCE_MOMENTUM_LOSS_MULTIPLIER),
-                        (float)momentum * (this._ball1.GetMass() * GameConstants.BALL_TO_BALL_BOUNCE_MOMENTUM_LOSS_MULTIPLIER)))); ;
+                        (float)momentum * (this._ball1.GetMass() * GameConstants.Ball.BOUNCE_MOMENTUM_LOSS_MULTIPLIER),
+                        (float)momentum * (this._ball1.GetMass() * GameConstants.Ball.BOUNCE_MOMENTUM_LOSS_MULTIPLIER)))); ;
             
             return new Tuple<Vector2, Vector2>(ball1ResultingVelocity, ball2ResultingVelocity);
         }
 
         private void PlaySound()
         {
-            Game1.playSound(SoundConstants.BALLS_COLLIDING);
+            Game1.playSound(SoundConstants.Ball.COLLIDING);
         }
     }
 }

@@ -63,8 +63,8 @@ namespace StardropPoolMinigame.Render.Drawers
         {
             Vector2 topLeft = this._entity.GetTopLeft();
             return new Vector2(
-                (topLeft.X - RenderConstants.BALL_MARGIN_LEFT) * RenderConstants.TileScale() + RenderConstants.AdjustedScreenWidthMargin(), 
-                (topLeft.Y - RenderConstants.BALL_MARGIN_TOP) * RenderConstants.TileScale() + RenderConstants.AdjustedScreenHeightMargin());
+                (topLeft.X - RenderConstants.Entities.Ball.MARGIN_LEFT) * RenderConstants.TileScale() + RenderConstants.AdjustedScreenWidthMargin(), 
+                (topLeft.Y - RenderConstants.Entities.Ball.MARGIN_TOP) * RenderConstants.TileScale() + RenderConstants.AdjustedScreenHeightMargin());
         }
 
         protected override Rectangle GetRawSource()
@@ -72,21 +72,21 @@ namespace StardropPoolMinigame.Render.Drawers
             switch (((Ball)this._entity).GetBallColor())
             {
                 case BallColor.Yellow:
-                    return Textures.BALL_COLOR_YELLOW;
+                    return Textures.Ball.Base.YELLOW;
                 case BallColor.Blue:
-                    return Textures.BALL_COLOR_BLUE;
+                    return Textures.Ball.Base.BLUE;
                 case BallColor.Red:
-                    return Textures.BALL_COLOR_RED;
+                    return Textures.Ball.Base.RED;
                 case BallColor.Purple:
-                    return Textures.BALL_COLOR_PURPLE;
+                    return Textures.Ball.Base.PURPLE;
                 case BallColor.Orange:
-                    return Textures.BALL_COLOR_ORANGE;
+                    return Textures.Ball.Base.ORANGE;
                 case BallColor.Green:
-                    return Textures.BALL_COLOR_GREEN;
+                    return Textures.Ball.Base.GREEN;
                 case BallColor.Maroon:
-                    return Textures.BALL_COLOR_MAROON;
+                    return Textures.Ball.Base.MAROON;
                 default:
-                    return Textures.BALL_COLOR_BLACK;
+                    return Textures.Ball.Base.BLACK;
             }
         }
 
@@ -102,7 +102,7 @@ namespace StardropPoolMinigame.Render.Drawers
             float? overrideLayerDepth = null)
         {
             batch.Draw(
-                this.GetTileSheet(),
+                this.GetTileset(),
                 this.GetDestination(overrideDestination),
                 this.GetSource(overrideSource),
                 this.GetColor(overrideColor),
@@ -123,7 +123,7 @@ namespace StardropPoolMinigame.Render.Drawers
             float? overrideLayerDepth = null)
         {
             batch.Draw(
-                this.GetTileSheet(),
+                this.GetTileset(),
                 this.GetDestination(overrideDestination),
                 this.GetCoreSource(),
                 this.GetColor(),
@@ -146,7 +146,7 @@ namespace StardropPoolMinigame.Render.Drawers
             if (((Ball)this._entity).GetBallType() == BallType.Stripped)
             {
                 batch.Draw(
-                    this.GetTileSheet(),
+                    this.GetTileset(),
                     this.GetDestination(overrideDestination),
                     this.GetStripeSource(),
                     this.GetColor(),
@@ -168,9 +168,9 @@ namespace StardropPoolMinigame.Render.Drawers
             float? overrideLayerDepth = null)
         {
             batch.Draw(
-                this.GetTileSheet(),
+                this.GetTileset(),
                 this.GetDestination(overrideDestination),
-                Textures.BALL_SHADOW,
+                Textures.Ball.SHADOW,
                 this.GetColor(),
                 this.GetRotation(overrideRotation),
                 this.GetOrigin(overrideOrigin),

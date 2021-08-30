@@ -4,16 +4,19 @@ namespace StardropPoolMinigame.Players
 {
     class ComputerOpponent : Player
     {
-        private int _confidence;
+        protected OpponentType _type;
 
-        private int _complexity;
+        protected int _confidence;
 
-        private int _angleAccuracy;
+        protected int _complexity;
 
-        private int _powerAccuracy;
+        protected int _angleAccuracy;
+
+        protected int _powerAccuracy;
 
         public ComputerOpponent(
             string name,
+            OpponentType type,
             long playerId,
             string music,
             int confidence,
@@ -27,6 +30,7 @@ namespace StardropPoolMinigame.Players
             playerId,
             music)
         {
+            this._type = type;
             this._confidence = confidence;
             this._complexity = complexity;
             this._angleAccuracy = angleAccuracy;
@@ -51,6 +55,11 @@ namespace StardropPoolMinigame.Players
         public int GetPowerAccuracy()
         {
             return this._powerAccuracy;
+        }
+
+        public OpponentType GetOpponentType()
+        {
+            return this._type;
         }
 
         public static ComputerOpponent GetComputerOpponentFromName(OpponentType name)

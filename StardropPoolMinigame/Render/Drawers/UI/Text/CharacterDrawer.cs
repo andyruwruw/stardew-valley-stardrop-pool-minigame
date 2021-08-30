@@ -11,32 +11,9 @@ namespace StardropPoolMinigame.Render.Drawers
         {
         }
 
-        public override void Draw(
-            SpriteBatch batch,
-            Vector2? overrideDestination = null,
-            Rectangle? overrideSource = null,
-            Color? overrideColor = null,
-            float? overrideRotation = null,
-            Vector2? overrideOrigin = null,
-            float? overrideScale = null,
-            SpriteEffects? overrideEffects = null,
-            float? overrideLayerDepth = null)
+        protected override Texture2D GetTileset()
         {
-            base.Draw(
-                batch,
-                overrideDestination,
-                overrideSource,
-                overrideColor,
-                overrideRotation,
-                overrideOrigin,
-                overrideScale,
-                overrideEffects,
-                overrideLayerDepth);
-        }
-
-        protected override Texture2D GetTileSheet()
-        {
-            return Textures.FontTileSheet;
+            return Textures.Tileset.Font;
         }
 
         protected override Rectangle GetRawSource()
@@ -47,7 +24,7 @@ namespace StardropPoolMinigame.Render.Drawers
         protected override Vector2 GetRawDestination()
         {
             Vector2 destination = base.GetRawDestination();
-            return new Vector2(destination.X, destination.Y + (RenderConstants.FONT_Y_OFFSET * RenderConstants.TileScale()));
+            return new Vector2(destination.X, destination.Y + (RenderConstants.Font.Y_OFFSET * RenderConstants.TileScale()));
         }
     }
 }

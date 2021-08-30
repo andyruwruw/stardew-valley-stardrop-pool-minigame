@@ -13,6 +13,10 @@ namespace StardropPoolMinigame.Entities
 
         private Text _text;
 
+        private string _textString;
+
+        private int _maxWidth;
+
         /// <summary>
         /// Creates button with rotating ball on hover.
         /// </summary>
@@ -32,19 +36,23 @@ namespace StardropPoolMinigame.Entities
             enteringTransition,
             exitingTransition)
         {
+            this._textString = text;
+            this._maxWidth = maxWidth;
+
             this._text = new Text(
-                origin,
-                new Vector2(anchor.X + (GameConstants.BALL_RADIUS * 2) + RenderConstants.BALL_BUTTON_INNER_PADDING, anchor.Y),
+                Origin.TopLeft,
+                new Vector2(this.GetTopLeft().X + (GameConstants.Ball.RADIUS * 2) + RenderConstants.Entities.BallButton.INNER_PADDING, anchor.Y),
                 layerDepth,
                 enteringTransition,
                 exitingTransition,
                 text,
                 maxWidth,
+                1f,
                 false,
                 true);
 
             this._ball = new Ball(
-                new Vector2(this.GetTopLeft().X + GameConstants.BALL_RADIUS, this.GetTopLeft().Y + (this._text.GetTotalHeight() / 2)),
+                new Vector2(this.GetTopLeft().X + GameConstants.Ball.RADIUS, this.GetTopLeft().Y + (this._text.GetTotalHeight() / 2)),
                 layerDepth,
                 enteringTransition,
                 exitingTransition,
@@ -60,7 +68,7 @@ namespace StardropPoolMinigame.Entities
 
             if (this.IsHovered())
             {
-                this._ball.GetOrientation().Roll(new Vector2(GameConstants.BALL_BUTTON_HOVER_ROTATIONAL_SPEED, 0));
+                this._ball.GetOrientation().Roll(new Vector2(GameConstants.BallButton.HOVER_ROTATIONAL_SPEED, 0));
             }
         }
 
@@ -71,7 +79,7 @@ namespace StardropPoolMinigame.Entities
 
         public override float GetTotalWidth()
         {
-            return (int)((GameConstants.BALL_RADIUS * 2) + RenderConstants.BALL_BUTTON_INNER_PADDING + this._text.GetTotalWidth());
+            return (int)((GameConstants.Ball.RADIUS * 2) + RenderConstants.Entities.BallButton.INNER_PADDING + this._maxWidth);
         }
 
         public override float GetTotalHeight()
@@ -81,12 +89,12 @@ namespace StardropPoolMinigame.Entities
 
         public override void ClickCallback()
         {
-            Sound.PlaySound(SoundConstants.BOTTON_PRESS);
+            Sound.PlaySound(SoundConstants.Feedback.BOTTON_PRESS);
         }
 
         protected override void HoveredCallback()
         {
-            Sound.PlaySound(SoundConstants.BUTTON_HOVER);
+            Sound.PlaySound(SoundConstants.Feedback.BUTTON_HOVER);
         }
 
         public override void SetTransitionState(TransitionState transitionState, bool start = false)

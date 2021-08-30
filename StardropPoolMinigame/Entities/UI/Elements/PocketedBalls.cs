@@ -28,12 +28,12 @@ namespace StardropPoolMinigame.Entities.UI.Background
 
         public override float GetTotalHeight()
         {
-            return Textures.POCKETED_BALLS_BORDER_BOX_SUPPORTS_BOUNDS.Height;
+            return Textures.POCKETED_BALLS_BORDER_BOX_SUPPORTS.Height;
         }
 
         public override float GetTotalWidth()
         {
-            return Textures.POCKETED_BALLS_BORDER_BOX_SUPPORTS_BOUNDS.Width;
+            return Textures.POCKETED_BALLS_BORDER_BOX_SUPPORTS.Width;
         }
 
         public override void SetTransitionState(TransitionState transitionState, bool start = false)

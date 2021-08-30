@@ -7,6 +7,10 @@ namespace StardropPoolMinigame.Render.Filters
     {
         string GetName();
 
+        void StartFilter();
+
+        void SetKey(string key);
+
         Vector2 ExecuteDestination(Vector2 destination);
 
         Rectangle ExecuteSource(Rectangle source);

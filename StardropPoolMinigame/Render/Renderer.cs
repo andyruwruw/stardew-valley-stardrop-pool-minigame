@@ -113,65 +113,60 @@ namespace StardropPoolMinigame.Render
 
             // Background
             this._entities.Add(new Solid(
-                Origin.TopLeft,
-                new Vector2(0, 0),
-                0.0000f,
-                null,
-                null,
                 new Primitives.Rectangle(
                     new Vector2(RenderConstants.AdjustedScreenWidthMargin(), RenderConstants.AdjustedScreenHeightMargin()),
                     (int)RenderConstants.AdjustedScreenWidth(),
                     (int)RenderConstants.AdjustedScreenHeight()),
-                Color.Black));
+                0.0000f,
+                null,
+                null,
+                Color.Black,
+                true));
 
             // Foreground
             this._entities.Add(new Solid(
-                Origin.TopLeft,
-                new Vector2(0, 0),
-                1.0000f,
-                null,
-                null,
                 new Primitives.Rectangle(
                     new Vector2(0, 0),
                     (int)RenderConstants.AdjustedScreenWidthMargin(),
                     (int)RenderConstants.AdjustedScreenWidthMargin()),
-                Textures.MINIGAME_MARGIN_BACKGROUND_COLOR));
-
-            this._entities.Add(new Solid(
-                Origin.TopLeft,
-                new Vector2(0, 0),
                 1.0000f,
                 null,
                 null,
+                Textures.Color.Solid.MARGIN,
+                true));
+
+            this._entities.Add(new Solid(
                 new Primitives.Rectangle(
                     new Vector2(RenderConstants.AdjustedScreenWidthMargin() + RenderConstants.AdjustedScreenWidth(), 0),
                     (int)RenderConstants.AdjustedScreenWidthMargin(),
                     (int)RenderConstants.ViewportHeight()),
-                Textures.MINIGAME_MARGIN_BACKGROUND_COLOR));
-
-            this._entities.Add(new Solid(
-                Origin.TopLeft,
-                new Vector2(0, 0),
                 1.0000f,
                 null,
                 null,
+                Textures.Color.Solid.MARGIN,
+                true));
+
+            this._entities.Add(new Solid(
                 new Primitives.Rectangle(
                     new Vector2(RenderConstants.AdjustedScreenWidthMargin(), 0),
                     (int)RenderConstants.AdjustedScreenWidth(),
                     (int)RenderConstants.AdjustedScreenHeightMargin()),
-                Textures.MINIGAME_MARGIN_BACKGROUND_COLOR));
-
-            this._entities.Add(new Solid(
-                Origin.TopLeft,
-                new Vector2(0, 0),
                 1.0000f,
                 null,
                 null,
+                Textures.Color.Solid.MARGIN,
+                true));
+
+            this._entities.Add(new Solid(
                 new Primitives.Rectangle(
                     new Vector2(RenderConstants.AdjustedScreenWidthMargin() + RenderConstants.AdjustedScreenWidth(), RenderConstants.AdjustedScreenHeightMargin() + RenderConstants.AdjustedScreenHeight()),
                     (int)RenderConstants.AdjustedScreenWidth(),
                     (int)RenderConstants.AdjustedScreenHeightMargin()),
-                Textures.MINIGAME_MARGIN_BACKGROUND_COLOR));
+                1.0000f,
+                null,
+                null,
+                Textures.Color.Solid.MARGIN,
+                true));
         }
     }
 }

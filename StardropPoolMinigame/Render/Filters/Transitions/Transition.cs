@@ -42,15 +42,19 @@ namespace StardropPoolMinigame.Render.Filters
             this._firstExecution = true;
         }
 
+        public override void SetKey(string key)
+        {
+            string transitionType = this._type == TransitionState.Entering ? "entering" : "exiting";
+            this._key = $"{key}-filter-{this.GetName()}-{transitionType}";
+        }
+
         public override string GetName()
         {
             return "generic-transition";
         }
 
-        public override void StartTransition(string key)
+        public override void StartFilter()
         {
-            string transitionType = this._type == TransitionState.Entering ? "entering" : "exiting";
-            this._key = $"{key}-filter-{this.GetName()}-{transitionType}";
             this._endingTick = Timer.StartTimer(this._key) + this.GetDelay() + this._duration;
         }
 
@@ -70,7 +74,7 @@ namespace StardropPoolMinigame.Render.Filters
 
             if (progress > 1f)
             {
-                Timer.EndTimer(this._key);
+                this.StopTransition();
                 this._isFinished = true;
                 this._firstExecution = false;
                 return 1f;

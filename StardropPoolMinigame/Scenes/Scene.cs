@@ -101,7 +101,6 @@ namespace StardropPoolMinigame.Scenes
                     this._transitionState = TransitionState.Present;
                 } else if (this._transitionState == TransitionState.Exiting)
                 {
-                    Logger.Info("Scene is dead");
                     this._transitionState = TransitionState.Dead;
                 }
             }

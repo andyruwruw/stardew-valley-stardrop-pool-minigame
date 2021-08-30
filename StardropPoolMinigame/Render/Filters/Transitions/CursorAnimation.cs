@@ -25,13 +25,13 @@ namespace StardropPoolMinigame.Render.Filters
             switch (Math.Floor(this.GetProgress() * 4))
             {
                 case 0:
-                    return Textures.CURSOR_TRANSITION_1_BOUNDS;
+                    return Textures.Cursor.FRAME_1;
                 case 1:
-                    return Textures.CURSOR_TRANSITION_2_BOUNDS;
+                    return Textures.Cursor.FRAME_2;
                 case 2:
-                    return Textures.CURSOR_TRANSITION_3_BOUNDS;
+                    return Textures.Cursor.FRAME_3;
                 default:
-                    return Textures.CURSOR_BOUNDS;
+                    return Textures.Cursor.DEFAULT;
             }
         }
     }

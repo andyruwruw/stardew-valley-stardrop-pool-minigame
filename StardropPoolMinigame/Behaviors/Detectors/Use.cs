@@ -27,8 +27,8 @@ namespace StardropPoolMinigame.Detect
             Tile front = Game1.currentLocation.map.GetLayer("Front").PickTile(new xTile.Dimensions.Location(clickX, clickY), Game1.viewport.Size);
             Tile building = Game1.currentLocation.map.GetLayer("Buildings").PickTile(new xTile.Dimensions.Location(clickX, clickY), Game1.viewport.Size);
 
-            if ((front != null && GameConstants.POOL_TABLE_TILE_ID_FRONT.Contains(front.TileIndex)) ||
-                building != null && GameConstants.POOL_TABLE_TILE_ID_BUILDING.Contains(building.TileIndex))
+            if ((front != null && GameConstants.PoolTable.TILE_ID_FRONT.Contains(front.TileIndex)) ||
+                building != null && GameConstants.PoolTable.TILE_ID_BUILDING.Contains(building.TileIndex))
             {
                 return true;
             }

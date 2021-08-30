@@ -12,13 +12,21 @@ namespace StardropPoolMinigame.Entities
     {
         private OpponentType _name;
 
+        private PortraitEmotion _emotion;
+
         private bool _isSilhouette;
 
-        private PortraitEmotion _emotion;
+        private bool _isDarker;
 
         private bool _isHoverable;
 
         private bool _isOnFire;
+
+        private PortraitFire _portraitFire;
+
+        private bool _isShining;
+
+        private PortraitRays _portraitRays;
 
         public Portrait(
             Origin origin,
@@ -27,10 +35,12 @@ namespace StardropPoolMinigame.Entities
             IFilter enteringTransition,
             IFilter exitingTransition,
             OpponentType name,
-            bool isSilhouette,
             PortraitEmotion emotion = PortraitEmotion.Default,
             bool isHoverable = false,
-            bool isOnFire = false
+            bool isSilhouette = false,
+            bool isDarker = false,
+            bool isOnFire = false,
+            bool isShining = false
         ) : base(
             origin,
             anchor,
@@ -39,10 +49,26 @@ namespace StardropPoolMinigame.Entities
             exitingTransition)
         {
             this._name = name;
-            this._isSilhouette = isSilhouette;
             this._emotion = emotion;
             this._isHoverable = isHoverable;
+            this._isSilhouette = isSilhouette;
+            this._isDarker = isDarker;
             this._isOnFire = isOnFire;
+            this._isShining = isShining;
+
+            this._portraitFire = new PortraitFire(
+                origin,
+                anchor,
+                layerDepth - 0.0001f,
+                enteringTransition,
+                exitingTransition);
+
+            this._portraitRays = new PortraitRays(
+                origin,
+                new Vector2(anchor.X + Textures.Portrait.Sam.DEFAULT.Width / 2, anchor.Y + Textures.Portrait.Sam.DEFAULT.Height / 2),
+                layerDepth - 0.0001f,
+                enteringTransition,
+                exitingTransition);
 
             this.SetDrawer(new PortraitDrawer(this));
         }
@@ -52,27 +78,34 @@ namespace StardropPoolMinigame.Entities
             return $"portrait-{this._id}";
         }
 
+        public override void Update()
+        {
+            base.Update();
+
+
+        }
+
         public override void ClickCallback()
         {
-            Sound.PlaySound(SoundConstants.BOTTON_PRESS);
+            Sound.PlaySound(SoundConstants.Feedback.BOTTON_PRESS);
         }
 
         protected override void HoveredCallback()
         {
             if (this._isHoverable)
             {
-                Sound.PlaySound(SoundConstants.BUTTON_HOVER);
+                Sound.PlaySound(SoundConstants.Feedback.BUTTON_HOVER);
             }
         }
 
         public override float GetTotalWidth()
         {
-            return Textures.PORTRAIT_SAM_DEFAULT_BOUNDS.Width;
+            return Textures.Portrait.Sam.DEFAULT.Width;
         }
 
         public override float GetTotalHeight()
         {
-            return Textures.PORTRAIT_SAM_DEFAULT_BOUNDS.Height;
+            return Textures.Portrait.Sam.DEFAULT.Height;
         }
 
         public OpponentType GetName()
@@ -100,9 +133,14 @@ namespace StardropPoolMinigame.Entities
             this._isSilhouette = isSilhouette;
         }
 
-        public void SetExitingTransition(IFilter transition)
+        public bool IsDarker()
         {
-            this._exitingTransition = transition;
+            return this._isDarker;
+        }
+
+        public void SetDarker(bool isDarker)
+        {
+            this._isDarker = isDarker;
         }
 
         public bool IsOnFire()
@@ -113,6 +151,26 @@ namespace StardropPoolMinigame.Entities
         public void SetIsOnFire(bool isOnFire)
         {
             this._isOnFire = isOnFire;
+        }
+
+        public bool IsShining()
+        {
+            return this._isShining;
+        }
+
+        public void SetIsShining(bool isShining)
+        {
+            this._isShining = isShining;
+        }
+
+        public PortraitFire GetPortraitFire()
+        {
+            return this._portraitFire;
+        }
+
+        public PortraitRays GetPortraitRays()
+        {
+            return this._portraitRays;
         }
     }
 }

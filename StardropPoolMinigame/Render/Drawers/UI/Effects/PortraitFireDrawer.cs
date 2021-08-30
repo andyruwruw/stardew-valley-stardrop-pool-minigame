@@ -1,17 +1,18 @@
 ﻿using Microsoft.Xna.Framework;
 using StardropPoolMinigame.Entities;
+using System;
 
 namespace StardropPoolMinigame.Render.Drawers
 {
-    class BarShelvesDrawer : Drawer
+    class PortraitFireDrawer : Drawer
     {
-        public BarShelvesDrawer(BarShelves shelves) : base(shelves)
+        public PortraitFireDrawer(PortraitFire fire) : base(fire)
         {
         }
 
         protected override Rectangle GetRawSource()
         {
-            return Textures.BAR_SHELVES;
+            return Textures.PortraitFire.FRAME_1;
         }
     }
 }

@@ -4,9 +4,9 @@ using StardropPoolMinigame.Helpers;
 using System;
 namespace StardropPoolMinigame.Scenes.Dialog.Scripts
 {
-    class IntroductionGus : Script
+    class RevealGus : Script
     {
-        public IntroductionGus() : base()
+        public RevealGus() : base()
         {
         }
 
@@ -14,19 +14,19 @@ namespace StardropPoolMinigame.Scenes.Dialog.Scripts
         {
             this._recitations.Add(new Recitation(
                 PortraitEmotion.Laugh,
-                Translations.GetTranslation(StringConstants.Quotes.Introduction.Gus.LINE1)));
+                Translations.GetTranslation(StringConstants.Quotes.Reveal.Gus.LINE1)));
 
             this._recitations.Add(new Recitation(
                 PortraitEmotion.Smurk,
-                Translations.GetTranslation(StringConstants.Quotes.Introduction.Gus.LINE2)));
+                Translations.GetTranslation(StringConstants.Quotes.Reveal.Gus.LINE2)));
 
             this._recitations.Add(new Recitation(
                 PortraitEmotion.Laugh,
-                Translations.GetTranslation(StringConstants.Quotes.Introduction.Gus.LINE3)));
+                Translations.GetTranslation(StringConstants.Quotes.Reveal.Gus.LINE3)));
 
             this._recitations.Add(new Recitation(
                 PortraitEmotion.Glare,
-                Translations.GetTranslation(StringConstants.Quotes.Introduction.Gus.LINE4),
+                Translations.GetTranslation(StringConstants.Quotes.Reveal.Gus.LINE4),
                 hasFire: true,
                 isDarker: true));
         }

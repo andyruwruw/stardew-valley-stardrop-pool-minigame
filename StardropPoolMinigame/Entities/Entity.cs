@@ -47,7 +47,8 @@ namespace StardropPoolMinigame.Entities
             if (this._enteringTransition != null)
             {
                 this._transitionState = TransitionState.Entering;
-                ((Transition)this._enteringTransition).StartTransition(this._id);
+                this._enteringTransition.SetKey(this._id);
+                ((Transition)this._enteringTransition).StartFilter();
             } else
             {
                 this._transitionState = TransitionState.Present;
@@ -59,27 +60,27 @@ namespace StardropPoolMinigame.Entities
             this.UpdateTransitionState();
         }
 
-        public Origin GetOrigin()
+        public virtual Origin GetOrigin()
         {
             return this._origin;
         }
 
-        public Vector2 GetAnchor()
+        public virtual Vector2 GetAnchor()
         {
             return this._anchor;
         }
 
-        public void SetAnchor(Vector2 anchor)
+        public virtual void SetAnchor(Vector2 anchor)
         {
             this._anchor = anchor;
         }
 
-        public float GetLayerDepth()
+        public virtual float GetLayerDepth()
         {
             return this._layerDepth;
         }
 
-        public TransitionState GetTransitionState()
+        public virtual TransitionState GetTransitionState()
         {
             return this._transitionState;
         }
@@ -92,28 +93,40 @@ namespace StardropPoolMinigame.Entities
                 && start)
             {
                 ((Transition)this._enteringTransition).ResetTransition();
-                ((Transition)this._enteringTransition).StartTransition(this._id);
+                ((Transition)this._enteringTransition).SetKey(this._id);
+                ((Transition)this._enteringTransition).StartFilter();
             }
             if (this._transitionState == TransitionState.Exiting
                 && this._exitingTransition != null
                 && start)
             {
                 ((Transition)this._exitingTransition).ResetTransition();
-                ((Transition)this._exitingTransition).StartTransition(this._id);
+                ((Transition)this._exitingTransition).SetKey(this._id);
+                ((Transition)this._exitingTransition).StartFilter();
             }
         }
 
-        public IFilter GetEnteringTransition()
+        public virtual IFilter GetEnteringTransition()
         {
             return this._enteringTransition;
         }
 
-        public IFilter GetExitingTransition()
+        public void SetEnteringTransition(IFilter transition)
+        {
+            this._enteringTransition = transition;
+        }
+
+        public virtual IFilter GetExitingTransition()
         {
             return this._exitingTransition;
         }
 
-        public Vector2 GetTopLeft()
+        public void SetExitingTransition(IFilter transition)
+        {
+            this._exitingTransition = transition;
+        }
+
+        public virtual Vector2 GetTopLeft()
         {
             if (this.GetOrigin() == Origin.TopLeft)
             {
@@ -154,12 +167,12 @@ namespace StardropPoolMinigame.Entities
             return this._anchor;
         }
 
-        public Primitives.Rectangle GetBoundary()
+        public virtual Primitives.Rectangle GetBoundary()
         {
             return new Primitives.Rectangle(this.GetTopLeft(), this.GetTotalWidth(), this.GetTotalHeight());
         }
 
-        public Primitives.Rectangle GetRawBoundary()
+        public virtual Primitives.Rectangle GetRawBoundary()
         {
             Vector2 topLeft = this.GetTopLeft();
 
@@ -191,7 +204,7 @@ namespace StardropPoolMinigame.Entities
             }
         }
 
-        public void SetDrawer(IDrawer drawer)
+        public virtual void SetDrawer(IDrawer drawer)
         {
             this._drawer = drawer;
         }

@@ -39,7 +39,7 @@ namespace StardropPoolMinigame.Entities
 
         public override void ClickCallback()
         {
-            Sound.PlaySound(SoundConstants.SUBMIT_BUTTON_PRESS);
+            Sound.PlaySound(SoundConstants.Feedback.SUBMIT_BUTTON_PRESS);
             Sound.StopMusic();
         }
     }

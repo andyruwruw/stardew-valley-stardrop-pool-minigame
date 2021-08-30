@@ -17,6 +17,7 @@ namespace StardropPoolMinigame.Entities
             IFilter exitingTransition,
             string text,
             int maxWidth = int.MaxValue,
+            float scale = 1.1f,
             bool isCentered = true
         ) : base(
             origin,
@@ -33,6 +34,7 @@ namespace StardropPoolMinigame.Entities
                 exitingTransition,
                 text,
                 maxWidth,
+                scale,
                 isCentered,
                 false);
 

@@ -38,10 +38,10 @@ namespace StardropPoolMinigame.Entities
             exitingTransition)
         {
             this._number = number;
-            this._range = new Circle(center, GameConstants.BALL_RADIUS);
+            this._range = new Circle(center, GameConstants.Ball.RADIUS);
             this._velocity = new Vector2(0, 0);
             this._acceleration = new Vector2(0, 0);
-            this._orientation = new Orientation(GameConstants.BALL_RADIUS, orientation.X, orientation.Y);
+            this._orientation = new Orientation(GameConstants.Ball.RADIUS, orientation.X, orientation.Y);
             this._massMultiplier = 1;
 
             this.SetDrawer(new BallDrawer(this));
@@ -61,10 +61,10 @@ namespace StardropPoolMinigame.Entities
             exitingTransition)
         {
             this._number = number;
-            this._range = new Circle(center, GameConstants.BALL_RADIUS);
+            this._range = new Circle(center, GameConstants.Ball.RADIUS);
             this._velocity = new Vector2(0, 0);
             this._acceleration = new Vector2(0, 0);
-            this._orientation = new Orientation(GameConstants.BALL_RADIUS);
+            this._orientation = new Orientation(GameConstants.Ball.RADIUS);
             this._massMultiplier = 1;
         }
 
@@ -77,12 +77,12 @@ namespace StardropPoolMinigame.Entities
 
         public override float GetTotalWidth()
         {
-            return GameConstants.BALL_RADIUS * 2;
+            return GameConstants.Ball.RADIUS * 2;
         }
 
         public override float GetTotalHeight()
         {
-            return GameConstants.BALL_RADIUS * 2;
+            return GameConstants.Ball.RADIUS * 2;
         }
 
         public override string GetId()
@@ -132,7 +132,7 @@ namespace StardropPoolMinigame.Entities
 
         public float GetMass()
         {
-            return GameConstants.BALL_MASS * this._massMultiplier;
+            return GameConstants.Ball.MASS * this._massMultiplier;
         }
 
         public int GetNumber()

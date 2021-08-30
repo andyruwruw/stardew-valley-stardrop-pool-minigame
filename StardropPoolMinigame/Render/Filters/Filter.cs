@@ -15,15 +15,19 @@ namespace StardropPoolMinigame.Render.Filters
 
         public Filter(string key)
         {
-            this._key = key;
+            this.SetKey(key);
         }
 
         public abstract string GetName();
 
-        public virtual void StartTransition(string key)
+        public virtual void StartFilter()
         {
-            this._key = $"{key}-filter-{this.GetName()}";
             Timer.StartTimer(this._key);
+        }
+
+        public void StopTransition()
+        {
+            Timer.EndTimer(this._key);
         }
 
         protected float GetTimePassed()
@@ -73,6 +77,11 @@ namespace StardropPoolMinigame.Render.Filters
         public virtual float ExecuteLayerDepth(float layerDepth)
         {
             return layerDepth;
+        }
+
+        public virtual void SetKey(string key)
+        {
+            this._key = $"{key}-filter-{this.GetName()}";
         }
     }
 }

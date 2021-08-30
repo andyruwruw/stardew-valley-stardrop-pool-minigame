@@ -11,6 +11,8 @@ namespace StardropPoolMinigame.Entities
     {
         private Text _text;
 
+        private bool _disabled;
+
         public Button(
             Origin origin,
             Vector2 anchor,
@@ -27,6 +29,8 @@ namespace StardropPoolMinigame.Entities
             enteringTransition,
             exitingTransition)
         {
+            this._disabled = false;
+
             this._text = new Text(
                 origin,
                 anchor,
@@ -35,6 +39,7 @@ namespace StardropPoolMinigame.Entities
                 exitingTransition,
                 text,
                 maxWidth,
+                1f,
                 isCentered,
                 true);
 
@@ -64,17 +69,27 @@ namespace StardropPoolMinigame.Entities
 
         public override void ClickCallback()
         {
-            Sound.PlaySound(SoundConstants.BOTTON_PRESS);
+            Sound.PlaySound(SoundConstants.Feedback.BOTTON_PRESS);
         }
 
         protected override void HoveredCallback()
         {
-            Sound.PlaySound(SoundConstants.BUTTON_HOVER);
+            Sound.PlaySound(SoundConstants.Feedback.BUTTON_HOVER);
         }
 
         public Text GetText()
         {
             return this._text;
+        }
+
+        public void SetDisabled(bool state)
+        {
+            this._disabled = state;
+        }
+
+        public bool IsDisabled()
+        {
+            return this._disabled;
         }
     }
 }

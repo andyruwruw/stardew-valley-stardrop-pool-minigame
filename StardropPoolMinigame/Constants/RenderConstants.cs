@@ -6,14 +6,21 @@ namespace StardropPoolMinigame.Constants
     class RenderConstants
     {
         /// <summary>
-        /// The height of the mingame window
+        /// Dimentions of the minigame window
         /// </summary>
-        public static int MINIGAME_SCREEN_HEIGHT = 224;
+        public class MinigameScreen
+        {
+            /// <summary>
+            /// The height of the minigame window
+            /// </summary>
+            public static int HEIGHT = 224;
 
-        /// <summary>
-        /// The width of the mingame window
-        /// </summary>
-        public static int MINIGAME_SCREEN_WIDTH = 400;
+            /// <summary>
+            /// The width of the minigame window
+            /// </summary>
+            public static int WIDTH = 400;
+        }
+        
 
         /// <summary>
         /// Tile size on tile sheet
@@ -38,7 +45,7 @@ namespace StardropPoolMinigame.Constants
         /// </summary>
         public static float AdjustedScreenHeight()
         {
-            return MINIGAME_SCREEN_HEIGHT * TileScale();
+            return MinigameScreen.HEIGHT * TileScale();
         }
 
         /// <summary>
@@ -46,7 +53,7 @@ namespace StardropPoolMinigame.Constants
         /// </summary>
         public static float AdjustedScreenWidth()
         {
-            return MINIGAME_SCREEN_WIDTH * TileScale();
+            return MinigameScreen.WIDTH * TileScale();
         }
 
         /// <summary>
@@ -125,28 +132,83 @@ namespace StardropPoolMinigame.Constants
             return new Vector2(point.X - AdjustedScreenWidthMargin(), point.Y - AdjustedScreenHeightMargin());
         }
 
-        public static int FONT_CHARACTER_HEIGHT = 9;
+        public class Font
+        {
+            public static int CHARACTER_HEIGHT = 13;
 
-        public static int FONT_SPACE_BETWEEN_CHARACTERS = 1;
+            public static int SPACE_BETWEEN_CHARACTERS = 1;
 
-        public static int FONT_SPACE_WIDTH = 4;
+            public static int SPACE_BETWEEN_CHARACTERS_ON_TILESET = 1;
 
-        public static int FONT_LINE_SPACING = 3;
+            public static int SPACE_WIDTH = 4;
 
-        public static int FONT_Y_OFFSET = 2;
+            public static int LINE_SPACING = 3;
 
-        public static float BALL_MARGIN_LEFT = 3f;
+            public static int Y_OFFSET = 1;
+        }
 
-        public static float BALL_MARGIN_TOP = 3f;
+        public class Entities
+        {
+            public class Ball
+            {
+                public static float MARGIN_LEFT = 3f;
 
-        public static float BALL_BUTTON_INNER_PADDING = 8f;
+                public static float MARGIN_TOP = 3f;
+            }
 
-        public static float BALL_BUTTON_LEFT_OFFSET = 4f;
+            public class BallButton
+            {
+                public static float INNER_PADDING = 8f;
 
-        public static float MENU_SCENE_GAME_TITLE_TOP_MARGIN = 6f;
+                public static float LEFT_OFFSET = 4f;
+            }
 
-        public static float CURSOR_BOTTOM_MARGIN = 18f;
+            public class PortraitFire
+            {
+                public static int FRAMES = 8;
 
-        public static float CHARACTER_SELECT_NAME_TOP_MARGIN = 18f;
+                public static int FRAME_DURATION = 4;
+            }
+
+        }
+
+        public class Scenes
+        {
+            public class MainMenu
+            {
+                public class GameTitle
+                {
+                    public static float TOP_MARGIN = 6f;
+                }
+
+                public class BallButton
+                {
+                    public static float BUTTON_MARGIN = 4f;
+                }
+            }
+
+            public class CharacterSelect
+            {
+                public class Cursor
+                {
+                    public static float BOTTOM_MARGIN = 18f;
+                }
+
+                public class SelectedName
+                {
+                    public static float TOP_MARGIN = 18f;
+                }
+            }
+
+            public class Dialog
+            {
+                public class Text
+                {
+                    public static int TOP_MARGIN = 15;
+
+                    public static int MAX_WIDTH = 150;
+                }
+            }
+        }
     }
 }

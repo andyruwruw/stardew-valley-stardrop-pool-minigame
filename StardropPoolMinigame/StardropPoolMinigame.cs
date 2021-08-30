@@ -145,7 +145,7 @@ namespace StardropPoolMinigame
         {
             if (this._currentScene != null && this._currentScene.HasNewScene())
             {
-                Logger.Info("New scene");
+                Logger.Info("Found new scene");
                 this._enteringScene = this._currentScene.GetNewScene();
                 this._exitingScene = this._currentScene;
                 this._currentScene = null;
@@ -173,12 +173,10 @@ namespace StardropPoolMinigame
         {
             if (this._exitingScene != null && this._exitingScene.GetTransitionState() == TransitionState.Dead)
             {
-                Logger.Info("No longer exiting");
                 this._exitingScene = null;
             }
             if (this._enteringScene != null && this._enteringScene.GetTransitionState() == TransitionState.Present)
             {
-                Logger.Info("No longer entering");
                 this._currentScene = this._enteringScene;
                 this._enteringScene = null;
             }

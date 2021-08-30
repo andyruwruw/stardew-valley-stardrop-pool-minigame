@@ -34,7 +34,7 @@ namespace StardropPoolMinigame.Render.Drawers
                     overrideColor,
                     overrideRotation,
                     overrideOrigin,
-                    overrideScale,
+                    ((Text)this._entity).GetScale(),
                     overrideEffects,
                     overrideLayerDepth);
             }

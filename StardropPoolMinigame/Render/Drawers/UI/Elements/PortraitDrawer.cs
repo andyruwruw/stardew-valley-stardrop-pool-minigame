@@ -11,18 +11,67 @@ namespace StardropPoolMinigame.Render.Drawers
         {
         }
 
-        protected override Texture2D GetTileSheet()
+        public override void Draw(
+            SpriteBatch batch,
+            Vector2? overrideDestination = null,
+            Rectangle? overrideSource = null,
+            Color? overrideColor = null,
+            float? overrideRotation = null,
+            Vector2? overrideOrigin = null,
+            float? overrideScale = null,
+            SpriteEffects? overrideEffects = null,
+            float? overrideLayerDepth = null)
+        {
+            base.Draw(
+                batch,
+                overrideDestination,
+                overrideSource,
+                overrideColor,
+                overrideRotation,
+                overrideOrigin,
+                overrideScale,
+                overrideEffects,
+                overrideLayerDepth);
+
+            if (((Portrait)this._entity).IsOnFire()) {
+                ((Portrait)this._entity).GetPortraitFire().GetDrawer().Draw(
+                    batch,
+                    overrideDestination,
+                    overrideSource,
+                    overrideColor,
+                    overrideRotation,
+                    overrideOrigin,
+                    overrideScale,
+                    overrideEffects,
+                    overrideLayerDepth);
+            }
+            if (((Portrait)this._entity).IsShining())
+            {
+                ((Portrait)this._entity).GetPortraitRays().GetDrawer().Draw(
+                    batch,
+                    overrideDestination,
+                    overrideSource,
+                    overrideColor,
+                    overrideRotation,
+                    overrideOrigin,
+                    overrideScale,
+                    overrideEffects,
+                    overrideLayerDepth);
+            }
+        }
+
+        protected override Texture2D GetTileset()
         {
             switch (((Portrait)this._entity).GetName())
             {
                 case OpponentType.Sebastian:
-                    return Textures.PortraitSebastianTilesheet;
+                    return Textures.Tileset.PortraitSebastian;
                 case OpponentType.Abigail:
-                    return Textures.PortraitAbigailTilesheet;
+                    return Textures.Tileset.PortraitAbigail;
                 case OpponentType.Gus:
-                    return Textures.PortraitGusTilesheet;
+                    return Textures.Tileset.PortraitGus;
                 default:
-                    return Textures.PortraitSamTilesheet;
+                    return Textures.Tileset.PortraitSam;
             }
         }
 
@@ -36,25 +85,25 @@ namespace StardropPoolMinigame.Render.Drawers
                     case PortraitEmotion.Glad:
                     case PortraitEmotion.Laugh:
                     case PortraitEmotion.Smurk:
-                        return Textures.PORTRAIT_SAM_LAUGH_BOUNDS;
+                        return Textures.Portrait.Sam.LAUGH;
                     case PortraitEmotion.Sad:
-                        return Textures.PORTRAIT_SAM_SAD_BOUNDS;
+                        return Textures.Portrait.Sam.SAD;
                     case PortraitEmotion.Glare:
-                        return Textures.PORTRAIT_SAM_GLARE_BOUNDS;
+                        return Textures.Portrait.Sam.GLARE;
                     case PortraitEmotion.Confused:
                     case PortraitEmotion.Frustrated:
-                        return Textures.PORTRAIT_SAM_FRUSTRATED_BOUNDS;
+                        return Textures.Portrait.Sam.FRUSTRATED;
                     case PortraitEmotion.Oops:
-                        return Textures.PORTRAIT_SAM_OOPS_BOUNDS;
+                        return Textures.Portrait.Sam.OOPS;
                     case PortraitEmotion.StraightFace:
-                        return Textures.PORTRAIT_SAM_STRAIGHT_FACE_BOUNDS;
+                        return Textures.Portrait.Sam.STRAIGHT_FACE;
                     case PortraitEmotion.Suprised:
                     case PortraitEmotion.Shock:
-                        return Textures.PORTRAIT_SAM_SHOCK_BOUNDS;
+                        return Textures.Portrait.Sam.SHOCK;
                     case PortraitEmotion.Embarassed:
-                        return Textures.PORTRAIT_SAM_EMBARASSED_BOUNDS;
+                        return Textures.Portrait.Sam.EMBARASSED;
                     default:
-                        return Textures.PORTRAIT_SAM_DEFAULT_BOUNDS;
+                        return Textures.Portrait.Sam.DEFAULT;
                 }
             }
             if (((Portrait)this._entity).GetName() == OpponentType.Sebastian)
@@ -63,24 +112,24 @@ namespace StardropPoolMinigame.Render.Drawers
                 {
                     case PortraitEmotion.Confused:
                     case PortraitEmotion.Sad:
-                        return Textures.PORTRAIT_SEBASTIAN_SAD_BOUNDS;
+                        return Textures.Portrait.Sebastian.SAD;
                     case PortraitEmotion.Blush:
-                        return Textures.PORTRAIT_SEBASTIAN_BLUSH_BOUNDS;
+                        return Textures.Portrait.Sebastian.BLUSH;
                     case PortraitEmotion.Frustrated:
                     case PortraitEmotion.Oops:
                     case PortraitEmotion.Shock:
                     case PortraitEmotion.Embarassed:
                     case PortraitEmotion.Suprised:
                     case PortraitEmotion.Glare:
-                        return Textures.PORTRAIT_SEBASTIAN_GLARE_BOUNDS;
+                        return Textures.Portrait.Sebastian.GLARE;
                     case PortraitEmotion.Glad:
-                        return Textures.PORTRAIT_SEBASTIAN_GLAD_BOUNDS;
+                        return Textures.Portrait.Sebastian.GLAD;
                     case PortraitEmotion.Laugh:
                     case PortraitEmotion.Smurk:
-                        return Textures.PORTRAIT_SEBASTIAN_SMURK_BOUNDS;
+                        return Textures.Portrait.Sebastian.SMURK;
                     case PortraitEmotion.StraightFace:
                     default:
-                        return Textures.PORTRAIT_SEBASTIAN_DEFAULT_BOUNDS;
+                        return Textures.Portrait.Sebastian.DEFAULT;
                 }
             }
             if (((Portrait)this._entity).GetName() == OpponentType.Abigail)
@@ -91,24 +140,23 @@ namespace StardropPoolMinigame.Render.Drawers
                     case PortraitEmotion.Glad:
                     case PortraitEmotion.Embarassed:
                     case PortraitEmotion.Laugh:
-                        return Textures.PORTRAIT_ABIGAIL_LAUGH_BOUNDS;
+                        return Textures.Portrait.Abigail.LAUGH;
                     case PortraitEmotion.Sad:
-                        return Textures.PORTRAIT_ABIGAIL_SAD_BOUNDS;
+                        return Textures.Portrait.Abigail.SAD;
                     case PortraitEmotion.Confused:
-                        return Textures.PORTRAIT_ABIGAIL_CONFUSED_BOUNDS;
+                        return Textures.Portrait.Abigail.CONFUSED;
                     case PortraitEmotion.Blush:
-                        return Textures.PORTRAIT_ABIGAIL_BLUSH_BOUNDS;
+                        return Textures.Portrait.Abigail.BLUSH;
                     case PortraitEmotion.Frustrated:
                     case PortraitEmotion.Oops:
                     case PortraitEmotion.Shock:
                     case PortraitEmotion.Glare:
-                        Logger.Info("GLARING");
-                        return Textures.PORTRAIT_ABIGAIL_GLARE_BOUNDS;
+                        return Textures.Portrait.Abigail.GLARE;
                     case PortraitEmotion.Suprised:
-                        return Textures.PORTRAIT_ABIGAIL_SUPRISED_BOUNDS;
+                        return Textures.Portrait.Abigail.SUPRISED;
                     case PortraitEmotion.StraightFace:
                     default:
-                        return Textures.PORTRAIT_ABIGAIL_DEFAULT_BOUNDS;
+                        return Textures.Portrait.Abigail.DEFAULT;
                 }
             }
             if (((Portrait)this._entity).GetName() == OpponentType.Gus)
@@ -119,23 +167,23 @@ namespace StardropPoolMinigame.Render.Drawers
                     case PortraitEmotion.Embarassed:
                     case PortraitEmotion.Shock:
                     case PortraitEmotion.Laugh:
-                        return Textures.PORTRAIT_GUS_LAUGH_BOUNDS;
+                        return Textures.Portrait.Gus.LAUGH;
                     case PortraitEmotion.Oops:
                     case PortraitEmotion.Blush:
-                        return Textures.PORTRAIT_GUS_BLUSH_BOUNDS;
+                        return Textures.Portrait.Gus.BLUSH;
                     case PortraitEmotion.Frustrated:
                     case PortraitEmotion.Sad:
                     case PortraitEmotion.Confused:
                     case PortraitEmotion.Glare:
-                        return Textures.PORTRAIT_GUS_GLARE_BOUNDS;
+                        return Textures.Portrait.Gus.GLARE;
                     case PortraitEmotion.StraightFace:
                     case PortraitEmotion.Glad:
                     case PortraitEmotion.Smurk:
                     default:
-                        return Textures.PORTRAIT_GUS_DEFAULT_BOUNDS;
+                        return Textures.Portrait.Gus.DEFAULT;
                 }
             }
-            return Textures.PORTRAIT_SAM_DEFAULT_BOUNDS;
+            return Textures.Portrait.Sam.DEFAULT;
         }
 
         protected override Color GetRawColor()
@@ -143,6 +191,10 @@ namespace StardropPoolMinigame.Render.Drawers
             if (((Portrait)this._entity).IsSilhouette())
             {
                 return Color.Black;
+            }
+            if (((Portrait)this._entity).IsDarker())
+            {
+                return Textures.Color.Shader.SHADOWED;
             }
             return Color.White;
         }

@@ -1,4 +1,5 @@
 ﻿using StardropPoolMinigame.Constants;
+using StardropPoolMinigame.Enums;
 using StardropPoolMinigame.Helpers;
 
 namespace StardropPoolMinigame.Players
@@ -9,12 +10,13 @@ namespace StardropPoolMinigame.Players
 
         public Sam() : base(
             Name,
+            OpponentType.Sam,
             Multiplayer.GetNewMultiplayerId(),
-            SoundConstants.SAM_THEME,
-            OpponentConstants.SAM_CONFIDENCE,
-            OpponentConstants.SAM_COMPLEXITY,
-            OpponentConstants.SAM_ANGLE_ACCURACY,
-            OpponentConstants.SAM_POWER_ACCURACY)
+            SoundConstants.Theme.SEBASTIAN,
+            OpponentConstants.Sam.CONFIDENCE,
+            OpponentConstants.Sam.COMPLEXITY,
+            OpponentConstants.Sam.ANGLE_ACCURACY,
+            OpponentConstants.Sam.POWER_ACCURACY)
         {
         }
     }

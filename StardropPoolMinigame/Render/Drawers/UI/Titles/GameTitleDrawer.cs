@@ -27,7 +27,7 @@ namespace StardropPoolMinigame.Render.Drawers
 
         protected override Rectangle GetRawSource()
         {
-            return Textures.TITLE_GAME_BOUNDS;
+            return Textures.GAME_TITLE;
         }
     }
 }

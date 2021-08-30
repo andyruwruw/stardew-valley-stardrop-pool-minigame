@@ -23,8 +23,8 @@ namespace StardropPoolMinigame.Render.Drawers
             SpriteEffects? overrideEffects = null,
             float? overrideLayerDepth = null)
         {
-            int rows = (int)Math.Ceiling((double)(RenderConstants.MINIGAME_SCREEN_HEIGHT / this.GetSource(overrideSource).Height));
-            int cols = (int)Math.Ceiling((double)(RenderConstants.MINIGAME_SCREEN_WIDTH / this.GetSource(overrideSource).Width));
+            int rows = (int)Math.Ceiling((double)(RenderConstants.MinigameScreen.HEIGHT / this.GetSource(overrideSource).Height));
+            int cols = (int)Math.Ceiling((double)(RenderConstants.MinigameScreen.WIDTH / this.GetSource(overrideSource).Width));
 
             for (int i = 0; i < rows; i++)
             {
@@ -49,7 +49,7 @@ namespace StardropPoolMinigame.Render.Drawers
 
         protected override Rectangle GetRawSource()
         {
-            return Textures.BACKGROUND_FLOOR_TILES_HIGH_RESOLUTION_BOUNDS;
+            return Textures.FLOOR_TILES;
         }
 
         private void DrawSingleFloorTile(
@@ -64,7 +64,7 @@ namespace StardropPoolMinigame.Render.Drawers
             float? overrideLayerDepth = null)
         {
             batch.Draw(
-                this.GetTileSheet(),
+                this.GetTileset(),
                 destination,
                 this.GetSource(overrideSource),
                 this.GetColor(overrideColor),

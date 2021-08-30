@@ -1,37 +1,52 @@
-﻿namespace StardropPoolMinigame.Constants
+﻿using StardropPoolMinigame.Enums;
+
+namespace StardropPoolMinigame.Constants
 {
     class OpponentConstants
     {
-        public static int SAM_CONFIDENCE = 1;
+        public class Sam
+        {
+            public static int CONFIDENCE = 1;
 
-        public static int SAM_COMPLEXITY = 1;
+            public static int COMPLEXITY = 1;
 
-        public static int SAM_ANGLE_ACCURACY = 1;
+            public static int ANGLE_ACCURACY = 1;
 
-        public static int SAM_POWER_ACCURACY = 1;
+            public static int POWER_ACCURACY = 1;
+        }
 
-        public static int SEBASTIAN_CONFIDENCE = 1;
+        public class Sebastian
+        {
+            public static int CONFIDENCE = 1;
 
-        public static int SEBASTIAN_COMPLEXITY = 1;
+            public static int COMPLEXITY = 1;
 
-        public static int SEBASTIAN_ANGLE_ACCURACY = 1;
+            public static int ANGLE_ACCURACY = 1;
 
-        public static int SEBASTIAN_POWER_ACCURACY = 1;
+            public static int POWER_ACCURACY = 1;
 
-        public static int ABIGAIL_CONFIDENCE = 1;
+        }
 
-        public static int ABIGAIL_COMPLEXITY = 1;
+        public class Abigail
+        {
+            public static int CONFIDENCE = 1;
 
-        public static int ABIGAIL_ANGLE_ACCURACY = 1;
+            public static int COMPLEXITY = 1;
 
-        public static int ABIGAIL_POWER_ACCURACY = 1;
+            public static int ANGLE_ACCURACY = 1;
 
-        public static int GUS_CONFIDENCE = 1;
+            public static int POWER_ACCURACY = 1;
+        }
 
-        public static int GUS_COMPLEXITY = 1;
+        public class Gus
+        {
+            public static int CONFIDENCE = 1;
 
-        public static int GUS_ANGLE_ACCURACY = 1;
+            public static int COMPLEXITY = 1;
 
-        public static int GUS_POWER_ACCURACY = 1;
+            public static int ANGLE_ACCURACY = 1;
+
+            public static int POWER_ACCURACY = 1;
+        }
     }
 }

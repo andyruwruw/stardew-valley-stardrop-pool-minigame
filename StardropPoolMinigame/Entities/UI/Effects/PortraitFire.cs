@@ -3,14 +3,15 @@ using StardropPoolMinigame.Enums;
 using StardropPoolMinigame.Render;
 using StardropPoolMinigame.Render.Drawers;
 using StardropPoolMinigame.Render.Filters;
+using System.Collections.Generic;
 
 namespace StardropPoolMinigame.Entities
 {
-    class Cue : EntityStatic
+    class PortraitFire : EntityStatic
     {
-        public Cue(
-            Origin origin, 
-            Vector2 anchor, 
+        public PortraitFire(
+            Origin origin,
+            Vector2 anchor,
             float layerDepth,
             IFilter enteringTransition,
             IFilter exitingTransition
@@ -21,22 +22,28 @@ namespace StardropPoolMinigame.Entities
             enteringTransition,
             exitingTransition)
         {
-            this.SetDrawer(new CueDrawer(this));
+            this.SetDrawer(new PortraitFireDrawer(this));
         }
 
         public override string GetId()
         {
-            return $"cue-{this._id}";
-        }
-
-        public override float GetTotalWidth()
-        {
-            return Textures.Cue.BASIC.Width;
+            return $"portrait-fire-{this._id}";
         }
 
         public override float GetTotalHeight()
         {
-            return Textures.Cue.BASIC.Height;
+            return Textures.PortraitFire.FRAME_1.Height;
+        }
+
+        public override float GetTotalWidth()
+        {
+            return Textures.PortraitFire.FRAME_1.Width;
+        }
+
+        protected override void InicializeFilters()
+        {
+            this._filters = new List<IFilter>();
+            this._filters.Add(new PortraitFireAnimation($"{this.GetId()}-animation"));
         }
     }
 }

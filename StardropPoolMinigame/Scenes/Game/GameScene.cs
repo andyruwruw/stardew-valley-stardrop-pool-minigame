@@ -34,10 +34,12 @@ namespace StardropPoolMinigame.Scenes
             IPlayer player2,
             IRules rules = null) : base()
         {
+            this.InicializeLists();
             this.InicializePlayers(player1, player2);
             this._rules = rules;
 
-            
+            this.AddDependentEntities();
+
             this._pocketedBalls = new List<Ball>();
             this._events = new List<GameEvent>();
             this._isFinished = false;
@@ -69,7 +71,10 @@ namespace StardropPoolMinigame.Scenes
         {
             // Background
             this._entities.Add(new FloorTiles(null, null));
+        }
 
+        private void AddDependentEntities()
+        {
             // Game Entities
             this._table = this._rules.GenerateTable();
             this._entities.Add(this._table);

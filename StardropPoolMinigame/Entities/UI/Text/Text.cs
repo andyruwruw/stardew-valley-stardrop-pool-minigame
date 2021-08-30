@@ -14,9 +14,11 @@ namespace StardropPoolMinigame.Entities
 
         private int _maxWidth;
 
-        private int _resultingHeight;
+        private float _resultingHeight;
 
         private IList<Character> _characters;
+
+        private float _scale;
 
         private bool _isCentered;
 
@@ -30,6 +32,7 @@ namespace StardropPoolMinigame.Entities
             IFilter exitingTransition,
             string text,
             int maxWidth,
+            float scale = 1f,
             bool isCentered = false,
             bool isHoverable = false
         ) : base(
@@ -39,9 +42,9 @@ namespace StardropPoolMinigame.Entities
             enteringTransition,
             exitingTransition)
         {
-            Logger.Info(text);
             this._text = text;
             this._maxWidth = maxWidth;
+            this._scale = scale;
             this._isCentered = isCentered;
             this._isHoverable = isHoverable;
 
@@ -57,6 +60,11 @@ namespace StardropPoolMinigame.Entities
         public override float GetTotalWidth()
         {
             return this._maxWidth;
+        }
+
+        public float GetScale()
+        {
+            return this._scale;
         }
 
         public override void ClickCallback()
@@ -79,6 +87,12 @@ namespace StardropPoolMinigame.Entities
             this.InicializeCharacters();
         }
 
+        public override void SetAnchor(Vector2 anchor)
+        {
+            this._anchor = anchor;
+            this.InicializeCharacters();
+        }
+
         public IList<Character> GetCharacters()
         {
             return this._characters;
@@ -96,10 +110,10 @@ namespace StardropPoolMinigame.Entities
         private void InicializeCharacters()
         {
             string word = "";
-            int wordLength = 0;
+            float wordLength = 0;
 
             string line = "";
-            int lineLength = 0;
+            float lineLength = 0;
 
             int lineIndex = 0;
 
@@ -111,7 +125,7 @@ namespace StardropPoolMinigame.Entities
             foreach (char character in this._text)
             {
                 IList<string> finishedLines = new List<string>();
-                IList<int> finishedLineLengths = new List<int>();
+                IList<float> finishedLineLengths = new List<float>();
 
                 if (character == ' ' || character == '\n' || characterIndex == this._text.Length - 1)
                 {
@@ -120,10 +134,10 @@ namespace StardropPoolMinigame.Entities
                         Rectangle characterBounds = Textures.GetCharacterBoundsFromChar(character);
 
                         word = $"{word}{character}";
-                        wordLength += RenderConstants.FONT_SPACE_BETWEEN_CHARACTERS + characterBounds.Width;
+                        wordLength += RenderConstants.Font.SPACE_BETWEEN_CHARACTERS * this._scale + characterBounds.Width * this._scale;
                     }
 
-                    if (lineLength + RenderConstants.FONT_SPACE_WIDTH + wordLength > this._maxWidth)
+                    if (lineLength + RenderConstants.Font.SPACE_WIDTH * this._scale + wordLength > this._maxWidth)
                     {
                         finishedLines.Add(line);
                         finishedLineLengths.Add(lineLength);
@@ -134,19 +148,32 @@ namespace StardropPoolMinigame.Entities
                             finishedLineLengths.Add(wordLength);
                         } else
                         {
-                            line = $"{word}";
+                            line = word;
                             lineLength = wordLength;
                         }
                     } else if (character == '\n' || characterIndex == this._text.Length - 1) {
-                        finishedLines.Add($"{line} {word}");
-                        finishedLineLengths.Add(lineLength + RenderConstants.FONT_SPACE_WIDTH + wordLength);
+                        if (line != "")
+                        {
+                            finishedLines.Add($"{line} {word}");
+                            finishedLineLengths.Add(lineLength + RenderConstants.Font.SPACE_WIDTH * this._scale + wordLength);
+                        } else
+                        {
+                            finishedLines.Add(word);
+                            finishedLineLengths.Add(wordLength);
+                        }
+
+                        if (character == '\n')
+                        {
+                            finishedLines.Add(" ");
+                            finishedLineLengths.Add(0);
+                        }
 
                         line = "";
                         lineLength = 0;
                     } else
                     {
                         line = $"{line} {word}";
-                        lineLength += RenderConstants.FONT_SPACE_WIDTH + wordLength;
+                        lineLength += RenderConstants.Font.SPACE_WIDTH * this._scale + wordLength;
                     }
 
                     word = "";
@@ -156,41 +183,45 @@ namespace StardropPoolMinigame.Entities
                     Rectangle characterBounds = Textures.GetCharacterBoundsFromChar(character);
 
                     word = $"{word}{character}";
-                    wordLength += RenderConstants.FONT_SPACE_BETWEEN_CHARACTERS + characterBounds.Width;
+                    wordLength += characterBounds.Width * this._scale;
+                    if (word != "")
+                    {
+                        wordLength += RenderConstants.Font.SPACE_BETWEEN_CHARACTERS * this._scale;
+                    }
                 }
 
                 if (finishedLines.Count > 0)
                 {
                     for (int i = 0; i < finishedLines.Count; i++)
                     {
-                        int cursor = 0;
-                        int leftMargin = this._isCentered ? (this._maxWidth - finishedLineLengths[i]) / 2 : 0;
+                        float cursor = 0;
+                        float leftMargin = this._isCentered ? (this._maxWidth - finishedLineLengths[i]) / 2 : 0;
 
                         foreach (char lineCharacter in finishedLines[i])
                         {
                             if (lineCharacter == ' ')
                             {
-                                cursor += RenderConstants.FONT_SPACE_WIDTH;
+                                cursor += RenderConstants.Font.SPACE_WIDTH * this._scale;
                             } else
                             {
                                 Rectangle characterBounds = Textures.GetCharacterBoundsFromChar(lineCharacter);
 
                                 this._characters.Add(new Character(
-                                    Origin.TopCenter,
+                                    Origin.TopLeft,
                                     new Vector2(
-                                        this.GetTopLeft().X + cursor + RenderConstants.FONT_SPACE_BETWEEN_CHARACTERS + leftMargin + (characterBounds.Width / 2),
-                                        this.GetTopLeft().Y + lineIndex * (RenderConstants.FONT_CHARACTER_HEIGHT + RenderConstants.FONT_LINE_SPACING)),
+                                        this.GetTopLeft().X + cursor + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS * this._scale + leftMargin,
+                                        this.GetTopLeft().Y + lineIndex * (RenderConstants.Font.CHARACTER_HEIGHT * this._scale + RenderConstants.Font.LINE_SPACING * this._scale)),
                                     this._layerDepth,
                                     this._enteringTransition,
                                     this._exitingTransition,
                                     lineCharacter));
 
-                                cursor += RenderConstants.FONT_SPACE_BETWEEN_CHARACTERS + characterBounds.Width;
+                                cursor += RenderConstants.Font.SPACE_BETWEEN_CHARACTERS * this._scale + characterBounds.Width * this._scale;
                             }
                         }
 
                         lineIndex += 1;
-                        this._resultingHeight += RenderConstants.FONT_CHARACTER_HEIGHT + RenderConstants.FONT_LINE_SPACING;
+                        this._resultingHeight += RenderConstants.Font.CHARACTER_HEIGHT * this._scale + RenderConstants.Font.LINE_SPACING * this._scale;
                     }
 
                     finishedLines.Clear();

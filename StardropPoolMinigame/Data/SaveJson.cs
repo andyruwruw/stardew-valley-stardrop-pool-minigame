@@ -2,17 +2,19 @@
 {
     class SaveJson
     {
-        public int BestGame { get; set; } = -1;
+        public int ArcadeTokens { get; set; } = 0;
+
+        public int HighscoreAgainstSam { get; set; } = -1;
+
+        public int HighscoreAgainstSebastian { get; set; } = -1;
+
+        public int HighscoreAgainstAbigail { get; set; } = -1;
+
+        public int HighscoreAgainstGus { get; set; } = -1;
 
         public string CurrentCue { get; set; } = "basic";
 
-        public bool DefeatedSam { get; set; } = false;
-
-        public bool DefeatedSebastian { get; set; } = false;
-
-        public bool DefeatedAbigail { get; set; } = false;
-
-        public bool DefeatedGus { get; set; } = false;
+        public string UnlockedCues { get; set; } = "basic";
 
         public int WinsAgainstSam { get; set; } = 0;
 
@@ -29,5 +31,9 @@
         public int WinsAgainstGus { get; set; } = 0;
 
         public int LossesAgainstGus { get; set; } = 0;
+
+        public bool UnlockedAbigail { get; set; } = false;
+
+        public bool UnlockedGus { get; set; } = false;
     }
 }

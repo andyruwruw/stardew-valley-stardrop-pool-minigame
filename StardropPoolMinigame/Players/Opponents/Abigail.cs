@@ -1,4 +1,5 @@
 ﻿using StardropPoolMinigame.Constants;
+using StardropPoolMinigame.Enums;
 using StardropPoolMinigame.Helpers;
 
 namespace StardropPoolMinigame.Players
@@ -9,12 +10,13 @@ namespace StardropPoolMinigame.Players
 
         public Abigail() : base(
             Name,
+            OpponentType.Abigail,
             Multiplayer.GetNewMultiplayerId(),
-            SoundConstants.ABIGAIL_THEME,
-            OpponentConstants.ABIGAIL_CONFIDENCE,
-            OpponentConstants.ABIGAIL_COMPLEXITY,
-            OpponentConstants.ABIGAIL_ANGLE_ACCURACY,
-            OpponentConstants.ABIGAIL_POWER_ACCURACY)
+            SoundConstants.Theme.ABIGAIL,
+            OpponentConstants.Abigail.CONFIDENCE,
+            OpponentConstants.Abigail.COMPLEXITY,
+            OpponentConstants.Abigail.ANGLE_ACCURACY,
+            OpponentConstants.Abigail.POWER_ACCURACY)
         {
         }
     }

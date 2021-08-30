@@ -1,4 +1,5 @@
 ﻿using StardropPoolMinigame.Constants;
+using StardropPoolMinigame.Enums;
 using StardropPoolMinigame.Helpers;
 
 namespace StardropPoolMinigame.Players
@@ -9,12 +10,13 @@ namespace StardropPoolMinigame.Players
 
         public Gus() : base(
             Name,
+            OpponentType.Gus,
             Multiplayer.GetNewMultiplayerId(),
-            SoundConstants.GUS_THEME,
-            OpponentConstants.GUS_CONFIDENCE,
-            OpponentConstants.GUS_COMPLEXITY,
-            OpponentConstants.GUS_ANGLE_ACCURACY,
-            OpponentConstants.GUS_POWER_ACCURACY)
+            SoundConstants.Theme.GUS,
+            OpponentConstants.Gus.CONFIDENCE,
+            OpponentConstants.Gus.COMPLEXITY,
+            OpponentConstants.Gus.ANGLE_ACCURACY,
+            OpponentConstants.Gus.POWER_ACCURACY)
         {
         }
     }

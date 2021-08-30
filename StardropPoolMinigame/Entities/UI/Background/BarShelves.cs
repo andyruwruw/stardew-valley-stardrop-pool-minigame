@@ -31,12 +31,12 @@ namespace StardropPoolMinigame.Entities
 
         public override float GetTotalWidth()
         {
-            return Textures.BACKGROUND_BAR_SHELVES_BOUNDS.Width;
+            return Textures.BAR_SHELVES.Width;
         }
 
         public override float GetTotalHeight()
         {
-            return Textures.BACKGROUND_BAR_SHELVES_BOUNDS.Height;
+            return Textures.BAR_SHELVES.Height;
         }
     }
 }

@@ -82,6 +82,7 @@
     <Compile Include="Entities\UI\Buttons\BallButton.cs" />
     <Compile Include="Entities\UI\Buttons\Button.cs" />
     <Compile Include="Entities\UI\Buttons\SubmitButton.cs" />
+    <Compile Include="Entities\UI\Effects\PortraitFire.cs" />
     <Compile Include="Entities\UI\Elements\PocketedBalls.cs" />
     <Compile Include="Entities\UI\Elements\Portrait.cs" />
     <Compile Include="Entities\UI\Titles\GameTitle.cs" />
@@ -116,6 +117,8 @@
     <Compile Include="Render\Drawers\Drawer.cs" />
     <Compile Include="Render\Drawers\Game\BallDrawer.cs" />
     <Compile Include="Render\Drawers\UI\Background\SolidDrawer.cs" />
+    <Compile Include="Render\Drawers\UI\Effects\PortraitFireDrawer.cs" />
+    <Compile Include="Render\Drawers\UI\Effects\PortraitRaysDrawer.cs" />
     <Compile Include="Render\Drawers\UI\Elements\CursorDrawer.cs" />
     <Compile Include="Render\Drawers\UI\Elements\PortraitDrawer.cs" />
     <Compile Include="Render\Drawers\Game\CueDrawer.cs" />
@@ -128,6 +131,8 @@
     <Compile Include="Render\Drawers\UI\Titles\GameTitleDrawer.cs" />
     <Compile Include="Render\Drawers\UI\Titles\PageTitleDrawer.cs" />
     <Compile Include="Render\Filters\Animations\Animation.cs" />
+    <Compile Include="Render\Filters\Animations\PortraitFireAnimation.cs" />
+    <Compile Include="Render\Filters\Animations\Rotate.cs" />
     <Compile Include="Render\Filters\Filter.cs" />
     <Compile Include="Render\Filters\IFilter.cs" />
     <Compile Include="Render\Filters\Animations\Wiggle.cs" />
@@ -143,6 +148,10 @@
     <Compile Include="Rules\IRules.cs" />
     <Compile Include="Rules\NineBall.cs" />
     <Compile Include="Scenes\Dialog\DialogScene.cs" />
+    <Compile Include="Scenes\Dialog\Scripts\IntroductionSam.cs" />
+    <Compile Include="Scenes\Dialog\Scripts\IntroductionSebastian.cs" />
+    <Compile Include="Scenes\Dialog\Scripts\RevealAbigail.cs" />
+    <Compile Include="Scenes\Dialog\Scripts\RevealGus.cs" />
     <Compile Include="Scenes\Game\GameScene.cs" />
     <Compile Include="Scenes\Game\States\Turn.cs" />
     <Compile Include="Scenes\IScene.cs" />
@@ -160,8 +169,8 @@
     <Compile Include="Structures\Primitives\Rectangle.cs" />
     <Compile Include="Structures\Primitives\Triangle.cs" />
     <Compile Include="Structures\Trees\QuadTree.cs" />
-    <Compile Include="Entities\UI\Effects\Cursor.cs" />
-    <Compile Include="Entities\UI\Effects\Rays.cs" />
+    <Compile Include="Entities\UI\Elements\Cursor.cs" />
+    <Compile Include="Entities\UI\Effects\PortraitRays.cs" />
     <Compile Include="Render\Drawers\UI\Background\FloorTilesDrawer.cs" />
     <Compile Include="Rules\RuleSet.cs" />
     <Compile Include="Helpers\Translations.cs" />
