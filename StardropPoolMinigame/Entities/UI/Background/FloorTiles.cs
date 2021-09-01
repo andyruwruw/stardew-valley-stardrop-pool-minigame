@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using StardropPoolMinigame.Constants;
 using StardropPoolMinigame.Enums;
 using StardropPoolMinigame.Render;
 using StardropPoolMinigame.Render.Drawers;
@@ -14,7 +15,7 @@ namespace StardropPoolMinigame.Entities
         ) : base(
             Origin.TopLeft,
             new Vector2(0, 0),
-            0.0001f,
+            LayerDepthConstants.Game.FLOOR_TILES,
             enteringTransition,
             exitingTransition)
         {

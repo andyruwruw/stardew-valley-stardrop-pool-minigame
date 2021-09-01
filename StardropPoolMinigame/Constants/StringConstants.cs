@@ -139,6 +139,8 @@
                     public static string LINE2 = "sebastian.introduction.line-2";
 
                     public static string LINE3 = "sebastian.introduction.line-3";
+
+                    public static string LINE4 = "sebastian.introduction.line-4";
                 }
 
                 public class Abigail

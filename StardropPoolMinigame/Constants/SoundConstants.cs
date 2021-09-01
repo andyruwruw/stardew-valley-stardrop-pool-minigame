@@ -26,7 +26,7 @@
         {
             public static string GAME = "movieTheater";
 
-            public static string SAM = "ragtime";
+            public static string SAM = "event1";
 
             public static string SEBASTIAN = "crane_game";
 
@@ -49,6 +49,10 @@
             public static string BOTTON_PRESS = "select";
 
             public static string SUBMIT_BUTTON_PRESS = "FishHit";
+
+            public static string DIALOG_START = "dialogueCharacter";
+
+            public static string DIALOG_NEXT = "dialogueCharacter";
         }
     }
 }

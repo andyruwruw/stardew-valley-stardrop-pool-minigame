@@ -200,5 +200,21 @@ namespace StardropPoolMinigame.Constants
                 }
             }
         }
+
+        public class Game
+        {
+            public class FadeIn
+            {
+                public static IFilter Exiting()
+                {
+                    return new SlideIn(
+                        80,
+                        true,
+                        TransitionState.Exiting,
+                        20,
+                        new Vector2(0, 0));
+                }
+            }
+        }
     }
 }

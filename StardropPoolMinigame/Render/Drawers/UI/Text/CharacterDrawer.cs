@@ -2,6 +2,8 @@
 using Microsoft.Xna.Framework.Graphics;
 using StardropPoolMinigame.Constants;
 using StardropPoolMinigame.Entities;
+using StardropPoolMinigame.Render.Filters;
+using System.Collections.Generic;
 
 namespace StardropPoolMinigame.Render.Drawers
 {
@@ -25,6 +27,20 @@ namespace StardropPoolMinigame.Render.Drawers
         {
             Vector2 destination = base.GetRawDestination();
             return new Vector2(destination.X, destination.Y + (RenderConstants.Font.Y_OFFSET * RenderConstants.TileScale()));
+        }
+
+        protected override Vector2 GetDestination(Vector2? overrideDestination = null)
+        {
+            Vector2 destination = overrideDestination == null ? this.GetRawDestination() : (Vector2)overrideDestination;
+
+            IList<IFilter> filters = this._entity.GetFilters();
+
+            foreach (IFilter filter in filters)
+            {
+                destination = filter.ExecuteDestination(destination);
+            }
+
+            return destination;
         }
     }
 }

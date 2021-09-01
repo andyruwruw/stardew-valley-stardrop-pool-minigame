@@ -14,17 +14,7 @@ namespace StardropPoolMinigame.Rules
         {
         }
 
-        public override Table GenerateTable()
-        {
-            return new Table(
-                Origin.CenterCenter,
-                new Vector2(RenderConstants.MinigameScreen.WIDTH / 2, RenderConstants.MinigameScreen.HEIGHT / 2),
-                0.0030f,
-                null,
-                null);
-        }
-
-        public override QuadTree GenerateInitialBalls()
+        public override QuadTree GenerateInitialBalls(Vector2 footSpot, Direction rackOrientation)
         {
             QuadTree quadTree = new QuadTree(new Primitives.Rectangle(new Vector2(0, 0), 2, 2));
 
@@ -48,9 +38,9 @@ namespace StardropPoolMinigame.Rules
         public override IList<GameEvent> BallPocketed(
             IPlayer player,
             IList<Ball> balls,
-            Pocket pocket,
+            TableSegment pocket,
             IList<Ball> remaining,
-            Pocket target = null)
+            TableSegment target = null)
         {
             IList<GameEvent> events = new List<GameEvent>();
 

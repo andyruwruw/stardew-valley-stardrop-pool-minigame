@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using StardropPoolMinigame.Constants;
 using StardropPoolMinigame.Entities;
+using System.Collections.Generic;
 
 namespace StardropPoolMinigame.Render.Drawers
 {
@@ -21,11 +23,32 @@ namespace StardropPoolMinigame.Render.Drawers
             SpriteEffects? overrideEffects = null,
             float? overrideLayerDepth = null)
         {
+            IList<IList<TableSegment>> grid = ((Table)this._entity).GetTableSegments();
+
+            for (int i = 0; i < grid.Count; i++)
+            {
+                for (int j = 0; j < grid[i].Count; j++)
+                {
+                    if (grid[i][j] != null)
+                    {
+                        grid[i][j].GetDrawer().Draw(
+                            batch,
+                            overrideDestination,
+                            overrideSource,
+                            overrideColor,
+                            overrideRotation,
+                            overrideOrigin,
+                            overrideScale,
+                            overrideEffects,
+                            overrideLayerDepth);
+                    }
+                }
+            }
         }
 
         protected override Rectangle GetRawSource()
         {
-            return new Rectangle();
+            return Textures.Table.Edge.Front.NORTH;
         }
     }
 }

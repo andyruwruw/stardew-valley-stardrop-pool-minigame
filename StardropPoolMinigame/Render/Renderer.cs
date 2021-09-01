@@ -2,7 +2,6 @@
 using Microsoft.Xna.Framework.Graphics;
 using StardropPoolMinigame.Constants;
 using StardropPoolMinigame.Entities;
-using StardropPoolMinigame.Enums;
 using StardropPoolMinigame.Render.Drawers;
 using StardropPoolMinigame.Scenes;
 using System.Collections.Generic;
@@ -121,52 +120,52 @@ namespace StardropPoolMinigame.Render
                 null,
                 null,
                 Color.Black,
-                true));
+                isRawCoords: true));
 
             // Foreground
             this._entities.Add(new Solid(
                 new Primitives.Rectangle(
                     new Vector2(0, 0),
                     (int)RenderConstants.AdjustedScreenWidthMargin(),
-                    (int)RenderConstants.AdjustedScreenWidthMargin()),
-                1.0000f,
+                    (int)RenderConstants.ViewportHeight()),
+                0.9000f,
                 null,
                 null,
                 Textures.Color.Solid.MARGIN,
-                true));
+                isRawCoords: true));
 
             this._entities.Add(new Solid(
                 new Primitives.Rectangle(
                     new Vector2(RenderConstants.AdjustedScreenWidthMargin() + RenderConstants.AdjustedScreenWidth(), 0),
                     (int)RenderConstants.AdjustedScreenWidthMargin(),
                     (int)RenderConstants.ViewportHeight()),
-                1.0000f,
+                0.9000f,
                 null,
                 null,
                 Textures.Color.Solid.MARGIN,
-                true));
+                isRawCoords: true));
 
             this._entities.Add(new Solid(
                 new Primitives.Rectangle(
                     new Vector2(RenderConstants.AdjustedScreenWidthMargin(), 0),
                     (int)RenderConstants.AdjustedScreenWidth(),
                     (int)RenderConstants.AdjustedScreenHeightMargin()),
-                1.0000f,
+                0.9000f,
                 null,
                 null,
                 Textures.Color.Solid.MARGIN,
-                true));
+                isRawCoords: true));
 
             this._entities.Add(new Solid(
                 new Primitives.Rectangle(
-                    new Vector2(RenderConstants.AdjustedScreenWidthMargin() + RenderConstants.AdjustedScreenWidth(), RenderConstants.AdjustedScreenHeightMargin() + RenderConstants.AdjustedScreenHeight()),
+                    new Vector2(RenderConstants.AdjustedScreenWidthMargin(), RenderConstants.AdjustedScreenHeight() + RenderConstants.AdjustedScreenHeightMargin()),
                     (int)RenderConstants.AdjustedScreenWidth(),
                     (int)RenderConstants.AdjustedScreenHeightMargin()),
-                1.0000f,
+                0.9000f,
                 null,
                 null,
                 Textures.Color.Solid.MARGIN,
-                true));
+                isRawCoords: true));
         }
     }
 }

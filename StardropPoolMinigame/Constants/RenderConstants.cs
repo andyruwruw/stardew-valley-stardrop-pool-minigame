@@ -170,6 +170,14 @@ namespace StardropPoolMinigame.Constants
                 public static int FRAME_DURATION = 4;
             }
 
+            public class TableSegment
+            {
+                public static int MARGIN = 3;
+
+                public static int BORDER = 10;
+
+                public static int LIP = 5;
+            }
         }
 
         public class Scenes

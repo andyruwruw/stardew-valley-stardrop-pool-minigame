@@ -79,6 +79,7 @@ namespace StardropPoolMinigame.Scenes
 
         public override void ReceiveLeftClick()
         {
+            // Check if buttons are clicked
             if (this._sebastianPortrait.IsHovered())
             {
                 this._sebastianPortrait.ClickCallback();
@@ -118,8 +119,12 @@ namespace StardropPoolMinigame.Scenes
         {
         }
 
+        /// <summary>
+        /// Updates entities based on state 
+        /// </summary>
         private void UpdatePortraits()
         {
+            // Darken out unselected portraits
             foreach (Portrait portrait in this._portraits)
             {
                 if (portrait.GetName() == OpponentType.Abigail)
@@ -136,6 +141,7 @@ namespace StardropPoolMinigame.Scenes
                 }
             }
 
+            // Reposition cursor and set name to selected opponent
             float centerX = RenderConstants.MinigameScreen.WIDTH / 2;
             float cursorTopMargin = Textures.BAR_SHELVES.Height - Textures.Portrait.Sam.DEFAULT.Height - RenderConstants.Scenes.CharacterSelect.Cursor.BOTTOM_MARGIN;
             float portraitSeparation = Textures.Portrait.Sam.DEFAULT.Width;
@@ -186,6 +192,9 @@ namespace StardropPoolMinigame.Scenes
             this._selectedName.SetTransitionState(TransitionState.Entering, true);
         }
 
+        /// <summary>
+        /// Initiate exiting transition and create GameScene / DialogScene
+        /// </summary>
         private void CharacterSelected()
         {
             this._challengeButton.SetTransitionState(TransitionState.Dead);
@@ -220,7 +229,7 @@ namespace StardropPoolMinigame.Scenes
             this._cursor.SetExitingTransition(TransitionConstants.CharacterSelect.Portrait.ActiveExiting());
             this._cursor.SetTransitionState(TransitionState.Exiting, true);
 
-            IScene gameScene = new GameScene(Player.GetMainPlayer(), this._opponent, RuleSet.GetDefaultRules());
+            IScene gameScene = new GameScene(Player.GetMainPlayer(), this._opponent);
             this._newScene = new DialogScene(gameScene);
         }
 

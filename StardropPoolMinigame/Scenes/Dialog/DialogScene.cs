@@ -2,6 +2,7 @@
 using StardropPoolMinigame.Constants;
 using StardropPoolMinigame.Entities;
 using StardropPoolMinigame.Enums;
+using StardropPoolMinigame.Helpers;
 using StardropPoolMinigame.Scenes.Dialog.Scripts;
 
 namespace StardropPoolMinigame.Scenes
@@ -25,6 +26,8 @@ namespace StardropPoolMinigame.Scenes
             this._currentRecitation = this._script.GetNext();
 
             this.AddDependentEntities();
+
+            Sound.PlaySound(SoundConstants.Feedback.DIALOG_START);
         }
 
         public override string GetKey()
@@ -34,6 +37,8 @@ namespace StardropPoolMinigame.Scenes
 
         public override void ReceiveLeftClick()
         {
+            Sound.PlaySound(SoundConstants.Feedback.DIALOG_NEXT);
+
             Recitation next = this._script.GetNext();
 
             if (next == null)

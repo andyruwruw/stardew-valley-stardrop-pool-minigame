@@ -22,8 +22,12 @@ namespace StardropPoolMinigame.Scenes.Dialog.Scripts
                 Translations.GetTranslation(StringConstants.Quotes.Introduction.Sebastian.LINE2)));
 
             this._recitations.Add(new Recitation(
-                PortraitEmotion.Glare,
+                PortraitEmotion.Glad,
                 Translations.GetTranslation(StringConstants.Quotes.Introduction.Sebastian.LINE3)));
+
+            this._recitations.Add(new Recitation(
+                PortraitEmotion.Smurk,
+                Translations.GetTranslation(StringConstants.Quotes.Introduction.Sebastian.LINE4)));
         }
 
         public override OpponentType GetCharacter()

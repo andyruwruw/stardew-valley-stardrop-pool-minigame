@@ -145,7 +145,6 @@ namespace StardropPoolMinigame
         {
             if (this._currentScene != null && this._currentScene.HasNewScene())
             {
-                Logger.Info("Found new scene");
                 this._enteringScene = this._currentScene.GetNewScene();
                 this._exitingScene = this._currentScene;
                 this._currentScene = null;

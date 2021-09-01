@@ -76,6 +76,8 @@ namespace StardropPoolMinigame.Constants
             /// Tile IDs for Pool Table on Front Layer
             /// </summary>
             public static IList<int> TILE_ID_FRONT = new List<int>() { 1415, 1416, 1417, 1418, 1419 };
+
+            public static int LIP_CONTACT = 2;
         }
         
         public class BallButton

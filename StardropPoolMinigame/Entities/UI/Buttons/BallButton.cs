@@ -101,6 +101,7 @@ namespace StardropPoolMinigame.Entities
         {
             base.SetTransitionState(transitionState, start);
             this._ball.SetTransitionState(transitionState, true);
+            this._text.SetTransitionState(transitionState, true);
         }
 
         public Ball GetBall()

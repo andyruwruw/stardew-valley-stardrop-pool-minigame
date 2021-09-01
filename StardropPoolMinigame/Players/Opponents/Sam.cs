@@ -12,7 +12,7 @@ namespace StardropPoolMinigame.Players
             Name,
             OpponentType.Sam,
             Multiplayer.GetNewMultiplayerId(),
-            SoundConstants.Theme.SEBASTIAN,
+            SoundConstants.Theme.SAM,
             OpponentConstants.Sam.CONFIDENCE,
             OpponentConstants.Sam.COMPLEXITY,
             OpponentConstants.Sam.ANGLE_ACCURACY,

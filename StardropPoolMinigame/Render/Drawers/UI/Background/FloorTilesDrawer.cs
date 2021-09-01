@@ -25,14 +25,15 @@ namespace StardropPoolMinigame.Render.Drawers
         {
             int rows = (int)Math.Ceiling((double)(RenderConstants.MinigameScreen.HEIGHT / this.GetSource(overrideSource).Height));
             int cols = (int)Math.Ceiling((double)(RenderConstants.MinigameScreen.WIDTH / this.GetSource(overrideSource).Width));
-
-            for (int i = 0; i < rows; i++)
+            
+            for (int i = 0; i <= rows; i++)
             {
-                for (int j = 0; j < cols; j++)
+                for (int j = 0; j <= cols; j++)
                 {
                     Vector2 destination = new Vector2(
-                        cols * this.GetSource(overrideSource).Width * this.GetScale(overrideScale),
-                        rows * this.GetSource(overrideSource).Height * this.GetScale(overrideScale));
+                        j * this.GetSource(overrideSource).Width * this.GetScale() + RenderConstants.AdjustedScreenWidthMargin(),
+                        i * this.GetSource(overrideSource).Height * this.GetScale() + RenderConstants.AdjustedScreenHeightMargin());
+
                     this.DrawSingleFloorTile(
                         batch,
                         destination,

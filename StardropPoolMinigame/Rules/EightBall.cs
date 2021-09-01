@@ -15,19 +15,55 @@ namespace StardropPoolMinigame.Rules
 
         }
 
-        public override Table GenerateTable()
+        public override QuadTree GenerateInitialBalls(Vector2 footSpot, Direction rackOrientation)
         {
-            return new Table(
-                Origin.CenterCenter,
-                new Vector2(RenderConstants.MinigameScreen.WIDTH / 2, RenderConstants.MinigameScreen.HEIGHT / 2),
-                0.0030f,
-                null,
-                null);
-        }
+            QuadTree quadTree = new QuadTree(new Primitives.Rectangle(new Vector2(0, 0), RenderConstants.MinigameScreen.WIDTH, RenderConstants.MinigameScreen.HEIGHT));
 
-        public override QuadTree GenerateInitialBalls()
-        {
-            QuadTree quadTree = new QuadTree(new Primitives.Rectangle(new Vector2(0, 0), 2, 2));
+            int ballsInRow = 1;
+            int ballsFinishedInRow = 0;
+            int row = 0;
+
+            Logger.Info("Lets create some balls");
+
+            for (int ballNumber = 1; ballNumber <= 15; ballNumber++)
+            {
+                Logger.Info($"{ballNumber}");
+                if (rackOrientation == Direction.West || rackOrientation == Direction.East)
+                {
+                    float X = footSpot.X + (row * GameConstants.Ball.RADIUS / 11 * 10 * (rackOrientation == Direction.West ? -1 : 1));
+                    float Y = footSpot.Y + (((ballsInRow * GameConstants.Ball.RADIUS * 2) + (ballsInRow - 1)) / 2 * (rackOrientation == Direction.West ? -1 : 1)) + (((ballsFinishedInRow * GameConstants.Ball.RADIUS * 2) + (ballsFinishedInRow - 1)) * (rackOrientation == Direction.West ? 1 : -1)) + GameConstants.Ball.RADIUS;
+                    Logger.Info($"Yeet heres a ball {X} {Y}");
+
+                    quadTree.Insert(new Ball(
+                        new Vector2(
+                            footSpot.X + (row * GameConstants.Ball.RADIUS / 11 * 10 * (rackOrientation == Direction.West ? -1 : 1)),
+                            footSpot.Y + (((ballsInRow * GameConstants.Ball.RADIUS * 2) + (ballsInRow - 1)) / 2 * (rackOrientation == Direction.West ? -1 : 1)) + (((ballsFinishedInRow * GameConstants.Ball.RADIUS * 2) + (ballsFinishedInRow - 1)) * (rackOrientation == Direction.West ? 1 : -1)) + GameConstants.Ball.RADIUS),
+                        LayerDepthConstants.Game.BALL,
+                        null,
+                        null,
+                        ballNumber));
+                }
+                else
+                {
+                    quadTree.Insert(new Ball(
+                        new Vector2(
+                            footSpot.X + (((ballsInRow * GameConstants.Ball.RADIUS * 2) + (ballsInRow - 1)) / 2 * (rackOrientation == Direction.South ? -1 : 1)) + (((ballsFinishedInRow * GameConstants.Ball.RADIUS * 2) + (ballsFinishedInRow - 1)) * (rackOrientation == Direction.South ? 1 : -1)) + GameConstants.Ball.RADIUS,
+                            footSpot.Y + (row * GameConstants.Ball.RADIUS / 11 * 10 * (rackOrientation == Direction.South ? 1 : -1))),
+                        LayerDepthConstants.Game.BALL,
+                        null,
+                        null,
+                        ballNumber));
+                }
+
+                ballsFinishedInRow += 1;
+
+                if (ballsFinishedInRow >= ballsInRow)
+                {
+                    ballsInRow += 1;
+                    ballsFinishedInRow = 0;
+                    row += 1;
+                }
+            }
 
             return quadTree;
         }
@@ -49,9 +85,9 @@ namespace StardropPoolMinigame.Rules
         public override IList<GameEvent> BallPocketed(
             IPlayer player,
             IList<Ball> balls,
-            Pocket pocket,
+            TableSegment pocket,
             IList<Ball> remaining,
-            Pocket target = null)
+            TableSegment target = null)
         {
             IList<GameEvent> events = new List<GameEvent>();
 
