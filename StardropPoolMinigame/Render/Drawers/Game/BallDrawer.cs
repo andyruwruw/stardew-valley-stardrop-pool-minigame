@@ -33,22 +33,28 @@ namespace StardropPoolMinigame.Render.Drawers
                 overrideScale,
                 overrideEffects,
                 overrideLayerDepth);
-            this.DrawCore(
-                batch,
-                overrideDestination,
-                overrideRotation,
-                overrideOrigin,
-                overrideScale,
-                overrideEffects,
-                overrideLayerDepth);
-            this.DrawStripes(
-                batch,
-                overrideDestination,
-                overrideRotation,
-                overrideOrigin,
-                overrideScale,
-                overrideEffects,
-                overrideLayerDepth);
+
+            if (((Ball)this._entity).GetBallType() != BallType.White)
+            {
+                this.DrawCore(
+                    batch,
+                    overrideDestination,
+                    overrideRotation,
+                    overrideOrigin,
+                    overrideScale,
+                    overrideEffects,
+                    overrideLayerDepth);
+
+                this.DrawStripes(
+                    batch,
+                    overrideDestination,
+                    overrideRotation,
+                    overrideOrigin,
+                    overrideScale,
+                    overrideEffects,
+                    overrideLayerDepth);
+            }
+            
             this.DrawShadows(
                 batch,
                 overrideDestination,
@@ -85,6 +91,8 @@ namespace StardropPoolMinigame.Render.Drawers
                     return Textures.Ball.Base.GREEN;
                 case BallColor.Maroon:
                     return Textures.Ball.Base.MAROON;
+                case BallColor.White:
+                    return Textures.Ball.Base.WHITE;
                 default:
                     return Textures.Ball.Base.BLACK;
             }

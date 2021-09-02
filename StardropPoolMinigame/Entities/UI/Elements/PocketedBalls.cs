@@ -1,10 +1,12 @@
 ﻿using Microsoft.Xna.Framework;
+using StardropPoolMinigame.Constants;
 using StardropPoolMinigame.Enums;
 using StardropPoolMinigame.Render;
+using StardropPoolMinigame.Render.Drawers;
 using StardropPoolMinigame.Render.Filters;
 using System.Collections.Generic;
 
-namespace StardropPoolMinigame.Entities.UI.Background
+namespace StardropPoolMinigame.Entities
 {
     class PocketedBalls : EntityStatic
     {
@@ -24,16 +26,17 @@ namespace StardropPoolMinigame.Entities.UI.Background
             exitingTransition)
         {
             this._balls = new List<Ball>();
+            this.SetDrawer(new PocketedBallsDrawer(this));
         }
 
         public override float GetTotalHeight()
         {
-            return Textures.POCKETED_BALLS_BORDER_BOX_SUPPORTS.Height;
+            return Textures.PocketedBalls.BORDER_BOX.Height + Textures.PocketedBalls.SUPPORTS.Height;
         }
 
         public override float GetTotalWidth()
         {
-            return Textures.POCKETED_BALLS_BORDER_BOX_SUPPORTS.Width;
+            return Textures.PocketedBalls.BORDER_BOX.Width;
         }
 
         public override void SetTransitionState(TransitionState transitionState, bool start = false)
@@ -46,9 +49,40 @@ namespace StardropPoolMinigame.Entities.UI.Background
             }
         }
 
-        public void AddBall(Ball ball)
+        public int Count()
         {
+            return this._balls.Count;
+        }
+
+        public void Clear()
+        {
+            this._balls.Clear();
+        }
+
+        public void Add(Ball ball)
+        {
+            float segmentWidth = Textures.PocketedBalls.BORDER_BOX.Width - (RenderConstants.Entities.PocketedBalls.PADDING * 2) / 7;
+            Vector2 location = Vector2.Add(
+                this.GetTopLeft(), new Vector2(this._balls.Count * segmentWidth + (segmentWidth / 2),
+                Textures.PocketedBalls.SUPPORTS.Height + Textures.PocketedBalls.BORDER_BOX.Height / 2));
+
+            ball.SetAnchor(location);
             this._balls.Add(ball);
+        }
+
+        public int IndexOf(Ball ball)
+        {
+            return this._balls.IndexOf(ball);
+        }
+
+        public void Remove(Ball ball)
+        {
+            this._balls.Remove(ball);
+        }
+
+        public IList<Ball> GetBalls()
+        {
+            return this._balls;
         }
     }
 }

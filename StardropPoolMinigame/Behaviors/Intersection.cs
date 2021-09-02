@@ -1,4 +1,5 @@
-﻿using StardropPoolMinigame.Primitives;
+﻿using StardropPoolMinigame.Helpers;
+using StardropPoolMinigame.Primitives;
 
 namespace StardropPoolMinigame.Geometry
 {
@@ -37,12 +38,18 @@ namespace StardropPoolMinigame.Geometry
 
         public static bool IntersectingRectangles(Rectangle rectangle1, Rectangle rectangle2)
         {
-            return true;
+            bool value = (!(
+                    rectangle1.GetSouthEastCorner().Y < rectangle2.GetNorthWestCorner().Y
+                    || rectangle2.GetSouthEastCorner().Y < rectangle1.GetNorthWestCorner().Y)
+                && !(
+                    rectangle1.GetNorthWestCorner().X > rectangle2.GetSouthEastCorner().X
+                    || rectangle2.GetNorthWestCorner().X > rectangle1.GetSouthEastCorner().X));
+            return value;
         }
 
         public static bool IntersectingCircles(Circle circle1, Circle circle2)
         {
-            return true;
+            return Distance.Pythagorean(circle1.GetCenter(), circle2.GetCenter()) <= circle1.GetRadius() + circle2.GetRadius();
         }
 
         public static bool IntersectingRectangleAndCircle(Rectangle rectangle, Circle circle)

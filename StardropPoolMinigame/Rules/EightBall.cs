@@ -15,44 +15,62 @@ namespace StardropPoolMinigame.Rules
 
         }
 
-        public override QuadTree GenerateInitialBalls(Vector2 footSpot, Direction rackOrientation)
+        public override QuadTree GenerateInitialBalls(Vector2 tableTopLeft, Vector2 cueBallStart, Vector2 footSpot, Direction rackOrientation)
         {
             QuadTree quadTree = new QuadTree(new Primitives.Rectangle(new Vector2(0, 0), RenderConstants.MinigameScreen.WIDTH, RenderConstants.MinigameScreen.HEIGHT));
+
+            quadTree.Insert(new Ball(
+                Vector2.Add(tableTopLeft, cueBallStart),
+                LayerDepthConstants.Game.BALL,
+                null,
+                null,
+                0));
 
             int ballsInRow = 1;
             int ballsFinishedInRow = 0;
             int row = 0;
 
-            Logger.Info("Lets create some balls");
-
             for (int ballNumber = 1; ballNumber <= 15; ballNumber++)
             {
-                Logger.Info($"{ballNumber}");
+                int adjustedBallNumber = ballNumber;
+                if (ballNumber == 5)
+                {
+                    adjustedBallNumber = 8;
+                }
+                else if (ballNumber > 5 && ballNumber <= 8)
+                {
+                    adjustedBallNumber = ballNumber - 1;
+                } else
+                {
+                }
+
+                Vector2 startingPosition = Vector2.Add(tableTopLeft, footSpot);
+
+                float totalRowWidth = ((ballsInRow * GameConstants.Ball.RADIUS * 2) + (ballsInRow - 1));
+                float halfRowWidth = totalRowWidth / 2;
+
+                float finishedRowWidth = (ballsFinishedInRow * GameConstants.Ball.RADIUS * 2) + ballsFinishedInRow;
+
+                float rowOffset = (row * GameConstants.Ball.RADIUS * 2) / 11 * 10 * (rackOrientation == Direction.West || rackOrientation == Direction.North ? -1 : 1);
+                float colOffset = (halfRowWidth * (rackOrientation == Direction.West || rackOrientation == Direction.North ? 1 : -1)) + (finishedRowWidth * (rackOrientation == Direction.West || rackOrientation == Direction.North ? -1 : 1)) + GameConstants.Ball.RADIUS;
+
                 if (rackOrientation == Direction.West || rackOrientation == Direction.East)
                 {
-                    float X = footSpot.X + (row * GameConstants.Ball.RADIUS / 11 * 10 * (rackOrientation == Direction.West ? -1 : 1));
-                    float Y = footSpot.Y + (((ballsInRow * GameConstants.Ball.RADIUS * 2) + (ballsInRow - 1)) / 2 * (rackOrientation == Direction.West ? -1 : 1)) + (((ballsFinishedInRow * GameConstants.Ball.RADIUS * 2) + (ballsFinishedInRow - 1)) * (rackOrientation == Direction.West ? 1 : -1)) + GameConstants.Ball.RADIUS;
-                    Logger.Info($"Yeet heres a ball {X} {Y}");
-
                     quadTree.Insert(new Ball(
-                        new Vector2(
-                            footSpot.X + (row * GameConstants.Ball.RADIUS / 11 * 10 * (rackOrientation == Direction.West ? -1 : 1)),
-                            footSpot.Y + (((ballsInRow * GameConstants.Ball.RADIUS * 2) + (ballsInRow - 1)) / 2 * (rackOrientation == Direction.West ? -1 : 1)) + (((ballsFinishedInRow * GameConstants.Ball.RADIUS * 2) + (ballsFinishedInRow - 1)) * (rackOrientation == Direction.West ? 1 : -1)) + GameConstants.Ball.RADIUS),
+                        Vector2.Add(startingPosition, new Vector2(rowOffset, colOffset)),
                         LayerDepthConstants.Game.BALL,
                         null,
                         null,
-                        ballNumber));
+                        adjustedBallNumber));
                 }
                 else
                 {
                     quadTree.Insert(new Ball(
-                        new Vector2(
-                            footSpot.X + (((ballsInRow * GameConstants.Ball.RADIUS * 2) + (ballsInRow - 1)) / 2 * (rackOrientation == Direction.South ? -1 : 1)) + (((ballsFinishedInRow * GameConstants.Ball.RADIUS * 2) + (ballsFinishedInRow - 1)) * (rackOrientation == Direction.South ? 1 : -1)) + GameConstants.Ball.RADIUS,
-                            footSpot.Y + (row * GameConstants.Ball.RADIUS / 11 * 10 * (rackOrientation == Direction.South ? 1 : -1))),
+                        Vector2.Add(startingPosition, new Vector2(colOffset, rowOffset)),
                         LayerDepthConstants.Game.BALL,
                         null,
                         null,
-                        ballNumber));
+                        adjustedBallNumber));
                 }
 
                 ballsFinishedInRow += 1;

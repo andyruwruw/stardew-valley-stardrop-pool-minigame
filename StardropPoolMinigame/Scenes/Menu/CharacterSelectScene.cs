@@ -229,8 +229,8 @@ namespace StardropPoolMinigame.Scenes
             this._cursor.SetExitingTransition(TransitionConstants.CharacterSelect.Portrait.ActiveExiting());
             this._cursor.SetTransitionState(TransitionState.Exiting, true);
 
-            IScene gameScene = new GameScene(Player.GetMainPlayer(), this._opponent);
-            this._newScene = new DialogScene(gameScene);
+            ISceneCreator gameSceneCreator = new GameSceneCreator(Player.GetMainPlayer(), this._opponent);
+            this._newScene = new DialogScene(gameSceneCreator);
         }
 
         protected override void AddEntities()

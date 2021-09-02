@@ -14,7 +14,7 @@ namespace StardropPoolMinigame.Scenes.Dialog.Scripts
         protected override void AddRecitations()
         {
             this._recitations.Add(new Recitation(
-                PortraitEmotion.Glad,
+                PortraitEmotion.Default,
                 Translations.GetTranslation(StringConstants.Quotes.Introduction.Sebastian.LINE1, new { name = Game1.player.displayName })));
 
             this._recitations.Add(new Recitation(

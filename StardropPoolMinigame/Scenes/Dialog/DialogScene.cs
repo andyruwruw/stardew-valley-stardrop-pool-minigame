@@ -11,6 +11,8 @@ namespace StardropPoolMinigame.Scenes
     {
         private IScene _nextScene;
 
+        private ISceneCreator _sceneCreator;
+
         private IScript _script;
 
         private Recitation _currentRecitation;
@@ -22,7 +24,20 @@ namespace StardropPoolMinigame.Scenes
         public DialogScene(IScene nextScene): base()
         {
             this._nextScene = nextScene;
+            this._sceneCreator = null;
             this._script = Script.GetScript(nextScene);
+            this._currentRecitation = this._script.GetNext();
+
+            this.AddDependentEntities();
+
+            Sound.PlaySound(SoundConstants.Feedback.DIALOG_START);
+        }
+
+        public DialogScene(ISceneCreator sceneCreator) : base()
+        {
+            this._nextScene = null;
+            this._sceneCreator = sceneCreator;
+            this._script = Script.GetScript(sceneCreator);
             this._currentRecitation = this._script.GetNext();
 
             this.AddDependentEntities();
@@ -35,6 +50,17 @@ namespace StardropPoolMinigame.Scenes
             return "dialog-scene";
         }
 
+        private void TriggerNextScene()
+        {
+            if (this._nextScene != null)
+            {
+                this._newScene = this._nextScene;
+            } else
+            {
+                this._newScene = this._sceneCreator.GetScene();
+            }
+        }
+
         public override void ReceiveLeftClick()
         {
             Sound.PlaySound(SoundConstants.Feedback.DIALOG_NEXT);
@@ -43,7 +69,7 @@ namespace StardropPoolMinigame.Scenes
 
             if (next == null)
             {
-                this._newScene = this._nextScene;
+                this.TriggerNextScene();
             } else
             {
                 this._currentRecitation = next;

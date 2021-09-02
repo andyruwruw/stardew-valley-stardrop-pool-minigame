@@ -9,7 +9,7 @@ namespace StardropPoolMinigame.Rules
 {
     interface IRules
     {
-        QuadTree GenerateInitialBalls(Vector2 footSpot, Direction rackOrientation);
+        QuadTree GenerateInitialBalls(Vector2 tableTopLeft, Vector2 cueBallStart, Vector2 footSpot, Direction rackOrientation);
 
         IList<GameEvent> NoBallHit(IList<Ball> remaining);
 

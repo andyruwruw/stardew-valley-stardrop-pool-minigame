@@ -34,7 +34,11 @@
 
         public class Game
         {
-            public static float FADE_IN = 1.0000f;
+            public static float FADE_IN = 0.9000f;
+
+            public static float POCKETED_BALLS = 0.0050f;
+
+            public static float PORTRAIT = 0.0050f;
 
             public static float BALL = 0.0040f;
 

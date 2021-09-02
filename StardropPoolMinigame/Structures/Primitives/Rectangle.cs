@@ -21,10 +21,10 @@ namespace StardropPoolMinigame.Primitives
 
         public bool Contains(Vector2 point)
         {
-            return (point.X > this.GetWestX() &&
-                point.X < this.GetEastX() &&
-                point.Y < this.GetSouthY() &&
-                point.Y > this.GetNorthY());
+            return (point.X >= this.GetWestX() &&
+                point.X <= this.GetEastX() &&
+                point.Y <= this.GetSouthY() &&
+                point.Y >= this.GetNorthY());
         }
 
         public Microsoft.Xna.Framework.Rectangle GetXnaRectangle()

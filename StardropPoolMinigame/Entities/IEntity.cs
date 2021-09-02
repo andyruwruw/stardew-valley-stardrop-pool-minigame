@@ -32,6 +32,8 @@ namespace StardropPoolMinigame.Entities
 
         Vector2 GetTopLeft();
 
+        Vector2 GetCenter();
+
         float GetTotalWidth();
 
         float GetTotalHeight();

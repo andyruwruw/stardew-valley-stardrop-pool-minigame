@@ -40,6 +40,11 @@ namespace StardropPoolMinigame.Render.Drawers
                 this.GetLayerDepth(overrideLayerDepth));
         }
 
+        public IEntity GetEntity()
+        {
+            return this._entity;
+        }
+
         public virtual bool ShouldDraw()
         {
             return this._entity.GetTransitionState() != TransitionState.Dead;

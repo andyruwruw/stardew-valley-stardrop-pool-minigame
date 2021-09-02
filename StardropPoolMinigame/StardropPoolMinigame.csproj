@@ -49,7 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Behaviors\Attributes\Orientation.cs" />
-    <Compile Include="Behaviors\Bounce.cs" />
+    <Compile Include="Behaviors\Physics\Bounce.cs" />
     <Compile Include="Behaviors\Detectors\Use.cs" />
     <Compile Include="Behaviors\Intersection.cs" />
     <Compile Include="Constants\LayerDepthConstants.cs" />
@@ -57,6 +57,7 @@
     <Compile Include="Constants\TableConstants.cs" />
     <Compile Include="Constants\TransitionConstants.cs" />
     <Compile Include="Entities\Entity.cs" />
+    <Compile Include="Entities\EntityBoid.cs" />
     <Compile Include="Entities\EntityStatic.cs" />
     <Compile Include="Entities\Game\Tables\Segments\EastEdge.cs" />
     <Compile Include="Entities\Game\Tables\Segments\EastPocket.cs" />
@@ -146,6 +147,7 @@
     <Compile Include="Render\Drawers\UI\Effects\PortraitFireDrawer.cs" />
     <Compile Include="Render\Drawers\UI\Effects\PortraitRaysDrawer.cs" />
     <Compile Include="Render\Drawers\UI\Elements\CursorDrawer.cs" />
+    <Compile Include="Render\Drawers\UI\Elements\PocketedBallsDrawer.cs" />
     <Compile Include="Render\Drawers\UI\Elements\PortraitDrawer.cs" />
     <Compile Include="Render\Drawers\Game\CueDrawer.cs" />
     <Compile Include="Render\Drawers\IDrawer.cs" />
@@ -178,8 +180,10 @@
     <Compile Include="Scenes\Dialog\Scripts\RevealAbigail.cs" />
     <Compile Include="Scenes\Dialog\Scripts\RevealGus.cs" />
     <Compile Include="Scenes\Game\GameScene.cs" />
+    <Compile Include="Scenes\Game\GameSceneCreator.cs" />
     <Compile Include="Scenes\Game\States\Turn.cs" />
     <Compile Include="Scenes\IScene.cs" />
+    <Compile Include="Scenes\ISceneCreator.cs" />
     <Compile Include="Scenes\Menu\CharacterSelectScene.cs" />
     <Compile Include="Scenes\Menu\GalleryScene.cs" />
     <Compile Include="Scenes\Menu\MultiplayerScene.cs" />

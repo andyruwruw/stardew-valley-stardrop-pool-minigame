@@ -149,6 +149,8 @@ namespace StardropPoolMinigame
                 this._exitingScene = this._currentScene;
                 this._currentScene = null;
                 this._exitingScene.SetTransitionState(TransitionState.Exiting);
+
+                Logger.Trace($"Transitioning to New Scene: {this._exitingScene.GetType()} => {this._enteringScene.GetType()}");
             }
         }
 

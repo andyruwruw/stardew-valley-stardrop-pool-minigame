@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using StardropPoolMinigame.Entities;
 
 namespace StardropPoolMinigame.Render.Drawers
 {
@@ -15,6 +16,8 @@ namespace StardropPoolMinigame.Render.Drawers
             float? overrideScale = null,
             SpriteEffects? overrideEffects = null,
             float? overrideLayerDepth = null);
+
+        IEntity GetEntity();
 
         bool ShouldDraw();
     }

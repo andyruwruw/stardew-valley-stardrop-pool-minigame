@@ -49,6 +49,11 @@ namespace StardropPoolMinigame.Scenes.Dialog.Scripts
 
         protected abstract void AddRecitations();
 
+        public static IScript GetScript(ISceneCreator nextScene)
+        {
+            return GetScript(nextScene.GetScene());
+        }
+
         public static IScript GetScript(IScene nextScene)
         {
             if (nextScene is GameScene)

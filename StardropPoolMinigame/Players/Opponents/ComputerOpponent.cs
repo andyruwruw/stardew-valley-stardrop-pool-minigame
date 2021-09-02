@@ -26,7 +26,7 @@ namespace StardropPoolMinigame.Players
         ) : base(
             name,
             false,
-            false,
+            true,
             playerId,
             music)
         {

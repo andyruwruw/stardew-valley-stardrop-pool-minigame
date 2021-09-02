@@ -178,6 +178,15 @@ namespace StardropPoolMinigame.Constants
 
                 public static int LIP = 5;
             }
+
+            public class PocketedBalls
+            {
+                public static float SUPPORT_UPPER_MARGIN = -3f;
+
+                public static int SUPPORT_PADDING = 5;
+
+                public static int PADDING = 4;
+            }
         }
 
         public class Scenes

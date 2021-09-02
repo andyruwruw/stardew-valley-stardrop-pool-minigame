@@ -1054,15 +1054,18 @@ namespace StardropPoolMinigame.Render
                 RenderConstants.Font.CHARACTER_HEIGHT);
         }
 
+        public class PocketedBalls
+        {
+            public static Rectangle BORDER_BOX = new Rectangle(RenderConstants.TILE_SIZE * 12, RenderConstants.TILE_SIZE * 21, RenderConstants.TILE_SIZE * 7, RenderConstants.TILE_SIZE * 2);
+
+            public static Rectangle SUPPORTS = new Rectangle(RenderConstants.TILE_SIZE * 24, RenderConstants.TILE_SIZE * 8, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+        }
+
         public static Rectangle BAR_SHELVES = new Rectangle(0, 0, RenderConstants.TILE_SIZE * 25, RenderConstants.TILE_SIZE * 8);
 
         public static Rectangle FLOOR_TILES = new Rectangle(RenderConstants.TILE_SIZE * 16, RenderConstants.TILE_SIZE * 8, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 4);
 
         public static Rectangle PORTRAIT_RAYS = new Rectangle(0, RenderConstants.TILE_SIZE * 8, RenderConstants.TILE_SIZE * 17, RenderConstants.TILE_SIZE * 4);
-
-        public static Rectangle POCKETED_BALLS_BORDER_BOX = new Rectangle(RenderConstants.TILE_SIZE * 12, RenderConstants.TILE_SIZE * 21, RenderConstants.TILE_SIZE * 7, RenderConstants.TILE_SIZE * 2);
-
-        public static Rectangle POCKETED_BALLS_BORDER_BOX_SUPPORTS = new Rectangle(RenderConstants.TILE_SIZE * 24, RenderConstants.TILE_SIZE * 18, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
 
         public static Rectangle GAME_TITLE = new Rectangle(0, RenderConstants.TILE_SIZE * 8, RenderConstants.TILE_SIZE * 8, RenderConstants.TILE_SIZE * 5);
 

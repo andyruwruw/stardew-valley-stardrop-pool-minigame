@@ -66,6 +66,8 @@ namespace StardropPoolMinigame.Entities
             this._acceleration = new Vector2(0, 0);
             this._orientation = new Orientation(GameConstants.Ball.RADIUS);
             this._massMultiplier = 1;
+
+            this.SetDrawer(new BallDrawer(this));
         }
 
         public override void Update()
@@ -108,6 +110,11 @@ namespace StardropPoolMinigame.Entities
         public void SetAcceleration(Vector2 velocity)
         {
             this._velocity = velocity;
+        }
+
+        public void SetPosition(Vector2 position)
+        {
+            this._range.SetCenter(position);
         }
 
         public Vector2 GetPosition()

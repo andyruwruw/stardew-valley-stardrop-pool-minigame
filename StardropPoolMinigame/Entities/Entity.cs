@@ -167,6 +167,47 @@ namespace StardropPoolMinigame.Entities
             return this._anchor;
         }
 
+        public virtual Vector2 GetCenter()
+        {
+            if (this.GetOrigin() == Origin.TopLeft)
+            {
+                return Vector2.Add(this._anchor, new Vector2(this.GetTotalWidth() / 2, this.GetTotalHeight() / 2));
+            }
+            if (this.GetOrigin() == Origin.TopCenter)
+            {
+                return Vector2.Add(this._anchor, new Vector2(0, this.GetTotalHeight() / 2));
+            }
+            if (this.GetOrigin() == Origin.TopRight)
+            {
+                return Vector2.Add(this._anchor, new Vector2(this.GetTotalWidth() / -2, this.GetTotalHeight() / 2));
+            }
+            if (this.GetOrigin() == Origin.CenterLeft)
+            {
+                return Vector2.Add(this._anchor, new Vector2(this.GetTotalWidth() / 2, 0));
+            }
+            if (this.GetOrigin() == Origin.CenterCenter)
+            {
+                return this._anchor;
+            }
+            if (this.GetOrigin() == Origin.CenterRight)
+            {
+                return Vector2.Add(this._anchor, new Vector2(this.GetTotalWidth() / -2, 0));
+            }
+            if (this.GetOrigin() == Origin.BottomLeft)
+            {
+                return Vector2.Add(this._anchor, new Vector2(this.GetTotalWidth() / 2, this.GetTotalHeight() / -2));
+            }
+            if (this.GetOrigin() == Origin.BottomCenter)
+            {
+                return Vector2.Add(this._anchor, new Vector2(0, this.GetTotalHeight() / -2));
+            }
+            if (this.GetOrigin() == Origin.BottomRight)
+            {
+                return Vector2.Add(this._anchor, new Vector2(this.GetTotalWidth() / -2, this.GetTotalHeight() / -2));
+            }
+            return this._anchor;
+        }
+
         public virtual Primitives.Rectangle GetBoundary()
         {
             return new Primitives.Rectangle(this.GetTopLeft(), this.GetTotalWidth(), this.GetTotalHeight());

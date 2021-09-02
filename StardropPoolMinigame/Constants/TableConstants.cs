@@ -73,7 +73,7 @@ namespace StardropPoolMinigame.Constants
             /// Starting place to rack the balls
             /// </summary>
             public static Vector2 FOOT_SPOT = new Vector2(
-                LAYOUT[0].Count * Textures.Table.Edge.Back.NORTH.Width - (2 * (RenderConstants.Entities.TableSegment.MARGIN + RenderConstants.Entities.TableSegment.BORDER)) / 8 * 6,
+                ((LAYOUT[0].Count * Textures.Table.Edge.Back.NORTH.Width - (2 * (RenderConstants.Entities.TableSegment.MARGIN + RenderConstants.Entities.TableSegment.BORDER))) / 8 * 6) + (RenderConstants.Entities.TableSegment.MARGIN + RenderConstants.Entities.TableSegment.BORDER),
                 LAYOUT.Count * Textures.Table.Edge.Back.NORTH.Width / 2);
 
             /// <summary>
@@ -85,15 +85,8 @@ namespace StardropPoolMinigame.Constants
             /// Location of the cue ball in classic gamemodes
             /// </summary>
             public static Vector2 CUE_BALL_START = new Vector2(
-                LAYOUT[0].Count * Textures.Table.Edge.Back.NORTH.Width - (2 * (RenderConstants.Entities.TableSegment.MARGIN + RenderConstants.Entities.TableSegment.BORDER)) / 8 * 2,
+                ((LAYOUT[0].Count * Textures.Table.Edge.Back.NORTH.Width - (2 * (RenderConstants.Entities.TableSegment.MARGIN + RenderConstants.Entities.TableSegment.BORDER))) / 8 * 2) + (RenderConstants.Entities.TableSegment.MARGIN + RenderConstants.Entities.TableSegment.BORDER),
                 LAYOUT.Count * Textures.Table.Edge.Back.NORTH.Width / 2);
-
-            /// <summary>
-            /// Location of first cue ball in gamemodes where there are two balls
-            /// </summary>
-            public static Vector2 PLAYER1_CUE_BALL_START = new Vector2(
-                LAYOUT[0].Count * Textures.Table.Edge.Back.NORTH.Width - (2 * (RenderConstants.Entities.TableSegment.MARGIN + RenderConstants.Entities.TableSegment.BORDER)) / 8 * 2,
-                LAYOUT.Count * Textures.Table.Edge.Back.NORTH.Width / 4 * 1);
 
             /// <summary>
             /// Area in which ball in hand shots can be made from
@@ -102,14 +95,21 @@ namespace StardropPoolMinigame.Constants
                 new Vector2(
                     RenderConstants.Entities.TableSegment.MARGIN + RenderConstants.Entities.TableSegment.BORDER,
                     RenderConstants.Entities.TableSegment.MARGIN + RenderConstants.Entities.TableSegment.BORDER),
-                LAYOUT[0].Count * Textures.Table.Edge.Back.NORTH.Width - (2 * (RenderConstants.Entities.TableSegment.MARGIN + RenderConstants.Entities.TableSegment.BORDER)) / 8 * 2,
-                LAYOUT.Count * Textures.Table.Edge.Back.NORTH.Width - (2 * (RenderConstants.Entities.TableSegment.MARGIN + RenderConstants.Entities.TableSegment.BORDER)));
+                ((LAYOUT[0].Count * Textures.Table.Edge.Back.NORTH.Width - (2 * (RenderConstants.Entities.TableSegment.MARGIN + RenderConstants.Entities.TableSegment.BORDER))) / 8 * 2) + (RenderConstants.Entities.TableSegment.MARGIN + RenderConstants.Entities.TableSegment.BORDER),
+                (LAYOUT.Count * Textures.Table.Edge.Back.NORTH.Width - (2 * (RenderConstants.Entities.TableSegment.MARGIN + RenderConstants.Entities.TableSegment.BORDER))) + (RenderConstants.Entities.TableSegment.MARGIN + RenderConstants.Entities.TableSegment.BORDER));
+
+            /// <summary>
+            /// Location of first cue ball in gamemodes where there are two balls
+            /// </summary>
+            public static Vector2 PLAYER1_CUE_BALL_START = new Vector2(
+                ((LAYOUT[0].Count * Textures.Table.Edge.Back.NORTH.Width - (2 * (RenderConstants.Entities.TableSegment.MARGIN + RenderConstants.Entities.TableSegment.BORDER))) / 8 * 2) + (RenderConstants.Entities.TableSegment.MARGIN + RenderConstants.Entities.TableSegment.BORDER),
+                LAYOUT.Count * Textures.Table.Edge.Back.NORTH.Width / 4 * 1);
 
             /// <summary>
             /// Location of second cue ball in gamemodes where there are two balls
             /// </summary>
             public static Vector2 PLAYER2_CUE_BALL_START = new Vector2(
-                LAYOUT[0].Count * Textures.Table.Edge.Back.NORTH.Width - (2 * (RenderConstants.Entities.TableSegment.MARGIN + RenderConstants.Entities.TableSegment.BORDER)) / 8 * 2,
+                ((LAYOUT[0].Count * Textures.Table.Edge.Back.NORTH.Width - (2 * (RenderConstants.Entities.TableSegment.MARGIN + RenderConstants.Entities.TableSegment.BORDER))) / 8 * 2) + (RenderConstants.Entities.TableSegment.MARGIN + RenderConstants.Entities.TableSegment.BORDER),
                 LAYOUT.Count * Textures.Table.Edge.Back.NORTH.Width / 4 * 3);
         }
 

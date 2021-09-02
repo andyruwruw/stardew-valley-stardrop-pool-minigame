@@ -215,6 +215,32 @@ namespace StardropPoolMinigame.Constants
                         new Vector2(0, 0));
                 }
             }
+
+            public class PocketedBalls
+            {
+                public static IFilter Entering()
+                {
+                    return new SlideIn(
+                        60,
+                        true,
+                        TransitionState.Entering,
+                        20,
+                        new Vector2(0, -50));
+                }
+            }
+
+            public class Portrait
+            {
+                public static IFilter Entering()
+                {
+                    return new SlideIn(
+                        80,
+                        true,
+                        TransitionState.Entering,
+                        40,
+                        new Vector2(Textures.Portrait.Sam.DEFAULT.Width, 0));
+                }
+            }
         }
     }
 }

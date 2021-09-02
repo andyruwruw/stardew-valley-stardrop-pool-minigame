@@ -14,7 +14,7 @@ namespace StardropPoolMinigame.Rules
         {
         }
 
-        public override QuadTree GenerateInitialBalls(Vector2 footSpot, Direction rackOrientation)
+        public override QuadTree GenerateInitialBalls(Vector2 tableTopLeft, Vector2 cueBallStart, Vector2 footSpot, Direction rackOrientation)
         {
             QuadTree quadTree = new QuadTree(new Primitives.Rectangle(new Vector2(0, 0), 2, 2));
 
