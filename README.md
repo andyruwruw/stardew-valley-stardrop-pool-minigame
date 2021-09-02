@@ -22,11 +22,24 @@ Play a multiplayer friend, or challenge Sam and Sebastian to a game! Who knows, 
 
 Become the champion, amass collectables, experiement with new table layouts and gamemodes. Look forward to your Friday nights at the saloon.
 
-<p align="center">
+# Table of Contents
+
+- [Gamemodes](#gamemodes-banner)
+- [Table Layouts](#table-layouts-banner)
+
+&nbsp;
+&nbsp;
+&nbsp;
+
+<p align="center" name="gamemodes-banner">
   <img src="./documentation/images/png/banner-2.png">
 </p>
 
-Stardrop Saloon features a variety of gamemodes with more to come.
+<p align="center">
+  Stardrop Saloon features a variety of gamemodes with more to come.
+</p>
+
+# Gamemodes
 
 ## 8-Ball
 
@@ -48,11 +61,19 @@ Stardrop Pool Original. Both players have designated pockets to protect, and to 
 
 Stardrop Pool Original. Balls do not obey traditional laws of physics. The first person to grow comfortable with the uncomfortable wins. The game is won by the person with the most balls pocketed.
 
-<p align="center">
+&nbsp;
+&nbsp;
+&nbsp;
+
+<p align="center" name="table-layouts-banner">
   <img src="./documentation/images/png/banner-3.png">
 </p>
 
-Stardrop Pool allows you to pick from selection of strange tables.
+<p align="center">
+  Stardrop Pool allows you to pick from selection of strange tables.
+</p>
+
+# Table Layouts
 
 ## Classic
 
