@@ -23,13 +23,19 @@ namespace StardropPoolMinigame.Entities
 
         private float _massMultiplier;
 
+        private bool _isHighlighted;
+
+        private bool _isFlashing;
+
         public Ball(
             Vector2 center,
             float layerDepth,
             IFilter enteringTransition,
             IFilter exitingTransition,
             int number,
-            Vector2 orientation
+            Vector2 orientation,
+            bool isHighlighted = false,
+            bool isFlashing = false
         ) : base(
             Origin.CenterCenter,
             center,
@@ -39,6 +45,9 @@ namespace StardropPoolMinigame.Entities
         {
             this._number = number;
             this._range = new Circle(center, GameConstants.Ball.RADIUS);
+            this._isHighlighted = isHighlighted;
+            this._isFlashing = isFlashing;
+
             this._velocity = new Vector2(0, 0);
             this._acceleration = new Vector2(0, 0);
             this._orientation = new Orientation(GameConstants.Ball.RADIUS, orientation.X, orientation.Y);
@@ -52,7 +61,9 @@ namespace StardropPoolMinigame.Entities
             float layerDepth,
             IFilter enteringTransition,
             IFilter exitingTransition,
-            int number
+            int number,
+            bool isHighlighted = false,
+            bool isFlashing = false
         ) : base(
             Origin.CenterCenter,
             center,
@@ -62,6 +73,9 @@ namespace StardropPoolMinigame.Entities
         {
             this._number = number;
             this._range = new Circle(center, GameConstants.Ball.RADIUS);
+            this._isHighlighted = isHighlighted;
+            this._isFlashing = isFlashing;
+
             this._velocity = new Vector2(0, 0);
             this._acceleration = new Vector2(0, 0);
             this._orientation = new Orientation(GameConstants.Ball.RADIUS);
@@ -90,16 +104,6 @@ namespace StardropPoolMinigame.Entities
         public override string GetId()
         {
             return $"ball-{this._id}";
-        }
-
-        public void UpdateVectors()
-        {
-            Vector2 newPosition = Vector2.Add(this._range.GetCenter(), this._velocity);
-            Vector2 newVelocity = Vector2.Add(this._velocity, this._acceleration);
-
-            this._range.SetCenter(newPosition);
-            this._orientation.Roll(this._velocity);
-            this._velocity = newVelocity;
         }
 
         public void SetVelocity(Vector2 velocity)
@@ -190,6 +194,44 @@ namespace StardropPoolMinigame.Entities
                 default:
                     return BallColor.Black;
             }
+        }
+
+        public bool IsHighlighted()
+        {
+            return this._isHighlighted;
+        }
+
+        public void SetIsHighlighted(bool state)
+        {
+            if (state)
+            {
+                this._isFlashing = !state;
+            }
+            this._isHighlighted = state;
+        }
+
+        public bool IsFlashing()
+        {
+            return this._isFlashing;
+        }
+
+        public void SetIsFlashing(bool state)
+        {
+            if (state)
+            {
+                this._isHighlighted = !state;
+            }
+            this._isFlashing = state;
+        }
+
+        private void UpdateVectors()
+        {
+            Vector2 newPosition = Vector2.Add(this._range.GetCenter(), this._velocity);
+            Vector2 newVelocity = Vector2.Add(this._velocity, this._acceleration);
+
+            this._range.SetCenter(newPosition);
+            this._orientation.Roll(this._velocity);
+            this._velocity = newVelocity;
         }
     }
 }

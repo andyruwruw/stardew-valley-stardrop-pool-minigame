@@ -158,6 +158,7 @@
     <Compile Include="Render\Drawers\UI\Titles\GameTitleDrawer.cs" />
     <Compile Include="Render\Drawers\UI\Titles\PageTitleDrawer.cs" />
     <Compile Include="Render\Filters\Animations\Animation.cs" />
+    <Compile Include="Render\Filters\Animations\BallHighlightFlashing.cs" />
     <Compile Include="Render\Filters\Animations\PortraitFireAnimation.cs" />
     <Compile Include="Render\Filters\Animations\Rotate.cs" />
     <Compile Include="Render\Filters\Filter.cs" />

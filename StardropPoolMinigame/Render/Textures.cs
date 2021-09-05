@@ -149,6 +149,8 @@ namespace StardropPoolMinigame.Render
             }
 
             public static Rectangle SHADOW = new Rectangle(RenderConstants.TILE_SIZE * 24, RenderConstants.TILE_SIZE * 10, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+
+            public static Rectangle HIGHLIGHT = new Rectangle(RenderConstants.TILE_SIZE * 23, RenderConstants.TILE_SIZE * 11, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
         }
 
         /// <summary>

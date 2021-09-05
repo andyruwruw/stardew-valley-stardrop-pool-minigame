@@ -104,6 +104,9 @@ namespace StardropPoolMinigame.Scenes
         {
         }
 
+        /// <summary>
+        /// Add entities that require constructor first
+        /// </summary>
         private void AddDependentEntities()
         {
             this._portrait = new Portrait(

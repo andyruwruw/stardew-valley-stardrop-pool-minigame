@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.5" tiledversion="1.6.0" name="StardropPoolMinigameTileset" tilewidth="400" tileheight="128" tilecount="119" columns="0">
+<tileset version="1.5" tiledversion="1.6.0" name="StardropPoolMinigameTileset" tilewidth="400" tileheight="128" tilecount="120" columns="0">
  <grid orientation="orthogonal" width="1" height="1"/>
  <tile id="0">
   <image width="16" height="16" source="../png/ball/ball-colors/ball-color-blue.png"/>
@@ -357,5 +357,8 @@
  </tile>
  <tile id="205">
   <image width="32" height="32" source="../png/table/south-edge-front.png"/>
+ </tile>
+ <tile id="208">
+  <image width="16" height="16" source="../png/ball/ball-highlight.png"/>
  </tile>
 </tileset>

@@ -3,13 +3,17 @@ using Microsoft.Xna.Framework.Graphics;
 using StardropPoolMinigame.Constants;
 using StardropPoolMinigame.Entities;
 using StardropPoolMinigame.Enums;
+using StardropPoolMinigame.Render.Filters;
 
 namespace StardropPoolMinigame.Render.Drawers
 {
     class BallDrawer : Drawer
     {
+        private IFilter _flashingAnimation;
+
         public BallDrawer(Ball ball) : base(ball)
         {
+            this._flashingAnimation = new BallHighlightFlashing($"{this._entity.GetId()}-animation");
         }
 
         public override void Draw(
@@ -63,6 +67,18 @@ namespace StardropPoolMinigame.Render.Drawers
                 overrideScale,
                 overrideEffects,
                 overrideLayerDepth);
+
+            if (((Ball)this._entity).IsHighlighted() || ((Ball)this._entity).IsFlashing())
+            {
+                this.DrawHighlight(
+                    batch,
+                    overrideDestination,
+                    overrideRotation,
+                    overrideOrigin,
+                    overrideScale,
+                    overrideEffects,
+                    overrideLayerDepth);
+            }
         }
 
         protected override Vector2 GetRawDestination()
@@ -185,6 +201,27 @@ namespace StardropPoolMinigame.Render.Drawers
                 this.GetScale(overrideScale),
                 this.GetEffects(overrideEffects),
                 this.GetLayerDepth(overrideLayerDepth) + 0.0002f);
+        }
+
+        private void DrawHighlight(
+            SpriteBatch batch,
+            Vector2? overrideDestination = null,
+            float? overrideRotation = null,
+            Vector2? overrideOrigin = null,
+            float? overrideScale = null,
+            SpriteEffects? overrideEffects = null,
+            float? overrideLayerDepth = null)
+        {
+            batch.Draw(
+                this.GetTileset(),
+                this.GetDestination(overrideDestination),
+                Textures.Ball.HIGHLIGHT,
+                ((Ball)this._entity).IsFlashing() ? this._flashingAnimation.ExecuteColor(this.GetColor()) : this.GetColor(),
+                this.GetRotation(overrideRotation),
+                this.GetOrigin(overrideOrigin),
+                this.GetScale(overrideScale),
+                this.GetEffects(overrideEffects),
+                this.GetLayerDepth(overrideLayerDepth) + 0.0003f);
         }
 
         private Rectangle GetCoreSource()
