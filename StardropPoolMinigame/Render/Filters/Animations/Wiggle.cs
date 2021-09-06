@@ -15,11 +15,18 @@ namespace StardropPoolMinigame.Render.Filters
             this._amplitude = amplitude;
         }
 
+        public void SetAmplitude(float value)
+        {
+            this._amplitude = value;
+        }
+
         public override Vector2 ExecuteDestination(Vector2 destination)
         {
-            return base.ExecuteDestination(new Vector2(
-                (float)(this._amplitude * Math.Sin(this._frequency * this.GetProgress()) + this._amplitude / .5 * Math.Sin(this._frequency * this.GetProgress())),
-                (float)(this._amplitude * Math.Sin(this._frequency * this.GetProgress()) + this._amplitude / 2 * Math.Cos(this._frequency * this.GetProgress()))));
+            return Vector2.Add(
+                destination,
+                new Vector2(
+                    (float)(this._amplitude * Math.Sin(this._frequency * this.GetProgress()) + this._amplitude / .3 * Math.Sin(this._frequency * this.GetProgress())),
+                    (float)(this._amplitude * Math.Sin(this._frequency * this.GetProgress()) + this._amplitude / 2 * Math.Cos(this._frequency * this.GetProgress()))));
         }
     }
 }

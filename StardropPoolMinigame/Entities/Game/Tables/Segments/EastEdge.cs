@@ -21,6 +21,11 @@ namespace StardropPoolMinigame.Entities
         {
         }
 
+        public override string GetId()
+        {
+            return $"table-segment-east-edge-{this._id}";
+        }
+
         public override TableSegmentType GetTableSegmentType()
         {
             return TableSegmentType.EastEdge;

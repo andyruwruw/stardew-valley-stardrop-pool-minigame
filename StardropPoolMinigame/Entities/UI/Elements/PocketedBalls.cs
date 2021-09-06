@@ -29,6 +29,11 @@ namespace StardropPoolMinigame.Entities
             this.SetDrawer(new PocketedBallsDrawer(this));
         }
 
+        public override string GetId()
+        {
+            return $"pocketed-balls-{this._id}";
+        }
+
         public override float GetTotalHeight()
         {
             return Textures.PocketedBalls.BORDER_BOX.Height + Textures.PocketedBalls.SUPPORTS.Height;

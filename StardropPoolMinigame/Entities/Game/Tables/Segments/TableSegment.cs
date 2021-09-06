@@ -24,6 +24,11 @@ namespace StardropPoolMinigame.Entities
             this.SetDrawer(new TableSegmentDrawer(this));
         }
 
+        public override string GetId()
+        {
+            return $"generic-table-segment-{this._id}";
+        }
+
         public override float GetTotalHeight()
         {
             return Textures.Table.Edge.Back.NORTH.Height;

@@ -88,19 +88,19 @@ namespace StardropPoolMinigame.Entities
             }
         }
 
-        public void Flock(IList<EntityBoid> neighbors)
+        public void Flock(IList<IEntity> neighbors)
         {
             IList<EntityBoid> filtered = new List<EntityBoid>();
 
-            foreach (EntityBoid boid in neighbors)
+            foreach (IEntity boid in neighbors)
             {
                 if (boid.GetId() != this.GetId())
                 {
-                    float distance = (float)Distance.Pythagorean(this.GetPerceptionCenter(), boid.GetPerceptionCenter());
+                    float distance = (float)Distance.Pythagorean(this.GetPerceptionCenter(), ((EntityBoid)boid).GetPerceptionCenter());
 
                     if (distance < this._perception.GetRadius())
                     {
-                        filtered.Add(boid);
+                        filtered.Add((EntityBoid)boid);
                     }
                 }
             }
@@ -210,6 +210,11 @@ namespace StardropPoolMinigame.Entities
         public int GetDuration()
         {
             return this._duration;
+        }
+
+        public Circle GetPerception()
+        {
+            return this._perception;
         }
     }
 }

@@ -63,6 +63,11 @@ namespace StardropPoolMinigame.Players
             return this._isMe;
         }
 
+        public string GetName()
+        {
+            return this._name;
+        }
+
         public long GetPlayerId()
         {
             return this._playerId;

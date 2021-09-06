@@ -32,6 +32,11 @@ namespace StardropPoolMinigame.Entities
             this.SetDrawer(new CharacterDrawer(this));
         }
 
+        public override string GetId()
+        {
+            return $"text-character-{this._id}";
+        }
+
         public Rectangle GetCharacterBounds()
         {
             return this._charBounds;

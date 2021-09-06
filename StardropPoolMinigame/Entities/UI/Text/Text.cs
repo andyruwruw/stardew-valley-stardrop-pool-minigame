@@ -52,6 +52,11 @@ namespace StardropPoolMinigame.Entities
             this.InicializeCharacters();
         }
 
+        public override string GetId()
+        {
+            return $"text-{this._id}";
+        }
+
         public override float GetTotalHeight()
         {
             return this._resultingHeight;

@@ -188,7 +188,7 @@ namespace StardropPoolMinigame.Render
         /// </summary>
         public class PortraitFire
         {
-            public static Rectangle FRAME_1 = new Rectangle(12, RenderConstants.TILE_SIZE * 17, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 4);
+            public static Rectangle FRAME_1 = new Rectangle(RenderConstants.TILE_SIZE * 12, RenderConstants.TILE_SIZE * 17, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 4);
 
             public static Rectangle FRAME_2 = new Rectangle(RenderConstants.TILE_SIZE * 16, RenderConstants.TILE_SIZE * 17, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 4);
 
@@ -1061,6 +1061,43 @@ namespace StardropPoolMinigame.Render
             public static Rectangle BORDER_BOX = new Rectangle(RenderConstants.TILE_SIZE * 12, RenderConstants.TILE_SIZE * 21, RenderConstants.TILE_SIZE * 7, RenderConstants.TILE_SIZE * 2);
 
             public static Rectangle SUPPORTS = new Rectangle(RenderConstants.TILE_SIZE * 24, RenderConstants.TILE_SIZE * 8, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+        }
+
+        public class Particle
+        {
+            public class Spark
+            {
+                public static Rectangle FRAME_1 = new Rectangle(RenderConstants.TILE_SIZE * 19, RenderConstants.TILE_SIZE * 12, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+
+                public static Rectangle FRAME_2 = new Rectangle(RenderConstants.TILE_SIZE * 20, RenderConstants.TILE_SIZE * 12, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+
+                public static Rectangle FRAME_3 = new Rectangle(RenderConstants.TILE_SIZE * 21, RenderConstants.TILE_SIZE * 12, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+            }
+
+            public class Sparkle
+            {
+                public static Rectangle FRAME_1 = new Rectangle(RenderConstants.TILE_SIZE * 16, RenderConstants.TILE_SIZE * 12, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+
+                public static Rectangle FRAME_2 = new Rectangle(RenderConstants.TILE_SIZE * 17, RenderConstants.TILE_SIZE * 12, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+
+                public static Rectangle FRAME_3 = new Rectangle(RenderConstants.TILE_SIZE * 18, RenderConstants.TILE_SIZE * 12, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+            }
+
+            public class Glimmer
+            {
+                public static Rectangle FRAME_1 = new Rectangle(RenderConstants.TILE_SIZE * 20, RenderConstants.TILE_SIZE * 11, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+
+                public static Rectangle FRAME_2 = new Rectangle(RenderConstants.TILE_SIZE * 21, RenderConstants.TILE_SIZE * 11, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+            }
+
+            public class PurpleWhisp
+            {
+                public static Rectangle FRAME_1 = new Rectangle(RenderConstants.TILE_SIZE * 22, RenderConstants.TILE_SIZE * 12, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+
+                public static Rectangle FRAME_2 = new Rectangle(RenderConstants.TILE_SIZE * 23, RenderConstants.TILE_SIZE * 12, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+
+                public static Rectangle FRAME_3 = new Rectangle(RenderConstants.TILE_SIZE * 24, RenderConstants.TILE_SIZE * 12, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+            }
         }
 
         public static Rectangle BAR_SHELVES = new Rectangle(0, 0, RenderConstants.TILE_SIZE * 25, RenderConstants.TILE_SIZE * 8);

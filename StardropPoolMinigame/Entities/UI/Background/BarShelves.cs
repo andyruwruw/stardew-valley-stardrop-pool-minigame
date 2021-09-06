@@ -26,7 +26,7 @@ namespace StardropPoolMinigame.Entities
 
         public override string GetId()
         {
-            return $"bar-shelves-background-{this._id}";
+            return $"bar-shelves-{this._id}";
         }
 
         public override float GetTotalWidth()

@@ -1,14 +1,15 @@
 ﻿
 using Microsoft.Xna.Framework;
 using StardropPoolMinigame.Constants;
-using StardropPoolMinigame.Controller;
 using StardropPoolMinigame.Entities;
 using StardropPoolMinigame.Enums;
+using StardropPoolMinigame.Helpers;
 using StardropPoolMinigame.Players;
 using StardropPoolMinigame.Render;
 using StardropPoolMinigame.Rules;
 using StardropPoolMinigame.Scenes.States;
 using StardropPoolMinigame.Structures;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -23,6 +24,8 @@ namespace StardropPoolMinigame.Scenes
         private IRules _rules;
 
         private Table _table;
+
+        private IList<Ball> _cueBall;
 
         private QuadTree _balls;
 
@@ -49,7 +52,7 @@ namespace StardropPoolMinigame.Scenes
             this.Inicialize(rules, table, player1, player2);
             this.AddDependentEntities();
 
-            this._turn = new Turn(this._players, 1);
+            this._turn = new Turn(this._players, 0);
 
             this._fadeIn.SetTransitionState(TransitionState.Exiting, true);
         }
@@ -62,6 +65,7 @@ namespace StardropPoolMinigame.Scenes
         public override void Update()
         {
             this.UpdateCueBall();
+            this.UpdateCue();
             this.UpdateQuadTree();
             base.Update();
 
@@ -77,21 +81,31 @@ namespace StardropPoolMinigame.Scenes
             //}
         }
 
+        private void UpdateCue()
+        {
+            if (this._turn.GetTurnState() == TurnState.SelectingAngle
+                || this._turn.GetTurnState() == TurnState.SelectingPower
+                || this._turn.GetTurnState() == TurnState.BallsInMotion)
+            {
+                this._turn.GetCurrentPlayer().GetCue().Update(this._turn.GetTurnState(), this.GetCueBall());
+            }
+        }
+
         private void UpdateCueBall()
         {
             if (this._turn.GetTurnState() == TurnState.Idle)
             {
-                if (this._balls.GetCueBall().IsHovered())
+                if (this.GetCueBall().IsHovered())
                 {
-                    this._balls.GetCueBall().SetIsHighlighted(true);
+                    this.GetCueBall().SetIsHighlighted(true);
                 } else
                 {
-                    this._balls.GetCueBall().SetIsFlashing(true);
+                    this.GetCueBall().SetIsFlashing(true);
                 }
             } else
             {
-                this._balls.GetCueBall().SetIsHighlighted(false);
-                this._balls.GetCueBall().SetIsFlashing(false);
+                this.GetCueBall().SetIsHighlighted(false);
+                this.GetCueBall().SetIsFlashing(false);
             }
         }
 
@@ -101,7 +115,7 @@ namespace StardropPoolMinigame.Scenes
             {
                 QuadTree quadTree = new QuadTree(new Primitives.Rectangle(new Vector2(0, 0), RenderConstants.MinigameScreen.WIDTH, RenderConstants.MinigameScreen.HEIGHT));
 
-                IList<Ball> balls = this._balls.Query();
+                IList<IEntity> balls = this._balls.Query();
 
                 foreach (Ball ball in balls)
                 {
@@ -116,6 +130,7 @@ namespace StardropPoolMinigame.Scenes
         {
             if (this._turn.GetTurnState() == TurnState.SelectingPocket && this._turn.IsMyTurn())
             {
+                Sound.PlaySound(SoundConstants.Feedback.BOTTON_PRESS);
                 if (this._turn.NeedsToPlaceCueBall())
                 {
                     this._turn.SetTurnState(TurnState.PlacingBall);
@@ -125,15 +140,19 @@ namespace StardropPoolMinigame.Scenes
                 }
             } else if (this._turn.GetTurnState() == TurnState.PlacingBall && this._turn.IsMyTurn())
             {
+                Sound.PlaySound(SoundConstants.Feedback.BOTTON_PRESS);
                 this._turn.SetTurnState(TurnState.Idle);
-            } else if (this._turn.GetTurnState() == TurnState.Idle && this._turn.IsMyTurn() && this._balls.GetCueBall().IsHovered())
+            } else if (this._turn.GetTurnState() == TurnState.Idle && this._turn.IsMyTurn() && this.GetCueBall().IsHovered())
             {
+                Sound.PlaySound(SoundConstants.Feedback.BOTTON_PRESS);
                 this._turn.SetTurnState(TurnState.SelectingAngle);
             } else if (this._turn.GetTurnState() == TurnState.SelectingAngle && this._turn.IsMyTurn())
             {
+                Sound.PlaySound(SoundConstants.Cue.LOCK_ANGLE);
                 this._turn.SetTurnState(TurnState.SelectingPower);
             } else if (this._turn.GetTurnState() == TurnState.SelectingPower && this._turn.IsMyTurn())
             {
+                Sound.PlaySound(SoundConstants.Cue.LOCK_POWER);
                 this._turn.SetTurnState(TurnState.BallsInMotion);
             }
         }
@@ -142,17 +161,32 @@ namespace StardropPoolMinigame.Scenes
         {
             if (this._turn.GetTurnState() == TurnState.SelectingAngle && this._turn.IsMyTurn())
             {
+                Sound.PlaySound(SoundConstants.Feedback.GAME_CANCEL);
                 this._turn.SetTurnState(TurnState.Idle);
-            }
-
-            if (this._turn.GetTurnState() == TurnState.SelectingPower && this._turn.IsMyTurn())
+            } else if (this._turn.GetTurnState() == TurnState.SelectingPower && this._turn.IsMyTurn())
             {
+                Sound.PlaySound(SoundConstants.Feedback.GAME_CANCEL);
                 this._turn.SetTurnState(TurnState.SelectingAngle);
             }
         }
 
         public override IList<IEntity> GetEntities()
         {
+            if (this._turn.GetTurnState() == TurnState.BallsInMotion
+                || this._turn.GetTurnState() == TurnState.SelectingAngle
+                || this._turn.GetTurnState() == TurnState.SelectingPower)
+            {
+                IList<IEntity> entities = new List<IEntity>();
+
+                entities.Add(this._turn.GetCurrentPlayer().GetCue());
+
+                foreach (IEntity entity in this._entities)
+                {
+                    entities.Add(entity);
+                }
+
+                return entities;
+            }
             return this._entities;
         }
 
@@ -170,6 +204,8 @@ namespace StardropPoolMinigame.Scenes
         {
             return this._players;
         }
+
+        
 
         protected override void AddEntities()
         {
@@ -201,6 +237,15 @@ namespace StardropPoolMinigame.Scenes
             this._entities.Add(this._player2PocketedBalls);
         }
 
+        private Ball GetCueBall()
+        {
+            if (this._rules.HasPlayerSpecificCueBalls())
+            {
+                return this._cueBall[this._turn.GetCurrentPlayerIndex()];
+            }
+            return this._cueBall[0];
+        }
+
         /// <summary>
         /// Add entities that require constructor first
         /// </summary>
@@ -209,11 +254,14 @@ namespace StardropPoolMinigame.Scenes
             // Game Entities
             this._entities.Add(this._table);
 
-            this._balls = this._rules.GenerateInitialBalls(
+            Tuple<IList<Ball>, QuadTree> setup = this._rules.GenerateInitialBalls(
                 this._table.GetTopLeft(),
                 TableConstants.GetCueBallStart(this._table.GetTableType()),
                 TableConstants.GetFootSpot(this._table.GetTableType()),
                 TableConstants.GetRackOrientation(this._table.GetTableType()));
+
+            this._cueBall = setup.Item1;
+            this._balls = setup.Item2;
 
             foreach (Ball ball in this._balls.Query())
             {
@@ -243,6 +291,7 @@ namespace StardropPoolMinigame.Scenes
         private void Inicialize(IRules rules, Table table, IPlayer player1, IPlayer player2)
         {
             this._ballList = new List<Ball>();
+            this._cueBall = new List<Ball>();
             this._opponentPortrait = null;
 
             this._rules = rules == null ? RuleSet.GetDefaultRules() : rules;

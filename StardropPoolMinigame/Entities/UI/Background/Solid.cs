@@ -34,6 +34,11 @@ namespace StardropPoolMinigame.Entities
             this.SetDrawer(new SolidDrawer(this));
         }
 
+        public override string GetId()
+        {
+            return $"solid-{this._id}";
+        }
+
         public override float GetTotalHeight()
         {
             return this._destination.GetHeight();

@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./documentation/images/png/banner.png">
+  <img src="https://github.com/andyruwruw/stardew-valley-stardrop-pool-minigame/blob/develop/documentation/images/gif/banner-1.gif?raw=true">
 </p>
 
 <p align="center">
@@ -66,7 +66,7 @@ Stardrop Pool Original. Balls do not obey traditional laws of physics. The first
 &nbsp;
 
 <p align="center" name="table-layouts-banner">
-  <img src="./documentation/images/png/banner-3.png">
+  <img src="https://github.com/andyruwruw/stardew-valley-stardrop-pool-minigame/blob/develop/documentation/images/gif/banner-3.gif?raw=true">
 </p>
 
 <p align="center">

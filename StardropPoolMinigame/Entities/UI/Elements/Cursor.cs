@@ -24,6 +24,11 @@ namespace StardropPoolMinigame.Entities
             this.SetDrawer(new CursorDrawer(this));
         }
 
+        public override string GetId()
+        {
+            return $"cursor-{this._id}";
+        }
+
         public override float GetTotalHeight()
         {
             return Textures.Cursor.DEFAULT.Height;

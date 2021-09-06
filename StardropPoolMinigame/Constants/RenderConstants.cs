@@ -124,7 +124,7 @@ namespace StardropPoolMinigame.Constants
 
         public static Vector2 ConvertMinigameWindowToRaw(Vector2 point)
         {
-            return new Vector2(point.X + AdjustedScreenWidthMargin(), point.Y + AdjustedScreenHeightMargin());
+            return Vector2.Add(Vector2.Multiply(point, RenderConstants.TileScale()), RenderConstants.GetMinigameScreenNorthWest());
         }
 
         public static Vector2 ConvertRawToMinigameWindow(Vector2 point)
@@ -186,6 +186,20 @@ namespace StardropPoolMinigame.Constants
                 public static int SUPPORT_PADDING = 5;
 
                 public static int PADDING = 4;
+            }
+
+            public class Particle
+            {
+                public class Spark
+                {
+                    public static int FRAMES = 3;
+
+                    public static int FRAME_DURATION = 4;
+
+                    public static float MARGIN_LEFT = 3f;
+
+                    public static float MARGIN_TOP = 3f;
+                }
             }
         }
 

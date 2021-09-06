@@ -3,13 +3,14 @@ using StardropPoolMinigame.Entities;
 using StardropPoolMinigame.Enums;
 using StardropPoolMinigame.Players;
 using StardropPoolMinigame.Structures;
+using System;
 using System.Collections.Generic;
 
 namespace StardropPoolMinigame.Rules
 {
     interface IRules
     {
-        QuadTree GenerateInitialBalls(Vector2 tableTopLeft, Vector2 cueBallStart, Vector2 footSpot, Direction rackOrientation);
+        Tuple<IList<Ball>, QuadTree> GenerateInitialBalls(Vector2 tableTopLeft, Vector2 cueBallStart, Vector2 footSpot, Direction rackOrientation);
 
         IList<GameEvent> NoBallHit(IList<Ball> remaining);
 
@@ -21,5 +22,7 @@ namespace StardropPoolMinigame.Rules
             TableSegment pocket,
             IList<Ball> remaining,
             TableSegment target = null);
+
+        bool HasPlayerSpecificCueBalls();
     }
 }

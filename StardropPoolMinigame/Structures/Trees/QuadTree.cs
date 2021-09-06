@@ -25,7 +25,7 @@ namespace StardropPoolMinigame.Structures
         /// <summary>
         /// List of points in QuadTree.
         /// </summary>
-        private IList<Ball> _points;
+        private IList<IEntity> _points;
 
         /// <summary>
         /// Whether QuadTree has <see cref="Subdivide">Subdivided</see>.
@@ -58,11 +58,6 @@ namespace StardropPoolMinigame.Structures
         private QuadTree _southEast;
 
         /// <summary>
-        /// Reference to cue ball
-        /// </summary>
-        private Ball _cueBall;
-
-        /// <summary>
         /// Instantiates a QuadTree
         /// </summary>
         /// <param name="boundary"><see cref="Rectangle"/> for QuadTree boundary</param>
@@ -73,7 +68,7 @@ namespace StardropPoolMinigame.Structures
             this.Count = 0;
             this._boundary = boundary;
             this._capacity = capacity;
-            this._points = new List<Ball>();
+            this._points = new List<IEntity>();
             this._divided = false;
             this._isRoot = isRoot;
         }
@@ -87,14 +82,9 @@ namespace StardropPoolMinigame.Structures
         /// 
         /// <param name="point">Point to be inserted</param>
         /// <returns>Whether point was added successfully</returns>
-        public bool Insert(Ball point)
+        public bool Insert(IEntity point)
         {
-            if (this._isRoot && point.GetNumber() == 0)
-            {
-                this._cueBall = point;
-            }
-
-            if (!this._boundary.Contains(point.GetPosition()))
+            if (!this._boundary.Contains(point.GetAnchor()))
             {
                 return false;
             }
@@ -123,7 +113,7 @@ namespace StardropPoolMinigame.Structures
             return false;
         }
 
-        public bool Remove(Ball point)
+        public bool Remove(IEntity point)
         {
             if (this._points.Contains(point))
             {
@@ -149,7 +139,7 @@ namespace StardropPoolMinigame.Structures
         /// <param name="range"><see cref="IRange"/> to query</param>
         /// <param name="found">List of found points so far</param>
         /// <returns>List of points found</returns>
-        public IList<Ball> Query(IRange range = null, List<Ball> found = null)
+        public IList<IEntity> Query(IRange range = null, List<IEntity> found = null)
         {
             if (range == null)
             {
@@ -158,7 +148,7 @@ namespace StardropPoolMinigame.Structures
 
             if (found == null)
             {
-                found = new List<Ball>();
+                found = new List<IEntity> ();
             }
 
             if (!Intersection.IsIntersecting(range, this._boundary))
@@ -166,11 +156,11 @@ namespace StardropPoolMinigame.Structures
                 return found;
             }
 
-            foreach (Ball ball in this._points)
+            foreach (IEntity entity in this._points)
             {
-                if (range.Contains(ball.GetPosition()))
+                if (range.Contains(entity.GetAnchor()))
                 {
-                    found.Add(ball);
+                    found.Add(entity);
                 }
             }
 
@@ -183,11 +173,6 @@ namespace StardropPoolMinigame.Structures
             }
 
             return found;
-        }
-
-        public Ball GetCueBall()
-        {
-            return this._cueBall;
         }
 
         public IRange GetBoundary()

@@ -22,6 +22,11 @@ namespace StardropPoolMinigame.Entities
             this.SetDrawer(new FloorTilesDrawer(this));
         }
 
+        public override string GetId()
+        {
+            return $"floor-tile-{this._id}";
+        }
+
         public override float GetTotalHeight()
         {
             return Textures.FLOOR_TILES.Height;

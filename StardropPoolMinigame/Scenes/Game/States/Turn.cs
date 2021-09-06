@@ -35,6 +35,11 @@ namespace StardropPoolMinigame.Scenes.States
             return this._needsToPlaceCueBall;
         }
 
+        public int GetCurrentPlayerIndex()
+        {
+            return this._playerIndex;
+        }
+
         public IPlayer GetCurrentPlayer()
         {
             return this._players[this._playerIndex];

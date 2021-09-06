@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using StardropPoolMinigame.Constants;
-using StardropPoolMinigame.Helpers;
 using System;
 
 namespace StardropPoolMinigame.Render.Filters

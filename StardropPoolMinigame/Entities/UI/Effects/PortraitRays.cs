@@ -25,6 +25,11 @@ namespace StardropPoolMinigame.Entities
             this.SetDrawer(new PortraitRaysDrawer(this));
         }
 
+        public override string GetId()
+        {
+            return $"portrait-rays-{this._id}";
+        }
+
         public override float GetTotalHeight()
         {
             return Textures.PORTRAIT_RAYS.Height;

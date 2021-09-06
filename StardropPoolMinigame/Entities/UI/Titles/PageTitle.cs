@@ -41,6 +41,11 @@ namespace StardropPoolMinigame.Entities
             this.SetDrawer(new PageTitleDrawer(this));
         }
 
+        public override string GetId()
+        {
+            return $"page-title-{this._id}";
+        }
+
         public override float GetTotalWidth()
         {
             return this._text.GetTotalWidth();

@@ -6,6 +6,16 @@
     class DevConstants
     {
         /// <summary>
+        /// Displays physics and drawing debugging visuals
+        /// </summary>
+        public static bool DEBUG_VISUALS = true;
+
+        /// <summary>
+        /// Useful for finding sprites outside the minigame window
+        /// </summary>
+        public static bool DISABLE_MARGIN_SOLIDS = false;
+
+        /// <summary>
         /// All right clicks will be registered as pool table clicks
         /// </summary>
         public static bool OVERRIDE_IS_POOL_TABLE = true;

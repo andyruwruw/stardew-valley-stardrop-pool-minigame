@@ -1,5 +1,7 @@
-﻿using StardropPoolMinigame.Helpers;
+﻿using Microsoft.Xna.Framework;
+using StardropPoolMinigame.Helpers;
 using StardropPoolMinigame.Primitives;
+using System;
 
 namespace StardropPoolMinigame.Geometry
 {
@@ -10,7 +12,7 @@ namespace StardropPoolMinigame.Geometry
             bool isRectangle = false;
             bool isCircle = false;
 
-            if (shape1 is Rectangle || shape2 is Rectangle)
+            if (shape1 is Primitives.Rectangle || shape2 is Primitives.Rectangle)
             {
                 isRectangle = true;
             }
@@ -21,7 +23,7 @@ namespace StardropPoolMinigame.Geometry
 
             if (isRectangle && !isCircle)
             {
-                return IntersectingRectangles((Rectangle)shape1, (Rectangle)shape2);
+                return IntersectingRectangles((Primitives.Rectangle)shape1, (Primitives.Rectangle)shape2);
             }
             if (isCircle && !isRectangle)
             {
@@ -30,13 +32,13 @@ namespace StardropPoolMinigame.Geometry
             if (isCircle && isRectangle)
             {
                 return IntersectingRectangleAndCircle(
-                    shape1 is Rectangle ? (Rectangle)shape1 : (Rectangle)shape2,
+                    shape1 is Primitives.Rectangle ? (Primitives.Rectangle)shape1 : (Primitives.Rectangle)shape2,
                     shape1 is Circle ? (Circle)shape1 : (Circle)shape2);
             }
             return false;
         }
 
-        public static bool IntersectingRectangles(Rectangle rectangle1, Rectangle rectangle2)
+        public static bool IntersectingRectangles(Primitives.Rectangle rectangle1, Primitives.Rectangle rectangle2)
         {
             bool value = (!(
                     rectangle1.GetSouthEastCorner().Y < rectangle2.GetNorthWestCorner().Y
@@ -52,9 +54,33 @@ namespace StardropPoolMinigame.Geometry
             return Distance.Pythagorean(circle1.GetCenter(), circle2.GetCenter()) <= circle1.GetRadius() + circle2.GetRadius();
         }
 
-        public static bool IntersectingRectangleAndCircle(Rectangle rectangle, Circle circle)
+        public static bool IntersectingRectangleAndCircle(Primitives.Rectangle rectangle, Circle circle)
         {
-            return true;
+            Vector2 circleDistance = new Vector2((float)Math.Abs(circle.GetCenter().X - rectangle.GetNorthWestCorner().X), (float)Math.Abs(circle.GetCenter().Y - rectangle.GetNorthWestCorner().Y));
+
+            if (circleDistance.X > (rectangle.GetWidth() / 2 + circle.GetRadius()))
+            {
+                return false;
+            }
+
+            if (circleDistance.Y > (rectangle.GetHeight() / 2 + circle.GetRadius()))
+            {
+                return false;
+            }
+
+            if (circleDistance.X <= (rectangle.GetWidth() / 2))
+            { 
+                return true;
+            }
+
+            if (circleDistance.Y <= (rectangle.GetHeight() / 2))
+            {
+                return true;
+            }
+
+            float  cornerDistanceSquared = (float)(Math.Pow(circleDistance.X - rectangle.GetWidth() / 2, 2) + Math.Pow(circleDistance.Y - rectangle.GetHeight() / 2, 2));
+
+            return cornerDistanceSquared <= Math.Pow(circle.GetRadius(), 2);
         }
     }
 }

@@ -21,6 +21,11 @@ namespace StardropPoolMinigame.Entities
         {
         }
 
+        public override string GetId()
+        {
+            return $"table-segment-north-east-pocket-{this._id}";
+        }
+
         public override TableSegmentType GetTableSegmentType()
         {
             return TableSegmentType.NorthEastPocket;

@@ -53,6 +53,7 @@
     <Compile Include="Behaviors\Detectors\Use.cs" />
     <Compile Include="Behaviors\Intersection.cs" />
     <Compile Include="Constants\LayerDepthConstants.cs" />
+    <Compile Include="Constants\ParticleEmitterConstants.cs" />
     <Compile Include="Constants\StringConstants.cs" />
     <Compile Include="Constants\TableConstants.cs" />
     <Compile Include="Constants\TransitionConstants.cs" />
@@ -83,6 +84,13 @@
     <Compile Include="Entities\Game\Tables\Segments\WestPocket.cs" />
     <Compile Include="Entities\IEntity.cs" />
     <Compile Include="Entities\EntityHoverable.cs" />
+    <Compile Include="Entities\Particles\Individual\Glimmer.cs" />
+    <Compile Include="Entities\Particles\Individual\Particle.cs" />
+    <Compile Include="Entities\Particles\Individual\PurpleWhisp.cs" />
+    <Compile Include="Entities\Particles\Individual\Spark.cs" />
+    <Compile Include="Entities\Particles\Individual\Sparkle.cs" />
+    <Compile Include="Entities\Particles\ParticleEmitter.cs" />
+    <Compile Include="Entities\Particles\SparkEmitter.cs" />
     <Compile Include="Entities\Powerups\BigPockets.cs" />
     <Compile Include="Entities\Powerups\FrozenTear.cs" />
     <Compile Include="Entities\Powerups\GhostBall.cs" />
@@ -113,6 +121,7 @@
     <Compile Include="Entities\UI\Titles\PageTitle.cs" />
     <Compile Include="Enums\BallColor.cs" />
     <Compile Include="Enums\BallType.cs" />
+    <Compile Include="Enums\CueType.cs" />
     <Compile Include="Enums\Direction.cs" />
     <Compile Include="Enums\GameEvent.cs" />
     <Compile Include="Enums\OpponentType.cs" />
@@ -143,6 +152,8 @@
     <Compile Include="Render\Drawers\Drawer.cs" />
     <Compile Include="Render\Drawers\Game\BallDrawer.cs" />
     <Compile Include="Render\Drawers\Game\TableSegmentDrawer.cs" />
+    <Compile Include="Render\Drawers\Particles\Individual\SparkDrawer.cs" />
+    <Compile Include="Render\Drawers\Particles\ParticleEmitterDrawer.cs" />
     <Compile Include="Render\Drawers\UI\Background\SolidDrawer.cs" />
     <Compile Include="Render\Drawers\UI\Effects\PortraitFireDrawer.cs" />
     <Compile Include="Render\Drawers\UI\Effects\PortraitRaysDrawer.cs" />
@@ -161,6 +172,7 @@
     <Compile Include="Render\Filters\Animations\BallHighlightFlashing.cs" />
     <Compile Include="Render\Filters\Animations\PortraitFireAnimation.cs" />
     <Compile Include="Render\Filters\Animations\Rotate.cs" />
+    <Compile Include="Render\Filters\Animations\SparkAnimation.cs" />
     <Compile Include="Render\Filters\Filter.cs" />
     <Compile Include="Render\Filters\IFilter.cs" />
     <Compile Include="Render\Filters\Animations\Wiggle.cs" />
@@ -172,9 +184,12 @@
     <Compile Include="Render\Filters\Transitions\ScaleUp.cs" />
     <Compile Include="Render\Filters\Transitions\SlideIn.cs" />
     <Compile Include="Render\Filters\Transitions\Transition.cs" />
+    <Compile Include="Rules\Chaos.cs" />
     <Compile Include="Rules\EightBall.cs" />
+    <Compile Include="Rules\Goalkeeper.cs" />
     <Compile Include="Rules\IRules.cs" />
     <Compile Include="Rules\NineBall.cs" />
+    <Compile Include="Rules\TugOfWar.cs" />
     <Compile Include="Scenes\Dialog\DialogScene.cs" />
     <Compile Include="Scenes\Dialog\Scripts\IntroductionSam.cs" />
     <Compile Include="Scenes\Dialog\Scripts\IntroductionSebastian.cs" />

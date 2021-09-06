@@ -53,6 +53,8 @@
             public static string DIALOG_START = "dialogueCharacter";
 
             public static string DIALOG_NEXT = "dialogueCharacter";
+
+            public static string GAME_CANCEL = "cancel";
         }
     }
 }
