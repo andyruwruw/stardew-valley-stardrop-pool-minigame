@@ -143,6 +143,11 @@ namespace StardropPoolMinigame.Render.Drawers
                 scale = filter.ExecuteScale(scale);
             }
 
+            if (scale == 0)
+            {
+                scale = 0.001f;
+            }
+
             return scale;
         }
 
@@ -298,18 +303,36 @@ namespace StardropPoolMinigame.Render.Drawers
                 1f);
         }
 
-        public static void DrawDebugCircle(SpriteBatch batch, Vector2 center, int radius, Color? color = null, int size = 4, bool isRaw = false)
+        public static void DrawDebugCircle(SpriteBatch batch, Vector2 center, float radius, Color? color = null, int size = 1, bool isRaw = false)
         {
-            float pythag = (float)(radius * Math.Sqrt(2) / 2);
+            int maxLineLength = 3;
+            float circumference = (float)(radius * 2 * Math.PI);
+            int segments = (int)Math.Floor(circumference / maxLineLength);
 
-            DrawDebugPoint(batch, Vector2.Add(center, new Vector2(radius, 0)), color, size, isRaw);
-            DrawDebugPoint(batch, Vector2.Add(center, new Vector2(radius * -1, 0)), color, size, isRaw);
-            DrawDebugPoint(batch, Vector2.Add(center, new Vector2(0, radius)), color, size, isRaw);
-            DrawDebugPoint(batch, Vector2.Add(center, new Vector2(0, radius * -1)), color, size, isRaw);
-            DrawDebugPoint(batch, Vector2.Add(center, new Vector2(pythag, pythag)), color, size, isRaw);
-            DrawDebugPoint(batch, Vector2.Add(center, new Vector2(pythag, pythag * -1)), color, size, isRaw);
-            DrawDebugPoint(batch, Vector2.Add(center, new Vector2(pythag * -1, pythag)), color, size, isRaw);
-            DrawDebugPoint(batch, Vector2.Add(center, new Vector2(pythag * -1, pythag * -1)), color, size, isRaw);
+            float angle = (float)(2 * Math.PI) / segments;
+            Vector2 firstPoint = new Vector2(center.X + radius, center.Y);
+            Vector2 lastPoint = firstPoint;
+
+            for (int i = 1; i < segments; i++)
+            {
+                Vector2 newPoint = Vector2.Add(center, Vector2.Multiply(Vector2.Normalize(Operators.RadiansToVector(angle * i)), radius));
+                DrawDebugLine(
+                    batch,
+                    lastPoint,
+                    newPoint,
+                    color,
+                    size,
+                    isRaw);
+                lastPoint = newPoint;
+            }
+
+            DrawDebugLine(
+                batch,
+                lastPoint,
+                firstPoint,
+                color,
+                size,
+                isRaw);
         }
     }
 }

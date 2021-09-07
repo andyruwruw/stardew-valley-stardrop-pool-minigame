@@ -26,6 +26,7 @@ namespace StardropPoolMinigame.Entities
             GameConstants.Particle.Glimmer.COHESION_STRENGTH,
             GameConstants.Particle.Glimmer.SEPARATION_STRENGTH,
             GameConstants.Particle.Glimmer.MAXIMUM_VELOCITY,
+            GameConstants.Particle.Glimmer.MAXIMUM_FORCE,
             Vector2.Multiply(maximumInitialVelcity, GameConstants.Particle.Glimmer.MAXIMUM_INITIAL_VELOCITY_SCOLAR),
             Vector2.Multiply(minimumInitialVelcity, GameConstants.Particle.Glimmer.MINIMUM_INITIAL_VELOCITY_SCOLAR),
             GameConstants.Particle.Glimmer.LIFESPAN)

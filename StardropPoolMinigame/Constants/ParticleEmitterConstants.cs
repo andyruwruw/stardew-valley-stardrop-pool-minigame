@@ -8,7 +8,7 @@ namespace StardropPoolMinigame.Constants
     {
         public class Cue
         {
-            public static ParticleEmitter GetParticleEmitter(CueType type)
+            public static ParticleEmitter GetParticleEmitter(CueType type, float layerDepth)
             {
                 switch (type)
                 {
@@ -16,14 +16,14 @@ namespace StardropPoolMinigame.Constants
                         return new SparkEmitter(
                             Vector2.Zero,
                             5,
-                            0.0400f,
+                            layerDepth - 0.0001f,
                             5);
                     default:
                         return new SparkEmitter(
                             Vector2.Zero,
-                            5,
-                            0.0400f,
-                            5);
+                            1,
+                            layerDepth - 0.0001f,
+                            1);
                 }
             }
         }

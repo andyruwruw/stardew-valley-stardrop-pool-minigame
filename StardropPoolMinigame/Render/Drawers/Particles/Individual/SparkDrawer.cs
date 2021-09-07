@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using StardropPoolMinigame.Constants;
 using StardropPoolMinigame.Entities;
+using StardropPoolMinigame.Enums;
 using StardropPoolMinigame.Helpers;
 using System;
 
@@ -13,9 +14,15 @@ namespace StardropPoolMinigame.Render.Drawers
         {
         }
 
+        public override bool ShouldDraw()
+        {
+            return this._entity.GetTransitionState() != TransitionState.Dead;
+        }
+
         protected override void DrawDebugVisuals(SpriteBatch batch)
         {
             DrawDebugPoint(batch, this._entity.GetAnchor());
+            DrawDebugCircle(batch, this._entity.GetAnchor(), (int)Math.Round(((Spark)this._entity).GetPerception().GetRadius()), Color.Purple);
         }
 
         protected override Rectangle GetRawSource()
@@ -31,9 +38,14 @@ namespace StardropPoolMinigame.Render.Drawers
                 topLeft.Y * RenderConstants.TileScale() + RenderConstants.AdjustedScreenHeightMargin());
         }
 
+        protected override Color GetRawColor()
+        {
+            return new Color(200, 200, 200, 200);
+        }
+
         protected override float GetRawRotation()
         {
-            return (float)(Operators.VectorToRadians(((EntityBoid)this._entity).GetVelocity()) + Math.PI * 1.5f);
+            return (float)(Operators.VectorToRadians(((EntityBoid)this._entity).GetVelocity()) + Math.PI / 3f);
         }
 
         protected override Vector2 GetRawOrigin()

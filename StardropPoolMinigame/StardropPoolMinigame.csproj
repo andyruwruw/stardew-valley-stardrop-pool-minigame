@@ -49,9 +49,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Behaviors\Attributes\Orientation.cs" />
-    <Compile Include="Behaviors\Physics\Bounce.cs" />
     <Compile Include="Behaviors\Detectors\Use.cs" />
     <Compile Include="Behaviors\Intersection.cs" />
+    <Compile Include="Behaviors\Physics\RealPhysics.cs" />
     <Compile Include="Constants\LayerDepthConstants.cs" />
     <Compile Include="Constants\ParticleEmitterConstants.cs" />
     <Compile Include="Constants\StringConstants.cs" />
@@ -154,6 +154,7 @@
     <Compile Include="Render\Drawers\Game\TableSegmentDrawer.cs" />
     <Compile Include="Render\Drawers\Particles\Individual\SparkDrawer.cs" />
     <Compile Include="Render\Drawers\Particles\ParticleEmitterDrawer.cs" />
+    <Compile Include="Render\Drawers\Structures\QuadTreeDrawer.cs" />
     <Compile Include="Render\Drawers\UI\Background\SolidDrawer.cs" />
     <Compile Include="Render\Drawers\UI\Effects\PortraitFireDrawer.cs" />
     <Compile Include="Render\Drawers\UI\Effects\PortraitRaysDrawer.cs" />

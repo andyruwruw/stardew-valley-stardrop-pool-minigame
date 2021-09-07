@@ -65,7 +65,7 @@ namespace StardropPoolMinigame.Render.Filters
         {
             float progress = this._type == TransitionState.Entering ? this.GetProgress() : this.GetInvertedProgress();
 
-            return this._startingScale + ((1 - this._startingScale) * progress);
+            return this._startingScale + ((1 - this._startingScale) * progress) + 0.001f;
         }
     }
 }

@@ -177,6 +177,16 @@ namespace StardropPoolMinigame.Constants
                 public static int BORDER = 10;
 
                 public static int LIP = 5;
+
+                public static int PASSABLE_LIP = 2;
+
+                public static int UNPASSABLE_LIP = 3;
+
+                public static int VERTICAL_POCKET_STRAIGHT_EDGE_HEIGHT = 3;
+
+                public static int POCKET_ANGLED_EDGE_HEIGHT = 5;
+
+                public static int SPACE_TO_BOUNCEABLE_SURFACE = 15;
             }
 
             public class PocketedBalls

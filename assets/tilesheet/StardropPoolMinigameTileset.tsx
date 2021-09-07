@@ -334,15 +334,6 @@
  <tile id="197">
   <image width="16" height="16" source="../png/effects/purple-whisp-3.png"/>
  </tile>
- <tile id="198">
-  <image width="16" height="16" source="../png/effects/spark-1.png"/>
- </tile>
- <tile id="199">
-  <image width="16" height="16" source="../png/effects/spark-2.png"/>
- </tile>
- <tile id="200">
-  <image width="16" height="16" source="../png/effects/spark-3.png"/>
- </tile>
  <tile id="201">
   <image width="16" height="16" source="../png/effects/sparkle-1.png"/>
  </tile>
@@ -360,5 +351,14 @@
  </tile>
  <tile id="208">
   <image width="16" height="16" source="../png/ball/ball-highlight.png"/>
+ </tile>
+ <tile id="209">
+  <image width="16" height="16" source="../png/effects/spark-1.png"/>
+ </tile>
+ <tile id="210">
+  <image width="16" height="16" source="../png/effects/spark-2.png"/>
+ </tile>
+ <tile id="211">
+  <image width="16" height="16" source="../png/effects/spark-3.png"/>
  </tile>
 </tileset>

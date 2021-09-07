@@ -1,4 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
+using StardropPoolMinigame.Constants;
+using StardropPoolMinigame.Helpers;
+using System;
 
 namespace StardropPoolMinigame.Entities
 {
@@ -27,10 +30,20 @@ namespace StardropPoolMinigame.Entities
             return new Spark(
                 this.GetPositionInCreationWindow(),
                 this._layerDepth,
-                this._enteringTransition,
-                this._exitingTransition,
+                TransitionConstants.Game.Sparks.Entering(),
+                TransitionConstants.Game.Sparks.Exiting(),
                 this.GetMaximumInitialVelocity(),
                 this.GetMinimumInitialVelocity());
+        }
+
+        protected override Vector2 GetMaximumInitialVelocity()
+        {
+            return Operators.RadiansToVector(Operators.VectorToRadians(this._direction) - (float)(Math.PI / 3));
+        }
+
+        protected override Vector2 GetMinimumInitialVelocity()
+        {
+            return Operators.RadiansToVector(Operators.VectorToRadians(this._direction) + (float)(Math.PI / 3));
         }
     }
 }

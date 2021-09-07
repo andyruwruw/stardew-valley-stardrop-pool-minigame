@@ -208,11 +208,6 @@ namespace StardropPoolMinigame.Entities
             return this._anchor;
         }
 
-        public virtual Primitives.Rectangle GetBoundary()
-        {
-            return new Primitives.Rectangle(this.GetTopLeft(), this.GetTotalWidth(), this.GetTotalHeight());
-        }
-
         public virtual Primitives.Rectangle GetRawBoundary()
         {
             Vector2 topLeft = this.GetTopLeft();

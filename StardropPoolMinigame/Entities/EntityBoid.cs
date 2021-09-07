@@ -3,6 +3,7 @@ using StardropPoolMinigame.Enums;
 using StardropPoolMinigame.Helpers;
 using StardropPoolMinigame.Primitives;
 using StardropPoolMinigame.Render.Filters;
+using System;
 using System.Collections.Generic;
 
 namespace StardropPoolMinigame.Entities
@@ -16,6 +17,8 @@ namespace StardropPoolMinigame.Entities
         protected Vector2 _acceleration;
 
         protected float _maxVelocity;
+
+        protected float _maxForce;
 
         protected float _alignmentStrength;
 
@@ -36,6 +39,7 @@ namespace StardropPoolMinigame.Entities
             float cohesionStrength,
             float separationStrength,
             float maxVelocity,
+            float maxForce,
             Vector2 maxInitialVelocity,
             Vector2 minInitialVelocity,
             int duration
@@ -47,6 +51,7 @@ namespace StardropPoolMinigame.Entities
             exitingTransition)
         {
             this._maxVelocity = maxVelocity;
+            this._maxForce = maxForce;
             this._alignmentStrength = alignmentStrength;
             this._cohesionStrength = cohesionStrength;
             this._separationStrength = separationStrength;
@@ -54,10 +59,10 @@ namespace StardropPoolMinigame.Entities
 
             this._perception = new Circle(Vector2.Add(this.GetTopLeft(), new Vector2(this.GetTotalWidth() / 2, this.GetTotalHeight() / 2)), perceptionRadius);
             this._acceleration = new Vector2(
-                Random.Fraction() * (maxInitialVelocity.X - minInitialVelocity.X) + minInitialVelocity.X,
-                Random.Fraction() * (maxInitialVelocity.Y - minInitialVelocity.Y) + minInitialVelocity.Y);
+                Helpers.Random.Fraction() * (maxInitialVelocity.X - minInitialVelocity.X) + minInitialVelocity.X,
+                Helpers.Random.Fraction() * (maxInitialVelocity.Y - minInitialVelocity.Y) + minInitialVelocity.Y);
 
-            Timer.StartTimer(this.GetId());
+            Timer.StartTimer($"{this.GetId()}-lifetime");
         }
 
         public override string GetId()
@@ -73,16 +78,16 @@ namespace StardropPoolMinigame.Entities
             this._velocity = Vector2.Add(this._velocity, this._acceleration);
             this._acceleration = Vector2.Zero;
 
-            this._velocity = Vector2.Clamp(
-                this._velocity,
-                Vector2.Zero,
-                new Vector2(
-                    this._maxVelocity,
-                    this._maxVelocity));
+            if (Math.Abs(Operators.GetMagnitude(this._velocity)) > this._maxVelocity)
+            {
+                this._velocity = Vector2.Multiply(Vector2.Normalize(this._velocity), this._maxVelocity);
+            }
 
             this._perception.SetCenter(this.GetCenter());
 
-            if (Timer.CheckTimer(this.GetId()) > this._duration)
+            if (this._transitionState != TransitionState.Exiting
+                && this._transitionState != TransitionState.Dead
+                && Timer.CheckTimer($"{this.GetId()}-lifetime") > this._duration)
             {
                 this.SetTransitionState(TransitionState.Exiting, true);
             }
@@ -105,21 +110,29 @@ namespace StardropPoolMinigame.Entities
                 }
             }
 
+            Vector2 alignmentChange = Vector2.Multiply(
+                this.Align(filtered),
+                this._alignmentStrength);
+            Vector2 separationChange = Vector2.Multiply(
+                this.Separation(filtered),
+                this._separationStrength);
+            Vector2 cohesionChange = Vector2.Multiply(
+                this.Cohesion(filtered),
+                this._cohesionStrength);
+
             this._acceleration = Vector2.Add(
                 this._acceleration,
-                Vector2.Multiply(
-                    this.Align(filtered),
-                    this._alignmentStrength));
+                alignmentChange);
             this._acceleration = Vector2.Add(
                 this._acceleration,
-                Vector2.Multiply(
-                    this.Separation(filtered),
-                    this._separationStrength));
+                separationChange);
             this._acceleration = Vector2.Add(
                 this._acceleration,
-                Vector2.Multiply(
-                    this.Cohesion(filtered),
-                    this._cohesionStrength));
+                cohesionChange);
+
+            if (Math.Abs(Operators.GetMagnitude(this._acceleration)) > Math.Abs(this._maxForce)) {
+                this._acceleration = Vector2.Multiply(Vector2.Normalize(this._acceleration), this._maxForce);
+            }
         }
 
         public Vector2 Align(IList<EntityBoid> neighbors)
@@ -140,6 +153,7 @@ namespace StardropPoolMinigame.Entities
             }
             
             steering = Vector2.Divide(steering, total);
+            steering = Vector2.Multiply(Vector2.Normalize(steering), this._maxVelocity);
             steering = Vector2.Subtract(steering, this._velocity);
 
             return steering;
@@ -168,6 +182,7 @@ namespace StardropPoolMinigame.Entities
             }
 
             steering = Vector2.Divide(steering, total);
+            steering = Vector2.Multiply(Vector2.Normalize(steering), this._maxVelocity);
             steering = Vector2.Subtract(steering, this._velocity);
 
             return steering;
@@ -180,7 +195,7 @@ namespace StardropPoolMinigame.Entities
 
             foreach (EntityBoid boid in neighbors)
             {
-                steering = Vector2.Add(steering, boid.GetPerceptionCenter());
+                steering = Vector2.Add(steering, boid.GetCenter());
 
                 total += 1;
             }
@@ -191,7 +206,8 @@ namespace StardropPoolMinigame.Entities
             }
 
             steering = Vector2.Divide(steering, total);
-            steering = Vector2.Subtract(steering, this.GetPerceptionCenter());
+            steering = Vector2.Subtract(steering, this.GetCenter());
+            steering = Vector2.Multiply(Vector2.Normalize(steering), this._maxVelocity);
             steering = Vector2.Subtract(steering, this._velocity);
 
             return steering;

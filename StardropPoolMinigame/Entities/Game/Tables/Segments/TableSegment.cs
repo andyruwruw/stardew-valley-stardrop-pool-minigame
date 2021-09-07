@@ -1,13 +1,18 @@
 ﻿using Microsoft.Xna.Framework;
 using StardropPoolMinigame.Enums;
+using StardropPoolMinigame.Primitives;
 using StardropPoolMinigame.Render;
 using StardropPoolMinigame.Render.Drawers;
 using StardropPoolMinigame.Render.Filters;
+using System;
+using System.Collections.Generic;
 
 namespace StardropPoolMinigame.Entities
 {
     abstract class TableSegment : EntityStatic
     {
+        protected IList<Line> _bounceableSurfaces;
+
         public TableSegment(
             Origin origin,
             Vector2 anchor,
@@ -37,6 +42,11 @@ namespace StardropPoolMinigame.Entities
         public override float GetTotalWidth()
         {
             return Textures.Table.Edge.Back.NORTH.Width;
+        }
+
+        public virtual void InicializeBounceableSurfaces()
+        {
+            this._bounceableSurfaces = new List<Line>();
         }
 
         public abstract TableSegmentType GetTableSegmentType();
@@ -97,5 +107,6 @@ namespace StardropPoolMinigame.Entities
                     return null;
             }
         }
+
     }
 }

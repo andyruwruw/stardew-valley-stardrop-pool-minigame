@@ -38,8 +38,6 @@ namespace StardropPoolMinigame.Entities
 
         float GetTotalHeight();
 
-        Primitives.Rectangle GetBoundary();
-
         Primitives.Rectangle GetRawBoundary();
 
         IList<IFilter> GetFilters();

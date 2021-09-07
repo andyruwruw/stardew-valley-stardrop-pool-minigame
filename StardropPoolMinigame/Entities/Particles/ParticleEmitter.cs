@@ -4,6 +4,7 @@ using StardropPoolMinigame.Enums;
 using StardropPoolMinigame.Helpers;
 using StardropPoolMinigame.Render.Drawers;
 using StardropPoolMinigame.Structures;
+using System;
 using System.Collections.Generic;
 
 namespace StardropPoolMinigame.Entities
@@ -13,6 +14,8 @@ namespace StardropPoolMinigame.Entities
         protected QuadTree _quadTree;
 
         protected float _radius;
+
+        protected float _rateBase;
 
         protected float _rate;
 
@@ -39,6 +42,7 @@ namespace StardropPoolMinigame.Entities
                     RenderConstants.MinigameScreen.WIDTH,
                     RenderConstants.MinigameScreen.HEIGHT));
             this._radius = radius;
+            this._rateBase = rate;
             this._rate = rate;
             this._direction = Vector2.Zero;
             this._active = active;
@@ -70,12 +74,14 @@ namespace StardropPoolMinigame.Entities
                 {
                     ((Particle)particle).Flock(this._quadTree.Query(((Particle)particle).GetPerception()));
                     ((Particle)particle).Update();
-                    quadTree.Insert(particle);
+                    if (particle.GetTransitionState() != TransitionState.Dead)
+                    {
+                        quadTree.Insert(particle);
+                    }
                 }
             }
 
             this._quadTree = quadTree;
-
             if (this._active && Timer.CheckTimer($"{this.GetId()}-creation-cycle") > this._rate)
             {
                 Timer.EndTimer($"{this.GetId()}-creation-cycle");
@@ -111,7 +117,7 @@ namespace StardropPoolMinigame.Entities
 
         public void SetRate(float rate)
         {
-            this._rate = rate;
+            this._rate = rate * this._rateBase;
         }
 
         public float GetRadius()
@@ -129,6 +135,11 @@ namespace StardropPoolMinigame.Entities
             return this._quadTree.Query();
         }
 
+        public bool IsActive()
+        {
+            return this._active;
+        }
+
         public void SetActive(bool state)
         {
             this._active = state;
@@ -136,12 +147,12 @@ namespace StardropPoolMinigame.Entities
 
         protected Vector2 GetPositionInCreationWindow()
         {
-            return Vector2.Add(this._anchor, new Vector2(Random.Fraction() * this._radius, Random.Fraction() * this._radius));
+            return Vector2.Add(this._anchor, new Vector2(Helpers.Random.Fraction() * this._radius, Helpers.Random.Fraction() * this._radius));
         }
 
         public void SetDirection(Vector2 direction)
         {
-            this._direction = direction;
+            this._direction = Operators.RadiansToVector(Operators.VectorToRadians(direction) + (float)(Math.PI / 3));
         }
 
         protected virtual Vector2 GetMaximumInitialVelocity()

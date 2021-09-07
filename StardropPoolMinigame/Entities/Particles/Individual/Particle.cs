@@ -8,9 +8,6 @@ namespace StardropPoolMinigame.Entities
 {
     class Particle : EntityBoid
     {
-
-        private int _lifespan;
-
         public Particle(
             Origin origin,
             Vector2 anchor,
@@ -22,6 +19,7 @@ namespace StardropPoolMinigame.Entities
             float cohesionStrength,
             float separationStrength,
             float maxVelocity,
+            float maxForce,
             Vector2 maxInitialVelocity,
             Vector2 minInitialVelocity,
             int lifespan
@@ -36,32 +34,11 @@ namespace StardropPoolMinigame.Entities
             cohesionStrength,
             separationStrength,
             maxVelocity,
+            maxForce,
             maxInitialVelocity,
             minInitialVelocity,
             lifespan)
         {
-            this._lifespan = lifespan;
-
-            Timer.StartTimer($"{this.GetId()}-lifespan");
-        }
-
-        public override void Update()
-        {
-            base.Update();
-
-            if (this._transitionState != TransitionState.Exiting
-                && this._transitionState != TransitionState.Dead
-                && Timer.CheckTimer($"{this.GetId()}-lifespan") > this._lifespan)
-            {
-                Timer.EndTimer($"{this.GetId()}-lifespan");
-                if (this._exitingTransition != null)
-                {
-                    this.SetTransitionState(TransitionState.Exiting, true);
-                } else
-                {
-                    this.SetTransitionState(TransitionState.Dead, true);
-                }
-            }
         }
 
         public override string GetId()

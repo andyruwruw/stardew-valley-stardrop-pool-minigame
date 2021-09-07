@@ -26,6 +26,7 @@ namespace StardropPoolMinigame.Entities
             GameConstants.Particle.PurpleWhisp.COHESION_STRENGTH,
             GameConstants.Particle.PurpleWhisp.SEPARATION_STRENGTH,
             GameConstants.Particle.PurpleWhisp.MAXIMUM_VELOCITY,
+            GameConstants.Particle.PurpleWhisp.MAXIMUM_FORCE,
             Vector2.Multiply(maximumInitialVelcity, GameConstants.Particle.PurpleWhisp.MAXIMUM_INITIAL_VELOCITY_SCOLAR),
             Vector2.Multiply(minimumInitialVelcity, GameConstants.Particle.PurpleWhisp.MINIMUM_INITIAL_VELOCITY_SCOLAR),
             GameConstants.Particle.PurpleWhisp.LIFESPAN)

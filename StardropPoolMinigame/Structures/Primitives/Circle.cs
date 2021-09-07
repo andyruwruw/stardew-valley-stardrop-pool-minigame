@@ -17,7 +17,7 @@ namespace StardropPoolMinigame.Primitives
 
         public bool Contains(Vector2 point)
         {
-            return Distance.Between(point, this.GetCenter()) <= this._radius;
+            return Distance.Between(point, this._center) <= this._radius;
         }
 
         public void SetCenter(Vector2 center)

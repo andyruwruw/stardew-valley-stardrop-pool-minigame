@@ -29,5 +29,10 @@ namespace StardropPoolMinigame.Helpers
         {
             return new Vector2((float)Math.Cos(radians), (float)Math.Sin(radians));
         }
+
+        public static float GetMagnitude(Vector2 vector)
+        {
+            return (float)(Math.Sqrt(Math.Pow(vector.X, 2) + Math.Pow(vector.Y, 2)));
+        }
     }
 }

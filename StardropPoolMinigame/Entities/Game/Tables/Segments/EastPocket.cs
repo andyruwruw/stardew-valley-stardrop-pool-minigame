@@ -1,6 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
+using StardropPoolMinigame.Constants;
 using StardropPoolMinigame.Enums;
+using StardropPoolMinigame.Primitives;
 using StardropPoolMinigame.Render.Filters;
+using System;
 
 namespace StardropPoolMinigame.Entities
 {
@@ -29,6 +32,63 @@ namespace StardropPoolMinigame.Entities
         public override TableSegmentType GetTableSegmentType()
         {
             return TableSegmentType.EastPocket;
+        }
+
+        public override void InicializeBounceableSurfaces()
+        {
+            base.InicializeBounceableSurfaces();
+
+            this._bounceableSurfaces.Add(
+                new Line(
+                    Vector2.Add(
+                        this._anchor,
+                        new Vector2(
+                            this.GetTotalWidth() - RenderConstants.Entities.TableSegment.SPACE_TO_BOUNCEABLE_SURFACE,
+                            0)),
+                    Vector2.Add(
+                        this._anchor,
+                        new Vector2(
+                            this.GetTotalWidth() - RenderConstants.Entities.TableSegment.SPACE_TO_BOUNCEABLE_SURFACE,
+                            RenderConstants.Entities.TableSegment.VERTICAL_POCKET_STRAIGHT_EDGE_HEIGHT))));
+
+            this._bounceableSurfaces.Add(
+                new Line(
+                    Vector2.Add(
+                        this._anchor,
+                        new Vector2(
+                            this.GetTotalWidth() - RenderConstants.Entities.TableSegment.SPACE_TO_BOUNCEABLE_SURFACE,
+                            RenderConstants.Entities.TableSegment.VERTICAL_POCKET_STRAIGHT_EDGE_HEIGHT + 1)),
+                    Vector2.Add(
+                        this._anchor,
+                        new Vector2(
+                            this.GetTotalWidth() - RenderConstants.Entities.TableSegment.SPACE_TO_BOUNCEABLE_SURFACE + RenderConstants.Entities.TableSegment.UNPASSABLE_LIP,
+                            RenderConstants.Entities.TableSegment.VERTICAL_POCKET_STRAIGHT_EDGE_HEIGHT + 1 + RenderConstants.Entities.TableSegment.POCKET_ANGLED_EDGE_HEIGHT))));
+
+            this._bounceableSurfaces.Add(
+                new Line(
+                    Vector2.Add(
+                        this._anchor,
+                        new Vector2(
+                            this.GetTotalWidth() - RenderConstants.Entities.TableSegment.SPACE_TO_BOUNCEABLE_SURFACE,
+                            this.GetTotalHeight() - RenderConstants.Entities.TableSegment.VERTICAL_POCKET_STRAIGHT_EDGE_HEIGHT)),
+                    Vector2.Add(
+                        this._anchor,
+                        new Vector2(
+                            this.GetTotalWidth() - RenderConstants.Entities.TableSegment.SPACE_TO_BOUNCEABLE_SURFACE,
+                            this.GetTotalHeight()))));
+
+            this._bounceableSurfaces.Add(
+                new Line(
+                    Vector2.Add(
+                        this._anchor,
+                        new Vector2(
+                            this.GetTotalWidth() - RenderConstants.Entities.TableSegment.SPACE_TO_BOUNCEABLE_SURFACE,
+                            this.GetTotalHeight() - RenderConstants.Entities.TableSegment.VERTICAL_POCKET_STRAIGHT_EDGE_HEIGHT - 1)),
+                    Vector2.Add(
+                        this._anchor,
+                        new Vector2(
+                            this.GetTotalWidth() - RenderConstants.Entities.TableSegment.SPACE_TO_BOUNCEABLE_SURFACE + RenderConstants.Entities.TableSegment.UNPASSABLE_LIP,
+                            this.GetTotalHeight() - RenderConstants.Entities.TableSegment.VERTICAL_POCKET_STRAIGHT_EDGE_HEIGHT - 1 - RenderConstants.Entities.TableSegment.POCKET_ANGLED_EDGE_HEIGHT))));
         }
     }
 }

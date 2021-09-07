@@ -6,6 +6,8 @@ using StardropPoolMinigame.Enums;
 using StardropPoolMinigame.Helpers;
 using StardropPoolMinigame.Render.Drawers;
 using StardropPoolMinigame.Render.Filters;
+using System.Collections.Generic;
+using StardropPoolMinigame.Behaviors.Physics;
 
 namespace StardropPoolMinigame.Entities
 {
@@ -87,7 +89,13 @@ namespace StardropPoolMinigame.Entities
         public override void Update()
         {
             this.UpdateVectors();
+            base.Update();
+        }
 
+        public void Update(IList<IEntity> neighbors, TableSegment tableSegment, IDictionary<IEntity, IList<IEntity>> collisionsHandled)
+        {
+            this.UpdateInteractions(neighbors, tableSegment, collisionsHandled);
+            this.UpdateVectors();
             base.Update();
         }
 
@@ -118,12 +126,13 @@ namespace StardropPoolMinigame.Entities
 
         public void SetPosition(Vector2 position)
         {
+            this._anchor = position;
             this._range.SetCenter(position);
         }
 
         public Vector2 GetPosition()
         {
-            return this._range.GetCenter();
+            return this._anchor;
         }
 
         public Vector2 GetVelocity()
@@ -224,14 +233,55 @@ namespace StardropPoolMinigame.Entities
             this._isFlashing = state;
         }
 
+        private void UpdateInteractions(IList<IEntity> neighbors, TableSegment tableSegment, IDictionary<IEntity, IList<IEntity>> collisionsHandled)
+        {
+            foreach (Ball ball in neighbors)
+            {
+                if (ball.GetId() != this.GetId() && (!collisionsHandled.ContainsKey(ball) || !collisionsHandled[ball].Contains(this)))
+                {
+                    Sound.PlaySound(SoundConstants.Ball.COLLIDING);
+                    RealPhysics.Bounce(this, ball);
+                }
+
+                if (!collisionsHandled.ContainsKey(ball) || !collisionsHandled[ball].Contains(this))
+                {
+                    Logger.Info("Ball skipped");
+                }
+            }
+        }
+
         private void UpdateVectors()
         {
-            Vector2 newPosition = Vector2.Add(this._range.GetCenter(), this._velocity);
-            Vector2 newVelocity = Vector2.Add(this._velocity, this._acceleration);
-
-            this._range.SetCenter(newPosition);
+            this._anchor = Vector2.Add(this._anchor, this._velocity);
             this._orientation.Roll(this._velocity);
-            this._velocity = newVelocity;
+
+            this._velocity = Vector2.Add(this._velocity, this._acceleration);
+            this._acceleration = Vector2.Zero;
+
+            if (Operators.GetMagnitude(this._velocity) < GameConstants.Ball.MINIMUM_VELOCITY && Operators.GetMagnitude(this._velocity) > 0)
+            {
+                this._velocity = Vector2.Zero;
+            } else
+            {
+                Vector2 friction = Vector2.Multiply(this._velocity, GameConstants.Ball.FRICTION_ACCELERATION);
+
+                // Friction ramps up the slower the ball gets
+                if (Operators.GetMagnitude(this._velocity) <= GameConstants.Ball.HALT_BEGIN_VELOCITY && Operators.GetMagnitude(this._velocity) > 0)
+                {
+                    Vector2 direction = Vector2.Normalize(this._velocity);
+                    float percentShortStop = (GameConstants.Ball.HALT_BEGIN_VELOCITY - Operators.GetMagnitude(this._velocity)) / GameConstants.Ball.HALT_BEGIN_VELOCITY;
+                    friction = Vector2.Add(friction, Vector2.Multiply(direction, GameConstants.Ball.HALT_ACCELERATION * percentShortStop));
+                }
+
+                Vector2 minimum = Vector2.Min(Vector2.Zero, Vector2.Multiply(this._velocity, -1));
+                Vector2 maximum = Vector2.Max(Vector2.Zero, Vector2.Multiply(this._velocity, -1));
+
+                Vector2.Clamp(friction, minimum, maximum);
+
+                this._acceleration = Vector2.Add(this._acceleration, friction);
+            }
+
+            this._range.SetCenter(this._anchor);
         }
     }
 }

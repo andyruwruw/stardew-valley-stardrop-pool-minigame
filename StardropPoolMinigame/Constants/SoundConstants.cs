@@ -6,9 +6,9 @@
         {
             public static string LOCK_ANGLE = "give_gift";
 
-            public static string FULL_CHARGE = "furnace";
+            public static string FULL_CHARGE = "fireball";
 
-            public static string LOCK_POWER = "fishBite";
+            public static string LOCK_POWER = "wind";
 
             public static string STRIKE = "thudStep";
         }

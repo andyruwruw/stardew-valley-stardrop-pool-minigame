@@ -1,11 +1,13 @@
 ﻿using StardropPoolMinigame.Entities;
+using StardropPoolMinigame.Enums;
 using StardropPoolMinigame.Geometry;
 using StardropPoolMinigame.Primitives;
+using StardropPoolMinigame.Render.Drawers;
 using System.Collections.Generic;
 
 namespace StardropPoolMinigame.Structures
 {
-    class QuadTree
+    class QuadTree : EntityStatic
     {
         /// <summary>
         /// Number of items in QuadTree.
@@ -63,7 +65,16 @@ namespace StardropPoolMinigame.Structures
         /// <param name="boundary"><see cref="Rectangle"/> for QuadTree boundary</param>
         /// <param name="capacity">Number of nodes before QuadTree <see cref="Subdivide">Subdivides</see></param>
         /// <param name="isRoot">Whether QuadTree is root QuadTree</param>
-        public QuadTree(Rectangle boundary, int capacity = 4, bool isRoot = true)
+        public QuadTree(
+            Rectangle boundary,
+            int capacity = 4,
+            bool isRoot = true
+        ) : base(
+            Origin.TopLeft,
+            boundary.GetNorthWestCorner(),
+            1.0000f,
+            null,
+            null)
         {
             this.Count = 0;
             this._boundary = boundary;
@@ -71,6 +82,18 @@ namespace StardropPoolMinigame.Structures
             this._points = new List<IEntity>();
             this._divided = false;
             this._isRoot = isRoot;
+
+            this.SetDrawer(new QuadTreeDrawer(this));
+        }
+
+        public override float GetTotalWidth()
+        {
+            return this._boundary.GetWidth();
+        }
+
+        public override float GetTotalHeight()
+        {
+            return this._boundary.GetHeight();
         }
 
         /// <summary>
@@ -101,10 +124,25 @@ namespace StardropPoolMinigame.Structures
                 this.Subdivide();
             }
 
-            if (this._northEast.Insert(point) ||
-                this._northWest.Insert(point) ||
-                this._southEast.Insert(point) ||
-                this._southWest.Insert(point))
+            if (this._northEast.Insert(point))
+            {
+                this.Count += 1;
+                return true;
+            }
+
+            if (this._northWest.Insert(point))
+            {
+                this.Count += 1;
+                return true;
+            }
+
+            if (this._southEast.Insert(point))
+            {
+                this.Count += 1;
+                return true;
+            }
+
+            if (this._southWest.Insert(point))
             {
                 this.Count += 1;
                 return true;
@@ -148,7 +186,7 @@ namespace StardropPoolMinigame.Structures
 
             if (found == null)
             {
-                found = new List<IEntity> ();
+                found = new List<IEntity>();
             }
 
             if (!Intersection.IsIntersecting(range, this._boundary))
@@ -180,6 +218,36 @@ namespace StardropPoolMinigame.Structures
             return this._boundary;
         }
 
+        public bool IsSubdivided()
+        {
+            return this._divided;
+        }
+
+        public QuadTree GetNorthWestQuadrant()
+        {
+            return this._northWest;
+        }
+
+        public QuadTree GetNorthEastQuadrant()
+        {
+            return this._northEast;
+        }
+
+        public QuadTree GetSouthWestQuadrant()
+        {
+            return this._southWest;
+        }
+
+        public QuadTree GetSouthEastQuadrant()
+        {
+            return this._southEast;
+        }
+
+        public IList<IEntity> GetPoints()
+        {
+            return this._points;
+        }
+
         /// <summary>
         /// Subdivides the QuadTree into quadrants.
         /// </summary>
@@ -191,6 +259,13 @@ namespace StardropPoolMinigame.Structures
             this._southEast = new QuadTree(this._boundary.GetSouthEastRange(), this._capacity, false);
 
             this._divided = true;
+
+            foreach (IEntity point in this._points)
+            {
+                this.Insert(point);
+            }
+
+            this._points.Clear();
         }
     }
 }

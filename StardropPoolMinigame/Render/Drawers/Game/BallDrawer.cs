@@ -79,6 +79,20 @@ namespace StardropPoolMinigame.Render.Drawers
                     overrideEffects,
                     overrideLayerDepth);
             }
+
+            if (DevConstants.DEBUG_VISUALS)
+            {
+                this.DrawDebugVisuals(batch);
+            }
+        }
+
+        protected override void DrawDebugVisuals(SpriteBatch batch)
+        {
+            // DrawDebugPoint(batch, this._entity.GetAnchor());
+
+            DrawDebugCircle(batch, this._entity.GetAnchor(), GameConstants.Ball.RADIUS, Color.Yellow);
+
+            DrawDebugCircle(batch, this._entity.GetAnchor(), GameConstants.Ball.RADIUS * 2, Color.Red);
         }
 
         protected override Vector2 GetRawDestination()

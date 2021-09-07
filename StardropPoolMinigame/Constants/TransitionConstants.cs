@@ -241,6 +241,38 @@ namespace StardropPoolMinigame.Constants
                         new Vector2(Textures.Portrait.Sam.DEFAULT.Width, 0));
                 }
             }
+
+            public class Cue
+            {
+                public static IFilter Entering()
+                {
+                    return new SlideIn(
+                        15,
+                        true,
+                        TransitionState.Entering,
+                        10,
+                        Vector2.Zero);
+                }
+            }
+
+            public class Sparks
+            {
+                public static IFilter Entering()
+                {
+                    return new ScaleUp(
+                        5,
+                        true,
+                        TransitionState.Entering);
+                }
+
+                public static IFilter Exiting()
+                {
+                    return new ScaleUp(
+                        50,
+                        true,
+                        TransitionState.Exiting);
+                }
+            }
         }
     }
 }

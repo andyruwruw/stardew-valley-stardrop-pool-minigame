@@ -39,7 +39,6 @@ namespace StardropPoolMinigame.Players
                 Origin.CenterLeft,
                 new Vector2(0, 0),
                 0.0080f,
-                null,
                 null);
         }
 

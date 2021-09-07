@@ -15,7 +15,7 @@ namespace StardropPoolMinigame.Constants
             /// <summary>
             /// Amount of friction applied per 1 unit of distance traveled
             /// </summary>
-            public static float FRICTION_ACCELERATION = (float)-.01;
+            public static float FRICTION_ACCELERATION = (float)-.001;
 
             /// <summary>
             /// Amount of acceleration halt applies
@@ -25,7 +25,7 @@ namespace StardropPoolMinigame.Constants
             /// <summary>
             /// Ball velocity at which halt begins
             /// </summary>
-            public static float HALT_BEGIN_VELOCITY = (float).8;
+            public static float HALT_BEGIN_VELOCITY = (float).1;
 
             /// <summary>
             /// Mass of pool ball
@@ -58,24 +58,24 @@ namespace StardropPoolMinigame.Constants
             /// <summary>
             /// Transfer ration of ball momentum to cue speed
             /// </summary>
-            public static float MOMENTUM_TRANSFER = 18;
+            public static float MOMENTUM_TRANSFER = 4;
 
             /// <summary>
-            /// Speed at which the cue travels
+            /// Time the cue takes to hit the ball.
             /// </summary>
-            public static float STRIKING_SPEED = 8;
+            public static float STRIKING_SPEED = 10;
 
             public static int MINIMUM_DISTANCE_FROM_BALL = (int)Math.Round((Ball.RADIUS + 5) * RenderConstants.TileScale());
 
-            public static int MAXIMUM_DISTANCE_FROM_BALL = (int)Math.Round((Ball.RADIUS + 75) * RenderConstants.TileScale());
+            public static int MAXIMUM_DISTANCE_FROM_BALL = (int)Math.Round((Ball.RADIUS + 85) * RenderConstants.TileScale());
 
-            public static int POWER_TO_WIGGLE_AMPLITUDE_SCALAR = 1;
+            public static int POWER_TO_WIGGLE_AMPLITUDE_SCALAR = 75;
 
             public static float WIGGLE_FREQUENCY = 800;
 
-            public static float PARTICLE_MINIMUM_POWER_TRIGGER = 0.75f;
+            public static float PARTICLE_MINIMUM_POWER_TRIGGER = 0.85f;
 
-            public static float PARTICLE_RATE_PER_POWER = .01f;
+            public static float PARTICLE_RATE_PER_POWER = 3f;
         }
 
         public class PoolTable
@@ -102,78 +102,86 @@ namespace StardropPoolMinigame.Constants
         {
             public class Spark
             {
-                public static float PERCEPTION_RADIUS = 10f;
+                public static float PERCEPTION_RADIUS = 6f;
 
-                public static float ALIGNMENT_STRENGTH = 0.3f;
+                public static float ALIGNMENT_STRENGTH = 0.04f;
 
-                public static float COHESION_STRENGTH = 0.3f;
+                public static float COHESION_STRENGTH = 0.005f;
 
-                public static float SEPARATION_STRENGTH = 0.5f;
+                public static float SEPARATION_STRENGTH = 0.04f;
 
-                public static float MAXIMUM_VELOCITY = 0.2f;
+                public static float MAXIMUM_VELOCITY = 1.5f;
 
-                public static float MAXIMUM_INITIAL_VELOCITY_SCOLAR = 0.2f;
+                public static float MAXIMUM_FORCE = 0.1f;
 
-                public static float MINIMUM_INITIAL_VELOCITY_SCOLAR = 0.2f;
+                public static float MAXIMUM_INITIAL_VELOCITY_SCOLAR = 1.5f;
 
-                public static int LIFESPAN = 2;
+                public static float MINIMUM_INITIAL_VELOCITY_SCOLAR = 0.3f;
+
+                public static int LIFESPAN = 50;
             }
 
             public class Sparkle
             {
-                public static float PERCEPTION_RADIUS = 10f;
+                public static float PERCEPTION_RADIUS = 5f;
 
-                public static float ALIGNMENT_STRENGTH = 1f;
+                public static float ALIGNMENT_STRENGTH = 0.04f;
 
-                public static float COHESION_STRENGTH = 1f;
+                public static float COHESION_STRENGTH = 0.005f;
 
-                public static float SEPARATION_STRENGTH = 1f;
+                public static float SEPARATION_STRENGTH = 0.08f;
 
-                public static float MAXIMUM_VELOCITY = 1f;
+                public static float MAXIMUM_VELOCITY = 1.5f;
 
-                public static float MAXIMUM_INITIAL_VELOCITY_SCOLAR = 1f;
+                public static float MAXIMUM_FORCE = 0.1f;
 
-                public static float MINIMUM_INITIAL_VELOCITY_SCOLAR = 1f;
+                public static float MAXIMUM_INITIAL_VELOCITY_SCOLAR = 1.5f;
 
-                public static int LIFESPAN = 20;
+                public static float MINIMUM_INITIAL_VELOCITY_SCOLAR = 0.3f;
+
+                public static int LIFESPAN = 50;
             }
 
             public class Glimmer
             {
-                public static float PERCEPTION_RADIUS = 10f;
+                public static float PERCEPTION_RADIUS = 5f;
 
-                public static float ALIGNMENT_STRENGTH = 1f;
+                public static float ALIGNMENT_STRENGTH = 0.04f;
 
-                public static float COHESION_STRENGTH = 1f;
+                public static float COHESION_STRENGTH = 0.005f;
 
-                public static float SEPARATION_STRENGTH = 1f;
+                public static float SEPARATION_STRENGTH = 0.08f;
 
-                public static float MAXIMUM_VELOCITY = 1f;
+                public static float MAXIMUM_VELOCITY = 1.5f;
 
-                public static float MAXIMUM_INITIAL_VELOCITY_SCOLAR = 1f;
+                public static float MAXIMUM_FORCE = 0.1f;
 
-                public static float MINIMUM_INITIAL_VELOCITY_SCOLAR = 1f;
+                public static float MAXIMUM_INITIAL_VELOCITY_SCOLAR = 1.5f;
 
-                public static int LIFESPAN = 20;
+                public static float MINIMUM_INITIAL_VELOCITY_SCOLAR = 0.3f;
+
+                public static int LIFESPAN = 50;
             }
 
             public class PurpleWhisp
             {
-                public static float PERCEPTION_RADIUS = 10f;
+                public static float PERCEPTION_RADIUS = 5f;
 
-                public static float ALIGNMENT_STRENGTH = 1f;
+                public static float ALIGNMENT_STRENGTH = 0.04f;
 
-                public static float COHESION_STRENGTH = 1f;
+                public static float COHESION_STRENGTH = 0.005f;
 
-                public static float SEPARATION_STRENGTH = 1f;
+                public static float SEPARATION_STRENGTH = 0.08f;
 
-                public static float MAXIMUM_VELOCITY = 1f;
+                public static float MAXIMUM_VELOCITY = 1.5f;
 
-                public static float MAXIMUM_INITIAL_VELOCITY_SCOLAR = 1f;
+                public static float MAXIMUM_FORCE = 0.1f;
 
-                public static float MINIMUM_INITIAL_VELOCITY_SCOLAR = 1f;
+                public static float MAXIMUM_INITIAL_VELOCITY_SCOLAR = 1.5f;
 
-                public static int LIFESPAN = 20;
+                public static float MINIMUM_INITIAL_VELOCITY_SCOLAR = 0.3f;
+
+                public static int LIFESPAN = 50;
             }
         }
     }

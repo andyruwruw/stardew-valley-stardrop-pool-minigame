@@ -56,31 +56,12 @@ namespace StardropPoolMinigame.Geometry
 
         public static bool IntersectingRectangleAndCircle(Primitives.Rectangle rectangle, Circle circle)
         {
-            Vector2 circleDistance = new Vector2((float)Math.Abs(circle.GetCenter().X - rectangle.GetNorthWestCorner().X), (float)Math.Abs(circle.GetCenter().Y - rectangle.GetNorthWestCorner().Y));
+            float Xn = Math.Max(rectangle.GetNorthWestCorner().X, Math.Min(circle.GetCenter().X, rectangle.GetSouthEastCorner().X));
+            float Yn = Math.Max(rectangle.GetNorthWestCorner().Y, Math.Min(circle.GetCenter().Y, rectangle.GetSouthEastCorner().Y));
 
-            if (circleDistance.X > (rectangle.GetWidth() / 2 + circle.GetRadius()))
-            {
-                return false;
-            }
-
-            if (circleDistance.Y > (rectangle.GetHeight() / 2 + circle.GetRadius()))
-            {
-                return false;
-            }
-
-            if (circleDistance.X <= (rectangle.GetWidth() / 2))
-            { 
-                return true;
-            }
-
-            if (circleDistance.Y <= (rectangle.GetHeight() / 2))
-            {
-                return true;
-            }
-
-            float  cornerDistanceSquared = (float)(Math.Pow(circleDistance.X - rectangle.GetWidth() / 2, 2) + Math.Pow(circleDistance.Y - rectangle.GetHeight() / 2, 2));
-
-            return cornerDistanceSquared <= Math.Pow(circle.GetRadius(), 2);
+            float Dx = Xn - circle.GetCenter().X;
+            float Dy = Yn - circle.GetCenter().Y;
+            return (Dx * Dx + Dy * Dy) <= circle.GetRadius() * circle.GetRadius();
         }
     }
 }
