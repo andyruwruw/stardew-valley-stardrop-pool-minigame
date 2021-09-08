@@ -38,19 +38,7 @@ namespace StardropPoolMinigame.Entities
         {
             base.InicializeBounceableSurfaces();
 
-            this._bounceableSurfaces.Add(
-                new Line(
-                    Vector2.Add(
-                        this._anchor,
-                        new Vector2(
-                            this.GetTotalWidth() - RenderConstants.Entities.TableSegment.SPACE_TO_BOUNCEABLE_SURFACE,
-                            0)),
-                    Vector2.Add(
-                        this._anchor,
-                        new Vector2(
-                            this.GetTotalWidth() - RenderConstants.Entities.TableSegment.SPACE_TO_BOUNCEABLE_SURFACE,
-                            this.GetTotalHeight()))));
-
+            // North Edge
             this._bounceableSurfaces.Add(
                 new Line(
                     Vector2.Add(

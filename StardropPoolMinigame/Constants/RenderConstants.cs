@@ -153,7 +153,7 @@ namespace StardropPoolMinigame.Constants
             {
                 public static float MARGIN_LEFT = 3f;
 
-                public static float MARGIN_TOP = 3f;
+                public static float MARGIN_TOP = 2f;
             }
 
             public class BallButton
@@ -182,11 +182,21 @@ namespace StardropPoolMinigame.Constants
 
                 public static int UNPASSABLE_LIP = 3;
 
-                public static int VERTICAL_POCKET_STRAIGHT_EDGE_HEIGHT = 3;
+                public static int SPACE_TO_BOUNCEABLE_SURFACE = MARGIN + BORDER + UNPASSABLE_LIP;
 
-                public static int POCKET_ANGLED_EDGE_HEIGHT = 5;
+                public static int VERTICAL_POCKET_STRAIGHT_EDGE_HEIGHT = 2;
 
-                public static int SPACE_TO_BOUNCEABLE_SURFACE = 15;
+                public static int POCKET_ANGLED_EDGE_HEIGHT = 3;
+
+                public static int FLAT_POCKET_BARE_EDGE_LENGTH = 3;
+
+                public static int ANGLED_POCKET_BARE_EDGE_LENGTH = 6;
+
+                public static int FLAT_POCKET_BORDER_OFFSET = -2;
+
+                public static int ANGLED_POCKET_BORDER_OFFSET = 3;
+
+                public static int POCKET_RADIUS = 7;
             }
 
             public class PocketedBalls

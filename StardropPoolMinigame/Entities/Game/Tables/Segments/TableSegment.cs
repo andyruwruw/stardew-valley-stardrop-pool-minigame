@@ -13,6 +13,8 @@ namespace StardropPoolMinigame.Entities
     {
         protected IList<Line> _bounceableSurfaces;
 
+        protected IList<Circle> _pockets;
+
         public TableSegment(
             Origin origin,
             Vector2 anchor,
@@ -26,6 +28,8 @@ namespace StardropPoolMinigame.Entities
             enteringTransition,
             exitingTransition)
         {
+            this.InicializeBounceableSurfaces();
+            this.InicializePockets();
             this.SetDrawer(new TableSegmentDrawer(this));
         }
 
@@ -47,6 +51,21 @@ namespace StardropPoolMinigame.Entities
         public virtual void InicializeBounceableSurfaces()
         {
             this._bounceableSurfaces = new List<Line>();
+        }
+
+        public virtual void InicializePockets()
+        {
+            this._pockets = new List<Circle>();
+        }
+
+        public IList<Line> GetBounceableSurfaces()
+        {
+            return this._bounceableSurfaces;
+        }
+
+        public IList<Circle> GetPockets()
+        {
+            return this._pockets;
         }
 
         public abstract TableSegmentType GetTableSegmentType();

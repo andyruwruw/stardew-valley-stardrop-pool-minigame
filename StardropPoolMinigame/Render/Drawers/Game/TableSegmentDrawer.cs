@@ -3,6 +3,8 @@ using Microsoft.Xna.Framework.Graphics;
 using StardropPoolMinigame.Constants;
 using StardropPoolMinigame.Entities;
 using StardropPoolMinigame.Enums;
+using StardropPoolMinigame.Primitives;
+using System.Collections.Generic;
 
 namespace StardropPoolMinigame.Render.Drawers
 {
@@ -15,7 +17,7 @@ namespace StardropPoolMinigame.Render.Drawers
         public override void Draw(
             SpriteBatch batch,
             Vector2? overrideDestination = null,
-            Rectangle? overrideSource = null,
+            Microsoft.Xna.Framework.Rectangle? overrideSource = null,
             Color? overrideColor = null,
             float? overrideRotation = null,
             Vector2? overrideOrigin = null,
@@ -86,9 +88,40 @@ namespace StardropPoolMinigame.Render.Drawers
                     }
                 }
             }
+
+            if (DevConstants.DEBUG_VISUALS)
+            {
+                this.DrawDebugVisuals(batch);
+            }
         }
 
-        protected override Rectangle GetRawSource()
+        protected override void DrawDebugVisuals(SpriteBatch batch)
+        {
+            IList<Line> bounceableSurfaces = ((TableSegment)this._entity).GetBounceableSurfaces();
+
+            foreach (Line line in bounceableSurfaces)
+            {
+                DrawDebugLine(
+                    batch,
+                    line.GetStart(),
+                    line.GetEnd(),
+                    Color.Pink,
+                    1);
+            }
+
+            IList<Circle> pockets = ((TableSegment)this._entity).GetPockets();
+
+            foreach (Circle pocket in pockets)
+            {
+                DrawDebugCircle(
+                    batch,
+                    pocket.GetCenter(),
+                    pocket.GetRadius(),
+                    Color.Coral);
+            }
+        }
+
+        protected override Microsoft.Xna.Framework.Rectangle GetRawSource()
         {
             return Textures.Table.Edge.Back.NORTH;
         }

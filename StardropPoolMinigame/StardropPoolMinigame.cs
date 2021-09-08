@@ -7,7 +7,9 @@ using StardropPoolMinigame.Constants;
 using StardropPoolMinigame.Controller;
 using StardropPoolMinigame.Enums;
 using StardropPoolMinigame.Helpers;
+using StardropPoolMinigame.Players;
 using StardropPoolMinigame.Render;
+using StardropPoolMinigame.Rules;
 using StardropPoolMinigame.Scenes;
 
 namespace StardropPoolMinigame
@@ -38,7 +40,15 @@ namespace StardropPoolMinigame
         {
             Textures.LoadTextures();
 
-            this._enteringScene = new MenuScene();
+            if (DevConstants.AUTO_START_AI_GAME)
+            {
+                this._enteringScene = new GameScene(Player.GetMainPlayer(), new Sam());
+            } else
+            {
+                this._enteringScene = new MenuScene();
+            }
+
+            
             this._currentScene = null;
             this._exitingScene = null;
 

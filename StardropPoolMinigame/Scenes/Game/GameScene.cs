@@ -69,17 +69,6 @@ namespace StardropPoolMinigame.Scenes
             this.UpdateCueBall();
             this.UpdateCue();
             base.Update();
-
-            // IList<Ball> possiblyClickedBalls = this._balls.Query(new Primitives.Rectangle(new Vector2(Mouse.Position.X - GameConstants.Ball.RADIUS, Mouse.Position.Y - GameConstants.Ball.RADIUS), GameConstants.Ball.RADIUS * 2, GameConstants.Ball.RADIUS * 2));
-
-            //foreach (Ball ball in possiblyClickedBalls)
-            //{
-            //    if (ball.IsHovered())
-            //    {
-
-            //        break;
-            //    }
-            //}
         }
 
         private void UpdateCueBall()
@@ -114,6 +103,8 @@ namespace StardropPoolMinigame.Scenes
         {
             if (this._turn.GetTurnState() == TurnState.BallsInMotion)
             {
+                bool finished = true;
+
                 QuadTree quadTree = new QuadTree(
                     new Primitives.Rectangle(
                         Vector2.Zero,
@@ -126,16 +117,67 @@ namespace StardropPoolMinigame.Scenes
 
                 foreach (Ball ball in balls)
                 {
+                    if (finished && Operators.GetMagnitude(ball.GetVelocity()) != 0)
+                    {
+                        finished = false;
+                    }
+
                     IList<IEntity> neighbors = this._balls.Query(new Circle(ball.GetAnchor(), GameConstants.Ball.RADIUS * 2));
                     collisionsHandled.Add(ball, neighbors);
 
                     TableSegment tableSegment = this._table.GetTableSegmentFromPosition(ball.GetAnchor());
 
                     ball.Update(neighbors, tableSegment, collisionsHandled);
-                    quadTree.Insert(ball);
+
+                    if (ball.IsPocketed())
+                    {
+                        this.BallPocketed(ball, balls, tableSegment);
+                    } else
+                    {
+                        quadTree.Insert(ball);
+                    }
                 }
 
                 this._balls = quadTree;
+
+                if (finished && this._turn.GetCurrentPlayer().GetCue().GetTransitionState() == TransitionState.Dead)
+                {
+                    this._turn.SetTurnState(TurnState.Results);
+                    foreach (GameEvent eventthing in this._events)
+                    {
+                        Logger.Info($"{eventthing}");
+                    }
+                }
+            }
+        }
+
+        private void BallPocketed(Ball ball, IList<IEntity> balls, TableSegment tableSegment)
+        {
+            IList<Ball> remaining = new List<Ball>();
+
+            foreach (Ball filterBall in balls)
+            {
+                if (filterBall.GetId() != ball.GetId() && !filterBall.IsPocketed())
+                {
+                    remaining.Add(filterBall);
+                }
+            }
+            Sound.PlaySound(SoundConstants.Ball.POCKETED);
+            IList<GameEvent> newEvents = this._rules.BallPocketed(this._turn.GetCurrentPlayer(), ball, tableSegment, remaining);
+
+            foreach (GameEvent newEvent in newEvents)
+            {
+                this._events.Add(newEvent);
+            }
+
+            switch (this._turn.GetCurrentPlayerIndex())
+            {
+                case 1:
+                    this._player2PocketedBalls.Add(ball);
+                    break;
+                default:
+                    this._player1PocketedBalls.Add(ball);
+                    break;
             }
         }
 

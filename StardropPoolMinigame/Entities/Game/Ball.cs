@@ -29,6 +29,8 @@ namespace StardropPoolMinigame.Entities
 
         private bool _isFlashing;
 
+        private bool _isPocketed;
+
         public Ball(
             Vector2 center,
             float layerDepth,
@@ -49,6 +51,7 @@ namespace StardropPoolMinigame.Entities
             this._range = new Circle(center, GameConstants.Ball.RADIUS);
             this._isHighlighted = isHighlighted;
             this._isFlashing = isFlashing;
+            this._isPocketed = false;
 
             this._velocity = new Vector2(0, 0);
             this._acceleration = new Vector2(0, 0);
@@ -233,19 +236,49 @@ namespace StardropPoolMinigame.Entities
             this._isFlashing = state;
         }
 
+        public bool IsPocketed()
+        {
+            return this._isPocketed;
+        }
+
         private void UpdateInteractions(IList<IEntity> neighbors, TableSegment tableSegment, IDictionary<IEntity, IList<IEntity>> collisionsHandled)
         {
+            // Bounce off balls
             foreach (Ball ball in neighbors)
             {
-                if (ball.GetId() != this.GetId() && (!collisionsHandled.ContainsKey(ball) || !collisionsHandled[ball].Contains(this)))
+                if (ball.GetId() != this.GetId()
+                    && (!collisionsHandled.ContainsKey(ball) || !collisionsHandled[ball].Contains(this)
+                    && (Operators.GetMagnitude(ball.GetVelocity()) > GameConstants.Ball.MINIMUM_BOUNCE_VELOCITY && Operators.GetMagnitude(this._velocity) > GameConstants.Ball.MINIMUM_BOUNCE_VELOCITY)))
                 {
                     Sound.PlaySound(SoundConstants.Ball.COLLIDING);
                     RealPhysics.Bounce(this, ball);
+                } else if (ball.GetId() != this.GetId()
+                    && (!collisionsHandled.ContainsKey(ball) || !collisionsHandled[ball].Contains(this))) {
+                    RealPhysics.Bounce(this, ball, true);
                 }
+            }
 
-                if (!collisionsHandled.ContainsKey(ball) || !collisionsHandled[ball].Contains(this))
+            // Bounce off walls
+            IList<Line> bounceableSurfaces = tableSegment.GetBounceableSurfaces();
+
+            foreach (Line bounceableSurface in bounceableSurfaces)
+            {
+                if (bounceableSurface.Intersects(new Circle(this._anchor, GameConstants.Ball.RADIUS)))
                 {
-                    Logger.Info("Ball skipped");
+                    Sound.PlaySound(SoundConstants.Ball.BOUNCE);
+                    RealPhysics.Bounce(this, bounceableSurface);
+                    break;
+                }
+            }
+
+            // Fall in pockets
+            IList<Circle> pockets = tableSegment.GetPockets();
+
+            foreach (Circle pocket in pockets)
+            {
+                if (pocket.Contains(this._anchor))
+                {
+                    this._isPocketed = true;
                 }
             }
         }
@@ -253,7 +286,7 @@ namespace StardropPoolMinigame.Entities
         private void UpdateVectors()
         {
             this._anchor = Vector2.Add(this._anchor, this._velocity);
-            this._orientation.Roll(this._velocity);
+            this._orientation.Roll(Vector2.Negate(this._velocity));
 
             this._velocity = Vector2.Add(this._velocity, this._acceleration);
             this._acceleration = Vector2.Zero;

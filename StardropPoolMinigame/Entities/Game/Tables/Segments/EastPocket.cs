@@ -38,6 +38,7 @@ namespace StardropPoolMinigame.Entities
         {
             base.InicializeBounceableSurfaces();
 
+            // North East Edge
             this._bounceableSurfaces.Add(
                 new Line(
                     Vector2.Add(
@@ -51,6 +52,21 @@ namespace StardropPoolMinigame.Entities
                             this.GetTotalWidth() - RenderConstants.Entities.TableSegment.SPACE_TO_BOUNCEABLE_SURFACE,
                             RenderConstants.Entities.TableSegment.VERTICAL_POCKET_STRAIGHT_EDGE_HEIGHT))));
 
+            // North East Edge Bare
+            this._bounceableSurfaces.Add(
+                new Line(
+                    Vector2.Add(
+                        this._anchor,
+                        new Vector2(
+                            this.GetTotalWidth() - RenderConstants.Entities.TableSegment.SPACE_TO_BOUNCEABLE_SURFACE,
+                            0)),
+                    Vector2.Add(
+                        this._anchor,
+                        new Vector2(
+                            this.GetTotalWidth() - RenderConstants.Entities.TableSegment.SPACE_TO_BOUNCEABLE_SURFACE + RenderConstants.Entities.TableSegment.UNPASSABLE_LIP,
+                            RenderConstants.Entities.TableSegment.VERTICAL_POCKET_STRAIGHT_EDGE_HEIGHT + 1 + RenderConstants.Entities.TableSegment.POCKET_ANGLED_EDGE_HEIGHT))));
+
+            // North East Pocket Angle
             this._bounceableSurfaces.Add(
                 new Line(
                     Vector2.Add(
@@ -64,6 +80,7 @@ namespace StardropPoolMinigame.Entities
                             this.GetTotalWidth() - RenderConstants.Entities.TableSegment.SPACE_TO_BOUNCEABLE_SURFACE + RenderConstants.Entities.TableSegment.UNPASSABLE_LIP,
                             RenderConstants.Entities.TableSegment.VERTICAL_POCKET_STRAIGHT_EDGE_HEIGHT + 1 + RenderConstants.Entities.TableSegment.POCKET_ANGLED_EDGE_HEIGHT))));
 
+            // South East Edge
             this._bounceableSurfaces.Add(
                 new Line(
                     Vector2.Add(
@@ -77,6 +94,21 @@ namespace StardropPoolMinigame.Entities
                             this.GetTotalWidth() - RenderConstants.Entities.TableSegment.SPACE_TO_BOUNCEABLE_SURFACE,
                             this.GetTotalHeight()))));
 
+            // South East Edge Bare
+            this._bounceableSurfaces.Add(
+                new Line(
+                    Vector2.Add(
+                        this._anchor,
+                        new Vector2(
+                            this.GetTotalWidth() - RenderConstants.Entities.TableSegment.SPACE_TO_BOUNCEABLE_SURFACE,
+                            this.GetTotalHeight() - RenderConstants.Entities.TableSegment.VERTICAL_POCKET_STRAIGHT_EDGE_HEIGHT)),
+                    Vector2.Add(
+                        this._anchor,
+                        new Vector2(
+                            this.GetTotalWidth() - RenderConstants.Entities.TableSegment.SPACE_TO_BOUNCEABLE_SURFACE + RenderConstants.Entities.TableSegment.UNPASSABLE_LIP,
+                            this.GetTotalHeight() - RenderConstants.Entities.TableSegment.VERTICAL_POCKET_STRAIGHT_EDGE_HEIGHT - 1 - RenderConstants.Entities.TableSegment.POCKET_ANGLED_EDGE_HEIGHT))));
+
+            // South East Pocket Angle
             this._bounceableSurfaces.Add(
                 new Line(
                     Vector2.Add(

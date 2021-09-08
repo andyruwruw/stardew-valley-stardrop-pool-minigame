@@ -15,17 +15,17 @@ namespace StardropPoolMinigame.Constants
             /// <summary>
             /// Amount of friction applied per 1 unit of distance traveled
             /// </summary>
-            public static float FRICTION_ACCELERATION = (float)-.001;
+            public static float FRICTION_ACCELERATION = (float)-.005;
 
             /// <summary>
             /// Amount of acceleration halt applies
             /// </summary>
-            public static float HALT_ACCELERATION = (float)-.1;
+            public static float HALT_ACCELERATION = (float)-.005;
 
             /// <summary>
             /// Ball velocity at which halt begins
             /// </summary>
-            public static float HALT_BEGIN_VELOCITY = (float).1;
+            public static float HALT_BEGIN_VELOCITY = (float).05;
 
             /// <summary>
             /// Mass of pool ball
@@ -46,6 +46,8 @@ namespace StardropPoolMinigame.Constants
             /// Momentum loss from bouncing off a wall
             /// </summary>
             public static float BOUNCE_MOMENTUM_LOSS_MULTIPLIER = 1;
+
+            public static float MINIMUM_BOUNCE_VELOCITY = .05f;
 
             /// <summary>
             /// Momentum loss from bouncing off a wall
@@ -102,17 +104,17 @@ namespace StardropPoolMinigame.Constants
         {
             public class Spark
             {
-                public static float PERCEPTION_RADIUS = 6f;
+                public static float PERCEPTION_RADIUS = 8f;
 
-                public static float ALIGNMENT_STRENGTH = 0.04f;
+                public static float ALIGNMENT_STRENGTH = 0.02f;
 
-                public static float COHESION_STRENGTH = 0.005f;
+                public static float COHESION_STRENGTH = 0.03f;
 
                 public static float SEPARATION_STRENGTH = 0.04f;
 
                 public static float MAXIMUM_VELOCITY = 1.5f;
 
-                public static float MAXIMUM_FORCE = 0.1f;
+                public static float MAXIMUM_FORCE = 0.2f;
 
                 public static float MAXIMUM_INITIAL_VELOCITY_SCOLAR = 1.5f;
 

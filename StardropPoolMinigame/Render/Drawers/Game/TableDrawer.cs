@@ -46,6 +46,11 @@ namespace StardropPoolMinigame.Render.Drawers
             }
         }
 
+        protected override void DrawDebugVisuals(SpriteBatch batch)
+        {
+            DrawDebugLine(batch, Vector2.Zero, new Vector2(RenderConstants.MinigameScreen.WIDTH, RenderConstants.MinigameScreen.HEIGHT), Color.Coral, 1);
+        }
+
         protected override Rectangle GetRawSource()
         {
             return Textures.Table.Edge.Front.NORTH;

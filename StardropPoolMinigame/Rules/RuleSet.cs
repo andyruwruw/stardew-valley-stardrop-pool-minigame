@@ -16,7 +16,7 @@ namespace StardropPoolMinigame.Rules
 
         public abstract IList<GameEvent> FirstBallHit(IPlayer player, Ball ball);
 
-        public abstract IList<GameEvent> BallPocketed(IPlayer player, IList<Ball> balls, TableSegment pocket, IList<Ball> remaining, TableSegment target = null);
+        public abstract IList<GameEvent> BallPocketed(IPlayer player, Ball ball, TableSegment pocket, IList<Ball> remaining, TableSegment target = null);
 
         public virtual bool HasPlayerSpecificCueBalls()
         {

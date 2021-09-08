@@ -38,7 +38,7 @@
         /// <summary>
         /// On game start, skip menus and go right into a game
         /// </summary>
-        public static bool AUTO_START_AI_GAME = false;
+        public static bool AUTO_START_AI_GAME = true;
 
         /// <summary>
         /// On game start, skip menus and go right into game summary

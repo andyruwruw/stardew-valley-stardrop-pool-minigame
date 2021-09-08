@@ -50,7 +50,7 @@ namespace StardropPoolMinigame.Rules
 
         public override IList<GameEvent> BallPocketed(
             IPlayer player,
-            IList<Ball> balls,
+            Ball ball,
             TableSegment pocket,
             IList<Ball> remaining,
             TableSegment target = null)

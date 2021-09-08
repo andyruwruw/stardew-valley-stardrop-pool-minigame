@@ -100,6 +100,9 @@ namespace StardropPoolMinigame.Rules
         {
             IList<GameEvent> events = new List<GameEvent>();
 
+            events.Add(GameEvent.NextPlayer);
+            events.Add(GameEvent.Scratch);
+
             return events;
         }
 
@@ -107,17 +110,54 @@ namespace StardropPoolMinigame.Rules
         {
             IList<GameEvent> events = new List<GameEvent>();
 
+            if (ball.GetBallType() != player.GetBallType())
+            {
+                events.Add(GameEvent.NextPlayer);
+                events.Add(GameEvent.Scratch);
+            }
+
             return events;
         }
 
         public override IList<GameEvent> BallPocketed(
             IPlayer player,
-            IList<Ball> balls,
+            Ball ball,
             TableSegment pocket,
             IList<Ball> remaining,
             TableSegment target = null)
         {
             IList<GameEvent> events = new List<GameEvent>();
+
+            if (ball.GetNumber() == 0)
+            {
+                events.Add(GameEvent.NextPlayer);
+                events.Add(GameEvent.Scratch);
+
+                return events;
+            }
+
+            if (player.GetBallType() == BallType.Any)
+            {
+                player.SetBallType(ball.GetBallType());
+
+                if (ball.GetBallType() == BallType.Stripped)
+                {
+                    events.Add(GameEvent.ChoseStripes);
+                } else
+                {
+                    events.Add(GameEvent.ChoseSolids);
+                }
+            }
+
+            if (ball.GetBallType() == player.GetBallType())
+            {
+                events.Add(GameEvent.ScoredPoint);
+                
+            } else
+            {
+                events.Add(GameEvent.GavePoint);
+            }
+            events.Add(GameEvent.SamePlayer);
 
             return events;
         }

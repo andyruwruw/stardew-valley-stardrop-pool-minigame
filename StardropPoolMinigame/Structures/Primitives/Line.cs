@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using StardropPoolMinigame.Helpers;
 using System;
 
 namespace StardropPoolMinigame.Primitives
@@ -20,30 +21,26 @@ namespace StardropPoolMinigame.Primitives
             return Vector2.Subtract(this._start, this._end);
         }
 
+        public float GetLength()
+        {
+            return (float)Distance.Pythagorean(this._start, this._end);
+        }
+
         public bool Intersects(Circle circle)
         {
-            float startDistanceX = this._start.X - circle.GetCenter().X;
-            float startDistanceY = this._start.Y - circle.GetCenter().Y;
-
-            float endDistanceX = this._end.X - circle.GetCenter().X;
-            float endDistanceY = this._end.Y -= circle.GetCenter().Y;
-
-            float a = (float)(Math.Pow(endDistanceX - startDistanceX, 2) + Math.Pow(endDistanceY - startDistanceY, 2));
-            float b = 2 * (startDistanceX * (endDistanceX - startDistanceX) + startDistanceY * (endDistanceY - startDistanceY));
-            float c = (float)(Math.Pow(startDistanceX, 2) + Math.Pow(startDistanceY, 2) - Math.Pow(circle.GetRadius(), 2));
-            float disc = (float)(Math.Pow(b, 2) - 4 * a * c);
-
-            if (disc <= 0)
+            if (Distance.Pythagorean(this._start, circle.GetCenter()) <= circle.GetRadius()
+                || Distance.Pythagorean(this._end, circle.GetCenter()) <= circle.GetRadius())
             {
-                return false;
+                return true;
             }
 
-            float sqrtdisc = (float)Math.Sqrt(disc);
+            float dotProduct = (float)((((circle.GetCenter().X - this.GetStart().X) * (this.GetEnd().X - this.GetStart().X)) + ((circle.GetCenter().Y - this.GetStart().Y) * (this.GetEnd().Y - this.GetStart().Y))) / Math.Pow(this.GetLength(), 2));
 
-            float t1 = (-b + sqrtdisc) / (2 * a);
-            float t2 = (-b - sqrtdisc) / (2 * a);
+            Vector2 closestPoint = new Vector2(
+                this.GetStart().X + (dotProduct * (this.GetEnd().X - this.GetStart().X)),
+                this.GetStart().Y + (dotProduct * (this.GetEnd().Y - this.GetStart().Y)));
 
-            return (0 < t1 && t1 < 1) || (0 < t2 && t2 < 1);
+            return Distance.Pythagorean(closestPoint, circle.GetCenter()) <= circle.GetRadius();
         }
 
         public bool Intersects(Line other)

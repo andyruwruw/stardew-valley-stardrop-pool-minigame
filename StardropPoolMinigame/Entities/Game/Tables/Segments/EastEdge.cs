@@ -3,7 +3,6 @@ using StardropPoolMinigame.Constants;
 using StardropPoolMinigame.Enums;
 using StardropPoolMinigame.Primitives;
 using StardropPoolMinigame.Render.Filters;
-using System;
 
 namespace StardropPoolMinigame.Entities
 {
@@ -38,6 +37,7 @@ namespace StardropPoolMinigame.Entities
         {
             base.InicializeBounceableSurfaces();
 
+            // East Edge
             this._bounceableSurfaces.Add(
                 new Line(
                     Vector2.Add(
