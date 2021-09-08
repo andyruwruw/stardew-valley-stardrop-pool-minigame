@@ -50,7 +50,8 @@
   <ItemGroup>
     <Compile Include="Behaviors\Attributes\Orientation.cs" />
     <Compile Include="Behaviors\Detectors\Use.cs" />
-    <Compile Include="Behaviors\Intersection.cs" />
+    <Compile Include="Helpers\Intersection.cs" />
+    <Compile Include="Behaviors\Physics\BoidPhysics.cs" />
     <Compile Include="Behaviors\Physics\RealPhysics.cs" />
     <Compile Include="Constants\LayerDepthConstants.cs" />
     <Compile Include="Constants\ParticleEmitterConstants.cs" />
@@ -117,6 +118,15 @@
     <Compile Include="Entities\UI\Effects\PortraitFire.cs" />
     <Compile Include="Entities\UI\Elements\PocketedBalls.cs" />
     <Compile Include="Entities\UI\Elements\Portrait.cs" />
+    <Compile Include="Entities\UI\Popups\BallPocketedPopup.cs" />
+    <Compile Include="Entities\UI\Popups\ComboPopup.cs" />
+    <Compile Include="Entities\UI\Popups\DefeatPopup.cs" />
+    <Compile Include="Entities\UI\Popups\OpponentTurnPopup.cs" />
+    <Compile Include="Entities\UI\Popups\Popup.cs" />
+    <Compile Include="Entities\UI\Popups\ScratchPop.cs" />
+    <Compile Include="Entities\UI\Popups\UnlockedCharacterPopup.cs" />
+    <Compile Include="Entities\UI\Popups\VictoryPopup.cs" />
+    <Compile Include="Entities\UI\Popups\YourTurnPopup.cs" />
     <Compile Include="Entities\UI\Titles\GameTitle.cs" />
     <Compile Include="Entities\UI\Titles\PageTitle.cs" />
     <Compile Include="Enums\BallColor.cs" />
@@ -167,6 +177,7 @@
     <Compile Include="Render\Drawers\UI\Buttons\BallButtonDrawer.cs" />
     <Compile Include="Render\Drawers\UI\Background\BarShelvesDrawer.cs" />
     <Compile Include="Render\Drawers\UI\Buttons\ButtonDrawer.cs" />
+    <Compile Include="Render\Drawers\UI\Popups\PopupDrawer.cs" />
     <Compile Include="Render\Drawers\UI\Titles\GameTitleDrawer.cs" />
     <Compile Include="Render\Drawers\UI\Titles\PageTitleDrawer.cs" />
     <Compile Include="Render\Filters\Animations\Animation.cs" />
@@ -199,6 +210,7 @@
     <Compile Include="Scenes\Game\GameScene.cs" />
     <Compile Include="Scenes\Game\GameSceneCreator.cs" />
     <Compile Include="Scenes\Game\States\Turn.cs" />
+    <Compile Include="Scenes\Game\States\TurnResults.cs" />
     <Compile Include="Scenes\IScene.cs" />
     <Compile Include="Scenes\ISceneCreator.cs" />
     <Compile Include="Scenes\Menu\CharacterSelectScene.cs" />

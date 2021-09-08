@@ -3,6 +3,7 @@ using StardewModdingAPI;
 using StardewModdingAPI.Events;
 using StardropPoolMinigame.Helpers;
 using StardropPoolMinigame.Detect;
+using StardropPoolMinigame.Render;
 
 namespace StardropPoolMinigame
 {
@@ -28,6 +29,7 @@ namespace StardropPoolMinigame
         private void OnSaveLoaded(object sender, SaveLoadedEventArgs e)
         {
             Save.SetData(this.Helper.Data);
+            Textures.LoadTextures();
         }
 
         /// <summary>

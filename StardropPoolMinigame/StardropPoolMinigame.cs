@@ -38,8 +38,6 @@ namespace StardropPoolMinigame
 
         public StardropPoolMinigame()
         {
-            Textures.LoadTextures();
-
             if (DevConstants.AUTO_START_AI_GAME)
             {
                 this._enteringScene = new GameScene(Player.GetMainPlayer(), new Sam());
@@ -47,7 +45,6 @@ namespace StardropPoolMinigame
             {
                 this._enteringScene = new MenuScene();
             }
-
             
             this._currentScene = null;
             this._exitingScene = null;

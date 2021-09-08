@@ -8,7 +8,7 @@
         /// <summary>
         /// Displays physics and drawing debugging visuals
         /// </summary>
-        public static bool DEBUG_VISUALS = true;
+        public static bool DEBUG_VISUALS = false;
 
         /// <summary>
         /// Useful for finding sprites outside the minigame window

@@ -7,8 +7,17 @@ using System;
 
 namespace StardropPoolMinigame.Behaviors.Physics
 {
+    /// <summary>
+    /// Resembles real life physics
+    /// </summary>
     class RealPhysics
     {
+        /// <summary>
+        /// Bounces two balls together
+        /// </summary>
+        /// <param name="ball1">First ball to be bounced</param>
+        /// <param name="ball2">Second ball to be bounced</param>
+        /// <param name="offsetOnly">Does not alter velocity, but offsets balls to not overlap</param>
         public static void Bounce(Ball ball1, Ball ball2, bool offsetOnly = false)
         {
             Vector2 angle = Vector2.Subtract(ball1.GetAnchor(), ball2.GetPosition());
@@ -74,6 +83,14 @@ namespace StardropPoolMinigame.Behaviors.Physics
             ball.SetAnchor(Vector2.Add(ball.GetAnchor(), Vector2.Multiply(collisionNormal, overlapping / 1.9f)));
         }
 
+        /// <summary>
+        /// Calculates conservation of momentum
+        /// </summary>
+        /// <param name="ball1">First ball in collision</param>
+        /// <param name="ball2"></param>
+        /// <param name="ball1CollisionForce"></param>
+        /// <param name="ball2CollisionForce"></param>
+        /// <returns></returns>
         private static float GetMomentum(Ball ball1, Ball ball2, float ball1CollisionForce, float ball2CollisionForce)
         {
             return ((float)2.0 * (ball1CollisionForce - ball2CollisionForce)) / (ball1.GetMass() + ball2.GetMass());

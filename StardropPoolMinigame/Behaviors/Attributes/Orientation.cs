@@ -4,10 +4,19 @@ using System.Collections.Generic;
 
 namespace StardropPoolMinigame.Attributes
 {
+    /// <summary>
+    /// Polar coordinates for orientation of balls
+    /// </summary>
     class Orientation
     {
+        /// <summary>
+        /// Longitude and latitude degrees
+        /// </summary>
         private Vector2 _orientation;
 
+        /// <summary>
+        /// The circumference of the ball
+        /// </summary>
         private float _circumference;
 
         public Orientation(
@@ -19,6 +28,10 @@ namespace StardropPoolMinigame.Attributes
             this._orientation = new Vector2(longitude, latitude);
         }
 
+        /// <summary>
+        /// Rotates the orientation based on velocity and circumfrance
+        /// </summary>
+        /// <param name="velocity"></param>
         public void Roll(Vector2 velocity)
         {
             Vector2 degrees = new Vector2(velocity.X / this._circumference * 360, velocity.Y / this._circumference * 360);
@@ -27,6 +40,10 @@ namespace StardropPoolMinigame.Attributes
             this.Limit();
         }
 
+        /// <summary>
+        /// Retrieves the simplified orientation
+        /// </summary>
+        /// <returns>Longitude and latitude degrees</returns>
         public Vector2 GetFace()
         {
             float LATITUDE_DIFF = 30;
@@ -40,6 +57,9 @@ namespace StardropPoolMinigame.Attributes
             return new Vector2(simplifiedLongitude == 180 ? 0 : simplifiedLongitude, simplifiedLatitude);
         }
 
+        /// <summary>
+        /// Simplifies the orientation to not go above 180
+        /// </summary>
         private void Limit()
         {
             float LATITUDE_DIFF = 30;

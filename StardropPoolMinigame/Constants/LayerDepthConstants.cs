@@ -53,5 +53,7 @@
         {
 
         }
+
+        public static float POPUP = 0.9000f;
     }
 }

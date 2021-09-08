@@ -517,5 +517,22 @@
                 }
             }
         }
+
+        public class Popups
+        {
+            public static string VICTORY = "game.popup.victory";
+
+            public static string DEFEAT = "game.popup.defeat";
+
+            public static string SCRATCH = "game.popup.scratch";
+
+            public static string BALL_POCKETED = "game.popup.ball-pocketed";
+
+            public static string COMBO = "game.popup.combo";
+
+            public static string YOUR_TURN = "game.popup.your-turn";
+
+            public static string OPPONENT_TURN = "game.popup.opponent-turn";
+        }
     }
 }

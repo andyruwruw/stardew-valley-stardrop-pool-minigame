@@ -12,7 +12,7 @@
         NextPlayer = 4,
         GavePoint = 5,
         Scratch = 6,
-        Lose = 7,
-        Win = 8,
+        Defeat = 7,
+        Victory = 8,
     }
 }
