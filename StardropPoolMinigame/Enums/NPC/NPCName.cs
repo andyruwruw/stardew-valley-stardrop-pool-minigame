@@ -3,7 +3,7 @@
     /// <summary>
     /// Computer opponent names
     /// </summary>
-    public enum OpponentType
+    public enum NPCName
     {
         Sam = 1,
         Sebastian = 2,

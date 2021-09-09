@@ -4,10 +4,19 @@ using System;
 
 namespace StardropPoolMinigame.Primitives
 {
-    class Line
+    /// <summary>
+    /// Simple line class
+    /// </summary>
+    class Line : IRange
     {
+        /// <summary>
+        /// <see cref="Vector2"/> of the start of the line
+        /// </summary>
         private Vector2 _start;
 
+        /// <summary>
+        /// <see cref="Vector2"/> of the end of the line
+        /// </summary>
         private Vector2 _end;
 
         public Line(Vector2 start, Vector2 end)
@@ -16,20 +25,10 @@ namespace StardropPoolMinigame.Primitives
             this._end = end;
         }
 
-        public Vector2 GetAngle()
-        {
-            return Vector2.Subtract(this._start, this._end);
-        }
-
-        public float GetLength()
-        {
-            return (float)Distance.Pythagorean(this._start, this._end);
-        }
-
         public bool Intersects(Circle circle)
         {
-            if (Distance.Pythagorean(this._start, circle.GetCenter()) <= circle.GetRadius()
-                || Distance.Pythagorean(this._end, circle.GetCenter()) <= circle.GetRadius())
+            if (DistanceHelper.Pythagorean(this._start, circle.GetCenter()) <= circle.GetRadius()
+                || DistanceHelper.Pythagorean(this._end, circle.GetCenter()) <= circle.GetRadius())
             {
                 return true;
             }
@@ -40,7 +39,7 @@ namespace StardropPoolMinigame.Primitives
                 this.GetStart().X + (dotProduct * (this.GetEnd().X - this.GetStart().X)),
                 this.GetStart().Y + (dotProduct * (this.GetEnd().Y - this.GetStart().Y)));
 
-            return Distance.Pythagorean(closestPoint, circle.GetCenter()) <= circle.GetRadius();
+            return DistanceHelper.Pythagorean(closestPoint, circle.GetCenter()) <= circle.GetRadius();
         }
 
         public bool Intersects(Line other)
@@ -78,14 +77,40 @@ namespace StardropPoolMinigame.Primitives
             return false;
         }
 
+        /// <summary>
+        /// Gets the <see cref="Vector2"/> of the start of the line
+        /// </summary>
+        /// <returns><see cref="Vector2"/> of start of line</returns>
         public Vector2 GetStart()
         {
             return this._start;
         }
 
+        /// <summary>
+        /// Gets the <see cref="Vector2"/> of the end of the line
+        /// </summary>
+        /// <returns><see cref="Vector2"/> of end of line</returns>
         public Vector2 GetEnd()
         {
             return this._end;
+        }
+
+        /// <summary>
+        /// Returns the length of the <see cref="Line"/>
+        /// </summary>
+        /// <returns>Length of <see cref="Line"/></returns>
+        public float GetLength()
+        {
+            return (float)DistanceHelper.Pythagorean(this._start, this._end);
+        }
+
+        /// <summary>
+        /// Returns the slope of the <see cref="Line"/>
+        /// </summary>
+        /// <returns><see cref="Vector2"/> of angle from start to end</returns>
+        public Vector2 GetSlope()
+        {
+            return Vector2.Subtract(this._start, this._end);
         }
 
         private bool OnSegment(Vector2 p, Vector2 q, Vector2 r)

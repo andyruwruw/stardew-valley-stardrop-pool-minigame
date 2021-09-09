@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace StardropPoolMinigame.Helpers
+﻿namespace StardropPoolMinigame.Helpers
 {
     class Random
     {

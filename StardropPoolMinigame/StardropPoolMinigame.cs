@@ -4,12 +4,10 @@ using Microsoft.Xna.Framework.Input;
 using StardewValley;
 using StardewValley.Minigames;
 using StardropPoolMinigame.Constants;
-using StardropPoolMinigame.Controller;
 using StardropPoolMinigame.Enums;
 using StardropPoolMinigame.Helpers;
 using StardropPoolMinigame.Players;
 using StardropPoolMinigame.Render;
-using StardropPoolMinigame.Rules;
 using StardropPoolMinigame.Scenes;
 
 namespace StardropPoolMinigame
