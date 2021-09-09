@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using StardropPoolMinigame.Helpers;
+using StardropPoolMinigame.Primitives.Helpers;
 using System;
 
 namespace StardropPoolMinigame.Primitives
@@ -25,56 +26,22 @@ namespace StardropPoolMinigame.Primitives
             this._end = end;
         }
 
-        public bool Intersects(Circle circle)
+        /// <inheritdoc cref="IRange.Contains(Vector2)"/>
+        public bool Contains(Vector2 point)
         {
-            if (DistanceHelper.Pythagorean(this._start, circle.GetCenter()) <= circle.GetRadius()
-                || DistanceHelper.Pythagorean(this._end, circle.GetCenter()) <= circle.GetRadius())
-            {
-                return true;
-            }
-
-            float dotProduct = (float)((((circle.GetCenter().X - this.GetStart().X) * (this.GetEnd().X - this.GetStart().X)) + ((circle.GetCenter().Y - this.GetStart().Y) * (this.GetEnd().Y - this.GetStart().Y))) / Math.Pow(this.GetLength(), 2));
-
-            Vector2 closestPoint = new Vector2(
-                this.GetStart().X + (dotProduct * (this.GetEnd().X - this.GetStart().X)),
-                this.GetStart().Y + (dotProduct * (this.GetEnd().Y - this.GetStart().Y)));
-
-            return DistanceHelper.Pythagorean(closestPoint, circle.GetCenter()) <= circle.GetRadius();
+            return true;
         }
 
-        public bool Intersects(Line other)
+        /// <inheritdoc cref="IRange.Intersects(IRange)"/>
+        public bool Intersects(IRange other)
         {
-            float o1 = this.Orientation(this._start, other.GetStart(), this._end);
-            float o2 = this.Orientation(this._start, other.GetStart(), other.GetEnd());
-            float o3 = this.Orientation(this._end, other.GetEnd(), this._start);
-            float o4 = this.Orientation(this._end, other.GetEnd(), other.GetStart());
+            return IntersectionHelper.IsIntersecting(this, other);
+        }
 
-            if (o1 != o2 && o3 != o4)
-            {
-                return true;
-            }
-
-            if (o1 == 0 && this.OnSegment(this._start, this._end, other.GetStart()))
-            {
-                return true;
-            }
-            
-            if (o2 == 0 && this.OnSegment(this._start, other.GetEnd(), other.GetStart()))
-            {
-                return true;
-            }
-
-            if (o3 == 0 && this.OnSegment(this._end, this._start, other.GetEnd()))
-            {
-                return true;
-            }
-
-            if (o4 == 0 && this.OnSegment(this._end, other.GetStart(), other.GetEnd()))
-            {
-                return true;
-            }
-
-            return false;
+        /// <inheritdoc cref="IRange.GetCenter"/>
+        public Vector2 GetCenter()
+        {
+            return Vector2.Add(this._start, Vector2.Multiply(Vector2.Subtract(this._start, this._end), 0.5f));
         }
 
         /// <summary>
@@ -101,7 +68,7 @@ namespace StardropPoolMinigame.Primitives
         /// <returns>Length of <see cref="Line"/></returns>
         public float GetLength()
         {
-            return (float)DistanceHelper.Pythagorean(this._start, this._end);
+            return (float)VectorHelper.Pythagorean(this._start, this._end);
         }
 
         /// <summary>
@@ -111,23 +78,6 @@ namespace StardropPoolMinigame.Primitives
         public Vector2 GetSlope()
         {
             return Vector2.Subtract(this._start, this._end);
-        }
-
-        private bool OnSegment(Vector2 p, Vector2 q, Vector2 r)
-        {
-            return q.X <= Math.Max(p.X, r.X) && q.X >= Math.Min(p.X, r.X) && q.Y <= Math.Max(p.Y, r.Y) && q.Y >= Math.Min(p.Y, r.Y);
-        }
-
-        private float Orientation(Vector2 p, Vector2 q, Vector2 r)
-        {
-            float value = (q.Y - p.Y) * (r.X - q.X) - (q.X - p.X) * (r.Y - q.Y);
-
-            if (value == 0f)
-            {
-                return value;
-            }
-
-            return value > 0f ? 1f : 2f;
         }
     }
 }

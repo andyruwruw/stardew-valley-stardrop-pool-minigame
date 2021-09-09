@@ -1,5 +1,8 @@
 ﻿namespace StardropPoolMinigame.Data.Save
 {
+    /// <summary>
+    /// Save data for <see cref="StardropPoolMinigame"/>
+    /// </summary>
     class SaveJson
     {
         /// <summary>
@@ -33,7 +36,7 @@
         public string CurrentCue { get; set; } = "basic";
 
         /// <summary>
-        /// Comma separated cue IDs
+        /// Comma separated IDs
         /// </summary>
         public string UnlockedCues { get; set; } = "basic";
 

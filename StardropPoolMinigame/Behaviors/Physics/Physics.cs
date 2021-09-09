@@ -1,4 +1,4 @@
-namespace StardropPoolMinigame.Behaviors.Physics
+﻿namespace StardropPoolMinigame.Behaviors.Physics
 {
     class Physics
     {

@@ -7,8 +7,14 @@ namespace StardropPoolMinigame.Scenes.Dialog.Scripts
 {
     abstract class Script : IScript
     {
+        /// <summary>
+        /// <see cref="IList"/> of <see cref="Recitations"/>, or dialog lines for <see cref="Script"/>
+        /// </summary>
         protected IList<Recitation> _recitations;
 
+        /// <summary>
+        /// Index of current <see cref="Recitation"/>
+        /// </summary>
         protected int _index;
 
         public Script()
@@ -19,6 +25,7 @@ namespace StardropPoolMinigame.Scenes.Dialog.Scripts
             this.AddRecitations();
         }
 
+        /// <inheritdoc cref="IScript.GetNext"/>
         public Recitation GetNext()
         {
             if (this._index >= this._recitations.Count - 1)
@@ -32,6 +39,7 @@ namespace StardropPoolMinigame.Scenes.Dialog.Scripts
             return next;
         }
 
+        /// <inheritdoc cref="IScript.GetLast"/>
         public Recitation GetLast()
         {
             if (this._index <= 0)
@@ -45,18 +53,18 @@ namespace StardropPoolMinigame.Scenes.Dialog.Scripts
             return last;
         }
 
-        public abstract OpponentType GetCharacter();
+        /// <inheritdoc cref="IScript.GetNPCName"/>
+        public abstract NPCName GetNPCName();
 
+        /// <summary>
+        /// <para>Overridable function for adding <see cref="Recitation">Recitations</see> to <see cref="Script"/></para>
+        /// <para>Automatically called at instantiation</para>
+        /// </summary>
         protected abstract void AddRecitations();
 
         public static IScript GetScript(ISceneCreator nextScene)
         {
-            return GetScript(nextScene.GetScene());
-        }
-
-        public static IScript GetScript(IScene nextScene)
-        {
-            if (nextScene is GameScene)
+            if (nextScene is GameSceneCreator)
             {
                 IPlayer opponent = ((GameScene)nextScene).GetPlayers()[1];
 

@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using StardropPoolMinigame.Constants;
 using StardropPoolMinigame.Entities;
-using StardropPoolMinigame.Helpers;
 using StardropPoolMinigame.Primitives;
 using System;
 

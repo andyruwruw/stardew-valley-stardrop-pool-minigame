@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using StardropPoolMinigame.Constants;
+using System.Collections.Generic;
 
 namespace StardropPoolMinigame.Detect.Hover
 {
@@ -16,6 +17,15 @@ namespace StardropPoolMinigame.Detect.Hover
 
         public PoolTableHoverDetector() : base()
         {
+        }
+
+        public override bool IsHovering()
+        {
+            if (DevConstants.OVERRIDE_IS_POOL_TABLE)
+            {
+                return true;
+            }
+            return base.IsHovering();
         }
 
         protected override void InicializeTileIdLists()

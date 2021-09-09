@@ -4,14 +4,27 @@ using StardropPoolMinigame.Rules;
 
 namespace StardropPoolMinigame.Scenes
 {
+    /// <inheritdoc cref="ISceneCreator"/>
     class GameSceneCreator : ISceneCreator
     {
+        /// <summary>
+        /// Stored parameter for <see cref="GameScene"/> creation
+        /// </summary>
         private IPlayer _player1;
 
+        /// <summary>
+        /// Stored parameter for <see cref="GameScene"/> creation
+        /// </summary>
         private IPlayer _player2;
 
+        /// <summary>
+        /// Stored parameter for <see cref="GameScene"/> creation
+        /// </summary>
         private IRules _rules;
 
+        /// <summary>
+        /// Stored parameter for <see cref="GameScene"/> creation
+        /// </summary>
         private Table _table;
 
         public GameSceneCreator(
@@ -26,6 +39,7 @@ namespace StardropPoolMinigame.Scenes
             this._table = table;
         }
 
+        /// <inheritdoc cref="ISceneCreator.GetScene"/>
         public IScene GetScene()
         {
             return new GameScene(

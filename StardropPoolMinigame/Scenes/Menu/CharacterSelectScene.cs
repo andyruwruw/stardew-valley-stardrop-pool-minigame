@@ -55,7 +55,7 @@ namespace StardropPoolMinigame.Scenes
         /// <summary>
         /// Name of selected opponent
         /// </summary>
-        OpponentType _opponentName;
+        NPCName _opponentName;
 
         /// <summary>
         /// Class of selected opponent
@@ -64,7 +64,7 @@ namespace StardropPoolMinigame.Scenes
 
         public CharacterSelectScene() : base()
         {
-            this._opponentName = OpponentType.Sam;
+            this._opponentName = NPCName.Sam;
         }
 
         public override string GetKey()
@@ -83,31 +83,31 @@ namespace StardropPoolMinigame.Scenes
             if (this._sebastianPortrait.IsHovered())
             {
                 this._sebastianPortrait.ClickCallback();
-                this._opponentName = OpponentType.Sebastian;
+                this._opponentName = NPCName.Sebastian;
                 this.UpdatePortraits();
             }
             else if (this._abigailPortrait.IsHovered())
             {
                 this._abigailPortrait.ClickCallback();
-                this._opponentName = OpponentType.Abigail;
+                this._opponentName = NPCName.Abigail;
                 this.UpdatePortraits();
             }
             else if (this._samPortrait.IsHovered())
             {
                 this._samPortrait.ClickCallback();
-                this._opponentName = OpponentType.Sam;
+                this._opponentName = NPCName.Sam;
                 this.UpdatePortraits();
             }
             else if (this._gusPortrait.IsHovered())
             {
                 this._gusPortrait.ClickCallback();
-                this._opponentName = OpponentType.Gus;
+                this._opponentName = NPCName.Gus;
                 this.UpdatePortraits();
             }
             else if (
                 this._challengeButton.IsHovered()
-                && (this._opponentName != OpponentType.Abigail || Save.IsAbigailUnlocked())
-                && (this._opponentName != OpponentType.Gus || Save.IsGusUnlocked()))
+                && (this._opponentName != NPCName.Abigail || Save.IsAbigailUnlocked())
+                && (this._opponentName != NPCName.Gus || Save.IsGusUnlocked()))
             {
                 this._challengeButton.ClickCallback();
                 Sound.StopMusic();
@@ -127,11 +127,11 @@ namespace StardropPoolMinigame.Scenes
             // Darken out unselected portraits
             foreach (Portrait portrait in this._portraits)
             {
-                if (portrait.GetName() == OpponentType.Abigail)
+                if (portrait.GetName() == NPCName.Abigail)
                 {
                     portrait.SetDarker(this._opponentName != portrait.GetName() && Save.IsAbigailUnlocked());
                     portrait.SetSilhouette(!Save.IsAbigailUnlocked());
-                } else if (portrait.GetName() == OpponentType.Gus)
+                } else if (portrait.GetName() == NPCName.Gus)
                 {
                     portrait.SetDarker(this._opponentName != portrait.GetName() && Save.IsGusUnlocked());
                     portrait.SetSilhouette(!Save.IsGusUnlocked());
@@ -151,12 +151,12 @@ namespace StardropPoolMinigame.Scenes
 
             switch (this._opponentName)
             {
-                case OpponentType.Sebastian:
+                case NPCName.Sebastian:
                     cursorAnchor = new Vector2(centerX - (portraitSeparation * 0.55f), cursorTopMargin);
                     selectedOpponentName = Sebastian.Name;
                     this._challengeButton.SetDisabled(false);
                     break;
-                case OpponentType.Abigail:
+                case NPCName.Abigail:
                     cursorAnchor = new Vector2(centerX + (portraitSeparation * 0.4f), cursorTopMargin);
                     if (Save.IsAbigailUnlocked())
                     {
@@ -168,7 +168,7 @@ namespace StardropPoolMinigame.Scenes
                         this._challengeButton.SetDisabled(true);
                     }
                     break;
-                case OpponentType.Gus:
+                case NPCName.Gus:
                     cursorAnchor = new Vector2(centerX + (portraitSeparation * 1.4f), cursorTopMargin);
                     if (Save.IsGusUnlocked())
                     {
@@ -205,11 +205,11 @@ namespace StardropPoolMinigame.Scenes
                 {
                     PortraitEmotion emotion = PortraitEmotion.Laugh;
 
-                    if (this._opponentName == OpponentType.Abigail)
+                    if (this._opponentName == NPCName.Abigail)
                     {
                         emotion = PortraitEmotion.Glare;
                     }
-                    else if (this._opponentName == OpponentType.Sebastian)
+                    else if (this._opponentName == NPCName.Sebastian)
                     {
                         emotion = PortraitEmotion.Smurk;
                     }
@@ -266,7 +266,7 @@ namespace StardropPoolMinigame.Scenes
                 0.0030f,
                 TransitionConstants.CharacterSelect.Portrait.Entering(),
                 TransitionConstants.CharacterSelect.Portrait.Exiting(),
-                OpponentType.Sam,
+                NPCName.Sam,
                 isHoverable: true);
             this._entities.Add(this._samPortrait);
             this._portraits.Add(this._samPortrait);
@@ -277,7 +277,7 @@ namespace StardropPoolMinigame.Scenes
                 0.0030f,
                 TransitionConstants.CharacterSelect.Portrait.Entering(),
                 TransitionConstants.CharacterSelect.Portrait.Exiting(),
-                OpponentType.Sebastian,
+                NPCName.Sebastian,
                 isHoverable: true,
                 isDarker: true);
             this._entities.Add(this._sebastianPortrait);
@@ -289,7 +289,7 @@ namespace StardropPoolMinigame.Scenes
                 0.0030f,
                 TransitionConstants.CharacterSelect.Portrait.Entering(),
                 TransitionConstants.CharacterSelect.Portrait.Exiting(),
-                OpponentType.Abigail,
+                NPCName.Abigail,
                 isHoverable: true,
                 isDarker: Save.IsAbigailUnlocked(),
                 isSilhouette: !Save.IsAbigailUnlocked());
@@ -302,7 +302,7 @@ namespace StardropPoolMinigame.Scenes
                 0.0030f,
                 TransitionConstants.CharacterSelect.Portrait.Entering(),
                 TransitionConstants.CharacterSelect.Portrait.Exiting(),
-                OpponentType.Gus,
+                NPCName.Gus,
                 isHoverable: true,
                 isDarker: Save.IsGusUnlocked(),
                 isSilhouette: !Save.IsGusUnlocked());

@@ -2,10 +2,13 @@
 
 namespace StardropPoolMinigame.Controller
 {
+    /// <summary>
+    /// Tracks the position of the player's cursor
+    /// </summary>
     class Mouse
     {
         /// <summary>
-        /// Position of the cursor
+        /// <see cref="Vector2"/> of position of the cursor
         /// </summary>
         public static Vector2 Position;
 

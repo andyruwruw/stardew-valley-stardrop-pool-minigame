@@ -4,6 +4,7 @@ using StardewModdingAPI.Events;
 using StardropPoolMinigame.Helpers;
 using StardropPoolMinigame.Detect;
 using StardropPoolMinigame.Render;
+using StardropPoolMinigame.Detect.Hover;
 
 namespace StardropPoolMinigame
 {
@@ -50,7 +51,9 @@ namespace StardropPoolMinigame
                 return;
             }
 
-            if (e.Button.IsActionButton() && Use.IsPoolTable())
+            if (e.Button.IsActionButton()
+                && (new PoolTableHoverDetector()).IsHovering()
+                && Game1.currentMinigame == null)
             {
                 this.StartGame();
             }

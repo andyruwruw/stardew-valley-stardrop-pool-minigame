@@ -9,33 +9,33 @@ namespace StardropPoolMinigame.Scenes
 {
     class DialogScene: Scene
     {
-        private IScene _nextScene;
-
+        /// <summary>
+        /// <see cref="ISceneCreator"/> to generate next <see cref="IScene"/>
+        /// </summary>
         private ISceneCreator _sceneCreator;
 
+        /// <summary>
+        /// Current dialog <see cref="Script"/>
+        /// </summary>
         private IScript _script;
 
+        /// <summary>
+        /// Current line of dialog from <see cref="Script"/>
+        /// </summary>
         private Recitation _currentRecitation;
 
+        /// <summary>
+        /// Portrait <see cref="IEntity"/> of active speaker in <see cref="Script"/>
+        /// </summary>
         private Portrait _portrait;
 
+        /// <summary>
+        /// Text <see cref="IEntity"/> of current line of dialog from <see cref="Script"/>
+        /// </summary>
         private Text _text;
-
-        public DialogScene(IScene nextScene): base()
-        {
-            this._nextScene = nextScene;
-            this._sceneCreator = null;
-            this._script = Script.GetScript(nextScene);
-            this._currentRecitation = this._script.GetNext();
-
-            this.AddDependentEntities();
-
-            Sound.PlaySound(SoundConstants.Feedback.DIALOG_START);
-        }
 
         public DialogScene(ISceneCreator sceneCreator) : base()
         {
-            this._nextScene = null;
             this._sceneCreator = sceneCreator;
             this._script = Script.GetScript(sceneCreator);
             this._currentRecitation = this._script.GetNext();
@@ -45,22 +45,13 @@ namespace StardropPoolMinigame.Scenes
             Sound.PlaySound(SoundConstants.Feedback.DIALOG_START);
         }
 
+        /// <inheritdoc cref="IScene.GetKey"/>
         public override string GetKey()
         {
             return "dialog-scene";
         }
 
-        private void TriggerNextScene()
-        {
-            if (this._nextScene != null)
-            {
-                this._newScene = this._nextScene;
-            } else
-            {
-                this._newScene = this._sceneCreator.GetScene();
-            }
-        }
-
+        /// <inheritdoc cref="IScene.ReceiveLeftClick"/>
         public override void ReceiveLeftClick()
         {
             Sound.PlaySound(SoundConstants.Feedback.DIALOG_NEXT);
@@ -95,19 +86,19 @@ namespace StardropPoolMinigame.Scenes
             }
         }
 
+        /// <inheritdoc cref="IScene.ReceiveRightClick"/>
         public override void ReceiveRightClick()
         {
             this._currentRecitation = this._script.GetLast();
         }
 
+        /// <inheritdoc cref="Scene.AddEntities"/>
         protected override void AddEntities()
         {
         }
 
-        /// <summary>
-        /// Add entities that require constructor first
-        /// </summary>
-        private void AddDependentEntities()
+        /// <inheritdoc cref="Scene.AddDependentEntities"/>
+        protected override void AddDependentEntities()
         {
             this._portrait = new Portrait(
                 Origin.BottomCenter,
@@ -117,7 +108,7 @@ namespace StardropPoolMinigame.Scenes
                 0.0030f,
                 TransitionConstants.Dialog.Portrait.Entering(),
                 null,
-                this._script.GetCharacter(),
+                this._script.GetNPCName(),
                 this._currentRecitation.GetEmotion(),
                 isOnFire: this._currentRecitation.HasFire(),
                 isShining: this._currentRecitation.HasShine());
@@ -136,6 +127,14 @@ namespace StardropPoolMinigame.Scenes
                 0.6f,
                 isCentered: true);
             this._entities.Add(this._text);
+        }
+
+        /// <summary>
+        /// Generates next <see cref="IScene"/> to replace <see cref="DialogScene"/>
+        /// </summary>
+        private void TriggerNextScene()
+        {
+            this._newScene = this._sceneCreator.GetScene();
         }
     }
 }

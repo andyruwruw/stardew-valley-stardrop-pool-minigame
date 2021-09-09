@@ -50,7 +50,8 @@
   <ItemGroup>
     <Compile Include="Behaviors\Attributes\Orientation.cs" />
     <Compile Include="Behaviors\Detectors\Use.cs" />
-    <Compile Include="Helpers\IntersectionHelper.cs" />
+    <Compile Include="Behaviors\Physics\Physics.cs" />
+    <Compile Include="Structures\Primitives\Geometry\IntersectionHelper.cs" />
     <Compile Include="Behaviors\Physics\BoidPhysics.cs" />
     <Compile Include="Behaviors\Physics\RealPhysics.cs" />
     <Compile Include="Constants\LayerDepthConstants.cs" />
@@ -179,6 +180,7 @@
     <Compile Include="Scenes\Dialog\DialogScene.cs" />
     <Compile Include="Scenes\Dialog\Scripts\IntroductionSam.cs" />
     <Compile Include="Scenes\Dialog\Scripts\IntroductionSebastian.cs" />
+    <Compile Include="Scenes\Dialog\Scripts\IRecitation.cs" />
     <Compile Include="Scenes\Dialog\Scripts\RevealAbigail.cs" />
     <Compile Include="Scenes\Dialog\Scripts\RevealGus.cs" />
     <Compile Include="Scenes\Game\GameScene.cs" />
@@ -253,23 +255,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Scenes\Game\States\Substates\" />
-    <Folder Include="Controller\Detect\" />
-    <Folder Include="Controller\Detect\Hover\" />
-    <Folder Include="Enums\Ball\" />
-    <Folder Include="Enums\Cue\" />
-    <Folder Include="Enums\Table\" />
-    <Folder Include="Enums\General\" />
-    <Folder Include="Enums\Game\" />
-    <Folder Include="Enums\NPC\" />
-    <Folder Include="Enums\Render\" />
-    <Folder Include="Multiplayer\" />
-    <Folder Include="Multiplayer\Messages\" />
-    <Folder Include="Entities\Game\Powerups\" />
-    <Folder Include="Entities\UI\General\" />
-    <Folder Include="Entities\UI\General\Text\" />
-    <Folder Include="Entities\UI\Portraits\" />
-    <Folder Include="Entities\UI\Portraits\Effects\" />
-    <Folder Include="Entities\UI\General\Titles\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Pathoschild.Stardew.ModBuildConfig.3.2.2\build\Pathoschild.Stardew.ModBuildConfig.targets" Condition="Exists('..\packages\Pathoschild.Stardew.ModBuildConfig.3.2.2\build\Pathoschild.Stardew.ModBuildConfig.targets')" />

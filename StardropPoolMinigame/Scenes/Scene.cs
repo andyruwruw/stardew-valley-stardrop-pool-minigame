@@ -92,6 +92,15 @@ namespace StardropPoolMinigame.Scenes
         }
 
         /// <summary>
+        /// <para>Overrideable method to add <see cref="Scene"/> specific <see cref="IEntity">IEntities</see></para>
+        /// <para>Not automatically called in <see cref="Scene"/> constructor</para>
+        /// <para>Should add <see cref="IEntity">IEntities</see> to <see cref="_entities"/> protected <see cref="IList"/>, which will already be instantiated</para>
+        /// </summary>
+        protected virtual void AddDependentEntities()
+        {
+        }
+
+        /// <summary>
         /// Updates all scene specific <see cref="IEntity">IEntities</see> from <see cref="Scene._entities"/>
         /// </summary>
         protected void UpdateEntities()

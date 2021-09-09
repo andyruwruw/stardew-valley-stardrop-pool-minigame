@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using StardropPoolMinigame.Constants;
+using StardropPoolMinigame.Primitives.Helpers;
 
 namespace StardropPoolMinigame.Primitives
 {
@@ -31,11 +32,7 @@ namespace StardropPoolMinigame.Primitives
             this._height = height;
         }
 
-        /// <summary>
-        /// Whether a point lies within the <see cref="IRange"/>
-        /// </summary>
-        /// <param name="point"><see cref="Vector2"/> of the point to check</param>
-        /// <returns>Whether the point is inside <see cref="IRange"/></returns>
+        /// <inheritdoc cref="IRange.Contains(Vector2)"/>
         public bool Contains(Vector2 point)
         {
             return (point.X >= this.GetWestX() &&
@@ -44,14 +41,16 @@ namespace StardropPoolMinigame.Primitives
                 point.Y >= this.GetNorthY());
         }
 
-        /// <summary>
-        /// Whether a range intersects with the <see cref="IRange"/>
-        /// </summary>
-        /// <param name="other"><see cref="IRange"/> to check</param>
-        /// <returns>Whether the <see cref="IRange"/> intersects with this <see cref="IRange"/></returns>
+        /// <inheritdoc cref="IRange.Intersects(IRange)"/>
         public bool Intersects(IRange other)
         {
-            return true;
+            return IntersectionHelper.IsIntersecting(this, other);
+        }
+
+        /// <inheritdoc cref="IRange.GetCenter(IRange)"/>
+        public Vector2 GetCenter()
+        {
+            return new Vector2(this.GetCenterX(), this.GetCenterY());
         }
 
         /// <summary>
@@ -61,15 +60,6 @@ namespace StardropPoolMinigame.Primitives
         public Vector2 GetAnchor()
         {
             return this._anchor;
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Vector2"/> of the center of the <see cref="IRange"/>
-        /// </summary>
-        /// <returns>Center of <see cref="IRange"/></returns>
-        public Vector2 GetCenter()
-        {
-            return new Vector2(this.GetCenterX(), this.GetCenterY());
         }
 
         /// <summary>

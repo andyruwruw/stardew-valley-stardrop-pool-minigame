@@ -27,7 +27,7 @@ namespace StardropPoolMinigame.Detect.Hover
         /// Returns whether the player is hovering over designated tile IDs
         /// </summary>
         /// <returns>Whether player is hovering tile IDs</returns>
-        public bool IsHovering()
+        public virtual bool IsHovering()
         {
             Vector2 positionClicked = this.GetPositionHovered();
             Tile front = this.GetFrontTileHovered(positionClicked);
