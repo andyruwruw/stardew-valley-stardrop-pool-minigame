@@ -8,8 +8,19 @@ using System.Collections.Generic;
 
 namespace StardropPoolMinigame.Rules
 {
+    /// <summary>
+    /// Specifies what game events are brought about by different events
+    /// </summary>
     interface IRules
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tableTopLeft"></param>
+        /// <param name="cueBallStart"></param>
+        /// <param name="footSpot"></param>
+        /// <param name="rackOrientation"></param>
+        /// <returns></returns>
         Tuple<IList<Ball>, QuadTree> GenerateInitialBalls(
             Vector2 tableTopLeft,
             Vector2 cueBallStart,

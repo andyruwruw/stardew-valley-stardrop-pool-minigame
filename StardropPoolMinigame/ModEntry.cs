@@ -2,23 +2,26 @@
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
 using StardropPoolMinigame.Helpers;
-using StardropPoolMinigame.Detect;
 using StardropPoolMinigame.Render;
 using StardropPoolMinigame.Detect.Hover;
+using StardropPoolMinigame.Data;
 
 namespace StardropPoolMinigame
 {
     public class ModEntry : Mod
     {
         /// <summary>
-        /// Provides helper to other classes and sets events
+        /// Provides <see cref="IModHelper"/> to other classes and sets events
         /// </summary>
         public override void Entry(IModHelper helper)
         {
+            // Inicialize helper classes
+            Config.SetConfig(this.Helper.ReadConfig<ModConfig>());
             Helpers.Multiplayer.SetHelper(this.Helper.Multiplayer);
             Translations.SetHelper(this.Helper.Translation);
             Logger.SetMonitor(this.Monitor);
 
+            // Set event handlers
             helper.Events.Input.ButtonPressed += this.OnButtonPressed;
             helper.Events.GameLoop.SaveLoaded += this.OnSaveLoaded;
             helper.Events.GameLoop.Saving += this.OnSaving;

@@ -7,7 +7,7 @@ using StardropPoolMinigame.Render;
 
 namespace StardropPoolMinigame.Scenes
 {
-    class MenuScene : Scene
+    class MainMenuScene : Scene
     {
         private BallButton _playButton;
 
@@ -17,7 +17,7 @@ namespace StardropPoolMinigame.Scenes
 
         private BallButton _settingsButton;
 
-        public MenuScene() : base()
+        public MainMenuScene() : base()
         {
             Sound.PlayMusic(SoundConstants.Theme.GAME);
         }

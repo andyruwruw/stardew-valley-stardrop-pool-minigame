@@ -13,10 +13,10 @@ namespace StardropPoolMinigame.Players
             OpponentType.Gus,
             Multiplayer.GetNewMultiplayerId(),
             SoundConstants.Theme.GUS,
-            OpponentConstants.Gus.CONFIDENCE,
-            OpponentConstants.Gus.COMPLEXITY,
-            OpponentConstants.Gus.ANGLE_ACCURACY,
-            OpponentConstants.Gus.POWER_ACCURACY)
+            NPCConstants.Gus.CONFIDENCE,
+            NPCConstants.Gus.COMPLEXITY,
+            NPCConstants.Gus.ANGLE_ACCURACY,
+            NPCConstants.Gus.POWER_ACCURACY)
         {
         }
     }

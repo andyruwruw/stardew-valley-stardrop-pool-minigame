@@ -1,5 +1,7 @@
-﻿using StardropPoolMinigame.Entities;
+﻿using StardropPoolMinigame.Constants;
+using StardropPoolMinigame.Entities;
 using StardropPoolMinigame.Enums;
+using StardropPoolMinigame.Players;
 using StardropPoolMinigame.Render.Filters;
 using System.Collections.Generic;
 
@@ -144,6 +146,19 @@ namespace StardropPoolMinigame.Scenes
                     this._transitionState = TransitionState.Dead;
                 }
             }
+        }
+
+        public static IScene GetDefaultScene()
+        {
+            if (DevConstants.AUTO_START_AI_GAME)
+            {
+                return new GameScene(Player.GetMainPlayer(), new Sam());
+            }
+            if (DevConstants.AUTO_START_DIALOG)
+            {
+                return new DialogScene(new GameSceneCreator(Player.GetMainPlayer(), new Sam()));
+            }
+            return new MainMenuScene();
         }
     }
 }

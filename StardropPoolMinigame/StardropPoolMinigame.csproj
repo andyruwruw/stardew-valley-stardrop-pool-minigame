@@ -51,6 +51,24 @@
     <Compile Include="Behaviors\Attributes\Orientation.cs" />
     <Compile Include="Behaviors\Detectors\Use.cs" />
     <Compile Include="Behaviors\Physics\Physics.cs" />
+    <Compile Include="Helpers\Config.cs" />
+    <Compile Include="Multiplayer\Messages\ChallengeAccepted.cs" />
+    <Compile Include="Multiplayer\Messages\ChallengeRequest.cs" />
+    <Compile Include="Multiplayer\Messages\SelectAngle.cs" />
+    <Compile Include="Multiplayer\Messages\MouseMove.cs" />
+    <Compile Include="Multiplayer\Messages\PlayerLeft.cs" />
+    <Compile Include="Multiplayer\Messages\SelectPower.cs" />
+    <Compile Include="Scenes\CharacterSelect\CharacterSelectSceneCreator.cs" />
+    <Compile Include="Scenes\Dialog\DialogSceneCreator.cs" />
+    <Compile Include="Scenes\Gallery\GallerySceneCreator.cs" />
+    <Compile Include="Scenes\Game\States\Game.cs" />
+    <Compile Include="Scenes\Game\States\GameResults.cs" />
+    <Compile Include="Scenes\MainMenu\MainMenuSceneCreator.cs" />
+    <Compile Include="Scenes\Multiplayer\MultiplayerSceneCreator.cs" />
+    <Compile Include="Scenes\Settings\SettingsSceneCreator.cs" />
+    <Compile Include="Scenes\Summary\SummarySceneCreator.cs" />
+    <Compile Include="Structures\Graphs\IGraph.cs" />
+    <Compile Include="Structures\Graphs\QuadTree2.cs" />
     <Compile Include="Structures\Primitives\Geometry\IntersectionHelper.cs" />
     <Compile Include="Behaviors\Physics\BoidPhysics.cs" />
     <Compile Include="Behaviors\Physics\RealPhysics.cs" />
@@ -95,7 +113,7 @@
     <Compile Include="Entities\Particles\SparkEmitter.cs" />
     <Compile Include="Constants\DevConstants.cs" />
     <Compile Include="Constants\GameConstants.cs" />
-    <Compile Include="Constants\OpponentConstants.cs" />
+    <Compile Include="Constants\NPCConstants.cs" />
     <Compile Include="Constants\RenderConstants.cs" />
     <Compile Include="Constants\SoundConstants.cs" />
     <Compile Include="Controller\Mouse.cs" />
@@ -119,9 +137,8 @@
     <Compile Include="Entities\UI\Popups\VictoryPopup.cs" />
     <Compile Include="Entities\UI\Popups\YourTurnPopup.cs" />
     <Compile Include="Helpers\Logger.cs" />
-    <Compile Include="Helpers\MultiplayerHelper.cs" />
-    <Compile Include="Helpers\Operators.cs" />
-    <Compile Include="Helpers\RandomHelper.cs" />
+    <Compile Include="Multiplayer\MultiplayerHelper.cs" />
+    <Compile Include="Helpers\MiscellaneousHelper.cs" />
     <Compile Include="Helpers\Save.cs" />
     <Compile Include="Helpers\Sound.cs" />
     <Compile Include="Helpers\Timer.cs" />
@@ -140,12 +157,12 @@
     <Compile Include="Render\Drawers\Particles\Individual\SparkDrawer.cs" />
     <Compile Include="Render\Drawers\Particles\ParticleEmitterDrawer.cs" />
     <Compile Include="Render\Drawers\Structures\QuadTreeDrawer.cs" />
-    <Compile Include="Render\Drawers\UI\Background\SolidDrawer.cs" />
-    <Compile Include="Render\Drawers\UI\Effects\PortraitFireDrawer.cs" />
-    <Compile Include="Render\Drawers\UI\Effects\PortraitRaysDrawer.cs" />
+    <Compile Include="Render\Drawers\UI\General\SolidDrawer.cs" />
+    <Compile Include="Render\Drawers\UI\Portraits\Effects\PortraitFireDrawer.cs" />
+    <Compile Include="Render\Drawers\UI\Portraits\Effects\PortraitRaysDrawer.cs" />
     <Compile Include="Render\Drawers\UI\Elements\CursorDrawer.cs" />
     <Compile Include="Render\Drawers\UI\Elements\PocketedBallsDrawer.cs" />
-    <Compile Include="Render\Drawers\UI\Elements\PortraitDrawer.cs" />
+    <Compile Include="Render\Drawers\UI\Portraits\PortraitDrawer.cs" />
     <Compile Include="Render\Drawers\Game\CueDrawer.cs" />
     <Compile Include="Render\Drawers\IDrawer.cs" />
     <Compile Include="Render\Drawers\Game\TableDrawer.cs" />
@@ -153,8 +170,8 @@
     <Compile Include="Render\Drawers\UI\Background\BarShelvesDrawer.cs" />
     <Compile Include="Render\Drawers\UI\Buttons\ButtonDrawer.cs" />
     <Compile Include="Render\Drawers\UI\Popups\PopupDrawer.cs" />
-    <Compile Include="Render\Drawers\UI\Titles\GameTitleDrawer.cs" />
-    <Compile Include="Render\Drawers\UI\Titles\PageTitleDrawer.cs" />
+    <Compile Include="Render\Drawers\UI\General\Titles\GameTitleDrawer.cs" />
+    <Compile Include="Render\Drawers\UI\General\Titles\PageTitleDrawer.cs" />
     <Compile Include="Render\Filters\Animations\Animation.cs" />
     <Compile Include="Render\Filters\Animations\BallHighlightFlashing.cs" />
     <Compile Include="Render\Filters\Animations\PortraitFireAnimation.cs" />
@@ -165,8 +182,6 @@
     <Compile Include="Render\Filters\Animations\Wiggle.cs" />
     <Compile Include="Render\Filters\Transitions\CursorAnimation.cs" />
     <Compile Include="Render\Renderer.cs" />
-    <Compile Include="Render\Scenes\ISceneRenderer.cs" />
-    <Compile Include="Render\Scenes\SceneRenderer.cs" />
     <Compile Include="Render\Textures.cs" />
     <Compile Include="Render\Filters\Transitions\ScaleUp.cs" />
     <Compile Include="Render\Filters\Transitions\SlideIn.cs" />
@@ -178,22 +193,22 @@
     <Compile Include="Rules\NineBall.cs" />
     <Compile Include="Rules\TugOfWar.cs" />
     <Compile Include="Scenes\Dialog\DialogScene.cs" />
-    <Compile Include="Scenes\Dialog\Scripts\IntroductionSam.cs" />
-    <Compile Include="Scenes\Dialog\Scripts\IntroductionSebastian.cs" />
-    <Compile Include="Scenes\Dialog\Scripts\IRecitation.cs" />
-    <Compile Include="Scenes\Dialog\Scripts\RevealAbigail.cs" />
-    <Compile Include="Scenes\Dialog\Scripts\RevealGus.cs" />
+    <Compile Include="Scenes\Dialog\States\Scripts\IntroductionSam.cs" />
+    <Compile Include="Scenes\Dialog\States\Scripts\IntroductionSebastian.cs" />
+    <Compile Include="Scenes\Dialog\States\Scripts\IRecitation.cs" />
+    <Compile Include="Scenes\Dialog\States\Scripts\RevealAbigail.cs" />
+    <Compile Include="Scenes\Dialog\States\Scripts\RevealGus.cs" />
     <Compile Include="Scenes\Game\GameScene.cs" />
     <Compile Include="Scenes\Game\GameSceneCreator.cs" />
     <Compile Include="Scenes\Game\States\Turn.cs" />
     <Compile Include="Scenes\Game\States\TurnResults.cs" />
     <Compile Include="Scenes\IScene.cs" />
     <Compile Include="Scenes\ISceneCreator.cs" />
-    <Compile Include="Scenes\Menu\CharacterSelectScene.cs" />
-    <Compile Include="Scenes\Menu\GalleryScene.cs" />
-    <Compile Include="Scenes\Menu\MultiplayerScene.cs" />
-    <Compile Include="Scenes\Menu\SettingsScene.cs" />
-    <Compile Include="Scenes\Menu\MenuScene.cs" />
+    <Compile Include="Scenes\CharacterSelect\CharacterSelectScene.cs" />
+    <Compile Include="Scenes\Gallery\GalleryScene.cs" />
+    <Compile Include="Scenes\Multiplayer\MultiplayerScene.cs" />
+    <Compile Include="Scenes\Settings\SettingsScene.cs" />
+    <Compile Include="Scenes\MainMenu\MainMenuScene.cs" />
     <Compile Include="Scenes\Scene.cs" />
     <Compile Include="Scenes\Summary\SummaryScene.cs" />
     <Compile Include="StardropPoolMinigame.cs" />
@@ -206,13 +221,13 @@
     <Compile Include="Render\Drawers\UI\Background\FloorTilesDrawer.cs" />
     <Compile Include="Rules\RuleSet.cs" />
     <Compile Include="Helpers\Translations.cs" />
-    <Compile Include="Render\Drawers\UI\Text\TextDrawer.cs" />
-    <Compile Include="Render\Drawers\UI\Text\CharacterDrawer.cs" />
-    <Compile Include="Scenes\Dialog\Scripts\IScript.cs" />
-    <Compile Include="Scenes\Dialog\Scripts\Script.cs" />
-    <Compile Include="Scenes\Dialog\Scripts\IntroductionGus.cs" />
-    <Compile Include="Scenes\Dialog\Scripts\IntroductionAbigail.cs" />
-    <Compile Include="Scenes\Dialog\Scripts\Recitation.cs" />
+    <Compile Include="Render\Drawers\UI\General\Text\TextDrawer.cs" />
+    <Compile Include="Render\Drawers\UI\General\Text\CharacterDrawer.cs" />
+    <Compile Include="Scenes\Dialog\States\Scripts\IScript.cs" />
+    <Compile Include="Scenes\Dialog\States\Scripts\Script.cs" />
+    <Compile Include="Scenes\Dialog\States\Scripts\IntroductionGus.cs" />
+    <Compile Include="Scenes\Dialog\States\Scripts\IntroductionAbigail.cs" />
+    <Compile Include="Scenes\Dialog\States\Scripts\Recitation.cs" />
     <Compile Include="Controller\Detect\Hover\ITileHoverDetector.cs" />
     <Compile Include="Controller\Detect\Hover\PoolTableHoverDetector.cs" />
     <Compile Include="Controller\Detect\Hover\TileHoverDetector.cs" />
@@ -253,9 +268,7 @@
     <None Include="manifest.json" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Scenes\Game\States\Substates\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Pathoschild.Stardew.ModBuildConfig.3.2.2\build\Pathoschild.Stardew.ModBuildConfig.targets" Condition="Exists('..\packages\Pathoschild.Stardew.ModBuildConfig.3.2.2\build\Pathoschild.Stardew.ModBuildConfig.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

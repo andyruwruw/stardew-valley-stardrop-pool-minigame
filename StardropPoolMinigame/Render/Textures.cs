@@ -3,13 +3,14 @@ using Microsoft.Xna.Framework.Graphics;
 using StardewValley;
 using StardropPoolMinigame.Constants;
 using StardropPoolMinigame.Enums;
+using StardropPoolMinigame.Entities;
 
 namespace StardropPoolMinigame.Render
 {
     class Textures
     {
         /// <summary>
-        /// Tileset links
+        /// <see cref="Texture2D"/> tileset references
         /// </summary>
         public class Tileset
         {
@@ -27,7 +28,7 @@ namespace StardropPoolMinigame.Render
         }
 
         /// <summary>
-        /// Bounds for all colors
+        /// Static <see cref="Microsoft.Xna.Framework.Color"/> values
         /// </summary>
         public class Color
         {
@@ -51,7 +52,7 @@ namespace StardropPoolMinigame.Render
         }
 
         /// <summary>
-        /// Bounds for all ball components
+        /// Bounds for all <see cref="Entities.Ball"/> components
         /// </summary>
         public class Ball
         {
@@ -154,7 +155,7 @@ namespace StardropPoolMinigame.Render
         }
 
         /// <summary>
-        /// Bounds for Cues
+        /// Bounds for <see cref="Entities.Cue"/>
         /// </summary>
         public class Cue
         {
@@ -170,7 +171,7 @@ namespace StardropPoolMinigame.Render
         }
 
         /// <summary>
-        /// Bounds for cursor frames
+        /// Bounds for <see cref="Entities.Cursor"/>
         /// </summary>
         public class Cursor
         {
@@ -184,7 +185,7 @@ namespace StardropPoolMinigame.Render
         }
 
         /// <summary>
-        /// Bounds for portrait fire frames
+        /// Bounds for <see cref="Entities.PortraitFire"/>
         /// </summary>
         public class PortraitFire
         {
@@ -206,7 +207,7 @@ namespace StardropPoolMinigame.Render
         }
 
         /// <summary>
-        /// Bounds for all portrait characters and emotions
+        /// Bounds for all <see cref="Entities.Portrait"/> characters and emotions
         /// </summary>
         public class Portrait
         {
@@ -276,7 +277,7 @@ namespace StardropPoolMinigame.Render
         }
 
         /// <summary>
-        /// Bounds for all table segment pieces
+        /// Bounds for all <see cref="Entities.TableSegment"/> pieces
         /// </summary>
         public class Table
         {
@@ -391,7 +392,7 @@ namespace StardropPoolMinigame.Render
         }
 
         /// <summary>
-        /// Bounds for all font characters
+        /// Bounds for all font <see cref="Entities.Character">Characters</see>
         /// </summary>
         public class Characters
         {
@@ -1256,10 +1257,10 @@ namespace StardropPoolMinigame.Render
         }
 
         /// <summary>
-        /// Retrives ball stripes texture based on orientation
+        /// Retrives <see cref="Entities.Ball"/> stripes texture based on <see cref="Orientation"/>
         /// </summary>
         /// <param name="orientation">Polar coordinate <see cref="Vector2"/></param>
-        /// <returns>Ball stripes texture</returns>
+        /// <returns><see cref="Entities.Ball"/> stripes texture bounds</returns>
         public static Rectangle GetBallStripesBounds(Vector2 orientation)
         {
             if (orientation.Y == 90)
@@ -1290,7 +1291,7 @@ namespace StardropPoolMinigame.Render
         }
 
         /// <summary>
-        /// Retrives font texture based on character.
+        /// Retrives font <see cref="Entities.Character"/> texture based on character
         /// </summary>
         /// <param name="orientation">Character to retrieve></param>
         /// <returns>Custom font texture</returns>
@@ -1522,10 +1523,10 @@ namespace StardropPoolMinigame.Render
         }
 
         /// <summary>
-        /// Retrieves table segement front texture based on <see cref="TableSegmentType"/>
+        /// Retrieves <see cref="Entities.TableSegment"/> front texture based on <see cref="TableSegmentType"/>
         /// </summary>
-        /// <param name="type">Type of table segment</param>
-        /// <returns>Bounds of table segment front</returns>
+        /// <param name="type">Type of <see cref="Entities.TableSegment"/></param>
+        /// <returns>Bounds of <see cref="Entities.TableSegment"/> front</returns>
         public static Rectangle GetTableSegmentFrontFromType(TableSegmentType type)
         {
             switch (type)
@@ -1576,10 +1577,10 @@ namespace StardropPoolMinigame.Render
         }
 
         /// <summary>
-        /// Retrieves table segement back texture based on <see cref="TableSegmentType"/>
+        /// Retrieves <see cref="Entities.TableSegment"/> back texture based on <see cref="TableSegmentType"/>
         /// </summary>
-        /// <param name="type">Type of table segment</param>
-        /// <returns>Bounds of table segment back</returns>
+        /// <param name="type">Type of <see cref="Entities.TableSegment"/></param>
+        /// <returns>Bounds of <see cref="Entities.TableSegment"/> back</returns>
         public static Rectangle GetTableSegmentBackFromType(TableSegmentType type)
         {
             switch (type)

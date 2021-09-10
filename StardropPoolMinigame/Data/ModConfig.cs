@@ -2,6 +2,10 @@
 {
     class ModConfig
     {
-        public bool ExampleBoolean { get; set; } = true;
+        public bool ShowParticles { get; set; } = true;
+
+        public bool ShowTransitions { get; set; } = false;
+
+        public bool PlayAnyTime { get; set; } = false;
     }
 }

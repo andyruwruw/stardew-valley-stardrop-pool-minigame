@@ -1,8 +1,6 @@
-﻿using StardropPoolMinigame.Enums;
-
-namespace StardropPoolMinigame.Constants
+﻿namespace StardropPoolMinigame.Constants
 {
-    class OpponentConstants
+    class NPCConstants
     {
         public class Sam
         {

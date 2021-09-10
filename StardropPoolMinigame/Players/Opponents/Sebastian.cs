@@ -13,10 +13,10 @@ namespace StardropPoolMinigame.Players
             OpponentType.Sebastian,
             Multiplayer.GetNewMultiplayerId(),
             SoundConstants.Theme.SEBASTIAN,
-            OpponentConstants.Sebastian.CONFIDENCE,
-            OpponentConstants.Sebastian.COMPLEXITY,
-            OpponentConstants.Sebastian.ANGLE_ACCURACY,
-            OpponentConstants.Sebastian.POWER_ACCURACY)
+            NPCConstants.Sebastian.CONFIDENCE,
+            NPCConstants.Sebastian.COMPLEXITY,
+            NPCConstants.Sebastian.ANGLE_ACCURACY,
+            NPCConstants.Sebastian.POWER_ACCURACY)
         {
         }
     }

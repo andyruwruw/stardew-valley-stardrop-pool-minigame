@@ -1,6 +1,4 @@
-﻿using StardropPoolMinigame.Render.Scenes;
-
-namespace StardropPoolMinigame.Scenes
+﻿namespace StardropPoolMinigame.Scenes
 {
     /// <summary>
     /// Depicts score and summary of finished <see cref="GameScene"/>

@@ -3,10 +3,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using StardewValley;
 using StardewValley.Minigames;
-using StardropPoolMinigame.Constants;
 using StardropPoolMinigame.Enums;
 using StardropPoolMinigame.Helpers;
-using StardropPoolMinigame.Players;
 using StardropPoolMinigame.Render;
 using StardropPoolMinigame.Scenes;
 
@@ -36,14 +34,7 @@ namespace StardropPoolMinigame
 
         public StardropPoolMinigame()
         {
-            if (DevConstants.AUTO_START_AI_GAME)
-            {
-                this._enteringScene = new GameScene(Player.GetMainPlayer(), new Sam());
-            } else
-            {
-                this._enteringScene = new MenuScene();
-            }
-            
+            this._enteringScene = Scene.GetDefaultScene();
             this._currentScene = null;
             this._exitingScene = null;
 

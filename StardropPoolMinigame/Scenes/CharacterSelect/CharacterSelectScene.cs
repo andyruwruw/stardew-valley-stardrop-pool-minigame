@@ -5,7 +5,6 @@ using StardropPoolMinigame.Enums;
 using StardropPoolMinigame.Helpers;
 using StardropPoolMinigame.Players;
 using StardropPoolMinigame.Render;
-using StardropPoolMinigame.Rules;
 using System.Collections.Generic;
 
 namespace StardropPoolMinigame.Scenes

@@ -6,11 +6,14 @@ using System.Collections.Generic;
 
 namespace StardropPoolMinigame.Entities
 {
+    /// <summary>
+    /// Drawable object in an <see cref="Scenes.IScene"/>
+    /// </summary>
     interface IEntity
     {
-        void Update();
-
         string GetId();
+
+        void Update();
 
         IDrawer GetDrawer();
 

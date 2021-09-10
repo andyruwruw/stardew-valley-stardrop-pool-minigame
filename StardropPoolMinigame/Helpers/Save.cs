@@ -1,7 +1,6 @@
 ﻿using StardewModdingAPI;
 using StardropPoolMinigame.Constants;
 using StardropPoolMinigame.Data.Save;
-using StardropPoolMinigame.Enums;
 using System.Collections.Generic;
 
 namespace StardropPoolMinigame.Helpers

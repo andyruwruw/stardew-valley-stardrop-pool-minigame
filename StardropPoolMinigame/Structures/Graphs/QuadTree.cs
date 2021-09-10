@@ -1,13 +1,12 @@
 ﻿using StardropPoolMinigame.Entities;
 using StardropPoolMinigame.Enums;
-using StardropPoolMinigame.Geometry;
 using StardropPoolMinigame.Primitives;
 using StardropPoolMinigame.Render.Drawers;
 using System.Collections.Generic;
 
 namespace StardropPoolMinigame.Structures
 {
-    class QuadTree : EntityStatic
+    class QuadTree<T>
     {
         /// <summary>
         /// Number of items in QuadTree.

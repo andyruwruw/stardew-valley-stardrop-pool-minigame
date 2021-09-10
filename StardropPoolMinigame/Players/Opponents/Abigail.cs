@@ -13,10 +13,10 @@ namespace StardropPoolMinigame.Players
             OpponentType.Abigail,
             Multiplayer.GetNewMultiplayerId(),
             SoundConstants.Theme.ABIGAIL,
-            OpponentConstants.Abigail.CONFIDENCE,
-            OpponentConstants.Abigail.COMPLEXITY,
-            OpponentConstants.Abigail.ANGLE_ACCURACY,
-            OpponentConstants.Abigail.POWER_ACCURACY)
+            NPCConstants.Abigail.CONFIDENCE,
+            NPCConstants.Abigail.COMPLEXITY,
+            NPCConstants.Abigail.ANGLE_ACCURACY,
+            NPCConstants.Abigail.POWER_ACCURACY)
         {
         }
     }

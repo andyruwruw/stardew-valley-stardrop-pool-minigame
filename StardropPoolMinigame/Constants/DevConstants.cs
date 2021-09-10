@@ -1,7 +1,8 @@
 ﻿namespace StardropPoolMinigame.Constants
 {
     /// <summary>
-    /// What's up coder, good to have you here.
+    /// <para>What's up coder, good to have you here</para>
+    /// <para>Here are some tools to help you test</para>
     /// </summary>
     class DevConstants
     {
