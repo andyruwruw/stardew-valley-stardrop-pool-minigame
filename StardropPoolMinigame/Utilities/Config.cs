@@ -1,6 +1,6 @@
 ﻿using StardropPoolMinigame.Data;
 
-namespace StardropPoolMinigame.Helpers
+namespace StardropPoolMinigame.Utilities
 {
     /// <summary>
     /// Retrieves values generated from the <see href="https://stardewvalleywiki.com/Modding:Modder_Guide/APIs/Config">config.json</see>.

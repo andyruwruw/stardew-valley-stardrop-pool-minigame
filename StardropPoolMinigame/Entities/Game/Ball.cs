@@ -3,7 +3,6 @@ using StardropPoolMinigame.Primitives;
 using StardropPoolMinigame.Constants;
 using StardropPoolMinigame.Attributes;
 using StardropPoolMinigame.Enums;
-using StardropPoolMinigame.Helpers;
 using StardropPoolMinigame.Render.Drawers;
 using StardropPoolMinigame.Render.Filters;
 using System.Collections.Generic;
@@ -15,7 +14,7 @@ namespace StardropPoolMinigame.Entities
     {
         private int _number;
 
-        private Circle _range;
+        private float radius;
 
         private Vector2 _velocity;
 

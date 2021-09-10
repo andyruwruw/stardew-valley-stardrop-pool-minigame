@@ -184,7 +184,26 @@ namespace StardropPoolMinigame.Entities
 
         private void InitializeParticleEmitter()
         {
-            this._particleEmitter = ParticleEmitterConstants.Cue.GetParticleEmitter(this._type, this._layerDepth);
+            this._particleEmitter = GetCueParticleEmitter(this._type, this._layerDepth);
+        }
+
+        public static ParticleEmitter GetCueParticleEmitter(CueType type, float layerDepth)
+        {
+            switch (type)
+            {
+                case CueType.Flames:
+                    return new SparkEmitter(
+                        Vector2.Zero,
+                        5,
+                        layerDepth - 0.0001f,
+                        5);
+                default:
+                    return new SparkEmitter(
+                        Vector2.Zero,
+                        1,
+                        layerDepth - 0.0001f,
+                        1);
+            }
         }
     }
 }

@@ -11,12 +11,17 @@ namespace StardropPoolMinigame.Behaviors.Physics
     /// </summary>
     class RealPhysics
     {
+        public static Circle GetPerception(Ball ball)
+        {
+            return new Circle(ball.GetAnchor(), ball.GetRadius());
+        }
+
         /// <summary>
-        /// Bounces two balls together
+        /// Bounces two <see cref="Ball">Balls</see> together.
         /// </summary>
-        /// <param name="ball1">First ball to be bounced</param>
-        /// <param name="ball2">Second ball to be bounced</param>
-        /// <param name="offsetOnly">Does not alter velocity, but offsets balls to not overlap</param>
+        /// <param name="ball1">First <see cref="Ball"/> to be bounced</param>
+        /// <param name="ball2">Second  <see cref="Ball"/> to be bounced</param>
+        /// <param name="offsetOnly">Whether to alter velocity</param>
         public static void Bounce(Ball ball1, Ball ball2, bool offsetOnly = false)
         {
             Vector2 angle = Vector2.Subtract(ball1.GetAnchor(), ball2.GetPosition());
@@ -56,7 +61,7 @@ namespace StardropPoolMinigame.Behaviors.Physics
         }
 
         /// <summary>
-        /// Bounces ball off a wall
+        /// Bounces <see cref="Ball"/> off a <see cref="Line"/>
         /// </summary>
         /// <remarks>
         /// Sourced from https://www.mathsisfun.com/algebra/vectors-dot-product.html

@@ -21,7 +21,7 @@ namespace StardropPoolMinigame.Structures
         /// </summary>
         /// <param name="position"><see cref="Vector2"/> position of the node</param>
         /// <returns>Whether the node as removed</returns>
-        bool Remove(Vector2 point);
+        bool Remove(Vector2 position);
 
         /// <summary>
         /// Removes a node from the <see cref="IGraph"/>.

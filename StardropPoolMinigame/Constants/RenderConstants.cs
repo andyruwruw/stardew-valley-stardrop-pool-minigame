@@ -352,6 +352,8 @@ namespace StardropPoolMinigame.Constants
             {
                 public class LayerDepth
                 {
+                    public static float QUAD_TREE = 0.9000f;
+
                     public static float POPUP = 0.9000f;
                 }
             }

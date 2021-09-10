@@ -1,6 +1,6 @@
 ﻿using StardewValley;
 
-namespace StardropPoolMinigame.Helpers
+namespace StardropPoolMinigame.Utilities
 {
     /// <summary>
     /// Facade for playing sound effects and music.

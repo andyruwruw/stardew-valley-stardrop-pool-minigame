@@ -1,6 +1,7 @@
 ﻿namespace StardropPoolMinigame.Behaviors.Physics
 {
-    interface IPhysics
+    /// <inheritdoc cref="IPhysics"/>
+    class Physics
     {
     }
 }

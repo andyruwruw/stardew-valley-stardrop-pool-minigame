@@ -3,7 +3,7 @@ using StardropPoolMinigame.Constants;
 using StardropPoolMinigame.Data.Save;
 using System.Collections.Generic;
 
-namespace StardropPoolMinigame.Helpers
+namespace StardropPoolMinigame.Utilities
 {
     class Save
     {

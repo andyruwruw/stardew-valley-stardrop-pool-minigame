@@ -1,7 +1,7 @@
 ﻿using StardewValley;
 using System.Collections.Generic;
 
-namespace StardropPoolMinigame.Helpers
+namespace StardropPoolMinigame.Utilities
 {
     /// <summary>
     /// <para>Times events based on keys.</para>

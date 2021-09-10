@@ -1,4 +1,6 @@
-﻿using StardropPoolMinigame.Entities;
+﻿using Microsoft.Xna.Framework;
+using StardropPoolMinigame.Constants;
+using StardropPoolMinigame.Entities;
 using StardropPoolMinigame.Enums;
 using StardropPoolMinigame.Primitives;
 using StardropPoolMinigame.Render.Drawers;
@@ -6,167 +8,174 @@ using System.Collections.Generic;
 
 namespace StardropPoolMinigame.Structures
 {
-    class QuadTree<T>
+    class QuadTree<T> : EntityStatic, IGraph<T>
     {
         /// <summary>
-        /// Number of items in QuadTree.
+        /// The total number of nodes stored.
         /// </summary>
-        public int Count;
+        private int _count;
 
         /// <summary>
-        /// <see cref="IRange"/> of QuadTree.
+        /// <see cref="IRange"/> of <see cref="QuadTree{T}"/>.
         /// </summary>
-        private Rectangle _boundary;
+        private Primitives.Rectangle _boundary;
 
         /// <summary>
-        /// Number of nodes before QuadTree <see cref="Subdivide">Subdivides</see>.
+        /// Number of nodes before <see cref="QuadTree{T}"/> <see cref="Subdivide">Subdivides</see>.
         /// </summary>
         private int _capacity;
 
         /// <summary>
-        /// List of points in QuadTree.
+        /// North-west quadrant <see cref="QuadTree{T}"/>.
         /// </summary>
-        private IList<IEntity> _points;
+        private QuadTree<T> _northWest;
 
         /// <summary>
-        /// Whether QuadTree has <see cref="Subdivide">Subdivided</see>.
+        /// North-east quadrant <see cref="QuadTree{T}"/>.
         /// </summary>
-        private bool _divided;
+        private QuadTree<T> _northEast;
 
         /// <summary>
-        /// Whether QuadTree is root QuadTree.
+        /// South-west quadrant <see cref="QuadTree{T}"/>.
+        /// </summary>
+        private QuadTree<T> _southWest;
+
+        /// <summary>
+        /// South-east quadrant <see cref="QuadTree{T}"/>.
+        /// </summary>
+        private QuadTree<T> _southEast;
+
+        /// <summary>
+        /// List of points in <see cref="QuadTree{T}"/>.
+        /// </summary>
+        private Dictionary<Vector2, T> _points;
+
+        /// <summary>
+        /// Whether <see cref="QuadTree{T}"/> has <see cref="Subdivide">Subdivided</see>.
+        /// </summary>
+        private bool _isDivided;
+
+        /// <summary>
+        /// Whether <see cref="QuadTree{T}"/> is root <see cref="QuadTree{T}"/>.
         /// </summary>
         private bool _isRoot;
 
         /// <summary>
-        /// North-west quadrant QuadTree
+        /// Instantiates a <see cref="QuadTree{T}"/>.
         /// </summary>
-        private QuadTree _northWest;
-
-        /// <summary>
-        /// North-east quadrant QuadTree
-        /// </summary>
-        private QuadTree _northEast;
-
-        /// <summary>
-        /// South-west quadrant QuadTree
-        /// </summary>
-        private QuadTree _southWest;
-
-        /// <summary>
-        /// South-east quadrant QuadTree
-        /// </summary>
-        private QuadTree _southEast;
-
-        /// <summary>
-        /// Instantiates a QuadTree
-        /// </summary>
-        /// <param name="boundary"><see cref="Rectangle"/> for QuadTree boundary</param>
-        /// <param name="capacity">Number of nodes before QuadTree <see cref="Subdivide">Subdivides</see></param>
-        /// <param name="isRoot">Whether QuadTree is root QuadTree</param>
+        /// <param name="boundary"><see cref="Rectangle"/> for <see cref="QuadTree{T}"/> boundary</param>
+        /// <param name="capacity">Number of nodes before <see cref="QuadTree{T}"/> <see cref="Subdivide">Subdivides</see></param>
+        /// <param name="isRoot">Whether <see cref="QuadTree{T}"/> is root <see cref="QuadTree{T}"/></param>
         public QuadTree(
-            Rectangle boundary,
+            Primitives.Rectangle boundary,
             int capacity = 4,
             bool isRoot = true
         ) : base(
             Origin.TopLeft,
             boundary.GetNorthWestCorner(),
-            1.0000f,
+            RenderConstants.Scenes.General.LayerDepth.QUAD_TREE,
             null,
             null)
         {
-            this.Count = 0;
+            this._count = 0;
             this._boundary = boundary;
             this._capacity = capacity;
-            this._points = new List<IEntity>();
-            this._divided = false;
+            this._points = new Dictionary<Vector2, T>();
+            this._isDivided = false;
             this._isRoot = isRoot;
 
             this.SetDrawer(new QuadTreeDrawer(this));
         }
 
-        public override float GetTotalWidth()
+        /// <inheritdoc cref="IGraph{T}.Insert(Vector2, T)"/>
+        public bool Insert(Vector2 position, T data)
         {
-            return this._boundary.GetWidth();
-        }
-
-        public override float GetTotalHeight()
-        {
-            return this._boundary.GetHeight();
-        }
-
-        /// <summary>
-        /// Inserts a point into the QuadTree.
-        /// </summary>
-        /// <remarks>
-        /// The QuadTree will <see cref="Subdivide">Subdivide</see> if it is already at capacity.
-        /// </remarks>
-        /// 
-        /// <param name="point">Point to be inserted</param>
-        /// <returns>Whether point was added successfully</returns>
-        public bool Insert(IEntity point)
-        {
-            if (!this._boundary.Contains(point.GetAnchor()))
+            if (!this._boundary.Contains(position))
             {
                 return false;
             }
 
             if (this._points.Count < this._capacity)
             {
-                this._points.Add(point);
-                this.Count += 1;
+                this._points.Add(position, data);
+                this._count += 1;
                 return true;
             }
 
-            if (!this._divided)
+            if (!this._isDivided)
             {
                 this.Subdivide();
             }
 
-            if (this._northEast.Insert(point))
+            if (this._northEast.Insert(position, data))
             {
-                this.Count += 1;
+                this._count += 1;
                 return true;
             }
 
-            if (this._northWest.Insert(point))
+            if (this._northWest.Insert(position, data))
             {
-                this.Count += 1;
+                this._count += 1;
                 return true;
             }
 
-            if (this._southEast.Insert(point))
+            if (this._southEast.Insert(position, data))
             {
-                this.Count += 1;
+                this._count += 1;
                 return true;
             }
 
-            if (this._southWest.Insert(point))
+            if (this._southWest.Insert(position, data))
             {
-                this.Count += 1;
+                this._count += 1;
                 return true;
             }
 
             return false;
         }
 
-        public bool Remove(IEntity point)
+        /// <inheritdoc cref="IGraph{T}.Remove(Vector2)"/>
+        public bool Remove(Vector2 position)
         {
-            if (this._points.Contains(point))
+            if (this._points.ContainsKey(position))
             {
-                this._points.Remove(point);
+                this._points.Remove(position);
                 return true;
             }
 
-            if (this._divided)
+            if (this._isDivided)
             {
-                return (this._northEast.Remove(point) ||
-                    this._northWest.Remove(point) ||
-                    this._southEast.Remove(point) ||
-                    this._southWest.Remove(point));
+                return (this._northEast.Remove(position) ||
+                    this._northWest.Remove(position) ||
+                    this._southEast.Remove(position) ||
+                    this._southWest.Remove(position));
             }
 
             return false;
+        }
+
+        /// <inheritdoc cref="IGraph{T}.Remove(T)"/>
+        public bool Remove(T data)
+        {
+            return false;
+        }
+
+        /// <inheritdoc cref="IGraph{T}.GetCount"/>
+        public int GetCount()
+        {
+            return this._count;
+        }
+
+        /// <inheritdoc cref="IEntity.GetTotalWidth"/>
+        public override float GetTotalWidth()
+        {
+            return this._boundary.GetWidth();
+        }
+
+        /// <inheritdoc cref="IEntity.GetTotalHeight"/>
+        public override float GetTotalHeight()
+        {
+            return this._boundary.GetHeight();
         }
 
         /// <summary>
@@ -176,7 +185,7 @@ namespace StardropPoolMinigame.Structures
         /// <param name="range"><see cref="IRange"/> to query</param>
         /// <param name="found">List of found points so far</param>
         /// <returns>List of points found</returns>
-        public IList<IEntity> Query(IRange range = null, List<IEntity> found = null)
+        public IList<T> Query(IRange range = null, List<T> found = null)
         {
             if (range == null)
             {
@@ -185,23 +194,23 @@ namespace StardropPoolMinigame.Structures
 
             if (found == null)
             {
-                found = new List<IEntity>();
+                found = new List<T>();
             }
 
-            if (!Intersection.IsIntersecting(range, this._boundary))
+            if (!this._boundary.Intersects(range))
             {
                 return found;
             }
 
-            foreach (IEntity entity in this._points)
+            foreach (Vector2 position in this._points.Keys)
             {
-                if (range.Contains(entity.GetAnchor()))
+                if (range.Contains(position))
                 {
-                    found.Add(entity);
+                    found.Add(this._points[position]);
                 }
             }
 
-            if (this._divided)
+            if (this._isDivided)
             {
                 found.AddRange(this._northWest.Query(range));
                 found.AddRange(this._northEast.Query(range));
@@ -212,59 +221,65 @@ namespace StardropPoolMinigame.Structures
             return found;
         }
 
+        /// <summary>
+        /// <see cref="IRange"/> of <see cref="QuadTree{T}"/>.
+        /// </summary>
         public IRange GetBoundary()
         {
             return this._boundary;
         }
 
+        /// <summary>
+        /// Whether <see cref="QuadTree{T}"/> has <see cref="Subdivide">Subdivided</see>.
+        /// </summary>
         public bool IsSubdivided()
         {
-            return this._divided;
+            return this._isDivided;
         }
 
-        public QuadTree GetNorthWestQuadrant()
+        /// <summary>
+        /// North-west quadrant <see cref="QuadTree{T}"/>.
+        /// </summary>
+        public QuadTree<T> GetNorthWestQuadrant()
         {
             return this._northWest;
         }
 
-        public QuadTree GetNorthEastQuadrant()
+        /// <summary>
+        /// North-east quadrant <see cref="QuadTree{T}"/>.
+        /// </summary>
+        public QuadTree<T> GetNorthEastQuadrant()
         {
             return this._northEast;
         }
 
-        public QuadTree GetSouthWestQuadrant()
+        /// <summary>
+        /// South-west quadrant <see cref="QuadTree{T}"/>.
+        /// </summary>
+        public QuadTree<T> GetSouthWestQuadrant()
         {
             return this._southWest;
         }
 
-        public QuadTree GetSouthEastQuadrant()
+        /// <summary>
+        /// South-east quadrant <see cref="QuadTree{T}"/>.
+        /// </summary>
+        public QuadTree<T> GetSouthEastQuadrant()
         {
             return this._southEast;
         }
 
-        public IList<IEntity> GetPoints()
-        {
-            return this._points;
-        }
-
         /// <summary>
-        /// Subdivides the QuadTree into quadrants.
+        /// Subdivides the <see cref="QuadTree{T}"/> into quadrants.
         /// </summary>
         private void Subdivide()
         {
-            this._northWest = new QuadTree(this._boundary.GetNorthWestRange(), this._capacity, false);
-            this._northEast = new QuadTree(this._boundary.GetNorthEastRange(), this._capacity, false);
-            this._southWest = new QuadTree(this._boundary.GetSouthWestRange(), this._capacity, false);
-            this._southEast = new QuadTree(this._boundary.GetSouthEastRange(), this._capacity, false);
+            this._northWest = new QuadTree<T>(this._boundary.GetNorthWestQuadrant(), this._capacity, false);
+            this._northEast = new QuadTree<T>(this._boundary.GetNorthEastQuadrant(), this._capacity, false);
+            this._southWest = new QuadTree<T>(this._boundary.GetSouthWestQuadrant(), this._capacity, false);
+            this._southEast = new QuadTree<T>(this._boundary.GetSouthEastQuadrant(), this._capacity, false);
 
-            this._divided = true;
-
-            foreach (IEntity point in this._points)
-            {
-                this.Insert(point);
-            }
-
-            this._points.Clear();
+            this._isDivided = true;
         }
     }
 }

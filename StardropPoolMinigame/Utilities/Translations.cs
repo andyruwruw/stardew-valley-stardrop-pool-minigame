@@ -1,7 +1,7 @@
 ﻿using System;
 using StardewModdingAPI;
 
-namespace StardropPoolMinigame.Helpers
+namespace StardropPoolMinigame.Utilities
 {
     /// <summary>
     /// Retrieves translated strings from <see href="https://stardewvalleywiki.com/Modding:Translations">i18n folder</see>.

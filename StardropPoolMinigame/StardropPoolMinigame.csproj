@@ -48,10 +48,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Behaviors\Attributes\Orientation.cs" />
-    <Compile Include="Behaviors\Detectors\Use.cs" />
-    <Compile Include="Behaviors\Physics\Physics.cs" />
-    <Compile Include="Helpers\Config.cs" />
+    <Compile Include="Behaviors\Orientation.cs" />
+    <Compile Include="Behaviors\PhysicsObject.cs" />
+    <Compile Include="Physics\Physics.cs" />
+    <Compile Include="Utilities\Config.cs" />
     <Compile Include="Multiplayer\Messages\ChallengeAccepted.cs" />
     <Compile Include="Multiplayer\Messages\ChallengeRequest.cs" />
     <Compile Include="Multiplayer\Messages\SelectAngle.cs" />
@@ -68,12 +68,9 @@
     <Compile Include="Scenes\Settings\SettingsSceneCreator.cs" />
     <Compile Include="Scenes\Summary\SummarySceneCreator.cs" />
     <Compile Include="Structures\Graphs\IGraph.cs" />
-    <Compile Include="Structures\Graphs\QuadTree2.cs" />
     <Compile Include="Structures\Primitives\Geometry\IntersectionHelper.cs" />
-    <Compile Include="Behaviors\Physics\BoidPhysics.cs" />
-    <Compile Include="Behaviors\Physics\RealPhysics.cs" />
-    <Compile Include="Constants\LayerDepthConstants.cs" />
-    <Compile Include="Constants\ParticleEmitterConstants.cs" />
+    <Compile Include="Physics\BoidPhysics.cs" />
+    <Compile Include="Physics\RealPhysics.cs" />
     <Compile Include="Constants\StringConstants.cs" />
     <Compile Include="Constants\TableConstants.cs" />
     <Compile Include="Constants\TransitionConstants.cs" />
@@ -136,12 +133,12 @@
     <Compile Include="Entities\UI\Popups\UnlockedCharacterPopup.cs" />
     <Compile Include="Entities\UI\Popups\VictoryPopup.cs" />
     <Compile Include="Entities\UI\Popups\YourTurnPopup.cs" />
-    <Compile Include="Helpers\Logger.cs" />
+    <Compile Include="Utilities\Logger.cs" />
     <Compile Include="Multiplayer\MultiplayerHelper.cs" />
     <Compile Include="Helpers\MiscellaneousHelper.cs" />
-    <Compile Include="Helpers\Save.cs" />
-    <Compile Include="Helpers\Sound.cs" />
-    <Compile Include="Helpers\Timer.cs" />
+    <Compile Include="Utilities\Save.cs" />
+    <Compile Include="Utilities\Sound.cs" />
+    <Compile Include="Utilities\Timer.cs" />
     <Compile Include="ModEntry.cs" />
     <Compile Include="Players\IPlayer.cs" />
     <Compile Include="Players\Opponents\Abigail.cs" />
@@ -220,7 +217,7 @@
     <Compile Include="Entities\UI\Elements\Cursor.cs" />
     <Compile Include="Render\Drawers\UI\Background\FloorTilesDrawer.cs" />
     <Compile Include="Rules\RuleSet.cs" />
-    <Compile Include="Helpers\Translations.cs" />
+    <Compile Include="Utilities\Translations.cs" />
     <Compile Include="Render\Drawers\UI\General\Text\TextDrawer.cs" />
     <Compile Include="Render\Drawers\UI\General\Text\CharacterDrawer.cs" />
     <Compile Include="Scenes\Dialog\States\Scripts\IScript.cs" />
@@ -261,7 +258,7 @@
     <Compile Include="Entities\UI\Portraits\Portrait.cs" />
     <Compile Include="Entities\UI\General\Titles\GameTitle.cs" />
     <Compile Include="Entities\UI\General\Titles\PageTitle.cs" />
-    <Compile Include="Behaviors\Physics\IPhysics.cs" />
+    <Compile Include="Physics\IPhysics.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="i18n\default.json" />
