@@ -50,6 +50,8 @@
   <ItemGroup>
     <Compile Include="Behaviors\Orientation.cs" />
     <Compile Include="Behaviors\PhysicsObject.cs" />
+    <Compile Include="Entities\EntityPhysics.cs" />
+    <Compile Include="Physics\FlockingNewtonianPhysics.cs" />
     <Compile Include="Physics\Physics.cs" />
     <Compile Include="Utilities\Config.cs" />
     <Compile Include="Multiplayer\Messages\ChallengeAccepted.cs" />
@@ -69,14 +71,13 @@
     <Compile Include="Scenes\Summary\SummarySceneCreator.cs" />
     <Compile Include="Structures\Graphs\IGraph.cs" />
     <Compile Include="Structures\Primitives\Geometry\IntersectionHelper.cs" />
-    <Compile Include="Physics\BoidPhysics.cs" />
-    <Compile Include="Physics\RealPhysics.cs" />
+    <Compile Include="Physics\FlockingPhysics.cs" />
+    <Compile Include="Physics\NewtonianPhysics.cs" />
     <Compile Include="Constants\StringConstants.cs" />
     <Compile Include="Constants\TableConstants.cs" />
     <Compile Include="Constants\TransitionConstants.cs" />
     <Compile Include="Entities\Entity.cs" />
     <Compile Include="Entities\EntityBoid.cs" />
-    <Compile Include="Entities\EntityStatic.cs" />
     <Compile Include="Entities\Game\Tables\Segments\EastEdge.cs" />
     <Compile Include="Entities\Game\Tables\Segments\EastPocket.cs" />
     <Compile Include="Entities\Game\Tables\Segments\Felt.cs" />
@@ -100,7 +101,6 @@
     <Compile Include="Entities\Game\Tables\Segments\WestEdge.cs" />
     <Compile Include="Entities\Game\Tables\Segments\WestPocket.cs" />
     <Compile Include="Entities\IEntity.cs" />
-    <Compile Include="Entities\EntityHoverable.cs" />
     <Compile Include="Entities\Particles\Individual\Glimmer.cs" />
     <Compile Include="Entities\Particles\Individual\Particle.cs" />
     <Compile Include="Entities\Particles\Individual\PurpleWhisp.cs" />
