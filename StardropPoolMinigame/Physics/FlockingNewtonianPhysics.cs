@@ -17,13 +17,13 @@ namespace StardropPoolMinigame.Behaviors.Physics
         }
 
         /// <inheritdoc cref="IPhysics.GetTangiblePerception(EntityPhysics)"/>
-        public override IRange GetTangiblePerception(EntityPhysics entity)
+        protected override IRange GetTangiblePerception(EntityPhysics entity)
         {
             return entity.GetBoundary();
         }
 
         /// <inheritdoc cref="Physics.InteractWithTangible(EntityPhysics, IList{EntityPhysics}, IList{IRange})"/>
-        public override void InteractWithTangible(EntityPhysics entity, IList<EntityPhysics> neighbors, IList<IRange> barriers)
+        protected override void InteractWithTangible(EntityPhysics entity, IList<EntityPhysics> neighbors, IList<IRange> barriers)
         {
             this.BounceAllNeighbors(entity, neighbors);
             this.BounceAllBarriers(entity, barriers);

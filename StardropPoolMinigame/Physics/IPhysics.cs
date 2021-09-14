@@ -1,5 +1,7 @@
 ﻿using StardropPoolMinigame.Entities;
 using StardropPoolMinigame.Primitives;
+using StardropPoolMinigame.Structures;
+using System;
 using System.Collections.Generic;
 
 namespace StardropPoolMinigame.Behaviors.Physics
@@ -24,33 +26,19 @@ namespace StardropPoolMinigame.Behaviors.Physics
         bool HasTangibleInteractions();
 
         /// <summary>
-        /// Retrives the <see cref="IRange"/> of a <see cref="EntityPhysics">EntityPhysics'</see> intangible forces.
+        /// Simulates intangible interactions for <see cref="IGraph{T}"/>, generating a new <see cref="IGraph{T}"/> in its place.
         /// </summary>
-        /// <param name="entity"><see cref="EntityPhysics"/> in question</param>
-        /// <returns><see cref="IRange"/> of <see cref="EntityPhysics"/> intangible perception</returns>
-        IRange GetIntangiblePerception(EntityPhysics entity);
+        /// <param name="graph"><see cref="IGraph{T}"/> of <see cref="EntityPhysics"/></param>
+        /// <param name="table"></param>
+        /// <returns>New <see cref="IGraph{T}"/></returns>
+        Tuple<IGraph<EntityPhysics>, bool> IntangibleInteractions(IGraph<EntityPhysics> graph, Table table);
 
         /// <summary>
-        /// Retrives the <see cref="IRange"/> of a <see cref="EntityPhysics">EntityPhysics'</see> tangible forces.
+        /// Simulates tangible interactions for <see cref="IGraph{T}"/>, generating a new <see cref="IGraph{T}"/> in its place.
         /// </summary>
-        /// <param name="entity"><see cref="EntityPhysics"/> in question</param>
-        /// <returns><see cref="IRange"/> of <see cref="EntityPhysics"/> tangible perception</returns>
-        IRange GetTangiblePerception(EntityPhysics entity);
-
-        /// <summary>
-        /// Simulate interaction between main <see cref="EntityPhysics"/> and its intangible neighbors / barriers.
-        /// </summary>
-        /// <param name="entity">Main <see cref="EntityPhysics"/></param>
-        /// <param name="neighbors">Neighboring <see cref="EntityPhysics"/> within the main <see cref="EntityPhysics"/> intangible perception radius</param>
-        /// <param name="barriers">Neighboring <see cref="IRange">IRanges</see> within the main <see cref="EntityPhysics"/> intangible perception radius</param>
-        void InteractWithIntangible(EntityPhysics entity, IList<EntityPhysics> neighbors, IList<IRange> barriers);
-
-        /// <summary>
-        /// Simulate interaction between main <see cref="EntityPhysics"/> and its tangible neighbors / barriers.
-        /// </summary>
-        /// <param name="entity">Main <see cref="EntityPhysics"/></param>
-        /// <param name="neighbors">Neighboring <see cref="EntityPhysics"/> within the main <see cref="EntityPhysics"/> tangible perception radius</param>
-        /// <param name="barriers">Neighboring <see cref="IRange">IRanges</see> within the main <see cref="EntityPhysics"/> tangible perception radius</param>
-        void InteractWithTangible(EntityPhysics entity, IList<EntityPhysics> neighbors, IList<IRange> barriers);
+        /// <param name="graph"><see cref="IGraph{T}"/> of <see cref="EntityPhysics"/></param>
+        /// <param name="table"></param>
+        /// <returns>New <see cref="IGraph{T}"/></returns>
+        Tuple<IGraph<EntityPhysics>, bool> TangibleInteractions(IGraph<EntityPhysics> graph, Table table);
     }
 }

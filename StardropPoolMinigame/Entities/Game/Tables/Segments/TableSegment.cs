@@ -11,7 +11,7 @@ namespace StardropPoolMinigame.Entities
 {
     abstract class TableSegment : Entity
     {
-        protected IList<Line> _bounceableSurfaces;
+        protected IList<IRange> _bounceableSurfaces;
 
         protected IList<Circle> _pockets;
 
@@ -50,7 +50,7 @@ namespace StardropPoolMinigame.Entities
 
         public virtual void InicializeBounceableSurfaces()
         {
-            this._bounceableSurfaces = new List<Line>();
+            this._bounceableSurfaces = new List<IRange>();
         }
 
         public virtual void InicializePockets()
@@ -58,7 +58,7 @@ namespace StardropPoolMinigame.Entities
             this._pockets = new List<Circle>();
         }
 
-        public IList<Line> GetBounceableSurfaces()
+        public IList<IRange> GetBounceableSurfaces()
         {
             return this._bounceableSurfaces;
         }

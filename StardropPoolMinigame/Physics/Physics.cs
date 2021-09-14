@@ -3,6 +3,7 @@ using StardropPoolMinigame.Constants;
 using StardropPoolMinigame.Entities;
 using StardropPoolMinigame.Helpers;
 using StardropPoolMinigame.Primitives;
+using StardropPoolMinigame.Structures;
 using System;
 using System.Collections.Generic;
 
@@ -30,25 +31,55 @@ namespace StardropPoolMinigame.Behaviors.Physics
             return false;
         }
 
-        /// <inheritdoc cref="IPhysics.GetIntangiblePerception(EntityPhysics)"/>
-        public virtual IRange GetIntangiblePerception(EntityPhysics entity)
+        /// <inheritdoc cref="IPhysics.IntangibleInteractions(IGraph{EntityPhysics}, Table)"/>
+        public virtual Tuple<IGraph<EntityPhysics>, bool> IntangibleInteractions(IGraph<EntityPhysics> graph, Table table)
+        {
+            return new Tuple<IGraph<EntityPhysics>, bool>(graph, true);
+        }
+
+        /// <inheritdoc cref="IPhysics.TangibleInteractions(IGraph{EntityPhysics}, Table)"/>
+        public virtual Tuple<IGraph<EntityPhysics>, bool> TangibleInteractions(IGraph<EntityPhysics> graph, Table table)
+        {
+            return new Tuple<IGraph<EntityPhysics>, bool>(graph, true);
+        }
+
+        /// <summary>
+        /// Retrives the <see cref="IRange"/> of a <see cref="EntityPhysics">EntityPhysics'</see> intangible forces.
+        /// </summary>
+        /// <param name="entity"><see cref="EntityPhysics"/> in question</param>
+        /// <returns><see cref="IRange"/> of <see cref="EntityPhysics"/> intangible perception</returns>
+        protected virtual IRange GetIntangiblePerception(EntityPhysics entity)
         {
             return new Circle(entity.GetAnchor(), 0f);
         }
 
-        /// <inheritdoc cref="IPhysics.GetTangiblePerception(EntityPhysics)"/>
-        public virtual IRange GetTangiblePerception(EntityPhysics entity)
+        /// <summary>
+        /// Retrives the <see cref="IRange"/> of a <see cref="EntityPhysics">EntityPhysics'</see> tangible forces.
+        /// </summary>
+        /// <param name="entity"><see cref="EntityPhysics"/> in question</param>
+        /// <returns><see cref="IRange"/> of <see cref="EntityPhysics"/> tangible perception</returns>
+        protected virtual IRange GetTangiblePerception(EntityPhysics entity)
         {
             return new Circle(entity.GetAnchor(), 0f);
         }
 
-        /// <inheritdoc cref="IPhysics.InteractWithIntangible(EntityPhysics, IList{EntityPhysics}, IList{IRange})"/>
-        public virtual void InteractWithIntangible(EntityPhysics entity, IList<EntityPhysics> neighbors, IList<IRange> barriers)
+        /// <summary>
+        /// Simulate interaction between main <see cref="EntityPhysics"/> and its intangible neighbors / barriers.
+        /// </summary>
+        /// <param name="entity">Main <see cref="EntityPhysics"/></param>
+        /// <param name="neighbors">Neighboring <see cref="EntityPhysics"/> within the main <see cref="EntityPhysics"/> intangible perception radius</param>
+        /// <param name="barriers">Neighboring <see cref="IRange">IRanges</see> within the main <see cref="EntityPhysics"/> intangible perception radius</param>
+        protected virtual void InteractWithIntangible(EntityPhysics entity, IList<EntityPhysics> neighbors, IList<IRange> barriers)
         {
         }
 
-        /// <inheritdoc cref="IPhysics.InteractWithTangible(EntityPhysics, IList{EntityPhysics}, IList{IRange})"/>
-        public virtual void InteractWithTangible(EntityPhysics entity, IList<EntityPhysics> neighbors, IList<IRange> barriers)
+        /// <summary>
+        /// Simulate interaction between main <see cref="EntityPhysics"/> and its tangible neighbors / barriers.
+        /// </summary>
+        /// <param name="entity">Main <see cref="EntityPhysics"/></param>
+        /// <param name="neighbors">Neighboring <see cref="EntityPhysics"/> within the main <see cref="EntityPhysics"/> tangible perception radius</param>
+        /// <param name="barriers">Neighboring <see cref="IRange">IRanges</see> within the main <see cref="EntityPhysics"/> tangible perception radius</param>
+        protected virtual void InteractWithTangible(EntityPhysics entity, IList<EntityPhysics> neighbors, IList<IRange> barriers)
         {
         }
 
@@ -89,6 +120,24 @@ namespace StardropPoolMinigame.Behaviors.Physics
                     this.Bounce(entity, bounceableSurface);
 
                     entity.CollisionCallback(bounceableSurface);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Checks if <see cref="EntityPhysics"/> lies within a <see cref="TableSegment"/> pocket bounds.
+        /// </summary>
+        /// <param name="entity"><see cref="EntityPhysics"/> in question</param>
+        /// <param name="tableSegement"><see cref="TableSegment"/> the <see cref="EntityPhysics"/> is in</param>
+        protected virtual void CheckIfPocketed(EntityPhysics entity, TableSegment tableSegement)
+        {
+            IList<Circle> pocketBounds = tableSegement.GetPockets();
+
+            foreach (Circle pocketBound in pocketBounds)
+            {
+                if (pocketBound.Contains(entity.GetAnchor()))
+                {
+                    ((Ball)entity).SetPocketed(true);
                 }
             }
         }

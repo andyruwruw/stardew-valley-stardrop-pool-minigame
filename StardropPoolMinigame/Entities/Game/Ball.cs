@@ -6,6 +6,7 @@ using StardropPoolMinigame.Enums;
 using StardropPoolMinigame.Render.Drawers;
 using StardropPoolMinigame.Render.Filters;
 using System.Collections.Generic;
+using StardropPoolMinigame.Helpers;
 
 namespace StardropPoolMinigame.Entities
 {
@@ -161,7 +162,7 @@ namespace StardropPoolMinigame.Entities
                 return BallColor.White;
             }
 
-            switch (Operators.Modulo(this._number, 8))
+            switch (MiscellaneousHelper.Modulo(this._number, 8))
             {
                 case 1:
                     return BallColor.Yellow;
@@ -213,6 +214,11 @@ namespace StardropPoolMinigame.Entities
         public bool IsPocketed()
         {
             return this._isPocketed;
+        }
+
+        public void SetPocketed(bool state)
+        {
+            this._isPocketed = state;
         }
 
         private void UpdateInteractions(IList<IEntity> neighbors, TableSegment tableSegment, IDictionary<IEntity, IList<IEntity>> collisionsHandled)

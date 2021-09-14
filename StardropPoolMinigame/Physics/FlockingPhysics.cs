@@ -43,13 +43,13 @@ namespace StardropPoolMinigame.Behaviors.Physics
         }
 
         /// <inheritdoc cref="Physics.GetIntangiblePerception(EntityPhysics)"/>
-        public override IRange GetIntangiblePerception(EntityPhysics entity)
+        protected override IRange GetIntangiblePerception(EntityPhysics entity)
         {
             return new Circle(entity.GetAnchor(), entity.GetIntangibleRadius());
         }
 
         /// <inheritdoc cref="Physics.InteractWithIntangible(EntityPhysics, IList{EntityPhysics}, IList{IRange})"/>
-        public override void InteractWithIntangible(EntityPhysics entity, IList<EntityPhysics> neighbors, IList<IRange> barriers)
+        protected override void InteractWithIntangible(EntityPhysics entity, IList<EntityPhysics> neighbors, IList<IRange> barriers)
         {
             entity.AddAcceleration(Vector2.Multiply(
                 this.Align(entity, neighbors),

@@ -66,10 +66,10 @@ namespace StardropPoolMinigame.Scenes.Dialog.Scripts
             {
                 IPlayer opponent = ((GameScene)nextScene).GetPlayers()[1];
 
-                if (Save.GetWins(((ComputerOpponent)opponent).GetOpponentType()) == 0
-                    && Save.GetLosses(((ComputerOpponent)opponent).GetOpponentType()) == 0)
+                if (Save.GetWins(((ComputerOpponent)opponent).GetNPCName()) == 0
+                    && Save.GetLosses(((ComputerOpponent)opponent).GetNPCName()) == 0)
                 {
-                    return GetIntroduction(((ComputerOpponent)opponent).GetOpponentType());
+                    return GetIntroduction(((ComputerOpponent)opponent).GetNPCName());
                 }
 
                 if (opponent is Sam)

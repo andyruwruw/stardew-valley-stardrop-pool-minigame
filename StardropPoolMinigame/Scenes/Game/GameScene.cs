@@ -3,6 +3,7 @@ using StardropPoolMinigame.Behaviors.Physics;
 using StardropPoolMinigame.Constants;
 using StardropPoolMinigame.Entities;
 using StardropPoolMinigame.Enums;
+using StardropPoolMinigame.Helpers;
 using StardropPoolMinigame.Players;
 using StardropPoolMinigame.Primitives;
 using StardropPoolMinigame.Render;
@@ -267,51 +268,12 @@ namespace StardropPoolMinigame.Scenes
         {
             if (this._turn.GetTurnState() == TurnState.BallsInMotion)
             {
-                bool finished = true;
+                Tuple<IGraph<EntityPhysics>, bool> tangibleInteractionResults = this._physics.TangibleInteractions(this.GetQuadTree(), this.GetTable());
 
-                QuadTree quadTree = new QuadTree(
-                    new Primitives.Rectangle(
-                        Vector2.Zero,
-                        RenderConstants.MinigameScreen.WIDTH,
-                        RenderConstants.MinigameScreen.HEIGHT));
-
-                IList<IEntity> balls = this._balls.Query();
-
-                IDictionary<IEntity, IList<IEntity>> collisionsHandled = new Dictionary<IEntity, IList<IEntity>>();
-
-                foreach (Ball ball in balls)
-                {
-                    if (finished && Operators.GetMagnitude(ball.GetVelocity()) != 0)
-                    {
-                        finished = false;
-                    }
-
-                    IList<IEntity> neighbors = this._balls.Query(new Circle(ball.GetAnchor(), GameConstants.Ball.RADIUS * 2));
-                    collisionsHandled.Add(ball, neighbors);
-
-                    TableSegment tableSegment = this._table.GetTableSegmentFromPosition(ball.GetAnchor());
-
-                    ball.Update(neighbors, tableSegment, collisionsHandled);
-
-                    if (ball.IsPocketed())
-                    {
-                        this.BallPocketed(ball, balls, tableSegment);
-                    }
-                    else
-                    {
-                        quadTree.Insert(ball);
-                    }
-                }
-
-                this._balls = quadTree;
-
-                if (finished && this._turn.GetCurrentPlayer().GetCue().GetTransitionState() == TransitionState.Dead)
+                this.SetQuadTree((QuadTree<EntityPhysics>)tangibleInteractionResults.Item1);
+                if (tangibleInteractionResults.Item2 && this._turn.GetCurrentPlayer().GetCue().GetTransitionState() == TransitionState.Dead)
                 {
                     this._turn.SetTurnState(TurnState.Results);
-                    foreach (GameEvent eventthing in this._events)
-                    {
-                        Logger.Info($"{eventthing}");
-                    }
                 }
             }
         }
@@ -408,6 +370,16 @@ namespace StardropPoolMinigame.Scenes
         public QuadTree<EntityPhysics> GetQuadTree()
         {
             return (QuadTree<EntityPhysics>)this._entities[StringConstants.Entities.Game.QUAD_TREE];
+        }
+
+        /// <summary>
+        /// Sets reference to <see cref="QuadTree{T}"/> of <see cref="Ball"/>.
+        /// </summary>
+        /// <param name="quadTree">Reference to <see cref="QuadTree{T}"/> of <see cref="Ball"/></returns>
+        public void SetQuadTree(QuadTree<EntityPhysics> quadTree)
+        {
+            this._entities.Remove(StringConstants.Entities.Game.QUAD_TREE);
+            this._entities.Add(StringConstants.Entities.Game.QUAD_TREE, quadTree);
         }
 
         /// <summary>

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using StardewValley;
 using StardropPoolMinigame.Enums;
+using StardropPoolMinigame.Helpers;
 using StardropPoolMinigame.Render;
 using StardropPoolMinigame.Render.Filters;
 using System;
@@ -42,7 +43,7 @@ namespace StardropPoolMinigame.Constants
                         30,
                         false,
                         TransitionState.Entering,
-                        (int)Math.Round(Helpers.Random.Fraction() * 10),
+                        (int)Math.Round(MiscellaneousHelper.Random() * 10),
                         new Vector2(0, Textures.Portrait.Sam.DEFAULT.Height / 2));
                 }
 
@@ -112,7 +113,7 @@ namespace StardropPoolMinigame.Constants
                         30,
                         true,
                         TransitionState.Exiting,
-                        (int)Math.Round(Helpers.Random.Fraction() * 10),
+                        (int)Math.Round(MiscellaneousHelper.Random() * 10),
                         new Vector2(0, Textures.Portrait.Sam.DEFAULT.Height / 2));
                 }
 
