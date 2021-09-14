@@ -7,7 +7,7 @@ using StardropPoolMinigame.Render.Filters;
 
 namespace StardropPoolMinigame.Entities
 {
-    class FloorTiles : EntityStatic
+    class FloorTiles : Entity
     {
         public FloorTiles(
             IFilter enteringTransition,

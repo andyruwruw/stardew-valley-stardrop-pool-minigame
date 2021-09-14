@@ -10,7 +10,7 @@ using System;
 
 namespace StardropPoolMinigame.Entities
 {
-    class Cue : EntityStatic
+    class Cue : Entity
     {
         private CueType _type;
 

@@ -3,6 +3,9 @@
     /// <inheritdoc cref="ISceneCreator"/>
     class CharacterSelectSceneCreator : ISceneCreator
     {
+        /// <summary>
+        /// Instantiates <see cref="CharacterSelectSceneCreator"/>.
+        /// </summary>
         public CharacterSelectSceneCreator()
         {
         }

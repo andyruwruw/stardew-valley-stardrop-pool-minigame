@@ -6,10 +6,14 @@
     class SummaryScene: Scene
     {
         /// <summary>
-        /// Previous <see cref="GameScene"/> being summarized
+        /// Previous <see cref="GameScene"/> being summarized.
         /// </summary>
         private IScene _gameScene;
 
+        /// <summary>
+        /// Instantiates <see cref="SummaryScene"/>.
+        /// </summary>
+        /// <param name="gameScene">Previous <see cref="GameScene"/> being summarized</param>
         public SummaryScene(GameScene gameScene) : base()
         {
             this._gameScene = gameScene;

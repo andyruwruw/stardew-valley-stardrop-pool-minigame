@@ -6,7 +6,7 @@ using StardropPoolMinigame.Render.Filters;
 
 namespace StardropPoolMinigame.Entities
 {
-    class Particle : EntityBoid
+    class Particle : EntityPhysics
     {
         public Particle(
             Origin origin,

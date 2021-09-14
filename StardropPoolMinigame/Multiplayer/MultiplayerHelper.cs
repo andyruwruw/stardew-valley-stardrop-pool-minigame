@@ -1,6 +1,7 @@
 ﻿using StardewModdingAPI;
 using StardewValley;
-using StardropPoolMinigame.Messages;
+using StardropPoolMinigame.Constants;
+using StardropPoolMinigame.Multiplayer.Messages;
 using System.Collections.Generic;
 
 namespace StardropPoolMinigame.Helpers
@@ -33,7 +34,7 @@ namespace StardropPoolMinigame.Helpers
                     {
                         foreach (IMultiplayerPeerMod mod in peer.Mods)
                         {
-                            if (mod.Name == "StardewPoolMinigame")
+                            if (mod.Name == StringConstants.General.MINIGAME_NAME)
                             {
                                 Multiplayer.PlayablePeers.Add(peer);
                                 added = true;

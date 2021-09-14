@@ -1,13 +1,21 @@
 ﻿using StardropPoolMinigame.Constants;
-using StardropPoolMinigame.Helpers;
+using StardropPoolMinigame.Utilities;
 
 namespace StardropPoolMinigame.Entities.UI.Popups
 {
     class OpponentTurnPopup : Popup
     {
-        public OpponentTurnPopup() : base(null, null, Translations.GetTranslation(StringConstants.Popups.OPPONENT_TURN))
+        public OpponentTurnPopup() : base(
+            null,
+            null,
+            Translations.GetTranslation(StringConstants.Popups.OPPONENT_TURN))
         {
+        }
 
+        /// <inheritdoc cref="Entity.GetId"/>
+        public override string GetId()
+        {
+            return $"popup-opponent-turn-{this._id}";
         }
     }
 }

@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 namespace StardropPoolMinigame.Entities
 {
-    class Table : EntityStatic
+    class Table : Entity
     {
         private TableType _type;
 
@@ -118,7 +118,7 @@ namespace StardropPoolMinigame.Entities
             return new Table(
                 Origin.CenterCenter,
                 new Vector2(RenderConstants.MinigameScreen.WIDTH / 2, RenderConstants.MinigameScreen.HEIGHT / 2),
-                LayerDepthConstants.Game.TABLE,
+                RenderConstants.Scenes.Game.LayerDepth.TABLE,
                 null,
                 null,
                 TableType.Classic);

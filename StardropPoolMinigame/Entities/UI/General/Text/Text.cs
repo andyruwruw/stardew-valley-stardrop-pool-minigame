@@ -8,7 +8,7 @@ using StardropPoolMinigame.Render.Filters;
 
 namespace StardropPoolMinigame.Entities
 {
-    class Text : EntityHoverable
+    class Text : Entity
     {
         private string _text;
 
@@ -108,7 +108,7 @@ namespace StardropPoolMinigame.Entities
             return this._isHoverable;
         }
 
-        protected override void HoveredCallback()
+        public override void HoverCallback()
         {
         }
 

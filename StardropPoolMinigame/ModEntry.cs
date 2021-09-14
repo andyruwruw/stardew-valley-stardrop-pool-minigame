@@ -1,17 +1,17 @@
 ﻿using StardewValley;
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
-using StardropPoolMinigame.Helpers;
 using StardropPoolMinigame.Render;
 using StardropPoolMinigame.Detect.Hover;
 using StardropPoolMinigame.Data;
+using StardropPoolMinigame.Utilities;
 
 namespace StardropPoolMinigame
 {
     public class ModEntry : Mod
     {
         /// <summary>
-        /// Provides <see cref="IModHelper"/> to other classes and sets events
+        /// Provides <see cref="IModHelper"/> to other classes and sets events.
         /// </summary>
         public override void Entry(IModHelper helper)
         {
@@ -28,7 +28,7 @@ namespace StardropPoolMinigame
         }
 
         /// <summary>
-        /// Loads mod save data
+        /// Loads mod save data.
         /// </summary>
         private void OnSaveLoaded(object sender, SaveLoadedEventArgs e)
         {
@@ -37,7 +37,7 @@ namespace StardropPoolMinigame
         }
 
         /// <summary>
-        /// Saves mod data
+        /// Saves mod data.
         /// </summary>
         private void OnSaving(object sender, SavingEventArgs e)
         {
@@ -45,7 +45,7 @@ namespace StardropPoolMinigame
         }
 
         /// <summary>
-        /// Detects if pool table is right clicked
+        /// Detects if pool table is right clicked.
         /// </summary>
         private void OnButtonPressed(object sender, ButtonPressedEventArgs e)
         {
@@ -63,7 +63,7 @@ namespace StardropPoolMinigame
         }
 
         /// <summary>
-        /// Begins the mini-game
+        /// Begins the <see cref="StardropPoolMinigame"/>.
         /// </summary>
         private void StartGame()
         {

@@ -16,13 +16,13 @@ namespace StardropPoolMinigame.Rules
 
         }
 
-        public override Tuple<IList<Ball>, QuadTree> GenerateInitialBalls(
+        public override Tuple<IList<Ball>, QuadTree<EntityPhysics>> GenerateInitialBalls(
             Vector2 tableTopLeft,
             Vector2 cueBallStart,
             Vector2 footSpot,
             Direction rackOrientation)
         {
-            QuadTree quadTree = new QuadTree(
+            QuadTree<EntityPhysics> quadTree = new QuadTree<EntityPhysics>(
                 new Primitives.Rectangle(
                     new Vector2(0, 0),
                     RenderConstants.MinigameScreen.WIDTH,
@@ -30,11 +30,11 @@ namespace StardropPoolMinigame.Rules
 
             Ball cueBall = new Ball(
                 Vector2.Add(tableTopLeft, cueBallStart),
-                LayerDepthConstants.Game.BALL,
+                RenderConstants.Scenes.Game.LayerDepth.BALL,
                 null,
                 null,
                 0);
-            quadTree.Insert(cueBall);
+            quadTree.Insert(cueBall.GetAnchor(), cueBall);
 
             int ballsInRow = 1;
             int ballsFinishedInRow = 0;
@@ -66,21 +66,29 @@ namespace StardropPoolMinigame.Rules
 
                 if (rackOrientation == Direction.West || rackOrientation == Direction.East)
                 {
-                    quadTree.Insert(new Ball(
-                        Vector2.Add(startingPosition, new Vector2(rowOffset, colOffset)),
-                        LayerDepthConstants.Game.BALL,
-                        null,
-                        null,
-                        adjustedBallNumber));
+                    Vector2 anchor = Vector2.Add(startingPosition, new Vector2(rowOffset, colOffset));
+
+                    quadTree.Insert(
+                        anchor,
+                        new Ball(
+                            anchor,
+                            RenderConstants.Scenes.Game.LayerDepth.BALL,
+                            null,
+                            null,
+                            adjustedBallNumber));
                 }
                 else
                 {
-                    quadTree.Insert(new Ball(
-                        Vector2.Add(startingPosition, new Vector2(colOffset, rowOffset)),
-                        LayerDepthConstants.Game.BALL,
-                        null,
-                        null,
-                        adjustedBallNumber));
+                    Vector2 anchor = Vector2.Add(startingPosition, new Vector2(colOffset, rowOffset));
+
+                    quadTree.Insert(
+                        anchor,
+                        new Ball(
+                            anchor,
+                            RenderConstants.Scenes.Game.LayerDepth.BALL,
+                            null,
+                            null,
+                            adjustedBallNumber));
                 }
 
                 ballsFinishedInRow += 1;
@@ -93,7 +101,7 @@ namespace StardropPoolMinigame.Rules
                 }
             }
 
-            return new Tuple<IList<Ball>, QuadTree>(new List<Ball> { cueBall }, quadTree);
+            return new Tuple<IList<Ball>, QuadTree<EntityPhysics>>(new List<Ball> { cueBall }, quadTree);
         }
 
         public override IList<GameEvent> NoBallHit(IList<Ball> remaining)

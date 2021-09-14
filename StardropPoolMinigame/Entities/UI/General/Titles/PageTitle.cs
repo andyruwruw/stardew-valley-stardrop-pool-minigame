@@ -5,7 +5,7 @@ using StardropPoolMinigame.Render.Filters;
 
 namespace StardropPoolMinigame.Entities
 {
-    class PageTitle : EntityStatic
+    class PageTitle : Entity
     {
         Text _text;
 

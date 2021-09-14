@@ -2,6 +2,9 @@
 {
     class MultiplayerScene : Scene
     {
+        /// <summary>
+        /// Instantiates <see cref="MultiplayerScene"/>.
+        /// </summary>
         public MultiplayerScene() : base()
         {
         }

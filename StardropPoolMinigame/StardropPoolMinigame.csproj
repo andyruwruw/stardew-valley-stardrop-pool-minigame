@@ -51,6 +51,7 @@
     <Compile Include="Behaviors\Orientation.cs" />
     <Compile Include="Behaviors\PhysicsObject.cs" />
     <Compile Include="Entities\EntityPhysics.cs" />
+    <Compile Include="Multiplayer\Messages\IModMessage.cs" />
     <Compile Include="Physics\FlockingNewtonianPhysics.cs" />
     <Compile Include="Physics\Physics.cs" />
     <Compile Include="Utilities\Config.cs" />
@@ -63,7 +64,6 @@
     <Compile Include="Scenes\CharacterSelect\CharacterSelectSceneCreator.cs" />
     <Compile Include="Scenes\Dialog\DialogSceneCreator.cs" />
     <Compile Include="Scenes\Gallery\GallerySceneCreator.cs" />
-    <Compile Include="Scenes\Game\States\Game.cs" />
     <Compile Include="Scenes\Game\States\GameResults.cs" />
     <Compile Include="Scenes\MainMenu\MainMenuSceneCreator.cs" />
     <Compile Include="Scenes\Multiplayer\MultiplayerSceneCreator.cs" />
@@ -77,7 +77,6 @@
     <Compile Include="Constants\TableConstants.cs" />
     <Compile Include="Constants\TransitionConstants.cs" />
     <Compile Include="Entities\Entity.cs" />
-    <Compile Include="Entities\EntityBoid.cs" />
     <Compile Include="Entities\Game\Tables\Segments\EastEdge.cs" />
     <Compile Include="Entities\Game\Tables\Segments\EastPocket.cs" />
     <Compile Include="Entities\Game\Tables\Segments\Felt.cs" />

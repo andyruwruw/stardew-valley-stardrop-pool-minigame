@@ -6,7 +6,7 @@ using StardropPoolMinigame.Render.Filters;
 
 namespace StardropPoolMinigame.Entities
 {
-    class Character : EntityHoverable
+    class Character : Entity
     {
         private char _character;
 

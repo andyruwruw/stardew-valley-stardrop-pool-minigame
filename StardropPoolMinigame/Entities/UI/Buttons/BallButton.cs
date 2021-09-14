@@ -4,10 +4,11 @@ using StardropPoolMinigame.Enums;
 using StardropPoolMinigame.Helpers;
 using StardropPoolMinigame.Render.Drawers;
 using StardropPoolMinigame.Render.Filters;
+using StardropPoolMinigame.Utilities;
 
 namespace StardropPoolMinigame.Entities
 {
-    class BallButton : EntityHoverable
+    class BallButton : Entity
     {
         private Ball _ball;
 
@@ -92,7 +93,7 @@ namespace StardropPoolMinigame.Entities
             Sound.PlaySound(SoundConstants.Feedback.BOTTON_PRESS);
         }
 
-        protected override void HoveredCallback()
+        public override void HoverCallback()
         {
             Sound.PlaySound(SoundConstants.Feedback.BUTTON_HOVER);
         }

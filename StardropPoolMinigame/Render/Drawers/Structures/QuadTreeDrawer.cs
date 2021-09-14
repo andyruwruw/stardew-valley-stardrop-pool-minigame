@@ -8,9 +8,9 @@ using System.Collections.Generic;
 
 namespace StardropPoolMinigame.Render.Drawers
 {
-    class QuadTreeDrawer : Drawer
+    class QuadTreeDrawer<T> : Drawer
     {
-        public QuadTreeDrawer(QuadTree tree) : base(tree)
+        public QuadTreeDrawer(QuadTree<T> tree) : base(tree)
         {
         }
 
@@ -33,12 +33,12 @@ namespace StardropPoolMinigame.Render.Drawers
 
         protected override void DrawDebugVisuals(SpriteBatch batch)
         {
-            IList<QuadTree> unvisited = new List<QuadTree>();
-            unvisited.Add(((QuadTree)this._entity));
+            IList<QuadTree<T>> unvisited = new List<QuadTree<T>>();
+            unvisited.Add(((QuadTree<T>)this._entity));
 
             while (unvisited.Count > 0)
             {
-                QuadTree current = unvisited[0];
+                QuadTree<T> current = unvisited[0];
 
                 if (current.IsSubdivided())
                 {

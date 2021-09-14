@@ -1,16 +1,16 @@
 ﻿using Microsoft.Xna.Framework;
 using StardropPoolMinigame.Constants;
 using StardropPoolMinigame.Enums;
-using StardropPoolMinigame.Helpers;
 using StardropPoolMinigame.Render;
 using StardropPoolMinigame.Render.Drawers;
 using StardropPoolMinigame.Render.Filters;
+using StardropPoolMinigame.Utilities;
 
 namespace StardropPoolMinigame.Entities
 {
-    class Portrait : EntityHoverable
+    class Portrait : Entity
     {
-        private OpponentType _name;
+        private NPCName _name;
 
         private PortraitEmotion _emotion;
 
@@ -34,7 +34,7 @@ namespace StardropPoolMinigame.Entities
             float layerDepth,
             IFilter enteringTransition,
             IFilter exitingTransition,
-            OpponentType name,
+            NPCName name,
             PortraitEmotion emotion = PortraitEmotion.Default,
             bool isHoverable = false,
             bool isSilhouette = false,
@@ -90,7 +90,7 @@ namespace StardropPoolMinigame.Entities
             Sound.PlaySound(SoundConstants.Feedback.BOTTON_PRESS);
         }
 
-        protected override void HoveredCallback()
+        public override void HoverCallback()
         {
             if (this._isHoverable)
             {
@@ -108,7 +108,7 @@ namespace StardropPoolMinigame.Entities
             return Textures.Portrait.Sam.DEFAULT.Height;
         }
 
-        public OpponentType GetName()
+        public NPCName GetName()
         {
             return this._name;
         }

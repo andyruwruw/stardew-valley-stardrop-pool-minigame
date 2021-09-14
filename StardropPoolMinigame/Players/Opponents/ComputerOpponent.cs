@@ -4,7 +4,7 @@ namespace StardropPoolMinigame.Players
 {
     class ComputerOpponent : Player
     {
-        protected OpponentType _type;
+        protected NPCName _type;
 
         protected int _confidence;
 
@@ -16,7 +16,7 @@ namespace StardropPoolMinigame.Players
 
         public ComputerOpponent(
             string name,
-            OpponentType type,
+            NPCName type,
             long playerId,
             string music,
             int confidence,
@@ -57,20 +57,20 @@ namespace StardropPoolMinigame.Players
             return this._powerAccuracy;
         }
 
-        public OpponentType GetOpponentType()
+        public NPCName GetNPCName()
         {
             return this._type;
         }
 
-        public static ComputerOpponent GetComputerOpponentFromName(OpponentType name)
+        public static ComputerOpponent GetComputerOpponentFromName(NPCName name)
         {
             switch (name)
             {
-                case OpponentType.Sebastian:
+                case NPCName.Sebastian:
                     return new Sebastian();
-                case OpponentType.Abigail:
+                case NPCName.Abigail:
                     return new Abigail();
-                case OpponentType.Gus:
+                case NPCName.Gus:
                     return new Gus();
                 default:
                     return new Sam();

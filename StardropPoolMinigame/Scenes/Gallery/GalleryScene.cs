@@ -2,6 +2,9 @@
 {
     class GalleryScene : Scene
     {
+        /// <summary>
+        /// Instantiates <see cref="GalleryScene"/>.
+        /// </summary>
         public GalleryScene() : base()
         {
         }

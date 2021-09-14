@@ -1,13 +1,22 @@
 ﻿using StardropPoolMinigame.Constants;
-using StardropPoolMinigame.Helpers;
+using StardropPoolMinigame.Utilities;
 
 namespace StardropPoolMinigame.Entities.UI.Popups
 {
     class UnlockedCharacterPopup : Popup
     {
-        public UnlockedCharacterPopup() : base(null, null, Translations.GetTranslation(StringConstants.Popups.VICTORY))
+        public UnlockedCharacterPopup() : base(
+            null,
+            null,
+            Translations.GetTranslation(StringConstants.Popups.VICTORY))
         {
 
+        }
+
+        /// <inheritdoc cref="Entity.GetId"/>
+        public override string GetId()
+        {
+            return $"popup-unlocked-character-{this._id}";
         }
     }
 }

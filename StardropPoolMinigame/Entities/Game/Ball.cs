@@ -6,19 +6,20 @@ using StardropPoolMinigame.Enums;
 using StardropPoolMinigame.Render.Drawers;
 using StardropPoolMinigame.Render.Filters;
 using System.Collections.Generic;
-using StardropPoolMinigame.Behaviors.Physics;
 
 namespace StardropPoolMinigame.Entities
 {
-    class Ball : EntityHoverable
+    /// <summary>
+    /// <see cref="Ball"/> in pool game.
+    /// </summary>
+    class Ball : EntityPhysics
     {
+        /// <summary>
+        /// <see cref="Ball"/> number
+        /// </summary>
         private int _number;
 
         private float radius;
-
-        private Vector2 _velocity;
-
-        private Vector2 _acceleration;
 
         private Orientation _orientation;
 
@@ -88,6 +89,13 @@ namespace StardropPoolMinigame.Entities
             this.SetDrawer(new BallDrawer(this));
         }
 
+        /// <inheritdoc cref="EntityPhysics.GetId"/>
+        public override string GetId()
+        {
+            return $"ball-{this._id}";
+        }
+
+        /// <inheritdoc cref="EntityPhysics.Update"/>
         public override void Update()
         {
             this.UpdateVectors();
@@ -101,58 +109,25 @@ namespace StardropPoolMinigame.Entities
             base.Update();
         }
 
+        /// <inheritdoc cref="EntityPhysics.GetTotalWidth"/>
         public override float GetTotalWidth()
         {
             return GameConstants.Ball.RADIUS * 2;
         }
 
+        /// <inheritdoc cref="EntityPhysics.GetTotalHeight"/>
         public override float GetTotalHeight()
         {
             return GameConstants.Ball.RADIUS * 2;
         }
 
-        public override string GetId()
-        {
-            return $"ball-{this._id}";
-        }
-
-        public void SetVelocity(Vector2 velocity)
-        {
-            this._velocity = velocity;
-        }
-
-        public void SetAcceleration(Vector2 velocity)
-        {
-            this._velocity = velocity;
-        }
-
-        public void SetPosition(Vector2 position)
-        {
-            this._anchor = position;
-            this._range.SetCenter(position);
-        }
-
-        public Vector2 GetPosition()
-        {
-            return this._anchor;
-        }
-
-        public Vector2 GetVelocity()
-        {
-            return this._velocity;
-        }
-
-        public Vector2 GetAcceleration()
-        {
-            return this._acceleration;
-        }
-
+        
         public Orientation GetOrientation()
         {
             return this._orientation;
         }
 
-        public float GetMass()
+        public override float GetMass()
         {
             return GameConstants.Ball.MASS * this._massMultiplier;
         }

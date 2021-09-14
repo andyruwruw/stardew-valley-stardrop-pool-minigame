@@ -273,5 +273,14 @@ namespace StardropPoolMinigame.Behaviors.Physics
 
             return steering;
         }
+
+        /// <summary>
+        /// Instantiates default <see cref="IPhysics"/>.
+        /// </summary>
+        /// <returns>Default <see cref="IPhysics"/></returns>
+        public static IPhysics GetDefaultPhysics()
+        {
+            return new NewtonianPhysics();
+        }
     }
 }

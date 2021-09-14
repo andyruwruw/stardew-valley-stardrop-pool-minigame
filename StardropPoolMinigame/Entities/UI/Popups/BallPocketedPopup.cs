@@ -1,13 +1,22 @@
 ﻿using StardropPoolMinigame.Constants;
-using StardropPoolMinigame.Helpers;
+using StardropPoolMinigame.Utilities;
 
 namespace StardropPoolMinigame.Entities
 {
     class BallPocketedPopup : Popup
     {
-        public BallPocketedPopup() : base(null, null, Translations.GetTranslation(StringConstants.Popups.COMBO))
+        public BallPocketedPopup() : base(
+            null,
+            null,
+            Translations.GetTranslation(StringConstants.Popups.COMBO))
         {
 
+        }
+
+        /// <inheritdoc cref="Entity.GetId"/>
+        public override string GetId()
+        {
+            return $"popup-ball-pocketed-{this._id}";
         }
     }
 }

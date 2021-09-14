@@ -6,7 +6,7 @@ using StardropPoolMinigame.Render.Filters;
 
 namespace StardropPoolMinigame.Entities
 {
-    class GameTitle : EntityStatic
+    class GameTitle : Entity
     {
         public GameTitle(
             Origin origin,

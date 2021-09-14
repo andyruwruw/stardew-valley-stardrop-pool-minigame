@@ -10,7 +10,7 @@ namespace StardropPoolMinigame.Rules
 {
     abstract class RuleSet : IRules
     {
-        public abstract Tuple<IList<Ball>, QuadTree> GenerateInitialBalls(Vector2 tableTopLeft, Vector2 cueBallStart, Vector2 footSpot, Direction rackOrientation);
+        public abstract Tuple<IList<Ball>, QuadTree<EntityPhysics>> GenerateInitialBalls(Vector2 tableTopLeft, Vector2 cueBallStart, Vector2 footSpot, Direction rackOrientation);
 
         public abstract IList<GameEvent> NoBallHit(IList<Ball> remaining);
 

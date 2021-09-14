@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 namespace StardropPoolMinigame.Entities
 {
-    abstract class TableSegment : EntityStatic
+    abstract class TableSegment : Entity
     {
         protected IList<Line> _bounceableSurfaces;
 

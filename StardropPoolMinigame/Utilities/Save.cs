@@ -1,27 +1,47 @@
 ﻿using StardewModdingAPI;
 using StardropPoolMinigame.Constants;
 using StardropPoolMinigame.Data.Save;
+using StardropPoolMinigame.Enums;
 using System.Collections.Generic;
 
 namespace StardropPoolMinigame.Utilities
 {
+    /// <summary>
+    /// Retrieves values generated from the mod save data.
+    /// </summary>
     class Save
     {
+        /// <summary>
+        /// Static reference to <see cref="IDataHelper"/>
+        /// </summary>
         private static IDataHelper Data;
 
+        /// <summary>
+        /// Static object generated from save data.
+        /// </summary>
         private static SaveJson SaveData;
 
+        /// <summary>
+        /// Sets static object generated from save data.
+        /// </summary>
+        /// <param name="config">Reference to <see cref="IDataHelper"/></param>
         public static void SetData(IDataHelper data)
         {
             Data = data;
             ReadSaveData();
         }
 
+        /// <summary>
+        /// Reads save data from <see cref="SaveJson"/>.
+        /// </summary>
         public static void WriteSaveData()
         {
             Data.WriteSaveData<SaveJson>("stardrop-pool-minigame", SaveData);
         }
 
+        /// <summary>
+        /// Reads save data and generates <see cref="SaveJson"/>.
+        /// </summary>
         public static void ReadSaveData()
         {
             if (SaveData == null)
@@ -35,12 +55,15 @@ namespace StardropPoolMinigame.Utilities
 
                 if (DevConstants.OVERRIDE_CHARACTER_UNLOCKS)
                 {
-                    UnlockAbigail();
-                    UnlockGus();
+                    SaveData.WinsAgainstSebastian = 1;
+                    SaveData.WinsAgainstAbigail = 1;
                 }
             }
         }
 
+        /// <summary>
+        /// Deletes save data.
+        /// </summary>
         public static void ResetData()
         {
             Data.WriteSaveData<SaveJson>("stardrop-pool-minigame", null);
@@ -66,15 +89,15 @@ namespace StardropPoolMinigame.Utilities
             return SaveData.ArcadeTokens >= tokens;
         }
 
-        public static int GetHighscore(OpponentType name)
+        public static int GetHighscore(NPCName name)
         {
             switch (name)
             {
-                case OpponentType.Sebastian:
+                case NPCName.Sebastian:
                     return GetHighscoreAgainstSebastian();
-                case OpponentType.Abigail:
+                case NPCName.Abigail:
                     return GetHighscoreAgainstAbigail();
-                case OpponentType.Gus:
+                case NPCName.Gus:
                     return GetHighscoreAgainstGus();
                 default:
                     return GetHighscoreAgainstSam();
@@ -101,17 +124,17 @@ namespace StardropPoolMinigame.Utilities
             return SaveData.HighscoreAgainstGus;
         }
 
-        public static void SetHighscore(OpponentType name, int score)
+        public static void SetHighscore(NPCName name, int score)
         {
             switch (name)
             {
-                case OpponentType.Sebastian:
+                case NPCName.Sebastian:
                     SetHighscoreAgainstSebastian(score);
                     break;
-                case OpponentType.Abigail:
+                case NPCName.Abigail:
                     SetHighscoreAgainstAbigail(score);
                     break;
-                case OpponentType.Gus:
+                case NPCName.Gus:
                     SetHighscoreAgainstGus(score);
                     break;
                 default:
@@ -140,15 +163,15 @@ namespace StardropPoolMinigame.Utilities
             SaveData.HighscoreAgainstGus = score;
         }
 
-        public static bool BeatsHighscore(OpponentType name, int score)
+        public static bool BeatsHighscore(NPCName name, int score)
         {
             switch (name)
             {
-                case OpponentType.Sebastian:
+                case NPCName.Sebastian:
                     return BeatsHighscoreAgainstSebastian(score);
-                case OpponentType.Abigail:
+                case NPCName.Abigail:
                     return BeatsHighscoreAgainstAbigail(score);
-                case OpponentType.Gus:
+                case NPCName.Gus:
                     return BeatsHighscoreAgainstGus(score);
                 default:
                     return BeatsHighscoreAgainstSam(score);
@@ -175,15 +198,15 @@ namespace StardropPoolMinigame.Utilities
             return SaveData.HighscoreAgainstGus > score;
         }
 
-        public static bool HasDefeated(OpponentType name)
+        public static bool HasDefeated(NPCName name)
         {
             switch (name)
             {
-                case OpponentType.Sebastian:
+                case NPCName.Sebastian:
                     return HasDefeatedSebastian();
-                case OpponentType.Abigail:
+                case NPCName.Abigail:
                     return HasDefeatedAbigail();
-                case OpponentType.Gus:
+                case NPCName.Gus:
                     return HasDefeatedGus();
                 default:
                     return HasDefeatedSam();
@@ -210,15 +233,15 @@ namespace StardropPoolMinigame.Utilities
             return SaveData.WinsAgainstGus > 0;
         }
 
-        public static int GetWins(OpponentType name)
+        public static int GetWins(NPCName name)
         {
             switch (name)
             {
-                case OpponentType.Sebastian:
+                case NPCName.Sebastian:
                     return GetWinsAgainstSebastian();
-                case OpponentType.Abigail:
+                case NPCName.Abigail:
                     return GetWinsAgainstAbigail();
-                case OpponentType.Gus:
+                case NPCName.Gus:
                     return GetWinsAgainstGus();
                 default:
                     return GetWinsAgainstSam();
@@ -245,17 +268,17 @@ namespace StardropPoolMinigame.Utilities
             return SaveData.WinsAgainstGus;
         }
 
-        public static void AddWin(OpponentType name)
+        public static void AddWin(NPCName name)
         {
             switch (name)
             {
-                case OpponentType.Sebastian:
+                case NPCName.Sebastian:
                     AddWinAgainstSebastian();
                     break;
-                case OpponentType.Abigail:
+                case NPCName.Abigail:
                     AddWinAgainstAbigail();
                     break;
-                case OpponentType.Gus:
+                case NPCName.Gus:
                     AddWinAgainstGus();
                     break;
                 default:
@@ -284,15 +307,15 @@ namespace StardropPoolMinigame.Utilities
             SaveData.WinsAgainstGus += 1;
         }
 
-        public static int GetLosses(OpponentType name)
+        public static int GetLosses(NPCName name)
         {
             switch (name)
             {
-                case OpponentType.Sebastian:
+                case NPCName.Sebastian:
                     return GetLossesAgainstSebastian();
-                case OpponentType.Abigail:
+                case NPCName.Abigail:
                     return GetLossesAgainstAbigail();
-                case OpponentType.Gus:
+                case NPCName.Gus:
                     return GetLossesAgainstGus();
                 default:
                     return GetLossesAgainstSam();
@@ -319,17 +342,17 @@ namespace StardropPoolMinigame.Utilities
             return SaveData.LossesAgainstGus;
         }
 
-        public static void AddLoss(OpponentType name)
+        public static void AddLoss(NPCName name)
         {
             switch (name)
             {
-                case OpponentType.Sebastian:
+                case NPCName.Sebastian:
                     AddLossAgainstSebastian();
                     break;
-                case OpponentType.Abigail:
+                case NPCName.Abigail:
                     AddLossAgainstAbigail();
                     break;
-                case OpponentType.Gus:
+                case NPCName.Gus:
                     AddLossAgainstGus();
                     break;
                 default:
@@ -358,13 +381,13 @@ namespace StardropPoolMinigame.Utilities
             SaveData.WinsAgainstGus += 1;
         }
 
-        public static bool IsUnlocked(OpponentType name)
+        public static bool IsUnlocked(NPCName name)
         {
             switch (name)
             {
-                case OpponentType.Abigail:
+                case NPCName.Abigail:
                     return IsAbigailUnlocked();
-                case OpponentType.Gus:
+                case NPCName.Gus:
                     return IsGusUnlocked();
                 default:
                     return true;
@@ -373,12 +396,12 @@ namespace StardropPoolMinigame.Utilities
 
         public static bool IsAbigailUnlocked()
         {
-            return SaveData.UnlockedAbigail;
+            return SaveData.WinsAgainstSebastian > 0;
         }
 
         public static bool IsGusUnlocked()
         {
-            return SaveData.UnlockedGus;
+            return SaveData.WinsAgainstAbigail > 0;
         }
 
         public static string GetCurrentCue()
@@ -414,16 +437,6 @@ namespace StardropPoolMinigame.Utilities
                 && HasDefeatedSebastian()
                 && HasDefeatedAbigail()
                 && HasDefeatedGus();
-        }
-
-        public static void UnlockAbigail()
-        {
-            SaveData.UnlockedAbigail = true;
-        }
-
-        public static void UnlockGus()
-        {
-            SaveData.UnlockedGus = true;
         }
     }
 }

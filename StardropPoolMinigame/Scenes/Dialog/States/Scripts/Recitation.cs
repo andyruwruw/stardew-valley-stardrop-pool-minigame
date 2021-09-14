@@ -1,11 +1,12 @@
-﻿using StardropPoolMinigame.Entities;
-using StardropPoolMinigame.Enums;
+﻿using StardropPoolMinigame.Enums;
 using System.Collections.Generic;
 
 namespace StardropPoolMinigame.Scenes.Dialog.Scripts
 {
-    class Recitation
+    class Recitation : IRecitation
     {
+        private NPCName _name;
+
         private PortraitEmotion _emotion;
 
         private string _text;
@@ -21,6 +22,7 @@ namespace StardropPoolMinigame.Scenes.Dialog.Scripts
         private int _delay;
 
         public Recitation(
+            NPCName name,
             PortraitEmotion emotion,
             string text = "",
             IList<string> sounds = null,
@@ -29,6 +31,7 @@ namespace StardropPoolMinigame.Scenes.Dialog.Scripts
             bool isDarker = false,
             int delay = -1)
         {
+            this._name = name;
             this._emotion = emotion;
             this._text = text;
             this._sounds = sounds;
@@ -36,6 +39,11 @@ namespace StardropPoolMinigame.Scenes.Dialog.Scripts
             this._hasFire = hasFire;
             this._isDarker = isDarker;
             this._delay = delay;
+        }
+
+        public NPCName GetName()
+        {
+            return this._name;
         }
 
         public PortraitEmotion GetEmotion()

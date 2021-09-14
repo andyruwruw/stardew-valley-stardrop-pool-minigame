@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace StardropPoolMinigame.Entities
 {
-    class PocketedBalls : EntityStatic
+    class PocketedBalls : Entity
     {
         private IList<Ball> _balls;
 

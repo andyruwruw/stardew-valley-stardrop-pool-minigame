@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace StardropPoolMinigame.Entities
 {
-    abstract class Popup : EntityStatic
+    abstract class Popup : Entity
     {
         private IList<IEntity> _entities;
 
@@ -21,7 +21,7 @@ namespace StardropPoolMinigame.Entities
         ) : base(
             Origin.CenterCenter,
             new Vector2(RenderConstants.MinigameScreen.WIDTH / 2, RenderConstants.MinigameScreen.HEIGHT / 2),
-            LayerDepthConstants.POPUP,
+            RenderConstants.Scenes.General.LayerDepth.POPUP,
             enteringTransition,
             exitingTransition)
         {

@@ -4,14 +4,15 @@ using StardropPoolMinigame.Enums;
 using StardropPoolMinigame.Helpers;
 using StardropPoolMinigame.Render.Drawers;
 using StardropPoolMinigame.Structures;
+using StardropPoolMinigame.Utilities;
 using System;
 using System.Collections.Generic;
 
 namespace StardropPoolMinigame.Entities
 {
-    abstract class ParticleEmitter : EntityStatic
+    abstract class ParticleEmitter : Entity
     {
-        protected QuadTree _quadTree;
+        protected QuadTree<Particle> _quadTree;
 
         protected float _radius;
 
@@ -36,7 +37,7 @@ namespace StardropPoolMinigame.Entities
             null,
             null)
         {
-            this._quadTree = new QuadTree(
+            this._quadTree = new QuadTree<Particle>(
                 new Primitives.Rectangle(
                     new Vector2(0, 0),
                     RenderConstants.MinigameScreen.WIDTH,
@@ -60,9 +61,9 @@ namespace StardropPoolMinigame.Entities
         {
             base.Update();
 
-            IList<IEntity> particles = this._quadTree.Query();
+            IList<Particle> particles = this._quadTree.Query();
 
-            QuadTree quadTree = new QuadTree(
+            QuadTree<Particle> quadTree = new QuadTree<Particle>(
                 new Primitives.Rectangle(
                     new Vector2(0, 0),
                     RenderConstants.MinigameScreen.WIDTH,
@@ -95,7 +96,7 @@ namespace StardropPoolMinigame.Entities
         {
             Particle particle = this.CreateParticle();
 
-            this._quadTree.Insert(particle);
+            this._quadTree.Insert(particle.GetAnchor(), particle);
         }
 
         public abstract Particle CreateParticle();
@@ -130,7 +131,7 @@ namespace StardropPoolMinigame.Entities
             this._radius = radius;
         }
 
-        public IList<IEntity> GetEntities()
+        public IList<Particle> GetEntities()
         {
             return this._quadTree.Query();
         }
@@ -147,12 +148,12 @@ namespace StardropPoolMinigame.Entities
 
         protected Vector2 GetPositionInCreationWindow()
         {
-            return Vector2.Add(this._anchor, new Vector2(Helpers.Random.Fraction() * this._radius, Helpers.Random.Fraction() * this._radius));
+            return Vector2.Add(this._anchor, new Vector2(MiscellaneousHelper.Random() * this._radius, MiscellaneousHelper.Random() * this._radius));
         }
 
         public void SetDirection(Vector2 direction)
         {
-            this._direction = Operators.RadiansToVector(Operators.VectorToRadians(direction) + (float)(Math.PI / 3));
+            this._direction = VectorHelper.RadiansToVector(VectorHelper.VectorToRadians(direction) + (float)(Math.PI / 3));
         }
 
         protected virtual Vector2 GetMaximumInitialVelocity()

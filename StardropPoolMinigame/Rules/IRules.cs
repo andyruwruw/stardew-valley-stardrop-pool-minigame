@@ -21,7 +21,7 @@ namespace StardropPoolMinigame.Rules
         /// <param name="footSpot"></param>
         /// <param name="rackOrientation"></param>
         /// <returns></returns>
-        Tuple<IList<Ball>, QuadTree> GenerateInitialBalls(
+        Tuple<IList<Ball>, QuadTree<EntityPhysics>> GenerateInitialBalls(
             Vector2 tableTopLeft,
             Vector2 cueBallStart,
             Vector2 footSpot,

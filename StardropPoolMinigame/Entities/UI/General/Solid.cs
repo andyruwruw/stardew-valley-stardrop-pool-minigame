@@ -5,7 +5,7 @@ using StardropPoolMinigame.Render.Filters;
 
 namespace StardropPoolMinigame.Entities
 {
-    class Solid : EntityStatic
+    class Solid : Entity
     {
         private Primitives.Rectangle _destination;
 

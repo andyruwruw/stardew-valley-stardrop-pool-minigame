@@ -4,12 +4,14 @@ using Microsoft.Xna.Framework.Input;
 using StardewValley;
 using StardewValley.Minigames;
 using StardropPoolMinigame.Enums;
-using StardropPoolMinigame.Helpers;
 using StardropPoolMinigame.Render;
 using StardropPoolMinigame.Scenes;
 
 namespace StardropPoolMinigame
 {
+    /// <summary>
+    /// Stardrop Pool <see cref="IMinigame"/> class.
+    /// </summary>
     class StardropPoolMinigame : IMinigame
     {
         /// <summary>

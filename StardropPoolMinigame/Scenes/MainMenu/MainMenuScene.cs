@@ -2,24 +2,24 @@
 using StardropPoolMinigame.Constants;
 using StardropPoolMinigame.Entities;
 using StardropPoolMinigame.Enums;
-using StardropPoolMinigame.Helpers;
 using StardropPoolMinigame.Render;
+using StardropPoolMinigame.Utilities;
 
 namespace StardropPoolMinigame.Scenes
 {
     class MainMenuScene : Scene
     {
-        private BallButton _playButton;
-
-        private BallButton _multiplayerButton;
-
-        private BallButton _galleryButton;
-
-        private BallButton _settingsButton;
-
+        /// <summary>
+        /// Instantiates <see cref="MainMenuScene"/>.
+        /// </summary>
         public MainMenuScene() : base()
         {
             Sound.PlayMusic(SoundConstants.Theme.GAME);
+        }
+
+        public override string GetKey()
+        {
+            return "main-menu-scene";
         }
 
         public override void Update()
@@ -29,22 +29,26 @@ namespace StardropPoolMinigame.Scenes
 
         public override void ReceiveLeftClick()
         {
-            if (this._playButton.IsHovered())
+            foreach (string key in StringConstants.Entities.MainMenu.BUTTONS)
             {
-                this._playButton.ClickCallback();
-                this._newScene = new CharacterSelectScene();
-            } else if (this._multiplayerButton.IsHovered())
-            {
-                this._multiplayerButton.ClickCallback();
-                this._newScene = new MultiplayerScene();
-            } else if (this._galleryButton.IsHovered())
-            {
-                this._galleryButton.ClickCallback();
-                this._newScene = new GalleryScene();
-            } else if (this._settingsButton.IsHovered())
-            {
-                this._settingsButton.ClickCallback();
-                this._newScene = new SettingsScene();
+                if (this._entities[key].IsHovered())
+                {
+                    this._entities[key].ClickCallback();
+
+                    if (key == StringConstants.Entities.MainMenu.MULTIPLAYER_BUTTON)
+                    {
+                        this._newScene = new MultiplayerScene();
+                    } else if (key == StringConstants.Entities.MainMenu.GALLERY_BUTTON)
+                    {
+                        this._newScene = new GalleryScene();
+                    } else if (key == StringConstants.Entities.MainMenu.SETTINGS_BUTTON)
+                    {
+                        this._newScene = new SettingsScene();
+                    } else
+                    {
+                        this._newScene = new CharacterSelectScene();
+                    }
+                }
             }
         }
 
@@ -52,60 +56,65 @@ namespace StardropPoolMinigame.Scenes
         {
         }
 
-        public override string GetKey()
-        {
-            return "menu-scene";
-        }
-
         protected override void AddEntities()
         {
             // Background
-            this._entities.Add(new BarShelves(
-                Origin.TopLeft,
-                new Vector2(0, 0),
-                0.0010f,
-                null,
-                null));
+            this._entities.Add(
+                StringConstants.Entities.MainMenu.BAR_SHELVES,
+                new BarShelves(
+                    Origin.TopLeft,
+                    new Vector2(0, 0),
+                    0.0010f,
+                    null,
+                    null));
 
             float centerX = RenderConstants.MinigameScreen.WIDTH / 2;
             float portraitTopMargin = Textures.BAR_SHELVES.Height - Textures.Portrait.Sam.DEFAULT.Height;
             float portraitSeparation = Textures.Portrait.Sam.DEFAULT.Width;
 
-            this._entities.Add(new Portrait(
-                Origin.TopLeft,
-                new Vector2(centerX - (portraitSeparation * 2), portraitTopMargin),
-                0.0011f,
-                TransitionConstants.MainMenu.Portrait.Entering(),
-                TransitionConstants.MainMenu.Portrait.Exiting(),
-                OpponentType.Sam,
-                isSilhouette: true));
+            this._entities.Add(
+                StringConstants.Entities.MainMenu.SAM_PORTRAIT,
+                new Portrait(
+                    Origin.TopLeft,
+                    new Vector2(centerX - (portraitSeparation * 2), portraitTopMargin),
+                    0.0011f,
+                    TransitionConstants.MainMenu.Portrait.Entering(),
+                    TransitionConstants.MainMenu.Portrait.Exiting(),
+                    NPCName.Sam,
+                    isSilhouette: true));
 
-            this._entities.Add(new Portrait(
-                Origin.TopLeft,
-                new Vector2(centerX - portraitSeparation, portraitTopMargin),
-                0.0011f,
-                TransitionConstants.MainMenu.Portrait.Entering(),
-                TransitionConstants.MainMenu.Portrait.Exiting(),
-                OpponentType.Sebastian,
-                isSilhouette: true));
+            this._entities.Add(
+                StringConstants.Entities.MainMenu.SEBASTIAN_PORTRAIT,
+                new Portrait(
+                    Origin.TopLeft,
+                    new Vector2(centerX - portraitSeparation, portraitTopMargin),
+                    0.0011f,
+                    TransitionConstants.MainMenu.Portrait.Entering(),
+                    TransitionConstants.MainMenu.Portrait.Exiting(),
+                    NPCName.Sebastian,
+                    isSilhouette: true));
 
-            this._entities.Add(new Portrait(
-                Origin.TopLeft,
-                new Vector2(centerX, portraitTopMargin),
-                0.0011f,
-                TransitionConstants.MainMenu.Portrait.Entering(),
-                TransitionConstants.MainMenu.Portrait.Exiting(),
-                OpponentType.Abigail,
-                isSilhouette: true));
+            this._entities.Add(
+                StringConstants.Entities.MainMenu.ABIGAIL_PORTRAIT,
+                new Portrait(
+                    Origin.TopLeft,
+                    new Vector2(centerX, portraitTopMargin),
+                    0.0011f,
+                    TransitionConstants.MainMenu.Portrait.Entering(),
+                    TransitionConstants.MainMenu.Portrait.Exiting(),
+                    NPCName.Abigail,
+                    isSilhouette: true));
 
-            this._entities.Add(new Portrait(
-                Origin.TopLeft,
-                new Vector2(centerX + portraitSeparation, portraitTopMargin),
-                0.0011f,
-                TransitionConstants.MainMenu.Portrait.Entering(),
-                TransitionConstants.MainMenu.Portrait.Exiting(),
-                OpponentType.Gus,
-                isSilhouette: true));
+            this._entities.Add(
+                StringConstants.Entities.MainMenu.GUS_PORTRAIT,
+                new Portrait(
+                    Origin.TopLeft,
+                    new Vector2(centerX + portraitSeparation, portraitTopMargin),
+                    0.0011f,
+                    TransitionConstants.MainMenu.Portrait.Entering(),
+                    TransitionConstants.MainMenu.Portrait.Exiting(),
+                    NPCName.Gus,
+                    isSilhouette: true));
 
             // Buttons
             float spaceHeight = RenderConstants.MinigameScreen.HEIGHT - Textures.BAR_SHELVES.Height;
@@ -113,57 +122,63 @@ namespace StardropPoolMinigame.Scenes
             float margin = (spaceHeight - (buttonHeight * 4) - RenderConstants.Scenes.MainMenu.BallButton.BUTTON_MARGIN * 3) / 2;
             float baseY = margin + Textures.BAR_SHELVES.Height;
 
-            this._playButton = new BallButton(
-                Origin.TopCenter,
-                new Vector2((RenderConstants.MinigameScreen.WIDTH / 2) + RenderConstants.Entities.BallButton.LEFT_OFFSET, baseY),
-                0.0040f,
-                TransitionConstants.MainMenu.Button.Entering(0),
-                TransitionConstants.MainMenu.Button.Exiting(0),
-                Translations.GetTranslation(StringConstants.Buttons.MainMenu.PLAY),
-                80,
-                1);
-            this._entities.Add(this._playButton);
+            this._entities.Add(
+                StringConstants.Entities.MainMenu.PLAY_BUTTON,
+                new BallButton(
+                    Origin.TopCenter,
+                    new Vector2((RenderConstants.MinigameScreen.WIDTH / 2) + RenderConstants.Entities.BallButton.LEFT_OFFSET, baseY),
+                    0.0040f,
+                    TransitionConstants.MainMenu.Button.Entering(0),
+                    TransitionConstants.MainMenu.Button.Exiting(0),
+                    Translations.GetTranslation(StringConstants.Buttons.MainMenu.PLAY),
+                    80,
+                    1));
 
-            this._multiplayerButton = new BallButton(
-                Origin.TopCenter,
-                new Vector2((RenderConstants.MinigameScreen.WIDTH / 2) + RenderConstants.Entities.BallButton.LEFT_OFFSET, baseY + buttonHeight + RenderConstants.Scenes.MainMenu.BallButton.BUTTON_MARGIN),
-                0.0040f,
-                TransitionConstants.MainMenu.Button.Entering(1),
-                TransitionConstants.MainMenu.Button.Exiting(1),
-                Translations.GetTranslation(StringConstants.Buttons.MainMenu.MULTIPLAYER),
-                80,
-                10);
-            this._entities.Add(this._multiplayerButton);
+            this._entities.Add(
+                StringConstants.Entities.MainMenu.MULTIPLAYER_BUTTON,
+                new BallButton(
+                    Origin.TopCenter,
+                    new Vector2((RenderConstants.MinigameScreen.WIDTH / 2) + RenderConstants.Entities.BallButton.LEFT_OFFSET, baseY + buttonHeight + RenderConstants.Scenes.MainMenu.BallButton.BUTTON_MARGIN),
+                    0.0040f,
+                    TransitionConstants.MainMenu.Button.Entering(1),
+                    TransitionConstants.MainMenu.Button.Exiting(1),
+                    Translations.GetTranslation(StringConstants.Buttons.MainMenu.MULTIPLAYER),
+                    80,
+                    10));
 
-            this._galleryButton = new BallButton(
-                Origin.TopCenter,
-                new Vector2((RenderConstants.MinigameScreen.WIDTH / 2) + RenderConstants.Entities.BallButton.LEFT_OFFSET, baseY + (buttonHeight * 2) + (RenderConstants.Scenes.MainMenu.BallButton.BUTTON_MARGIN * 2)),
-                0.0040f,
-                TransitionConstants.MainMenu.Button.Entering(2),
-                TransitionConstants.MainMenu.Button.Exiting(2),
-                Translations.GetTranslation(StringConstants.Buttons.MainMenu.GALLERY),
-                80,
-                3);
-            this._entities.Add(this._galleryButton);
+            this._entities.Add(
+                StringConstants.Entities.MainMenu.GALLERY_BUTTON,
+                new BallButton(
+                    Origin.TopCenter,
+                    new Vector2((RenderConstants.MinigameScreen.WIDTH / 2) + RenderConstants.Entities.BallButton.LEFT_OFFSET, baseY + (buttonHeight * 2) + (RenderConstants.Scenes.MainMenu.BallButton.BUTTON_MARGIN * 2)),
+                    0.0040f,
+                    TransitionConstants.MainMenu.Button.Entering(2),
+                    TransitionConstants.MainMenu.Button.Exiting(2),
+                    Translations.GetTranslation(StringConstants.Buttons.MainMenu.GALLERY),
+                    80,
+                    3));
 
-            this._settingsButton = new BallButton(
-                Origin.TopCenter,
-                new Vector2((RenderConstants.MinigameScreen.WIDTH / 2) + RenderConstants.Entities.BallButton.LEFT_OFFSET, baseY + (buttonHeight * 3) + (RenderConstants.Scenes.MainMenu.BallButton.BUTTON_MARGIN * 3)),
-                0.0040f,
-                TransitionConstants.MainMenu.Button.Entering(3),
-                TransitionConstants.MainMenu.Button.Exiting(3),
-                Translations.GetTranslation(StringConstants.Buttons.MainMenu.SETTINGS),
-                80,
-                12);
-            this._entities.Add(this._settingsButton);
+            this._entities.Add(
+                StringConstants.Entities.MainMenu.SETTINGS_BUTTON,
+                new BallButton(
+                    Origin.TopCenter,
+                    new Vector2((RenderConstants.MinigameScreen.WIDTH / 2) + RenderConstants.Entities.BallButton.LEFT_OFFSET, baseY + (buttonHeight * 3) + (RenderConstants.Scenes.MainMenu.BallButton.BUTTON_MARGIN * 3)),
+                    0.0040f,
+                    TransitionConstants.MainMenu.Button.Entering(3),
+                    TransitionConstants.MainMenu.Button.Exiting(3),
+                    Translations.GetTranslation(StringConstants.Buttons.MainMenu.SETTINGS),
+                    80,
+                    12));
 
             // Title
-            this._entities.Add(new GameTitle(
-                Origin.TopCenter,
-                new Vector2(RenderConstants.MinigameScreen.WIDTH / 2, RenderConstants.Scenes.MainMenu.GameTitle.TOP_MARGIN),
-                0.0050f,
-                TransitionConstants.MainMenu.GameTitle.Entering(),
-                TransitionConstants.MainMenu.GameTitle.Exiting()));
+            this._entities.Add(
+                StringConstants.Entities.MainMenu.GAME_TITLE,
+                new GameTitle(
+                    Origin.TopCenter,
+                    new Vector2(RenderConstants.MinigameScreen.WIDTH / 2, RenderConstants.Scenes.MainMenu.GameTitle.TOP_MARGIN),
+                    0.0050f,
+                    TransitionConstants.MainMenu.GameTitle.Entering(),
+                    TransitionConstants.MainMenu.GameTitle.Exiting()));
         }
     }
 }

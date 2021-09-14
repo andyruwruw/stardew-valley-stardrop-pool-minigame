@@ -27,6 +27,13 @@ namespace StardropPoolMinigame.Scenes
         /// </summary>
         private Table _table;
 
+        /// <summary>
+        /// Instantiates <see cref="GameSceneCreator"/>.
+        /// </summary>
+        /// <param name="player1">Stored parameter for <see cref="GameScene"/> creation</param>
+        /// <param name="player2">Stored parameter for <see cref="GameScene"/> creation</param>
+        /// <param name="rules">Stored parameter for <see cref="GameScene"/> creation</param>
+        /// <param name="table">Stored parameter for <see cref="GameScene"/> creation</param>
         public GameSceneCreator(
             IPlayer player1,
             IPlayer player2,

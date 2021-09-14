@@ -243,8 +243,8 @@ namespace StardropPoolMinigame.Primitives
         public Microsoft.Xna.Framework.Rectangle GetRawXnaRectangle()
         {
             return new Microsoft.Xna.Framework.Rectangle(
-                (int)(this._anchor.X * RenderConstants.TileScale() + RenderConstants.AdjustedScreenWidthMargin()),
-                (int)(this._anchor.Y * RenderConstants.TileScale() + RenderConstants.AdjustedScreenHeightMargin()),
+                (int)(this._anchor.X * RenderConstants.TileScale() + RenderConstants.AdjustedScreen.Margin.Width()),
+                (int)(this._anchor.Y * RenderConstants.TileScale() + RenderConstants.AdjustedScreen.Margin.Height()),
                 (int)(this._width * RenderConstants.TileScale()),
                 (int)(this._height * RenderConstants.TileScale()));
         }

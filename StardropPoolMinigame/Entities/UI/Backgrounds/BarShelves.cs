@@ -6,7 +6,7 @@ using StardropPoolMinigame.Render.Filters;
 
 namespace StardropPoolMinigame.Entities
 {
-    class BarShelves : EntityStatic
+    class BarShelves : Entity
     {
         public BarShelves(
             Origin origin,

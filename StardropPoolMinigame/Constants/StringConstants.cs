@@ -1,7 +1,14 @@
-﻿namespace StardropPoolMinigame.Constants
+﻿using System.Collections.Generic;
+
+namespace StardropPoolMinigame.Constants
 {
     class StringConstants
     {
+        public class General
+        {
+            public static string MINIGAME_NAME = "StardewPoolMinigame";
+        }
+
         public class Buttons
         {
             public class MainMenu
@@ -533,6 +540,107 @@
             public static string YOUR_TURN = "game.popup.your-turn";
 
             public static string OPPONENT_TURN = "game.popup.opponent-turn";
+        }
+
+        public class Entities
+        {
+            public class CharacterSelect
+            {
+                public static IList<string> PORTRAITS = new List<string> {
+                    SAM_PORTRAIT,
+                    SEBASTIAN_PORTRAIT,
+                    ABIGAIL_PORTRAIT,
+                    GUS_PORTRAIT };
+
+                public static string BAR_SHELVES = "character-select-bar-shelves";
+
+                public static string BOTTOM_BACKGROUND = "character-select-bottom-background";
+
+                public static string SAM_PORTRAIT = "character-select-sam-portrait";
+
+                public static string SEBASTIAN_PORTRAIT = "character-select-sebastian-portrait";
+
+                public static string ABIGAIL_PORTRAIT = "character-select-abigail-portrait";
+
+                public static string GUS_PORTRAIT = "character-select-gus-portrait";
+
+                public static string CHALLENGE_BUTTON = "character-select-challenge-button";
+
+                public static string CURSOR = "character-select-cursor";
+
+                public static string PAGE_TITLE = "character-select-page-title";
+
+                public static string SELECTED_NAME = "character-select-selected-name";
+            }
+
+            public class Dialog
+            {
+                public static string PORTRAIT = "dialog-portrait";
+
+                public static string TEXT = "dialog-text";
+            }
+
+            public class Gallery
+            {
+            }
+
+            public class Game
+            {
+                public static string FLOOR_TILES = "game-floor-tiles";
+
+                public static string FADE_IN = "game-fade-in";
+
+                public static string TABLE = "game-table";
+
+                public static string QUAD_TREE = "game-quad-tree";
+
+                public static string POCKETED_BALLS_PLAYER2 = "game-pocketed-balls-player-1";
+
+                public static string POCKETED_BALLS_PLAYER1 = "game-pocketed-balls-player-2";
+
+                public static string PORTRAIT = "game-portrait";
+            }
+
+            public class MainMenu
+            {
+                public static IList<string> BUTTONS = new List<string> {
+                    PLAY_BUTTON,
+                    MULTIPLAYER_BUTTON,
+                    GALLERY_BUTTON,
+                    SETTINGS_BUTTON };
+
+                public static string PLAY_BUTTON = "main-menu-play-button";
+
+                public static string MULTIPLAYER_BUTTON = "main-menu-multiplayer-button";
+
+                public static string GALLERY_BUTTON = "main-menu-gallery-button";
+
+                public static string SETTINGS_BUTTON = "main-menu-settings-button";
+
+                public static string BAR_SHELVES = "main-menu-bar-shelves";
+
+                public static string SAM_PORTRAIT = "main-menu-sam-portrait";
+
+                public static string SEBASTIAN_PORTRAIT = "main-menu-sebastian-portrait";
+
+                public static string ABIGAIL_PORTRAIT = "main-menu-abigail-portrait";
+
+                public static string GUS_PORTRAIT = "main-menu-gus-portrait";
+
+                public static string GAME_TITLE = "main-menu-game-title";
+            }
+
+            public class Multiplayer
+            {
+            }
+
+            public class Settings
+            {
+            }
+
+            public class Summary
+            {
+            }
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using StardropPoolMinigame.Constants;
-using StardropPoolMinigame.Helpers;
+using StardropPoolMinigame.Utilities;
 
 namespace StardropPoolMinigame.Entities
 {
@@ -8,6 +8,12 @@ namespace StardropPoolMinigame.Entities
         public ComboPopup() : base(null, null, Translations.GetTranslation(StringConstants.Popups.COMBO))
         {
 
+        }
+
+        /// <inheritdoc cref="Entity.GetId"/>
+        public override string GetId()
+        {
+            return $"popup-combo-{this._id}";
         }
     }
 }

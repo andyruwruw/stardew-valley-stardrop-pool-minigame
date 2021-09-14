@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace StardropPoolMinigame.Structures
 {
-    class QuadTree<T> : EntityStatic, IGraph<T>
+    class QuadTree<T> : Entity, IGraph<T>
     {
         /// <summary>
         /// The total number of nodes stored.
@@ -84,7 +84,13 @@ namespace StardropPoolMinigame.Structures
             this._isDivided = false;
             this._isRoot = isRoot;
 
-            this.SetDrawer(new QuadTreeDrawer(this));
+            this.SetDrawer(new QuadTreeDrawer<T>(this));
+        }
+
+        /// <inheritdoc cref="Entity.GetId"/>
+        public override string GetId()
+        {
+            return $"quad-tree-{this._id}";
         }
 
         /// <inheritdoc cref="IGraph{T}.Insert(Vector2, T)"/>
@@ -224,7 +230,7 @@ namespace StardropPoolMinigame.Structures
         /// <summary>
         /// <see cref="IRange"/> of <see cref="QuadTree{T}"/>.
         /// </summary>
-        public IRange GetBoundary()
+        public override Primitives.Rectangle GetBoundary()
         {
             return this._boundary;
         }

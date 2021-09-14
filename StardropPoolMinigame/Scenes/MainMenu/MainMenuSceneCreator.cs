@@ -3,6 +3,9 @@
     /// <inheritdoc cref="ISceneCreator"/>
     class MainMenuSceneCreator : ISceneCreator
     {
+        /// <summary>
+        /// Instantiates <see cref="MainMenuSceneCreator"/>.
+        /// </summary>
         public MainMenuSceneCreator()
         {
         }

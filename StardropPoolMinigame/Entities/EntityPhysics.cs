@@ -38,8 +38,9 @@ namespace StardropPoolMinigame.Entities
             float layerDepth,
             IFilter enteringTransition,
             IFilter exitingTransition,
+            float mass,
             Vector2? startingVelocity = null,
-            Vector2? startinngAcceleration = null,
+            Vector2? startingAcceleration = null,
             float intangibleRadius = 0f
         ) : base(
             origin,
@@ -51,7 +52,8 @@ namespace StardropPoolMinigame.Entities
             this._physics = new PhysicsObject(
                 this._anchor,
                 startingVelocity != null ? (Vector2)startingVelocity : Vector2.Zero,
-                startinngAcceleration != null ? (Vector2)startinngAcceleration : Vector2.Zero);
+                startingAcceleration != null ? (Vector2)startingAcceleration : Vector2.Zero,
+                mass);
             this._intangibleRadius = intangibleRadius;
         }
 
@@ -62,6 +64,10 @@ namespace StardropPoolMinigame.Entities
             base.Update();
         }
 
+        /// <summary>
+        /// Callback for when <see cref="EntityPhysics"/> collides.
+        /// </summary>
+        /// <param name="against">What the <see cref="EntityPhysics"/> collided with</param>
         public virtual void CollisionCallback(object against)
         {
         }
@@ -218,37 +224,37 @@ namespace StardropPoolMinigame.Entities
         }
 
         /// <inheritdoc cref="PhysicsObject.GetMass"/>
-        public float GetMass()
+        public virtual float GetMass()
         {
             return this._physics.GetMass();
         }
 
         /// <inheritdoc cref="PhysicsObject.SetMass"/>
-        public void SetMass(float mass)
+        public virtual void SetMass(float mass)
         {
             this._physics.SetMass(mass);
         }
 
         /// <inheritdoc cref="PhysicsObject.GetMaximumVelocity"/>
-        public float GetMaximumVelocity()
+        public virtual float GetMaximumVelocity()
         {
             return this._physics.GetMaximumVelocity();
         }
 
         /// <inheritdoc cref="PhysicsObject.SetMaximumVelocity"/>
-        public void SetMaximumVelocity(float maximumVelocity)
+        public virtual void SetMaximumVelocity(float maximumVelocity)
         {
             this._physics.SetMaximumVelocity(maximumVelocity);
         }
 
         /// <inheritdoc cref="PhysicsObject.GetMaximumAcceleration"/>
-        public float GetMaximumAcceleration()
+        public virtual float GetMaximumAcceleration()
         {
             return this._physics.GetMaximumAcceleration();
         }
 
         /// <inheritdoc cref="PhysicsObject.SetMaximumAcceleration"/>
-        public void SetMaximumAcceleration(float maximumAcceleration)
+        public virtual void SetMaximumAcceleration(float maximumAcceleration)
         {
             this._physics.SetMaximumAcceleration(maximumAcceleration);
         }
@@ -257,7 +263,7 @@ namespace StardropPoolMinigame.Entities
         /// Retrieves radius of perception for intangible interactions.
         /// </summary>
         /// <returns>Radius of perception for intangible interactions</returns>
-        public float GetIntangibleRadius()
+        public virtual float GetIntangibleRadius()
         {
             return this._intangibleRadius;
         }
@@ -266,7 +272,7 @@ namespace StardropPoolMinigame.Entities
         /// Sets radius of perception for intangible interactions.
         /// </summary>
         /// <param name="intangibleRadius">New radius of perception for intangible interactions</param>
-        public void SetIntangibleRadius(float intangibleRadius)
+        public virtual void SetIntangibleRadius(float intangibleRadius)
         {
             this._intangibleRadius = intangibleRadius;
         }

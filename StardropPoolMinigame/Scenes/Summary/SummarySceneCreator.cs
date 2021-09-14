@@ -4,10 +4,14 @@
     class SummarySceneCreator : ISceneCreator
     {
         /// <summary>
-        /// Stored parameter for <see cref="DialogScene"/> creation
+        /// Stored parameter for <see cref="DialogScene"/> creation.
         /// </summary>
         private GameScene _gameScene;
 
+        /// <summary>
+        /// Instantiates <see cref="SummarySceneCreator"/>.
+        /// </summary>
+        /// <param name="gameScene">Stored parameter for <see cref="DialogScene"/> creation</param>
         public SummarySceneCreator(GameScene gameScene)
         {
             this._gameScene = gameScene;

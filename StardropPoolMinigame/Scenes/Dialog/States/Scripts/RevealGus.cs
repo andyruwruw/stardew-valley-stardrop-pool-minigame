@@ -1,6 +1,7 @@
 ﻿using StardropPoolMinigame.Constants;
 using StardropPoolMinigame.Enums;
 using StardropPoolMinigame.Helpers;
+using StardropPoolMinigame.Utilities;
 using System;
 namespace StardropPoolMinigame.Scenes.Dialog.Scripts
 {
@@ -13,27 +14,26 @@ namespace StardropPoolMinigame.Scenes.Dialog.Scripts
         protected override void AddRecitations()
         {
             this._recitations.Add(new Recitation(
+                NPCName.Gus,
                 PortraitEmotion.Laugh,
                 Translations.GetTranslation(StringConstants.Quotes.Reveal.Gus.LINE1)));
 
             this._recitations.Add(new Recitation(
+                NPCName.Gus,
                 PortraitEmotion.Smurk,
                 Translations.GetTranslation(StringConstants.Quotes.Reveal.Gus.LINE2)));
 
             this._recitations.Add(new Recitation(
+                NPCName.Gus,
                 PortraitEmotion.Laugh,
                 Translations.GetTranslation(StringConstants.Quotes.Reveal.Gus.LINE3)));
 
             this._recitations.Add(new Recitation(
+                NPCName.Gus,
                 PortraitEmotion.Glare,
                 Translations.GetTranslation(StringConstants.Quotes.Reveal.Gus.LINE4),
                 hasFire: true,
                 isDarker: true));
-        }
-
-        public override OpponentType GetCharacter()
-        {
-            return OpponentType.Gus;
         }
     }
 }

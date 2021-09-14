@@ -22,15 +22,18 @@ namespace StardropPoolMinigame.Scenes
         protected TransitionState _transitionState;
 
         /// <summary>
-        /// List of <see cref="Scene">Scene's</see> <see cref="IEntity">IEntities</see>
+        /// Dictionary of <see cref="Scene">Scene's</see> <see cref="IEntity">IEntities</see>
         /// </summary>
-        protected IList<IEntity> _entities;
+        protected IDictionary<string, IEntity> _entities;
 
+        /// <summary>
+        /// Instantiates <see cref="Scene"/>.
+        /// </summary>
         public Scene()
         {
             this._newScene = null;
             this._transitionState = TransitionState.Entering;
-            this._entities = new List<IEntity>();
+            this._entities = new Dictionary<string, IEntity>();
 
             this.AddEntities();
         }
@@ -57,7 +60,7 @@ namespace StardropPoolMinigame.Scenes
         /// <inheritdoc cref="IScene.GetEntities"/>
         public virtual IList<IEntity> GetEntities()
         {
-            return this._entities;
+            return new List<IEntity>(this._entities.Values);
         }
 
         /// <inheritdoc cref="IScene.HasNewScene"/>
@@ -109,7 +112,7 @@ namespace StardropPoolMinigame.Scenes
         {
             bool updateTransition = true;
 
-            foreach (IEntity entity in this._entities)
+            foreach (IEntity entity in this._entities.Values)
             {
                 entity.Update();
 
@@ -148,6 +151,10 @@ namespace StardropPoolMinigame.Scenes
             }
         }
 
+        /// <summary>
+        /// Generates starting <see cref="IScene"/>.
+        /// </summary>
+        /// <returns>Starting <see cref="IScene"/></returns>
         public static IScene GetDefaultScene()
         {
             if (DevConstants.AUTO_START_AI_GAME)

@@ -1,6 +1,7 @@
 ﻿using StardropPoolMinigame.Enums;
 using StardropPoolMinigame.Helpers;
 using StardropPoolMinigame.Players;
+using StardropPoolMinigame.Utilities;
 using System.Collections.Generic;
 
 namespace StardropPoolMinigame.Scenes.Dialog.Scripts
@@ -8,25 +9,25 @@ namespace StardropPoolMinigame.Scenes.Dialog.Scripts
     abstract class Script : IScript
     {
         /// <summary>
-        /// <see cref="IList"/> of <see cref="Recitations"/>, or dialog lines for <see cref="Script"/>
+        /// <see cref="IList"/> of <see cref="IRecitations"/>, or dialog lines for <see cref="Script"/>
         /// </summary>
-        protected IList<Recitation> _recitations;
+        protected IList<IRecitation> _recitations;
 
         /// <summary>
-        /// Index of current <see cref="Recitation"/>
+        /// Index of current <see cref="IRecitation"/>
         /// </summary>
         protected int _index;
 
         public Script()
         {
-            this._recitations = new List<Recitation>();
+            this._recitations = new List<IRecitation>();
             this._index = -1;
 
             this.AddRecitations();
         }
 
         /// <inheritdoc cref="IScript.GetNext"/>
-        public Recitation GetNext()
+        public IRecitation GetNext()
         {
             if (this._index >= this._recitations.Count - 1)
             {
@@ -34,13 +35,13 @@ namespace StardropPoolMinigame.Scenes.Dialog.Scripts
             }
 
             this._index += 1;
-            Recitation next = this._recitations[this._index];
+            IRecitation next = this._recitations[this._index];
             
             return next;
         }
 
         /// <inheritdoc cref="IScript.GetLast"/>
-        public Recitation GetLast()
+        public IRecitation GetLast()
         {
             if (this._index <= 0)
             {
@@ -48,16 +49,13 @@ namespace StardropPoolMinigame.Scenes.Dialog.Scripts
             }
 
             this._index -= 1;
-            Recitation last = this._recitations[this._index];
+            IRecitation last = this._recitations[this._index];
             
             return last;
         }
 
-        /// <inheritdoc cref="IScript.GetNPCName"/>
-        public abstract NPCName GetNPCName();
-
         /// <summary>
-        /// <para>Overridable function for adding <see cref="Recitation">Recitations</see> to <see cref="Script"/></para>
+        /// <para>Overridable function for adding <see cref="IRecitation">IRecitations</see> to <see cref="Script"/></para>
         /// <para>Automatically called at instantiation</para>
         /// </summary>
         protected abstract void AddRecitations();
@@ -106,15 +104,15 @@ namespace StardropPoolMinigame.Scenes.Dialog.Scripts
             return null;
         }
 
-        public static Script GetIntroduction(OpponentType name)
+        public static Script GetIntroduction(NPCName name)
         {
             switch (name)
             {
-                case OpponentType.Sebastian:
+                case NPCName.Sebastian:
                     return new IntroductionSebastian();
-                case OpponentType.Abigail:
+                case NPCName.Abigail:
                     return new IntroductionAbigail();
-                case OpponentType.Gus:
+                case NPCName.Gus:
                     return new IntroductionGus();
                 default:
                     return new IntroductionSam();
