@@ -5,7 +5,7 @@ using StardropPoolMinigame.Utilities;
 
 namespace StardropPoolMinigame.Scenes.Dialog.Scripts
 {
-    class IntroductionSam : Script
+    internal class IntroductionSam : Script
     {
         public IntroductionSam() : base()
         {

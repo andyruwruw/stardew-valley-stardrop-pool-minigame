@@ -1,20 +1,17 @@
 ﻿using StardropPoolMinigame.Enums;
+using StardropPoolMinigame.Helpers;
 using StardropPoolMinigame.Players;
+using System;
 using System.Collections.Generic;
 
 namespace StardropPoolMinigame.Scenes.States
 {
-    class Turn
+    internal class Turn
     {
         /// <summary>
-        /// <see cref="TurnResults"/> of <see cref="Turn"/>.
+        /// Whether the last <see cref="Turn"/> was a scratch and a new <see cref="Ball"/> needs to be placed.
         /// </summary>
-        private TurnResults _results;
-
-        /// <summary>
-        /// <see cref="IList"/> of <see cref="IPlayer"/>.
-        /// </summary>
-        private IList<IPlayer> _players;
+        private bool _needsToPlaceCueBall;
 
         /// <summary>
         /// Index of <see cref="IPlayer"/> whose <see cref="Turn"/> it is.
@@ -22,14 +19,19 @@ namespace StardropPoolMinigame.Scenes.States
         private int _playerIndex;
 
         /// <summary>
+        /// <see cref="IList"/> of <see cref="IPlayer"/>.
+        /// </summary>
+        private IList<IPlayer> _players;
+
+        /// <summary>
+        /// <see cref="TurnResults"/> of <see cref="Turn"/>.
+        /// </summary>
+        private TurnResults _results;
+
+        /// <summary>
         /// Current <see cref="TurnState"/>.
         /// </summary>
         private TurnState _turnState;
-
-        /// <summary>
-        /// Whether the last <see cref="Turn"/> was a scratch and a new <see cref="Ball"/> needs to be placed.
-        /// </summary>
-        private bool _needsToPlaceCueBall;
 
         /// <summary>
         /// Instantiates a new <see cref="Turn"/>.
@@ -39,28 +41,29 @@ namespace StardropPoolMinigame.Scenes.States
         /// <param name="wasScratch">Whether the last <see cref="Turn"/> was a scratch and a new <see cref="Ball"/> needs to be placed</param>
         /// <param name="selectPocket">Whether the next <see cref="Ball"/> requires a pocket to be specified</param>
         public Turn(
-            IList<IPlayer> players, 
-            int playerIndex = Math.Round(MiscellaneousHelper.Random()),
-            bool wasScratch = false, 
+            IList<IPlayer> players,
+            int? playerIndex = null,
+            bool wasScratch = false,
             bool selectPocket = false)
         {
             this._players = players;
-            this._playerIndex = playerIndex;
+            this._playerIndex = playerIndex == null ? (int)Math.Round(MiscellaneousHelper.Random()) : (int)playerIndex;
             this._needsToPlaceCueBall = wasScratch;
 
             this._turnState = TurnState.Idle;
             if (selectPocket)
             {
                 this._turnState = TurnState.SelectingPocket;
-            } else if (this._needsToPlaceCueBall)
+            }
+            else if (this._needsToPlaceCueBall)
             {
                 this._turnState = TurnState.PlacingBall;
             }
         }
 
-        public bool NeedsToPlaceCueBall()
+        public IPlayer GetCurrentPlayer()
         {
-            return this._needsToPlaceCueBall;
+            return this._players[this._playerIndex];
         }
 
         public int GetCurrentPlayerIndex()
@@ -68,9 +71,9 @@ namespace StardropPoolMinigame.Scenes.States
             return this._playerIndex;
         }
 
-        public IPlayer GetCurrentPlayer()
+        public TurnState GetTurnState()
         {
-            return this._players[this._playerIndex];
+            return this._turnState;
         }
 
         public bool IsMyTurn()
@@ -79,14 +82,14 @@ namespace StardropPoolMinigame.Scenes.States
                 && this.GetCurrentPlayer().IsMe());
         }
 
+        public bool NeedsToPlaceCueBall()
+        {
+            return this._needsToPlaceCueBall;
+        }
+
         public void SetTurnState(TurnState state)
         {
             this._turnState = state;
-        }
-
-        public TurnState GetTurnState()
-        {
-            return this._turnState;
         }
     }
 }

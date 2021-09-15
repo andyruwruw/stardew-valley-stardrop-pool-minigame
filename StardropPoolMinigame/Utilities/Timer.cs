@@ -7,31 +7,12 @@ namespace StardropPoolMinigame.Utilities
     /// <para>Times events based on keys.</para>
     /// <para>Utilizes game ticks.</para>
     /// </summary>
-    class Timer
+    internal class Timer
     {
         /// <summary>
-        /// Dictionary of keys and their start times. 
+        /// Dictionary of keys and their start times.
         /// </summary>
         private static Dictionary<string, int> _timings = new Dictionary<string, int>();
-
-        /// <summary>
-        /// Starts a timer with a given key.
-        /// </summary>
-        /// <param name="key">Timer key</param>
-        /// <returns><c>0</c> on success, <c>-1</c> on overlapping keys</returns>
-        public static int StartTimer(string key)
-        {
-            if (_timings.ContainsKey(key))
-            {
-                return -1;
-            }
-
-            int now = Game1.ticks;
-
-            _timings.Add(key, now);
-
-            return 0;
-        }
 
         /// <summary>
         /// Returns the number of ticks since a timer was started by key
@@ -66,6 +47,25 @@ namespace StardropPoolMinigame.Utilities
             _timings.Remove(key);
 
             return elapsed;
+        }
+
+        /// <summary>
+        /// Starts a timer with a given key.
+        /// </summary>
+        /// <param name="key">Timer key</param>
+        /// <returns><c>0</c> on success, <c>-1</c> on overlapping keys</returns>
+        public static int StartTimer(string key)
+        {
+            if (_timings.ContainsKey(key))
+            {
+                return -1;
+            }
+
+            int now = Game1.ticks;
+
+            _timings.Add(key, now);
+
+            return 0;
         }
     }
 }

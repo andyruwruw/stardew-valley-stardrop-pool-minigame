@@ -7,17 +7,17 @@ using StardropPoolMinigame.Utilities;
 
 namespace StardropPoolMinigame.Entities
 {
-    class Button : Entity
+    internal class Button : Entity
     {
-        /// <summary>
-        /// <see cref="Text"/> displayed for <see cref="Button"/>.
-        /// </summary>
-        private Text _text;
-
         /// <summary>
         /// Whether the <see cref="Button"/> is disabled.
         /// </summary>
         private bool _disabled;
+
+        /// <summary>
+        /// <see cref="Text"/> displayed for <see cref="Button"/>.
+        /// </summary>
+        private Text _text;
 
         /// <summary>
         /// Instantiates <see cref="Button"/>.
@@ -63,16 +63,25 @@ namespace StardropPoolMinigame.Entities
             this.SetDrawer(new ButtonDrawer(this));
         }
 
+        /// <inheritdoc cref="Entity.ClickCallback"/>
+        public override void ClickCallback()
+        {
+            Sound.PlaySound(SoundConstants.Feedback.BOTTON_PRESS);
+        }
+
         /// <inheritdoc cref="Entity.GetId"/>
         public override string GetId()
         {
             return $"basic-button-{this._id}";
         }
 
-        /// <inheritdoc cref="Entity.GetTotalWidth"/>
-        public override float GetTotalWidth()
+        /// <summary>
+        /// Retrieves <see cref="Text"/> displayed for button.
+        /// </summary>
+        /// <returns><see cref="Text"/> displayed for button</returns>
+        public Text GetText()
         {
-            return this._text.GetTotalWidth();
+            return this._text;
         }
 
         /// <inheritdoc cref="Entity.GetTotalHeight"/>
@@ -81,17 +90,10 @@ namespace StardropPoolMinigame.Entities
             return this._text.GetTotalHeight();
         }
 
-        /// <inheritdoc cref="Entity.SetTransitionState"/>
-        public override void SetTransitionState(TransitionState transitionState, bool start = false)
+        /// <inheritdoc cref="Entity.GetTotalWidth"/>
+        public override float GetTotalWidth()
         {
-            base.SetTransitionState(transitionState, start);
-            this._text.SetTransitionState(transitionState, true);
-        }
-
-        /// <inheritdoc cref="Entity.ClickCallback"/>
-        public override void ClickCallback()
-        {
-            Sound.PlaySound(SoundConstants.Feedback.BOTTON_PRESS);
+            return this._text.GetTotalWidth();
         }
 
         /// <inheritdoc cref="Entity.HoverCallback"/>
@@ -118,13 +120,11 @@ namespace StardropPoolMinigame.Entities
             this._disabled = state;
         }
 
-        /// <summary>
-        /// Retrieves <see cref="Text"/> displayed for button.
-        /// </summary>
-        /// <returns><see cref="Text"/> displayed for button</returns>
-        public Text GetText()
+        /// <inheritdoc cref="Entity.SetTransitionState"/>
+        public override void SetTransitionState(TransitionState transitionState, bool start = false)
         {
-            return this._text;
+            base.SetTransitionState(transitionState, start);
+            this._text.SetTransitionState(transitionState, true);
         }
     }
 }

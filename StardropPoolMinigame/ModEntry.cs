@@ -1,9 +1,9 @@
-﻿using StardewValley;
-using StardewModdingAPI;
+﻿using StardewModdingAPI;
 using StardewModdingAPI.Events;
-using StardropPoolMinigame.Render;
-using StardropPoolMinigame.Detect.Hover;
+using StardewValley;
 using StardropPoolMinigame.Data;
+using StardropPoolMinigame.Detect.Hover;
+using StardropPoolMinigame.Render;
 using StardropPoolMinigame.Utilities;
 
 namespace StardropPoolMinigame
@@ -28,23 +28,6 @@ namespace StardropPoolMinigame
         }
 
         /// <summary>
-        /// Loads mod save data.
-        /// </summary>
-        private void OnSaveLoaded(object sender, SaveLoadedEventArgs e)
-        {
-            Save.SetData(this.Helper.Data);
-            Textures.LoadTextures();
-        }
-
-        /// <summary>
-        /// Saves mod data.
-        /// </summary>
-        private void OnSaving(object sender, SavingEventArgs e)
-        {
-            Save.WriteSaveData();
-        }
-
-        /// <summary>
         /// Detects if pool table is right clicked.
         /// </summary>
         private void OnButtonPressed(object sender, ButtonPressedEventArgs e)
@@ -60,6 +43,23 @@ namespace StardropPoolMinigame
             {
                 this.StartGame();
             }
+        }
+
+        /// <summary>
+        /// Loads mod save data.
+        /// </summary>
+        private void OnSaveLoaded(object sender, SaveLoadedEventArgs e)
+        {
+            Save.SetData(this.Helper.Data);
+            Textures.LoadTextures();
+        }
+
+        /// <summary>
+        /// Saves mod data.
+        /// </summary>
+        private void OnSaving(object sender, SavingEventArgs e)
+        {
+            Save.WriteSaveData();
         }
 
         /// <summary>

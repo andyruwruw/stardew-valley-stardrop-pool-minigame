@@ -1,7 +1,7 @@
 ﻿namespace StardropPoolMinigame.Scenes.Settings
 {
     /// <inheritdoc cref="ISceneCreator"/>
-    class SettingsSceneCreator : ISceneCreator
+    internal class SettingsSceneCreator : ISceneCreator
     {
         /// <summary>
         /// Instantiates <see cref="SettingsSceneCreator"/>.

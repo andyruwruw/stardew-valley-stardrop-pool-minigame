@@ -6,7 +6,7 @@ using System;
 
 namespace StardropPoolMinigame.Entities
 {
-    class NorthWestCorner : TableSegment
+    internal class NorthWestCorner : TableSegment
     {
         public NorthWestCorner(
             Origin origin,

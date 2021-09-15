@@ -9,7 +9,7 @@ namespace StardropPoolMinigame.Behaviors.Physics
     /// <summary>
     /// How <see cref="EntityPhysics"/> interact with other objects and their environment.
     /// </summary>
-    interface IPhysics
+    internal interface IPhysics
     {
         /// <summary>
         /// <para>Whether the <see cref="IPhysics"/> system includes intangible forces.</para>

@@ -5,7 +5,7 @@ using StardropPoolMinigame.Entities;
 
 namespace StardropPoolMinigame.Render.Drawers
 {
-    class SolidDrawer : Drawer
+    internal class SolidDrawer : Drawer
     {
         public SolidDrawer(Solid solid) : base(solid)
         {
@@ -33,9 +33,9 @@ namespace StardropPoolMinigame.Render.Drawers
                 this.GetLayerDepth(overrideLayerDepth));
         }
 
-        protected override Texture2D GetTileset()
+        protected override Color GetRawColor()
         {
-            return Game1.staminaRect;
+            return ((Solid)this._entity).GetColor();
         }
 
         protected override Rectangle GetRawSource()
@@ -43,9 +43,9 @@ namespace StardropPoolMinigame.Render.Drawers
             return Game1.staminaRect.Bounds;
         }
 
-        protected override Color GetRawColor()
+        protected override Texture2D GetTileset()
         {
-            return ((Solid)this._entity).GetColor();
+            return Game1.staminaRect;
         }
     }
 }

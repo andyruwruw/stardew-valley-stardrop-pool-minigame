@@ -1,6 +1,6 @@
 ﻿namespace StardropPoolMinigame.Entities.Powerups
 {
-    abstract class Powerup
+    internal abstract class Powerup
     {
         public Powerup()
         {

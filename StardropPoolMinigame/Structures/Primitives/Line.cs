@@ -8,17 +8,17 @@ namespace StardropPoolMinigame.Primitives
     /// <summary>
     /// Simple line class
     /// </summary>
-    class Line : IRange
+    internal class Line : IRange
     {
-        /// <summary>
-        /// <see cref="Vector2"/> of the start of the line
-        /// </summary>
-        private Vector2 _start;
-
         /// <summary>
         /// <see cref="Vector2"/> of the end of the line
         /// </summary>
         private Vector2 _end;
+
+        /// <summary>
+        /// <see cref="Vector2"/> of the start of the line
+        /// </summary>
+        private Vector2 _start;
 
         public Line(Vector2 start, Vector2 end)
         {
@@ -32,25 +32,10 @@ namespace StardropPoolMinigame.Primitives
             return true;
         }
 
-        /// <inheritdoc cref="IRange.Intersects(IRange)"/>
-        public bool Intersects(IRange other)
-        {
-            return IntersectionHelper.IsIntersecting(this, other);
-        }
-
         /// <inheritdoc cref="IRange.GetCenter"/>
         public Vector2 GetCenter()
         {
             return Vector2.Add(this._start, Vector2.Multiply(Vector2.Subtract(this._start, this._end), 0.5f));
-        }
-
-        /// <summary>
-        /// Gets the <see cref="Vector2"/> of the start of the line
-        /// </summary>
-        /// <returns><see cref="Vector2"/> of start of line</returns>
-        public Vector2 GetStart()
-        {
-            return this._start;
         }
 
         /// <summary>
@@ -78,6 +63,21 @@ namespace StardropPoolMinigame.Primitives
         public Vector2 GetSlope()
         {
             return Vector2.Subtract(this._start, this._end);
+        }
+
+        /// <summary>
+        /// Gets the <see cref="Vector2"/> of the start of the line
+        /// </summary>
+        /// <returns><see cref="Vector2"/> of start of line</returns>
+        public Vector2 GetStart()
+        {
+            return this._start;
+        }
+
+        /// <inheritdoc cref="IRange.Intersects(IRange)"/>
+        public bool Intersects(IRange other)
+        {
+            return IntersectionHelper.IsIntersecting(this, other);
         }
     }
 }

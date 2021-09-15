@@ -5,7 +5,7 @@ using StardropPoolMinigame.Entities;
 
 namespace StardropPoolMinigame.Render.Drawers
 {
-    class PocketedBallsDrawer : Drawer
+    internal class PocketedBallsDrawer : Drawer
     {
         public PocketedBallsDrawer(PocketedBalls pocketedBalls) : base(pocketedBalls)
         {

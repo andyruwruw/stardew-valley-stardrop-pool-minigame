@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace StardropPoolMinigame.Render.Drawers
 {
-    class ParticleEmitterDrawer : Drawer
+    internal class ParticleEmitterDrawer : Drawer
     {
         public ParticleEmitterDrawer(ParticleEmitter emitter) : base(emitter)
         {
@@ -37,15 +37,15 @@ namespace StardropPoolMinigame.Render.Drawers
             }
         }
 
-        protected override Rectangle GetRawSource()
-        {
-            return Textures.Particle.Spark.FRAME_1;
-        }
-
         protected override void DrawDebugVisuals(SpriteBatch batch)
         {
             DrawDebugPoint(batch, this._entity.GetAnchor());
             DrawDebugCircle(batch, this._entity.GetAnchor(), (int)Math.Round(((ParticleEmitter)this._entity).GetRadius()), Color.Red);
+        }
+
+        protected override Rectangle GetRawSource()
+        {
+            return Textures.Particle.Spark.FRAME_1;
         }
     }
 }

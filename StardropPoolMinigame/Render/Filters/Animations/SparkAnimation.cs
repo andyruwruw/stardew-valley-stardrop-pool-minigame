@@ -4,7 +4,7 @@ using System;
 
 namespace StardropPoolMinigame.Render.Filters
 {
-    class SparkAnimation : Animation
+    internal class SparkAnimation : Animation
     {
         public SparkAnimation(string key) : base(key, RenderConstants.Entities.Particle.Spark.FRAMES * RenderConstants.Entities.Particle.Spark.FRAME_DURATION)
         {

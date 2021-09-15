@@ -8,15 +8,15 @@ using StardropPoolMinigame.Utilities;
 
 namespace StardropPoolMinigame.Entities
 {
-    class BallButton : Entity
+    internal class BallButton : Entity
     {
         private Ball _ball;
+
+        private int _maxWidth;
 
         private Text _text;
 
         private string _textString;
-
-        private int _maxWidth;
 
         /// <summary>
         /// Creates button with rotating ball on hover.
@@ -63,14 +63,14 @@ namespace StardropPoolMinigame.Entities
             this.SetDrawer(new BallButtonDrawer(this));
         }
 
-        public override void Update()
+        public override void ClickCallback()
         {
-            base.Update();
+            Sound.PlaySound(SoundConstants.Feedback.BOTTON_PRESS);
+        }
 
-            if (this.IsHovered())
-            {
-                this._ball.GetOrientation().Roll(new Vector2(GameConstants.BallButton.HOVER_ROTATIONAL_SPEED, 0));
-            }
+        public Ball GetBall()
+        {
+            return this._ball;
         }
 
         public override string GetId()
@@ -78,9 +78,9 @@ namespace StardropPoolMinigame.Entities
             return $"ball-button-{this._id}";
         }
 
-        public override float GetTotalWidth()
+        public Text GetText()
         {
-            return (int)((GameConstants.Ball.RADIUS * 2) + RenderConstants.Entities.BallButton.INNER_PADDING + this._maxWidth);
+            return this._text;
         }
 
         public override float GetTotalHeight()
@@ -88,9 +88,9 @@ namespace StardropPoolMinigame.Entities
             return this._text.GetTotalHeight();
         }
 
-        public override void ClickCallback()
+        public override float GetTotalWidth()
         {
-            Sound.PlaySound(SoundConstants.Feedback.BOTTON_PRESS);
+            return (int)((GameConstants.Ball.RADIUS * 2) + RenderConstants.Entities.BallButton.INNER_PADDING + this._maxWidth);
         }
 
         public override void HoverCallback()
@@ -105,14 +105,14 @@ namespace StardropPoolMinigame.Entities
             this._text.SetTransitionState(transitionState, true);
         }
 
-        public Ball GetBall()
+        public override void Update()
         {
-            return this._ball;
-        }
+            base.Update();
 
-        public Text GetText()
-        {
-            return this._text;
+            if (this.IsHovered())
+            {
+                this._ball.GetOrientation().Roll(new Vector2(GameConstants.BallButton.HOVER_ROTATIONAL_SPEED, 0));
+            }
         }
     }
 }

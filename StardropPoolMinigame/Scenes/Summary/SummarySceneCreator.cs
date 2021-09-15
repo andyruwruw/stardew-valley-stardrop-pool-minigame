@@ -1,7 +1,7 @@
 ﻿namespace StardropPoolMinigame.Scenes
 {
     /// <inheritdoc cref="ISceneCreator"/>
-    class SummarySceneCreator : ISceneCreator
+    internal class SummarySceneCreator : ISceneCreator
     {
         /// <summary>
         /// Stored parameter for <see cref="DialogScene"/> creation.

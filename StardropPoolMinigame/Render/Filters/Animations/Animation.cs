@@ -1,10 +1,10 @@
-﻿using StardropPoolMinigame.Helpers;
+﻿using StardropPoolMinigame.Utilities;
 
 namespace StardropPoolMinigame.Render.Filters
 {
-    abstract class Animation : Filter
+    internal abstract class Animation : Filter
     {
-        int _intervalLength;
+        private int _intervalLength;
 
         public Animation(string key, int intervalLength) : base(key)
         {

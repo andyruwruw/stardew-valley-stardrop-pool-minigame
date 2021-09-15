@@ -4,7 +4,7 @@ using System;
 
 namespace StardropPoolMinigame.Render.Filters
 {
-    class ScaleUp : Transition
+    internal class ScaleUp : Transition
     {
         private float _startingScale;
 
@@ -36,16 +36,6 @@ namespace StardropPoolMinigame.Render.Filters
             this._startingScale = startingScale;
         }
 
-        public override string GetName()
-        {
-            return "scale-up";
-        }
-
-        public override Vector2 ExecuteDestination(Vector2 destination)
-        {
-            return destination;
-        }
-
         public override Color ExecuteColor(Color color)
         {
             if (this._keyframeOpacity)
@@ -61,11 +51,21 @@ namespace StardropPoolMinigame.Render.Filters
             return color;
         }
 
+        public override Vector2 ExecuteDestination(Vector2 destination)
+        {
+            return destination;
+        }
+
         public override float ExecuteScale(float scale)
         {
             float progress = this._type == TransitionState.Entering ? this.GetProgress() : this.GetInvertedProgress();
 
             return this._startingScale + ((1 - this._startingScale) * progress) + 0.001f;
+        }
+
+        public override string GetName()
+        {
+            return "scale-up";
         }
     }
 }

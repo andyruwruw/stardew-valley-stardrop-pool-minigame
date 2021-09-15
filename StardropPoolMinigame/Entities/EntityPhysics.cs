@@ -9,17 +9,17 @@ namespace StardropPoolMinigame.Entities
     /// <para><inheritdoc cref="Entity"/></para>
     /// <para>Includes a <see cref="PhysicsObject"/> to track velocity and acceleration.</para>
     /// </summary>
-    abstract class EntityPhysics : Entity
+    internal abstract class EntityPhysics : Entity
     {
-        /// <summary>
-        /// Tracks velocity and acceleration.
-        /// </summary>
-        private PhysicsObject _physics;
-
         /// <summary>
         /// Radius of perception for intangible interactions.
         /// </summary>
         private float _intangibleRadius;
+
+        /// <summary>
+        /// Tracks velocity and acceleration.
+        /// </summary>
+        private PhysicsObject _physics;
 
         /// <summary>
         /// Instantiates an <see cref="EntityPhysics"/>.
@@ -57,11 +57,23 @@ namespace StardropPoolMinigame.Entities
             this._intangibleRadius = intangibleRadius;
         }
 
-        /// <inheritdoc cref="Entity.Update"/>
-        public override void Update()
+        /// <inheritdoc cref="PhysicsObject.AddAcceleration"/>
+        public void AddAcceleration(Vector2 acceleration)
         {
-            this.UpdatePhysics();
-            base.Update();
+            this._physics.AddAcceleration(acceleration);
+        }
+
+        /// <inheritdoc cref="PhysicsObject.AddPosition"/>
+        public void AddPosition(Vector2 position)
+        {
+            this._physics.AddPosition(position);
+            this._anchor = this._physics.GetPosition();
+        }
+
+        /// <inheritdoc cref="PhysicsObject.AddVelocity"/>
+        public void AddVelocity(Vector2 velocity)
+        {
+            this._physics.AddVelocity(velocity);
         }
 
         /// <summary>
@@ -72,45 +84,16 @@ namespace StardropPoolMinigame.Entities
         {
         }
 
-        /// <inheritdoc cref="PhysicsObject.GetPosition"/>
-        public Vector2 GetPosition()
+        /// <inheritdoc cref="PhysicsObject.DivideAcceleration"/>
+        public void DivideAcceleration(Vector2 acceleration)
         {
-            return this._physics.GetPosition();
+            this._physics.DivideAcceleration(acceleration);
         }
 
-        /// <inheritdoc cref="PhysicsObject.SetPosition"/>
-        public void SetPosition(Vector2 position)
+        /// <inheritdoc cref="PhysicsObject.DivideAcceleration"/>
+        public void DivideAcceleration(float acceleration)
         {
-            this._physics.SetPosition(position);
-            this._anchor = position;
-        }
-
-        /// <inheritdoc cref="PhysicsObject.AddPosition"/>
-        public void AddPosition(Vector2 position)
-        {
-            this._physics.AddPosition(position);
-            this._anchor = this._physics.GetPosition();
-        }
-
-        /// <inheritdoc cref="PhysicsObject.SubtractPosition"/>
-        public void SubtractPosition(Vector2 position)
-        {
-            this._physics.SubtractPosition(position);
-            this._anchor = this._physics.GetPosition();
-        }
-
-        /// <inheritdoc cref="PhysicsObject.MultiplyPosition"/>
-        public void MultiplyPosition(Vector2 position)
-        {
-            this._physics.MultiplyPosition(position);
-            this._anchor = this._physics.GetPosition();
-        }
-
-        /// <inheritdoc cref="PhysicsObject.MultiplyPosition"/>
-        public void MultiplyPosition(float position)
-        {
-            this._physics.MultiplyPosition(position);
-            this._anchor = this._physics.GetPosition();
+            this._physics.DivideAcceleration(acceleration);
         }
 
         /// <inheritdoc cref="PhysicsObject.DividePosition"/>
@@ -125,42 +108,6 @@ namespace StardropPoolMinigame.Entities
         {
             this._physics.DividePosition(position);
             this._anchor = this._physics.GetPosition();
-        }
-
-        /// <inheritdoc cref="PhysicsObject.GetVelocity"/>
-        public Vector2 GetVelocity()
-        {
-            return this._physics.GetVelocity();
-        }
-
-        /// <inheritdoc cref="PhysicsObject.SetVelocity"/>
-        public void SetVelocity(Vector2 velocity)
-        {
-            this._physics.SetVelocity(velocity);
-        }
-
-        /// <inheritdoc cref="PhysicsObject.AddVelocity"/>
-        public void AddVelocity(Vector2 velocity)
-        {
-            this._physics.AddVelocity(velocity);
-        }
-
-        /// <inheritdoc cref="PhysicsObject.SubtractVelocity"/>
-        public void SubtractVelocity(Vector2 velocity)
-        {
-            this._physics.SubtractVelocity(velocity);
-        }
-
-        /// <inheritdoc cref="PhysicsObject.MultiplyVelocity"/>
-        public void MultiplyVelocity(Vector2 velocity)
-        {
-            this._physics.MultiplyVelocity(velocity);
-        }
-
-        /// <inheritdoc cref="PhysicsObject.MultiplyVelocity"/>
-        public void MultiplyVelocity(float velocity)
-        {
-            this._physics.MultiplyVelocity(velocity);
         }
 
         /// <inheritdoc cref="PhysicsObject.DivideVelocity"/>
@@ -181,22 +128,43 @@ namespace StardropPoolMinigame.Entities
             return this._physics.GetAcceleration();
         }
 
-        /// <inheritdoc cref="PhysicsObject.SetAcceleration"/>
-        public void SetAcceleration(Vector2 acceleration)
+        /// <summary>
+        /// Retrieves radius of perception for intangible interactions.
+        /// </summary>
+        /// <returns>Radius of perception for intangible interactions</returns>
+        public virtual float GetIntangibleRadius()
         {
-            this._physics.DividePosition(acceleration);
+            return this._intangibleRadius;
         }
 
-        /// <inheritdoc cref="PhysicsObject.AddAcceleration"/>
-        public void AddAcceleration(Vector2 acceleration)
+        /// <inheritdoc cref="PhysicsObject.GetMass"/>
+        public virtual float GetMass()
         {
-            this._physics.AddAcceleration(acceleration);
+            return this._physics.GetMass();
         }
 
-        /// <inheritdoc cref="PhysicsObject.SubtractAcceleration"/>
-        public void SubtractAcceleration(Vector2 acceleration)
+        /// <inheritdoc cref="PhysicsObject.GetMaximumAcceleration"/>
+        public virtual float GetMaximumAcceleration()
         {
-            this._physics.SubtractAcceleration(acceleration);
+            return this._physics.GetMaximumAcceleration();
+        }
+
+        /// <inheritdoc cref="PhysicsObject.GetMaximumVelocity"/>
+        public virtual float GetMaximumVelocity()
+        {
+            return this._physics.GetMaximumVelocity();
+        }
+
+        /// <inheritdoc cref="PhysicsObject.GetPosition"/>
+        public Vector2 GetPosition()
+        {
+            return this._physics.GetPosition();
+        }
+
+        /// <inheritdoc cref="PhysicsObject.GetVelocity"/>
+        public Vector2 GetVelocity()
+        {
+            return this._physics.GetVelocity();
         }
 
         /// <inheritdoc cref="PhysicsObject.MultiplyAcceleration"/>
@@ -211,61 +179,36 @@ namespace StardropPoolMinigame.Entities
             this._physics.MultiplyAcceleration(acceleration);
         }
 
-        /// <inheritdoc cref="PhysicsObject.DivideAcceleration"/>
-        public void DivideAcceleration(Vector2 acceleration)
+        /// <inheritdoc cref="PhysicsObject.MultiplyPosition"/>
+        public void MultiplyPosition(Vector2 position)
         {
-            this._physics.DivideAcceleration(acceleration);
+            this._physics.MultiplyPosition(position);
+            this._anchor = this._physics.GetPosition();
         }
 
-        /// <inheritdoc cref="PhysicsObject.DivideAcceleration"/>
-        public void DivideAcceleration(float acceleration)
+        /// <inheritdoc cref="PhysicsObject.MultiplyPosition"/>
+        public void MultiplyPosition(float position)
         {
-            this._physics.DivideAcceleration(acceleration);
+            this._physics.MultiplyPosition(position);
+            this._anchor = this._physics.GetPosition();
         }
 
-        /// <inheritdoc cref="PhysicsObject.GetMass"/>
-        public virtual float GetMass()
+        /// <inheritdoc cref="PhysicsObject.MultiplyVelocity"/>
+        public void MultiplyVelocity(Vector2 velocity)
         {
-            return this._physics.GetMass();
+            this._physics.MultiplyVelocity(velocity);
         }
 
-        /// <inheritdoc cref="PhysicsObject.SetMass"/>
-        public virtual void SetMass(float mass)
+        /// <inheritdoc cref="PhysicsObject.MultiplyVelocity"/>
+        public void MultiplyVelocity(float velocity)
         {
-            this._physics.SetMass(mass);
+            this._physics.MultiplyVelocity(velocity);
         }
 
-        /// <inheritdoc cref="PhysicsObject.GetMaximumVelocity"/>
-        public virtual float GetMaximumVelocity()
+        /// <inheritdoc cref="PhysicsObject.SetAcceleration"/>
+        public void SetAcceleration(Vector2 acceleration)
         {
-            return this._physics.GetMaximumVelocity();
-        }
-
-        /// <inheritdoc cref="PhysicsObject.SetMaximumVelocity"/>
-        public virtual void SetMaximumVelocity(float maximumVelocity)
-        {
-            this._physics.SetMaximumVelocity(maximumVelocity);
-        }
-
-        /// <inheritdoc cref="PhysicsObject.GetMaximumAcceleration"/>
-        public virtual float GetMaximumAcceleration()
-        {
-            return this._physics.GetMaximumAcceleration();
-        }
-
-        /// <inheritdoc cref="PhysicsObject.SetMaximumAcceleration"/>
-        public virtual void SetMaximumAcceleration(float maximumAcceleration)
-        {
-            this._physics.SetMaximumAcceleration(maximumAcceleration);
-        }
-
-        /// <summary>
-        /// Retrieves radius of perception for intangible interactions.
-        /// </summary>
-        /// <returns>Radius of perception for intangible interactions</returns>
-        public virtual float GetIntangibleRadius()
-        {
-            return this._intangibleRadius;
+            this._physics.DividePosition(acceleration);
         }
 
         /// <summary>
@@ -275,6 +218,63 @@ namespace StardropPoolMinigame.Entities
         public virtual void SetIntangibleRadius(float intangibleRadius)
         {
             this._intangibleRadius = intangibleRadius;
+        }
+
+        /// <inheritdoc cref="PhysicsObject.SetMass"/>
+        public virtual void SetMass(float mass)
+        {
+            this._physics.SetMass(mass);
+        }
+
+        /// <inheritdoc cref="PhysicsObject.SetMaximumAcceleration"/>
+        public virtual void SetMaximumAcceleration(float maximumAcceleration)
+        {
+            this._physics.SetMaximumAcceleration(maximumAcceleration);
+        }
+
+        /// <inheritdoc cref="PhysicsObject.SetMaximumVelocity"/>
+        public virtual void SetMaximumVelocity(float maximumVelocity)
+        {
+            this._physics.SetMaximumVelocity(maximumVelocity);
+        }
+
+        /// <inheritdoc cref="PhysicsObject.SetPosition"/>
+        public void SetPosition(Vector2 position)
+        {
+            this._physics.SetPosition(position);
+            this._anchor = position;
+        }
+
+        /// <inheritdoc cref="PhysicsObject.SetVelocity"/>
+        public void SetVelocity(Vector2 velocity)
+        {
+            this._physics.SetVelocity(velocity);
+        }
+
+        /// <inheritdoc cref="PhysicsObject.SubtractAcceleration"/>
+        public void SubtractAcceleration(Vector2 acceleration)
+        {
+            this._physics.SubtractAcceleration(acceleration);
+        }
+
+        /// <inheritdoc cref="PhysicsObject.SubtractPosition"/>
+        public void SubtractPosition(Vector2 position)
+        {
+            this._physics.SubtractPosition(position);
+            this._anchor = this._physics.GetPosition();
+        }
+
+        /// <inheritdoc cref="PhysicsObject.SubtractVelocity"/>
+        public void SubtractVelocity(Vector2 velocity)
+        {
+            this._physics.SubtractVelocity(velocity);
+        }
+
+        /// <inheritdoc cref="Entity.Update"/>
+        public override void Update()
+        {
+            this.UpdatePhysics();
+            base.Update();
         }
 
         /// <inheritdoc cref="PhysicsObject.Update"/>

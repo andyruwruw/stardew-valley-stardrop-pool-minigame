@@ -1,6 +1,6 @@
 namespace StardropPoolMinigame.Powerups
 {
-    class Pressure : IPowerup
+    internal class Pressure : IPowerup
     {
         public Pressure()
         {

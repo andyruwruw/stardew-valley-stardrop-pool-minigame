@@ -9,10 +9,29 @@ using System.Collections.Generic;
 
 namespace StardropPoolMinigame.Rules
 {
-    class TugOfWar : RuleSet
+    internal class TugOfWar : RuleSet
     {
         public TugOfWar() : base()
         {
+        }
+
+        public override IList<GameEvent> BallPocketed(
+            IPlayer player,
+            Ball ball,
+            TableSegment pocket,
+            IList<Ball> remaining,
+            TableSegment target = null)
+        {
+            IList<GameEvent> events = new List<GameEvent>();
+
+            return events;
+        }
+
+        public override IList<GameEvent> FirstBallHit(IPlayer player, Ball ball)
+        {
+            IList<GameEvent> events = new List<GameEvent>();
+
+            return events;
         }
 
         public override Tuple<IList<Ball>, QuadTree<EntityPhysics>> GenerateInitialBalls(Vector2 tableTopLeft, Vector2 cueBallStart, Vector2 footSpot, Direction rackOrientation)
@@ -35,25 +54,6 @@ namespace StardropPoolMinigame.Rules
         }
 
         public override IList<GameEvent> NoBallHit(IList<Ball> remaining)
-        {
-            IList<GameEvent> events = new List<GameEvent>();
-
-            return events;
-        }
-
-        public override IList<GameEvent> FirstBallHit(IPlayer player, Ball ball)
-        {
-            IList<GameEvent> events = new List<GameEvent>();
-
-            return events;
-        }
-
-        public override IList<GameEvent> BallPocketed(
-            IPlayer player,
-            Ball ball,
-            TableSegment pocket,
-            IList<Ball> remaining,
-            TableSegment target = null)
         {
             IList<GameEvent> events = new List<GameEvent>();
 

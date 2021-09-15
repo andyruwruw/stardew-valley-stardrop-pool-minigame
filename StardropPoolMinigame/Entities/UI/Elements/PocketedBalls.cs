@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace StardropPoolMinigame.Entities
 {
-    class PocketedBalls : Entity
+    internal class PocketedBalls : Entity
     {
         private IList<Ball> _balls;
 
@@ -29,41 +29,6 @@ namespace StardropPoolMinigame.Entities
             this.SetDrawer(new PocketedBallsDrawer(this));
         }
 
-        public override string GetId()
-        {
-            return $"pocketed-balls-{this._id}";
-        }
-
-        public override float GetTotalHeight()
-        {
-            return Textures.PocketedBalls.BORDER_BOX.Height + Textures.PocketedBalls.SUPPORTS.Height;
-        }
-
-        public override float GetTotalWidth()
-        {
-            return Textures.PocketedBalls.BORDER_BOX.Width;
-        }
-
-        public override void SetTransitionState(TransitionState transitionState, bool start = false)
-        {
-            base.SetTransitionState(transitionState, start);
-
-            foreach (Ball ball in this._balls)
-            {
-                ball.SetTransitionState(transitionState, start);
-            }
-        }
-
-        public int Count()
-        {
-            return this._balls.Count;
-        }
-
-        public void Clear()
-        {
-            this._balls.Clear();
-        }
-
         public void Add(Ball ball)
         {
             float segmentWidth = (Textures.PocketedBalls.BORDER_BOX.Width - (RenderConstants.Entities.PocketedBalls.PADDING * 2)) / 7;
@@ -79,6 +44,36 @@ namespace StardropPoolMinigame.Entities
             this._balls.Add(ball);
         }
 
+        public void Clear()
+        {
+            this._balls.Clear();
+        }
+
+        public int Count()
+        {
+            return this._balls.Count;
+        }
+
+        public IList<Ball> GetBalls()
+        {
+            return this._balls;
+        }
+
+        public override string GetId()
+        {
+            return $"pocketed-balls-{this._id}";
+        }
+
+        public override float GetTotalHeight()
+        {
+            return Textures.PocketedBalls.BORDER_BOX.Height + Textures.PocketedBalls.SUPPORTS.Height;
+        }
+
+        public override float GetTotalWidth()
+        {
+            return Textures.PocketedBalls.BORDER_BOX.Width;
+        }
+
         public int IndexOf(Ball ball)
         {
             return this._balls.IndexOf(ball);
@@ -89,9 +84,14 @@ namespace StardropPoolMinigame.Entities
             this._balls.Remove(ball);
         }
 
-        public IList<Ball> GetBalls()
+        public override void SetTransitionState(TransitionState transitionState, bool start = false)
         {
-            return this._balls;
+            base.SetTransitionState(transitionState, start);
+
+            foreach (Ball ball in this._balls)
+            {
+                ball.SetTransitionState(transitionState, start);
+            }
         }
     }
 }

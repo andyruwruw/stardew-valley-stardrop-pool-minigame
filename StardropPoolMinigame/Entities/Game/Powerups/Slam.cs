@@ -1,6 +1,6 @@
 namespace StardropPoolMinigame.Powerups
 {
-    class Slam : IPowerup
+    internal class Slam : IPowerup
     {
         public Slam()
         {

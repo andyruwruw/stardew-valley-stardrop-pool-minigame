@@ -2,7 +2,7 @@
 
 namespace StardropPoolMinigame.Render.Filters
 {
-    class Rotate : Animation
+    internal class Rotate : Animation
     {
         public Rotate(string key, int speed) : base(key, speed)
         {

@@ -6,7 +6,7 @@ using StardropPoolMinigame.Render.Filters;
 
 namespace StardropPoolMinigame.Entities
 {
-    class BarShelves : Entity
+    internal class BarShelves : Entity
     {
         public BarShelves(
             Origin origin,
@@ -29,14 +29,14 @@ namespace StardropPoolMinigame.Entities
             return $"bar-shelves-{this._id}";
         }
 
-        public override float GetTotalWidth()
-        {
-            return Textures.BAR_SHELVES.Width;
-        }
-
         public override float GetTotalHeight()
         {
             return Textures.BAR_SHELVES.Height;
+        }
+
+        public override float GetTotalWidth()
+        {
+            return Textures.BAR_SHELVES.Width;
         }
     }
 }

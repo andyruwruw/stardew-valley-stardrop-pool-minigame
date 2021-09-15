@@ -8,13 +8,9 @@ using StardropPoolMinigame.Utilities;
 
 namespace StardropPoolMinigame.Entities
 {
-    class Portrait : Entity
+    internal class Portrait : Entity
     {
-        private NPCName _name;
-
         private PortraitEmotion _emotion;
-
-        private bool _isSilhouette;
 
         private bool _isDarker;
 
@@ -22,9 +18,13 @@ namespace StardropPoolMinigame.Entities
 
         private bool _isOnFire;
 
-        private PortraitFire _portraitFire;
-
         private bool _isShining;
+
+        private bool _isSilhouette;
+
+        private NPCName _name;
+
+        private PortraitFire _portraitFire;
 
         private PortraitRays _portraitRays;
 
@@ -73,49 +73,9 @@ namespace StardropPoolMinigame.Entities
             this.SetDrawer(new PortraitDrawer(this));
         }
 
-        public override string GetId()
-        {
-            return $"portrait-{this._id}";
-        }
-
-        public override void Update()
-        {
-            base.Update();
-
-
-        }
-
         public override void ClickCallback()
         {
             Sound.PlaySound(SoundConstants.Feedback.BOTTON_PRESS);
-        }
-
-        public override void HoverCallback()
-        {
-            if (this._isHoverable)
-            {
-                Sound.PlaySound(SoundConstants.Feedback.BUTTON_HOVER);
-            }
-        }
-
-        public override float GetTotalWidth()
-        {
-            return Textures.Portrait.Sam.DEFAULT.Width;
-        }
-
-        public override float GetTotalHeight()
-        {
-            return Textures.Portrait.Sam.DEFAULT.Height;
-        }
-
-        public NPCName GetName()
-        {
-            return this._name;
-        }
-
-        public void SetEmotion(PortraitEmotion emotion)
-        {
-            this._emotion = emotion;
         }
 
         public PortraitEmotion GetEmotion()
@@ -123,44 +83,14 @@ namespace StardropPoolMinigame.Entities
             return this._emotion;
         }
 
-        public bool IsSilhouette()
+        public override string GetId()
         {
-            return this._isSilhouette;
+            return $"portrait-{this._id}";
         }
 
-        public void SetSilhouette(bool isSilhouette)
+        public NPCName GetName()
         {
-            this._isSilhouette = isSilhouette;
-        }
-
-        public bool IsDarker()
-        {
-            return this._isDarker;
-        }
-
-        public void SetDarker(bool isDarker)
-        {
-            this._isDarker = isDarker;
-        }
-
-        public bool IsOnFire()
-        {
-            return this._isOnFire;
-        }
-
-        public void SetIsOnFire(bool isOnFire)
-        {
-            this._isOnFire = isOnFire;
-        }
-
-        public bool IsShining()
-        {
-            return this._isShining;
-        }
-
-        public void SetIsShining(bool isShining)
-        {
-            this._isShining = isShining;
+            return this._name;
         }
 
         public PortraitFire GetPortraitFire()
@@ -171,6 +101,74 @@ namespace StardropPoolMinigame.Entities
         public PortraitRays GetPortraitRays()
         {
             return this._portraitRays;
+        }
+
+        public override float GetTotalHeight()
+        {
+            return Textures.Portrait.Sam.DEFAULT.Height;
+        }
+
+        public override float GetTotalWidth()
+        {
+            return Textures.Portrait.Sam.DEFAULT.Width;
+        }
+
+        public override void HoverCallback()
+        {
+            if (this._isHoverable)
+            {
+                Sound.PlaySound(SoundConstants.Feedback.BUTTON_HOVER);
+            }
+        }
+
+        public bool IsDarker()
+        {
+            return this._isDarker;
+        }
+
+        public bool IsOnFire()
+        {
+            return this._isOnFire;
+        }
+
+        public bool IsShining()
+        {
+            return this._isShining;
+        }
+
+        public bool IsSilhouette()
+        {
+            return this._isSilhouette;
+        }
+
+        public void SetDarker(bool isDarker)
+        {
+            this._isDarker = isDarker;
+        }
+
+        public void SetEmotion(PortraitEmotion emotion)
+        {
+            this._emotion = emotion;
+        }
+
+        public void SetIsOnFire(bool isOnFire)
+        {
+            this._isOnFire = isOnFire;
+        }
+
+        public void SetIsShining(bool isShining)
+        {
+            this._isShining = isShining;
+        }
+
+        public void SetSilhouette(bool isSilhouette)
+        {
+            this._isSilhouette = isSilhouette;
+        }
+
+        public override void Update()
+        {
+            base.Update();
         }
     }
 }

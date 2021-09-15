@@ -8,17 +8,17 @@ using StardropPoolMinigame.Utilities;
 
 namespace StardropPoolMinigame.Scenes
 {
-    class CharacterSelectScene : Scene
+    internal class CharacterSelectScene : Scene
     {
-        /// <summary>
-        /// Name of selected opponent
-        /// </summary>
-        NPCName _opponentName;
-
         /// <summary>
         /// Class of selected opponent
         /// </summary>
-        ComputerOpponent _opponent;
+        private ComputerOpponent _opponent;
+
+        /// <summary>
+        /// Name of selected opponent
+        /// </summary>
+        private NPCName _opponentName;
 
         /// <summary>
         /// Instantiates <see cref="CharacterSelectScene"/>.
@@ -32,12 +32,6 @@ namespace StardropPoolMinigame.Scenes
         public override string GetKey()
         {
             return "charater-select-scene";
-        }
-
-        /// <inheritdoc cref="Scene.Update"/>
-        public override void Update()
-        {
-            this.UpdateEntities();
         }
 
         /// <inheritdoc cref="Scene.ReceiveLeftClick"/>
@@ -63,6 +57,12 @@ namespace StardropPoolMinigame.Scenes
                 Sound.StopMusic();
                 this.CharacterSelected();
             }
+        }
+
+        /// <inheritdoc cref="Scene.Update"/>
+        public override void Update()
+        {
+            this.UpdateEntities();
         }
 
         /// <inheritdoc cref="Scene.AddEntities"/>
@@ -194,81 +194,6 @@ namespace StardropPoolMinigame.Scenes
         }
 
         /// <summary>
-        /// Updates entities based on state 
-        /// </summary>
-        private void UpdatePortraits()
-        {
-            // Darken out unselected portraits
-            foreach (string key in StringConstants.Entities.CharacterSelect.PORTRAITS)
-            {
-                if (((Portrait)this._entities[key]).GetName() == NPCName.Abigail)
-                {
-                    ((Portrait)this._entities[key]).SetDarker(this._opponentName != ((Portrait)this._entities[key]).GetName() && Save.IsAbigailUnlocked());
-                    ((Portrait)this._entities[key]).SetSilhouette(!Save.IsAbigailUnlocked());
-                }
-                else if (((Portrait)this._entities[key]).GetName() == NPCName.Gus)
-                {
-                    ((Portrait)this._entities[key]).SetDarker(this._opponentName != ((Portrait)this._entities[key]).GetName() && Save.IsGusUnlocked());
-                    ((Portrait)this._entities[key]).SetSilhouette(!Save.IsGusUnlocked());
-                }
-                else
-                {
-                    ((Portrait)this._entities[key]).SetDarker(this._opponentName != ((Portrait)this._entities[key]).GetName());
-                }
-            }
-
-            // Reposition cursor and set name to selected opponent
-            float centerX = RenderConstants.MinigameScreen.WIDTH / 2;
-            float cursorTopMargin = Textures.BAR_SHELVES.Height - Textures.Portrait.Sam.DEFAULT.Height - RenderConstants.Scenes.CharacterSelect.Cursor.BOTTOM_MARGIN;
-            float portraitSeparation = Textures.Portrait.Sam.DEFAULT.Width;
-
-            Vector2 cursorAnchor = new Vector2(centerX - (portraitSeparation * 1.5f), cursorTopMargin);
-            string selectedOpponentName = Sam.Name;
-
-            switch (this._opponentName)
-            {
-                case NPCName.Sebastian:
-                    cursorAnchor = new Vector2(centerX - (portraitSeparation * 0.55f), cursorTopMargin);
-                    selectedOpponentName = Sebastian.Name;
-                    ((SubmitButton)this._entities[StringConstants.Entities.CharacterSelect.CHALLENGE_BUTTON]).SetDisabled(false);
-                    break;
-                case NPCName.Abigail:
-                    cursorAnchor = new Vector2(centerX + (portraitSeparation * 0.4f), cursorTopMargin);
-                    if (Save.IsAbigailUnlocked())
-                    {
-                        selectedOpponentName = Abigail.Name;
-                        ((SubmitButton)this._entities[StringConstants.Entities.CharacterSelect.CHALLENGE_BUTTON]).SetDisabled(false);
-                    } else
-                    {
-                        selectedOpponentName = "????";
-                        ((SubmitButton)this._entities[StringConstants.Entities.CharacterSelect.CHALLENGE_BUTTON]).SetDisabled(true);
-                    }
-                    break;
-                case NPCName.Gus:
-                    cursorAnchor = new Vector2(centerX + (portraitSeparation * 1.4f), cursorTopMargin);
-                    if (Save.IsGusUnlocked())
-                    {
-                        selectedOpponentName = Gus.Name;
-                        ((SubmitButton)this._entities[StringConstants.Entities.CharacterSelect.CHALLENGE_BUTTON]).SetDisabled(false);
-                    }
-                    else
-                    {
-                        selectedOpponentName = "????";
-                        ((SubmitButton)this._entities[StringConstants.Entities.CharacterSelect.CHALLENGE_BUTTON]).SetDisabled(true);
-                    }
-                    break;
-                default:
-                    ((SubmitButton)this._entities[StringConstants.Entities.CharacterSelect.CHALLENGE_BUTTON]).SetDisabled(false);
-                    break;
-            }
-
-            this._entities[StringConstants.Entities.CharacterSelect.CURSOR].SetAnchor(cursorAnchor);
-            this._entities[StringConstants.Entities.CharacterSelect.CURSOR].SetTransitionState(TransitionState.Entering, true);
-            ((Text)this._entities[StringConstants.Entities.CharacterSelect.CURSOR]).SetText(selectedOpponentName);
-            ((Text)this._entities[StringConstants.Entities.CharacterSelect.CURSOR]).SetTransitionState(TransitionState.Entering, true);
-        }
-
-        /// <summary>
         /// Initiate exiting transition and create <see cref="GameScene"/> / <see cref="DialogScene"/>
         /// </summary>
         private void CharacterSelected()
@@ -307,6 +232,85 @@ namespace StardropPoolMinigame.Scenes
 
             ISceneCreator gameSceneCreator = new GameSceneCreator(Player.GetMainPlayer(), this._opponent);
             this._newScene = new DialogScene(gameSceneCreator);
+        }
+
+        /// <summary>
+        /// Updates entities based on state
+        /// </summary>
+        private void UpdatePortraits()
+        {
+            // Darken out unselected portraits
+            foreach (string key in StringConstants.Entities.CharacterSelect.PORTRAITS)
+            {
+                if (((Portrait)this._entities[key]).GetName() == NPCName.Abigail)
+                {
+                    ((Portrait)this._entities[key]).SetDarker(this._opponentName != ((Portrait)this._entities[key]).GetName() && Save.IsAbigailUnlocked());
+                    ((Portrait)this._entities[key]).SetSilhouette(!Save.IsAbigailUnlocked());
+                }
+                else if (((Portrait)this._entities[key]).GetName() == NPCName.Gus)
+                {
+                    ((Portrait)this._entities[key]).SetDarker(this._opponentName != ((Portrait)this._entities[key]).GetName() && Save.IsGusUnlocked());
+                    ((Portrait)this._entities[key]).SetSilhouette(!Save.IsGusUnlocked());
+                }
+                else
+                {
+                    ((Portrait)this._entities[key]).SetDarker(this._opponentName != ((Portrait)this._entities[key]).GetName());
+                }
+            }
+
+            // Reposition cursor and set name to selected opponent
+            float centerX = RenderConstants.MinigameScreen.WIDTH / 2;
+            float cursorTopMargin = Textures.BAR_SHELVES.Height - Textures.Portrait.Sam.DEFAULT.Height - RenderConstants.Scenes.CharacterSelect.Cursor.BOTTOM_MARGIN;
+            float portraitSeparation = Textures.Portrait.Sam.DEFAULT.Width;
+
+            Vector2 cursorAnchor = new Vector2(centerX - (portraitSeparation * 1.5f), cursorTopMargin);
+            string selectedOpponentName = Sam.Name;
+
+            switch (this._opponentName)
+            {
+                case NPCName.Sebastian:
+                    cursorAnchor = new Vector2(centerX - (portraitSeparation * 0.55f), cursorTopMargin);
+                    selectedOpponentName = Sebastian.Name;
+                    ((SubmitButton)this._entities[StringConstants.Entities.CharacterSelect.CHALLENGE_BUTTON]).SetDisabled(false);
+                    break;
+
+                case NPCName.Abigail:
+                    cursorAnchor = new Vector2(centerX + (portraitSeparation * 0.4f), cursorTopMargin);
+                    if (Save.IsAbigailUnlocked())
+                    {
+                        selectedOpponentName = Abigail.Name;
+                        ((SubmitButton)this._entities[StringConstants.Entities.CharacterSelect.CHALLENGE_BUTTON]).SetDisabled(false);
+                    }
+                    else
+                    {
+                        selectedOpponentName = "????";
+                        ((SubmitButton)this._entities[StringConstants.Entities.CharacterSelect.CHALLENGE_BUTTON]).SetDisabled(true);
+                    }
+                    break;
+
+                case NPCName.Gus:
+                    cursorAnchor = new Vector2(centerX + (portraitSeparation * 1.4f), cursorTopMargin);
+                    if (Save.IsGusUnlocked())
+                    {
+                        selectedOpponentName = Gus.Name;
+                        ((SubmitButton)this._entities[StringConstants.Entities.CharacterSelect.CHALLENGE_BUTTON]).SetDisabled(false);
+                    }
+                    else
+                    {
+                        selectedOpponentName = "????";
+                        ((SubmitButton)this._entities[StringConstants.Entities.CharacterSelect.CHALLENGE_BUTTON]).SetDisabled(true);
+                    }
+                    break;
+
+                default:
+                    ((SubmitButton)this._entities[StringConstants.Entities.CharacterSelect.CHALLENGE_BUTTON]).SetDisabled(false);
+                    break;
+            }
+
+            this._entities[StringConstants.Entities.CharacterSelect.CURSOR].SetAnchor(cursorAnchor);
+            this._entities[StringConstants.Entities.CharacterSelect.CURSOR].SetTransitionState(TransitionState.Entering, true);
+            ((Text)this._entities[StringConstants.Entities.CharacterSelect.CURSOR]).SetText(selectedOpponentName);
+            ((Text)this._entities[StringConstants.Entities.CharacterSelect.CURSOR]).SetTransitionState(TransitionState.Entering, true);
         }
     }
 }

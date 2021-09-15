@@ -7,7 +7,7 @@ namespace StardropPoolMinigame.Primitives
     /// <summary>
     /// Simple circle class
     /// </summary>
-    class Circle : IRange
+    internal class Circle : IRange
     {
         /// <summary>
         /// <see cref="Vector2"/> of the center of the <see cref="Circle"/>
@@ -31,25 +31,10 @@ namespace StardropPoolMinigame.Primitives
             return VectorHelper.Pythagorean(point, this._center) <= this._radius;
         }
 
-        /// <inheritdoc cref="IRange.Intersects(IRange)"/>
-        public bool Intersects(IRange other)
-        {
-            return IntersectionHelper.IsIntersecting(this, other);
-        }
-
         /// <inheritdoc cref="IRange.GetCenter"/>
         public Vector2 GetCenter()
         {
             return this._center;
-        }
-
-        /// <summary>
-        /// Sets the center of the <see cref="Circle"/>
-        /// </summary>
-        /// <param name="center"><see cref="Vector2"/> of new center</param>
-        public void SetCenter(Vector2 center)
-        {
-            this._center = center;
         }
 
         /// <summary>
@@ -59,6 +44,21 @@ namespace StardropPoolMinigame.Primitives
         public float GetRadius()
         {
             return this._radius;
+        }
+
+        /// <inheritdoc cref="IRange.Intersects(IRange)"/>
+        public bool Intersects(IRange other)
+        {
+            return IntersectionHelper.IsIntersecting(this, other);
+        }
+
+        /// <summary>
+        /// Sets the center of the <see cref="Circle"/>
+        /// </summary>
+        /// <param name="center"><see cref="Vector2"/> of new center</param>
+        public void SetCenter(Vector2 center)
+        {
+            this._center = center;
         }
 
         /// <summary>

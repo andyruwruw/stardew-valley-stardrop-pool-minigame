@@ -13,24 +13,24 @@ namespace StardropPoolMinigame.Entities
     /// <summary>
     /// <see cref="Ball"/> in pool game.
     /// </summary>
-    class Ball : EntityPhysics
+    internal class Ball : EntityPhysics
     {
+        private bool _isFlashing;
+
+        private bool _isHighlighted;
+
+        private bool _isPocketed;
+
+        private float _massMultiplier;
+
         /// <summary>
         /// <see cref="Ball"/> number
         /// </summary>
         private int _number;
 
-        private float radius;
-
         private Orientation _orientation;
 
-        private float _massMultiplier;
-
-        private bool _isHighlighted;
-
-        private bool _isFlashing;
-
-        private bool _isPocketed;
+        private float radius;
 
         public Ball(
             Vector2 center,
@@ -90,71 +90,6 @@ namespace StardropPoolMinigame.Entities
             this.SetDrawer(new BallDrawer(this));
         }
 
-        /// <inheritdoc cref="EntityPhysics.GetId"/>
-        public override string GetId()
-        {
-            return $"ball-{this._id}";
-        }
-
-        /// <inheritdoc cref="EntityPhysics.Update"/>
-        public override void Update()
-        {
-            this.UpdateVectors();
-            base.Update();
-        }
-
-        public void Update(IList<IEntity> neighbors, TableSegment tableSegment, IDictionary<IEntity, IList<IEntity>> collisionsHandled)
-        {
-            this.UpdateInteractions(neighbors, tableSegment, collisionsHandled);
-            this.UpdateVectors();
-            base.Update();
-        }
-
-        /// <inheritdoc cref="EntityPhysics.GetTotalWidth"/>
-        public override float GetTotalWidth()
-        {
-            return GameConstants.Ball.RADIUS * 2;
-        }
-
-        /// <inheritdoc cref="EntityPhysics.GetTotalHeight"/>
-        public override float GetTotalHeight()
-        {
-            return GameConstants.Ball.RADIUS * 2;
-        }
-
-        
-        public Orientation GetOrientation()
-        {
-            return this._orientation;
-        }
-
-        public override float GetMass()
-        {
-            return GameConstants.Ball.MASS * this._massMultiplier;
-        }
-
-        public int GetNumber()
-        {
-            return _number;
-        }
-
-        public BallType GetBallType()
-        {
-            if (this._number == 0)
-            {
-                return BallType.White;
-            }
-            if (this._number <= 8)
-            {
-                return BallType.Solid;
-            }
-            if (this._number > 8)
-            {
-                return BallType.Stripped;
-            }
-            return BallType.Any;
-        }
-
         public BallColor GetBallColor()
         {
             if (this._number == 0)
@@ -183,23 +118,69 @@ namespace StardropPoolMinigame.Entities
             }
         }
 
-        public bool IsHighlighted()
+        public BallType GetBallType()
         {
-            return this._isHighlighted;
+            if (this._number == 0)
+            {
+                return BallType.White;
+            }
+            if (this._number <= 8)
+            {
+                return BallType.Solid;
+            }
+            if (this._number > 8)
+            {
+                return BallType.Stripped;
+            }
+            return BallType.Any;
         }
 
-        public void SetIsHighlighted(bool state)
+        /// <inheritdoc cref="EntityPhysics.GetId"/>
+        public override string GetId()
         {
-            if (state)
-            {
-                this._isFlashing = !state;
-            }
-            this._isHighlighted = state;
+            return $"ball-{this._id}";
+        }
+
+        public override float GetMass()
+        {
+            return GameConstants.Ball.MASS * this._massMultiplier;
+        }
+
+        public int GetNumber()
+        {
+            return _number;
+        }
+
+        public Orientation GetOrientation()
+        {
+            return this._orientation;
+        }
+
+        /// <inheritdoc cref="EntityPhysics.GetTotalHeight"/>
+        public override float GetTotalHeight()
+        {
+            return GameConstants.Ball.RADIUS * 2;
+        }
+
+        /// <inheritdoc cref="EntityPhysics.GetTotalWidth"/>
+        public override float GetTotalWidth()
+        {
+            return GameConstants.Ball.RADIUS * 2;
         }
 
         public bool IsFlashing()
         {
             return this._isFlashing;
+        }
+
+        public bool IsHighlighted()
+        {
+            return this._isHighlighted;
+        }
+
+        public bool IsPocketed()
+        {
+            return this._isPocketed;
         }
 
         public void SetIsFlashing(bool state)
@@ -211,14 +192,32 @@ namespace StardropPoolMinigame.Entities
             this._isFlashing = state;
         }
 
-        public bool IsPocketed()
+        public void SetIsHighlighted(bool state)
         {
-            return this._isPocketed;
+            if (state)
+            {
+                this._isFlashing = !state;
+            }
+            this._isHighlighted = state;
         }
 
         public void SetPocketed(bool state)
         {
             this._isPocketed = state;
+        }
+
+        /// <inheritdoc cref="EntityPhysics.Update"/>
+        public override void Update()
+        {
+            this.UpdateVectors();
+            base.Update();
+        }
+
+        public void Update(IList<IEntity> neighbors, TableSegment tableSegment, IDictionary<IEntity, IList<IEntity>> collisionsHandled)
+        {
+            this.UpdateInteractions(neighbors, tableSegment, collisionsHandled);
+            this.UpdateVectors();
+            base.Update();
         }
 
         private void UpdateInteractions(IList<IEntity> neighbors, TableSegment tableSegment, IDictionary<IEntity, IList<IEntity>> collisionsHandled)
@@ -232,8 +231,10 @@ namespace StardropPoolMinigame.Entities
                 {
                     Sound.PlaySound(SoundConstants.Ball.COLLIDING);
                     RealPhysics.Bounce(this, ball);
-                } else if (ball.GetId() != this.GetId()
-                    && (!collisionsHandled.ContainsKey(ball) || !collisionsHandled[ball].Contains(this))) {
+                }
+                else if (ball.GetId() != this.GetId()
+                  && (!collisionsHandled.ContainsKey(ball) || !collisionsHandled[ball].Contains(this)))
+                {
                     RealPhysics.Bounce(this, ball, true);
                 }
             }
@@ -274,7 +275,8 @@ namespace StardropPoolMinigame.Entities
             if (Operators.GetMagnitude(this._velocity) < GameConstants.Ball.MINIMUM_VELOCITY && Operators.GetMagnitude(this._velocity) > 0)
             {
                 this._velocity = Vector2.Zero;
-            } else
+            }
+            else
             {
                 Vector2 friction = Vector2.Multiply(this._velocity, GameConstants.Ball.FRICTION_ACCELERATION);
 

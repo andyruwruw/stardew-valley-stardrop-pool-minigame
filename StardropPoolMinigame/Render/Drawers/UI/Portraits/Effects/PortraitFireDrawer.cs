@@ -4,7 +4,7 @@ using System;
 
 namespace StardropPoolMinigame.Render.Drawers
 {
-    class PortraitFireDrawer : Drawer
+    internal class PortraitFireDrawer : Drawer
     {
         public PortraitFireDrawer(PortraitFire fire) : base(fire)
         {

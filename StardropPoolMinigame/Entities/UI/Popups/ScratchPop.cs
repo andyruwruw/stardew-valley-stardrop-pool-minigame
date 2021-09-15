@@ -3,14 +3,13 @@ using StardropPoolMinigame.Utilities;
 
 namespace StardropPoolMinigame.Entities
 {
-    class ScratchPop : Popup
+    internal class ScratchPop : Popup
     {
         public ScratchPop() : base(
             null,
             null,
             Translations.GetTranslation(StringConstants.Popups.SCRATCH))
         {
-
         }
 
         /// <inheritdoc cref="Entity.GetId"/>

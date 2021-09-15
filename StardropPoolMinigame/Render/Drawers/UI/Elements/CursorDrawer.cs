@@ -3,7 +3,7 @@ using StardropPoolMinigame.Entities;
 
 namespace StardropPoolMinigame.Render.Drawers
 {
-    class CursorDrawer : Drawer
+    internal class CursorDrawer : Drawer
     {
         public CursorDrawer(Cursor cursor) : base(cursor)
         {

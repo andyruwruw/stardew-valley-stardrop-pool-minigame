@@ -1,7 +1,7 @@
 ﻿namespace StardropPoolMinigame.Scenes.CharacterSelect
 {
     /// <inheritdoc cref="ISceneCreator"/>
-    class CharacterSelectSceneCreator : ISceneCreator
+    internal class CharacterSelectSceneCreator : ISceneCreator
     {
         /// <summary>
         /// Instantiates <see cref="CharacterSelectSceneCreator"/>.

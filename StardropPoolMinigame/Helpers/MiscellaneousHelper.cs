@@ -5,7 +5,7 @@ namespace StardropPoolMinigame.Helpers
     /// <summary>
     /// Miscellaneous helper functions.
     /// </summary>
-    class MiscellaneousHelper
+    internal class MiscellaneousHelper
     {
         /// <summary>
         /// Custom implementation of modulo to account for negative values.

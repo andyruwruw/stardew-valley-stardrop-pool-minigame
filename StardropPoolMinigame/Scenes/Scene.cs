@@ -8,8 +8,13 @@ using System.Collections.Generic;
 namespace StardropPoolMinigame.Scenes
 {
     /// <inheritdoc cref="IScene"/>
-    abstract class Scene : IScene
+    internal abstract class Scene : IScene
     {
+        /// <summary>
+        /// Dictionary of <see cref="Scene">Scene's</see> <see cref="IEntity">IEntities</see>
+        /// </summary>
+        protected IDictionary<string, IEntity> _entities;
+
         /// <summary>
         /// <para>New <see cref="IScene"/> to replace this <see cref="Scene"/></para>
         /// <para>Default value is <b>null</b>, but once set, the new scene replaces the current</para>
@@ -20,11 +25,6 @@ namespace StardropPoolMinigame.Scenes
         /// Current <see cref="TransitionState"/> of <see cref="Scene"/>
         /// </summary>
         protected TransitionState _transitionState;
-
-        /// <summary>
-        /// Dictionary of <see cref="Scene">Scene's</see> <see cref="IEntity">IEntities</see>
-        /// </summary>
-        protected IDictionary<string, IEntity> _entities;
 
         /// <summary>
         /// Instantiates <see cref="Scene"/>.
@@ -38,23 +38,21 @@ namespace StardropPoolMinigame.Scenes
             this.AddEntities();
         }
 
-        /// <inheritdoc cref="IScene.GetKey"/>
-        public abstract string GetKey();
-
-        /// <inheritdoc cref="IScene.Update"/>
-        public virtual void Update()
+        /// <summary>
+        /// Generates starting <see cref="IScene"/>.
+        /// </summary>
+        /// <returns>Starting <see cref="IScene"/></returns>
+        public static IScene GetDefaultScene()
         {
-            this.UpdateEntities();
-        }
-
-        /// <inheritdoc cref="IScene.ReceiveLeftClick"/>
-        public virtual void ReceiveLeftClick()
-        {
-        }
-
-        /// <inheritdoc cref="IScene.ReceiveRightClick"/>
-        public virtual void ReceiveRightClick()
-        {
+            if (DevConstants.AUTO_START_AI_GAME)
+            {
+                return new GameScene(Player.GetMainPlayer(), new Sam());
+            }
+            if (DevConstants.AUTO_START_DIALOG)
+            {
+                return new DialogScene(new GameSceneCreator(Player.GetMainPlayer(), new Sam()));
+            }
+            return new MainMenuScene();
         }
 
         /// <inheritdoc cref="IScene.GetEntities"/>
@@ -63,11 +61,8 @@ namespace StardropPoolMinigame.Scenes
             return new List<IEntity>(this._entities.Values);
         }
 
-        /// <inheritdoc cref="IScene.HasNewScene"/>
-        public bool HasNewScene()
-        {
-            return this._newScene != null;
-        }
+        /// <inheritdoc cref="IScene.GetKey"/>
+        public abstract string GetKey();
 
         /// <inheritdoc cref="IScene.GetNewScene"/>
         public IScene GetNewScene()
@@ -81,19 +76,32 @@ namespace StardropPoolMinigame.Scenes
             return this._transitionState;
         }
 
+        /// <inheritdoc cref="IScene.HasNewScene"/>
+        public bool HasNewScene()
+        {
+            return this._newScene != null;
+        }
+
+        /// <inheritdoc cref="IScene.ReceiveLeftClick"/>
+        public virtual void ReceiveLeftClick()
+        {
+        }
+
+        /// <inheritdoc cref="IScene.ReceiveRightClick"/>
+        public virtual void ReceiveRightClick()
+        {
+        }
+
         /// <inheritdoc cref="IScene.SetTransitionState"/>
         public void SetTransitionState(TransitionState transitionState)
         {
             this._transitionState = transitionState;
         }
 
-        /// <summary>
-        /// <para>Overrideable method to add <see cref="Scene"/> specific <see cref="IEntity">IEntities</see></para>
-        /// <para>Automatically called in <see cref="Scene"/> constructor</para>
-        /// <para>Should add <see cref="IEntity">IEntities</see> to <see cref="_entities"/> protected <see cref="IList"/>, which will already be instantiated</para>
-        /// </summary>
-        protected virtual void AddEntities()
+        /// <inheritdoc cref="IScene.Update"/>
+        public virtual void Update()
         {
+            this.UpdateEntities();
         }
 
         /// <summary>
@@ -102,6 +110,15 @@ namespace StardropPoolMinigame.Scenes
         /// <para>Should add <see cref="IEntity">IEntities</see> to <see cref="_entities"/> protected <see cref="IList"/>, which will already be instantiated</para>
         /// </summary>
         protected virtual void AddDependentEntities()
+        {
+        }
+
+        /// <summary>
+        /// <para>Overrideable method to add <see cref="Scene"/> specific <see cref="IEntity">IEntities</see></para>
+        /// <para>Automatically called in <see cref="Scene"/> constructor</para>
+        /// <para>Should add <see cref="IEntity">IEntities</see> to <see cref="_entities"/> protected <see cref="IList"/>, which will already be instantiated</para>
+        /// </summary>
+        protected virtual void AddEntities()
         {
         }
 
@@ -144,28 +161,12 @@ namespace StardropPoolMinigame.Scenes
                 if (this._transitionState == TransitionState.Entering)
                 {
                     this._transitionState = TransitionState.Present;
-                } else if (this._transitionState == TransitionState.Exiting)
+                }
+                else if (this._transitionState == TransitionState.Exiting)
                 {
                     this._transitionState = TransitionState.Dead;
                 }
             }
-        }
-
-        /// <summary>
-        /// Generates starting <see cref="IScene"/>.
-        /// </summary>
-        /// <returns>Starting <see cref="IScene"/></returns>
-        public static IScene GetDefaultScene()
-        {
-            if (DevConstants.AUTO_START_AI_GAME)
-            {
-                return new GameScene(Player.GetMainPlayer(), new Sam());
-            }
-            if (DevConstants.AUTO_START_DIALOG)
-            {
-                return new DialogScene(new GameSceneCreator(Player.GetMainPlayer(), new Sam()));
-            }
-            return new MainMenuScene();
         }
     }
 }

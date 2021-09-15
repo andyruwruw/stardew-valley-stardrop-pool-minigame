@@ -3,20 +3,20 @@ using StardropPoolMinigame.Enums;
 
 namespace StardropPoolMinigame.Players
 {
-    interface IPlayer
+    internal interface IPlayer
     {
-        bool IsComputer();
-
-        bool IsMe();
-
-        void SetBallType(BallType ballType);
-
         BallType GetBallType();
+
+        Cue GetCue();
 
         string GetMusicId();
 
         long GetPlayerId();
 
-        Cue GetCue();
+        bool IsComputer();
+
+        bool IsMe();
+
+        void SetBallType(BallType ballType);
     }
 }

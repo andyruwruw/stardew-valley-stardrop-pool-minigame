@@ -9,15 +9,71 @@ using StardropPoolMinigame.Structures;
 
 namespace StardropPoolMinigame.Rules
 {
-    class EightBall : RuleSet
+    internal class EightBall : RuleSet
     {
         public EightBall() : base()
         {
+        }
 
+        public override IList<GameEvent> BallPocketed(
+            IPlayer player,
+            Ball ball,
+            TableSegment pocket,
+            IList<Ball> remaining,
+            TableSegment target = null)
+        {
+            IList<GameEvent> events = new List<GameEvent>();
+
+            if (ball.GetNumber() == 0)
+            {
+                events.Add(GameEvent.NextPlayer);
+                events.Add(GameEvent.Scratch);
+
+                return events;
+            }
+
+            if (player.GetBallType() == BallType.Any)
+            {
+                player.SetBallType(ball.GetBallType());
+
+                if (ball.GetBallType() == BallType.Stripped)
+                {
+                    events.Add(GameEvent.ChoseStripes);
+                }
+                else
+                {
+                    events.Add(GameEvent.ChoseSolids);
+                }
+            }
+
+            if (ball.GetBallType() == player.GetBallType())
+            {
+                events.Add(GameEvent.ScoredPoint);
+            }
+            else
+            {
+                events.Add(GameEvent.GavePoint);
+            }
+            events.Add(GameEvent.SamePlayer);
+
+            return events;
+        }
+
+        public override IList<GameEvent> FirstBallHit(IPlayer player, Ball ball)
+        {
+            IList<GameEvent> events = new List<GameEvent>();
+
+            if (ball.GetBallType() != player.GetBallType())
+            {
+                events.Add(GameEvent.NextPlayer);
+                events.Add(GameEvent.Scratch);
+            }
+
+            return events;
         }
 
         public override Tuple<IList<Ball>, QuadTree<EntityPhysics>> GenerateInitialBalls(
-            Vector2 tableTopLeft,
+                            Vector2 tableTopLeft,
             Vector2 cueBallStart,
             Vector2 footSpot,
             Direction rackOrientation)
@@ -50,7 +106,8 @@ namespace StardropPoolMinigame.Rules
                 else if (ballNumber > 5 && ballNumber <= 8)
                 {
                     adjustedBallNumber = ballNumber - 1;
-                } else
+                }
+                else
                 {
                 }
 
@@ -110,62 +167,6 @@ namespace StardropPoolMinigame.Rules
 
             events.Add(GameEvent.NextPlayer);
             events.Add(GameEvent.Scratch);
-
-            return events;
-        }
-
-        public override IList<GameEvent> FirstBallHit(IPlayer player, Ball ball)
-        {
-            IList<GameEvent> events = new List<GameEvent>();
-
-            if (ball.GetBallType() != player.GetBallType())
-            {
-                events.Add(GameEvent.NextPlayer);
-                events.Add(GameEvent.Scratch);
-            }
-
-            return events;
-        }
-
-        public override IList<GameEvent> BallPocketed(
-            IPlayer player,
-            Ball ball,
-            TableSegment pocket,
-            IList<Ball> remaining,
-            TableSegment target = null)
-        {
-            IList<GameEvent> events = new List<GameEvent>();
-
-            if (ball.GetNumber() == 0)
-            {
-                events.Add(GameEvent.NextPlayer);
-                events.Add(GameEvent.Scratch);
-
-                return events;
-            }
-
-            if (player.GetBallType() == BallType.Any)
-            {
-                player.SetBallType(ball.GetBallType());
-
-                if (ball.GetBallType() == BallType.Stripped)
-                {
-                    events.Add(GameEvent.ChoseStripes);
-                } else
-                {
-                    events.Add(GameEvent.ChoseSolids);
-                }
-            }
-
-            if (ball.GetBallType() == player.GetBallType())
-            {
-                events.Add(GameEvent.ScoredPoint);
-                
-            } else
-            {
-                events.Add(GameEvent.GavePoint);
-            }
-            events.Add(GameEvent.SamePlayer);
 
             return events;
         }

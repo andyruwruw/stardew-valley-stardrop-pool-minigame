@@ -4,7 +4,7 @@ using System;
 
 namespace StardropPoolMinigame.Render.Filters
 {
-    class PortraitFireAnimation : Animation
+    internal class PortraitFireAnimation : Animation
     {
         public PortraitFireAnimation(string key) : base(key, RenderConstants.Entities.PortraitFire.FRAMES * RenderConstants.Entities.PortraitFire.FRAME_DURATION)
         {

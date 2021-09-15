@@ -6,8 +6,14 @@ namespace StardropPoolMinigame.Structures
     /// List of interconnected nodes.
     /// </summary>
     /// <typeparam name="T">Type of nodes stored</typeparam>
-    interface IGraph<T>
+    internal interface IGraph<T>
     {
+        /// <summary>
+        /// Gets the total number of nodes stored.
+        /// </summary>
+        /// <returns>Number of nodes</returns>
+        int GetCount();
+
         /// <summary>
         /// Adds a node to the <see cref="IGraph"/>.
         /// </summary>
@@ -29,11 +35,5 @@ namespace StardropPoolMinigame.Structures
         /// <param name="data">The node data</param>
         /// <returns>Whether the node as removed</returns>
         bool Remove(T data);
-
-        /// <summary>
-        /// Gets the total number of nodes stored.
-        /// </summary>
-        /// <returns>Number of nodes</returns>
-        int GetCount();
     }
 }

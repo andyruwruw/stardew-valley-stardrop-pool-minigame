@@ -6,19 +6,10 @@ namespace StardropPoolMinigame.Utilities
     /// <summary>
     /// Retrieves translated strings from <see href="https://stardewvalleywiki.com/Modding:Translations">i18n folder</see>.
     /// </summary>
-    class Translations
+    internal class Translations
     {
         /// <inheritdoc cref="ITranslationHelper"/>
         public static ITranslationHelper Helper;
-
-        /// <summary>
-        /// Sets static reference to <see cref="ITranslationHelper"/>.
-        /// </summary>
-        /// <param name="helper"><inheritdoc cref="ITranslationHelper"/></param>
-        public static void SetHelper(ITranslationHelper helper)
-        {
-            Helper = helper;
-        }
 
         /// <summary>
         /// Retrieves translated string from <see href="https://stardewvalleywiki.com/Modding:Translations">i18n folder</see> by ID.
@@ -39,6 +30,15 @@ namespace StardropPoolMinigame.Utilities
         public static string GetTranslation(string key, Object tokens)
         {
             return Helper.Get(key, tokens);
+        }
+
+        /// <summary>
+        /// Sets static reference to <see cref="ITranslationHelper"/>.
+        /// </summary>
+        /// <param name="helper"><inheritdoc cref="ITranslationHelper"/></param>
+        public static void SetHelper(ITranslationHelper helper)
+        {
+            Helper = helper;
         }
     }
 }

@@ -6,7 +6,7 @@ using StardropPoolMinigame.Render.Filters;
 
 namespace StardropPoolMinigame.Entities
 {
-    class PurpleWhisp : Particle
+    internal class PurpleWhisp : Particle
     {
         public PurpleWhisp(
             Vector2 anchor,

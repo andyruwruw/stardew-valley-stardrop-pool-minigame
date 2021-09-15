@@ -1,11 +1,10 @@
 ﻿using StardropPoolMinigame.Constants;
 using StardropPoolMinigame.Enums;
-using StardropPoolMinigame.Helpers;
 using StardropPoolMinigame.Utilities;
 
 namespace StardropPoolMinigame.Scenes.Dialog.Scripts
 {
-    class IntroductionAbigail : Script
+    internal class IntroductionAbigail : Script
     {
         public IntroductionAbigail() : base()
         {

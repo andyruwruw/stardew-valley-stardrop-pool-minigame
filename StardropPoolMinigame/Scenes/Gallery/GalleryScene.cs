@@ -1,6 +1,6 @@
 ﻿namespace StardropPoolMinigame.Scenes
 {
-    class GalleryScene : Scene
+    internal class GalleryScene : Scene
     {
         /// <summary>
         /// Instantiates <see cref="GalleryScene"/>.

@@ -6,7 +6,7 @@ using StardropPoolMinigame.Render.Filters;
 
 namespace StardropPoolMinigame.Entities
 {
-    class GameTitle : Entity
+    internal class GameTitle : Entity
     {
         public GameTitle(
             Origin origin,
@@ -29,14 +29,14 @@ namespace StardropPoolMinigame.Entities
             return $"game-title-{this._id}";
         }
 
-        public override float GetTotalWidth()
-        {
-            return Textures.GAME_TITLE.Width;
-        }
-
         public override float GetTotalHeight()
         {
             return Textures.GAME_TITLE.Height;
+        }
+
+        public override float GetTotalWidth()
+        {
+            return Textures.GAME_TITLE.Width;
         }
     }
 }

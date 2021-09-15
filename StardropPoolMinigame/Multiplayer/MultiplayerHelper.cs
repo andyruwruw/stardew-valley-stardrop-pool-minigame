@@ -6,18 +6,13 @@ using System.Collections.Generic;
 
 namespace StardropPoolMinigame.Helpers
 {
-    class Multiplayer
+    internal class Multiplayer
     {
         public static IMultiplayerHelper Helper;
 
         public static IList<IMultiplayerPeer> PlayablePeers;
 
         public static IList<IMultiplayerPeer> UnplayablePeers;
-
-        public static void SetHelper(IMultiplayerHelper helper)
-        {
-            Helper = helper;
-        }
 
         public static bool CanPlayMultiplayer()
         {
@@ -53,6 +48,11 @@ namespace StardropPoolMinigame.Helpers
             return Game1.IsMultiplayer && Multiplayer.PlayablePeers.Count > 0;
         }
 
+        public static long GetNewMultiplayerId()
+        {
+            return Helper.GetNewID();
+        }
+
         public static void Send(string messageType, IModMessage message)
         {
             Helper.SendMessage(
@@ -61,9 +61,9 @@ namespace StardropPoolMinigame.Helpers
                 modIDs: new[] { "andyruwruw.StardropPoolMinigame" });
         }
 
-        public static long GetNewMultiplayerId()
+        public static void SetHelper(IMultiplayerHelper helper)
         {
-            return Helper.GetNewID();
+            Helper = helper;
         }
     }
 }

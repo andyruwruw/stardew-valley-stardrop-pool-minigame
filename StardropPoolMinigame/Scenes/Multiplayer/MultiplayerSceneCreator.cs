@@ -1,7 +1,7 @@
 ﻿namespace StardropPoolMinigame.Scenes.Multiplayer
 {
     /// <inheritdoc cref="ISceneCreator"/>
-    class MultiplayerSceneCreator : ISceneCreator
+    internal class MultiplayerSceneCreator : ISceneCreator
     {
         /// <summary>
         /// Instantiates <see cref="MultiplayerSceneCreator"/>.

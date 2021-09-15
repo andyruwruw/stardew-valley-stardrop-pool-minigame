@@ -6,7 +6,7 @@ using StardropPoolMinigame.Render.Filters;
 
 namespace StardropPoolMinigame.Entities
 {
-    class Sparkle : Particle
+    internal class Sparkle : Particle
     {
         public Sparkle(
             Vector2 anchor,

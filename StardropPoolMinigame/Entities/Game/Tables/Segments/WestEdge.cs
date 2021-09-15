@@ -7,7 +7,7 @@ using System;
 
 namespace StardropPoolMinigame.Entities
 {
-    class WestEdge : TableSegment
+    internal class WestEdge : TableSegment
     {
         public WestEdge(
             Origin origin,
@@ -33,6 +33,7 @@ namespace StardropPoolMinigame.Entities
         {
             return TableSegmentType.WestEdge;
         }
+
         public override void InicializeBounceableSurfaces()
         {
             base.InicializeBounceableSurfaces();

@@ -5,7 +5,7 @@ using StardropPoolMinigame.Enums;
 
 namespace StardropPoolMinigame.Render.Drawers
 {
-    class PortraitDrawer : Drawer
+    internal class PortraitDrawer : Drawer
     {
         public PortraitDrawer(Portrait portrait) : base(portrait)
         {
@@ -33,7 +33,8 @@ namespace StardropPoolMinigame.Render.Drawers
                 overrideEffects,
                 overrideLayerDepth);
 
-            if (((Portrait)this._entity).IsOnFire()) {
+            if (((Portrait)this._entity).IsOnFire())
+            {
                 ((Portrait)this._entity).GetPortraitFire().GetDrawer().Draw(
                     batch,
                     overrideDestination,
@@ -60,24 +61,22 @@ namespace StardropPoolMinigame.Render.Drawers
             }
         }
 
-        protected override Texture2D GetTileset()
+        protected override Color GetRawColor()
         {
-            switch (((Portrait)this._entity).GetName())
+            if (((Portrait)this._entity).IsSilhouette())
             {
-                case OpponentType.Sebastian:
-                    return Textures.Tileset.PortraitSebastian;
-                case OpponentType.Abigail:
-                    return Textures.Tileset.PortraitAbigail;
-                case OpponentType.Gus:
-                    return Textures.Tileset.PortraitGus;
-                default:
-                    return Textures.Tileset.PortraitSam;
+                return Color.Black;
             }
+            if (((Portrait)this._entity).IsDarker())
+            {
+                return Textures.Color.Shader.SHADOWED;
+            }
+            return Color.White;
         }
 
         protected override Rectangle GetRawSource()
         {
-            if (((Portrait)this._entity).GetName() == OpponentType.Sam)
+            if (((Portrait)this._entity).GetName() == NPCName.Sam)
             {
                 switch (((Portrait)this._entity).GetEmotion())
                 {
@@ -106,7 +105,7 @@ namespace StardropPoolMinigame.Render.Drawers
                         return Textures.Portrait.Sam.DEFAULT;
                 }
             }
-            if (((Portrait)this._entity).GetName() == OpponentType.Sebastian)
+            if (((Portrait)this._entity).GetName() == NPCName.Sebastian)
             {
                 switch (((Portrait)this._entity).GetEmotion())
                 {
@@ -132,7 +131,7 @@ namespace StardropPoolMinigame.Render.Drawers
                         return Textures.Portrait.Sebastian.DEFAULT;
                 }
             }
-            if (((Portrait)this._entity).GetName() == OpponentType.Abigail)
+            if (((Portrait)this._entity).GetName() == NPCName.Abigail)
             {
                 switch (((Portrait)this._entity).GetEmotion())
                 {
@@ -159,7 +158,7 @@ namespace StardropPoolMinigame.Render.Drawers
                         return Textures.Portrait.Abigail.DEFAULT;
                 }
             }
-            if (((Portrait)this._entity).GetName() == OpponentType.Gus)
+            if (((Portrait)this._entity).GetName() == NPCName.Gus)
             {
                 switch (((Portrait)this._entity).GetEmotion())
                 {
@@ -186,17 +185,19 @@ namespace StardropPoolMinigame.Render.Drawers
             return Textures.Portrait.Sam.DEFAULT;
         }
 
-        protected override Color GetRawColor()
+        protected override Texture2D GetTileset()
         {
-            if (((Portrait)this._entity).IsSilhouette())
+            switch (((Portrait)this._entity).GetName())
             {
-                return Color.Black;
+                case NPCName.Sebastian:
+                    return Textures.Tileset.PortraitSebastian;
+                case NPCName.Abigail:
+                    return Textures.Tileset.PortraitAbigail;
+                case NPCName.Gus:
+                    return Textures.Tileset.PortraitGus;
+                default:
+                    return Textures.Tileset.PortraitSam;
             }
-            if (((Portrait)this._entity).IsDarker())
-            {
-                return Textures.Color.Shader.SHADOWED;
-            }
-            return Color.White;
         }
     }
 }

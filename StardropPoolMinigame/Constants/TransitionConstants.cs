@@ -8,80 +8,34 @@ using System;
 
 namespace StardropPoolMinigame.Constants
 {
-    class TransitionConstants
+    internal class TransitionConstants
     {
-        public class MainMenu
-        {
-            public class Button
-            {
-                public static IFilter Entering(int buttonNum)
-                {
-                    return new SlideIn(
-                        30,
-                        true,
-                        TransitionState.Entering,
-                        30 + (buttonNum * 4),
-                        new Vector2(0, 8));
-                }
-
-                public static IFilter Exiting(int buttonNum)
-                {
-                    return new SlideIn(
-                        30,
-                        true,
-                        TransitionState.Exiting,
-                        buttonNum * -4,
-                        new Vector2(0, 8));
-                }
-            }
-
-            public class Portrait
-            {
-                public static IFilter Entering()
-                {
-                    return new SlideIn(
-                        30,
-                        false,
-                        TransitionState.Entering,
-                        (int)Math.Round(MiscellaneousHelper.Random() * 10),
-                        new Vector2(0, Textures.Portrait.Sam.DEFAULT.Height / 2));
-                }
-
-                public static IFilter Exiting()
-                {
-                    return new SlideIn(
-                        1,
-                        false,
-                        TransitionState.Exiting,
-                        45,
-                        new Vector2(0, 0));
-                }
-            }
-
-            public class GameTitle
-            {
-                public static IFilter Entering()
-                {
-                    return new SlideIn(
-                        60,
-                        true,
-                        TransitionState.Entering,
-                        new Vector2(0, -25));
-                }
-
-                public static IFilter Exiting()
-                {
-                    return new SlideIn(
-                        30,
-                        true,
-                        TransitionState.Exiting,
-                        new Vector2(0, -25));
-                }
-            }
-        }
-
         public class CharacterSelect
         {
+            public static IFilter Exiting()
+            {
+                return new SlideIn(
+                    10,
+                    true,
+                    TransitionState.Exiting,
+                    90,
+                    new Vector2(0, 0));
+            }
+
+            public class OpponentName
+            {
+                public static IFilter Entering()
+                {
+                    return new SlideIn(
+                        20,
+                        true,
+                        TransitionState.Entering,
+                        30,
+                        new Vector2(0, 8),
+                        true);
+                }
+            }
+
             public class PageTitle
             {
                 public static IFilter Entering()
@@ -97,6 +51,16 @@ namespace StardropPoolMinigame.Constants
 
             public class Portrait
             {
+                public static IFilter ActiveExiting()
+                {
+                    return new SlideIn(
+                        30,
+                        true,
+                        TransitionState.Exiting,
+                        60,
+                        new Vector2(0, Textures.Portrait.Sam.DEFAULT.Height / 2));
+                }
+
                 public static IFilter Entering()
                 {
                     return new SlideIn(
@@ -116,40 +80,6 @@ namespace StardropPoolMinigame.Constants
                         (int)Math.Round(MiscellaneousHelper.Random() * 10),
                         new Vector2(0, Textures.Portrait.Sam.DEFAULT.Height / 2));
                 }
-
-                public static IFilter ActiveExiting()
-                {
-                    return new SlideIn(
-                        30,
-                        true,
-                        TransitionState.Exiting,
-                        60,
-                        new Vector2(0, Textures.Portrait.Sam.DEFAULT.Height / 2));
-                }
-            }
-
-            public class OpponentName
-            {
-                public static IFilter Entering()
-                {
-                    return new SlideIn(
-                        20,
-                        true,
-                        TransitionState.Entering,
-                        30,
-                        new Vector2(0, 8),
-                        true);
-                }
-            }
-
-            public static IFilter Exiting()
-            {
-                return new SlideIn(
-                    10,
-                    true,
-                    TransitionState.Exiting,
-                    90,
-                    new Vector2(0, 0));
             }
         }
 
@@ -170,16 +100,6 @@ namespace StardropPoolMinigame.Constants
 
             public class Text
             {
-                public static IFilter FirstEntering()
-                {
-                    return new SlideIn(
-                       15,
-                       true,
-                       TransitionState.Entering,
-                       170,
-                       new Vector2(0, 5));
-                }
-
                 public static IFilter Entering()
                 {
                     return new SlideIn(
@@ -199,11 +119,34 @@ namespace StardropPoolMinigame.Constants
                        0,
                        new Vector2(0, -5));
                 }
+
+                public static IFilter FirstEntering()
+                {
+                    return new SlideIn(
+                       15,
+                       true,
+                       TransitionState.Entering,
+                       170,
+                       new Vector2(0, 5));
+                }
             }
         }
 
         public class Game
         {
+            public class Cue
+            {
+                public static IFilter Entering()
+                {
+                    return new SlideIn(
+                        15,
+                        true,
+                        TransitionState.Entering,
+                        10,
+                        Vector2.Zero);
+                }
+            }
+
             public class FadeIn
             {
                 public static IFilter Exiting()
@@ -243,19 +186,6 @@ namespace StardropPoolMinigame.Constants
                 }
             }
 
-            public class Cue
-            {
-                public static IFilter Entering()
-                {
-                    return new SlideIn(
-                        15,
-                        true,
-                        TransitionState.Entering,
-                        10,
-                        Vector2.Zero);
-                }
-            }
-
             public class Sparks
             {
                 public static IFilter Entering()
@@ -272,6 +202,76 @@ namespace StardropPoolMinigame.Constants
                         50,
                         true,
                         TransitionState.Exiting);
+                }
+            }
+        }
+
+        public class MainMenu
+        {
+            public class Button
+            {
+                public static IFilter Entering(int buttonNum)
+                {
+                    return new SlideIn(
+                        30,
+                        true,
+                        TransitionState.Entering,
+                        30 + (buttonNum * 4),
+                        new Vector2(0, 8));
+                }
+
+                public static IFilter Exiting(int buttonNum)
+                {
+                    return new SlideIn(
+                        30,
+                        true,
+                        TransitionState.Exiting,
+                        buttonNum * -4,
+                        new Vector2(0, 8));
+                }
+            }
+
+            public class GameTitle
+            {
+                public static IFilter Entering()
+                {
+                    return new SlideIn(
+                        60,
+                        true,
+                        TransitionState.Entering,
+                        new Vector2(0, -25));
+                }
+
+                public static IFilter Exiting()
+                {
+                    return new SlideIn(
+                        30,
+                        true,
+                        TransitionState.Exiting,
+                        new Vector2(0, -25));
+                }
+            }
+
+            public class Portrait
+            {
+                public static IFilter Entering()
+                {
+                    return new SlideIn(
+                        30,
+                        false,
+                        TransitionState.Entering,
+                        (int)Math.Round(MiscellaneousHelper.Random() * 10),
+                        new Vector2(0, Textures.Portrait.Sam.DEFAULT.Height / 2));
+                }
+
+                public static IFilter Exiting()
+                {
+                    return new SlideIn(
+                        1,
+                        false,
+                        TransitionState.Exiting,
+                        45,
+                        new Vector2(0, 0));
                 }
             }
         }

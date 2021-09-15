@@ -7,7 +7,7 @@ using StardropPoolMinigame.Utilities;
 
 namespace StardropPoolMinigame.Scenes
 {
-    class MainMenuScene : Scene
+    internal class MainMenuScene : Scene
     {
         /// <summary>
         /// Instantiates <see cref="MainMenuScene"/>.
@@ -22,11 +22,6 @@ namespace StardropPoolMinigame.Scenes
             return "main-menu-scene";
         }
 
-        public override void Update()
-        {
-            this.UpdateEntities();
-        }
-
         public override void ReceiveLeftClick()
         {
             foreach (string key in StringConstants.Entities.MainMenu.BUTTONS)
@@ -38,13 +33,16 @@ namespace StardropPoolMinigame.Scenes
                     if (key == StringConstants.Entities.MainMenu.MULTIPLAYER_BUTTON)
                     {
                         this._newScene = new MultiplayerScene();
-                    } else if (key == StringConstants.Entities.MainMenu.GALLERY_BUTTON)
+                    }
+                    else if (key == StringConstants.Entities.MainMenu.GALLERY_BUTTON)
                     {
                         this._newScene = new GalleryScene();
-                    } else if (key == StringConstants.Entities.MainMenu.SETTINGS_BUTTON)
+                    }
+                    else if (key == StringConstants.Entities.MainMenu.SETTINGS_BUTTON)
                     {
                         this._newScene = new SettingsScene();
-                    } else
+                    }
+                    else
                     {
                         this._newScene = new CharacterSelectScene();
                     }
@@ -54,6 +52,11 @@ namespace StardropPoolMinigame.Scenes
 
         public override void ReceiveRightClick()
         {
+        }
+
+        public override void Update()
+        {
+            this.UpdateEntities();
         }
 
         protected override void AddEntities()

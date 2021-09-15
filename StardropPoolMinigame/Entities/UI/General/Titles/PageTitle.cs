@@ -5,9 +5,9 @@ using StardropPoolMinigame.Render.Filters;
 
 namespace StardropPoolMinigame.Entities
 {
-    class PageTitle : Entity
+    internal class PageTitle : Entity
     {
-        Text _text;
+        private Text _text;
 
         public PageTitle(
             Origin origin,
@@ -46,9 +46,9 @@ namespace StardropPoolMinigame.Entities
             return $"page-title-{this._id}";
         }
 
-        public override float GetTotalWidth()
+        public Text GetText()
         {
-            return this._text.GetTotalWidth();
+            return this._text;
         }
 
         public override float GetTotalHeight()
@@ -56,15 +56,15 @@ namespace StardropPoolMinigame.Entities
             return this._text.GetTotalHeight();
         }
 
+        public override float GetTotalWidth()
+        {
+            return this._text.GetTotalWidth();
+        }
+
         public override void SetTransitionState(TransitionState transitionState, bool start = false)
         {
             base.SetTransitionState(transitionState, start);
             this._text.SetTransitionState(transitionState, true);
-        }
-
-        public Text GetText()
-        {
-            return this._text;
         }
     }
 }

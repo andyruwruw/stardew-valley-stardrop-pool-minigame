@@ -11,10 +11,19 @@ namespace StardropPoolMinigame.Rules
     /// <summary>
     /// Specifies what game events are brought about by different events
     /// </summary>
-    interface IRules
+    internal interface IRules
     {
+        IList<GameEvent> BallPocketed(
+                    IPlayer player,
+                    Ball ball,
+                    TableSegment pocket,
+                    IList<Ball> remaining,
+                    TableSegment target = null);
+
+        IList<GameEvent> FirstBallHit(IPlayer player, Ball ball);
+
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="tableTopLeft"></param>
         /// <param name="cueBallStart"></param>
@@ -27,17 +36,8 @@ namespace StardropPoolMinigame.Rules
             Vector2 footSpot,
             Direction rackOrientation);
 
-        IList<GameEvent> NoBallHit(IList<Ball> remaining);
-
-        IList<GameEvent> FirstBallHit(IPlayer player, Ball ball);
-
-        IList<GameEvent> BallPocketed(
-            IPlayer player,
-            Ball ball,
-            TableSegment pocket,
-            IList<Ball> remaining,
-            TableSegment target = null);
-
         bool HasPlayerSpecificCueBalls();
+
+        IList<GameEvent> NoBallHit(IList<Ball> remaining);
     }
 }

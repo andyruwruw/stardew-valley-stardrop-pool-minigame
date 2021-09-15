@@ -3,7 +3,7 @@ using StardropPoolMinigame.Utilities;
 
 namespace StardropPoolMinigame.Entities.UI.Popups
 {
-    class OpponentTurnPopup : Popup
+    internal class OpponentTurnPopup : Popup
     {
         public OpponentTurnPopup() : base(
             null,

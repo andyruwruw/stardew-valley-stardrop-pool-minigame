@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace StardropPoolMinigame.Render.Drawers
 {
-    class CueDrawer : Drawer
+    internal class CueDrawer : Drawer
     {
         public CueDrawer(Cue cue) : base(cue)
         {
@@ -29,8 +29,8 @@ namespace StardropPoolMinigame.Render.Drawers
         protected override Vector2 GetRawDestination()
         {
             return new Vector2(
-                this._entity.GetAnchor().X * RenderConstants.TileScale() + RenderConstants.AdjustedScreenWidthMargin(),
-                this._entity.GetAnchor().Y * RenderConstants.TileScale() + RenderConstants.AdjustedScreenHeightMargin());
+                this._entity.GetAnchor().X * RenderConstants.TileScale() + RenderConstants.AdjustedScreen.Margin.Width(),
+                this._entity.GetAnchor().Y * RenderConstants.TileScale() + RenderConstants.AdjustedScreen.Margin.Height());
         }
 
         protected override Vector2 GetRawOrigin()
@@ -40,7 +40,7 @@ namespace StardropPoolMinigame.Render.Drawers
 
         protected override float GetRawRotation()
         {
-            return Operators.VectorToRadians(((Cue)this._entity).GetAngle());
+            return VectorHelper.VectorToRadians(((Cue)this._entity).GetAngle());
         }
 
         protected override Rectangle GetRawSource()

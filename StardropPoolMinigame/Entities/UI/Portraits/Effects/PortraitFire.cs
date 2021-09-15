@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace StardropPoolMinigame.Entities
 {
-    class PortraitFire : Entity
+    internal class PortraitFire : Entity
     {
         public PortraitFire(
             Origin origin,

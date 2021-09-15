@@ -1,6 +1,6 @@
 namespace StardropPoolMinigame.Powerups
 {
-    class BigPockets: IPowerup
+    internal class BigPockets : IPowerup
     {
         public BigPockets()
         {

@@ -3,23 +3,23 @@ using System.Collections.Generic;
 
 namespace StardropPoolMinigame.Scenes.Dialog.Scripts
 {
-    class Recitation : IRecitation
+    internal class Recitation : IRecitation
     {
-        private NPCName _name;
+        private int _delay;
 
         private PortraitEmotion _emotion;
 
-        private string _text;
-
-        private IList<string> _sounds;
+        private bool _hasFire;
 
         private bool _hasShine;
 
-        private bool _hasFire;
-
         private bool _isDarker;
 
-        private int _delay;
+        private NPCName _name;
+
+        private IList<string> _sounds;
+
+        private string _text;
 
         public Recitation(
             NPCName name,
@@ -41,9 +41,9 @@ namespace StardropPoolMinigame.Scenes.Dialog.Scripts
             this._delay = delay;
         }
 
-        public NPCName GetName()
+        public int GetDelay()
         {
-            return this._name;
+            return this._delay;
         }
 
         public PortraitEmotion GetEmotion()
@@ -51,18 +51,19 @@ namespace StardropPoolMinigame.Scenes.Dialog.Scripts
             return this._emotion;
         }
 
-        public string GetText()
+        public NPCName GetName()
         {
-            return this._text;
+            return this._name;
         }
 
-        public IList<string> GetSounds() {
+        public IList<string> GetSounds()
+        {
             return this._sounds;
         }
 
-        public bool HasShine()
+        public string GetText()
         {
-            return this._hasShine;
+            return this._text;
         }
 
         public bool HasFire()
@@ -70,8 +71,9 @@ namespace StardropPoolMinigame.Scenes.Dialog.Scripts
             return this._hasFire;
         }
 
-        public int GetDelay() {
-            return this._delay;
+        public bool HasShine()
+        {
+            return this._hasShine;
         }
     }
 }

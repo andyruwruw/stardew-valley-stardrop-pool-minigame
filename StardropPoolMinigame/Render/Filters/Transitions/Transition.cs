@@ -1,27 +1,27 @@
 ﻿using StardropPoolMinigame.Enums;
-using StardropPoolMinigame.Helpers;
+using StardropPoolMinigame.Utilities;
 
 namespace StardropPoolMinigame.Render.Filters
 {
-    abstract class Transition : Filter
+    internal abstract class Transition : Filter
     {
+        protected int _delay;
+
+        protected bool _delayOnce;
+
         protected int _duration;
 
-        protected int _delay;
+        protected int _endingTick;
+
+        protected bool _firstExecution;
+
+        protected bool _isFinished;
+
+        protected bool _keyframeOpacity;
 
         protected int _postDelay;
 
         protected TransitionState _type;
-
-        protected bool _keyframeOpacity;
-
-        protected bool _isFinished;
-
-        protected int _endingTick;
-
-        protected bool _delayOnce;
-
-        protected bool _firstExecution;
 
         public Transition(
             int duration,
@@ -42,20 +42,63 @@ namespace StardropPoolMinigame.Render.Filters
             this._firstExecution = true;
         }
 
+        public override string GetName()
+        {
+            return "generic-transition";
+        }
+
+        public bool IsFinished()
+        {
+            return this._isFinished;
+        }
+
+        public void ResetTransition()
+        {
+            this._key = null;
+            this._isFinished = false;
+        }
+
         public override void SetKey(string key)
         {
             string transitionType = this._type == TransitionState.Entering ? "entering" : "exiting";
             this._key = $"{key}-filter-{this.GetName()}-{transitionType}";
         }
 
-        public override string GetName()
+        public void SetPostDelay(int delay)
         {
-            return "generic-transition";
+            this._postDelay = delay;
         }
 
         public override void StartFilter()
         {
             this._endingTick = Timer.StartTimer(this._key) + this.GetDelay() + this._duration;
+        }
+
+        protected float EaseOut(float time, float startValue, float change, float duration)
+        {
+            time /= duration / 2;
+            if (time < 1)
+            {
+                return change / 2 * time * time + startValue;
+            }
+
+            time--;
+            return -change / 2 * (time * (time - 2) - 1) + startValue;
+        }
+
+        protected int GetDelay()
+        {
+            if (this._delayOnce && !this._firstExecution)
+            {
+                return 0;
+            }
+
+            return this._delay + this._postDelay;
+        }
+
+        protected float GetInvertedProgress()
+        {
+            return 1f - this.GetProgress();
         }
 
         protected float GetProgress()
@@ -80,49 +123,6 @@ namespace StardropPoolMinigame.Render.Filters
                 return 1f;
             }
             return progress;
-        }
-
-        protected float GetInvertedProgress()
-        {
-            return 1f - this.GetProgress();
-        }
-
-        public void ResetTransition()
-        {
-            this._key = null;
-            this._isFinished = false;
-        }
-
-        public bool IsFinished()
-        {
-            return this._isFinished;
-        }
-
-        public void SetPostDelay(int delay)
-        {
-            this._postDelay = delay;
-        }
-
-        protected float EaseOut(float time, float startValue, float change, float duration)
-        {
-            time /= duration / 2;
-            if (time < 1)
-            {
-                return change / 2 * time * time + startValue;
-            }
-
-            time--;
-            return -change / 2 * (time * (time - 2) - 1) + startValue;
-        }
-
-        protected int GetDelay()
-        {
-            if (this._delayOnce && !this._firstExecution)
-            {
-                return 0;
-            }
-
-            return this._delay  + this._postDelay;
         }
     }
 }

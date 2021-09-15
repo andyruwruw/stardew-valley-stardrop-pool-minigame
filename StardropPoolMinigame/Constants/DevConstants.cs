@@ -4,8 +4,23 @@
     /// <para>What's up coder, good to have you here</para>
     /// <para>Here are some tools to help you test</para>
     /// </summary>
-    class DevConstants
+    internal class DevConstants
     {
+        /// <summary>
+        /// On game start, skip menus and go right into a game
+        /// </summary>
+        public static bool AUTO_START_AI_GAME = true;
+
+        /// <summary>
+        /// On game start, skip menus and go right into dialog
+        /// </summary>
+        public static bool AUTO_START_DIALOG = false;
+
+        /// <summary>
+        /// On game start, skip menus and go right into game summary
+        /// </summary>
+        public static bool AUTO_START_SUMMARY = false;
+
         /// <summary>
         /// Displays physics and drawing debugging visuals
         /// </summary>
@@ -17,9 +32,9 @@
         public static bool DISABLE_MARGIN_SOLIDS = false;
 
         /// <summary>
-        /// All right clicks will be registered as pool table clicks
+        /// Load fake save data
         /// </summary>
-        public static bool OVERRIDE_IS_POOL_TABLE = true;
+        public static bool FAKE_SAVE_DATA = false;
 
         /// <summary>
         /// Unlock all characters
@@ -32,28 +47,13 @@
         public static bool OVERRIDE_COLLECTABLE_UNLOCKS = false;
 
         /// <summary>
-        /// On game start, skip menus and go right into dialog
+        /// All right clicks will be registered as pool table clicks
         /// </summary>
-        public static bool AUTO_START_DIALOG = false;
-
-        /// <summary>
-        /// On game start, skip menus and go right into a game
-        /// </summary>
-        public static bool AUTO_START_AI_GAME = true;
-
-        /// <summary>
-        /// On game start, skip menus and go right into game summary
-        /// </summary>
-        public static bool AUTO_START_SUMMARY = false;
+        public static bool OVERRIDE_IS_POOL_TABLE = true;
 
         /// <summary>
         /// Allows multiplayer without another player. You play both turns.
         /// </summary>
         public static bool PRETEND_MULTIPLAYER = false;
-
-        /// <summary>
-        /// Load fake save data
-        /// </summary>
-        public static bool FAKE_SAVE_DATA = false;
     }
 }

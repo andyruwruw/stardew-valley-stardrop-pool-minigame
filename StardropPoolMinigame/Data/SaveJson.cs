@@ -3,7 +3,7 @@
     /// <summary>
     /// Save data for <see cref="StardropPoolMinigame"/>
     /// </summary>
-    class SaveJson
+    internal class SaveJson
     {
         /// <summary>
         /// Arcade tokens earned
@@ -11,14 +11,9 @@
         public int ArcadeTokens { get; set; } = 0;
 
         /// <summary>
-        /// Best score against Sam
+        /// Current cue equipted
         /// </summary>
-        public int HighscoreAgainstSam { get; set; } = -1;
-
-        /// <summary>
-        /// Best score against Sebastian
-        /// </summary>
-        public int HighscoreAgainstSebastian { get; set; } = -1;
+        public string CurrentCue { get; set; } = "basic";
 
         /// <summary>
         /// Best score against Abigail
@@ -31,39 +26,14 @@
         public int HighscoreAgainstGus { get; set; } = -1;
 
         /// <summary>
-        /// Current cue equipted
+        /// Best score against Sam
         /// </summary>
-        public string CurrentCue { get; set; } = "basic";
+        public int HighscoreAgainstSam { get; set; } = -1;
 
         /// <summary>
-        /// Comma separated IDs
+        /// Best score against Sebastian
         /// </summary>
-        public string UnlockedCues { get; set; } = "basic";
-
-        /// <summary>
-        /// Number of wins against Sam
-        /// </summary>
-        public int WinsAgainstSam { get; set; } = 0;
-
-        /// <summary>
-        /// Number of losses against Sam
-        /// </summary>
-        public int LossesAgainstSam { get; set; } = 0;
-
-        /// <summary>
-        /// Number of wins against Sebastian
-        /// </summary>
-        public int WinsAgainstSebastian { get; set; } = 0;
-
-        /// <summary>
-        /// Number of losses against Sebastian
-        /// </summary>
-        public int LossesAgainstSebastian { get; set; } = 0;
-
-        /// <summary>
-        /// Number of wins against Abigail
-        /// </summary>
-        public int WinsAgainstAbigail { get; set; } = 0;
+        public int HighscoreAgainstSebastian { get; set; } = -1;
 
         /// <summary>
         /// Number of losses against Abigail
@@ -71,13 +41,43 @@
         public int LossesAgainstAbigail { get; set; } = 0;
 
         /// <summary>
+        /// Number of losses against Gus
+        /// </summary>
+        public int LossesAgainstGus { get; set; } = 0;
+
+        /// <summary>
+        /// Number of losses against Sam
+        /// </summary>
+        public int LossesAgainstSam { get; set; } = 0;
+
+        /// <summary>
+        /// Number of losses against Sebastian
+        /// </summary>
+        public int LossesAgainstSebastian { get; set; } = 0;
+
+        /// <summary>
+        /// Comma separated IDs
+        /// </summary>
+        public string UnlockedCues { get; set; } = "basic";
+
+        /// <summary>
+        /// Number of wins against Abigail
+        /// </summary>
+        public int WinsAgainstAbigail { get; set; } = 0;
+
+        /// <summary>
         /// Number of wins against Gus
         /// </summary>
         public int WinsAgainstGus { get; set; } = 0;
 
         /// <summary>
-        /// Number of losses against Gus
+        /// Number of wins against Sam
         /// </summary>
-        public int LossesAgainstGus { get; set; } = 0;
+        public int WinsAgainstSam { get; set; } = 0;
+
+        /// <summary>
+        /// Number of wins against Sebastian
+        /// </summary>
+        public int WinsAgainstSebastian { get; set; } = 0;
     }
 }

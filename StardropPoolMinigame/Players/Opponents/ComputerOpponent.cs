@@ -2,17 +2,17 @@
 
 namespace StardropPoolMinigame.Players
 {
-    class ComputerOpponent : Player
+    internal class ComputerOpponent : Player
     {
-        protected NPCName _type;
-
-        protected int _confidence;
+        protected int _angleAccuracy;
 
         protected int _complexity;
 
-        protected int _angleAccuracy;
+        protected int _confidence;
 
         protected int _powerAccuracy;
+
+        protected NPCName _type;
 
         public ComputerOpponent(
             string name,
@@ -37,31 +37,6 @@ namespace StardropPoolMinigame.Players
             this._powerAccuracy = powerAccuracy;
         }
 
-        public int GetConfidence()
-        {
-            return this._confidence;
-        }
-
-        public int GetComplexity()
-        {
-            return this._complexity;
-        }
-
-        public int GetAngleAccuracy()
-        {
-            return this._angleAccuracy;
-        }
-
-        public int GetPowerAccuracy()
-        {
-            return this._powerAccuracy;
-        }
-
-        public NPCName GetNPCName()
-        {
-            return this._type;
-        }
-
         public static ComputerOpponent GetComputerOpponentFromName(NPCName name)
         {
             switch (name)
@@ -75,6 +50,31 @@ namespace StardropPoolMinigame.Players
                 default:
                     return new Sam();
             }
+        }
+
+        public int GetAngleAccuracy()
+        {
+            return this._angleAccuracy;
+        }
+
+        public int GetComplexity()
+        {
+            return this._complexity;
+        }
+
+        public int GetConfidence()
+        {
+            return this._confidence;
+        }
+
+        public NPCName GetNPCName()
+        {
+            return this._type;
+        }
+
+        public int GetPowerAccuracy()
+        {
+            return this._powerAccuracy;
         }
     }
 }

@@ -1,12 +1,11 @@
 ﻿using StardewValley;
 using StardropPoolMinigame.Constants;
 using StardropPoolMinigame.Enums;
-using StardropPoolMinigame.Helpers;
 using StardropPoolMinigame.Utilities;
 
 namespace StardropPoolMinigame.Scenes.Dialog.Scripts
 {
-    class IntroductionSebastian : Script
+    internal class IntroductionSebastian : Script
     {
         public IntroductionSebastian() : base()
         {

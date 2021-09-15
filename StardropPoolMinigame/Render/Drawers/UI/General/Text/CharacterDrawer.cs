@@ -7,26 +7,10 @@ using System.Collections.Generic;
 
 namespace StardropPoolMinigame.Render.Drawers
 {
-    class CharacterDrawer : Drawer
+    internal class CharacterDrawer : Drawer
     {
         public CharacterDrawer(Character character) : base(character)
         {
-        }
-
-        protected override Texture2D GetTileset()
-        {
-            return Textures.Tileset.Font;
-        }
-
-        protected override Rectangle GetRawSource()
-        {
-            return ((Character)this._entity).GetCharacterBounds();
-        }
-
-        protected override Vector2 GetRawDestination()
-        {
-            Vector2 destination = base.GetRawDestination();
-            return new Vector2(destination.X, destination.Y + (RenderConstants.Font.Y_OFFSET * RenderConstants.TileScale()));
         }
 
         protected override Vector2 GetDestination(Vector2? overrideDestination = null)
@@ -41,6 +25,22 @@ namespace StardropPoolMinigame.Render.Drawers
             }
 
             return destination;
+        }
+
+        protected override Vector2 GetRawDestination()
+        {
+            Vector2 destination = base.GetRawDestination();
+            return new Vector2(destination.X, destination.Y + (RenderConstants.Font.Y_OFFSET * RenderConstants.TileScale()));
+        }
+
+        protected override Rectangle GetRawSource()
+        {
+            return ((Character)this._entity).GetCharacterBounds();
+        }
+
+        protected override Texture2D GetTileset()
+        {
+            return Textures.Tileset.Font;
         }
     }
 }

@@ -6,7 +6,7 @@ using StardropPoolMinigame.Utilities;
 
 namespace StardropPoolMinigame.Entities
 {
-    class SubmitButton : Button
+    internal class SubmitButton : Button
     {
         /// <summary>
         /// Button with different click sound
@@ -32,17 +32,17 @@ namespace StardropPoolMinigame.Entities
         {
         }
 
-        /// <inheritdoc cref="Button.GetId"/>
-        public override string GetId()
-        {
-            return $"submit-button-{this._id}";
-        }
-
         /// <inheritdoc cref="Button.ClickCallback"/>
         public override void ClickCallback()
         {
             Sound.PlaySound(SoundConstants.Feedback.SUBMIT_BUTTON_PRESS);
             Sound.StopMusic();
+        }
+
+        /// <inheritdoc cref="Button.GetId"/>
+        public override string GetId()
+        {
+            return $"submit-button-{this._id}";
         }
     }
 }

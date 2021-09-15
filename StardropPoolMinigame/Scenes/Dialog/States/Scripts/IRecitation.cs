@@ -3,20 +3,20 @@ using System.Collections.Generic;
 
 namespace StardropPoolMinigame.Scenes.Dialog.Scripts
 {
-    interface IRecitation
+    internal interface IRecitation
     {
-        NPCName GetName();
+        int GetDelay();
 
         PortraitEmotion GetEmotion();
 
-        string GetText();
+        NPCName GetName();
 
         IList<string> GetSounds();
 
-        bool HasShine();
+        string GetText();
 
         bool HasFire();
 
-        int GetDelay();
+        bool HasShine();
     }
 }

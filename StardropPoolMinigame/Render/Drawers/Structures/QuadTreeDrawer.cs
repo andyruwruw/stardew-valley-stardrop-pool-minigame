@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace StardropPoolMinigame.Render.Drawers
 {
-    class QuadTreeDrawer<T> : Drawer
+    internal class QuadTreeDrawer<T> : Drawer
     {
         public QuadTreeDrawer(QuadTree<T> tree) : base(tree)
         {
@@ -46,7 +46,8 @@ namespace StardropPoolMinigame.Render.Drawers
                     unvisited.Add(current.GetNorthEastQuadrant());
                     unvisited.Add(current.GetSouthWestQuadrant());
                     unvisited.Add(current.GetSouthEastQuadrant());
-                } else
+                }
+                else
                 {
                     DrawDebugLine(
                         batch,
@@ -76,7 +77,7 @@ namespace StardropPoolMinigame.Render.Drawers
                         Color.Orange,
                         1);
 
-                    foreach (IEntity point in current.GetPoints())
+                    foreach (IEntity point in current.Query())
                     {
                         DrawDebugPoint(
                             batch,

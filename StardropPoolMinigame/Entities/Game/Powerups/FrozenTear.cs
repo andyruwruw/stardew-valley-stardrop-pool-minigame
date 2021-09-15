@@ -1,6 +1,6 @@
 namespace StardropPoolMinigame.Powerups
 {
-    class FrozenTear : IPowerup
+    internal class FrozenTear : IPowerup
     {
         public FrozenTear()
         {

@@ -5,7 +5,7 @@ using System;
 
 namespace StardropPoolMinigame.Render.Filters
 {
-    class SlideIn : Transition
+    internal class SlideIn : Transition
     {
         private Vector2 _difference;
 
@@ -39,28 +39,6 @@ namespace StardropPoolMinigame.Render.Filters
             this._difference = difference;
         }
 
-        public override string GetName()
-        {
-            return "slide-in";
-        }
-
-        public override Vector2 ExecuteDestination(Vector2 destination)
-        {
-            float progress = this._type == TransitionState.Entering ? this.GetInvertedProgress() : this.GetProgress();
-
-            return new Vector2(
-                this.EaseOut(
-                    progress * this._duration,
-                    destination.X,
-                    this._difference.X * RenderConstants.TileScale(),
-                    this._duration),
-                this.EaseOut(
-                    progress * this._duration, 
-                    destination.Y,
-                    this._difference.Y * RenderConstants.TileScale(),
-                    this._duration));
-        }
-
         public override Color ExecuteColor(Color color)
         {
             if (this._keyframeOpacity)
@@ -74,6 +52,28 @@ namespace StardropPoolMinigame.Render.Filters
                     (byte)Math.Round(progress * 255));
             }
             return color;
+        }
+
+        public override Vector2 ExecuteDestination(Vector2 destination)
+        {
+            float progress = this._type == TransitionState.Entering ? this.GetInvertedProgress() : this.GetProgress();
+
+            return new Vector2(
+                this.EaseOut(
+                    progress * this._duration,
+                    destination.X,
+                    this._difference.X * RenderConstants.TileScale(),
+                    this._duration),
+                this.EaseOut(
+                    progress * this._duration,
+                    destination.Y,
+                    this._difference.Y * RenderConstants.TileScale(),
+                    this._duration));
+        }
+
+        public override string GetName()
+        {
+            return "slide-in";
         }
     }
 }

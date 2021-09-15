@@ -4,7 +4,7 @@ using StardropPoolMinigame.Render.Filters;
 
 namespace StardropPoolMinigame.Entities
 {
-    class Felt : TableSegment
+    internal class Felt : TableSegment
     {
         public Felt(
             Origin origin,

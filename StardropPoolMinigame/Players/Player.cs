@@ -6,21 +6,21 @@ using StardropPoolMinigame.Enums;
 
 namespace StardropPoolMinigame.Players
 {
-    class Player : IPlayer
+    internal class Player : IPlayer
     {
-        private string _name;
+        private BallType _ballType;
 
-        private bool _isMe;
+        private Cue _cue;
 
         private bool _isComputer;
 
-        private long _playerId;
-
-        private BallType _ballType;
+        private bool _isMe;
 
         private string _music;
 
-        private Cue _cue;
+        private string _name;
+
+        private long _playerId;
 
         public Player(
             string name,
@@ -42,34 +42,18 @@ namespace StardropPoolMinigame.Players
                 null);
         }
 
-        public bool IsComputer()
+        public static IPlayer GetMainPlayer()
         {
-            return this._isComputer;
-        }
-
-        public void SetBallType(BallType ballType)
-        {
-            this._ballType = ballType;
+            return new Player(
+                Game1.player.displayName,
+                true,
+                false,
+                Game1.player.uniqueMultiplayerID);
         }
 
         public BallType GetBallType()
         {
             return this._ballType;
-        }
-
-        public bool IsMe()
-        {
-            return this._isMe;
-        }
-
-        public string GetName()
-        {
-            return this._name;
-        }
-
-        public long GetPlayerId()
-        {
-            return this._playerId;
         }
 
         public Cue GetCue()
@@ -82,13 +66,29 @@ namespace StardropPoolMinigame.Players
             return this._music;
         }
 
-        public static IPlayer GetMainPlayer()
+        public string GetName()
         {
-            return new Player(
-                Game1.player.displayName,
-                true,
-                false,
-                Game1.player.uniqueMultiplayerID);
+            return this._name;
+        }
+
+        public long GetPlayerId()
+        {
+            return this._playerId;
+        }
+
+        public bool IsComputer()
+        {
+            return this._isComputer;
+        }
+
+        public bool IsMe()
+        {
+            return this._isMe;
+        }
+
+        public void SetBallType(BallType ballType)
+        {
+            this._ballType = ballType;
         }
     }
 }

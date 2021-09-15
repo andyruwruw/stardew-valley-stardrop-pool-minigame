@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace StardropPoolMinigame.Behaviors.Physics
 {
-    class FlockingNewtonianPhysics : Physics
+    internal class FlockingNewtonianPhysics : Physics
     {
         public FlockingNewtonianPhysics() : base()
         {

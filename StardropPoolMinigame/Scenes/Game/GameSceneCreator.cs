@@ -5,7 +5,7 @@ using StardropPoolMinigame.Rules;
 namespace StardropPoolMinigame.Scenes
 {
     /// <inheritdoc cref="ISceneCreator"/>
-    class GameSceneCreator : ISceneCreator
+    internal class GameSceneCreator : ISceneCreator
     {
         /// <summary>
         /// Stored parameter for <see cref="GameScene"/> creation

@@ -3,14 +3,13 @@ using StardropPoolMinigame.Utilities;
 
 namespace StardropPoolMinigame.Entities
 {
-    class DefeatPopup : Popup
+    internal class DefeatPopup : Popup
     {
         public DefeatPopup() : base(
             null,
             null,
             Translations.GetTranslation(StringConstants.Popups.DEFEAT))
         {
-
         }
 
         /// <inheritdoc cref="Entity.GetId"/>

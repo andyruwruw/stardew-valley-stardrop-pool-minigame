@@ -9,7 +9,7 @@ namespace StardropPoolMinigame.Behaviors.Physics
     /// <para><inheritdoc cref="Physics"/></para>
     /// <para>Flocking simulation.</para>
     /// </summary>
-    class FlockingPhysics : Physics
+    internal class FlockingPhysics : Physics
     {
         /// <summary>
         /// How strong alignment impacts acceleration (multiplier).
@@ -17,14 +17,14 @@ namespace StardropPoolMinigame.Behaviors.Physics
         private float _alignmentStrength;
 
         /// <summary>
-        /// How strong separation impacts acceleration (multiplier).
-        /// </summary>
-        private float _separationStrength;
-
-        /// <summary>
         /// How strong cohesion impacts acceleration (multiplier).
         /// </summary>
         private float _cohesionStrength;
+
+        /// <summary>
+        /// How strong separation impacts acceleration (multiplier).
+        /// </summary>
+        private float _separationStrength;
 
         public FlockingPhysics(
             float alignmentStrength,

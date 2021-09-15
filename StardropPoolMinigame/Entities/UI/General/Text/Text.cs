@@ -8,21 +8,21 @@ using StardropPoolMinigame.Render.Filters;
 
 namespace StardropPoolMinigame.Entities
 {
-    class Text : Entity
+    internal class Text : Entity
     {
-        private string _text;
+        private IList<Character> _characters;
+
+        private bool _isCentered;
+
+        private bool _isHoverable;
 
         private int _maxWidth;
 
         private float _resultingHeight;
 
-        private IList<Character> _characters;
-
         private float _scale;
 
-        private bool _isCentered;
-
-        private bool _isHoverable;
+        private string _text;
 
         public Text(
             Origin origin,
@@ -52,9 +52,23 @@ namespace StardropPoolMinigame.Entities
             this.InicializeCharacters();
         }
 
+        public override void ClickCallback()
+        {
+        }
+
+        public IList<Character> GetCharacters()
+        {
+            return this._characters;
+        }
+
         public override string GetId()
         {
             return $"text-{this._id}";
+        }
+
+        public float GetScale()
+        {
+            return this._scale;
         }
 
         public override float GetTotalHeight()
@@ -67,13 +81,25 @@ namespace StardropPoolMinigame.Entities
             return this._maxWidth;
         }
 
-        public float GetScale()
+        public override void HoverCallback()
         {
-            return this._scale;
         }
 
-        public override void ClickCallback()
+        public bool IsHoverable()
         {
+            return this._isHoverable;
+        }
+
+        public override void SetAnchor(Vector2 anchor)
+        {
+            this._anchor = anchor;
+            this.InicializeCharacters();
+        }
+
+        public void SetText(string text)
+        {
+            this._text = text;
+            this.InicializeCharacters();
         }
 
         public override void SetTransitionState(TransitionState transitionState, bool start = false)
@@ -84,32 +110,6 @@ namespace StardropPoolMinigame.Entities
             {
                 character.SetTransitionState(transitionState, true);
             }
-        }
-
-        public void SetText(string text)
-        {
-            this._text = text;
-            this.InicializeCharacters();
-        }
-
-        public override void SetAnchor(Vector2 anchor)
-        {
-            this._anchor = anchor;
-            this.InicializeCharacters();
-        }
-
-        public IList<Character> GetCharacters()
-        {
-            return this._characters;
-        }
-
-        public bool IsHoverable()
-        {
-            return this._isHoverable;
-        }
-
-        public override void HoverCallback()
-        {
         }
 
         private void InicializeCharacters()
@@ -151,17 +151,21 @@ namespace StardropPoolMinigame.Entities
                         {
                             finishedLines.Add(word);
                             finishedLineLengths.Add(wordLength);
-                        } else
+                        }
+                        else
                         {
                             line = word;
                             lineLength = wordLength;
                         }
-                    } else if (character == '\n' || characterIndex == this._text.Length - 1) {
+                    }
+                    else if (character == '\n' || characterIndex == this._text.Length - 1)
+                    {
                         if (line != "")
                         {
                             finishedLines.Add($"{line} {word}");
                             finishedLineLengths.Add(lineLength + RenderConstants.Font.SPACE_WIDTH * this._scale + wordLength);
-                        } else
+                        }
+                        else
                         {
                             finishedLines.Add(word);
                             finishedLineLengths.Add(wordLength);
@@ -175,7 +179,8 @@ namespace StardropPoolMinigame.Entities
 
                         line = "";
                         lineLength = 0;
-                    } else
+                    }
+                    else
                     {
                         line = $"{line} {word}";
                         lineLength += RenderConstants.Font.SPACE_WIDTH * this._scale + wordLength;
@@ -183,7 +188,8 @@ namespace StardropPoolMinigame.Entities
 
                     word = "";
                     wordLength = 0;
-                } else
+                }
+                else
                 {
                     Rectangle characterBounds = Textures.GetCharacterBoundsFromChar(character);
 
@@ -207,7 +213,8 @@ namespace StardropPoolMinigame.Entities
                             if (lineCharacter == ' ')
                             {
                                 cursor += RenderConstants.Font.SPACE_WIDTH * this._scale;
-                            } else
+                            }
+                            else
                             {
                                 Rectangle characterBounds = Textures.GetCharacterBoundsFromChar(lineCharacter);
 

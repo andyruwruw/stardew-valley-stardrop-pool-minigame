@@ -10,13 +10,22 @@ using System.Collections.Generic;
 namespace StardropPoolMinigame.Behaviors.Physics
 {
     /// <inheritdoc cref="IPhysics"/>
-    abstract class Physics : IPhysics
+    internal abstract class Physics : IPhysics
     {
         /// <summary>
         /// Instantiates a physics system, or rules of interactions.
         /// </summary>
         public Physics()
         {
+        }
+
+        /// <summary>
+        /// Instantiates default <see cref="IPhysics"/>.
+        /// </summary>
+        /// <returns>Default <see cref="IPhysics"/></returns>
+        public static IPhysics GetDefaultPhysics()
+        {
+            return new NewtonianPhysics();
         }
 
         /// <inheritdoc cref="IPhysics.HasIntangibleInteractions"/>
@@ -44,102 +53,32 @@ namespace StardropPoolMinigame.Behaviors.Physics
         }
 
         /// <summary>
-        /// Retrives the <see cref="IRange"/> of a <see cref="EntityPhysics">EntityPhysics'</see> intangible forces.
+        /// <see cref="EntityPhysics"/> attempt to align their velocities with one another.
         /// </summary>
-        /// <param name="entity"><see cref="EntityPhysics"/> in question</param>
-        /// <returns><see cref="IRange"/> of <see cref="EntityPhysics"/> intangible perception</returns>
-        protected virtual IRange GetIntangiblePerception(EntityPhysics entity)
-        {
-            return new Circle(entity.GetAnchor(), 0f);
-        }
-
-        /// <summary>
-        /// Retrives the <see cref="IRange"/> of a <see cref="EntityPhysics">EntityPhysics'</see> tangible forces.
-        /// </summary>
-        /// <param name="entity"><see cref="EntityPhysics"/> in question</param>
-        /// <returns><see cref="IRange"/> of <see cref="EntityPhysics"/> tangible perception</returns>
-        protected virtual IRange GetTangiblePerception(EntityPhysics entity)
-        {
-            return new Circle(entity.GetAnchor(), 0f);
-        }
-
-        /// <summary>
-        /// Simulate interaction between main <see cref="EntityPhysics"/> and its intangible neighbors / barriers.
-        /// </summary>
-        /// <param name="entity">Main <see cref="EntityPhysics"/></param>
         /// <param name="neighbors">Neighboring <see cref="EntityPhysics"/> within the main <see cref="EntityPhysics"/> intangible perception radius</param>
-        /// <param name="barriers">Neighboring <see cref="IRange">IRanges</see> within the main <see cref="EntityPhysics"/> intangible perception radius</param>
-        protected virtual void InteractWithIntangible(EntityPhysics entity, IList<EntityPhysics> neighbors, IList<IRange> barriers)
+        /// <returns>Alignment <see cref="Vector2"/> to add to acceleration</returns>
+        protected Vector2 Align(EntityPhysics entity, IList<EntityPhysics> neighbors)
         {
-        }
+            Vector2 steering = Vector2.Zero;
+            int total = 0;
 
-        /// <summary>
-        /// Simulate interaction between main <see cref="EntityPhysics"/> and its tangible neighbors / barriers.
-        /// </summary>
-        /// <param name="entity">Main <see cref="EntityPhysics"/></param>
-        /// <param name="neighbors">Neighboring <see cref="EntityPhysics"/> within the main <see cref="EntityPhysics"/> tangible perception radius</param>
-        /// <param name="barriers">Neighboring <see cref="IRange">IRanges</see> within the main <see cref="EntityPhysics"/> tangible perception radius</param>
-        protected virtual void InteractWithTangible(EntityPhysics entity, IList<EntityPhysics> neighbors, IList<IRange> barriers)
-        {
-        }
-
-        /// <summary>
-        /// <see cref="Bounce(EntityPhysics, EntityPhysics, bool)"/> off all neighbors.
-        /// </summary>
-        /// <param name="entity">Main <see cref="EntityPhysics"/></param>
-        /// <param name="neighbors">Neighboring <see cref="EntityPhysics"/> within the main <see cref="EntityPhysics"/> tangible perception radius</param>
-        protected virtual void BounceAllNeighbors(EntityPhysics entity, IList<EntityPhysics> neighbors)
-        {
-            foreach (EntityPhysics neighbor in neighbors)
+            foreach (EntityPhysics boid in neighbors)
             {
-                if (entity.GetId() != neighbor.GetId())
-                {
-                    bool offsetOnly = (Math.Abs(VectorHelper.GetMagnitude(entity.GetVelocity())) + Math.Abs(VectorHelper.GetMagnitude(neighbor.GetVelocity())) < GameConstants.Ball.MINIMUM_BOUNCE_VELOCITY * 2);
+                steering = Vector2.Add(steering, boid.GetVelocity());
 
-                    this.Bounce(entity, neighbor, offsetOnly);
-
-                    if (!offsetOnly)
-                    {
-                        entity.CollisionCallback(neighbor);
-                    }
-                }
+                total += 1;
             }
-        }
 
-        /// <summary>
-        /// <see cref="Bounce(EntityPhysics, EntityPhysics, bool)"/> off all barriers.
-        /// </summary>
-        /// <param name="entity">Main <see cref="EntityPhysics"/></param>
-        /// <param name="barriers">Neighboring <see cref="IRange">IRanges</see> within the main <see cref="EntityPhysics"/> tangible perception radius</param>
-        protected virtual void BounceAllBarriers(EntityPhysics entity, IList<IRange> barriers)
-        {
-            foreach (Line bounceableSurface in barriers)
+            if (steering.X == 0 && steering.Y == 0)
             {
-                if (bounceableSurface.Intersects(entity.GetBoundary()))
-                {
-                    this.Bounce(entity, bounceableSurface);
-
-                    entity.CollisionCallback(bounceableSurface);
-                }
+                return steering;
             }
-        }
 
-        /// <summary>
-        /// Checks if <see cref="EntityPhysics"/> lies within a <see cref="TableSegment"/> pocket bounds.
-        /// </summary>
-        /// <param name="entity"><see cref="EntityPhysics"/> in question</param>
-        /// <param name="tableSegement"><see cref="TableSegment"/> the <see cref="EntityPhysics"/> is in</param>
-        protected virtual void CheckIfPocketed(EntityPhysics entity, TableSegment tableSegement)
-        {
-            IList<Circle> pocketBounds = tableSegement.GetPockets();
+            steering = Vector2.Divide(steering, total);
+            steering = Vector2.Multiply(Vector2.Normalize(steering), entity.GetMaximumVelocity());
+            steering = Vector2.Subtract(steering, entity.GetVelocity());
 
-            foreach (Circle pocketBound in pocketBounds)
-            {
-                if (pocketBound.Contains(entity.GetAnchor()))
-                {
-                    ((Ball)entity).SetPocketed(true);
-                }
-            }
+            return steering;
         }
 
         /// <summary>
@@ -208,6 +147,95 @@ namespace StardropPoolMinigame.Behaviors.Physics
         }
 
         /// <summary>
+        /// <see cref="Bounce(EntityPhysics, EntityPhysics, bool)"/> off all barriers.
+        /// </summary>
+        /// <param name="entity">Main <see cref="EntityPhysics"/></param>
+        /// <param name="barriers">Neighboring <see cref="IRange">IRanges</see> within the main <see cref="EntityPhysics"/> tangible perception radius</param>
+        protected virtual void BounceAllBarriers(EntityPhysics entity, IList<IRange> barriers)
+        {
+            foreach (Line bounceableSurface in barriers)
+            {
+                if (bounceableSurface.Intersects(entity.GetBoundary()))
+                {
+                    this.Bounce(entity, bounceableSurface);
+
+                    entity.CollisionCallback(bounceableSurface);
+                }
+            }
+        }
+
+        /// <summary>
+        /// <see cref="Bounce(EntityPhysics, EntityPhysics, bool)"/> off all neighbors.
+        /// </summary>
+        /// <param name="entity">Main <see cref="EntityPhysics"/></param>
+        /// <param name="neighbors">Neighboring <see cref="EntityPhysics"/> within the main <see cref="EntityPhysics"/> tangible perception radius</param>
+        protected virtual void BounceAllNeighbors(EntityPhysics entity, IList<EntityPhysics> neighbors)
+        {
+            foreach (EntityPhysics neighbor in neighbors)
+            {
+                if (entity.GetId() != neighbor.GetId())
+                {
+                    bool offsetOnly = (Math.Abs(VectorHelper.GetMagnitude(entity.GetVelocity())) + Math.Abs(VectorHelper.GetMagnitude(neighbor.GetVelocity())) < GameConstants.Ball.MINIMUM_BOUNCE_VELOCITY * 2);
+
+                    this.Bounce(entity, neighbor, offsetOnly);
+
+                    if (!offsetOnly)
+                    {
+                        entity.CollisionCallback(neighbor);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Checks if <see cref="EntityPhysics"/> lies within a <see cref="TableSegment"/> pocket bounds.
+        /// </summary>
+        /// <param name="entity"><see cref="EntityPhysics"/> in question</param>
+        /// <param name="tableSegement"><see cref="TableSegment"/> the <see cref="EntityPhysics"/> is in</param>
+        protected virtual void CheckIfPocketed(EntityPhysics entity, TableSegment tableSegement)
+        {
+            IList<Circle> pocketBounds = tableSegement.GetPockets();
+
+            foreach (Circle pocketBound in pocketBounds)
+            {
+                if (pocketBound.Contains(entity.GetAnchor()))
+                {
+                    ((Ball)entity).SetPocketed(true);
+                }
+            }
+        }
+
+        /// <summary>
+        /// <see cref="EntityPhysics"/> attempt to drift towards the center off mass.
+        /// </summary>
+        /// <param name="neighbors">Neighboring <see cref="EntityPhysics"/> within the main <see cref="EntityPhysics"/> intangible perception radius</param>
+        /// <returns>Cohesion <see cref="Vector2"/> to add to acceleration</returns>
+        protected Vector2 Cohesion(EntityPhysics entity, IList<EntityPhysics> neighbors)
+        {
+            Vector2 steering = Vector2.Zero;
+            int total = 0;
+
+            foreach (EntityPhysics boid in neighbors)
+            {
+                steering = Vector2.Add(steering, boid.GetAnchor());
+
+                total += 1;
+            }
+
+            if (steering.X == 0 && steering.Y == 0)
+            {
+                return steering;
+            }
+
+            steering = Vector2.Divide(steering, total);
+            steering = Vector2.Subtract(steering, entity.GetAnchor());
+            steering = Vector2.Multiply(Vector2.Normalize(steering), entity.GetMaximumVelocity());
+            steering = Vector2.Subtract(steering, entity.GetVelocity());
+
+            return steering;
+        }
+
+        /// <summary>
         /// Calculates collision force of <see cref="EntityPhysics"/>.
         /// </summary>
         /// <param name="entity1"><see cref="EntityPhysics"/> in collision</param>
@@ -216,6 +244,16 @@ namespace StardropPoolMinigame.Behaviors.Physics
         protected virtual float GetCollisionForce(EntityPhysics entity, Vector2 angle)
         {
             return Vector2.Dot(entity.GetVelocity(), angle);
+        }
+
+        /// <summary>
+        /// Retrives the <see cref="IRange"/> of a <see cref="EntityPhysics">EntityPhysics'</see> intangible forces.
+        /// </summary>
+        /// <param name="entity"><see cref="EntityPhysics"/> in question</param>
+        /// <returns><see cref="IRange"/> of <see cref="EntityPhysics"/> intangible perception</returns>
+        protected virtual IRange GetIntangiblePerception(EntityPhysics entity)
+        {
+            return new Circle(entity.GetAnchor(), 0f);
         }
 
         /// <summary>
@@ -231,32 +269,33 @@ namespace StardropPoolMinigame.Behaviors.Physics
         }
 
         /// <summary>
-        /// <see cref="EntityPhysics"/> attempt to align their velocities with one another.
+        /// Retrives the <see cref="IRange"/> of a <see cref="EntityPhysics">EntityPhysics'</see> tangible forces.
         /// </summary>
-        /// <param name="neighbors">Neighboring <see cref="EntityPhysics"/> within the main <see cref="EntityPhysics"/> intangible perception radius</param>
-        /// <returns>Alignment <see cref="Vector2"/> to add to acceleration</returns>
-        protected Vector2 Align(EntityPhysics entity, IList<EntityPhysics> neighbors)
+        /// <param name="entity"><see cref="EntityPhysics"/> in question</param>
+        /// <returns><see cref="IRange"/> of <see cref="EntityPhysics"/> tangible perception</returns>
+        protected virtual IRange GetTangiblePerception(EntityPhysics entity)
         {
-            Vector2 steering = Vector2.Zero;
-            int total = 0;
+            return new Circle(entity.GetAnchor(), 0f);
+        }
 
-            foreach (EntityPhysics boid in neighbors)
-            {
-                steering = Vector2.Add(steering, boid.GetVelocity());
+        /// <summary>
+        /// Simulate interaction between main <see cref="EntityPhysics"/> and its intangible neighbors / barriers.
+        /// </summary>
+        /// <param name="entity">Main <see cref="EntityPhysics"/></param>
+        /// <param name="neighbors">Neighboring <see cref="EntityPhysics"/> within the main <see cref="EntityPhysics"/> intangible perception radius</param>
+        /// <param name="barriers">Neighboring <see cref="IRange">IRanges</see> within the main <see cref="EntityPhysics"/> intangible perception radius</param>
+        protected virtual void InteractWithIntangible(EntityPhysics entity, IList<EntityPhysics> neighbors, IList<IRange> barriers)
+        {
+        }
 
-                total += 1;
-            }
-
-            if (steering.X == 0 && steering.Y == 0)
-            {
-                return steering;
-            }
-
-            steering = Vector2.Divide(steering, total);
-            steering = Vector2.Multiply(Vector2.Normalize(steering), entity.GetMaximumVelocity());
-            steering = Vector2.Subtract(steering, entity.GetVelocity());
-
-            return steering;
+        /// <summary>
+        /// Simulate interaction between main <see cref="EntityPhysics"/> and its tangible neighbors / barriers.
+        /// </summary>
+        /// <param name="entity">Main <see cref="EntityPhysics"/></param>
+        /// <param name="neighbors">Neighboring <see cref="EntityPhysics"/> within the main <see cref="EntityPhysics"/> tangible perception radius</param>
+        /// <param name="barriers">Neighboring <see cref="IRange">IRanges</see> within the main <see cref="EntityPhysics"/> tangible perception radius</param>
+        protected virtual void InteractWithTangible(EntityPhysics entity, IList<EntityPhysics> neighbors, IList<IRange> barriers)
+        {
         }
 
         /// <summary>
@@ -291,45 +330,6 @@ namespace StardropPoolMinigame.Behaviors.Physics
             steering = Vector2.Subtract(steering, entity.GetVelocity());
 
             return steering;
-        }
-
-        /// <summary>
-        /// <see cref="EntityPhysics"/> attempt to drift towards the center off mass.
-        /// </summary>
-        /// <param name="neighbors">Neighboring <see cref="EntityPhysics"/> within the main <see cref="EntityPhysics"/> intangible perception radius</param>
-        /// <returns>Cohesion <see cref="Vector2"/> to add to acceleration</returns>
-        protected Vector2 Cohesion(EntityPhysics entity, IList<EntityPhysics> neighbors)
-        {
-            Vector2 steering = Vector2.Zero;
-            int total = 0;
-
-            foreach (EntityPhysics boid in neighbors)
-            {
-                steering = Vector2.Add(steering, boid.GetAnchor());
-
-                total += 1;
-            }
-
-            if (steering.X == 0 && steering.Y == 0)
-            {
-                return steering;
-            }
-
-            steering = Vector2.Divide(steering, total);
-            steering = Vector2.Subtract(steering, entity.GetAnchor());
-            steering = Vector2.Multiply(Vector2.Normalize(steering), entity.GetMaximumVelocity());
-            steering = Vector2.Subtract(steering, entity.GetVelocity());
-
-            return steering;
-        }
-
-        /// <summary>
-        /// Instantiates default <see cref="IPhysics"/>.
-        /// </summary>
-        /// <returns>Default <see cref="IPhysics"/></returns>
-        public static IPhysics GetDefaultPhysics()
-        {
-            return new NewtonianPhysics();
         }
     }
 }

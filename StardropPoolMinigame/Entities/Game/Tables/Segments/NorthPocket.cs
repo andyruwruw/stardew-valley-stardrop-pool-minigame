@@ -6,7 +6,7 @@ using StardropPoolMinigame.Render.Filters;
 
 namespace StardropPoolMinigame.Entities
 {
-    class NorthPocket : TableSegment
+    internal class NorthPocket : TableSegment
     {
         public NorthPocket(
             Origin origin,

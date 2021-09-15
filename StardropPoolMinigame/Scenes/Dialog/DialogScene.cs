@@ -8,18 +8,8 @@ using StardropPoolMinigame.Utilities;
 
 namespace StardropPoolMinigame.Scenes
 {
-    class DialogScene: Scene
+    internal class DialogScene : Scene
     {
-        /// <summary>
-        /// <see cref="ISceneCreator"/> to generate next <see cref="IScene"/>.
-        /// </summary>
-        private ISceneCreator _sceneCreator;
-
-        /// <summary>
-        /// Current dialog <see cref="Script"/>.
-        /// </summary>
-        private IScript _script;
-
         /// <summary>
         /// Current line of dialog from <see cref="Script"/>.
         /// </summary>
@@ -29,6 +19,16 @@ namespace StardropPoolMinigame.Scenes
         /// Portrait <see cref="IEntity"/> of active speaker in <see cref="Script"/>.
         /// </summary>
         private Portrait _portrait;
+
+        /// <summary>
+        /// <see cref="ISceneCreator"/> to generate next <see cref="IScene"/>.
+        /// </summary>
+        private ISceneCreator _sceneCreator;
+
+        /// <summary>
+        /// Current dialog <see cref="Script"/>.
+        /// </summary>
+        private IScript _script;
 
         /// <summary>
         /// Text <see cref="IEntity"/> of current line of dialog from <see cref="Script"/>.
@@ -66,7 +66,8 @@ namespace StardropPoolMinigame.Scenes
             if (next == null)
             {
                 this.TriggerNextScene();
-            } else
+            }
+            else
             {
                 this._currentRecitation = next;
 
@@ -96,11 +97,6 @@ namespace StardropPoolMinigame.Scenes
         public override void ReceiveRightClick()
         {
             this._currentRecitation = this._script.GetLast();
-        }
-
-        /// <inheritdoc cref="Scene.AddEntities"/>
-        protected override void AddEntities()
-        {
         }
 
         /// <inheritdoc cref="Scene.AddDependentEntities"/>
@@ -135,6 +131,11 @@ namespace StardropPoolMinigame.Scenes
                     RenderConstants.Scenes.Dialog.Text.MAX_WIDTH,
                     0.6f,
                     isCentered: true));
+        }
+
+        /// <inheritdoc cref="Scene.AddEntities"/>
+        protected override void AddEntities()
+        {
         }
 
         /// <summary>

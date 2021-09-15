@@ -6,8 +6,11 @@
     public enum BallType
     {
         Any = 0,
+
         White = 1,
+
         Solid = 2,
+
         Stripped = 3,
     }
 }

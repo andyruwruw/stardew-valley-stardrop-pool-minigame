@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace StardropPoolMinigame.Render.Drawers
 {
-    class TableSegmentDrawer : Drawer
+    internal class TableSegmentDrawer : Drawer
     {
         public TableSegmentDrawer(TableSegment tableSegment) : base(tableSegment)
         {
@@ -51,7 +51,7 @@ namespace StardropPoolMinigame.Render.Drawers
                     this.GetOrigin(overrideOrigin),
                     this.GetScale(overrideScale),
                     this.GetEffects(overrideEffects),
-                    LayerDepthConstants.Game.TABLE_FRONT);
+                    RenderConstants.Scenes.Game.LayerDepth.TABLE_FRONT);
 
                 // Shadow
                 batch.Draw(
@@ -64,7 +64,8 @@ namespace StardropPoolMinigame.Render.Drawers
                     this.GetScale(overrideScale),
                     this.GetEffects(overrideEffects),
                     this.GetLayerDepth(overrideLayerDepth) - 0.0001f);
-            } else
+            }
+            else
             {
                 Vector2 destination = this.GetDestination(overrideDestination);
 

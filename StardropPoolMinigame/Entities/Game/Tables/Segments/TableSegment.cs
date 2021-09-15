@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 namespace StardropPoolMinigame.Entities
 {
-    abstract class TableSegment : Entity
+    internal abstract class TableSegment : Entity
     {
         protected IList<IRange> _bounceableSurfaces;
 
@@ -32,43 +32,6 @@ namespace StardropPoolMinigame.Entities
             this.InicializePockets();
             this.SetDrawer(new TableSegmentDrawer(this));
         }
-
-        public override string GetId()
-        {
-            return $"generic-table-segment-{this._id}";
-        }
-
-        public override float GetTotalHeight()
-        {
-            return Textures.Table.Edge.Back.NORTH.Height;
-        }
-
-        public override float GetTotalWidth()
-        {
-            return Textures.Table.Edge.Back.NORTH.Width;
-        }
-
-        public virtual void InicializeBounceableSurfaces()
-        {
-            this._bounceableSurfaces = new List<IRange>();
-        }
-
-        public virtual void InicializePockets()
-        {
-            this._pockets = new List<Circle>();
-        }
-
-        public IList<IRange> GetBounceableSurfaces()
-        {
-            return this._bounceableSurfaces;
-        }
-
-        public IList<Circle> GetPockets()
-        {
-            return this._pockets;
-        }
-
-        public abstract TableSegmentType GetTableSegmentType();
 
         public static TableSegment GetTableSegmentFromType(
             TableSegmentType type,
@@ -127,5 +90,41 @@ namespace StardropPoolMinigame.Entities
             }
         }
 
+        public IList<IRange> GetBounceableSurfaces()
+        {
+            return this._bounceableSurfaces;
+        }
+
+        public override string GetId()
+        {
+            return $"generic-table-segment-{this._id}";
+        }
+
+        public IList<Circle> GetPockets()
+        {
+            return this._pockets;
+        }
+
+        public abstract TableSegmentType GetTableSegmentType();
+
+        public override float GetTotalHeight()
+        {
+            return Textures.Table.Edge.Back.NORTH.Height;
+        }
+
+        public override float GetTotalWidth()
+        {
+            return Textures.Table.Edge.Back.NORTH.Width;
+        }
+
+        public virtual void InicializeBounceableSurfaces()
+        {
+            this._bounceableSurfaces = new List<IRange>();
+        }
+
+        public virtual void InicializePockets()
+        {
+            this._pockets = new List<Circle>();
+        }
     }
 }

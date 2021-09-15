@@ -7,7 +7,7 @@ using System;
 
 namespace StardropPoolMinigame.Entities
 {
-    class NorthEastEdge : TableSegment
+    internal class NorthEastEdge : TableSegment
     {
         public NorthEastEdge(
             Origin origin,

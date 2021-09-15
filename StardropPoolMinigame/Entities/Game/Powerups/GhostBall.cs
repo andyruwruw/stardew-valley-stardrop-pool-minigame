@@ -1,6 +1,6 @@
 namespace StardropPoolMinigame.Powerups
 {
-    class GhostBall : IPowerup
+    internal class GhostBall : IPowerup
     {
         public GhostBall()
         {

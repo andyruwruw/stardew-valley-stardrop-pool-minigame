@@ -3,7 +3,7 @@
     /// <summary>
     /// Depicts score and summary of finished <see cref="GameScene"/>
     /// </summary>
-    class SummaryScene: Scene
+    internal class SummaryScene : Scene
     {
         /// <summary>
         /// Previous <see cref="GameScene"/> being summarized.

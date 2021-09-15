@@ -6,7 +6,7 @@ namespace StardropPoolMinigame
     /// <summary>
     /// Static method of printing to <see cref="IMonitor"/>
     /// </summary>
-    class Logger
+    internal class Logger
     {
         /// <summary>
         /// Static reference to <see cref="IMonitor"/>
@@ -14,12 +14,12 @@ namespace StardropPoolMinigame
         private static IMonitor Monitor;
 
         /// <summary>
-        /// Sets static reference to <see cref="IMonitor"/>
+        /// Prints to <see cref="LogLevel.Debug"/> of <see cref="IMonitor"/>
         /// </summary>
-        /// <param name="monitor"><see cref="IMonitor"/> reference</param>
-        public static void SetMonitor(IMonitor monitor)
+        /// <param name="message">Message to be printed</param>
+        public static void Debug(String message)
         {
-            Monitor = monitor;
+            Monitor.Log(message, LogLevel.Debug);
         }
 
         /// <summary>
@@ -32,12 +32,12 @@ namespace StardropPoolMinigame
         }
 
         /// <summary>
-        /// Prints to <see cref="LogLevel.Debug"/> of <see cref="IMonitor"/>
+        /// Sets static reference to <see cref="IMonitor"/>
         /// </summary>
-        /// <param name="message">Message to be printed</param>
-        public static void Debug(String message)
+        /// <param name="monitor"><see cref="IMonitor"/> reference</param>
+        public static void SetMonitor(IMonitor monitor)
         {
-            Monitor.Log(message, LogLevel.Debug);
+            Monitor = monitor;
         }
 
         /// <summary>

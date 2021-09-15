@@ -1,6 +1,6 @@
 ﻿namespace StardropPoolMinigame.Scenes.Game.States
 {
-    class GameResults
+    internal class GameResults
     {
         private int _turns;
 

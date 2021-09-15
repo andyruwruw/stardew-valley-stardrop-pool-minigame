@@ -7,7 +7,7 @@ using StardropPoolMinigame.Render.Filters;
 
 namespace StardropPoolMinigame.Render.Drawers
 {
-    class BallDrawer : Drawer
+    internal class BallDrawer : Drawer
     {
         private IFilter _flashingAnimation;
 
@@ -58,7 +58,7 @@ namespace StardropPoolMinigame.Render.Drawers
                     overrideEffects,
                     overrideLayerDepth);
             }
-            
+
             this.DrawShadows(
                 batch,
                 overrideDestination,
@@ -99,8 +99,8 @@ namespace StardropPoolMinigame.Render.Drawers
         {
             Vector2 topLeft = this._entity.GetTopLeft();
             return new Vector2(
-                (topLeft.X - RenderConstants.Entities.Ball.MARGIN_LEFT) * RenderConstants.TileScale() + RenderConstants.AdjustedScreenWidthMargin(), 
-                (topLeft.Y - RenderConstants.Entities.Ball.MARGIN_TOP) * RenderConstants.TileScale() + RenderConstants.AdjustedScreenHeightMargin());
+                (topLeft.X - RenderConstants.Entities.Ball.MARGIN_LEFT) * RenderConstants.TileScale() + RenderConstants.AdjustedScreen.Margin.Width(),
+                (topLeft.Y - RenderConstants.Entities.Ball.MARGIN_TOP) * RenderConstants.TileScale() + RenderConstants.AdjustedScreen.Margin.Height());
         }
 
         protected override Rectangle GetRawSource()
@@ -172,7 +172,7 @@ namespace StardropPoolMinigame.Render.Drawers
                 this.GetLayerDepth(overrideLayerDepth) + 0.0001f);
         }
 
-        private void DrawStripes(
+        private void DrawHighlight(
             SpriteBatch batch,
             Vector2? overrideDestination = null,
             float? overrideRotation = null,
@@ -181,19 +181,16 @@ namespace StardropPoolMinigame.Render.Drawers
             SpriteEffects? overrideEffects = null,
             float? overrideLayerDepth = null)
         {
-            if (((Ball)this._entity).GetBallType() == BallType.Stripped)
-            {
-                batch.Draw(
-                    this.GetTileset(),
-                    this.GetDestination(overrideDestination),
-                    this.GetStripeSource(),
-                    this.GetColor(),
-                    this.GetRotation(overrideRotation),
-                    this.GetOrigin(overrideOrigin),
-                    this.GetScale(overrideScale),
-                    this.GetEffects(overrideEffects),
-                    this.GetLayerDepth(overrideLayerDepth) + 0.0001f);
-            }
+            batch.Draw(
+                this.GetTileset(),
+                this.GetDestination(overrideDestination),
+                Textures.Ball.HIGHLIGHT,
+                ((Ball)this._entity).IsFlashing() ? this._flashingAnimation.ExecuteColor(this.GetColor()) : this.GetColor(),
+                this.GetRotation(overrideRotation),
+                this.GetOrigin(overrideOrigin),
+                this.GetScale(overrideScale),
+                this.GetEffects(overrideEffects),
+                this.GetLayerDepth(overrideLayerDepth) + 0.0003f);
         }
 
         private void DrawShadows(
@@ -217,8 +214,8 @@ namespace StardropPoolMinigame.Render.Drawers
                 this.GetLayerDepth(overrideLayerDepth) + 0.0002f);
         }
 
-        private void DrawHighlight(
-            SpriteBatch batch,
+        private void DrawStripes(
+                            SpriteBatch batch,
             Vector2? overrideDestination = null,
             float? overrideRotation = null,
             Vector2? overrideOrigin = null,
@@ -226,16 +223,19 @@ namespace StardropPoolMinigame.Render.Drawers
             SpriteEffects? overrideEffects = null,
             float? overrideLayerDepth = null)
         {
-            batch.Draw(
-                this.GetTileset(),
-                this.GetDestination(overrideDestination),
-                Textures.Ball.HIGHLIGHT,
-                ((Ball)this._entity).IsFlashing() ? this._flashingAnimation.ExecuteColor(this.GetColor()) : this.GetColor(),
-                this.GetRotation(overrideRotation),
-                this.GetOrigin(overrideOrigin),
-                this.GetScale(overrideScale),
-                this.GetEffects(overrideEffects),
-                this.GetLayerDepth(overrideLayerDepth) + 0.0003f);
+            if (((Ball)this._entity).GetBallType() == BallType.Stripped)
+            {
+                batch.Draw(
+                    this.GetTileset(),
+                    this.GetDestination(overrideDestination),
+                    this.GetStripeSource(),
+                    this.GetColor(),
+                    this.GetRotation(overrideRotation),
+                    this.GetOrigin(overrideOrigin),
+                    this.GetScale(overrideScale),
+                    this.GetEffects(overrideEffects),
+                    this.GetLayerDepth(overrideLayerDepth) + 0.0001f);
+            }
         }
 
         private Rectangle GetCoreSource()

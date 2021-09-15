@@ -4,7 +4,7 @@ using StardropPoolMinigame.Entities;
 
 namespace StardropPoolMinigame.Render.Drawers
 {
-    interface IDrawer
+    internal interface IDrawer
     {
         void Draw(
             SpriteBatch batch,

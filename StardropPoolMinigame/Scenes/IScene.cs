@@ -7,39 +7,18 @@ namespace StardropPoolMinigame.Scenes
     /// <summary>
     /// An interactable page, comprised of <see cref="IEntity">IEntities</see> and logic for handling events
     /// </summary>
-    interface IScene
+    internal interface IScene
     {
-        /// <summary>
-        /// Unique identifier for <see cref="IScene"/>
-        /// </summary>
-        /// <returns>ID of <see cref="IScene"/></returns>
-        string GetKey();
-
-        /// <summary>
-        /// Updates all <see cref="IScene">IScene's</see> <see cref="IEntity">IEntities</see> and runs all <see cref="IScene"/> specific logic
-        /// </summary>
-        void Update();
-
-        /// <summary>
-        /// Handles left click event for <see cref="IScene"/>
-        /// </summary>
-        void ReceiveLeftClick();
-
-        /// <summary>
-        /// Handles right click event for <see cref="IScene"/>
-        /// </summary>
-        void ReceiveRightClick();
-
         /// <summary>
         /// Gets all <see cref="IScene">IScene's</see> <see cref="IEntity">IEntities</see>
         /// </summary>
         IList<IEntity> GetEntities();
 
         /// <summary>
-        /// Whether the <see cref="IScene"/> is finished and a new <see cref="IScene"/> ready
+        /// Unique identifier for <see cref="IScene"/>
         /// </summary>
-        /// <returns>Whether new <see cref="IScene"/> is ready</returns>
-        bool HasNewScene();
+        /// <returns>ID of <see cref="IScene"/></returns>
+        string GetKey();
 
         /// <summary>
         /// Gets the new <see cref="IScene"/> to replace this <see cref="IScene"/>
@@ -54,9 +33,30 @@ namespace StardropPoolMinigame.Scenes
         TransitionState GetTransitionState();
 
         /// <summary>
+        /// Whether the <see cref="IScene"/> is finished and a new <see cref="IScene"/> ready
+        /// </summary>
+        /// <returns>Whether new <see cref="IScene"/> is ready</returns>
+        bool HasNewScene();
+
+        /// <summary>
+        /// Handles left click event for <see cref="IScene"/>
+        /// </summary>
+        void ReceiveLeftClick();
+
+        /// <summary>
+        /// Handles right click event for <see cref="IScene"/>
+        /// </summary>
+        void ReceiveRightClick();
+
+        /// <summary>
         /// Sets the <see cref="TransitionState"/> of the <see cref="IScene"/>
         /// </summary>
         /// <param name="transitionState">New <see cref="TransitionState"/></param>
         void SetTransitionState(TransitionState transitionState);
+
+        /// <summary>
+        /// Updates all <see cref="IScene">IScene's</see> <see cref="IEntity">IEntities</see> and runs all <see cref="IScene"/> specific logic
+        /// </summary>
+        void Update();
     }
 }

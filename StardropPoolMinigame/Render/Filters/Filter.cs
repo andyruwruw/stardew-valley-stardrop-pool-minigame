@@ -4,7 +4,7 @@ using StardropPoolMinigame.Helpers;
 
 namespace StardropPoolMinigame.Render.Filters
 {
-    abstract class Filter : IFilter
+    internal abstract class Filter : IFilter
     {
         protected string _key;
 
@@ -18,7 +18,52 @@ namespace StardropPoolMinigame.Render.Filters
             this.SetKey(key);
         }
 
+        public virtual Color ExecuteColor(Color color)
+        {
+            return color;
+        }
+
+        public virtual Vector2 ExecuteDestination(Vector2 destination)
+        {
+            return destination;
+        }
+
+        public virtual SpriteEffects ExecuteEffects(SpriteEffects effects)
+        {
+            return effects;
+        }
+
+        public virtual float ExecuteLayerDepth(float layerDepth)
+        {
+            return layerDepth;
+        }
+
+        public virtual Vector2 ExecuteOrigin(Vector2 origin)
+        {
+            return origin;
+        }
+
+        public virtual float ExecuteRotation(float rotation)
+        {
+            return rotation;
+        }
+
+        public virtual float ExecuteScale(float scale)
+        {
+            return scale;
+        }
+
+        public virtual Rectangle ExecuteSource(Rectangle source)
+        {
+            return source;
+        }
+
         public abstract string GetName();
+
+        public virtual void SetKey(string key)
+        {
+            this._key = $"{key}-filter-{this.GetName()}";
+        }
 
         public virtual void StartFilter()
         {
@@ -37,51 +82,6 @@ namespace StardropPoolMinigame.Render.Filters
                 return (float)(Timer.CheckTimer(this._key));
             }
             return 0;
-        }
-
-        public virtual Vector2 ExecuteDestination(Vector2 destination)
-        {
-            return destination;
-        }
-
-        public virtual Rectangle ExecuteSource(Rectangle source)
-        {
-            return source;
-        }
-
-        public virtual Color ExecuteColor(Color color)
-        {
-            return color;
-        }
-
-        public virtual float ExecuteRotation(float rotation)
-        {
-            return rotation;
-        }
-
-        public virtual Vector2 ExecuteOrigin(Vector2 origin)
-        {
-            return origin;
-        }
-
-        public virtual float ExecuteScale(float scale)
-        {
-            return scale;
-        }
-
-        public virtual SpriteEffects ExecuteEffects(SpriteEffects effects)
-        {
-            return effects;
-        }
-
-        public virtual float ExecuteLayerDepth(float layerDepth)
-        {
-            return layerDepth;
-        }
-
-        public virtual void SetKey(string key)
-        {
-            this._key = $"{key}-filter-{this.GetName()}";
         }
     }
 }

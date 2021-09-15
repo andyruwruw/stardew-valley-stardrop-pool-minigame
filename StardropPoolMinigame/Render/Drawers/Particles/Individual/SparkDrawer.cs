@@ -8,7 +8,7 @@ using System;
 
 namespace StardropPoolMinigame.Render.Drawers
 {
-    class SparkDrawer : Drawer
+    internal class SparkDrawer : Drawer
     {
         public SparkDrawer(Spark spark) : base(spark)
         {
@@ -25,9 +25,9 @@ namespace StardropPoolMinigame.Render.Drawers
             DrawDebugCircle(batch, this._entity.GetAnchor(), (int)Math.Round(((Spark)this._entity).GetPerception().GetRadius()), Color.Purple);
         }
 
-        protected override Rectangle GetRawSource()
+        protected override Color GetRawColor()
         {
-            return Textures.Particle.Spark.FRAME_1;
+            return new Color(200, 200, 200, 200);
         }
 
         protected override Vector2 GetRawDestination()
@@ -38,9 +38,9 @@ namespace StardropPoolMinigame.Render.Drawers
                 topLeft.Y * RenderConstants.TileScale() + RenderConstants.AdjustedScreenHeightMargin());
         }
 
-        protected override Color GetRawColor()
+        protected override Vector2 GetRawOrigin()
         {
-            return new Color(200, 200, 200, 200);
+            return new Vector2(this.GetRawSource().Width / 2, this.GetRawSource().Height / 2);
         }
 
         protected override float GetRawRotation()
@@ -48,9 +48,9 @@ namespace StardropPoolMinigame.Render.Drawers
             return (float)(Operators.VectorToRadians(((EntityBoid)this._entity).GetVelocity()) + Math.PI / 3f);
         }
 
-        protected override Vector2 GetRawOrigin()
+        protected override Rectangle GetRawSource()
         {
-            return new Vector2(this.GetRawSource().Width / 2, this.GetRawSource().Height / 2);
+            return Textures.Particle.Spark.FRAME_1;
         }
     }
 }

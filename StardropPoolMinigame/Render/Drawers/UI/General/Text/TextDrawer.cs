@@ -5,7 +5,7 @@ using StardropPoolMinigame.Entities;
 
 namespace StardropPoolMinigame.Render.Drawers
 {
-    class TextDrawer : Drawer
+    internal class TextDrawer : Drawer
     {
         public TextDrawer(Text text) : base(text)
         {

@@ -6,7 +6,7 @@ using StardropPoolMinigame.Render.Filters;
 
 namespace StardropPoolMinigame.Entities
 {
-    class Cursor : Entity
+    internal class Cursor : Entity
     {
         public Cursor(
             Origin origin,

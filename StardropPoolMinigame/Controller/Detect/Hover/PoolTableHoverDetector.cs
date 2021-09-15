@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace StardropPoolMinigame.Detect.Hover
 {
-    class PoolTableHoverDetector : TileHoverDetector
+    internal class PoolTableHoverDetector : TileHoverDetector
     {
         /// <summary>
         /// Tile IDs for pool table on building layer

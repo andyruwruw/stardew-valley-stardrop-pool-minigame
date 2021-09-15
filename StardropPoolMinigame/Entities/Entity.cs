@@ -9,7 +9,7 @@ using System.Collections.Generic;
 namespace StardropPoolMinigame.Entities
 {
     /// <inheritdoc cref="IEntity"/>
-    abstract class Entity : IEntity
+    internal abstract class Entity : IEntity
     {
         /// <summary>
         /// <see cref="IEntity">IEntity's</see> anchor, or position.
@@ -37,14 +37,14 @@ namespace StardropPoolMinigame.Entities
         protected IList<IFilter> _filters;
 
         /// <summary>
-        /// Whether the <see cref="Entity"/> is being hovered by the cursor.
-        /// </summary>
-        protected bool _isHovered;
-
-        /// <summary>
         /// <see cref="IEntity">IEntity's</see> unique identifier.
         /// </summary>
         protected string _id;
+
+        /// <summary>
+        /// Whether the <see cref="Entity"/> is being hovered by the cursor.
+        /// </summary>
+        protected bool _isHovered;
 
         /// <summary>
         /// <see cref="IEntity">IEntity's</see> layer depth for rendering.
@@ -89,18 +89,6 @@ namespace StardropPoolMinigame.Entities
             this.InicializeTransitionState();
         }
 
-        /// <inheritdoc cref="IEntity.Update"/>
-        public virtual void Update()
-        {
-            this.UpdateTransitionState();
-            this.UpdateHover();
-        }
-
-        /// <inheritdoc cref="IEntity.HoverCallback"/>
-        public virtual void HoverCallback()
-        {
-        }
-
         /// <inheritdoc cref="IEntity.ClickCallback"/>
         public virtual void ClickCallback()
         {
@@ -110,12 +98,6 @@ namespace StardropPoolMinigame.Entities
         public virtual Vector2 GetAnchor()
         {
             return this._anchor;
-        }
-
-        /// <inheritdoc cref="IEntity.SetAnchor(Vector2)"/>
-        public virtual void SetAnchor(Vector2 anchor)
-        {
-            this._anchor = anchor;
         }
 
         /// <inheritdoc cref="IEntity.GetCenter"/>
@@ -181,22 +163,10 @@ namespace StardropPoolMinigame.Entities
             return this._enteringTransition;
         }
 
-        /// <inheritdoc cref="IEntity.SetEnteringTransition"/>
-        public void SetEnteringTransition(IFilter transition)
-        {
-            this._enteringTransition = transition;
-        }
-
         /// <inheritdoc cref="IEntity.GetExitingTransition"/>
         public virtual IFilter GetExitingTransition()
         {
             return this._exitingTransition;
-        }
-
-        /// <inheritdoc cref="IEntity.SetExitingTransition"/>
-        public void SetExitingTransition(IFilter transition)
-        {
-            this._exitingTransition = transition;
         }
 
         /// <inheritdoc cref="IEntity.GetFilters"/>
@@ -221,11 +191,8 @@ namespace StardropPoolMinigame.Entities
             return filters;
         }
 
-        /// <inheritdoc cref="IEntity.IsHovered"/>
-        public bool IsHovered()
-        {
-            return this._isHovered;
-        }
+        /// <inheritdoc cref="IEntity.GetId"/>
+        public abstract string GetId();
 
         /// <inheritdoc cref="IEntity.GetLayerDepth"/>
         public virtual float GetLayerDepth()
@@ -294,10 +261,45 @@ namespace StardropPoolMinigame.Entities
             return this._anchor;
         }
 
+        /// <inheritdoc cref="IEntity.GetTotalWidth"/>
+        public abstract float GetTotalHeight();
+
+        /// <inheritdoc cref="IEntity.GetTotalHeight"/>
+        public abstract float GetTotalWidth();
+
         /// <inheritdoc cref="IEntity.GetTransitionState"/>
         public virtual TransitionState GetTransitionState()
         {
             return this._transitionState;
+        }
+
+        /// <inheritdoc cref="IEntity.HoverCallback"/>
+        public virtual void HoverCallback()
+        {
+        }
+
+        /// <inheritdoc cref="IEntity.IsHovered"/>
+        public bool IsHovered()
+        {
+            return this._isHovered;
+        }
+
+        /// <inheritdoc cref="IEntity.SetAnchor(Vector2)"/>
+        public virtual void SetAnchor(Vector2 anchor)
+        {
+            this._anchor = anchor;
+        }
+
+        /// <inheritdoc cref="IEntity.SetEnteringTransition"/>
+        public void SetEnteringTransition(IFilter transition)
+        {
+            this._enteringTransition = transition;
+        }
+
+        /// <inheritdoc cref="IEntity.SetExitingTransition"/>
+        public void SetExitingTransition(IFilter transition)
+        {
+            this._exitingTransition = transition;
         }
 
         /// <inheritdoc cref="IEntity.SetTransitionState(TransitionState, bool)"/>
@@ -322,55 +324,11 @@ namespace StardropPoolMinigame.Entities
             }
         }
 
-        /// <inheritdoc cref="IEntity.GetId"/>
-        public abstract string GetId();
-
-        /// <inheritdoc cref="IEntity.GetTotalHeight"/>
-        public abstract float GetTotalWidth();
-
-        /// <inheritdoc cref="IEntity.GetTotalWidth"/>
-        public abstract float GetTotalHeight();
-
-        /// <summary>
-        /// Updates <see cref="Entity">Entity's</see> <see cref="_transitionState"/> based on current <see cref="Transition"/>.
-        /// </summary>
-        protected void UpdateTransitionState()
+        /// <inheritdoc cref="IEntity.Update"/>
+        public virtual void Update()
         {
-            if (this._transitionState == TransitionState.Present || this._transitionState == TransitionState.Dead)
-            {
-                return;
-            }
-
-            if (this._transitionState == TransitionState.Entering
-                && this._enteringTransition != null
-                && ((Transition)this._enteringTransition).IsFinished())
-            {
-                this._transitionState = TransitionState.Present;
-            } else if (this._transitionState == TransitionState.Exiting
-                && ((this._exitingTransition != null && ((Transition)this._exitingTransition).IsFinished())
-                    || this._exitingTransition == null))
-            {
-                this._transitionState = TransitionState.Dead;
-            }
-        }
-
-        /// <summary>
-        /// Updates <see cref="Entity">Entity's</see> <see cref="_isHovered"/> based on <see cref="Mouse"/> position.
-        /// </summary>
-        protected void UpdateHover()
-        {
-            if (this._transitionState == TransitionState.Present && this.GetRawBoundary().Contains(Mouse.Position))
-            {
-                if (!this._isHovered)
-                {
-                    this.HoverCallback();
-                }
-                this._isHovered = true;
-            }
-            else if (this._isHovered)
-            {
-                this._isHovered = false;
-            }
+            this.UpdateTransitionState();
+            this.UpdateHover();
         }
 
         /// <summary>
@@ -405,6 +363,49 @@ namespace StardropPoolMinigame.Entities
         protected virtual void SetDrawer(IDrawer drawer)
         {
             this._drawer = drawer;
+        }
+
+        /// <summary>
+        /// Updates <see cref="Entity">Entity's</see> <see cref="_isHovered"/> based on <see cref="Mouse"/> position.
+        /// </summary>
+        protected void UpdateHover()
+        {
+            if (this._transitionState == TransitionState.Present && this.GetRawBoundary().Contains(Mouse.Position))
+            {
+                if (!this._isHovered)
+                {
+                    this.HoverCallback();
+                }
+                this._isHovered = true;
+            }
+            else if (this._isHovered)
+            {
+                this._isHovered = false;
+            }
+        }
+
+        /// <summary>
+        /// Updates <see cref="Entity">Entity's</see> <see cref="_transitionState"/> based on current <see cref="Transition"/>.
+        /// </summary>
+        protected void UpdateTransitionState()
+        {
+            if (this._transitionState == TransitionState.Present || this._transitionState == TransitionState.Dead)
+            {
+                return;
+            }
+
+            if (this._transitionState == TransitionState.Entering
+                && this._enteringTransition != null
+                && ((Transition)this._enteringTransition).IsFinished())
+            {
+                this._transitionState = TransitionState.Present;
+            }
+            else if (this._transitionState == TransitionState.Exiting
+              && ((this._exitingTransition != null && ((Transition)this._exitingTransition).IsFinished())
+                  || this._exitingTransition == null))
+            {
+                this._transitionState = TransitionState.Dead;
+            }
         }
     }
 }

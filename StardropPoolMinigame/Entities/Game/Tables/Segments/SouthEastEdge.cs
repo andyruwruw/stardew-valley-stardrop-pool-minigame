@@ -7,7 +7,7 @@ using System;
 
 namespace StardropPoolMinigame.Entities
 {
-    class SouthEastEdge : TableSegment
+    internal class SouthEastEdge : TableSegment
     {
         public SouthEastEdge(
             Origin origin,
@@ -51,8 +51,6 @@ namespace StardropPoolMinigame.Entities
                         new Vector2(
                             this.GetTotalWidth(),
                             this.GetTotalHeight() - RenderConstants.Entities.TableSegment.SPACE_TO_BOUNCEABLE_SURFACE))));
-
-            
         }
     }
 }

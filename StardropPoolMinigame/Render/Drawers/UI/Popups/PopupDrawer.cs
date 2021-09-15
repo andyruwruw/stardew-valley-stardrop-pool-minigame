@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace StardropPoolMinigame.Render.Drawers
 {
-    class PopupDrawer : Drawer
+    internal class PopupDrawer : Drawer
     {
         public PopupDrawer(Popup popup) : base(popup)
         {
@@ -29,6 +29,7 @@ namespace StardropPoolMinigame.Render.Drawers
                 entity.GetDrawer().Draw(batch);
             }
         }
+
         protected override Rectangle GetRawSource()
         {
             return Textures.BAR_SHELVES;

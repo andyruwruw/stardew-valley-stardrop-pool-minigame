@@ -4,7 +4,7 @@ using StardropPoolMinigame.Entities;
 
 namespace StardropPoolMinigame.Render.Drawers
 {
-    class PageTitleDrawer : Drawer
+    internal class PageTitleDrawer : Drawer
     {
         public PageTitleDrawer(PageTitle title) : base(title)
         {

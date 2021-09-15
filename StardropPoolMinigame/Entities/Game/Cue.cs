@@ -10,25 +10,25 @@ using System;
 
 namespace StardropPoolMinigame.Entities
 {
-    class Cue : Entity
+    internal class Cue : Entity
     {
-        private CueType _type;
-
         private Vector2 _angle;
-
-        private float _power;
-
-        private IFilter _wiggleAnimation;
-
-        private ParticleEmitter _particleEmitter;
-
-        private bool _striking;
 
         private Vector2 _cueBallPosition;
 
+        private ParticleEmitter _particleEmitter;
+
+        private float _power;
+
+        private bool _striking;
+
+        private CueType _type;
+
+        private IFilter _wiggleAnimation;
+
         public Cue(
-            Origin origin, 
-            Vector2 anchor, 
+            Origin origin,
+            Vector2 anchor,
             float layerDepth,
             IFilter enteringTransition,
             CueType type = CueType.Basic
@@ -53,9 +53,53 @@ namespace StardropPoolMinigame.Entities
             this.SetDrawer(new CueDrawer(this));
         }
 
+        public static ParticleEmitter GetCueParticleEmitter(CueType type, float layerDepth)
+        {
+            switch (type)
+            {
+                case CueType.Flames:
+                    return new SparkEmitter(
+                        Vector2.Zero,
+                        5,
+                        layerDepth - 0.0001f,
+                        5);
+                default:
+                    return new SparkEmitter(
+                        Vector2.Zero,
+                        1,
+                        layerDepth - 0.0001f,
+                        1);
+            }
+        }
+
+        public Vector2 GetAngle()
+        {
+            return this._angle;
+        }
+
+        public CueType GetCueType()
+        {
+            return this._type;
+        }
+
         public override string GetId()
         {
             return $"cue-{this._id}";
+        }
+
+        public ParticleEmitter GetParticleEmitter()
+        {
+            return this._particleEmitter;
+        }
+
+        public override float GetTotalHeight()
+        {
+            return Textures.Cue.BASIC.Height;
+        }
+
+        public override float GetTotalWidth()
+        {
+            return Textures.Cue.BASIC.Width;
         }
 
         public void Update(TurnState turnState, Ball cueBall)
@@ -72,7 +116,8 @@ namespace StardropPoolMinigame.Entities
             {
                 this.UpdatePower(cueBall);
                 ((Wiggle)this._wiggleAnimation).SetAmplitude(this._power / (GameConstants.Cue.MAXIMUM_DISTANCE_FROM_BALL / RenderConstants.TileScale() - GameConstants.Cue.MINIMUM_DISTANCE_FROM_BALL / RenderConstants.TileScale()) * GameConstants.Cue.POWER_TO_WIGGLE_AMPLITUDE_SCALAR);
-            } else
+            }
+            else
             {
                 this._particleEmitter.SetActive(false);
                 ((Wiggle)this._wiggleAnimation).SetAmplitude(0f);
@@ -84,29 +129,9 @@ namespace StardropPoolMinigame.Entities
             }
         }
 
-        public override float GetTotalWidth()
+        private void InitializeParticleEmitter()
         {
-            return Textures.Cue.BASIC.Width;
-        }
-
-        public override float GetTotalHeight()
-        {
-            return Textures.Cue.BASIC.Height;
-        }
-
-        public Vector2 GetAngle()
-        {
-            return this._angle;
-        }
-
-        public CueType GetCueType()
-        {
-            return this._type;
-        }
-
-        public ParticleEmitter GetParticleEmitter()
-        {
-            return this._particleEmitter;
+            this._particleEmitter = GetCueParticleEmitter(this._type, this._layerDepth);
         }
 
         private void UpdateAngle(Ball cueBall)
@@ -118,6 +143,36 @@ namespace StardropPoolMinigame.Entities
             this._particleEmitter.SetDirection(this._angle);
         }
 
+        private void UpdateBallsInMotion(Ball cueBall)
+        {
+            if (!this._striking)
+            {
+                this._cueBallPosition = cueBall.GetCenter();
+                this._striking = true;
+                Timer.StartTimer($"{this.GetId()}-striking");
+            }
+
+            int timeRemaining = (int)(GameConstants.Cue.STRIKING_SPEED - Timer.CheckTimer($"{this.GetId()}-striking"));
+
+            Vector2 relativeDistance = Vector2.Multiply(
+                this._angle,
+                this._power * ((GameConstants.Cue.MAXIMUM_DISTANCE_FROM_BALL - GameConstants.Cue.MINIMUM_DISTANCE_FROM_BALL) / RenderConstants.TileScale()) + (GameConstants.Cue.MINIMUM_DISTANCE_FROM_BALL / RenderConstants.TileScale()));
+
+            this._anchor = Vector2.Add(
+                this._cueBallPosition,
+                relativeDistance * (timeRemaining / GameConstants.Cue.STRIKING_SPEED));
+
+            if (timeRemaining <= 0)
+            {
+                Sound.PlaySound(SoundConstants.Ball.COLLIDING);
+
+                cueBall.SetVelocity(Vector2.Multiply(this._angle, this._power * GameConstants.Cue.MOMENTUM_TRANSFER * -1));
+
+                this.SetTransitionState(TransitionState.Exiting, true);
+                Timer.EndTimer($"{this.GetId()}-striking");
+            }
+        }
+
         private void UpdatePower(Ball cueBall)
         {
             Vector2 difference = Vector2.Subtract(Mouse.Position, RenderConstants.ConvertMinigameWindowToRaw(cueBall.GetPosition()));
@@ -126,7 +181,8 @@ namespace StardropPoolMinigame.Entities
             if (this._power < 0.1f)
             {
                 this._power = 0.1f;
-            } else if (this._power > 1f)
+            }
+            else if (this._power > 1f)
             {
                 this._power = 1f;
             }
@@ -146,63 +202,10 @@ namespace StardropPoolMinigame.Entities
                 this._particleEmitter.SetActive(true);
                 this._particleEmitter.SetAnchor(this._anchor);
                 this._particleEmitter.SetRate(GameConstants.Cue.PARTICLE_RATE_PER_POWER / ((this._power - GameConstants.Cue.PARTICLE_MINIMUM_POWER_TRIGGER) / (1 - GameConstants.Cue.PARTICLE_MINIMUM_POWER_TRIGGER)));
-            } else
+            }
+            else
             {
                 this._particleEmitter.SetActive(false);
-            }
-        }
-
-        private void UpdateBallsInMotion(Ball cueBall)
-        {
-            if (!this._striking)
-            {
-                this._cueBallPosition = cueBall.GetCenter();
-                this._striking = true;
-                Timer.StartTimer($"{this.GetId()}-striking");
-            }
-
-            int timeRemaining = (int)(GameConstants.Cue.STRIKING_SPEED - Timer.CheckTimer($"{this.GetId()}-striking"));
-
-            Vector2 relativeDistance = Vector2.Multiply(
-                this._angle,
-                this._power * ((GameConstants.Cue.MAXIMUM_DISTANCE_FROM_BALL - GameConstants.Cue.MINIMUM_DISTANCE_FROM_BALL) / RenderConstants.TileScale()) + (GameConstants.Cue.MINIMUM_DISTANCE_FROM_BALL / RenderConstants.TileScale()));
-            
-            this._anchor = Vector2.Add(
-                this._cueBallPosition,
-                relativeDistance * (timeRemaining / GameConstants.Cue.STRIKING_SPEED));
-
-            if (timeRemaining <= 0)
-            {
-                Sound.PlaySound(SoundConstants.Ball.COLLIDING);
-
-                cueBall.SetVelocity(Vector2.Multiply(this._angle, this._power * GameConstants.Cue.MOMENTUM_TRANSFER * -1));
-
-                this.SetTransitionState(TransitionState.Exiting, true);
-                Timer.EndTimer($"{this.GetId()}-striking");
-            }
-        }
-
-        private void InitializeParticleEmitter()
-        {
-            this._particleEmitter = GetCueParticleEmitter(this._type, this._layerDepth);
-        }
-
-        public static ParticleEmitter GetCueParticleEmitter(CueType type, float layerDepth)
-        {
-            switch (type)
-            {
-                case CueType.Flames:
-                    return new SparkEmitter(
-                        Vector2.Zero,
-                        5,
-                        layerDepth - 0.0001f,
-                        5);
-                default:
-                    return new SparkEmitter(
-                        Vector2.Zero,
-                        1,
-                        layerDepth - 0.0001f,
-                        1);
             }
         }
     }

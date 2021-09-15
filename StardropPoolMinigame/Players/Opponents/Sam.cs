@@ -4,13 +4,13 @@ using StardropPoolMinigame.Helpers;
 
 namespace StardropPoolMinigame.Players
 {
-    class Sam: ComputerOpponent
+    internal class Sam : ComputerOpponent
     {
         public static string Name = "Sam";
 
         public Sam() : base(
             Name,
-            OpponentType.Sam,
+            NPCName.Sam,
             Multiplayer.GetNewMultiplayerId(),
             SoundConstants.Theme.SAM,
             NPCConstants.Sam.CONFIDENCE,

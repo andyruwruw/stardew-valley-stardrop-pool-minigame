@@ -4,7 +4,7 @@ using StardropPoolMinigame.Entities;
 
 namespace StardropPoolMinigame.Render.Drawers
 {
-    class ButtonDrawer : Drawer
+    internal class ButtonDrawer : Drawer
     {
         public ButtonDrawer(Button button) : base(button)
         {
@@ -33,22 +33,22 @@ namespace StardropPoolMinigame.Render.Drawers
                 overrideLayerDepth);
         }
 
-        protected override Rectangle GetRawSource()
-        {
-            return Textures.Characters.LOWERCASE_A;
-        }
-
         protected override Color GetRawColor()
         {
             if (((Button)this._entity).IsDisabled())
             {
                 return Textures.Color.Solid.DISABLED;
             }
-            if (((EntityHoverable)this._entity).IsHovered())
+            if (this._entity.IsHovered())
             {
                 return Textures.Color.Solid.HOVER_ACCENT;
             }
             return Color.White;
+        }
+
+        protected override Rectangle GetRawSource()
+        {
+            return Textures.Characters.LOWERCASE_A;
         }
     }
 }

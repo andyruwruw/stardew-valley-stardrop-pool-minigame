@@ -3,7 +3,7 @@
     /// <summary>
     /// Proxy for <see cref="IScene"/>, delaying its creation
     /// </summary>
-    interface ISceneCreator
+    internal interface ISceneCreator
     {
         /// <summary>
         /// Instantiates and returns the <see cref="IScene"/>

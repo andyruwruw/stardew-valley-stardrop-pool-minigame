@@ -7,7 +7,7 @@ using StardropPoolMinigame.Render.Filters;
 
 namespace StardropPoolMinigame.Entities
 {
-    class Spark : Particle
+    internal class Spark : Particle
     {
         private IFilter _sparkAnimation;
 

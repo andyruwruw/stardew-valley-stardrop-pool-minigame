@@ -5,11 +5,11 @@ using StardropPoolMinigame.Render.Filters;
 
 namespace StardropPoolMinigame.Entities
 {
-    class Solid : Entity
+    internal class Solid : Entity
     {
-        private Primitives.Rectangle _destination;
-
         private Color _color;
+
+        private Primitives.Rectangle _destination;
 
         private bool _isRawCoords;
 
@@ -34,9 +34,24 @@ namespace StardropPoolMinigame.Entities
             this.SetDrawer(new SolidDrawer(this));
         }
 
+        public Color GetColor()
+        {
+            return this._color;
+        }
+
+        public Primitives.Rectangle GetDestination()
+        {
+            return this._destination;
+        }
+
         public override string GetId()
         {
             return $"solid-{this._id}";
+        }
+
+        public Rectangle GetRawXnaDestination()
+        {
+            return this._destination.GetRawXnaRectangle();
         }
 
         public override float GetTotalHeight()
@@ -49,24 +64,9 @@ namespace StardropPoolMinigame.Entities
             return this._destination.GetWidth();
         }
 
-        public Primitives.Rectangle GetDestination()
-        {
-            return this._destination;
-        }
-
         public Rectangle GetXnaDestination()
         {
             return this._destination.GetXnaRectangle();
-        }
-
-        public Rectangle GetRawXnaDestination()
-        {
-            return this._destination.GetRawXnaRectangle();
-        }
-
-        public Color GetColor()
-        {
-            return this._color;
         }
 
         public bool IsRawCoords()

@@ -9,13 +9,13 @@ namespace StardropPoolMinigame.Detect.Hover
     /// <summary>
     /// Detects if player is currently hovering certain tile IDs
     /// </summary>
-    abstract class TileHoverDetector : ITileHoverDetector
+    internal abstract class TileHoverDetector : ITileHoverDetector
     {
-        // List of front tile IDs
-        protected IList<int> _frontTileIds;
-
         // List of building tile IDs
         protected IList<int> _buildingTileIds;
+
+        // List of front tile IDs
+        protected IList<int> _frontTileIds;
 
         public TileHoverDetector()
         {
@@ -45,11 +45,6 @@ namespace StardropPoolMinigame.Detect.Hover
             this._frontTileIds = new List<int>();
             this._buildingTileIds = new List<int>();
         }
-
-        /// <summary>
-        /// Adds tile IDs to lists of front and building tile IDs
-        /// </summary>
-        protected abstract void InicializeTileIdLists();
 
         /// <summary>
         /// Retrieves building tile currently hovered
@@ -100,6 +95,10 @@ namespace StardropPoolMinigame.Detect.Hover
             Vector2 overridePositionHovered = positionHovered == null ? this.GetPositionHovered() : (Vector2)positionHovered;
             return Game1.currentLocation.map.GetLayer(layer).PickTile(new xTile.Dimensions.Location((int)overridePositionHovered.X, (int)overridePositionHovered.Y), Game1.viewport.Size);
         }
+
+        /// <summary>
+        /// Adds tile IDs to lists of front and building tile IDs
+        /// </summary>
+        protected abstract void InicializeTileIdLists();
     }
 }
-

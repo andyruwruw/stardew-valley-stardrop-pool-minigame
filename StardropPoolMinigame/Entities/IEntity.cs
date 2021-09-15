@@ -9,18 +9,8 @@ namespace StardropPoolMinigame.Entities
     /// <summary>
     /// Drawable object in an <see cref="Scenes.IScene"/>.
     /// </summary>
-    interface IEntity
+    internal interface IEntity
     {
-        /// <summary>
-        /// Updates <see cref="IEntity"/>.
-        /// </summary>
-        void Update();
-
-        /// <summary>
-        /// Callback when <see cref="IEntity"/> is hovered.
-        /// </summary>
-        void HoverCallback();
-
         /// <summary>
         /// Callback when <see cref="IEntity"/> is clicked.
         /// </summary>
@@ -31,12 +21,6 @@ namespace StardropPoolMinigame.Entities
         /// </summary>
         /// <returns><see cref="IEntity">IEntity's</see> anchor</returns>
         Vector2 GetAnchor();
-
-        /// <summary>
-        /// Sets <see cref="IEntity">IEntity's</see> anchor, or position.
-        /// </summary>
-        /// <param name="anchor">New anchor as <see cref="Vector2"/></param>
-        void SetAnchor(Vector2 anchor);
 
         /// <summary>
         /// Retrieves the boundary, or <see cref="Primitives.Rectangle"/>, of the <see cref="IEntity"/>.
@@ -63,34 +47,16 @@ namespace StardropPoolMinigame.Entities
         IFilter GetEnteringTransition();
 
         /// <summary>
-        /// Sets <see cref="IEntity">IEntity's</see> entering <see cref="Transition"/>.
-        /// </summary>
-        /// <param name="transition">New entering <see cref="Transition"/></param>
-        void SetEnteringTransition(IFilter transition);
-
-        /// <summary>
         /// Retrieves <see cref="IEntity">IEntity's</see> exiting <see cref="Transition"/>.
         /// </summary>
         /// <returns><see cref="IEntity">IEntity's</see> exiting <see cref="Transition"/></returns>
         IFilter GetExitingTransition();
 
         /// <summary>
-        /// Sets <see cref="IEntity">IEntity's</see> exiting <see cref="Transition"/>.
-        /// </summary>
-        /// <param name="transition">New exiting <see cref="Transition"/></param>
-        void SetExitingTransition(IFilter transition);
-
-        /// <summary>
         /// Retrieves <see cref="IEntity">IEntity's</see> perminant <see cref="IFilter">IFilters</see>.
         /// </summary>
         /// <returns><see cref="IEntity">IEntity's</see> perminant <see cref="IFilter">IFilters</see></returns>
         IList<IFilter> GetFilters();
-
-        /// <summary>
-        /// Whether the <see cref="IEntity"/> is hovered by the cursor.
-        /// </summary>
-        /// <returns>Whether the <see cref="IEntity"/> is hovered</returns>
-        bool IsHovered();
 
         /// <summary>
         /// Retrieves <see cref="IEntity">IEntity's</see> unique identifier.
@@ -141,10 +107,44 @@ namespace StardropPoolMinigame.Entities
         TransitionState GetTransitionState();
 
         /// <summary>
+        /// Callback when <see cref="IEntity"/> is hovered.
+        /// </summary>
+        void HoverCallback();
+
+        /// <summary>
+        /// Whether the <see cref="IEntity"/> is hovered by the cursor.
+        /// </summary>
+        /// <returns>Whether the <see cref="IEntity"/> is hovered</returns>
+        bool IsHovered();
+
+        /// <summary>
+        /// Sets <see cref="IEntity">IEntity's</see> anchor, or position.
+        /// </summary>
+        /// <param name="anchor">New anchor as <see cref="Vector2"/></param>
+        void SetAnchor(Vector2 anchor);
+
+        /// <summary>
+        /// Sets <see cref="IEntity">IEntity's</see> entering <see cref="Transition"/>.
+        /// </summary>
+        /// <param name="transition">New entering <see cref="Transition"/></param>
+        void SetEnteringTransition(IFilter transition);
+
+        /// <summary>
+        /// Sets <see cref="IEntity">IEntity's</see> exiting <see cref="Transition"/>.
+        /// </summary>
+        /// <param name="transition">New exiting <see cref="Transition"/></param>
+        void SetExitingTransition(IFilter transition);
+
+        /// <summary>
         /// Sets <see cref="IEntity">IEntity's</see> current <see cref="TransitionState"/>.
         /// </summary>
         /// <param name="transitionState">New <see cref="TransitionState"/></param>
         /// <param name="start">Whether to trigger <see cref="Transition">Transition's</see> start.</param>
         void SetTransitionState(TransitionState transitionState, bool start = false);
+
+        /// <summary>
+        /// Updates <see cref="IEntity"/>.
+        /// </summary>
+        void Update();
     }
 }

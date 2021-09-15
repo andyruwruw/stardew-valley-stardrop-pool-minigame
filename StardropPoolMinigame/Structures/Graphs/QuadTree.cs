@@ -8,13 +8,8 @@ using System.Collections.Generic;
 
 namespace StardropPoolMinigame.Structures
 {
-    class QuadTree<T> : Entity, IGraph<T>
+    internal class QuadTree<T> : Entity, IGraph<T>
     {
-        /// <summary>
-        /// The total number of nodes stored.
-        /// </summary>
-        private int _count;
-
         /// <summary>
         /// <see cref="IRange"/> of <see cref="QuadTree{T}"/>.
         /// </summary>
@@ -26,29 +21,9 @@ namespace StardropPoolMinigame.Structures
         private int _capacity;
 
         /// <summary>
-        /// North-west quadrant <see cref="QuadTree{T}"/>.
+        /// The total number of nodes stored.
         /// </summary>
-        private QuadTree<T> _northWest;
-
-        /// <summary>
-        /// North-east quadrant <see cref="QuadTree{T}"/>.
-        /// </summary>
-        private QuadTree<T> _northEast;
-
-        /// <summary>
-        /// South-west quadrant <see cref="QuadTree{T}"/>.
-        /// </summary>
-        private QuadTree<T> _southWest;
-
-        /// <summary>
-        /// South-east quadrant <see cref="QuadTree{T}"/>.
-        /// </summary>
-        private QuadTree<T> _southEast;
-
-        /// <summary>
-        /// List of points in <see cref="QuadTree{T}"/>.
-        /// </summary>
-        private Dictionary<Vector2, T> _points;
+        private int _count;
 
         /// <summary>
         /// Whether <see cref="QuadTree{T}"/> has <see cref="Subdivide">Subdivided</see>.
@@ -59,6 +34,31 @@ namespace StardropPoolMinigame.Structures
         /// Whether <see cref="QuadTree{T}"/> is root <see cref="QuadTree{T}"/>.
         /// </summary>
         private bool _isRoot;
+
+        /// <summary>
+        /// North-east quadrant <see cref="QuadTree{T}"/>.
+        /// </summary>
+        private QuadTree<T> _northEast;
+
+        /// <summary>
+        /// North-west quadrant <see cref="QuadTree{T}"/>.
+        /// </summary>
+        private QuadTree<T> _northWest;
+
+        /// <summary>
+        /// List of points in <see cref="QuadTree{T}"/>.
+        /// </summary>
+        private Dictionary<Vector2, T> _points;
+
+        /// <summary>
+        /// South-east quadrant <see cref="QuadTree{T}"/>.
+        /// </summary>
+        private QuadTree<T> _southEast;
+
+        /// <summary>
+        /// South-west quadrant <see cref="QuadTree{T}"/>.
+        /// </summary>
+        private QuadTree<T> _southWest;
 
         /// <summary>
         /// Instantiates a <see cref="QuadTree{T}"/>.
@@ -87,10 +87,68 @@ namespace StardropPoolMinigame.Structures
             this.SetDrawer(new QuadTreeDrawer<T>(this));
         }
 
+        /// <summary>
+        /// <see cref="IRange"/> of <see cref="QuadTree{T}"/>.
+        /// </summary>
+        public override Primitives.Rectangle GetBoundary()
+        {
+            return this._boundary;
+        }
+
+        /// <inheritdoc cref="IGraph{T}.GetCount"/>
+        public int GetCount()
+        {
+            return this._count;
+        }
+
         /// <inheritdoc cref="Entity.GetId"/>
         public override string GetId()
         {
             return $"quad-tree-{this._id}";
+        }
+
+        /// <summary>
+        /// North-east quadrant <see cref="QuadTree{T}"/>.
+        /// </summary>
+        public QuadTree<T> GetNorthEastQuadrant()
+        {
+            return this._northEast;
+        }
+
+        /// <summary>
+        /// North-west quadrant <see cref="QuadTree{T}"/>.
+        /// </summary>
+        public QuadTree<T> GetNorthWestQuadrant()
+        {
+            return this._northWest;
+        }
+
+        /// <summary>
+        /// South-east quadrant <see cref="QuadTree{T}"/>.
+        /// </summary>
+        public QuadTree<T> GetSouthEastQuadrant()
+        {
+            return this._southEast;
+        }
+
+        /// <summary>
+        /// South-west quadrant <see cref="QuadTree{T}"/>.
+        /// </summary>
+        public QuadTree<T> GetSouthWestQuadrant()
+        {
+            return this._southWest;
+        }
+
+        /// <inheritdoc cref="IEntity.GetTotalHeight"/>
+        public override float GetTotalHeight()
+        {
+            return this._boundary.GetHeight();
+        }
+
+        /// <inheritdoc cref="IEntity.GetTotalWidth"/>
+        public override float GetTotalWidth()
+        {
+            return this._boundary.GetWidth();
         }
 
         /// <inheritdoc cref="IGraph{T}.Insert(Vector2, T)"/>
@@ -140,54 +198,18 @@ namespace StardropPoolMinigame.Structures
             return false;
         }
 
-        /// <inheritdoc cref="IGraph{T}.Remove(Vector2)"/>
-        public bool Remove(Vector2 position)
+        /// <summary>
+        /// Whether <see cref="QuadTree{T}"/> has <see cref="Subdivide">Subdivided</see>.
+        /// </summary>
+        public bool IsSubdivided()
         {
-            if (this._points.ContainsKey(position))
-            {
-                this._points.Remove(position);
-                return true;
-            }
-
-            if (this._isDivided)
-            {
-                return (this._northEast.Remove(position) ||
-                    this._northWest.Remove(position) ||
-                    this._southEast.Remove(position) ||
-                    this._southWest.Remove(position));
-            }
-
-            return false;
-        }
-
-        /// <inheritdoc cref="IGraph{T}.Remove(T)"/>
-        public bool Remove(T data)
-        {
-            return false;
-        }
-
-        /// <inheritdoc cref="IGraph{T}.GetCount"/>
-        public int GetCount()
-        {
-            return this._count;
-        }
-
-        /// <inheritdoc cref="IEntity.GetTotalWidth"/>
-        public override float GetTotalWidth()
-        {
-            return this._boundary.GetWidth();
-        }
-
-        /// <inheritdoc cref="IEntity.GetTotalHeight"/>
-        public override float GetTotalHeight()
-        {
-            return this._boundary.GetHeight();
+            return this._isDivided;
         }
 
         /// <summary>
         /// Retrieves all points within a given <see cref="IRange"/>.
         /// </summary>
-        /// 
+        ///
         /// <param name="range"><see cref="IRange"/> to query</param>
         /// <param name="found">List of found points so far</param>
         /// <returns>List of points found</returns>
@@ -227,52 +249,30 @@ namespace StardropPoolMinigame.Structures
             return found;
         }
 
-        /// <summary>
-        /// <see cref="IRange"/> of <see cref="QuadTree{T}"/>.
-        /// </summary>
-        public override Primitives.Rectangle GetBoundary()
+        /// <inheritdoc cref="IGraph{T}.Remove(Vector2)"/>
+        public bool Remove(Vector2 position)
         {
-            return this._boundary;
+            if (this._points.ContainsKey(position))
+            {
+                this._points.Remove(position);
+                return true;
+            }
+
+            if (this._isDivided)
+            {
+                return (this._northEast.Remove(position) ||
+                    this._northWest.Remove(position) ||
+                    this._southEast.Remove(position) ||
+                    this._southWest.Remove(position));
+            }
+
+            return false;
         }
 
-        /// <summary>
-        /// Whether <see cref="QuadTree{T}"/> has <see cref="Subdivide">Subdivided</see>.
-        /// </summary>
-        public bool IsSubdivided()
+        /// <inheritdoc cref="IGraph{T}.Remove(T)"/>
+        public bool Remove(T data)
         {
-            return this._isDivided;
-        }
-
-        /// <summary>
-        /// North-west quadrant <see cref="QuadTree{T}"/>.
-        /// </summary>
-        public QuadTree<T> GetNorthWestQuadrant()
-        {
-            return this._northWest;
-        }
-
-        /// <summary>
-        /// North-east quadrant <see cref="QuadTree{T}"/>.
-        /// </summary>
-        public QuadTree<T> GetNorthEastQuadrant()
-        {
-            return this._northEast;
-        }
-
-        /// <summary>
-        /// South-west quadrant <see cref="QuadTree{T}"/>.
-        /// </summary>
-        public QuadTree<T> GetSouthWestQuadrant()
-        {
-            return this._southWest;
-        }
-
-        /// <summary>
-        /// South-east quadrant <see cref="QuadTree{T}"/>.
-        /// </summary>
-        public QuadTree<T> GetSouthEastQuadrant()
-        {
-            return this._southEast;
+            return false;
         }
 
         /// <summary>

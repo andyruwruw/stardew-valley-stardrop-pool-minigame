@@ -3,7 +3,7 @@ using System;
 
 namespace StardropPoolMinigame.Render.Filters
 {
-    class BallHighlightFlashing : Animation
+    internal class BallHighlightFlashing : Animation
     {
         public BallHighlightFlashing(string key) : base(key, 50)
         {

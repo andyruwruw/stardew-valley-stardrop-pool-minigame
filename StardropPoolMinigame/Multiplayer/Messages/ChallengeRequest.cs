@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StardropPoolMinigame.Multiplayer.Messages
 {
-    class ChallengeRequest
+    internal class ChallengeRequest
     {
     }
 }

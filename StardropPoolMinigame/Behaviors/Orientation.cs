@@ -6,17 +6,17 @@ namespace StardropPoolMinigame.Attributes
     /// <summary>
     /// Polar coordinates for orientation of balls
     /// </summary>
-    class Orientation
+    internal class Orientation
     {
-        /// <summary>
-        /// Longitude and latitude degrees
-        /// </summary>
-        private Vector2 _orientation;
-
         /// <summary>
         /// The circumference of the ball
         /// </summary>
         private float _circumference;
+
+        /// <summary>
+        /// Longitude and latitude degrees
+        /// </summary>
+        private Vector2 _orientation;
 
         public Orientation(
             float radius,
@@ -25,18 +25,6 @@ namespace StardropPoolMinigame.Attributes
         {
             this._circumference = (float)(2 * Math.PI * radius);
             this._orientation = new Vector2(longitude, latitude);
-        }
-
-        /// <summary>
-        /// Rotates the orientation based on velocity and circumfrance
-        /// </summary>
-        /// <param name="velocity"></param>
-        public void Roll(Vector2 velocity)
-        {
-            Vector2 degrees = new Vector2(velocity.X / this._circumference * 360, velocity.Y / this._circumference * 360);
-            this._orientation = Vector2.Add(this._orientation, degrees);
-
-            this.Limit();
         }
 
         /// <summary>
@@ -54,6 +42,18 @@ namespace StardropPoolMinigame.Attributes
             float simplifiedLongitude = (float)Math.Round(this._orientation.X / longitudeDiff) * longitudeDiff;
 
             return new Vector2(simplifiedLongitude == 180 ? 0 : simplifiedLongitude, simplifiedLatitude);
+        }
+
+        /// <summary>
+        /// Rotates the orientation based on velocity and circumfrance
+        /// </summary>
+        /// <param name="velocity"></param>
+        public void Roll(Vector2 velocity)
+        {
+            Vector2 degrees = new Vector2(velocity.X / this._circumference * 360, velocity.Y / this._circumference * 360);
+            this._orientation = Vector2.Add(this._orientation, degrees);
+
+            this.Limit();
         }
 
         /// <summary>

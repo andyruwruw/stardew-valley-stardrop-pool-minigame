@@ -3,7 +3,7 @@ using StardropPoolMinigame.Entities;
 
 namespace StardropPoolMinigame.Render.Drawers
 {
-    class PortraitRaysDrawer : Drawer
+    internal class PortraitRaysDrawer : Drawer
     {
         public PortraitRaysDrawer(PortraitRays rays) : base(rays)
         {

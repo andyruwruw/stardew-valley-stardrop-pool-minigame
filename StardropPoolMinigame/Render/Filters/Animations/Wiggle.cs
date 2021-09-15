@@ -3,21 +3,16 @@ using System;
 
 namespace StardropPoolMinigame.Render.Filters
 {
-    class Wiggle : Animation
+    internal class Wiggle : Animation
     {
-        private float _frequency;
-
         private float _amplitude;
+
+        private float _frequency;
 
         public Wiggle(string key, float frequency, float amplitude) : base(key, 1000)
         {
             this._frequency = frequency;
             this._amplitude = amplitude;
-        }
-
-        public void SetAmplitude(float value)
-        {
-            this._amplitude = value;
         }
 
         public override Vector2 ExecuteDestination(Vector2 destination)
@@ -27,6 +22,11 @@ namespace StardropPoolMinigame.Render.Filters
                 new Vector2(
                     (float)(this._amplitude * Math.Sin(this._frequency * this.GetProgress()) + this._amplitude / .3 * Math.Sin(this._frequency * this.GetProgress())),
                     (float)(this._amplitude * Math.Sin(this._frequency * this.GetProgress()) + this._amplitude / 2 * Math.Cos(this._frequency * this.GetProgress()))));
+        }
+
+        public void SetAmplitude(float value)
+        {
+            this._amplitude = value;
         }
     }
 }

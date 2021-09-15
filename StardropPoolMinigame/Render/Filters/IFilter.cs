@@ -3,28 +3,28 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace StardropPoolMinigame.Render.Filters
 {
-    interface IFilter
+    internal interface IFilter
     {
-        string GetName();
-
-        void StartFilter();
-
-        void SetKey(string key);
-
-        Vector2 ExecuteDestination(Vector2 destination);
-
-        Rectangle ExecuteSource(Rectangle source);
-
         Color ExecuteColor(Color color);
 
-        float ExecuteRotation(float rotation);
-
-        Vector2 ExecuteOrigin(Vector2 origin);
-
-        float ExecuteScale(float scale);
+        Vector2 ExecuteDestination(Vector2 destination);
 
         SpriteEffects ExecuteEffects(SpriteEffects effects);
 
         float ExecuteLayerDepth(float layerDepth);
+
+        Vector2 ExecuteOrigin(Vector2 origin);
+
+        float ExecuteRotation(float rotation);
+
+        float ExecuteScale(float scale);
+
+        Rectangle ExecuteSource(Rectangle source);
+
+        string GetName();
+
+        void SetKey(string key);
+
+        void StartFilter();
     }
 }

@@ -1,7 +1,7 @@
 ﻿namespace StardropPoolMinigame.Scenes.Gallery
 {
     /// <inheritdoc cref="ISceneCreator"/>
-    class GallerySceneCreator : ISceneCreator
+    internal class GallerySceneCreator : ISceneCreator
     {
         public GallerySceneCreator()
         {

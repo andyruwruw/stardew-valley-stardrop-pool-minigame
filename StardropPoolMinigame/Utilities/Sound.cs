@@ -5,17 +5,8 @@ namespace StardropPoolMinigame.Utilities
     /// <summary>
     /// Facade for playing sound effects and music.
     /// </summary>
-    class Sound
+    internal class Sound
     {
-        /// <summary>
-        /// Plays a sound based on ID.
-        /// </summary>
-        /// <param name="id">Sound ID</param>
-        public static void PlaySound(string id)
-        {
-            Game1.playSound(id);
-        }
-
         /// <summary>
         /// <para>Plays music track based on ID.</para>
         /// <para>Utilizes the <see cref="Game1.MusicContext.MiniGame"/> music context.</para>
@@ -24,6 +15,15 @@ namespace StardropPoolMinigame.Utilities
         public static void PlayMusic(string id)
         {
             Game1.changeMusicTrack(id, false, Game1.MusicContext.MiniGame);
+        }
+
+        /// <summary>
+        /// Plays a sound based on ID.
+        /// </summary>
+        /// <param name="id">Sound ID</param>
+        public static void PlaySound(string id)
+        {
+            Game1.playSound(id);
         }
 
         /// <summary>

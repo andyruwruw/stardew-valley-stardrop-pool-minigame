@@ -9,11 +9,11 @@ using System.Collections.Generic;
 
 namespace StardropPoolMinigame.Entities
 {
-    class Table : Entity
+    internal class Table : Entity
     {
-        private TableType _type;
-
         private IList<IList<TableSegment>> _layout;
+
+        private TableType _type;
 
         public Table(
             Origin origin,
@@ -36,19 +36,20 @@ namespace StardropPoolMinigame.Entities
             this.SetDrawer(new TableDrawer(this));
         }
 
+        public static Table GetDefaultTable()
+        {
+            return new Table(
+                Origin.CenterCenter,
+                new Vector2(RenderConstants.MinigameScreen.WIDTH / 2, RenderConstants.MinigameScreen.HEIGHT / 2),
+                RenderConstants.Scenes.Game.LayerDepth.TABLE,
+                null,
+                null,
+                TableType.Classic);
+        }
+
         public override string GetId()
         {
             return $"table-{this._id}";
-        }
-
-        public override float GetTotalWidth()
-        {
-            return TableConstants.GetLayout(this._type)[0].Count * this.GetSegmentSize();
-        }
-
-        public override float GetTotalHeight()
-        {
-            return TableConstants.GetLayout(this._type).Count * this.GetSegmentSize();
         }
 
         public int GetSegmentSize()
@@ -77,6 +78,16 @@ namespace StardropPoolMinigame.Entities
         public TableType GetTableType()
         {
             return this._type;
+        }
+
+        public override float GetTotalHeight()
+        {
+            return TableConstants.GetLayout(this._type).Count * this.GetSegmentSize();
+        }
+
+        public override float GetTotalWidth()
+        {
+            return TableConstants.GetLayout(this._type)[0].Count * this.GetSegmentSize();
         }
 
         /// <summary>
@@ -111,17 +122,6 @@ namespace StardropPoolMinigame.Entities
 
                 this._layout.Add(row);
             }
-        }
-
-        public static Table GetDefaultTable()
-        {
-            return new Table(
-                Origin.CenterCenter,
-                new Vector2(RenderConstants.MinigameScreen.WIDTH / 2, RenderConstants.MinigameScreen.HEIGHT / 2),
-                RenderConstants.Scenes.Game.LayerDepth.TABLE,
-                null,
-                null,
-                TableType.Classic);
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace StardropPoolMinigame.Powerups
 {
-    interface IPowerup
+    internal interface IPowerup
     {
     }
 }

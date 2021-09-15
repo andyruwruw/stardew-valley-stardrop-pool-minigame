@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace StardropPoolMinigame.Render.Drawers
 {
-    class TableDrawer : Drawer
+    internal class TableDrawer : Drawer
     {
         public TableDrawer(Table table) : base(table)
         {

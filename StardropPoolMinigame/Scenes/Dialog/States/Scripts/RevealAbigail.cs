@@ -4,7 +4,7 @@ using StardropPoolMinigame.Utilities;
 
 namespace StardropPoolMinigame.Scenes.Dialog.Scripts
 {
-    class RevealAbigail : Script
+    internal class RevealAbigail : Script
     {
         public RevealAbigail() : base()
         {

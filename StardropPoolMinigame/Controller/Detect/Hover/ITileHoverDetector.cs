@@ -3,7 +3,7 @@
     /// <summary>
     /// Detects if player is currently hovering certain tile IDs
     /// </summary>
-    interface ITileHoverDetector
+    internal interface ITileHoverDetector
     {
         /// <summary>
         /// Returns whether the player is hovering over designated tile IDs
@@ -12,4 +12,3 @@
         bool IsHovering();
     }
 }
-

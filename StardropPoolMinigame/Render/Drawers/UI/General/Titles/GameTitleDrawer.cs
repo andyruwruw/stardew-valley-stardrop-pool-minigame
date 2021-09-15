@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace StardropPoolMinigame.Render.Drawers
 {
-    class GameTitleDrawer : Drawer
+    internal class GameTitleDrawer : Drawer
     {
         public GameTitleDrawer(GameTitle title) : base(title)
         {

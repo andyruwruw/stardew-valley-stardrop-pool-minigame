@@ -10,19 +10,19 @@ using System.Collections.Generic;
 
 namespace StardropPoolMinigame.Entities
 {
-    abstract class ParticleEmitter : Entity
+    internal abstract class ParticleEmitter : Entity
     {
+        protected bool _active;
+
+        protected Vector2 _direction;
+
         protected QuadTree<Particle> _quadTree;
 
         protected float _radius;
 
-        protected float _rateBase;
-
         protected float _rate;
 
-        protected Vector2 _direction;
-
-        protected bool _active;
+        protected float _rateBase;
 
         public ParticleEmitter(
             Vector2 anchor,
@@ -52,9 +52,68 @@ namespace StardropPoolMinigame.Entities
             Timer.StartTimer($"{this.GetId()}-creation-cycle");
         }
 
+        public void AddParticle()
+        {
+            Particle particle = this.CreateParticle();
+
+            this._quadTree.Insert(particle.GetAnchor(), particle);
+        }
+
+        public abstract Particle CreateParticle();
+
+        public IList<Particle> GetEntities()
+        {
+            return this._quadTree.Query();
+        }
+
         public override string GetId()
         {
             return $"particle-emitter-{this._id}";
+        }
+
+        public float GetRadius()
+        {
+            return this._radius;
+        }
+
+        public float GetRate()
+        {
+            return this._rate;
+        }
+
+        public override float GetTotalHeight()
+        {
+            return 0;
+        }
+
+        public override float GetTotalWidth()
+        {
+            return 0;
+        }
+
+        public bool IsActive()
+        {
+            return this._active;
+        }
+
+        public void SetActive(bool state)
+        {
+            this._active = state;
+        }
+
+        public void SetDirection(Vector2 direction)
+        {
+            this._direction = VectorHelper.RadiansToVector(VectorHelper.VectorToRadians(direction) + (float)(Math.PI / 3));
+        }
+
+        public void SetRadius(float radius)
+        {
+            this._radius = radius;
+        }
+
+        public void SetRate(float rate)
+        {
+            this._rate = rate * this._rateBase;
         }
 
         public override void Update()
@@ -92,70 +151,6 @@ namespace StardropPoolMinigame.Entities
             }
         }
 
-        public void AddParticle()
-        {
-            Particle particle = this.CreateParticle();
-
-            this._quadTree.Insert(particle.GetAnchor(), particle);
-        }
-
-        public abstract Particle CreateParticle();
-
-        public override float GetTotalHeight()
-        {
-            return 0;
-        }
-
-        public override float GetTotalWidth()
-        {
-            return 0;
-        }
-
-        public float GetRate()
-        {
-            return this._rate;
-        }
-
-        public void SetRate(float rate)
-        {
-            this._rate = rate * this._rateBase;
-        }
-
-        public float GetRadius()
-        {
-            return this._radius;
-        }
-
-        public void SetRadius(float radius)
-        {
-            this._radius = radius;
-        }
-
-        public IList<Particle> GetEntities()
-        {
-            return this._quadTree.Query();
-        }
-
-        public bool IsActive()
-        {
-            return this._active;
-        }
-
-        public void SetActive(bool state)
-        {
-            this._active = state;
-        }
-
-        protected Vector2 GetPositionInCreationWindow()
-        {
-            return Vector2.Add(this._anchor, new Vector2(MiscellaneousHelper.Random() * this._radius, MiscellaneousHelper.Random() * this._radius));
-        }
-
-        public void SetDirection(Vector2 direction)
-        {
-            this._direction = VectorHelper.RadiansToVector(VectorHelper.VectorToRadians(direction) + (float)(Math.PI / 3));
-        }
-
         protected virtual Vector2 GetMaximumInitialVelocity()
         {
             return this._direction;
@@ -164,6 +159,11 @@ namespace StardropPoolMinigame.Entities
         protected virtual Vector2 GetMinimumInitialVelocity()
         {
             return this._direction;
+        }
+
+        protected Vector2 GetPositionInCreationWindow()
+        {
+            return Vector2.Add(this._anchor, new Vector2(MiscellaneousHelper.Random() * this._radius, MiscellaneousHelper.Random() * this._radius));
         }
     }
 }

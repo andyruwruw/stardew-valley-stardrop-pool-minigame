@@ -3,14 +3,13 @@ using StardropPoolMinigame.Utilities;
 
 namespace StardropPoolMinigame.Entities.UI.Popups
 {
-    class YourTurnPopup : Popup
+    internal class YourTurnPopup : Popup
     {
         public YourTurnPopup() : base(
             null,
             null,
             Translations.GetTranslation(StringConstants.Popups.YOUR_TURN))
         {
-
         }
 
         /// <inheritdoc cref="Entity.GetId"/>

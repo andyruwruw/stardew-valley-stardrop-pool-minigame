@@ -3,7 +3,7 @@ using StardropPoolMinigame.Entities;
 
 namespace StardropPoolMinigame.Render.Drawers
 {
-    class BarShelvesDrawer : Drawer
+    internal class BarShelvesDrawer : Drawer
     {
         public BarShelvesDrawer(BarShelves shelves) : base(shelves)
         {

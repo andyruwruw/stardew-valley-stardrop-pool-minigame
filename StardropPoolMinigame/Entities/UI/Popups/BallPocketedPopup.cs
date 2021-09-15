@@ -3,14 +3,13 @@ using StardropPoolMinigame.Utilities;
 
 namespace StardropPoolMinigame.Entities
 {
-    class BallPocketedPopup : Popup
+    internal class BallPocketedPopup : Popup
     {
         public BallPocketedPopup() : base(
             null,
             null,
             Translations.GetTranslation(StringConstants.Popups.COMBO))
         {
-
         }
 
         /// <inheritdoc cref="Entity.GetId"/>

@@ -6,7 +6,7 @@ using StardropPoolMinigame.Render.Filters;
 
 namespace StardropPoolMinigame.Entities
 {
-    class Particle : EntityPhysics
+    internal class Particle : EntityPhysics
     {
         public Particle(
             Origin origin,
@@ -46,14 +46,14 @@ namespace StardropPoolMinigame.Entities
             return $"generic-particle-{this._id}";
         }
 
-        public override float GetTotalWidth()
-        {
-            return Textures.Particle.Spark.FRAME_1.Width;
-        }
-
         public override float GetTotalHeight()
         {
             return Textures.Particle.Spark.FRAME_1.Height;
+        }
+
+        public override float GetTotalWidth()
+        {
+            return Textures.Particle.Spark.FRAME_1.Width;
         }
     }
 }

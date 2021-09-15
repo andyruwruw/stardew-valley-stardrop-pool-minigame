@@ -6,7 +6,7 @@ using StardropPoolMinigame.Render.Filters;
 
 namespace StardropPoolMinigame.Entities
 {
-    class Glimmer : Particle
+    internal class Glimmer : Particle
     {
         public Glimmer(
             Vector2 anchor,

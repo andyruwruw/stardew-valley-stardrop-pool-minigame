@@ -5,12 +5,21 @@ namespace StardropPoolMinigame.Utilities
     /// <summary>
     /// Retrieves values generated from the <see href="https://stardewvalleywiki.com/Modding:Modder_Guide/APIs/Config">config.json</see>.
     /// </summary>
-    class Config
+    internal class Config
     {
         /// <summary>
         /// Static object generated from <see href="https://stardewvalleywiki.com/Modding:Modder_Guide/APIs/Config">config.json</see>.
         /// </summary>
         private static ModConfig _config;
+
+        /// <summary>
+        /// Whether time and day restrictions apply to when you can play NPC.
+        /// </summary>
+        /// <returns>Whether time and day restrictions apply</returns>
+        public static bool PlayAnyTime()
+        {
+            return _config.PlayAnyTime;
+        }
 
         /// <summary>
         /// Sets static object generated from <see href="https://stardewvalleywiki.com/Modding:Modder_Guide/APIs/Config">config.json</see>.
@@ -37,15 +46,6 @@ namespace StardropPoolMinigame.Utilities
         public static bool ShowTransitions()
         {
             return _config.ShowTransitions;
-        }
-
-        /// <summary>
-        /// Whether time and day restrictions apply to when you can play NPC.
-        /// </summary>
-        /// <returns>Whether time and day restrictions apply</returns>
-        public static bool PlayAnyTime()
-        {
-            return _config.PlayAnyTime;
         }
     }
 }

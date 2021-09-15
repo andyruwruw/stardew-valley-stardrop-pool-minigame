@@ -5,18 +5,8 @@ namespace StardropPoolMinigame.Behaviors
     /// <summary>
     /// Maintains position, velocity and acceleration of an object.
     /// </summary>
-    class PhysicsObject
+    internal class PhysicsObject
     {
-        /// <summary>
-        /// Position of <see cref="PhysicsObject"/> as <see cref="Vector2"/>.
-        /// </summary>
-        private Vector2 _position;
-
-        /// <summary>
-        /// Velocity of <see cref="PhysicsObject"/> as <see cref="Vector2"/>.
-        /// </summary>
-        private Vector2 _velocity;
-
         /// <summary>
         /// Acceleration of <see cref="PhysicsObject"/> as <see cref="Vector2"/>.
         /// </summary>
@@ -28,15 +18,24 @@ namespace StardropPoolMinigame.Behaviors
         private float _mass;
 
         /// <summary>
+        /// Maximum acceleration <see cref="PhysicsObject"/> can speed up.
+        /// </summary>
+        private float _maximumAcceleration;
+
+        /// <summary>
         /// Maximum velocity <see cref="PhysicsObject"/> can travel.
         /// </summary>
         private float _maximumVelocity;
 
         /// <summary>
-        /// Maximum acceleration <see cref="PhysicsObject"/> can speed up.
+        /// Position of <see cref="PhysicsObject"/> as <see cref="Vector2"/>.
         /// </summary>
-        private float _maximumAcceleration;
+        private Vector2 _position;
 
+        /// <summary>
+        /// Velocity of <see cref="PhysicsObject"/> as <see cref="Vector2"/>.
+        /// </summary>
+        private Vector2 _velocity;
 
         /// <summary>
         /// Instantiates a <see cref="PhysicsObject"/>.
@@ -108,32 +107,14 @@ namespace StardropPoolMinigame.Behaviors
             this._maximumVelocity = maximumVelocity;
             this._maximumAcceleration = maximumAcceleration;
         }
-        /// <summary>
-        /// Updates position, velocity and acceleration of <see cref="PhysicsObject"/>.
-        /// </summary>
-        public void Update()
-        {
-            this._position = Vector2.Add(this._position, this._velocity);
-            this._velocity = Vector2.Add(this._velocity, this._acceleration);
-            this._acceleration = Vector2.Zero;
-        }
 
         /// <summary>
-        /// Retrieves position of <see cref="PhysicsObject"/> as <see cref="Vector2"/>.
+        /// Adds a <see cref="Vector2"/> to the acceleration of the <see cref="PhysicsObject"/>.
         /// </summary>
-        /// <returns>Position of <see cref="PhysicsObject"/> as <see cref="Vector2"/></returns>
-        public Vector2 GetPosition()
+        /// <param name="acceleration"><see cref="Vector2"/> to be added to acceleration</param>
+        public void AddAcceleration(Vector2 acceleration)
         {
-            return this._position;
-        }
-
-        /// <summary>
-        /// Sets position of <see cref="PhysicsObject"/> as <see cref="Vector2"/>.
-        /// </summary>
-        /// <param name="position">New position of <see cref="PhysicsObject"/> as <see cref="Vector2"/></param>
-        public void SetPosition(Vector2 position)
-        {
-            this._position = position;
+            this._acceleration = Vector2.Add(this._acceleration, acceleration);
         }
 
         /// <summary>
@@ -146,30 +127,30 @@ namespace StardropPoolMinigame.Behaviors
         }
 
         /// <summary>
-        /// Subtracts a <see cref="Vector2"/> from the position of the <see cref="PhysicsObject"/>.
+        /// Adds a <see cref="Vector2"/> to the velocity of the <see cref="PhysicsObject"/>.
         /// </summary>
-        /// <param name="position"><see cref="Vector2"/> to be subtracted from position</param>
-        public void SubtractPosition(Vector2 position)
+        /// <param name="velocity"><see cref="Vector2"/> to be added to velocity</param>
+        public void AddVelocity(Vector2 velocity)
         {
-            this._position = Vector2.Subtract(this._position, position);
+            this._velocity = Vector2.Add(this._velocity, velocity);
         }
 
         /// <summary>
-        /// Multiplies a <see cref="Vector2"/> with the position of the <see cref="PhysicsObject"/>.
+        /// Divides a <see cref="Vector2"/> from the acceleration of the <see cref="PhysicsObject"/>.
         /// </summary>
-        /// <param name="position"><see cref="Vector2"/> to be multiplied with position</param>
-        public void MultiplyPosition(Vector2 position)
+        /// <param name="acceleration"><see cref="Vector2"/> to be divided from acceleration</param>
+        public void DivideAcceleration(Vector2 acceleration)
         {
-            this._position = Vector2.Multiply(this._position, position);
+            this._acceleration = Vector2.Divide(this._acceleration, acceleration);
         }
 
         /// <summary>
-        /// Multiplies a float with the position of the <see cref="PhysicsObject"/>.
+        /// Divides a float from the acceleration of the <see cref="PhysicsObject"/>.
         /// </summary>
-        /// <param name="position">Float to be multiplied with position</param>
-        public void MultiplyPosition(float position)
+        /// <param name="acceleration">Float to be divided from acceleration</param>
+        public void DivideAcceleration(float acceleration)
         {
-            this._position = Vector2.Multiply(this._position, position);
+            this._acceleration = Vector2.Divide(this._acceleration, acceleration);
         }
 
         /// <summary>
@@ -188,60 +169,6 @@ namespace StardropPoolMinigame.Behaviors
         public void DividePosition(float position)
         {
             this._position = Vector2.Divide(this._position, position);
-        }
-
-        /// <summary>
-        /// Retrieves velocity of <see cref="PhysicsObject"/> as <see cref="Vector2"/>.
-        /// </summary>
-        /// <returns>Velocity of <see cref="PhysicsObject"/> as <see cref="Vector2"/></returns>
-        public Vector2 GetVelocity()
-        {
-            return this._velocity;
-        }
-
-        /// <summary>
-        /// Sets velocity of <see cref="PhysicsObject"/> as <see cref="Vector2"/>.
-        /// </summary>
-        /// <param name="velocity">New velocity of <see cref="PhysicsObject"/> as <see cref="Vector2"/></param>
-        public void SetVelocity(Vector2 velocity)
-        {
-            this._velocity = velocity;
-        }
-
-        /// <summary>
-        /// Adds a <see cref="Vector2"/> to the velocity of the <see cref="PhysicsObject"/>.
-        /// </summary>
-        /// <param name="velocity"><see cref="Vector2"/> to be added to velocity</param>
-        public void AddVelocity(Vector2 velocity)
-        {
-            this._velocity = Vector2.Add(this._velocity, velocity);
-        }
-
-        /// <summary>
-        /// Subtracts a <see cref="Vector2"/> from the velocity of the <see cref="PhysicsObject"/>.
-        /// </summary>
-        /// <param name="velocity"><see cref="Vector2"/> to be subtracted from velocity</param>
-        public void SubtractVelocity(Vector2 velocity)
-        {
-            this._velocity = Vector2.Subtract(this._velocity, velocity);
-        }
-
-        /// <summary>
-        /// Multiplies a <see cref="Vector2"/> with the velocity of the <see cref="PhysicsObject"/>.
-        /// </summary>
-        /// <param name="velocity"><see cref="Vector2"/> to be multiplied with velocity</param>
-        public void MultiplyVelocity(Vector2 velocity)
-        {
-            this._velocity = Vector2.Multiply(this._velocity, velocity);
-        }
-
-        /// <summary>
-        /// Multiplies a float with the velocity of the <see cref="PhysicsObject"/>.
-        /// </summary>
-        /// <param name="velocity">Float to be multiplied with velocity</param>
-        public void MultiplyVelocity(float velocity)
-        {
-            this._velocity = Vector2.Multiply(this._velocity, velocity);
         }
 
         /// <summary>
@@ -272,30 +199,48 @@ namespace StardropPoolMinigame.Behaviors
         }
 
         /// <summary>
-        /// Sets acceleration of <see cref="PhysicsObject"/> as <see cref="Vector2"/>.
+        /// Retrieves mass of the <see cref="PhysicsObject"/>.
         /// </summary>
-        /// <param name="acceleration">New acceleration of <see cref="PhysicsObject"/> as <see cref="Vector2"/></param>
-        public void SetAcceleration(Vector2 velocity)
+        /// <returns>Mass of the <see cref="PhysicsObject"/></returns>
+        public float GetMass()
         {
-            this._velocity = velocity;
+            return this._mass;
         }
 
         /// <summary>
-        /// Adds a <see cref="Vector2"/> to the acceleration of the <see cref="PhysicsObject"/>.
+        /// Retrieves maximum acceleration <see cref="PhysicsObject"/> can speed up.
         /// </summary>
-        /// <param name="acceleration"><see cref="Vector2"/> to be added to acceleration</param>
-        public void AddAcceleration(Vector2 acceleration)
+        /// <returns>Maximum acceleration <see cref="PhysicsObject"/> can speed up</returns>
+        public float GetMaximumAcceleration()
         {
-            this._acceleration = Vector2.Add(this._acceleration, acceleration);
+            return this._maximumAcceleration;
         }
 
         /// <summary>
-        /// Subtracts a <see cref="Vector2"/> from the acceleration of the <see cref="PhysicsObject"/>.
+        /// Retrieves maximum velocity <see cref="PhysicsObject"/> can travel.
         /// </summary>
-        /// <param name="acceleration"><see cref="Vector2"/> to be subtracted from acceleration</param>
-        public void SubtractAcceleration(Vector2 acceleration)
+        /// <returns>Maximum velocity <see cref="PhysicsObject"/> can travel</returns>
+        public float GetMaximumVelocity()
         {
-            this._acceleration = Vector2.Subtract(this._acceleration, acceleration);
+            return this._maximumVelocity;
+        }
+
+        /// <summary>
+        /// Retrieves position of <see cref="PhysicsObject"/> as <see cref="Vector2"/>.
+        /// </summary>
+        /// <returns>Position of <see cref="PhysicsObject"/> as <see cref="Vector2"/></returns>
+        public Vector2 GetPosition()
+        {
+            return this._position;
+        }
+
+        /// <summary>
+        /// Retrieves velocity of <see cref="PhysicsObject"/> as <see cref="Vector2"/>.
+        /// </summary>
+        /// <returns>Velocity of <see cref="PhysicsObject"/> as <see cref="Vector2"/></returns>
+        public Vector2 GetVelocity()
+        {
+            return this._velocity;
         }
 
         /// <summary>
@@ -317,30 +262,48 @@ namespace StardropPoolMinigame.Behaviors
         }
 
         /// <summary>
-        /// Divides a <see cref="Vector2"/> from the acceleration of the <see cref="PhysicsObject"/>.
+        /// Multiplies a <see cref="Vector2"/> with the position of the <see cref="PhysicsObject"/>.
         /// </summary>
-        /// <param name="acceleration"><see cref="Vector2"/> to be divided from acceleration</param>
-        public void DivideAcceleration(Vector2 acceleration)
+        /// <param name="position"><see cref="Vector2"/> to be multiplied with position</param>
+        public void MultiplyPosition(Vector2 position)
         {
-            this._acceleration = Vector2.Divide(this._acceleration, acceleration);
+            this._position = Vector2.Multiply(this._position, position);
         }
 
         /// <summary>
-        /// Divides a float from the acceleration of the <see cref="PhysicsObject"/>.
+        /// Multiplies a float with the position of the <see cref="PhysicsObject"/>.
         /// </summary>
-        /// <param name="acceleration">Float to be divided from acceleration</param>
-        public void DivideAcceleration(float acceleration)
+        /// <param name="position">Float to be multiplied with position</param>
+        public void MultiplyPosition(float position)
         {
-            this._acceleration = Vector2.Divide(this._acceleration, acceleration);
+            this._position = Vector2.Multiply(this._position, position);
         }
 
         /// <summary>
-        /// Retrieves mass of the <see cref="PhysicsObject"/>.
+        /// Multiplies a <see cref="Vector2"/> with the velocity of the <see cref="PhysicsObject"/>.
         /// </summary>
-        /// <returns>Mass of the <see cref="PhysicsObject"/></returns>
-        public float GetMass()
+        /// <param name="velocity"><see cref="Vector2"/> to be multiplied with velocity</param>
+        public void MultiplyVelocity(Vector2 velocity)
         {
-            return this._mass;
+            this._velocity = Vector2.Multiply(this._velocity, velocity);
+        }
+
+        /// <summary>
+        /// Multiplies a float with the velocity of the <see cref="PhysicsObject"/>.
+        /// </summary>
+        /// <param name="velocity">Float to be multiplied with velocity</param>
+        public void MultiplyVelocity(float velocity)
+        {
+            this._velocity = Vector2.Multiply(this._velocity, velocity);
+        }
+
+        /// <summary>
+        /// Sets acceleration of <see cref="PhysicsObject"/> as <see cref="Vector2"/>.
+        /// </summary>
+        /// <param name="acceleration">New acceleration of <see cref="PhysicsObject"/> as <see cref="Vector2"/></param>
+        public void SetAcceleration(Vector2 velocity)
+        {
+            this._velocity = velocity;
         }
 
         /// <summary>
@@ -353,12 +316,12 @@ namespace StardropPoolMinigame.Behaviors
         }
 
         /// <summary>
-        /// Retrieves maximum velocity <see cref="PhysicsObject"/> can travel.
+        /// Sets maximum acceleration <see cref="PhysicsObject"/> can speed up.
         /// </summary>
-        /// <returns>Maximum velocity <see cref="PhysicsObject"/> can travel</returns>
-        public float GetMaximumVelocity()
+        /// <param name="maximumAcceleration">New maximum acceleration <see cref="PhysicsObject"/> can speed up</param>
+        public void SetMaximumAcceleration(float maximumAcceleration)
         {
-            return this._maximumVelocity;
+            this._maximumAcceleration = maximumAcceleration;
         }
 
         /// <summary>
@@ -371,21 +334,58 @@ namespace StardropPoolMinigame.Behaviors
         }
 
         /// <summary>
-        /// Retrieves maximum acceleration <see cref="PhysicsObject"/> can speed up.
+        /// Sets position of <see cref="PhysicsObject"/> as <see cref="Vector2"/>.
         /// </summary>
-        /// <returns>Maximum acceleration <see cref="PhysicsObject"/> can speed up</returns>
-        public float GetMaximumAcceleration()
+        /// <param name="position">New position of <see cref="PhysicsObject"/> as <see cref="Vector2"/></param>
+        public void SetPosition(Vector2 position)
         {
-            return this._maximumAcceleration;
+            this._position = position;
         }
 
         /// <summary>
-        /// Sets maximum acceleration <see cref="PhysicsObject"/> can speed up.
+        /// Sets velocity of <see cref="PhysicsObject"/> as <see cref="Vector2"/>.
         /// </summary>
-        /// <param name="maximumAcceleration">New maximum acceleration <see cref="PhysicsObject"/> can speed up</param>
-        public void SetMaximumAcceleration(float maximumAcceleration)
+        /// <param name="velocity">New velocity of <see cref="PhysicsObject"/> as <see cref="Vector2"/></param>
+        public void SetVelocity(Vector2 velocity)
         {
-            this._maximumAcceleration = maximumAcceleration;
+            this._velocity = velocity;
+        }
+
+        /// <summary>
+        /// Subtracts a <see cref="Vector2"/> from the acceleration of the <see cref="PhysicsObject"/>.
+        /// </summary>
+        /// <param name="acceleration"><see cref="Vector2"/> to be subtracted from acceleration</param>
+        public void SubtractAcceleration(Vector2 acceleration)
+        {
+            this._acceleration = Vector2.Subtract(this._acceleration, acceleration);
+        }
+
+        /// <summary>
+        /// Subtracts a <see cref="Vector2"/> from the position of the <see cref="PhysicsObject"/>.
+        /// </summary>
+        /// <param name="position"><see cref="Vector2"/> to be subtracted from position</param>
+        public void SubtractPosition(Vector2 position)
+        {
+            this._position = Vector2.Subtract(this._position, position);
+        }
+
+        /// <summary>
+        /// Subtracts a <see cref="Vector2"/> from the velocity of the <see cref="PhysicsObject"/>.
+        /// </summary>
+        /// <param name="velocity"><see cref="Vector2"/> to be subtracted from velocity</param>
+        public void SubtractVelocity(Vector2 velocity)
+        {
+            this._velocity = Vector2.Subtract(this._velocity, velocity);
+        }
+
+        /// <summary>
+        /// Updates position, velocity and acceleration of <see cref="PhysicsObject"/>.
+        /// </summary>
+        public void Update()
+        {
+            this._position = Vector2.Add(this._position, this._velocity);
+            this._velocity = Vector2.Add(this._velocity, this._acceleration);
+            this._acceleration = Vector2.Zero;
         }
     }
 }

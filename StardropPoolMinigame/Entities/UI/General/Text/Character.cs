@@ -6,7 +6,7 @@ using StardropPoolMinigame.Render.Filters;
 
 namespace StardropPoolMinigame.Entities
 {
-    class Character : Entity
+    internal class Character : Entity
     {
         private char _character;
 
@@ -32,14 +32,14 @@ namespace StardropPoolMinigame.Entities
             this.SetDrawer(new CharacterDrawer(this));
         }
 
-        public override string GetId()
-        {
-            return $"text-character-{this._id}";
-        }
-
         public Rectangle GetCharacterBounds()
         {
             return this._charBounds;
+        }
+
+        public override string GetId()
+        {
+            return $"text-character-{this._id}";
         }
 
         public override float GetTotalHeight()

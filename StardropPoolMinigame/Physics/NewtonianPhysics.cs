@@ -13,7 +13,7 @@ namespace StardropPoolMinigame.Behaviors.Physics
     /// <para><inheritdoc cref="Physics"/></para>
     /// <para>Resembles real life physics.</para>
     /// </summary>
-    class NewtonianPhysics : Physics
+    internal class NewtonianPhysics : Physics
     {
         public NewtonianPhysics() : base()
         {

@@ -5,7 +5,7 @@ using System;
 
 namespace StardropPoolMinigame.Entities
 {
-    class SparkEmitter : ParticleEmitter
+    internal class SparkEmitter : ParticleEmitter
     {
         public SparkEmitter(
             Vector2 anchor,
@@ -20,11 +20,6 @@ namespace StardropPoolMinigame.Entities
         {
         }
 
-        public override string GetId()
-        {
-            return $"spark-emitter-{this._id}";
-        }
-
         public override Particle CreateParticle()
         {
             return new Spark(
@@ -34,6 +29,11 @@ namespace StardropPoolMinigame.Entities
                 TransitionConstants.Game.Sparks.Exiting(),
                 this.GetMaximumInitialVelocity(),
                 this.GetMinimumInitialVelocity());
+        }
+
+        public override string GetId()
+        {
+            return $"spark-emitter-{this._id}";
         }
 
         protected override Vector2 GetMaximumInitialVelocity()

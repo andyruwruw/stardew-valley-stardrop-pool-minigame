@@ -1,7 +1,7 @@
 ﻿namespace StardropPoolMinigame.Scenes.MainMenu
 {
     /// <inheritdoc cref="ISceneCreator"/>
-    class MainMenuSceneCreator : ISceneCreator
+    internal class MainMenuSceneCreator : ISceneCreator
     {
         /// <summary>
         /// Instantiates <see cref="MainMenuSceneCreator"/>.

@@ -11,9 +11,9 @@ namespace StardropPoolMinigame.Render
     /// <summary>
     /// Renders entries onto the screen
     /// </summary>
-    class Renderer
+    internal class Renderer
     {
-        IList<IEntity> _entities;
+        private IList<IEntity> _entities;
 
         public Renderer()
         {
@@ -59,22 +59,12 @@ namespace StardropPoolMinigame.Render
         }
 
         /// <summary>
-        /// Draws entries that are always present
-        /// </summary>
-        /// <param name="batch">XNA Framework SpriteBatch</param>
-        private void DrawStaticEntities(SpriteBatch batch)
-        {
-            this.DrawEntities(batch, this._entities);
-        }
-
-        /// <summary>
         /// Draws the provided set of entries
         /// </summary>
         /// <param name="batch">XNA Framework SpriteBatch</param>
         /// <param name="entities">Entities to be drawn</param>
         private void DrawEntities(SpriteBatch batch, IList<IEntity> entities)
         {
-
             IList<IDrawer> drawers = GetDrawersFromEntities(entities);
 
             foreach (IDrawer drawer in drawers)
@@ -84,6 +74,15 @@ namespace StardropPoolMinigame.Render
                     drawer.Draw(batch);
                 }
             }
+        }
+
+        /// <summary>
+        /// Draws entries that are always present
+        /// </summary>
+        /// <param name="batch">XNA Framework SpriteBatch</param>
+        private void DrawStaticEntities(SpriteBatch batch)
+        {
+            this.DrawEntities(batch, this._entities);
         }
 
         /// <summary>
