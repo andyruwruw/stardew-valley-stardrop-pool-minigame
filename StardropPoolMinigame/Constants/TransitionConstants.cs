@@ -1,5 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using StardewValley;
 using StardropPoolMinigame.Enums;
 using StardropPoolMinigame.Helpers;
 using StardropPoolMinigame.Render;

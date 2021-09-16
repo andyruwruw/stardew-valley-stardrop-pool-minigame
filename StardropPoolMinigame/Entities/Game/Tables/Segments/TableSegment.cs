@@ -28,8 +28,8 @@ namespace StardropPoolMinigame.Entities
             enteringTransition,
             exitingTransition)
         {
-            this.InicializeBounceableSurfaces();
-            this.InicializePockets();
+            this.InitializeBounceableSurfaces();
+            this.InitializePockets();
             this.SetDrawer(new TableSegmentDrawer(this));
         }
 
@@ -117,12 +117,12 @@ namespace StardropPoolMinigame.Entities
             return Textures.Table.Edge.Back.NORTH.Width;
         }
 
-        public virtual void InicializeBounceableSurfaces()
+        public virtual void InitializeBounceableSurfaces()
         {
             this._bounceableSurfaces = new List<IRange>();
         }
 
-        public virtual void InicializePockets()
+        public virtual void InitializePockets()
         {
             this._pockets = new List<Circle>();
         }

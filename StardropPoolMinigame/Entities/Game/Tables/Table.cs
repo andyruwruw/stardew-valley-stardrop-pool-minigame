@@ -40,8 +40,8 @@ namespace StardropPoolMinigame.Entities
         {
             return new Table(
                 Origin.CenterCenter,
-                new Vector2(RenderConstants.MinigameScreen.WIDTH / 2, RenderConstants.MinigameScreen.HEIGHT / 2),
-                RenderConstants.Scenes.Game.LayerDepth.TABLE,
+                new Vector2(RenderConstants.MinigameScreen.Width / 2, RenderConstants.MinigameScreen.Height / 2),
+                RenderConstants.Scenes.Game.LayerDepth.Table,
                 null,
                 null,
                 TableType.Classic);

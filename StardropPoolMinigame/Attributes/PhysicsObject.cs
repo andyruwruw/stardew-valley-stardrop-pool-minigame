@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 
-namespace StardropPoolMinigame.Behaviors
+namespace StardropPoolMinigame.Attributes
 {
     /// <summary>
     /// Maintains position, velocity and acceleration of an object.

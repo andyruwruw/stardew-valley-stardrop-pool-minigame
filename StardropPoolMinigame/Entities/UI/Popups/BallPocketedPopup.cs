@@ -8,7 +8,7 @@ namespace StardropPoolMinigame.Entities
         public BallPocketedPopup() : base(
             null,
             null,
-            Translations.GetTranslation(StringConstants.Popups.COMBO))
+            Translations.GetTranslation(StringConstants.Popups.Combo))
         {
         }
 

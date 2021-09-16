@@ -34,9 +34,9 @@ namespace StardropPoolMinigame.Entities
             return TableSegmentType.NorthWestPocket;
         }
 
-        public override void InicializeBounceableSurfaces()
+        public override void InitializeBounceableSurfaces()
         {
-            base.InicializeBounceableSurfaces();
+            base.InitializeBounceableSurfaces();
 
             // North East Pocket Angle
             this._bounceableSurfaces.Add(
@@ -45,12 +45,12 @@ namespace StardropPoolMinigame.Entities
                         this._anchor,
                         new Vector2(
                             this.GetTotalWidth(),
-                            RenderConstants.Entities.TableSegment.SPACE_TO_BOUNCEABLE_SURFACE)),
+                            RenderConstants.Entities.TableSegment.SpaceToBounceableSurface)),
                     Vector2.Add(
                         this._anchor,
                         new Vector2(
-                            this.GetTotalWidth() - RenderConstants.Entities.TableSegment.POCKET_ANGLED_EDGE_HEIGHT,
-                            RenderConstants.Entities.TableSegment.SPACE_TO_BOUNCEABLE_SURFACE - RenderConstants.Entities.TableSegment.UNPASSABLE_LIP))));
+                            this.GetTotalWidth() - RenderConstants.Entities.TableSegment.PocketAngledEdgeHeight,
+                            RenderConstants.Entities.TableSegment.SpaceToBounceableSurface - RenderConstants.Entities.TableSegment.UnpassableLip))));
 
             // North East Bare Edge
             this._bounceableSurfaces.Add(
@@ -58,13 +58,13 @@ namespace StardropPoolMinigame.Entities
                     Vector2.Add(
                         this._anchor,
                         new Vector2(
-                            this.GetTotalWidth() - RenderConstants.Entities.TableSegment.POCKET_ANGLED_EDGE_HEIGHT - RenderConstants.Entities.TableSegment.ANGLED_POCKET_BARE_EDGE_LENGTH,
-                            RenderConstants.Entities.TableSegment.SPACE_TO_BOUNCEABLE_SURFACE - RenderConstants.Entities.TableSegment.UNPASSABLE_LIP)),
+                            this.GetTotalWidth() - RenderConstants.Entities.TableSegment.PocketAngledEdgeHeight - RenderConstants.Entities.TableSegment.AngledPocketBareEdgeLength,
+                            RenderConstants.Entities.TableSegment.SpaceToBounceableSurface - RenderConstants.Entities.TableSegment.UnpassableLip)),
                     Vector2.Add(
                         this._anchor,
                         new Vector2(
-                            this.GetTotalWidth() - RenderConstants.Entities.TableSegment.POCKET_ANGLED_EDGE_HEIGHT,
-                            RenderConstants.Entities.TableSegment.SPACE_TO_BOUNCEABLE_SURFACE - RenderConstants.Entities.TableSegment.UNPASSABLE_LIP))));
+                            this.GetTotalWidth() - RenderConstants.Entities.TableSegment.PocketAngledEdgeHeight,
+                            RenderConstants.Entities.TableSegment.SpaceToBounceableSurface - RenderConstants.Entities.TableSegment.UnpassableLip))));
 
             // South West Pocket Angle
             this._bounceableSurfaces.Add(
@@ -72,13 +72,13 @@ namespace StardropPoolMinigame.Entities
                     Vector2.Add(
                         this._anchor,
                         new Vector2(
-                            RenderConstants.Entities.TableSegment.SPACE_TO_BOUNCEABLE_SURFACE,
+                            RenderConstants.Entities.TableSegment.SpaceToBounceableSurface,
                             this.GetTotalHeight())),
                     Vector2.Add(
                         this._anchor,
                         new Vector2(
-                            RenderConstants.Entities.TableSegment.SPACE_TO_BOUNCEABLE_SURFACE - RenderConstants.Entities.TableSegment.UNPASSABLE_LIP,
-                            this.GetTotalHeight() - RenderConstants.Entities.TableSegment.POCKET_ANGLED_EDGE_HEIGHT))));
+                            RenderConstants.Entities.TableSegment.SpaceToBounceableSurface - RenderConstants.Entities.TableSegment.UnpassableLip,
+                            this.GetTotalHeight() - RenderConstants.Entities.TableSegment.PocketAngledEdgeHeight))));
 
             // South West Bare Edge
             this._bounceableSurfaces.Add(
@@ -86,27 +86,27 @@ namespace StardropPoolMinigame.Entities
                     Vector2.Add(
                         this._anchor,
                         new Vector2(
-                            RenderConstants.Entities.TableSegment.SPACE_TO_BOUNCEABLE_SURFACE - RenderConstants.Entities.TableSegment.UNPASSABLE_LIP,
-                            this.GetTotalHeight() - RenderConstants.Entities.TableSegment.POCKET_ANGLED_EDGE_HEIGHT)),
+                            RenderConstants.Entities.TableSegment.SpaceToBounceableSurface - RenderConstants.Entities.TableSegment.UnpassableLip,
+                            this.GetTotalHeight() - RenderConstants.Entities.TableSegment.PocketAngledEdgeHeight)),
                     Vector2.Add(
                         this._anchor,
                         new Vector2(
-                            RenderConstants.Entities.TableSegment.SPACE_TO_BOUNCEABLE_SURFACE - RenderConstants.Entities.TableSegment.UNPASSABLE_LIP,
-                            this.GetTotalHeight() - RenderConstants.Entities.TableSegment.POCKET_ANGLED_EDGE_HEIGHT - RenderConstants.Entities.TableSegment.ANGLED_POCKET_BARE_EDGE_LENGTH))));
+                            RenderConstants.Entities.TableSegment.SpaceToBounceableSurface - RenderConstants.Entities.TableSegment.UnpassableLip,
+                            this.GetTotalHeight() - RenderConstants.Entities.TableSegment.PocketAngledEdgeHeight - RenderConstants.Entities.TableSegment.AngledPocketBareEdgeLength))));
         }
 
-        public override void InicializePockets()
+        public override void InitializePockets()
         {
-            base.InicializePockets();
+            base.InitializePockets();
 
             this._pockets.Add(
                 new Circle(
                     Vector2.Add(
                         this._anchor,
                         new Vector2(
-                            RenderConstants.Entities.TableSegment.MARGIN + RenderConstants.Entities.TableSegment.BORDER + RenderConstants.Entities.TableSegment.ANGLED_POCKET_BORDER_OFFSET,
-                            RenderConstants.Entities.TableSegment.MARGIN + RenderConstants.Entities.TableSegment.BORDER + RenderConstants.Entities.TableSegment.ANGLED_POCKET_BORDER_OFFSET)),
-                    RenderConstants.Entities.TableSegment.POCKET_RADIUS));
+                            RenderConstants.Entities.TableSegment.Margin + RenderConstants.Entities.TableSegment.Border + RenderConstants.Entities.TableSegment.AngledPocketBorderOffset,
+                            RenderConstants.Entities.TableSegment.Margin + RenderConstants.Entities.TableSegment.Border + RenderConstants.Entities.TableSegment.AngledPocketBorderOffset)),
+                    RenderConstants.Entities.TableSegment.PocketRadius));
         }
     }
 }

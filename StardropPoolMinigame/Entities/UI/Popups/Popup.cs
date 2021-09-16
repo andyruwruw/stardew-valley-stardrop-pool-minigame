@@ -20,8 +20,8 @@ namespace StardropPoolMinigame.Entities
             string text
         ) : base(
             Origin.CenterCenter,
-            new Vector2(RenderConstants.MinigameScreen.WIDTH / 2, RenderConstants.MinigameScreen.HEIGHT / 2),
-            RenderConstants.Scenes.General.LayerDepth.POPUP,
+            new Vector2(RenderConstants.MinigameScreen.Width / 2, RenderConstants.MinigameScreen.Height / 2),
+            RenderConstants.Scenes.General.LayerDepth.Popup,
             enteringTransition,
             exitingTransition)
         {
@@ -99,12 +99,12 @@ namespace StardropPoolMinigame.Entities
         {
             this._textEntity = new Text(
                 Origin.CenterCenter,
-                new Vector2(RenderConstants.MinigameScreen.WIDTH / 2, RenderConstants.MinigameScreen.HEIGHT / 2),
+                new Vector2(RenderConstants.MinigameScreen.Width / 2, RenderConstants.MinigameScreen.Height / 2),
                 this._layerDepth,
                 this._enteringTransition,
                 this._exitingTransition,
                 this._text,
-                RenderConstants.MinigameScreen.WIDTH,
+                RenderConstants.MinigameScreen.Width,
                 1f,
                 true,
                 false);

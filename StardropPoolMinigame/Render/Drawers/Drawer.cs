@@ -138,7 +138,7 @@ namespace StardropPoolMinigame.Render.Drawers
                 this.GetEffects(overrideEffects),
                 this.GetLayerDepth(overrideLayerDepth));
 
-            if (DevConstants.DEBUG_VISUALS)
+            if (DevConstants.DebugVisuals)
             {
                 this.DrawDebugVisuals(batch);
             }

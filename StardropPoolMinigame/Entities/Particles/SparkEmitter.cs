@@ -1,49 +1,57 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using StardropPoolMinigame.Constants;
 using StardropPoolMinigame.Helpers;
-using System;
 
 namespace StardropPoolMinigame.Entities
 {
-    internal class SparkEmitter : ParticleEmitter
-    {
-        public SparkEmitter(
-            Vector2 anchor,
-            float radius,
-            float layerDepth,
-            float rate
-        ) : base(
-            anchor,
-            radius,
-            layerDepth,
-            rate)
-        {
-        }
+	internal class SparkEmitter : ParticleEmitter
+	{
+		public SparkEmitter(
+			Vector2 anchor,
+			float radius,
+			float layerDepth,
+			float rate
+		) : base(
+			anchor,
+			radius,
+			layerDepth,
+			rate)
+		{
+		}
 
-        public override Particle CreateParticle()
-        {
-            return new Spark(
-                this.GetPositionInCreationWindow(),
-                this._layerDepth,
-                TransitionConstants.Game.Sparks.Entering(),
-                TransitionConstants.Game.Sparks.Exiting(),
-                this.GetMaximumInitialVelocity(),
-                this.GetMinimumInitialVelocity());
-        }
+		public override Particle CreateParticle()
+		{
+			var startingAcceleration = new Vector2(
+				MiscellaneousHelper.Random() * (GetMaximumInitialVelocity().X - GetMinimumInitialVelocity().X) +
+				GetMinimumInitialVelocity().X,
+				MiscellaneousHelper.Random() * (GetMaximumInitialVelocity().Y - GetMinimumInitialVelocity().Y) +
+				GetMinimumInitialVelocity().Y);
 
-        public override string GetId()
-        {
-            return $"spark-emitter-{this._id}";
-        }
+			return new Spark(
+				GetPositionInCreationWindow(),
+				_layerDepth,
+				TransitionConstants.Game.Sparks.Entering(),
+				TransitionConstants.Game.Sparks.Exiting(),
+				0f,
+				null,
+				startingAcceleration,
+				GameConstants.Particle.Spark.PerceptionRadius);
+		}
 
-        protected override Vector2 GetMaximumInitialVelocity()
-        {
-            return VectorHelper.RadiansToVector(VectorHelper.VectorToRadians(this._direction) - (float)(Math.PI / 3));
-        }
+		public override string GetId()
+		{
+			return $"spark-emitter-{_id}";
+		}
 
-        protected override Vector2 GetMinimumInitialVelocity()
-        {
-            return VectorHelper.RadiansToVector(VectorHelper.VectorToRadians(this._direction) + (float)(Math.PI / 3));
-        }
-    }
+		protected override Vector2 GetMaximumInitialVelocity()
+		{
+			return VectorHelper.RadiansToVector(VectorHelper.VectorToRadians(_direction) - (float) (Math.PI / 3));
+		}
+
+		protected override Vector2 GetMinimumInitialVelocity()
+		{
+			return VectorHelper.RadiansToVector(VectorHelper.VectorToRadians(_direction) + (float) (Math.PI / 3));
+		}
+	}
 }

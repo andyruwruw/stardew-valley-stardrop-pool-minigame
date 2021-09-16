@@ -75,7 +75,7 @@ namespace StardropPoolMinigame.Entities
 
         public override void ClickCallback()
         {
-            Sound.PlaySound(SoundConstants.Feedback.BOTTON_PRESS);
+            Sound.PlaySound(SoundConstants.Feedback.BottonPress);
         }
 
         public PortraitEmotion GetEmotion()
@@ -117,7 +117,7 @@ namespace StardropPoolMinigame.Entities
         {
             if (this._isHoverable)
             {
-                Sound.PlaySound(SoundConstants.Feedback.BUTTON_HOVER);
+                Sound.PlaySound(SoundConstants.Feedback.ButtonHover);
             }
         }
 

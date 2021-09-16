@@ -42,7 +42,7 @@ namespace StardropPoolMinigame.Entities
 
             this._text = new Text(
                 Origin.TopLeft,
-                new Vector2(this.GetTopLeft().X + (GameConstants.Ball.RADIUS * 2) + RenderConstants.Entities.BallButton.INNER_PADDING, anchor.Y),
+                new Vector2(this.GetTopLeft().X + (GameConstants.Ball.Radius * 2) + RenderConstants.Entities.BallButton.InnerPadding, anchor.Y),
                 layerDepth,
                 enteringTransition,
                 exitingTransition,
@@ -53,7 +53,7 @@ namespace StardropPoolMinigame.Entities
                 true);
 
             this._ball = new Ball(
-                new Vector2(this.GetTopLeft().X + GameConstants.Ball.RADIUS, this.GetTopLeft().Y + (this._text.GetTotalHeight() / 2)),
+                new Vector2(this.GetTopLeft().X + GameConstants.Ball.Radius, this.GetTopLeft().Y + (this._text.GetTotalHeight() / 2)),
                 layerDepth,
                 enteringTransition,
                 exitingTransition,
@@ -65,7 +65,7 @@ namespace StardropPoolMinigame.Entities
 
         public override void ClickCallback()
         {
-            Sound.PlaySound(SoundConstants.Feedback.BOTTON_PRESS);
+            Sound.PlaySound(SoundConstants.Feedback.BottonPress);
         }
 
         public Ball GetBall()
@@ -90,12 +90,12 @@ namespace StardropPoolMinigame.Entities
 
         public override float GetTotalWidth()
         {
-            return (int)((GameConstants.Ball.RADIUS * 2) + RenderConstants.Entities.BallButton.INNER_PADDING + this._maxWidth);
+            return (int)((GameConstants.Ball.Radius * 2) + RenderConstants.Entities.BallButton.InnerPadding + this._maxWidth);
         }
 
         public override void HoverCallback()
         {
-            Sound.PlaySound(SoundConstants.Feedback.BUTTON_HOVER);
+            Sound.PlaySound(SoundConstants.Feedback.ButtonHover);
         }
 
         public override void SetTransitionState(TransitionState transitionState, bool start = false)
@@ -111,7 +111,7 @@ namespace StardropPoolMinigame.Entities
 
             if (this.IsHovered())
             {
-                this._ball.GetOrientation().Roll(new Vector2(GameConstants.BallButton.HOVER_ROTATIONAL_SPEED, 0));
+                this._ball.GetOrientation().Roll(new Vector2(GameConstants.BallButton.HoverRotationalSpeed, 0));
             }
         }
     }

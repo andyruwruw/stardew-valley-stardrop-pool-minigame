@@ -5,7 +5,7 @@ namespace StardropPoolMinigame.Entities
 {
     internal class ComboPopup : Popup
     {
-        public ComboPopup() : base(null, null, Translations.GetTranslation(StringConstants.Popups.COMBO))
+        public ComboPopup() : base(null, null, Translations.GetTranslation(StringConstants.Popups.Combo))
         {
         }
 

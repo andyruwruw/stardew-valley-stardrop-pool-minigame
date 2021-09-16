@@ -16,37 +16,37 @@ namespace StardropPoolMinigame.Scenes.Dialog.Scripts
             this._recitations.Add(new Recitation(
                 NPCName.Sam,
                 PortraitEmotion.Laugh,
-                Translations.GetTranslation(StringConstants.Quotes.Introduction.Sam.LINE1, new { name = Game1.player.displayName })));
+                Translations.GetTranslation(StringConstants.Quotes.Introduction.Sam.Line1, new { name = Game1.player.displayName })));
 
             this._recitations.Add(new Recitation(
                 NPCName.Sam,
                 PortraitEmotion.Embarassed,
-                Translations.GetTranslation(StringConstants.Quotes.Introduction.Sam.LINE2)));
+                Translations.GetTranslation(StringConstants.Quotes.Introduction.Sam.Line2)));
 
             this._recitations.Add(new Recitation(
                 NPCName.Sam,
                 PortraitEmotion.Default,
-                Translations.GetTranslation(StringConstants.Quotes.Introduction.Sam.LINE3)));
+                Translations.GetTranslation(StringConstants.Quotes.Introduction.Sam.Line3)));
 
             this._recitations.Add(new Recitation(
                 NPCName.Sam,
                 PortraitEmotion.Laugh,
-                Translations.GetTranslation(StringConstants.Quotes.Introduction.Sam.LINE4)));
+                Translations.GetTranslation(StringConstants.Quotes.Introduction.Sam.Line4)));
 
             this._recitations.Add(new Recitation(
                 NPCName.Sam,
                 PortraitEmotion.Default,
-                Translations.GetTranslation(StringConstants.Quotes.Introduction.Sam.LINE5)));
+                Translations.GetTranslation(StringConstants.Quotes.Introduction.Sam.Line5)));
 
             this._recitations.Add(new Recitation(
                 NPCName.Sam,
                 PortraitEmotion.Default,
-                Translations.GetTranslation(StringConstants.Quotes.Introduction.Sam.LINE6)));
+                Translations.GetTranslation(StringConstants.Quotes.Introduction.Sam.Line6)));
 
             this._recitations.Add(new Recitation(
                 NPCName.Sam,
                 PortraitEmotion.Embarassed,
-                Translations.GetTranslation(StringConstants.Quotes.Introduction.Sam.LINE7)));
+                Translations.GetTranslation(StringConstants.Quotes.Introduction.Sam.Line7)));
         }
     }
 }

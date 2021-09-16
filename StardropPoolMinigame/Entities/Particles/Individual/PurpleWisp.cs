@@ -5,9 +5,9 @@ using StardropPoolMinigame.Render.Filters;
 
 namespace StardropPoolMinigame.Entities
 {
-	internal class Sparkle : Particle
+	internal class PurpleWisp : Particle
 	{
-		public Sparkle(
+		public PurpleWisp(
 			Vector2 anchor,
 			float layerDepth,
 			IFilter enteringTransition,
@@ -31,17 +31,17 @@ namespace StardropPoolMinigame.Entities
 
 		public override string GetId()
 		{
-			return $"particle-sparkle-{_id}";
+			return $"particle-purple-whisp-{_id}";
 		}
 
 		public override float GetTotalHeight()
 		{
-			return Textures.Particle.Sparkle.FRAME_1.Height;
+			return Textures.Particle.PurpleWhisp.FRAME_1.Height;
 		}
 
 		public override float GetTotalWidth()
 		{
-			return Textures.Particle.Sparkle.FRAME_1.Width;
+			return Textures.Particle.PurpleWhisp.FRAME_1.Width;
 		}
 	}
 }

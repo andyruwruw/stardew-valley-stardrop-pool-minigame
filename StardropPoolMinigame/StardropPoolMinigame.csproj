@@ -48,8 +48,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Behaviors\Orientation.cs" />
-    <Compile Include="Behaviors\PhysicsObject.cs" />
+    <Compile Include="Attributes\Orientation.cs" />
+    <Compile Include="Attributes\PhysicsObject.cs" />
     <Compile Include="Entities\EntityPhysics.cs" />
     <Compile Include="Multiplayer\Messages\IModMessage.cs" />
     <Compile Include="Physics\FlockingNewtonianPhysics.cs" />
@@ -102,7 +102,7 @@
     <Compile Include="Entities\IEntity.cs" />
     <Compile Include="Entities\Particles\Individual\Glimmer.cs" />
     <Compile Include="Entities\Particles\Individual\Particle.cs" />
-    <Compile Include="Entities\Particles\Individual\PurpleWhisp.cs" />
+    <Compile Include="Entities\Particles\Individual\PurpleWisp.cs" />
     <Compile Include="Entities\Particles\Individual\Spark.cs" />
     <Compile Include="Entities\Particles\Individual\Sparkle.cs" />
     <Compile Include="Entities\Particles\ParticleEmitter.cs" />

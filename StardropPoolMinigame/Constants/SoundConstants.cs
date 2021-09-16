@@ -4,57 +4,57 @@
     {
         public class Ball
         {
-            public static string BOUNCE = "thudStep";
+            public static string Bounce = "thudStep";
 
-            public static string COLLIDING = "stoneStep";
+            public static string Colliding = "stoneStep";
 
-            public static string POCKETED = "coin";
+            public static string Pocketed = "coin";
         }
 
         public class Cue
         {
-            public static string FULL_CHARGE = "fireball";
+            public static string FullCharge = "fireball";
 
-            public static string LOCK_ANGLE = "give_gift";
+            public static string LockAngle = "give_gift";
 
-            public static string LOCK_POWER = "wind";
+            public static string LockPower = "wind";
 
-            public static string STRIKE = "thudStep";
+            public static string Strike = "thudStep";
         }
 
         public class Events
         {
-            public static string SCRATCH = "cancel";
+            public static string Scratch = "cancel";
 
-            public static string VICTORY = "getNewSpecialItem"; // newRecord
+            public static string Victory = "getNewSpecialItem"; // newRecord
         }
 
         public class Feedback
         {
-            public static string BOTTON_PRESS = "select";
+            public static string BottonPress = "select";
 
-            public static string BUTTON_HOVER = "shiny4";
+            public static string ButtonHover = "shiny4";
 
-            public static string DIALOG_NEXT = "dialogueCharacter";
+            public static string DialogNext = "dialogueCharacter";
 
-            public static string DIALOG_START = "dialogueCharacter";
+            public static string DialogStart = "dialogueCharacter";
 
-            public static string GAME_CANCEL = "cancel";
+            public static string GameCancel = "cancel";
 
-            public static string SUBMIT_BUTTON_PRESS = "FishHit";
+            public static string SubmitButtonPress = "FishHit";
         }
 
         public class Theme
         {
-            public static string ABIGAIL = "cowboy_boss";
+            public static string Abigail = "cowboy_boss";
 
-            public static string GAME = "movieTheater";
+            public static string Game = "movieTheater";
 
-            public static string GUS = "PIRATE_THEME";
+            public static string Gus = "PIRATE_THEME";
 
-            public static string SAM = "event1";
+            public static string Sam = "event1";
 
-            public static string SEBASTIAN = "crane_game";
+            public static string Sebastian = "crane_game";
         }
     }
 }

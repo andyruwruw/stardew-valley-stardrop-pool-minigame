@@ -15,17 +15,17 @@ namespace StardropPoolMinigame.Scenes.Dialog.Scripts
             this._recitations.Add(new Recitation(
                 NPCName.Abigail,
                 PortraitEmotion.StraightFace,
-                Translations.GetTranslation(StringConstants.Quotes.Introduction.Abigail.LINE1)));
+                Translations.GetTranslation(StringConstants.Quotes.Introduction.Abigail.Line1)));
 
             this._recitations.Add(new Recitation(
                 NPCName.Abigail,
                 PortraitEmotion.Laugh,
-                Translations.GetTranslation(StringConstants.Quotes.Introduction.Abigail.LINE2)));
+                Translations.GetTranslation(StringConstants.Quotes.Introduction.Abigail.Line2)));
 
             this._recitations.Add(new Recitation(
                 NPCName.Abigail,
                 PortraitEmotion.Glare,
-                Translations.GetTranslation(StringConstants.Quotes.Introduction.Abigail.LINE3)));
+                Translations.GetTranslation(StringConstants.Quotes.Introduction.Abigail.Line3)));
         }
     }
 }

@@ -9,13 +9,13 @@ namespace StardropPoolMinigame.Render
 {
     internal class Textures
     {
-        public static Rectangle BAR_SHELVES = new Rectangle(0, 0, RenderConstants.TILE_SIZE * 25, RenderConstants.TILE_SIZE * 8);
+        public static Rectangle BAR_SHELVES = new Rectangle(0, 0, RenderConstants.TileSize * 25, RenderConstants.TileSize * 8);
 
-        public static Rectangle FLOOR_TILES = new Rectangle(RenderConstants.TILE_SIZE * 16, RenderConstants.TILE_SIZE * 8, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 4);
+        public static Rectangle FLOOR_TILES = new Rectangle(RenderConstants.TileSize * 16, RenderConstants.TileSize * 8, RenderConstants.TileSize * 4, RenderConstants.TileSize * 4);
 
-        public static Rectangle GAME_TITLE = new Rectangle(0, RenderConstants.TILE_SIZE * 8, RenderConstants.TILE_SIZE * 8, RenderConstants.TILE_SIZE * 5);
+        public static Rectangle GAME_TITLE = new Rectangle(0, RenderConstants.TileSize * 8, RenderConstants.TileSize * 8, RenderConstants.TileSize * 5);
 
-        public static Rectangle PORTRAIT_RAYS = new Rectangle(0, RenderConstants.TILE_SIZE * 8, RenderConstants.TILE_SIZE * 17, RenderConstants.TILE_SIZE * 4);
+        public static Rectangle PORTRAIT_RAYS = new Rectangle(0, RenderConstants.TileSize * 8, RenderConstants.TileSize * 17, RenderConstants.TileSize * 4);
 
         /// <summary>
         /// Retrives ball core texture based on orientation
@@ -692,101 +692,101 @@ namespace StardropPoolMinigame.Render
         /// </summary>
         public class Ball
         {
-            public static Rectangle HIGHLIGHT = new Rectangle(RenderConstants.TILE_SIZE * 23, RenderConstants.TILE_SIZE * 11, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+            public static Rectangle HIGHLIGHT = new Rectangle(RenderConstants.TileSize * 23, RenderConstants.TileSize * 11, RenderConstants.TileSize, RenderConstants.TileSize);
 
-            public static Rectangle SHADOW = new Rectangle(RenderConstants.TILE_SIZE * 24, RenderConstants.TILE_SIZE * 10, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+            public static Rectangle SHADOW = new Rectangle(RenderConstants.TileSize * 24, RenderConstants.TileSize * 10, RenderConstants.TileSize, RenderConstants.TileSize);
 
             public class Base
             {
-                public static Rectangle BLACK = new Rectangle(RenderConstants.TILE_SIZE * 23, RenderConstants.TILE_SIZE * 10, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+                public static Rectangle BLACK = new Rectangle(RenderConstants.TileSize * 23, RenderConstants.TileSize * 10, RenderConstants.TileSize, RenderConstants.TileSize);
 
-                public static Rectangle BLUE = new Rectangle(RenderConstants.TILE_SIZE * 22, RenderConstants.TILE_SIZE * 9, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+                public static Rectangle BLUE = new Rectangle(RenderConstants.TileSize * 22, RenderConstants.TileSize * 9, RenderConstants.TileSize, RenderConstants.TileSize);
 
-                public static Rectangle GREEN = new Rectangle(RenderConstants.TILE_SIZE * 21, RenderConstants.TILE_SIZE * 10, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+                public static Rectangle GREEN = new Rectangle(RenderConstants.TileSize * 21, RenderConstants.TileSize * 10, RenderConstants.TileSize, RenderConstants.TileSize);
 
-                public static Rectangle MAROON = new Rectangle(RenderConstants.TILE_SIZE * 22, RenderConstants.TILE_SIZE * 10, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+                public static Rectangle MAROON = new Rectangle(RenderConstants.TileSize * 22, RenderConstants.TileSize * 10, RenderConstants.TileSize, RenderConstants.TileSize);
 
-                public static Rectangle ORANGE = new Rectangle(RenderConstants.TILE_SIZE * 20, RenderConstants.TILE_SIZE * 10, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+                public static Rectangle ORANGE = new Rectangle(RenderConstants.TileSize * 20, RenderConstants.TileSize * 10, RenderConstants.TileSize, RenderConstants.TileSize);
 
-                public static Rectangle PURPLE = new Rectangle(RenderConstants.TILE_SIZE * 24, RenderConstants.TILE_SIZE * 9, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+                public static Rectangle PURPLE = new Rectangle(RenderConstants.TileSize * 24, RenderConstants.TileSize * 9, RenderConstants.TileSize, RenderConstants.TileSize);
 
-                public static Rectangle RED = new Rectangle(RenderConstants.TILE_SIZE * 23, RenderConstants.TILE_SIZE * 9, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+                public static Rectangle RED = new Rectangle(RenderConstants.TileSize * 23, RenderConstants.TileSize * 9, RenderConstants.TileSize, RenderConstants.TileSize);
 
-                public static Rectangle WHITE = new Rectangle(RenderConstants.TILE_SIZE * 20, RenderConstants.TILE_SIZE * 9, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+                public static Rectangle WHITE = new Rectangle(RenderConstants.TileSize * 20, RenderConstants.TileSize * 9, RenderConstants.TileSize, RenderConstants.TileSize);
 
-                public static Rectangle YELLOW = new Rectangle(RenderConstants.TILE_SIZE * 21, RenderConstants.TILE_SIZE * 9, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+                public static Rectangle YELLOW = new Rectangle(RenderConstants.TileSize * 21, RenderConstants.TileSize * 9, RenderConstants.TileSize, RenderConstants.TileSize);
             }
 
             public class Core
             {
-                public static Rectangle CORE_0_0 = new Rectangle(RenderConstants.TILE_SIZE * 25, RenderConstants.TILE_SIZE * 3, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+                public static Rectangle CORE_0_0 = new Rectangle(RenderConstants.TileSize * 25, RenderConstants.TileSize * 3, RenderConstants.TileSize, RenderConstants.TileSize);
 
-                public static Rectangle CORE_0_30 = new Rectangle(RenderConstants.TILE_SIZE * 25, RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+                public static Rectangle CORE_0_30 = new Rectangle(RenderConstants.TileSize * 25, RenderConstants.TileSize * 2, RenderConstants.TileSize, RenderConstants.TileSize);
 
-                public static Rectangle CORE_0_60 = new Rectangle(RenderConstants.TILE_SIZE * 25, RenderConstants.TILE_SIZE * 1, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+                public static Rectangle CORE_0_60 = new Rectangle(RenderConstants.TileSize * 25, RenderConstants.TileSize * 1, RenderConstants.TileSize, RenderConstants.TileSize);
 
-                public static Rectangle CORE_0_90 = new Rectangle(RenderConstants.TILE_SIZE * 25, RenderConstants.TILE_SIZE * 0, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+                public static Rectangle CORE_0_90 = new Rectangle(RenderConstants.TileSize * 25, RenderConstants.TileSize * 0, RenderConstants.TileSize, RenderConstants.TileSize);
 
-                public static Rectangle CORE_0_N30 = new Rectangle(RenderConstants.TILE_SIZE * 25, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+                public static Rectangle CORE_0_N30 = new Rectangle(RenderConstants.TileSize * 25, RenderConstants.TileSize * 4, RenderConstants.TileSize, RenderConstants.TileSize);
 
-                public static Rectangle CORE_0_N60 = new Rectangle(RenderConstants.TILE_SIZE * 25, RenderConstants.TILE_SIZE * 5, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+                public static Rectangle CORE_0_N60 = new Rectangle(RenderConstants.TileSize * 25, RenderConstants.TileSize * 5, RenderConstants.TileSize, RenderConstants.TileSize);
 
-                public static Rectangle CORE_120_0 = new Rectangle(RenderConstants.TILE_SIZE * 29, RenderConstants.TILE_SIZE * 3, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+                public static Rectangle CORE_120_0 = new Rectangle(RenderConstants.TileSize * 29, RenderConstants.TileSize * 3, RenderConstants.TileSize, RenderConstants.TileSize);
 
-                public static Rectangle CORE_120_30 = new Rectangle(RenderConstants.TILE_SIZE * 29, RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+                public static Rectangle CORE_120_30 = new Rectangle(RenderConstants.TileSize * 29, RenderConstants.TileSize * 2, RenderConstants.TileSize, RenderConstants.TileSize);
 
-                public static Rectangle CORE_120_N30 = new Rectangle(RenderConstants.TILE_SIZE * 29, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+                public static Rectangle CORE_120_N30 = new Rectangle(RenderConstants.TileSize * 29, RenderConstants.TileSize * 4, RenderConstants.TileSize, RenderConstants.TileSize);
 
-                public static Rectangle CORE_135_60 = new Rectangle(RenderConstants.TILE_SIZE * 28, RenderConstants.TILE_SIZE * 1, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+                public static Rectangle CORE_135_60 = new Rectangle(RenderConstants.TileSize * 28, RenderConstants.TileSize * 1, RenderConstants.TileSize, RenderConstants.TileSize);
 
-                public static Rectangle CORE_135_N60 = new Rectangle(RenderConstants.TILE_SIZE * 28, RenderConstants.TILE_SIZE * 5, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+                public static Rectangle CORE_135_N60 = new Rectangle(RenderConstants.TileSize * 28, RenderConstants.TileSize * 5, RenderConstants.TileSize, RenderConstants.TileSize);
 
-                public static Rectangle CORE_150_0 = new Rectangle(RenderConstants.TILE_SIZE * 30, RenderConstants.TILE_SIZE * 3, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+                public static Rectangle CORE_150_0 = new Rectangle(RenderConstants.TileSize * 30, RenderConstants.TileSize * 3, RenderConstants.TileSize, RenderConstants.TileSize);
 
-                public static Rectangle CORE_150_30 = new Rectangle(RenderConstants.TILE_SIZE * 30, RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+                public static Rectangle CORE_150_30 = new Rectangle(RenderConstants.TileSize * 30, RenderConstants.TileSize * 2, RenderConstants.TileSize, RenderConstants.TileSize);
 
-                public static Rectangle CORE_150_N30 = new Rectangle(RenderConstants.TILE_SIZE * 30, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+                public static Rectangle CORE_150_N30 = new Rectangle(RenderConstants.TileSize * 30, RenderConstants.TileSize * 4, RenderConstants.TileSize, RenderConstants.TileSize);
 
-                public static Rectangle CORE_30_0 = new Rectangle(RenderConstants.TILE_SIZE * 26, RenderConstants.TILE_SIZE * 3, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+                public static Rectangle CORE_30_0 = new Rectangle(RenderConstants.TileSize * 26, RenderConstants.TileSize * 3, RenderConstants.TileSize, RenderConstants.TileSize);
 
-                public static Rectangle CORE_30_30 = new Rectangle(RenderConstants.TILE_SIZE * 26, RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+                public static Rectangle CORE_30_30 = new Rectangle(RenderConstants.TileSize * 26, RenderConstants.TileSize * 2, RenderConstants.TileSize, RenderConstants.TileSize);
 
-                public static Rectangle CORE_30_N30 = new Rectangle(RenderConstants.TILE_SIZE * 26, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+                public static Rectangle CORE_30_N30 = new Rectangle(RenderConstants.TileSize * 26, RenderConstants.TileSize * 4, RenderConstants.TileSize, RenderConstants.TileSize);
 
-                public static Rectangle CORE_45_60 = new Rectangle(RenderConstants.TILE_SIZE * 26, RenderConstants.TILE_SIZE * 1, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+                public static Rectangle CORE_45_60 = new Rectangle(RenderConstants.TileSize * 26, RenderConstants.TileSize * 1, RenderConstants.TileSize, RenderConstants.TileSize);
 
-                public static Rectangle CORE_45_N60 = new Rectangle(RenderConstants.TILE_SIZE * 26, RenderConstants.TILE_SIZE * 5, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+                public static Rectangle CORE_45_N60 = new Rectangle(RenderConstants.TileSize * 26, RenderConstants.TileSize * 5, RenderConstants.TileSize, RenderConstants.TileSize);
 
-                public static Rectangle CORE_60_0 = new Rectangle(RenderConstants.TILE_SIZE * 27, RenderConstants.TILE_SIZE * 3, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+                public static Rectangle CORE_60_0 = new Rectangle(RenderConstants.TileSize * 27, RenderConstants.TileSize * 3, RenderConstants.TileSize, RenderConstants.TileSize);
 
-                public static Rectangle CORE_60_30 = new Rectangle(RenderConstants.TILE_SIZE * 27, RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+                public static Rectangle CORE_60_30 = new Rectangle(RenderConstants.TileSize * 27, RenderConstants.TileSize * 2, RenderConstants.TileSize, RenderConstants.TileSize);
 
-                public static Rectangle CORE_60_N30 = new Rectangle(RenderConstants.TILE_SIZE * 27, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+                public static Rectangle CORE_60_N30 = new Rectangle(RenderConstants.TileSize * 27, RenderConstants.TileSize * 4, RenderConstants.TileSize, RenderConstants.TileSize);
 
-                public static Rectangle CORE_90_0 = new Rectangle(RenderConstants.TILE_SIZE * 28, RenderConstants.TILE_SIZE * 3, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+                public static Rectangle CORE_90_0 = new Rectangle(RenderConstants.TileSize * 28, RenderConstants.TileSize * 3, RenderConstants.TileSize, RenderConstants.TileSize);
 
-                public static Rectangle CORE_90_30 = new Rectangle(RenderConstants.TILE_SIZE * 28, RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+                public static Rectangle CORE_90_30 = new Rectangle(RenderConstants.TileSize * 28, RenderConstants.TileSize * 2, RenderConstants.TileSize, RenderConstants.TileSize);
 
-                public static Rectangle CORE_90_60 = new Rectangle(RenderConstants.TILE_SIZE * 27, RenderConstants.TILE_SIZE * 1, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+                public static Rectangle CORE_90_60 = new Rectangle(RenderConstants.TileSize * 27, RenderConstants.TileSize * 1, RenderConstants.TileSize, RenderConstants.TileSize);
 
-                public static Rectangle CORE_90_N30 = new Rectangle(RenderConstants.TILE_SIZE * 28, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+                public static Rectangle CORE_90_N30 = new Rectangle(RenderConstants.TileSize * 28, RenderConstants.TileSize * 4, RenderConstants.TileSize, RenderConstants.TileSize);
 
-                public static Rectangle CORE_90_N60 = new Rectangle(RenderConstants.TILE_SIZE * 27, RenderConstants.TILE_SIZE * 5, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+                public static Rectangle CORE_90_N60 = new Rectangle(RenderConstants.TileSize * 27, RenderConstants.TileSize * 5, RenderConstants.TileSize, RenderConstants.TileSize);
             }
 
             public class Stripes
             {
-                public static Rectangle STRIPES_0_0 = new Rectangle(RenderConstants.TILE_SIZE * 25, RenderConstants.TILE_SIZE * 9, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+                public static Rectangle STRIPES_0_0 = new Rectangle(RenderConstants.TileSize * 25, RenderConstants.TileSize * 9, RenderConstants.TileSize, RenderConstants.TileSize);
 
-                public static Rectangle STRIPES_0_30 = new Rectangle(RenderConstants.TILE_SIZE * 25, RenderConstants.TILE_SIZE * 8, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+                public static Rectangle STRIPES_0_30 = new Rectangle(RenderConstants.TileSize * 25, RenderConstants.TileSize * 8, RenderConstants.TileSize, RenderConstants.TileSize);
 
-                public static Rectangle STRIPES_0_60 = new Rectangle(RenderConstants.TILE_SIZE * 25, RenderConstants.TILE_SIZE * 7, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+                public static Rectangle STRIPES_0_60 = new Rectangle(RenderConstants.TileSize * 25, RenderConstants.TileSize * 7, RenderConstants.TileSize, RenderConstants.TileSize);
 
-                public static Rectangle STRIPES_0_90 = new Rectangle(RenderConstants.TILE_SIZE * 25, RenderConstants.TILE_SIZE * 6, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+                public static Rectangle STRIPES_0_90 = new Rectangle(RenderConstants.TileSize * 25, RenderConstants.TileSize * 6, RenderConstants.TileSize, RenderConstants.TileSize);
 
-                public static Rectangle STRIPES_0_N30 = new Rectangle(RenderConstants.TILE_SIZE * 25, RenderConstants.TILE_SIZE * 10, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+                public static Rectangle STRIPES_0_N30 = new Rectangle(RenderConstants.TileSize * 25, RenderConstants.TileSize * 10, RenderConstants.TileSize, RenderConstants.TileSize);
 
-                public static Rectangle STRIPES_0_N60 = new Rectangle(RenderConstants.TILE_SIZE * 25, RenderConstants.TILE_SIZE * 11, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+                public static Rectangle STRIPES_0_N60 = new Rectangle(RenderConstants.TileSize * 25, RenderConstants.TileSize * 11, RenderConstants.TileSize, RenderConstants.TileSize);
             }
         }
 
@@ -796,664 +796,664 @@ namespace StardropPoolMinigame.Render
         public class Characters
         {
             public static Rectangle APOSTROPHE = new Rectangle(
-                QUESTION_MARK.X + QUESTION_MARK.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 2,
+                QUESTION_MARK.X + QUESTION_MARK.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 2,
                 2,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle COLON = new Rectangle(
-                APOSTROPHE.X + APOSTROPHE.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 2,
+                APOSTROPHE.X + APOSTROPHE.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 2,
                 2,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle COMMA = new Rectangle(
-                PERIOD.X + PERIOD.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 2,
+                PERIOD.X + PERIOD.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 2,
                 3,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle ESZETT = new Rectangle(
-                Characters.UPPERCASE_Y_DIAERISIS.X + Characters.UPPERCASE_Y_DIAERISIS.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 5,
+                Characters.UPPERCASE_Y_DIAERISIS.X + Characters.UPPERCASE_Y_DIAERISIS.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 5,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle EXCLAMATION_POINT = new Rectangle(
-                COMMA.X + COMMA.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 2,
+                COMMA.X + COMMA.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 2,
                 2,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle INVERTED_QUESTION_MARK = new Rectangle(
-                Characters.UPPERCASE_N_TILDE.X + Characters.UPPERCASE_N_TILDE.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 5,
+                Characters.UPPERCASE_N_TILDE.X + Characters.UPPERCASE_N_TILDE.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 5,
                 6,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle LOWERCASE_A = new Rectangle(
                                                                                         0,
                 0,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle LOWERCASE_A_ACUTE = new Rectangle(
-                Characters.UPPERCASE_A_GRAVE.X + Characters.UPPERCASE_A_GRAVE.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 3,
+                Characters.UPPERCASE_A_GRAVE.X + Characters.UPPERCASE_A_GRAVE.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 3,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle LOWERCASE_A_CIRCUMFLEX = new Rectangle(
-                Characters.UPPERCASE_A_ACUTE.X + Characters.UPPERCASE_A_ACUTE.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 3,
+                Characters.UPPERCASE_A_ACUTE.X + Characters.UPPERCASE_A_ACUTE.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 3,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle LOWERCASE_A_DIAERISIS = new Rectangle(
-                Characters.UPPERCASE_A_CIRCUMFLEX.X + Characters.UPPERCASE_A_CIRCUMFLEX.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 3,
+                Characters.UPPERCASE_A_CIRCUMFLEX.X + Characters.UPPERCASE_A_CIRCUMFLEX.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 3,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle LOWERCASE_A_GRAVE = new Rectangle(
-                COLON.X + COLON.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 2,
+                COLON.X + COLON.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 2,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle LOWERCASE_AE_LIGATURE = new Rectangle(
-                Characters.UPPERCASE_A_DIAERISIS.X + Characters.UPPERCASE_A_DIAERISIS.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 3,
+                Characters.UPPERCASE_A_DIAERISIS.X + Characters.UPPERCASE_A_DIAERISIS.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 3,
                 12,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle LOWERCASE_B = new Rectangle(
-                UPPERCASE_A.X + UPPERCASE_A.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
+                UPPERCASE_A.X + UPPERCASE_A.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
                 0,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle LOWERCASE_C = new Rectangle(
-                UPPERCASE_B.X + UPPERCASE_B.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
+                UPPERCASE_B.X + UPPERCASE_B.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
                 0,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle LOWERCASE_C_CEDILLA = new Rectangle(
-                Characters.UPPERCASE_AE_LIGATURE.X + Characters.UPPERCASE_AE_LIGATURE.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 3,
+                Characters.UPPERCASE_AE_LIGATURE.X + Characters.UPPERCASE_AE_LIGATURE.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 3,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle LOWERCASE_D = new Rectangle(
-                UPPERCASE_C.X + UPPERCASE_C.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
+                UPPERCASE_C.X + UPPERCASE_C.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
                 0,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle LOWERCASE_E = new Rectangle(
-                UPPERCASE_D.X + UPPERCASE_D.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
+                UPPERCASE_D.X + UPPERCASE_D.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
                 0,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle LOWERCASE_E_ACUTE = new Rectangle(
-                Characters.UPPERCASE_C_CEDILLA.X + Characters.UPPERCASE_C_CEDILLA.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 3,
+                Characters.UPPERCASE_C_CEDILLA.X + Characters.UPPERCASE_C_CEDILLA.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 3,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle LOWERCASE_E_CIRCUMFLEX = new Rectangle(
-                Characters.UPPERCASE_E_GRAVE.X + Characters.UPPERCASE_E_GRAVE.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 3,
+                Characters.UPPERCASE_E_GRAVE.X + Characters.UPPERCASE_E_GRAVE.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 3,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle LOWERCASE_E_DIAERISIS = new Rectangle(
                 0,
-                RenderConstants.Font.CHARACTER_HEIGHT * 4,
+                RenderConstants.Font.CharacterHeight * 4,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle LOWERCASE_E_GRAVE = new Rectangle(
-                Characters.UPPERCASE_E_ACUTE.X + Characters.UPPERCASE_E_ACUTE.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 3,
+                Characters.UPPERCASE_E_ACUTE.X + Characters.UPPERCASE_E_ACUTE.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 3,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle LOWERCASE_F = new Rectangle(
-                UPPERCASE_E.X + UPPERCASE_E.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
+                UPPERCASE_E.X + UPPERCASE_E.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
                 0,
                 5,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle LOWERCASE_G = new Rectangle(
-                UPPERCASE_F.X + UPPERCASE_F.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
+                UPPERCASE_F.X + UPPERCASE_F.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
                 0,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle LOWERCASE_H = new Rectangle(
-                UPPERCASE_G.X + UPPERCASE_G.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
+                UPPERCASE_G.X + UPPERCASE_G.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
                 0,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle LOWERCASE_I = new Rectangle(
-                UPPERCASE_H.X + UPPERCASE_H.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
+                UPPERCASE_H.X + UPPERCASE_H.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
                 0,
                 2,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle LOWERCASE_I_ACUTE = new Rectangle(
-                Characters.UPPERCASE_I_GRAVE.X + Characters.UPPERCASE_I_GRAVE.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 4,
+                Characters.UPPERCASE_I_GRAVE.X + Characters.UPPERCASE_I_GRAVE.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 4,
                 2,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle LOWERCASE_I_CIRCUMFLEX = new Rectangle(
-                Characters.UPPERCASE_I_ACUTE.X + Characters.UPPERCASE_I_ACUTE.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 4,
+                Characters.UPPERCASE_I_ACUTE.X + Characters.UPPERCASE_I_ACUTE.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 4,
                 3,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle LOWERCASE_I_DIAERISIS = new Rectangle(
-                Characters.UPPERCASE_I_CIRCUMFLEX.X + Characters.UPPERCASE_I_CIRCUMFLEX.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 4,
+                Characters.UPPERCASE_I_CIRCUMFLEX.X + Characters.UPPERCASE_I_CIRCUMFLEX.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 4,
                 4,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle LOWERCASE_I_GRAVE = new Rectangle(
-                Characters.UPPERCASE_E_DIAERISIS.X + Characters.UPPERCASE_E_DIAERISIS.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 4,
+                Characters.UPPERCASE_E_DIAERISIS.X + Characters.UPPERCASE_E_DIAERISIS.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 4,
                 2,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle LOWERCASE_J = new Rectangle(
-                UPPERCASE_I.X + UPPERCASE_I.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
+                UPPERCASE_I.X + UPPERCASE_I.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
                 0,
                 4,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle LOWERCASE_K = new Rectangle(
-                UPPERCASE_J.X + UPPERCASE_J.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT,
+                UPPERCASE_J.X + UPPERCASE_J.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight,
                 6,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle LOWERCASE_L = new Rectangle(
-                UPPERCASE_K.X + UPPERCASE_K.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT,
+                UPPERCASE_K.X + UPPERCASE_K.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight,
                 2,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle LOWERCASE_M = new Rectangle(
-                UPPERCASE_L.X + UPPERCASE_L.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT,
+                UPPERCASE_L.X + UPPERCASE_L.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle LOWERCASE_N = new Rectangle(
-                UPPERCASE_M.X + UPPERCASE_M.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT,
+                UPPERCASE_M.X + UPPERCASE_M.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight,
                 6,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle LOWERCASE_N_TILDE = new Rectangle(
-                ESZETT.X + ESZETT.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 5,
+                ESZETT.X + ESZETT.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 5,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle LOWERCASE_O = new Rectangle(
-                UPPERCASE_N.X + UPPERCASE_N.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT,
+                UPPERCASE_N.X + UPPERCASE_N.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle LOWERCASE_O_ACUTE = new Rectangle(
-                Characters.UPPERCASE_I_DIAERISIS.X + Characters.UPPERCASE_I_DIAERISIS.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 4,
+                Characters.UPPERCASE_I_DIAERISIS.X + Characters.UPPERCASE_I_DIAERISIS.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 4,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle LOWERCASE_O_CIRCUMFLEX = new Rectangle(
-                Characters.UPPERCASE_O_GRAVE.X + Characters.UPPERCASE_O_GRAVE.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 4,
+                Characters.UPPERCASE_O_GRAVE.X + Characters.UPPERCASE_O_GRAVE.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 4,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle LOWERCASE_O_DIAERISIS = new Rectangle(
-                Characters.UPPERCASE_O_CIRCUMFLEX.X + Characters.UPPERCASE_O_CIRCUMFLEX.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 4,
+                Characters.UPPERCASE_O_CIRCUMFLEX.X + Characters.UPPERCASE_O_CIRCUMFLEX.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 4,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle LOWERCASE_O_GRAVE = new Rectangle(
-                Characters.UPPERCASE_O_ACUTE.X + Characters.UPPERCASE_O_ACUTE.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 4,
+                Characters.UPPERCASE_O_ACUTE.X + Characters.UPPERCASE_O_ACUTE.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 4,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle LOWERCASE_OE_LIGATURE = new Rectangle(
-                Characters.UPPERCASE_O_DIAERISIS.X + Characters.UPPERCASE_O_DIAERISIS.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 4,
+                Characters.UPPERCASE_O_DIAERISIS.X + Characters.UPPERCASE_O_DIAERISIS.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 4,
                 12,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle LOWERCASE_P = new Rectangle(
-                UPPERCASE_O.X + UPPERCASE_O.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT,
+                UPPERCASE_O.X + UPPERCASE_O.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle LOWERCASE_Q = new Rectangle(
-                UPPERCASE_P.X + UPPERCASE_P.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT,
+                UPPERCASE_P.X + UPPERCASE_P.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle LOWERCASE_R = new Rectangle(
-                UPPERCASE_Q.X + UPPERCASE_Q.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT,
+                UPPERCASE_Q.X + UPPERCASE_Q.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight,
                 5,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle LOWERCASE_S = new Rectangle(
-                UPPERCASE_R.X + UPPERCASE_R.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT,
+                UPPERCASE_R.X + UPPERCASE_R.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle LOWERCASE_T = new Rectangle(
                 0,
-                RenderConstants.Font.CHARACTER_HEIGHT * 2,
+                RenderConstants.Font.CharacterHeight * 2,
                 5,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle LOWERCASE_U = new Rectangle(
-                UPPERCASE_T.X + UPPERCASE_T.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 2,
+                UPPERCASE_T.X + UPPERCASE_T.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 2,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle LOWERCASE_U_ACUTE = new Rectangle(
-                Characters.UPPERCASE_OE_LIGATURE.X + Characters.UPPERCASE_OE_LIGATURE.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 5,
+                Characters.UPPERCASE_OE_LIGATURE.X + Characters.UPPERCASE_OE_LIGATURE.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 5,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle LOWERCASE_U_CIRCUMFLEX = new Rectangle(
-                Characters.UPPERCASE_U_GRAVE.X + Characters.UPPERCASE_U_GRAVE.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 5,
+                Characters.UPPERCASE_U_GRAVE.X + Characters.UPPERCASE_U_GRAVE.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 5,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle LOWERCASE_U_DIAERISIS = new Rectangle(
-                Characters.UPPERCASE_U_CIRCUMFLEX.X + Characters.UPPERCASE_U_CIRCUMFLEX.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 5,
+                Characters.UPPERCASE_U_CIRCUMFLEX.X + Characters.UPPERCASE_U_CIRCUMFLEX.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 5,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle LOWERCASE_U_GRAVE = new Rectangle(
-                Characters.UPPERCASE_U_ACUTE.X + Characters.UPPERCASE_U_ACUTE.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 5,
+                Characters.UPPERCASE_U_ACUTE.X + Characters.UPPERCASE_U_ACUTE.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 5,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle LOWERCASE_V = new Rectangle(
-                UPPERCASE_U.X + UPPERCASE_U.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 2,
+                UPPERCASE_U.X + UPPERCASE_U.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 2,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle LOWERCASE_W = new Rectangle(
-                UPPERCASE_V.X + UPPERCASE_V.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 2,
+                UPPERCASE_V.X + UPPERCASE_V.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 2,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle LOWERCASE_X = new Rectangle(
-                UPPERCASE_W.X + UPPERCASE_W.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 2,
+                UPPERCASE_W.X + UPPERCASE_W.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 2,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle LOWERCASE_Y = new Rectangle(
-                UPPERCASE_X.X + UPPERCASE_X.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 2,
+                UPPERCASE_X.X + UPPERCASE_X.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 2,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle LOWERCASE_Y_DIAERISIS = new Rectangle(
-                Characters.UPPERCASE_U_DIAERISIS.X + Characters.UPPERCASE_U_DIAERISIS.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 5,
+                Characters.UPPERCASE_U_DIAERISIS.X + Characters.UPPERCASE_U_DIAERISIS.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 5,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle LOWERCASE_Z = new Rectangle(
-                UPPERCASE_Y.X + UPPERCASE_Y.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 2,
+                UPPERCASE_Y.X + UPPERCASE_Y.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 2,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle PERIOD = new Rectangle(
-                UPPERCASE_Z.X + UPPERCASE_Z.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 2,
+                UPPERCASE_Z.X + UPPERCASE_Z.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 2,
                 2,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle QUESTION_MARK = new Rectangle(
-                EXCLAMATION_POINT.X + EXCLAMATION_POINT.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 2,
+                EXCLAMATION_POINT.X + EXCLAMATION_POINT.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 2,
                 6,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle UPPERCASE_A = new Rectangle(
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                LOWERCASE_A.X + LOWERCASE_A.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                LOWERCASE_A.X + LOWERCASE_A.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
                 0,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle UPPERCASE_A_ACUTE = new Rectangle(
-                LOWERCASE_A_ACUTE.X + LOWERCASE_A_ACUTE.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 3,
+                LOWERCASE_A_ACUTE.X + LOWERCASE_A_ACUTE.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 3,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle UPPERCASE_A_CIRCUMFLEX = new Rectangle(
-                LOWERCASE_A_CIRCUMFLEX.X + LOWERCASE_A_CIRCUMFLEX.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 3,
+                LOWERCASE_A_CIRCUMFLEX.X + LOWERCASE_A_CIRCUMFLEX.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 3,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle UPPERCASE_A_DIAERISIS = new Rectangle(
-                LOWERCASE_A_DIAERISIS.X + LOWERCASE_A_DIAERISIS.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 3,
+                LOWERCASE_A_DIAERISIS.X + LOWERCASE_A_DIAERISIS.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 3,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle UPPERCASE_A_GRAVE = new Rectangle(
                 0,
-                RenderConstants.Font.CHARACTER_HEIGHT * 3,
+                RenderConstants.Font.CharacterHeight * 3,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle UPPERCASE_AE_LIGATURE = new Rectangle(
-                LOWERCASE_AE_LIGATURE.X + LOWERCASE_AE_LIGATURE.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 3,
+                LOWERCASE_AE_LIGATURE.X + LOWERCASE_AE_LIGATURE.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 3,
                 11,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle UPPERCASE_B = new Rectangle(
-                                                                            LOWERCASE_B.X + LOWERCASE_B.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
+                                                                            LOWERCASE_B.X + LOWERCASE_B.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
                 0,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle UPPERCASE_C = new Rectangle(
-               LOWERCASE_C.X + LOWERCASE_C.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
+               LOWERCASE_C.X + LOWERCASE_C.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
                0,
                7,
-               RenderConstants.Font.CHARACTER_HEIGHT);
+               RenderConstants.Font.CharacterHeight);
 
             public static Rectangle UPPERCASE_C_CEDILLA = new Rectangle(
-                LOWERCASE_C_CEDILLA.X + LOWERCASE_C_CEDILLA.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 3,
+                LOWERCASE_C_CEDILLA.X + LOWERCASE_C_CEDILLA.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 3,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle UPPERCASE_D = new Rectangle(
-                            LOWERCASE_D.X + LOWERCASE_D.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
+                            LOWERCASE_D.X + LOWERCASE_D.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
                 0,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle UPPERCASE_E = new Rectangle(
-                LOWERCASE_E.X + LOWERCASE_E.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
+                LOWERCASE_E.X + LOWERCASE_E.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
                 0,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle UPPERCASE_E_ACUTE = new Rectangle(
-                LOWERCASE_E_ACUTE.X + LOWERCASE_E_ACUTE.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 3,
+                LOWERCASE_E_ACUTE.X + LOWERCASE_E_ACUTE.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 3,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle UPPERCASE_E_CIRCUMFLEX = new Rectangle(
-                LOWERCASE_E_CIRCUMFLEX.X + LOWERCASE_E_CIRCUMFLEX.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 3,
+                LOWERCASE_E_CIRCUMFLEX.X + LOWERCASE_E_CIRCUMFLEX.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 3,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle UPPERCASE_E_DIAERISIS = new Rectangle(
-                LOWERCASE_E_DIAERISIS.X + LOWERCASE_E_DIAERISIS.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 4,
+                LOWERCASE_E_DIAERISIS.X + LOWERCASE_E_DIAERISIS.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 4,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle UPPERCASE_E_GRAVE = new Rectangle(
-                LOWERCASE_E_GRAVE.X + LOWERCASE_E_GRAVE.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 3,
+                LOWERCASE_E_GRAVE.X + LOWERCASE_E_GRAVE.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 3,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle UPPERCASE_F = new Rectangle(
-                                                                LOWERCASE_F.X + LOWERCASE_F.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
+                                                                LOWERCASE_F.X + LOWERCASE_F.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
                 0,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle UPPERCASE_G = new Rectangle(
-                LOWERCASE_G.X + LOWERCASE_G.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
+                LOWERCASE_G.X + LOWERCASE_G.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
                 0,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle UPPERCASE_H = new Rectangle(
-                LOWERCASE_H.X + LOWERCASE_H.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
+                LOWERCASE_H.X + LOWERCASE_H.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
                 0,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle UPPERCASE_I = new Rectangle(
-                LOWERCASE_I.X + LOWERCASE_I.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
+                LOWERCASE_I.X + LOWERCASE_I.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
                 0,
                 6,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle UPPERCASE_I_ACUTE = new Rectangle(
-                LOWERCASE_I_ACUTE.X + LOWERCASE_I_ACUTE.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 4,
+                LOWERCASE_I_ACUTE.X + LOWERCASE_I_ACUTE.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 4,
                 6,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle UPPERCASE_I_CIRCUMFLEX = new Rectangle(
-                LOWERCASE_I_CIRCUMFLEX.X + LOWERCASE_I_CIRCUMFLEX.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 4,
+                LOWERCASE_I_CIRCUMFLEX.X + LOWERCASE_I_CIRCUMFLEX.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 4,
                 6,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle UPPERCASE_I_DIAERISIS = new Rectangle(
-                LOWERCASE_I_DIAERISIS.X + LOWERCASE_I_DIAERISIS.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 4,
+                LOWERCASE_I_DIAERISIS.X + LOWERCASE_I_DIAERISIS.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 4,
                 6,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle UPPERCASE_I_GRAVE = new Rectangle(
-                LOWERCASE_I_GRAVE.X + LOWERCASE_I_GRAVE.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 4,
+                LOWERCASE_I_GRAVE.X + LOWERCASE_I_GRAVE.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 4,
                 6,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle UPPERCASE_J = new Rectangle(
                                                                 0,
-                RenderConstants.Font.CHARACTER_HEIGHT,
+                RenderConstants.Font.CharacterHeight,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle UPPERCASE_K = new Rectangle(
-                LOWERCASE_K.X + LOWERCASE_K.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT,
+                LOWERCASE_K.X + LOWERCASE_K.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle UPPERCASE_L = new Rectangle(
-                LOWERCASE_L.X + LOWERCASE_L.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT,
+                LOWERCASE_L.X + LOWERCASE_L.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle UPPERCASE_M = new Rectangle(
-                LOWERCASE_M.X + LOWERCASE_M.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT,
+                LOWERCASE_M.X + LOWERCASE_M.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle UPPERCASE_N = new Rectangle(
-                LOWERCASE_N.X + LOWERCASE_N.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT,
+                LOWERCASE_N.X + LOWERCASE_N.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle UPPERCASE_N_TILDE = new Rectangle(
-                LOWERCASE_N_TILDE.X + LOWERCASE_N_TILDE.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 5,
+                LOWERCASE_N_TILDE.X + LOWERCASE_N_TILDE.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 5,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle UPPERCASE_O = new Rectangle(
-                            LOWERCASE_O.X + LOWERCASE_O.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT,
+                            LOWERCASE_O.X + LOWERCASE_O.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle UPPERCASE_O_ACUTE = new Rectangle(
-                LOWERCASE_O_ACUTE.X + LOWERCASE_O_ACUTE.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 4,
+                LOWERCASE_O_ACUTE.X + LOWERCASE_O_ACUTE.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 4,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle UPPERCASE_O_CIRCUMFLEX = new Rectangle(
-                LOWERCASE_O_CIRCUMFLEX.X + LOWERCASE_O_CIRCUMFLEX.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 4,
+                LOWERCASE_O_CIRCUMFLEX.X + LOWERCASE_O_CIRCUMFLEX.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 4,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle UPPERCASE_O_DIAERISIS = new Rectangle(
-                LOWERCASE_O_DIAERISIS.X + LOWERCASE_O_DIAERISIS.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 4,
+                LOWERCASE_O_DIAERISIS.X + LOWERCASE_O_DIAERISIS.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 4,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle UPPERCASE_O_GRAVE = new Rectangle(
-                LOWERCASE_O_GRAVE.X + LOWERCASE_O_GRAVE.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 4,
+                LOWERCASE_O_GRAVE.X + LOWERCASE_O_GRAVE.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 4,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle UPPERCASE_OE_LIGATURE = new Rectangle(
                 0,
-                RenderConstants.Font.CHARACTER_HEIGHT * 5,
+                RenderConstants.Font.CharacterHeight * 5,
                 12,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle UPPERCASE_P = new Rectangle(
-                                                                            LOWERCASE_P.X + LOWERCASE_P.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT,
+                                                                            LOWERCASE_P.X + LOWERCASE_P.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle UPPERCASE_Q = new Rectangle(
-                LOWERCASE_Q.X + LOWERCASE_Q.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT,
+                LOWERCASE_Q.X + LOWERCASE_Q.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle UPPERCASE_R = new Rectangle(
-                LOWERCASE_R.X + LOWERCASE_R.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT,
+                LOWERCASE_R.X + LOWERCASE_R.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle UPPERCASE_S = new Rectangle(
-                LOWERCASE_S.X + LOWERCASE_S.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT,
+                LOWERCASE_S.X + LOWERCASE_S.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle UPPERCASE_T = new Rectangle(
-                LOWERCASE_T.X + LOWERCASE_T.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 2,
+                LOWERCASE_T.X + LOWERCASE_T.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 2,
                 6,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle UPPERCASE_U = new Rectangle(
-                LOWERCASE_U.X + LOWERCASE_U.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 2,
+                LOWERCASE_U.X + LOWERCASE_U.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 2,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle UPPERCASE_U_ACUTE = new Rectangle(
-                LOWERCASE_U_ACUTE.X + LOWERCASE_U_ACUTE.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 5,
+                LOWERCASE_U_ACUTE.X + LOWERCASE_U_ACUTE.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 5,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle UPPERCASE_U_CIRCUMFLEX = new Rectangle(
-                LOWERCASE_U_CIRCUMFLEX.X + LOWERCASE_U_CIRCUMFLEX.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 5,
+                LOWERCASE_U_CIRCUMFLEX.X + LOWERCASE_U_CIRCUMFLEX.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 5,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle UPPERCASE_U_DIAERISIS = new Rectangle(
-                LOWERCASE_U_DIAERISIS.X + LOWERCASE_U_DIAERISIS.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 5,
+                LOWERCASE_U_DIAERISIS.X + LOWERCASE_U_DIAERISIS.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 5,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle UPPERCASE_U_GRAVE = new Rectangle(
-                LOWERCASE_U_GRAVE.X + LOWERCASE_U_GRAVE.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 5,
+                LOWERCASE_U_GRAVE.X + LOWERCASE_U_GRAVE.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 5,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle UPPERCASE_V = new Rectangle(
-                                                                LOWERCASE_V.X + LOWERCASE_V.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 2,
+                                                                LOWERCASE_V.X + LOWERCASE_V.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 2,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle UPPERCASE_W = new Rectangle(
-                LOWERCASE_W.X + LOWERCASE_W.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 2,
+                LOWERCASE_W.X + LOWERCASE_W.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 2,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle UPPERCASE_X = new Rectangle(
-                LOWERCASE_X.X + LOWERCASE_X.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 2,
+                LOWERCASE_X.X + LOWERCASE_X.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 2,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle UPPERCASE_Y = new Rectangle(
-                LOWERCASE_Y.X + LOWERCASE_Y.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 2,
+                LOWERCASE_Y.X + LOWERCASE_Y.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 2,
                 6,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle UPPERCASE_Y_DIAERISIS = new Rectangle(
-                LOWERCASE_Y_DIAERISIS.X + LOWERCASE_Y_DIAERISIS.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 5,
+                LOWERCASE_Y_DIAERISIS.X + LOWERCASE_Y_DIAERISIS.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 5,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
 
             public static Rectangle UPPERCASE_Z = new Rectangle(
-                            LOWERCASE_Z.X + LOWERCASE_Z.Width + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS_ON_TILESET,
-                RenderConstants.Font.CHARACTER_HEIGHT * 2,
+                            LOWERCASE_Z.X + LOWERCASE_Z.Width + RenderConstants.Font.SpaceBetweenCharactersOnTileset,
+                RenderConstants.Font.CharacterHeight * 2,
                 7,
-                RenderConstants.Font.CHARACTER_HEIGHT);
+                RenderConstants.Font.CharacterHeight);
         }
 
         /// <summary>
@@ -1485,15 +1485,15 @@ namespace StardropPoolMinigame.Render
         /// </summary>
         public class Cue
         {
-            public static Rectangle ABIGAIL = new Rectangle(RenderConstants.TILE_SIZE * 8, RenderConstants.TILE_SIZE * 11, RenderConstants.TILE_SIZE * 8, RenderConstants.TILE_SIZE);
+            public static Rectangle ABIGAIL = new Rectangle(RenderConstants.TileSize * 8, RenderConstants.TileSize * 11, RenderConstants.TileSize * 8, RenderConstants.TileSize);
 
-            public static Rectangle BASIC = new Rectangle(RenderConstants.TILE_SIZE * 8, RenderConstants.TILE_SIZE * 8, RenderConstants.TILE_SIZE * 8, RenderConstants.TILE_SIZE);
+            public static Rectangle BASIC = new Rectangle(RenderConstants.TileSize * 8, RenderConstants.TileSize * 8, RenderConstants.TileSize * 8, RenderConstants.TileSize);
 
-            public static Rectangle GUS = new Rectangle(RenderConstants.TILE_SIZE * 8, RenderConstants.TILE_SIZE * 12, RenderConstants.TILE_SIZE * 8, RenderConstants.TILE_SIZE);
+            public static Rectangle GUS = new Rectangle(RenderConstants.TileSize * 8, RenderConstants.TileSize * 12, RenderConstants.TileSize * 8, RenderConstants.TileSize);
 
-            public static Rectangle SAM = new Rectangle(RenderConstants.TILE_SIZE * 8, RenderConstants.TILE_SIZE * 9, RenderConstants.TILE_SIZE * 8, RenderConstants.TILE_SIZE);
+            public static Rectangle SAM = new Rectangle(RenderConstants.TileSize * 8, RenderConstants.TileSize * 9, RenderConstants.TileSize * 8, RenderConstants.TileSize);
 
-            public static Rectangle SEBASTIAN = new Rectangle(RenderConstants.TILE_SIZE * 8, RenderConstants.TILE_SIZE * 10, RenderConstants.TILE_SIZE * 8, RenderConstants.TILE_SIZE);
+            public static Rectangle SEBASTIAN = new Rectangle(RenderConstants.TileSize * 8, RenderConstants.TileSize * 10, RenderConstants.TileSize * 8, RenderConstants.TileSize);
         }
 
         /// <summary>
@@ -1501,57 +1501,57 @@ namespace StardropPoolMinigame.Render
         /// </summary>
         public class Cursor
         {
-            public static Rectangle DEFAULT = new Rectangle(RenderConstants.TILE_SIZE * 23, RenderConstants.TILE_SIZE * 8, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+            public static Rectangle DEFAULT = new Rectangle(RenderConstants.TileSize * 23, RenderConstants.TileSize * 8, RenderConstants.TileSize, RenderConstants.TileSize);
 
-            public static Rectangle FRAME_1 = new Rectangle(RenderConstants.TILE_SIZE * 20, RenderConstants.TILE_SIZE * 8, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+            public static Rectangle FRAME_1 = new Rectangle(RenderConstants.TileSize * 20, RenderConstants.TileSize * 8, RenderConstants.TileSize, RenderConstants.TileSize);
 
-            public static Rectangle FRAME_2 = new Rectangle(RenderConstants.TILE_SIZE * 21, RenderConstants.TILE_SIZE * 8, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+            public static Rectangle FRAME_2 = new Rectangle(RenderConstants.TileSize * 21, RenderConstants.TileSize * 8, RenderConstants.TileSize, RenderConstants.TileSize);
 
-            public static Rectangle FRAME_3 = new Rectangle(RenderConstants.TILE_SIZE * 22, RenderConstants.TILE_SIZE * 8, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+            public static Rectangle FRAME_3 = new Rectangle(RenderConstants.TileSize * 22, RenderConstants.TileSize * 8, RenderConstants.TileSize, RenderConstants.TileSize);
         }
 
         public class Particle
         {
             public class Glimmer
             {
-                public static Rectangle FRAME_1 = new Rectangle(RenderConstants.TILE_SIZE * 20, RenderConstants.TILE_SIZE * 11, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+                public static Rectangle FRAME_1 = new Rectangle(RenderConstants.TileSize * 20, RenderConstants.TileSize * 11, RenderConstants.TileSize, RenderConstants.TileSize);
 
-                public static Rectangle FRAME_2 = new Rectangle(RenderConstants.TILE_SIZE * 21, RenderConstants.TILE_SIZE * 11, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+                public static Rectangle FRAME_2 = new Rectangle(RenderConstants.TileSize * 21, RenderConstants.TileSize * 11, RenderConstants.TileSize, RenderConstants.TileSize);
             }
 
             public class PurpleWhisp
             {
-                public static Rectangle FRAME_1 = new Rectangle(RenderConstants.TILE_SIZE * 22, RenderConstants.TILE_SIZE * 12, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+                public static Rectangle FRAME_1 = new Rectangle(RenderConstants.TileSize * 22, RenderConstants.TileSize * 12, RenderConstants.TileSize, RenderConstants.TileSize);
 
-                public static Rectangle FRAME_2 = new Rectangle(RenderConstants.TILE_SIZE * 23, RenderConstants.TILE_SIZE * 12, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+                public static Rectangle FRAME_2 = new Rectangle(RenderConstants.TileSize * 23, RenderConstants.TileSize * 12, RenderConstants.TileSize, RenderConstants.TileSize);
 
-                public static Rectangle FRAME_3 = new Rectangle(RenderConstants.TILE_SIZE * 24, RenderConstants.TILE_SIZE * 12, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+                public static Rectangle FRAME_3 = new Rectangle(RenderConstants.TileSize * 24, RenderConstants.TileSize * 12, RenderConstants.TileSize, RenderConstants.TileSize);
             }
 
             public class Spark
             {
-                public static Rectangle FRAME_1 = new Rectangle(RenderConstants.TILE_SIZE * 19, RenderConstants.TILE_SIZE * 12, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+                public static Rectangle FRAME_1 = new Rectangle(RenderConstants.TileSize * 19, RenderConstants.TileSize * 12, RenderConstants.TileSize, RenderConstants.TileSize);
 
-                public static Rectangle FRAME_2 = new Rectangle(RenderConstants.TILE_SIZE * 20, RenderConstants.TILE_SIZE * 12, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+                public static Rectangle FRAME_2 = new Rectangle(RenderConstants.TileSize * 20, RenderConstants.TileSize * 12, RenderConstants.TileSize, RenderConstants.TileSize);
 
-                public static Rectangle FRAME_3 = new Rectangle(RenderConstants.TILE_SIZE * 21, RenderConstants.TILE_SIZE * 12, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+                public static Rectangle FRAME_3 = new Rectangle(RenderConstants.TileSize * 21, RenderConstants.TileSize * 12, RenderConstants.TileSize, RenderConstants.TileSize);
             }
 
             public class Sparkle
             {
-                public static Rectangle FRAME_1 = new Rectangle(RenderConstants.TILE_SIZE * 16, RenderConstants.TILE_SIZE * 12, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+                public static Rectangle FRAME_1 = new Rectangle(RenderConstants.TileSize * 16, RenderConstants.TileSize * 12, RenderConstants.TileSize, RenderConstants.TileSize);
 
-                public static Rectangle FRAME_2 = new Rectangle(RenderConstants.TILE_SIZE * 17, RenderConstants.TILE_SIZE * 12, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+                public static Rectangle FRAME_2 = new Rectangle(RenderConstants.TileSize * 17, RenderConstants.TileSize * 12, RenderConstants.TileSize, RenderConstants.TileSize);
 
-                public static Rectangle FRAME_3 = new Rectangle(RenderConstants.TILE_SIZE * 18, RenderConstants.TILE_SIZE * 12, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+                public static Rectangle FRAME_3 = new Rectangle(RenderConstants.TileSize * 18, RenderConstants.TileSize * 12, RenderConstants.TileSize, RenderConstants.TileSize);
             }
         }
 
         public class PocketedBalls
         {
-            public static Rectangle BORDER_BOX = new Rectangle(RenderConstants.TILE_SIZE * 12, RenderConstants.TILE_SIZE * 21, RenderConstants.TILE_SIZE * 7, RenderConstants.TILE_SIZE * 2);
+            public static Rectangle BORDER_BOX = new Rectangle(RenderConstants.TileSize * 12, RenderConstants.TileSize * 21, RenderConstants.TileSize * 7, RenderConstants.TileSize * 2);
 
-            public static Rectangle SUPPORTS = new Rectangle(RenderConstants.TILE_SIZE * 24, RenderConstants.TILE_SIZE * 8, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+            public static Rectangle SUPPORTS = new Rectangle(RenderConstants.TileSize * 24, RenderConstants.TileSize * 8, RenderConstants.TileSize, RenderConstants.TileSize);
         }
 
         /// <summary>
@@ -1561,66 +1561,66 @@ namespace StardropPoolMinigame.Render
         {
             public class Abigail
             {
-                public static Rectangle BLUSH = new Rectangle(0, RenderConstants.TILE_SIZE * 8, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 4);
+                public static Rectangle BLUSH = new Rectangle(0, RenderConstants.TileSize * 8, RenderConstants.TileSize * 4, RenderConstants.TileSize * 4);
 
-                public static Rectangle CONFUSED = new Rectangle(RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 4);
+                public static Rectangle CONFUSED = new Rectangle(RenderConstants.TileSize * 4, RenderConstants.TileSize * 4, RenderConstants.TileSize * 4, RenderConstants.TileSize * 4);
 
-                public static Rectangle DEFAULT = new Rectangle(0, 0, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 4);
+                public static Rectangle DEFAULT = new Rectangle(0, 0, RenderConstants.TileSize * 4, RenderConstants.TileSize * 4);
 
-                public static Rectangle GLARE = new Rectangle(RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 8, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 4);
+                public static Rectangle GLARE = new Rectangle(RenderConstants.TileSize * 4, RenderConstants.TileSize * 8, RenderConstants.TileSize * 4, RenderConstants.TileSize * 4);
 
-                public static Rectangle LAUGH = new Rectangle(RenderConstants.TILE_SIZE * 4, 0, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 4);
+                public static Rectangle LAUGH = new Rectangle(RenderConstants.TileSize * 4, 0, RenderConstants.TileSize * 4, RenderConstants.TileSize * 4);
 
-                public static Rectangle SAD = new Rectangle(0, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 4);
+                public static Rectangle SAD = new Rectangle(0, RenderConstants.TileSize * 4, RenderConstants.TileSize * 4, RenderConstants.TileSize * 4);
 
-                public static Rectangle SUPRISED = new Rectangle(RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 12, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 4);
+                public static Rectangle SUPRISED = new Rectangle(RenderConstants.TileSize * 4, RenderConstants.TileSize * 12, RenderConstants.TileSize * 4, RenderConstants.TileSize * 4);
             }
 
             public class Gus
             {
-                public static Rectangle BLUSH = new Rectangle(0, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 4);
+                public static Rectangle BLUSH = new Rectangle(0, RenderConstants.TileSize * 4, RenderConstants.TileSize * 4, RenderConstants.TileSize * 4);
 
-                public static Rectangle DEFAULT = new Rectangle(0, 0, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 4);
+                public static Rectangle DEFAULT = new Rectangle(0, 0, RenderConstants.TileSize * 4, RenderConstants.TileSize * 4);
 
-                public static Rectangle GLARE = new Rectangle(RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 4);
+                public static Rectangle GLARE = new Rectangle(RenderConstants.TileSize * 4, RenderConstants.TileSize * 4, RenderConstants.TileSize * 4, RenderConstants.TileSize * 4);
 
-                public static Rectangle LAUGH = new Rectangle(RenderConstants.TILE_SIZE * 4, 0, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 4);
+                public static Rectangle LAUGH = new Rectangle(RenderConstants.TileSize * 4, 0, RenderConstants.TileSize * 4, RenderConstants.TileSize * 4);
             }
 
             public class Sam
             {
-                public static Rectangle DEFAULT = new Rectangle(0, 0, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 4);
+                public static Rectangle DEFAULT = new Rectangle(0, 0, RenderConstants.TileSize * 4, RenderConstants.TileSize * 4);
 
-                public static Rectangle EMBARASSED = new Rectangle(0, RenderConstants.TILE_SIZE * 20, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 4);
+                public static Rectangle EMBARASSED = new Rectangle(0, RenderConstants.TileSize * 20, RenderConstants.TileSize * 4, RenderConstants.TileSize * 4);
 
-                public static Rectangle FRUSTRATED = new Rectangle(RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 4);
+                public static Rectangle FRUSTRATED = new Rectangle(RenderConstants.TileSize * 4, RenderConstants.TileSize * 4, RenderConstants.TileSize * 4, RenderConstants.TileSize * 4);
 
-                public static Rectangle GLARE = new Rectangle(RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 8, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 4);
+                public static Rectangle GLARE = new Rectangle(RenderConstants.TileSize * 4, RenderConstants.TileSize * 8, RenderConstants.TileSize * 4, RenderConstants.TileSize * 4);
 
-                public static Rectangle LAUGH = new Rectangle(RenderConstants.TILE_SIZE * 4, 0, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 4);
+                public static Rectangle LAUGH = new Rectangle(RenderConstants.TileSize * 4, 0, RenderConstants.TileSize * 4, RenderConstants.TileSize * 4);
 
-                public static Rectangle OOPS = new Rectangle(0, RenderConstants.TILE_SIZE * 8, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 4);
+                public static Rectangle OOPS = new Rectangle(0, RenderConstants.TileSize * 8, RenderConstants.TileSize * 4, RenderConstants.TileSize * 4);
 
-                public static Rectangle SAD = new Rectangle(0, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 4);
+                public static Rectangle SAD = new Rectangle(0, RenderConstants.TileSize * 4, RenderConstants.TileSize * 4, RenderConstants.TileSize * 4);
 
-                public static Rectangle SHOCK = new Rectangle(0, RenderConstants.TILE_SIZE * 16, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 4);
+                public static Rectangle SHOCK = new Rectangle(0, RenderConstants.TileSize * 16, RenderConstants.TileSize * 4, RenderConstants.TileSize * 4);
 
-                public static Rectangle STRAIGHT_FACE = new Rectangle(RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 12, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 4);
+                public static Rectangle STRAIGHT_FACE = new Rectangle(RenderConstants.TileSize * 4, RenderConstants.TileSize * 12, RenderConstants.TileSize * 4, RenderConstants.TileSize * 4);
             }
 
             public class Sebastian
             {
-                public static Rectangle BLUSH = new Rectangle(0, RenderConstants.TILE_SIZE * 8, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 4);
+                public static Rectangle BLUSH = new Rectangle(0, RenderConstants.TileSize * 8, RenderConstants.TileSize * 4, RenderConstants.TileSize * 4);
 
-                public static Rectangle DEFAULT = new Rectangle(0, 0, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 4);
+                public static Rectangle DEFAULT = new Rectangle(0, 0, RenderConstants.TileSize * 4, RenderConstants.TileSize * 4);
 
-                public static Rectangle GLAD = new Rectangle(RenderConstants.TILE_SIZE * 4, 0, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 4);
+                public static Rectangle GLAD = new Rectangle(RenderConstants.TileSize * 4, 0, RenderConstants.TileSize * 4, RenderConstants.TileSize * 4);
 
-                public static Rectangle GLARE = new Rectangle(RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 8, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 4);
+                public static Rectangle GLARE = new Rectangle(RenderConstants.TileSize * 4, RenderConstants.TileSize * 8, RenderConstants.TileSize * 4, RenderConstants.TileSize * 4);
 
-                public static Rectangle SAD = new Rectangle(RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 4);
+                public static Rectangle SAD = new Rectangle(RenderConstants.TileSize * 4, RenderConstants.TileSize * 4, RenderConstants.TileSize * 4, RenderConstants.TileSize * 4);
 
-                public static Rectangle SMURK = new Rectangle(RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 12, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 4);
+                public static Rectangle SMURK = new Rectangle(RenderConstants.TileSize * 4, RenderConstants.TileSize * 12, RenderConstants.TileSize * 4, RenderConstants.TileSize * 4);
             }
         }
 
@@ -1629,21 +1629,21 @@ namespace StardropPoolMinigame.Render
         /// </summary>
         public class PortraitFire
         {
-            public static Rectangle FRAME_1 = new Rectangle(RenderConstants.TILE_SIZE * 12, RenderConstants.TILE_SIZE * 17, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 4);
+            public static Rectangle FRAME_1 = new Rectangle(RenderConstants.TileSize * 12, RenderConstants.TileSize * 17, RenderConstants.TileSize * 4, RenderConstants.TileSize * 4);
 
-            public static Rectangle FRAME_2 = new Rectangle(RenderConstants.TILE_SIZE * 16, RenderConstants.TILE_SIZE * 17, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 4);
+            public static Rectangle FRAME_2 = new Rectangle(RenderConstants.TileSize * 16, RenderConstants.TileSize * 17, RenderConstants.TileSize * 4, RenderConstants.TileSize * 4);
 
-            public static Rectangle FRAME_3 = new Rectangle(RenderConstants.TILE_SIZE * 20, RenderConstants.TILE_SIZE * 17, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 4);
+            public static Rectangle FRAME_3 = new Rectangle(RenderConstants.TileSize * 20, RenderConstants.TileSize * 17, RenderConstants.TileSize * 4, RenderConstants.TileSize * 4);
 
-            public static Rectangle FRAME_4 = new Rectangle(RenderConstants.TILE_SIZE * 24, RenderConstants.TILE_SIZE * 17, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 4);
+            public static Rectangle FRAME_4 = new Rectangle(RenderConstants.TileSize * 24, RenderConstants.TileSize * 17, RenderConstants.TileSize * 4, RenderConstants.TileSize * 4);
 
-            public static Rectangle FRAME_5 = new Rectangle(RenderConstants.TILE_SIZE * 28, RenderConstants.TILE_SIZE * 17, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 4);
+            public static Rectangle FRAME_5 = new Rectangle(RenderConstants.TileSize * 28, RenderConstants.TileSize * 17, RenderConstants.TileSize * 4, RenderConstants.TileSize * 4);
 
-            public static Rectangle FRAME_6 = new Rectangle(0, RenderConstants.TILE_SIZE * 21, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 4);
+            public static Rectangle FRAME_6 = new Rectangle(0, RenderConstants.TileSize * 21, RenderConstants.TileSize * 4, RenderConstants.TileSize * 4);
 
-            public static Rectangle FRAME_7 = new Rectangle(RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 21, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 4);
+            public static Rectangle FRAME_7 = new Rectangle(RenderConstants.TileSize * 4, RenderConstants.TileSize * 21, RenderConstants.TileSize * 4, RenderConstants.TileSize * 4);
 
-            public static Rectangle FRAME_8 = new Rectangle(RenderConstants.TILE_SIZE * 8, RenderConstants.TILE_SIZE * 21, RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 4);
+            public static Rectangle FRAME_8 = new Rectangle(RenderConstants.TileSize * 8, RenderConstants.TileSize * 21, RenderConstants.TileSize * 4, RenderConstants.TileSize * 4);
         }
 
         /// <summary>
@@ -1651,30 +1651,30 @@ namespace StardropPoolMinigame.Render
         /// </summary>
         public class Table
         {
-            public static Rectangle FELT = new Rectangle(RenderConstants.TILE_SIZE * 22, RenderConstants.TILE_SIZE * 11, RenderConstants.TILE_SIZE, RenderConstants.TILE_SIZE);
+            public static Rectangle FELT = new Rectangle(RenderConstants.TileSize * 22, RenderConstants.TileSize * 11, RenderConstants.TileSize, RenderConstants.TileSize);
 
             public class Corner
             {
                 public class Back
                 {
-                    public static Rectangle NORTH_EAST = new Rectangle(0, RenderConstants.TILE_SIZE * 19, RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE * 2);
+                    public static Rectangle NORTH_EAST = new Rectangle(0, RenderConstants.TileSize * 19, RenderConstants.TileSize * 2, RenderConstants.TileSize * 2);
 
-                    public static Rectangle NORTH_WEST = new Rectangle(RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 19, RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE * 2);
+                    public static Rectangle NORTH_WEST = new Rectangle(RenderConstants.TileSize * 4, RenderConstants.TileSize * 19, RenderConstants.TileSize * 2, RenderConstants.TileSize * 2);
 
-                    public static Rectangle SOUTH_EAST = new Rectangle(0, RenderConstants.TILE_SIZE * 17, RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE * 2);
+                    public static Rectangle SOUTH_EAST = new Rectangle(0, RenderConstants.TileSize * 17, RenderConstants.TileSize * 2, RenderConstants.TileSize * 2);
 
-                    public static Rectangle SOUTH_WEST = new Rectangle(RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 17, RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE * 2);
+                    public static Rectangle SOUTH_WEST = new Rectangle(RenderConstants.TileSize * 4, RenderConstants.TileSize * 17, RenderConstants.TileSize * 2, RenderConstants.TileSize * 2);
                 }
 
                 public class Front
                 {
-                    public static Rectangle NORTH_EAST = new Rectangle(RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE * 19, RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE * 2);
+                    public static Rectangle NORTH_EAST = new Rectangle(RenderConstants.TileSize * 2, RenderConstants.TileSize * 19, RenderConstants.TileSize * 2, RenderConstants.TileSize * 2);
 
-                    public static Rectangle NORTH_WEST = new Rectangle(RenderConstants.TILE_SIZE * 6, RenderConstants.TILE_SIZE * 19, RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE * 2);
+                    public static Rectangle NORTH_WEST = new Rectangle(RenderConstants.TileSize * 6, RenderConstants.TileSize * 19, RenderConstants.TileSize * 2, RenderConstants.TileSize * 2);
 
-                    public static Rectangle SOUTH_EAST = new Rectangle(RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE * 17, RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE * 2);
+                    public static Rectangle SOUTH_EAST = new Rectangle(RenderConstants.TileSize * 2, RenderConstants.TileSize * 17, RenderConstants.TileSize * 2, RenderConstants.TileSize * 2);
 
-                    public static Rectangle SOUTH_WEST = new Rectangle(RenderConstants.TILE_SIZE * 6, RenderConstants.TILE_SIZE * 17, RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE * 2);
+                    public static Rectangle SOUTH_WEST = new Rectangle(RenderConstants.TileSize * 6, RenderConstants.TileSize * 17, RenderConstants.TileSize * 2, RenderConstants.TileSize * 2);
                 }
             }
 
@@ -1682,40 +1682,40 @@ namespace StardropPoolMinigame.Render
             {
                 public class Back
                 {
-                    public static Rectangle EAST = new Rectangle(RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 13, RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE * 2);
+                    public static Rectangle EAST = new Rectangle(RenderConstants.TileSize * 4, RenderConstants.TileSize * 13, RenderConstants.TileSize * 2, RenderConstants.TileSize * 2);
 
-                    public static Rectangle NORTH = new Rectangle(0, RenderConstants.TILE_SIZE * 13, RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE * 2);
+                    public static Rectangle NORTH = new Rectangle(0, RenderConstants.TileSize * 13, RenderConstants.TileSize * 2, RenderConstants.TileSize * 2);
 
-                    public static Rectangle NORTH_EAST = new Rectangle(RenderConstants.TILE_SIZE * 28, RenderConstants.TILE_SIZE * 13, RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE * 2);
+                    public static Rectangle NORTH_EAST = new Rectangle(RenderConstants.TileSize * 28, RenderConstants.TileSize * 13, RenderConstants.TileSize * 2, RenderConstants.TileSize * 2);
 
-                    public static Rectangle NORTH_WEST = new Rectangle(RenderConstants.TILE_SIZE * 24, RenderConstants.TILE_SIZE * 13, RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE * 2);
+                    public static Rectangle NORTH_WEST = new Rectangle(RenderConstants.TileSize * 24, RenderConstants.TileSize * 13, RenderConstants.TileSize * 2, RenderConstants.TileSize * 2);
 
-                    public static Rectangle SOUTH = new Rectangle(0, RenderConstants.TILE_SIZE * 15, RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE * 2);
+                    public static Rectangle SOUTH = new Rectangle(0, RenderConstants.TileSize * 15, RenderConstants.TileSize * 2, RenderConstants.TileSize * 2);
 
-                    public static Rectangle SOUTH_EAST = new Rectangle(RenderConstants.TILE_SIZE * 28, RenderConstants.TILE_SIZE * 15, RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE * 2);
+                    public static Rectangle SOUTH_EAST = new Rectangle(RenderConstants.TileSize * 28, RenderConstants.TileSize * 15, RenderConstants.TileSize * 2, RenderConstants.TileSize * 2);
 
-                    public static Rectangle SOUTH_WEST = new Rectangle(RenderConstants.TILE_SIZE * 24, RenderConstants.TILE_SIZE * 15, RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE * 2);
+                    public static Rectangle SOUTH_WEST = new Rectangle(RenderConstants.TileSize * 24, RenderConstants.TileSize * 15, RenderConstants.TileSize * 2, RenderConstants.TileSize * 2);
 
-                    public static Rectangle WEST = new Rectangle(RenderConstants.TILE_SIZE * 4, RenderConstants.TILE_SIZE * 15, RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE * 2);
+                    public static Rectangle WEST = new Rectangle(RenderConstants.TileSize * 4, RenderConstants.TileSize * 15, RenderConstants.TileSize * 2, RenderConstants.TileSize * 2);
                 }
 
                 public class Front
                 {
-                    public static Rectangle EAST = new Rectangle(RenderConstants.TILE_SIZE * 6, RenderConstants.TILE_SIZE * 13, RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE * 2);
+                    public static Rectangle EAST = new Rectangle(RenderConstants.TileSize * 6, RenderConstants.TileSize * 13, RenderConstants.TileSize * 2, RenderConstants.TileSize * 2);
 
-                    public static Rectangle NORTH = new Rectangle(RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE * 13, RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE * 2);
+                    public static Rectangle NORTH = new Rectangle(RenderConstants.TileSize * 2, RenderConstants.TileSize * 13, RenderConstants.TileSize * 2, RenderConstants.TileSize * 2);
 
-                    public static Rectangle NORTH_EAST = new Rectangle(RenderConstants.TILE_SIZE * 30, RenderConstants.TILE_SIZE * 13, RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE * 2);
+                    public static Rectangle NORTH_EAST = new Rectangle(RenderConstants.TileSize * 30, RenderConstants.TileSize * 13, RenderConstants.TileSize * 2, RenderConstants.TileSize * 2);
 
-                    public static Rectangle NORTH_WEST = new Rectangle(RenderConstants.TILE_SIZE * 26, RenderConstants.TILE_SIZE * 13, RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE * 2);
+                    public static Rectangle NORTH_WEST = new Rectangle(RenderConstants.TileSize * 26, RenderConstants.TileSize * 13, RenderConstants.TileSize * 2, RenderConstants.TileSize * 2);
 
-                    public static Rectangle SOUTH = new Rectangle(RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE * 15, RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE * 2);
+                    public static Rectangle SOUTH = new Rectangle(RenderConstants.TileSize * 2, RenderConstants.TileSize * 15, RenderConstants.TileSize * 2, RenderConstants.TileSize * 2);
 
-                    public static Rectangle SOUTH_EAST = new Rectangle(RenderConstants.TILE_SIZE * 30, RenderConstants.TILE_SIZE * 15, RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE * 2);
+                    public static Rectangle SOUTH_EAST = new Rectangle(RenderConstants.TileSize * 30, RenderConstants.TileSize * 15, RenderConstants.TileSize * 2, RenderConstants.TileSize * 2);
 
-                    public static Rectangle SOUTH_WEST = new Rectangle(RenderConstants.TILE_SIZE * 26, RenderConstants.TILE_SIZE * 15, RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE * 2);
+                    public static Rectangle SOUTH_WEST = new Rectangle(RenderConstants.TileSize * 26, RenderConstants.TileSize * 15, RenderConstants.TileSize * 2, RenderConstants.TileSize * 2);
 
-                    public static Rectangle WEST = new Rectangle(RenderConstants.TILE_SIZE * 6, RenderConstants.TILE_SIZE * 15, RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE * 2);
+                    public static Rectangle WEST = new Rectangle(RenderConstants.TileSize * 6, RenderConstants.TileSize * 15, RenderConstants.TileSize * 2, RenderConstants.TileSize * 2);
                 }
             }
 
@@ -1723,40 +1723,40 @@ namespace StardropPoolMinigame.Render
             {
                 public class Back
                 {
-                    public static Rectangle EAST = new Rectangle(RenderConstants.TILE_SIZE * 20, RenderConstants.TILE_SIZE * 13, RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE * 2);
+                    public static Rectangle EAST = new Rectangle(RenderConstants.TileSize * 20, RenderConstants.TileSize * 13, RenderConstants.TileSize * 2, RenderConstants.TileSize * 2);
 
-                    public static Rectangle NORTH = new Rectangle(RenderConstants.TILE_SIZE * 16, RenderConstants.TILE_SIZE * 13, RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE * 2);
+                    public static Rectangle NORTH = new Rectangle(RenderConstants.TileSize * 16, RenderConstants.TileSize * 13, RenderConstants.TileSize * 2, RenderConstants.TileSize * 2);
 
-                    public static Rectangle NORTH_EAST = new Rectangle(RenderConstants.TILE_SIZE * 12, RenderConstants.TILE_SIZE * 13, RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE * 2);
+                    public static Rectangle NORTH_EAST = new Rectangle(RenderConstants.TileSize * 12, RenderConstants.TileSize * 13, RenderConstants.TileSize * 2, RenderConstants.TileSize * 2);
 
-                    public static Rectangle NORTH_WEST = new Rectangle(RenderConstants.TILE_SIZE * 8, RenderConstants.TILE_SIZE * 13, RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE * 2);
+                    public static Rectangle NORTH_WEST = new Rectangle(RenderConstants.TileSize * 8, RenderConstants.TileSize * 13, RenderConstants.TileSize * 2, RenderConstants.TileSize * 2);
 
-                    public static Rectangle SOUTH = new Rectangle(RenderConstants.TILE_SIZE * 16, RenderConstants.TILE_SIZE * 15, RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE * 2);
+                    public static Rectangle SOUTH = new Rectangle(RenderConstants.TileSize * 16, RenderConstants.TileSize * 15, RenderConstants.TileSize * 2, RenderConstants.TileSize * 2);
 
-                    public static Rectangle SOUTH_EAST = new Rectangle(RenderConstants.TILE_SIZE * 12, RenderConstants.TILE_SIZE * 15, RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE * 2);
+                    public static Rectangle SOUTH_EAST = new Rectangle(RenderConstants.TileSize * 12, RenderConstants.TileSize * 15, RenderConstants.TileSize * 2, RenderConstants.TileSize * 2);
 
-                    public static Rectangle SOUTH_WEST = new Rectangle(RenderConstants.TILE_SIZE * 8, RenderConstants.TILE_SIZE * 15, RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE * 2);
+                    public static Rectangle SOUTH_WEST = new Rectangle(RenderConstants.TileSize * 8, RenderConstants.TileSize * 15, RenderConstants.TileSize * 2, RenderConstants.TileSize * 2);
 
-                    public static Rectangle WEST = new Rectangle(RenderConstants.TILE_SIZE * 20, RenderConstants.TILE_SIZE * 15, RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE * 2);
+                    public static Rectangle WEST = new Rectangle(RenderConstants.TileSize * 20, RenderConstants.TileSize * 15, RenderConstants.TileSize * 2, RenderConstants.TileSize * 2);
                 }
 
                 public class Front
                 {
-                    public static Rectangle EAST = new Rectangle(RenderConstants.TILE_SIZE * 22, RenderConstants.TILE_SIZE * 13, RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE * 2);
+                    public static Rectangle EAST = new Rectangle(RenderConstants.TileSize * 22, RenderConstants.TileSize * 13, RenderConstants.TileSize * 2, RenderConstants.TileSize * 2);
 
-                    public static Rectangle NORTH = new Rectangle(RenderConstants.TILE_SIZE * 18, RenderConstants.TILE_SIZE * 13, RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE * 2);
+                    public static Rectangle NORTH = new Rectangle(RenderConstants.TileSize * 18, RenderConstants.TileSize * 13, RenderConstants.TileSize * 2, RenderConstants.TileSize * 2);
 
-                    public static Rectangle NORTH_EAST = new Rectangle(RenderConstants.TILE_SIZE * 14, RenderConstants.TILE_SIZE * 13, RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE * 2);
+                    public static Rectangle NORTH_EAST = new Rectangle(RenderConstants.TileSize * 14, RenderConstants.TileSize * 13, RenderConstants.TileSize * 2, RenderConstants.TileSize * 2);
 
-                    public static Rectangle NORTH_WEST = new Rectangle(RenderConstants.TILE_SIZE * 10, RenderConstants.TILE_SIZE * 13, RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE * 2);
+                    public static Rectangle NORTH_WEST = new Rectangle(RenderConstants.TileSize * 10, RenderConstants.TileSize * 13, RenderConstants.TileSize * 2, RenderConstants.TileSize * 2);
 
-                    public static Rectangle SOUTH = new Rectangle(RenderConstants.TILE_SIZE * 18, RenderConstants.TILE_SIZE * 15, RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE * 2);
+                    public static Rectangle SOUTH = new Rectangle(RenderConstants.TileSize * 18, RenderConstants.TileSize * 15, RenderConstants.TileSize * 2, RenderConstants.TileSize * 2);
 
-                    public static Rectangle SOUTH_EAST = new Rectangle(RenderConstants.TILE_SIZE * 14, RenderConstants.TILE_SIZE * 15, RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE * 2);
+                    public static Rectangle SOUTH_EAST = new Rectangle(RenderConstants.TileSize * 14, RenderConstants.TileSize * 15, RenderConstants.TileSize * 2, RenderConstants.TileSize * 2);
 
-                    public static Rectangle SOUTH_WEST = new Rectangle(RenderConstants.TILE_SIZE * 10, RenderConstants.TILE_SIZE * 15, RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE * 2);
+                    public static Rectangle SOUTH_WEST = new Rectangle(RenderConstants.TileSize * 10, RenderConstants.TileSize * 15, RenderConstants.TileSize * 2, RenderConstants.TileSize * 2);
 
-                    public static Rectangle WEST = new Rectangle(RenderConstants.TILE_SIZE * 22, RenderConstants.TILE_SIZE * 15, RenderConstants.TILE_SIZE * 2, RenderConstants.TILE_SIZE * 2);
+                    public static Rectangle WEST = new Rectangle(RenderConstants.TileSize * 22, RenderConstants.TileSize * 15, RenderConstants.TileSize * 2, RenderConstants.TileSize * 2);
                 }
             }
         }

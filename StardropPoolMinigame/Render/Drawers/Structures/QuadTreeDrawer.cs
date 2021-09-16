@@ -25,7 +25,7 @@ namespace StardropPoolMinigame.Render.Drawers
             SpriteEffects? overrideEffects = null,
             float? overrideLayerDepth = null)
         {
-            if (DevConstants.DEBUG_VISUALS)
+            if (DevConstants.DebugVisuals)
             {
                 this.DrawDebugVisuals(batch);
             }

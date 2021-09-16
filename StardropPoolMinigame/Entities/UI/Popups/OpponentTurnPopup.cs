@@ -8,7 +8,7 @@ namespace StardropPoolMinigame.Entities.UI.Popups
         public OpponentTurnPopup() : base(
             null,
             null,
-            Translations.GetTranslation(StringConstants.Popups.OPPONENT_TURN))
+            Translations.GetTranslation(StringConstants.Popups.OpponentTurn))
         {
         }
 

@@ -44,11 +44,11 @@ namespace StardropPoolMinigame.Scenes
         /// <returns>Starting <see cref="IScene"/></returns>
         public static IScene GetDefaultScene()
         {
-            if (DevConstants.AUTO_START_AI_GAME)
+            if (DevConstants.AutoStartAIGame)
             {
                 return new GameScene(Player.GetMainPlayer(), new Sam());
             }
-            if (DevConstants.AUTO_START_DIALOG)
+            if (DevConstants.AutoStartDialog)
             {
                 return new DialogScene(new GameSceneCreator(Player.GetMainPlayer(), new Sam()));
             }

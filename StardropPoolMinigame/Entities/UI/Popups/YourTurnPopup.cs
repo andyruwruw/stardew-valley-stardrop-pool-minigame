@@ -8,7 +8,7 @@ namespace StardropPoolMinigame.Entities.UI.Popups
         public YourTurnPopup() : base(
             null,
             null,
-            Translations.GetTranslation(StringConstants.Popups.YOUR_TURN))
+            Translations.GetTranslation(StringConstants.Popups.YourTurn))
         {
         }
 

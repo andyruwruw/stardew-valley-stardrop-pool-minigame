@@ -31,12 +31,12 @@ namespace StardropPoolMinigame.Entities
 
         public void Add(Ball ball)
         {
-            float segmentWidth = (Textures.PocketedBalls.BORDER_BOX.Width - (RenderConstants.Entities.PocketedBalls.PADDING * 2)) / 7;
+            float segmentWidth = (Textures.PocketedBalls.BORDER_BOX.Width - (RenderConstants.Entities.PocketedBalls.Padding * 2)) / 7;
             Vector2 location = Vector2.Add(
                 this.GetTopLeft(),
                 new Vector2(
                     this._balls.Count * segmentWidth + (segmentWidth / 2),
-                    Textures.PocketedBalls.SUPPORTS.Height - (RenderConstants.Entities.PocketedBalls.SUPPORT_PADDING * 2) + (Textures.PocketedBalls.BORDER_BOX.Height - RenderConstants.Entities.PocketedBalls.SUPPORT_PADDING) / 2));
+                    Textures.PocketedBalls.SUPPORTS.Height - (RenderConstants.Entities.PocketedBalls.SupportPadding * 2) + (Textures.PocketedBalls.BORDER_BOX.Height - RenderConstants.Entities.PocketedBalls.SupportPadding) / 2));
 
             ball.SetAnchor(location);
             ball.SetVelocity(Vector2.Zero);

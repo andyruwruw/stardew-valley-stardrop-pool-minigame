@@ -8,7 +8,7 @@ namespace StardropPoolMinigame.Entities
         public DefeatPopup() : base(
             null,
             null,
-            Translations.GetTranslation(StringConstants.Popups.DEFEAT))
+            Translations.GetTranslation(StringConstants.Popups.Defeat))
         {
         }
 

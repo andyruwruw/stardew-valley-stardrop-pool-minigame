@@ -34,9 +34,9 @@ namespace StardropPoolMinigame.Entities
             return TableSegmentType.NorthEastCorner;
         }
 
-        public override void InicializeBounceableSurfaces()
+        public override void InitializeBounceableSurfaces()
         {
-            base.InicializeBounceableSurfaces();
+            base.InitializeBounceableSurfaces();
 
             // East Short Edge
             this._bounceableSurfaces.Add(
@@ -44,13 +44,13 @@ namespace StardropPoolMinigame.Entities
                     Vector2.Add(
                         this._anchor,
                         new Vector2(
-                            this.GetTotalWidth() - RenderConstants.Entities.TableSegment.SPACE_TO_BOUNCEABLE_SURFACE,
+                            this.GetTotalWidth() - RenderConstants.Entities.TableSegment.SpaceToBounceableSurface,
                             0)),
                     Vector2.Add(
                         this._anchor,
                         new Vector2(
-                            this.GetTotalWidth() - RenderConstants.Entities.TableSegment.SPACE_TO_BOUNCEABLE_SURFACE,
-                            RenderConstants.Entities.TableSegment.SPACE_TO_BOUNCEABLE_SURFACE))));
+                            this.GetTotalWidth() - RenderConstants.Entities.TableSegment.SpaceToBounceableSurface,
+                            RenderConstants.Entities.TableSegment.SpaceToBounceableSurface))));
 
             // North Short Edge
             this._bounceableSurfaces.Add(
@@ -58,13 +58,13 @@ namespace StardropPoolMinigame.Entities
                     Vector2.Add(
                         this._anchor,
                         new Vector2(
-                            this.GetTotalWidth() - RenderConstants.Entities.TableSegment.SPACE_TO_BOUNCEABLE_SURFACE,
-                            RenderConstants.Entities.TableSegment.SPACE_TO_BOUNCEABLE_SURFACE)),
+                            this.GetTotalWidth() - RenderConstants.Entities.TableSegment.SpaceToBounceableSurface,
+                            RenderConstants.Entities.TableSegment.SpaceToBounceableSurface)),
                     Vector2.Add(
                         this._anchor,
                         new Vector2(
                             this.GetTotalWidth(),
-                            RenderConstants.Entities.TableSegment.SPACE_TO_BOUNCEABLE_SURFACE))));
+                            RenderConstants.Entities.TableSegment.SpaceToBounceableSurface))));
         }
     }
 }

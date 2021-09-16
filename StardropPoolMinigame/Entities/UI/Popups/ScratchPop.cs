@@ -8,7 +8,7 @@ namespace StardropPoolMinigame.Entities
         public ScratchPop() : base(
             null,
             null,
-            Translations.GetTranslation(StringConstants.Popups.SCRATCH))
+            Translations.GetTranslation(StringConstants.Popups.Scratch))
         {
         }
 

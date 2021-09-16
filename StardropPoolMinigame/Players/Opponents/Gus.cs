@@ -1,23 +1,23 @@
 ﻿using StardropPoolMinigame.Constants;
 using StardropPoolMinigame.Enums;
-using StardropPoolMinigame.Helpers;
+using StardropPoolMinigame.Multiplayer;
 
 namespace StardropPoolMinigame.Players
 {
-    internal class Gus : ComputerOpponent
-    {
-        public static string Name = "Gus";
+	internal class Gus : ComputerOpponent
+	{
+		public static string Name = "Gus";
 
-        public Gus() : base(
-            Name,
-            NPCName.Gus,
-            Multiplayer.GetNewMultiplayerId(),
-            SoundConstants.Theme.GUS,
-            NPCConstants.Gus.CONFIDENCE,
-            NPCConstants.Gus.COMPLEXITY,
-            NPCConstants.Gus.ANGLE_ACCURACY,
-            NPCConstants.Gus.POWER_ACCURACY)
-        {
-        }
-    }
+		public Gus() : base(
+			Name,
+			NPCName.Gus,
+			MultiplayerHelper.GetNewMultiplayerId(),
+			SoundConstants.Theme.Gus,
+			NPCConstants.Gus.Confidence,
+			NPCConstants.Gus.Complexity,
+			NPCConstants.Gus.AngleAccuracy,
+			NPCConstants.Gus.PowerAccuracy)
+		{
+		}
+	}
 }

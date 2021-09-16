@@ -8,183 +8,207 @@ namespace StardropPoolMinigame.Constants
         public class Ball
         {
             /// <summary>
-            /// Momentum loss from bouncing off a wall
+            /// Momentum loss from bouncing off a wall.
             /// </summary>
-            public static float BOUNCE_MOMENTUM_LOSS_MULTIPLIER = 1;
+            public static float BounceMomentumLossMultiplier = 1;
 
             /// <summary>
-            /// Distance traveled between orientation updates
+            /// Distance traveled between <see cref="Attributes.Orientation"/> updates.
             /// </summary>
-            public static float DISTANCE_TO_ORIENTATION_CHANGE = 5;
+            public static float DistanceToOrientationChange = 5;
 
             /// <summary>
-            /// Amount of friction applied per 1 unit of distance traveled
+            /// Amount of friction applied per 1 unit of distance traveled.
             /// </summary>
-            public static float FRICTION_ACCELERATION = (float)-.005;
+            public static float FrictionAcceleration = (float)-.005;
 
             /// <summary>
-            /// Amount of acceleration halt applies
+            /// Amount of acceleration halt applies.
             /// </summary>
-            public static float HALT_ACCELERATION = (float)-.005;
+            public static float HaltAcceleration = (float)-.005;
 
             /// <summary>
-            /// Ball velocity at which halt begins
+            /// <see cref="Entities.Ball"/> velocity at which halt begins.
             /// </summary>
-            public static float HALT_BEGIN_VELOCITY = (float).05;
+            public static float HaltBeginVelocity = (float).05;
 
             /// <summary>
-            /// Mass of pool ball
+            /// Mass of pool <see cref="Entities.Ball"/>.
             /// </summary>
-            public static float MASS = 1;
-
-            public static float MINIMUM_BOUNCE_VELOCITY = .05f;
+            public static float Mass = 1;
 
             /// <summary>
-            /// Minimum velocity of ball
+            /// Minimum velocity for a <see cref="Entities.Ball"/> to bounce.
             /// </summary>
-            public static float MINIMUM_VELOCITY = (float).05;
+            public static float MinimumBounceVelocity = .05f;
 
             /// <summary>
-            /// Radius of pool ball
+            /// Minimum velocity of <see cref="Entities.Ball"/>.
             /// </summary>
-            public static float RADIUS = 5.5f;
+            public static float MinimumVelocity = (float).05;
 
             /// <summary>
-            /// Momentum loss from bouncing off a wall
+            /// Radius of pool <see cref="Entities.Ball"/>.
             /// </summary>
-            public static float WALL_BOUNCE_MOMENTUM_LOSS = 0;
+            public static float Radius = 5.5f;
+
+            /// <summary>
+            /// Momentum loss from bouncing off a wall.
+            /// </summary>
+            public static float WallBounceMomentumLoss = 0;
         }
 
         public class BallButton
         {
-            public static float HOVER_ROTATIONAL_SPEED = -.4f;
+            /// <summary>
+            /// Rotation speed of <see cref="Entities.BallButton"/> <see cref="Entities.Ball"/>.
+            /// </summary>
+            public static float HoverRotationalSpeed = -.4f;
         }
 
         public class Cue
         {
-            public static int MAXIMUM_DISTANCE_FROM_BALL = (int)Math.Round((Ball.RADIUS + 85) * RenderConstants.TileScale());
-
-            public static int MINIMUM_DISTANCE_FROM_BALL = (int)Math.Round((Ball.RADIUS + 5) * RenderConstants.TileScale());
+            /// <summary>
+            /// Maximum distance <see cref="Entities.Cue"/> can be dragged away from the cue <see cref="Entities.Ball"/> while striking.
+            /// </summary>
+            public static int MaximumDistanceFromCueBall = (int)Math.Round((Ball.Radius + 85) * RenderConstants.TileScale());
 
             /// <summary>
-            /// Transfer ration of ball momentum to cue speed
+            /// Minimum distance <see cref="Entities.Cue"/> can be dragged away from the cue <see cref="Entities.Ball"/> while striking.
             /// </summary>
-            public static float MOMENTUM_TRANSFER = 4;
-
-            public static float PARTICLE_MINIMUM_POWER_TRIGGER = 0.85f;
-
-            public static float PARTICLE_RATE_PER_POWER = 3f;
-
-            public static int POWER_TO_WIGGLE_AMPLITUDE_SCALAR = 75;
+            public static int MinimumDistanceFromCueBall = (int)Math.Round((Ball.Radius + 5) * RenderConstants.TileScale());
 
             /// <summary>
-            /// Time the cue takes to hit the ball.
+            /// Multiplier from <see cref="Entities.Cue"/> power to <see cref="Entities.Ball"/> speed.
             /// </summary>
-            public static float STRIKING_SPEED = 10;
+            public static float MomentumTransfer = 4;
 
-            public static float WIGGLE_FREQUENCY = 800;
+            /// <summary>
+            /// Minimum <see cref="Entities.Cue"/> power to trigger <see cref="Entities.ParticleEmitter"/>.
+            /// </summary>
+            public static float ParticleMinimumPowerTrigger = 0.85f;
+
+            /// <summary>
+            /// <see cref="Entities.Cue"/>'s effect on <see cref="Entities.ParticleEmitter"/> rate.
+            /// </summary>
+            public static float ParticleRatePerPower = 3f;
+
+            /// <summary>
+            /// <see cref="Entities.Cue"/> power effect on <see cref="Render.Filters.Wiggle"/> <see cref="Render.Filters.Animation"/>.
+            /// </summary>
+            public static int PowerToWiggleAmplitudeScalar = 75;
+
+            /// <summary>
+            /// Time the <see cref="Entities.Cue"/> takes to hit the <see cref="Entities.Ball"/>.
+            /// </summary>
+            public static float StrikingSpeed = 10;
+
+            /// <summary>
+            /// Rate of <see cref="Render.Filters.Wiggle"/> <see cref="Render.Filters.Animation"/> frequency.
+            /// </summary>
+            public static float WiggleFrequency = 800;
         }
 
         public class Particle
         {
             public class Glimmer
             {
-                public static float ALIGNMENT_STRENGTH = 0.04f;
+                public static float AlignmentStrength = 0.04f;
 
-                public static float COHESION_STRENGTH = 0.005f;
+                public static float CohesionStrength = 0.005f;
 
-                public static int LIFESPAN = 50;
+                public static int Lifespan = 50;
 
-                public static float MAXIMUM_FORCE = 0.1f;
+                public static float MaximumForce = 0.1f;
 
-                public static float MAXIMUM_INITIAL_VELOCITY_SCOLAR = 1.5f;
+                public static float MaximumInitialVelocityScholar = 1.5f;
 
-                public static float MAXIMUM_VELOCITY = 1.5f;
+                public static float MaximumVelocity = 1.5f;
 
-                public static float MINIMUM_INITIAL_VELOCITY_SCOLAR = 0.3f;
+                public static float MinimumInitialVelocityScholar = 0.3f;
 
-                public static float PERCEPTION_RADIUS = 5f;
+                public static float PerceptionRadius = 5f;
 
-                public static float SEPARATION_STRENGTH = 0.08f;
+                public static float SeparationStrength = 0.08f;
             }
 
-            public class PurpleWhisp
+            public class PurpleWisp
             {
-                public static float ALIGNMENT_STRENGTH = 0.04f;
+                public static float AlignmentStrength = 0.04f;
 
-                public static float COHESION_STRENGTH = 0.005f;
+                public static float CohesionStrength = 0.005f;
 
-                public static int LIFESPAN = 50;
+                public static int Lifespan = 50;
 
-                public static float MAXIMUM_FORCE = 0.1f;
+                public static float MaximumForce = 0.1f;
 
-                public static float MAXIMUM_INITIAL_VELOCITY_SCOLAR = 1.5f;
+                public static float MaximumInitialVelocityScholar = 1.5f;
 
-                public static float MAXIMUM_VELOCITY = 1.5f;
+                public static float MaximumVelocity = 1.5f;
 
-                public static float MINIMUM_INITIAL_VELOCITY_SCOLAR = 0.3f;
+                public static float MinimumInitialVelocityScholar = 0.3f;
 
-                public static float PERCEPTION_RADIUS = 5f;
+                public static float PerceptionRadius = 5f;
 
-                public static float SEPARATION_STRENGTH = 0.08f;
+                public static float SeparationStrength = 0.08f;
             }
 
             public class Spark
             {
-                public static float ALIGNMENT_STRENGTH = 0.02f;
+                public static float AlignmentStrength = 0.02f;
 
-                public static float COHESION_STRENGTH = 0.03f;
+                public static float CohesionStrength = 0.03f;
 
-                public static int LIFESPAN = 50;
+                public static int Lifespan = 50;
 
-                public static float MAXIMUM_FORCE = 0.2f;
+                public static float MaximumForce = 0.2f;
 
-                public static float MAXIMUM_INITIAL_VELOCITY_SCOLAR = 1.5f;
+                public static float MaximumInitialVelocityScholar = 1.5f;
 
-                public static float MAXIMUM_VELOCITY = 1.5f;
+                public static float MaximumVelocity = 1.5f;
 
-                public static float MINIMUM_INITIAL_VELOCITY_SCOLAR = 0.3f;
+                public static float MinimumInitialVelocityScholar = 0.3f;
 
-                public static float PERCEPTION_RADIUS = 8f;
+                public static float PerceptionRadius = 8f;
 
-                public static float SEPARATION_STRENGTH = 0.04f;
+                public static float SeparationStrength = 0.04f;
             }
 
             public class Sparkle
             {
-                public static float ALIGNMENT_STRENGTH = 0.04f;
+                public static float AlignmentStrength = 0.04f;
 
-                public static float COHESION_STRENGTH = 0.005f;
+                public static float CohesionStrength = 0.005f;
 
-                public static int LIFESPAN = 50;
+                public static int Lifespan = 50;
 
-                public static float MAXIMUM_FORCE = 0.1f;
+                public static float MaximumForce = 0.1f;
 
-                public static float MAXIMUM_INITIAL_VELOCITY_SCOLAR = 1.5f;
+                public static float MaximumInitialVelocityScholar = 1.5f;
 
-                public static float MAXIMUM_VELOCITY = 1.5f;
+                public static float MaximumVelocity = 1.5f;
 
-                public static float MINIMUM_INITIAL_VELOCITY_SCOLAR = 0.3f;
+                public static float MinimumInitialVelocityScholar = 0.3f;
 
-                public static float PERCEPTION_RADIUS = 5f;
+                public static float PerceptionRadius = 5f;
 
-                public static float SEPARATION_STRENGTH = 0.08f;
+                public static float SeparationStrength = 0.08f;
             }
         }
 
         public class PoolTable
         {
-            public static int LIP_CONTACT = 2;
+            public static int LipContact = 2;
 
             /// <summary>
             /// Tile IDs for Pool Table on Building Layer
             /// </summary>
-            public static IList<int> TILE_ID_BUILDING = new List<int>() { 1447, 1448, 1449, 1450, 1451, 1479, 1480, 1481, 1482, 1483 };
+            public static IList<int> TileIdBuilding = new List<int>() { 1447, 1448, 1449, 1450, 1451, 1479, 1480, 1481, 1482, 1483 };
 
             /// <summary>
             /// Tile IDs for Pool Table on Front Layer
             /// </summary>
-            public static IList<int> TILE_ID_FRONT = new List<int>() { 1415, 1416, 1417, 1418, 1419 };
+            public static IList<int> TileIdFront = new List<int>() { 1415, 1416, 1417, 1418, 1419 };
         }
     }
 }

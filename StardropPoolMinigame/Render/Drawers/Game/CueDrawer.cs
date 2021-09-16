@@ -3,8 +3,6 @@ using Microsoft.Xna.Framework.Graphics;
 using StardropPoolMinigame.Constants;
 using StardropPoolMinigame.Entities;
 using StardropPoolMinigame.Helpers;
-using StardropPoolMinigame.Render.Filters;
-using System.Collections.Generic;
 
 namespace StardropPoolMinigame.Render.Drawers
 {

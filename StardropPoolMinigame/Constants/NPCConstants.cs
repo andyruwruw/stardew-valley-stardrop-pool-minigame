@@ -6,59 +6,83 @@
     internal class NPCConstants
     {
         /// <summary>
-        /// <see cref="Abigail"/> AI values.
+        /// <see cref="Players.Abigail"/> AI values.
         /// </summary>
         public class Abigail
         {
-            public static int ANGLE_ACCURACY = 1;
+            /// <summary>
+            /// <see cref="Players.ComputerOpponent"/> accuracy when picking a <see cref="Cue"/> angle to take a shot.
+            /// </summary>
+            public static int AngleAccuracy = 1;
 
-            public static int COMPLEXITY = 1;
+            /// <summary>
+            /// <see cref="Players.ComputerOpponent"/> ability to check for combo / complex shots.
+            /// </summary>
+            public static int Complexity = 1;
 
-            public static int CONFIDENCE = 1;
+            /// <summary>
+            /// <see cref="Players.ComputerOpponent"/> desire to take difficult shots.
+            /// </summary>
+            public static int Confidence = 1;
 
-            public static int POWER_ACCURACY = 1;
+            /// <summary>
+            /// <see cref="Players.ComputerOpponent"/> accuracy when picking a <see cref="Cue"/> power to take a shot.
+            /// </summary>
+            public static int PowerAccuracy = 1;
         }
 
         /// <summary>
-        /// <see cref="Gus"/> AI values.
+        /// <see cref="Players.Gus"/> AI values.
         /// </summary>
         public class Gus
         {
-            public static int ANGLE_ACCURACY = 1;
+            /// <inheritdoc cref="Abigail.AngleAccuracy"/>
+            public static int AngleAccuracy = 1;
 
-            public static int COMPLEXITY = 1;
+            /// <inheritdoc cref="Abigail.Complexity"/>
+            public static int Complexity = 1;
 
-            public static int CONFIDENCE = 1;
+            /// <inheritdoc cref="Abigail.Confidence"/>
+            public static int Confidence = 1;
 
-            public static int POWER_ACCURACY = 1;
+            /// <inheritdoc cref="Abigail.PowerAccuracy"/>
+            public static int PowerAccuracy = 1;
         }
 
         /// <summary>
-        /// <see cref="Sam"/> AI values.
+        /// <see cref="Players.Sam"/> AI values.
         /// </summary>
         public class Sam
         {
-            public static int ANGLE_ACCURACY = 1;
+            /// <inheritdoc cref="Abigail.AngleAccuracy"/>
+            public static int AngleAccuracy = 1;
 
-            public static int COMPLEXITY = 1;
+            /// <inheritdoc cref="Abigail.Complexity"/>
+            public static int Complexity = 1;
 
-            public static int CONFIDENCE = 1;
+            /// <inheritdoc cref="Abigail.Confidence"/>
+            public static int Confidence = 1;
 
-            public static int POWER_ACCURACY = 1;
+            /// <inheritdoc cref="Abigail.PowerAccuracy"/>
+            public static int PowerAccuracy = 1;
         }
 
         /// <summary>
-        /// <see cref="Sebastian"/> AI values.
+        /// <see cref="Players.Sebastian"/> AI values.
         /// </summary>
         public class Sebastian
         {
-            public static int ANGLE_ACCURACY = 1;
+            /// <inheritdoc cref="Abigail.AngleAccuracy"/>
+            public static int AngleAccuracy = 1;
 
-            public static int COMPLEXITY = 1;
+            /// <inheritdoc cref="Abigail.Complexity"/>
+            public static int Complexity = 1;
 
-            public static int CONFIDENCE = 1;
+            /// <inheritdoc cref="Abigail.Confidence"/>
+            public static int Confidence = 1;
 
-            public static int POWER_ACCURACY = 1;
+            /// <inheritdoc cref="Abigail.PowerAccuracy"/>
+            public static int PowerAccuracy = 1;
         }
     }
 }

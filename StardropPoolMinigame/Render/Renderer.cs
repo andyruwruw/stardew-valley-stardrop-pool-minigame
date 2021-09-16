@@ -1,173 +1,163 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using StardropPoolMinigame.Constants;
 using StardropPoolMinigame.Entities;
 using StardropPoolMinigame.Render.Drawers;
 using StardropPoolMinigame.Scenes;
-using System.Collections.Generic;
+using Rectangle = StardropPoolMinigame.Primitives.Rectangle;
 
 namespace StardropPoolMinigame.Render
 {
-    /// <summary>
-    /// Renders entries onto the screen
-    /// </summary>
-    internal class Renderer
-    {
-        private IList<IEntity> _entities;
+	/// <summary>
+	/// Renders entries onto the screen
+	/// </summary>
+	internal class Renderer
+	{
+		private IList<IEntity> _entities;
 
-        public Renderer()
-        {
-            this.InicializeStaticEntities();
-        }
+		public Renderer()
+		{
+			InitializeStaticEntities();
+		}
 
-        /// <summary>
-        /// Draws all entities for scenes
-        /// </summary>
-        /// <param name="batch">XNA Framework SpriteBatch</param>
-        /// <param name="entering">Scene in entry transition</param>
-        /// <param name="current">Current scene</param>
-        /// <param name="exiting">Scene in exit transition</param>
-        public void Draw(
-            SpriteBatch batch,
-            IScene entering,
-            IScene current,
-            IScene exiting)
-        {
-            batch.Begin(
-                SpriteSortMode.FrontToBack,
-                BlendState.AlphaBlend,
-                SamplerState.PointClamp,
-                null,
-                null);
+		/// <summary>
+		/// Draws all entities for scenes
+		/// </summary>
+		/// <param name="batch">XNA Framework SpriteBatch</param>
+		/// <param name="entering">Scene in entry transition</param>
+		/// <param name="current">Current scene</param>
+		/// <param name="exiting">Scene in exit transition</param>
+		public void Draw(
+			SpriteBatch batch,
+			IScene entering,
+			IScene current,
+			IScene exiting)
+		{
+			batch.Begin(
+				SpriteSortMode.FrontToBack,
+				BlendState.AlphaBlend,
+				SamplerState.PointClamp,
+				null,
+				null);
 
-            this.DrawStaticEntities(batch);
+			DrawStaticEntities(batch);
 
-            if (entering != null)
-            {
-                this.DrawEntities(batch, entering.GetEntities());
-            }
-            if (current != null)
-            {
-                this.DrawEntities(batch, current.GetEntities());
-            }
-            if (exiting != null)
-            {
-                this.DrawEntities(batch, exiting.GetEntities());
-            }
+			if (entering != null) DrawEntities(batch, entering.GetEntities());
 
-            batch.End();
-        }
+			if (current != null) DrawEntities(batch, current.GetEntities());
 
-        /// <summary>
-        /// Draws the provided set of entries
-        /// </summary>
-        /// <param name="batch">XNA Framework SpriteBatch</param>
-        /// <param name="entities">Entities to be drawn</param>
-        private void DrawEntities(SpriteBatch batch, IList<IEntity> entities)
-        {
-            IList<IDrawer> drawers = GetDrawersFromEntities(entities);
+			if (exiting != null) DrawEntities(batch, exiting.GetEntities());
 
-            foreach (IDrawer drawer in drawers)
-            {
-                if (drawer.ShouldDraw())
-                {
-                    drawer.Draw(batch);
-                }
-            }
-        }
+			batch.End();
+		}
 
-        /// <summary>
-        /// Draws entries that are always present
-        /// </summary>
-        /// <param name="batch">XNA Framework SpriteBatch</param>
-        private void DrawStaticEntities(SpriteBatch batch)
-        {
-            this.DrawEntities(batch, this._entities);
-        }
+		/// <summary>
+		/// Draws the provided set of entries
+		/// </summary>
+		/// <param name="batch">XNA Framework SpriteBatch</param>
+		/// <param name="entities">Entities to be drawn</param>
+		private void DrawEntities(SpriteBatch batch, IList<IEntity> entities)
+		{
+			var drawers = GetDrawersFromEntities(entities);
 
-        /// <summary>
-        /// Retrieves list of drawers for a set of entries
-        /// </summary>
-        /// <param name="entities">Entities to be drawn</param>
-        /// <returns>List of drawers</returns>
-        private IList<IDrawer> GetDrawersFromEntities(IList<IEntity> entities)
-        {
-            IList<IDrawer> drawers = new List<IDrawer>();
+			foreach (var drawer in drawers)
+				if (drawer.ShouldDraw())
+					drawer.Draw(batch);
+		}
 
-            foreach (IEntity entity in entities)
-            {
-                drawers.Add(entity.GetDrawer());
-            }
+		/// <summary>
+		/// Draws entries that are always present
+		/// </summary>
+		/// <param name="batch">XNA Framework SpriteBatch</param>
+		private void DrawStaticEntities(SpriteBatch batch)
+		{
+			DrawEntities(batch, _entities);
+		}
 
-            return drawers;
-        }
+		/// <summary>
+		/// Retrieves list of drawers for a set of entries
+		/// </summary>
+		/// <param name="entities">Entities to be drawn</param>
+		/// <returns>List of drawers</returns>
+		private IList<IDrawer> GetDrawersFromEntities(IList<IEntity> entities)
+		{
+			IList<IDrawer> drawers = new List<IDrawer>();
 
-        /// <summary>
-        /// Creates static entries
-        /// </summary>
-        private void InicializeStaticEntities()
-        {
-            this._entities = new List<IEntity>();
+			foreach (var entity in entities) drawers.Add(entity.GetDrawer());
 
-            // Background
-            this._entities.Add(new Solid(
-                new Primitives.Rectangle(
-                    new Vector2(RenderConstants.AdjustedScreenWidthMargin(), RenderConstants.AdjustedScreenHeightMargin()),
-                    (int)RenderConstants.AdjustedScreenWidth(),
-                    (int)RenderConstants.AdjustedScreenHeight()),
-                0.0000f,
-                null,
-                null,
-                Color.Black,
-                isRawCoords: true));
+			return drawers;
+		}
 
-            // Foreground
-            if (!DevConstants.DISABLE_MARGIN_SOLIDS)
-            {
-                this._entities.Add(new Solid(
-                new Primitives.Rectangle(
-                    new Vector2(0, 0),
-                    (int)RenderConstants.AdjustedScreenWidthMargin(),
-                    (int)RenderConstants.ViewportHeight()),
-                0.9000f,
-                null,
-                null,
-                Textures.Color.Solid.MARGIN,
-                isRawCoords: true));
+		/// <summary>
+		/// Creates static entries
+		/// </summary>
+		private void InitializeStaticEntities()
+		{
+			_entities = new List<IEntity>();
 
-                this._entities.Add(new Solid(
-                    new Primitives.Rectangle(
-                        new Vector2(RenderConstants.AdjustedScreenWidthMargin() + RenderConstants.AdjustedScreenWidth(), 0),
-                        (int)RenderConstants.AdjustedScreenWidthMargin(),
-                        (int)RenderConstants.ViewportHeight()),
-                    0.9000f,
-                    null,
-                    null,
-                    Textures.Color.Solid.MARGIN,
-                    isRawCoords: true));
+			// Background
+			_entities.Add(new Solid(
+				new Rectangle(
+					new Vector2(RenderConstants.AdjustedScreen.Margin.Width(),
+						RenderConstants.AdjustedScreen.Margin.Height()),
+					(int) RenderConstants.AdjustedScreen.Width(),
+					(int) RenderConstants.AdjustedScreen.Height()),
+				0.0000f,
+				null,
+				null,
+				Color.Black,
+				true));
 
-                this._entities.Add(new Solid(
-                    new Primitives.Rectangle(
-                        new Vector2(RenderConstants.AdjustedScreenWidthMargin(), 0),
-                        (int)RenderConstants.AdjustedScreenWidth(),
-                        (int)RenderConstants.AdjustedScreenHeightMargin()),
-                    0.9000f,
-                    null,
-                    null,
-                    Textures.Color.Solid.MARGIN,
-                    isRawCoords: true));
+			// Foreground
+			if (!DevConstants.DisableMarginSolids)
+			{
+				_entities.Add(new Solid(
+					new Rectangle(
+						new Vector2(0, 0),
+						(int) RenderConstants.AdjustedScreen.Margin.Width(),
+						RenderConstants.Viewport.Height()),
+					0.9000f,
+					null,
+					null,
+					Textures.Color.Solid.MARGIN,
+					true));
 
-                this._entities.Add(new Solid(
-                    new Primitives.Rectangle(
-                        new Vector2(RenderConstants.AdjustedScreenWidthMargin(), RenderConstants.AdjustedScreenHeight() + RenderConstants.AdjustedScreenHeightMargin()),
-                        (int)RenderConstants.AdjustedScreenWidth(),
-                        (int)RenderConstants.AdjustedScreenHeightMargin()),
-                    0.9000f,
-                    null,
-                    null,
-                    Textures.Color.Solid.MARGIN,
-                    isRawCoords: true));
-            }
-        }
-    }
+				_entities.Add(new Solid(
+					new Rectangle(
+						new Vector2(
+							RenderConstants.AdjustedScreen.Margin.Width() + RenderConstants.AdjustedScreen.Width(), 0),
+						(int) RenderConstants.AdjustedScreen.Margin.Width(),
+						RenderConstants.Viewport.Height()),
+					0.9000f,
+					null,
+					null,
+					Textures.Color.Solid.MARGIN,
+					true));
+
+				_entities.Add(new Solid(
+					new Rectangle(
+						new Vector2(RenderConstants.AdjustedScreen.Margin.Width(), 0),
+						(int) RenderConstants.AdjustedScreen.Width(),
+						(int) RenderConstants.AdjustedScreen.Margin.Height()),
+					0.9000f,
+					null,
+					null,
+					Textures.Color.Solid.MARGIN,
+					true));
+
+				_entities.Add(new Solid(
+					new Rectangle(
+						new Vector2(RenderConstants.AdjustedScreen.Margin.Width(),
+							RenderConstants.AdjustedScreen.Height() + RenderConstants.AdjustedScreen.Margin.Height()),
+						(int) RenderConstants.AdjustedScreen.Width(),
+						(int) RenderConstants.AdjustedScreen.Margin.Height()),
+					0.9000f,
+					null,
+					null,
+					Textures.Color.Solid.MARGIN,
+					true));
+			}
+		}
+	}
 }

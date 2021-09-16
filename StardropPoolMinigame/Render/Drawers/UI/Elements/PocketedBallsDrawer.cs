@@ -38,8 +38,8 @@ namespace StardropPoolMinigame.Render.Drawers
                 this.GetDestination(Vector2.Add(
                     this.GetRawDestination(),
                     new Vector2(
-                        RenderConstants.Entities.PocketedBalls.SUPPORT_PADDING * RenderConstants.TileScale(),
-                        RenderConstants.Entities.PocketedBalls.SUPPORT_UPPER_MARGIN * RenderConstants.TileScale()))),
+                        RenderConstants.Entities.PocketedBalls.SupportPadding * RenderConstants.TileScale(),
+                        RenderConstants.Entities.PocketedBalls.SupportUpperMargin * RenderConstants.TileScale()))),
                 Textures.PocketedBalls.SUPPORTS,
                 this.GetColor(),
                 this.GetRotation(),
@@ -53,8 +53,8 @@ namespace StardropPoolMinigame.Render.Drawers
                 this.GetDestination(Vector2.Add(
                     this.GetRawDestination(),
                     new Vector2(
-                        ((Textures.PocketedBalls.BORDER_BOX.Width) - Textures.PocketedBalls.SUPPORTS.Width + (RenderConstants.Entities.PocketedBalls.SUPPORT_PADDING * -1)) * RenderConstants.TileScale(),
-                        RenderConstants.Entities.PocketedBalls.SUPPORT_UPPER_MARGIN * RenderConstants.TileScale()))),
+                        ((Textures.PocketedBalls.BORDER_BOX.Width) - Textures.PocketedBalls.SUPPORTS.Width + (RenderConstants.Entities.PocketedBalls.SupportPadding * -1)) * RenderConstants.TileScale(),
+                        RenderConstants.Entities.PocketedBalls.SupportUpperMargin * RenderConstants.TileScale()))),
                 Textures.PocketedBalls.SUPPORTS,
                 this.GetColor(),
                 this.GetRotation(),

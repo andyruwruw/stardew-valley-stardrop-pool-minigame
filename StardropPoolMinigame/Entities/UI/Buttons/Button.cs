@@ -66,7 +66,7 @@ namespace StardropPoolMinigame.Entities
         /// <inheritdoc cref="Entity.ClickCallback"/>
         public override void ClickCallback()
         {
-            Sound.PlaySound(SoundConstants.Feedback.BOTTON_PRESS);
+            Sound.PlaySound(SoundConstants.Feedback.BottonPress);
         }
 
         /// <inheritdoc cref="Entity.GetId"/>
@@ -99,7 +99,7 @@ namespace StardropPoolMinigame.Entities
         /// <inheritdoc cref="Entity.HoverCallback"/>
         public override void HoverCallback()
         {
-            Sound.PlaySound(SoundConstants.Feedback.BUTTON_HOVER);
+            Sound.PlaySound(SoundConstants.Feedback.ButtonHover);
         }
 
         /// <summary>

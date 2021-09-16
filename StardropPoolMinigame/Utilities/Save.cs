@@ -367,7 +367,7 @@ namespace StardropPoolMinigame.Utilities
                     SaveData = new SaveJson();
                 }
 
-                if (DevConstants.OVERRIDE_CHARACTER_UNLOCKS)
+                if (DevConstants.OverrideCharacterUnlocks)
                 {
                     SaveData.WinsAgainstSebastian = 1;
                     SaveData.WinsAgainstAbigail = 1;

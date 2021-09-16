@@ -39,12 +39,12 @@ namespace StardropPoolMinigame.Rules
             QuadTree<EntityPhysics> quadTree = new QuadTree<EntityPhysics>(
                 new Primitives.Rectangle(
                     new Vector2(0, 0),
-                    RenderConstants.MinigameScreen.WIDTH,
-                    RenderConstants.MinigameScreen.HEIGHT));
+                    RenderConstants.MinigameScreen.Width,
+                    RenderConstants.MinigameScreen.Height));
 
             Ball cueBall = new Ball(
                 Vector2.Add(tableTopLeft, cueBallStart),
-                RenderConstants.Scenes.Game.LayerDepth.BALL,
+                RenderConstants.Scenes.Game.LayerDepth.Ball,
                 null,
                 null,
                 0);

@@ -47,7 +47,7 @@ namespace StardropPoolMinigame.Scenes
 
             this.AddDependentEntities();
 
-            Sound.PlaySound(SoundConstants.Feedback.DIALOG_START);
+            Sound.PlaySound(SoundConstants.Feedback.DialogStart);
         }
 
         /// <inheritdoc cref="IScene.GetKey"/>
@@ -59,7 +59,7 @@ namespace StardropPoolMinigame.Scenes
         /// <inheritdoc cref="IScene.ReceiveLeftClick"/>
         public override void ReceiveLeftClick()
         {
-            Sound.PlaySound(SoundConstants.Feedback.DIALOG_NEXT);
+            Sound.PlaySound(SoundConstants.Feedback.DialogNext);
 
             IRecitation next = this._script.GetNext();
 
@@ -75,19 +75,19 @@ namespace StardropPoolMinigame.Scenes
                 this._portrait.SetIsOnFire(this._currentRecitation.HasFire());
                 this._portrait.SetIsShining(this._currentRecitation.HasShine());
 
-                this._entities.Remove(StringConstants.Entities.Dialog.TEXT);
+                this._entities.Remove(StringConstants.Entities.Dialog.Text);
                 this._entities.Add(
-                    StringConstants.Entities.Dialog.TEXT,
+                    StringConstants.Entities.Dialog.Text,
                     new Text(
                         Origin.TopCenter,
                         new Vector2(
-                            RenderConstants.MinigameScreen.WIDTH / 2,
-                            RenderConstants.MinigameScreen.HEIGHT / 2 + RenderConstants.Scenes.Dialog.Text.TOP_MARGIN),
+                            RenderConstants.MinigameScreen.Width / 2,
+                            RenderConstants.MinigameScreen.Height / 2 + RenderConstants.Scenes.Dialog.Text.TopMargin),
                         0.0040f,
                         TransitionConstants.Dialog.Text.Entering(),
                         TransitionConstants.Dialog.Text.Exiting(),
                         this._currentRecitation.GetText(),
-                        RenderConstants.Scenes.Dialog.Text.MAX_WIDTH,
+                        RenderConstants.Scenes.Dialog.Text.MaxWidth,
                         0.6f,
                         isCentered: true));
             }
@@ -103,12 +103,12 @@ namespace StardropPoolMinigame.Scenes
         protected override void AddDependentEntities()
         {
             this._entities.Add(
-                StringConstants.Entities.Dialog.PORTRAIT,
+                StringConstants.Entities.Dialog.Portrait,
                 new Portrait(
                     Origin.BottomCenter,
                     new Vector2(
-                        RenderConstants.MinigameScreen.WIDTH / 2,
-                        RenderConstants.MinigameScreen.HEIGHT / 2),
+                        RenderConstants.MinigameScreen.Width / 2,
+                        RenderConstants.MinigameScreen.Height / 2),
                     0.0030f,
                     TransitionConstants.Dialog.Portrait.Entering(),
                     null,
@@ -118,17 +118,17 @@ namespace StardropPoolMinigame.Scenes
                     isShining: this._currentRecitation.HasShine()));
 
             this._entities.Add(
-                StringConstants.Entities.Dialog.TEXT,
+                StringConstants.Entities.Dialog.Text,
                 new Text(
                     Origin.TopCenter,
                     new Vector2(
-                        RenderConstants.MinigameScreen.WIDTH / 2,
-                        RenderConstants.MinigameScreen.HEIGHT / 2 + RenderConstants.Scenes.Dialog.Text.TOP_MARGIN),
+                        RenderConstants.MinigameScreen.Width / 2,
+                        RenderConstants.MinigameScreen.Height / 2 + RenderConstants.Scenes.Dialog.Text.TopMargin),
                     0.0040f,
                     TransitionConstants.Dialog.Text.FirstEntering(),
                     TransitionConstants.Dialog.Text.Exiting(),
                     this._currentRecitation.GetText(),
-                    RenderConstants.Scenes.Dialog.Text.MAX_WIDTH,
+                    RenderConstants.Scenes.Dialog.Text.MaxWidth,
                     0.6f,
                     isCentered: true));
         }

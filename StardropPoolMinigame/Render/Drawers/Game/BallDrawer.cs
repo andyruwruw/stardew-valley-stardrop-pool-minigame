@@ -80,7 +80,7 @@ namespace StardropPoolMinigame.Render.Drawers
                     overrideLayerDepth);
             }
 
-            if (DevConstants.DEBUG_VISUALS)
+            if (DevConstants.DebugVisuals)
             {
                 this.DrawDebugVisuals(batch);
             }
@@ -90,17 +90,17 @@ namespace StardropPoolMinigame.Render.Drawers
         {
             // DrawDebugPoint(batch, this._entity.GetAnchor());
 
-            DrawDebugCircle(batch, this._entity.GetAnchor(), GameConstants.Ball.RADIUS, Color.Yellow);
+            DrawDebugCircle(batch, this._entity.GetAnchor(), GameConstants.Ball.Radius, Color.Yellow);
 
-            DrawDebugCircle(batch, this._entity.GetAnchor(), GameConstants.Ball.RADIUS * 2, Color.Red);
+            DrawDebugCircle(batch, this._entity.GetAnchor(), GameConstants.Ball.Radius * 2, Color.Red);
         }
 
         protected override Vector2 GetRawDestination()
         {
             Vector2 topLeft = this._entity.GetTopLeft();
             return new Vector2(
-                (topLeft.X - RenderConstants.Entities.Ball.MARGIN_LEFT) * RenderConstants.TileScale() + RenderConstants.AdjustedScreen.Margin.Width(),
-                (topLeft.Y - RenderConstants.Entities.Ball.MARGIN_TOP) * RenderConstants.TileScale() + RenderConstants.AdjustedScreen.Margin.Height());
+                (topLeft.X - RenderConstants.Entities.Ball.MarginLeft) * RenderConstants.TileScale() + RenderConstants.AdjustedScreen.Margin.Width(),
+                (topLeft.Y - RenderConstants.Entities.Ball.MarginTop) * RenderConstants.TileScale() + RenderConstants.AdjustedScreen.Margin.Height());
         }
 
         protected override Rectangle GetRawSource()

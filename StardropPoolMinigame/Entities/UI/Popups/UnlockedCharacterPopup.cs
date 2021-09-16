@@ -8,7 +8,7 @@ namespace StardropPoolMinigame.Entities.UI.Popups
         public UnlockedCharacterPopup() : base(
             null,
             null,
-            Translations.GetTranslation(StringConstants.Popups.VICTORY))
+            Translations.GetTranslation(StringConstants.Popups.Victory))
         {
         }
 

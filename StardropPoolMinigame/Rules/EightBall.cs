@@ -81,12 +81,12 @@ namespace StardropPoolMinigame.Rules
             QuadTree<EntityPhysics> quadTree = new QuadTree<EntityPhysics>(
                 new Primitives.Rectangle(
                     new Vector2(0, 0),
-                    RenderConstants.MinigameScreen.WIDTH,
-                    RenderConstants.MinigameScreen.HEIGHT));
+                    RenderConstants.MinigameScreen.Width,
+                    RenderConstants.MinigameScreen.Height));
 
             Ball cueBall = new Ball(
                 Vector2.Add(tableTopLeft, cueBallStart),
-                RenderConstants.Scenes.Game.LayerDepth.BALL,
+                RenderConstants.Scenes.Game.LayerDepth.Ball,
                 null,
                 null,
                 0);
@@ -113,13 +113,13 @@ namespace StardropPoolMinigame.Rules
 
                 Vector2 startingPosition = Vector2.Add(tableTopLeft, footSpot);
 
-                float totalRowWidth = ((ballsInRow * GameConstants.Ball.RADIUS * 2) + (ballsInRow - 1));
+                float totalRowWidth = ((ballsInRow * GameConstants.Ball.Radius * 2) + (ballsInRow - 1));
                 float halfRowWidth = totalRowWidth / 2;
 
-                float finishedRowWidth = (ballsFinishedInRow * GameConstants.Ball.RADIUS * 2) + ballsFinishedInRow;
+                float finishedRowWidth = (ballsFinishedInRow * GameConstants.Ball.Radius * 2) + ballsFinishedInRow;
 
-                float rowOffset = (row * GameConstants.Ball.RADIUS * 2) / 11 * 10 * (rackOrientation == Direction.West || rackOrientation == Direction.North ? -1 : 1);
-                float colOffset = (halfRowWidth * (rackOrientation == Direction.West || rackOrientation == Direction.North ? 1 : -1)) + (finishedRowWidth * (rackOrientation == Direction.West || rackOrientation == Direction.North ? -1 : 1)) + GameConstants.Ball.RADIUS;
+                float rowOffset = (row * GameConstants.Ball.Radius * 2) / 11 * 10 * (rackOrientation == Direction.West || rackOrientation == Direction.North ? -1 : 1);
+                float colOffset = (halfRowWidth * (rackOrientation == Direction.West || rackOrientation == Direction.North ? 1 : -1)) + (finishedRowWidth * (rackOrientation == Direction.West || rackOrientation == Direction.North ? -1 : 1)) + GameConstants.Ball.Radius;
 
                 if (rackOrientation == Direction.West || rackOrientation == Direction.East)
                 {
@@ -129,7 +129,7 @@ namespace StardropPoolMinigame.Rules
                         anchor,
                         new Ball(
                             anchor,
-                            RenderConstants.Scenes.Game.LayerDepth.BALL,
+                            RenderConstants.Scenes.Game.LayerDepth.Ball,
                             null,
                             null,
                             adjustedBallNumber));
@@ -142,7 +142,7 @@ namespace StardropPoolMinigame.Rules
                         anchor,
                         new Ball(
                             anchor,
-                            RenderConstants.Scenes.Game.LayerDepth.BALL,
+                            RenderConstants.Scenes.Game.LayerDepth.Ball,
                             null,
                             null,
                             adjustedBallNumber));

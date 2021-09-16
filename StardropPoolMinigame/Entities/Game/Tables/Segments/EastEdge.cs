@@ -33,9 +33,9 @@ namespace StardropPoolMinigame.Entities
             return TableSegmentType.EastEdge;
         }
 
-        public override void InicializeBounceableSurfaces()
+        public override void InitializeBounceableSurfaces()
         {
-            base.InicializeBounceableSurfaces();
+            base.InitializeBounceableSurfaces();
 
             // East Edge
             this._bounceableSurfaces.Add(
@@ -43,12 +43,12 @@ namespace StardropPoolMinigame.Entities
                     Vector2.Add(
                         this._anchor,
                         new Vector2(
-                            this.GetTotalWidth() - RenderConstants.Entities.TableSegment.SPACE_TO_BOUNCEABLE_SURFACE,
+                            this.GetTotalWidth() - RenderConstants.Entities.TableSegment.SpaceToBounceableSurface,
                             0)),
                     Vector2.Add(
                         this._anchor,
                         new Vector2(
-                            this.GetTotalWidth() - RenderConstants.Entities.TableSegment.SPACE_TO_BOUNCEABLE_SURFACE,
+                            this.GetTotalWidth() - RenderConstants.Entities.TableSegment.SpaceToBounceableSurface,
                             this.GetTotalHeight()))));
         }
     }

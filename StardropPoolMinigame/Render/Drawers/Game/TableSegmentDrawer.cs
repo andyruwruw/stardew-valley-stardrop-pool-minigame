@@ -51,12 +51,12 @@ namespace StardropPoolMinigame.Render.Drawers
                     this.GetOrigin(overrideOrigin),
                     this.GetScale(overrideScale),
                     this.GetEffects(overrideEffects),
-                    RenderConstants.Scenes.Game.LayerDepth.TABLE_FRONT);
+                    RenderConstants.Scenes.Game.LayerDepth.TableFront);
 
                 // Shadow
                 batch.Draw(
                     this.GetTileset(),
-                    new Vector2(destination.X + (RenderConstants.Entities.TableSegment.BORDER * RenderConstants.TileScale()), destination.Y + (RenderConstants.Entities.TableSegment.BORDER * RenderConstants.TileScale())),
+                    new Vector2(destination.X + (RenderConstants.Entities.TableSegment.Border * RenderConstants.TileScale()), destination.Y + (RenderConstants.Entities.TableSegment.Border * RenderConstants.TileScale())),
                     Textures.GetTableSegmentBackFromType(((TableSegment)this._entity).GetTableSegmentType()),
                     Textures.Color.Shader.SHADOW,
                     this.GetRotation(overrideRotation),
@@ -90,7 +90,7 @@ namespace StardropPoolMinigame.Render.Drawers
                 }
             }
 
-            if (DevConstants.DEBUG_VISUALS)
+            if (DevConstants.DebugVisuals)
             {
                 this.DrawDebugVisuals(batch);
             }
@@ -98,7 +98,7 @@ namespace StardropPoolMinigame.Render.Drawers
 
         protected override void DrawDebugVisuals(SpriteBatch batch)
         {
-            IList<Line> bounceableSurfaces = ((TableSegment)this._entity).GetBounceableSurfaces();
+            IList<IRange> bounceableSurfaces = ((TableSegment)this._entity).GetBounceableSurfaces();
 
             foreach (Line line in bounceableSurfaces)
             {

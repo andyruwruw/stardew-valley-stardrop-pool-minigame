@@ -35,7 +35,7 @@ namespace StardropPoolMinigame.Entities
         /// <inheritdoc cref="Button.ClickCallback"/>
         public override void ClickCallback()
         {
-            Sound.PlaySound(SoundConstants.Feedback.SUBMIT_BUTTON_PRESS);
+            Sound.PlaySound(SoundConstants.Feedback.SubmitButtonPress);
             Sound.StopMusic();
         }
 

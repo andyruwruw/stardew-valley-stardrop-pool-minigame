@@ -1,212 +1,215 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using StardropPoolMinigame.Constants;
 using StardropPoolMinigame.Controller;
 using StardropPoolMinigame.Enums;
-using StardropPoolMinigame.Helpers;
 using StardropPoolMinigame.Render;
 using StardropPoolMinigame.Render.Drawers;
 using StardropPoolMinigame.Render.Filters;
-using System;
+using StardropPoolMinigame.Utilities;
 
 namespace StardropPoolMinigame.Entities
 {
-    internal class Cue : Entity
-    {
-        private Vector2 _angle;
+	internal class Cue : Entity
+	{
+		private Vector2 _angle;
 
-        private Vector2 _cueBallPosition;
+		private Vector2 _cueBallPosition;
 
-        private ParticleEmitter _particleEmitter;
+		private ParticleEmitter _particleEmitter;
 
-        private float _power;
+		private float _power;
 
-        private bool _striking;
+		private bool _striking;
 
-        private CueType _type;
+		private readonly CueType _type;
 
-        private IFilter _wiggleAnimation;
+		private readonly IFilter _wiggleAnimation;
 
-        public Cue(
-            Origin origin,
-            Vector2 anchor,
-            float layerDepth,
-            IFilter enteringTransition,
-            CueType type = CueType.Basic
-        ) : base(
-            origin,
-            anchor,
-            layerDepth,
-            enteringTransition,
-            TransitionConstants.Game.Cue.Entering())
-        {
-            this._type = type;
-            this._striking = false;
+		public Cue(
+			Origin origin,
+			Vector2 anchor,
+			float layerDepth,
+			IFilter enteringTransition,
+			CueType type = CueType.Basic
+		) : base(
+			origin,
+			anchor,
+			layerDepth,
+			enteringTransition,
+			TransitionConstants.Game.Cue.Entering())
+		{
+			_type = type;
+			_striking = false;
 
-            this._angle = Vector2.Zero;
-            this._power = 0f;
-            this._cueBallPosition = Vector2.Zero;
+			_angle = Vector2.Zero;
+			_power = 0f;
+			_cueBallPosition = Vector2.Zero;
 
-            this._wiggleAnimation = new Wiggle($"{this.GetId()}-wiggle-animation", GameConstants.Cue.WIGGLE_FREQUENCY, 0);
-            this._filters.Add(this._wiggleAnimation);
+			_wiggleAnimation = new Wiggle($"{GetId()}-wiggle-animation", GameConstants.Cue.WiggleFrequency, 0);
+			_filters.Add(_wiggleAnimation);
 
-            this.InitializeParticleEmitter();
-            this.SetDrawer(new CueDrawer(this));
-        }
+			InitializeParticleEmitter();
+			SetDrawer(new CueDrawer(this));
+		}
 
-        public static ParticleEmitter GetCueParticleEmitter(CueType type, float layerDepth)
-        {
-            switch (type)
-            {
-                case CueType.Flames:
-                    return new SparkEmitter(
-                        Vector2.Zero,
-                        5,
-                        layerDepth - 0.0001f,
-                        5);
-                default:
-                    return new SparkEmitter(
-                        Vector2.Zero,
-                        1,
-                        layerDepth - 0.0001f,
-                        1);
-            }
-        }
+		public static ParticleEmitter GetCueParticleEmitter(CueType type, float layerDepth)
+		{
+			switch (type)
+			{
+				case CueType.Flames:
+					return new SparkEmitter(
+						Vector2.Zero,
+						5,
+						layerDepth - 0.0001f,
+						5);
+				default:
+					return new SparkEmitter(
+						Vector2.Zero,
+						1,
+						layerDepth - 0.0001f,
+						1);
+			}
+		}
 
-        public Vector2 GetAngle()
-        {
-            return this._angle;
-        }
+		public Vector2 GetAngle()
+		{
+			return _angle;
+		}
 
-        public CueType GetCueType()
-        {
-            return this._type;
-        }
+		public CueType GetCueType()
+		{
+			return _type;
+		}
 
-        public override string GetId()
-        {
-            return $"cue-{this._id}";
-        }
+		public override string GetId()
+		{
+			return $"cue-{_id}";
+		}
 
-        public ParticleEmitter GetParticleEmitter()
-        {
-            return this._particleEmitter;
-        }
+		public ParticleEmitter GetParticleEmitter()
+		{
+			return _particleEmitter;
+		}
 
-        public override float GetTotalHeight()
-        {
-            return Textures.Cue.BASIC.Height;
-        }
+		public override float GetTotalHeight()
+		{
+			return Textures.Cue.BASIC.Height;
+		}
 
-        public override float GetTotalWidth()
-        {
-            return Textures.Cue.BASIC.Width;
-        }
+		public override float GetTotalWidth()
+		{
+			return Textures.Cue.BASIC.Width;
+		}
 
-        public void Update(TurnState turnState, Ball cueBall)
-        {
-            base.Update();
-            this._particleEmitter.Update();
+		public void Update(TurnState turnState, Ball cueBall)
+		{
+			base.Update();
+			_particleEmitter.Update();
 
-            if (turnState == TurnState.SelectingAngle)
-            {
-                this.UpdateAngle(cueBall);
-            }
+			if (turnState == TurnState.SelectingAngle) UpdateAngle(cueBall);
 
-            if (turnState == TurnState.SelectingPower)
-            {
-                this.UpdatePower(cueBall);
-                ((Wiggle)this._wiggleAnimation).SetAmplitude(this._power / (GameConstants.Cue.MAXIMUM_DISTANCE_FROM_BALL / RenderConstants.TileScale() - GameConstants.Cue.MINIMUM_DISTANCE_FROM_BALL / RenderConstants.TileScale()) * GameConstants.Cue.POWER_TO_WIGGLE_AMPLITUDE_SCALAR);
-            }
-            else
-            {
-                this._particleEmitter.SetActive(false);
-                ((Wiggle)this._wiggleAnimation).SetAmplitude(0f);
-            }
+			if (turnState == TurnState.SelectingPower)
+			{
+				UpdatePower(cueBall);
+				((Wiggle) _wiggleAnimation).SetAmplitude(_power /
+					(GameConstants.Cue.MaximumDistanceFromCueBall / RenderConstants.TileScale() -
+						GameConstants.Cue.MinimumDistanceFromCueBall / RenderConstants.TileScale()) *
+					GameConstants.Cue.PowerToWiggleAmplitudeScalar);
+			}
+			else
+			{
+				_particleEmitter.SetActive(false);
+				((Wiggle) _wiggleAnimation).SetAmplitude(0f);
+			}
 
-            if (turnState == TurnState.BallsInMotion)
-            {
-                this.UpdateBallsInMotion(cueBall);
-            }
-        }
+			if (turnState == TurnState.BallsInMotion) UpdateBallsInMotion(cueBall);
+		}
 
-        private void InitializeParticleEmitter()
-        {
-            this._particleEmitter = GetCueParticleEmitter(this._type, this._layerDepth);
-        }
+		private void InitializeParticleEmitter()
+		{
+			_particleEmitter = GetCueParticleEmitter(_type, _layerDepth);
+		}
 
-        private void UpdateAngle(Ball cueBall)
-        {
-            this._angle = Vector2.Normalize(Vector2.Subtract(Mouse.Position, RenderConstants.ConvertMinigameWindowToRaw(cueBall.GetPosition())));
-            Vector2 relativeDistance = Vector2.Multiply(this._angle, GameConstants.Cue.MINIMUM_DISTANCE_FROM_BALL / RenderConstants.TileScale());
+		private void UpdateAngle(Ball cueBall)
+		{
+			_angle = Vector2.Normalize(Vector2.Subtract(Mouse.Position,
+				RenderConstants.ConvertAdjustedScreenToRaw(cueBall.GetPosition())));
+			var relativeDistance = Vector2.Multiply(_angle,
+				GameConstants.Cue.MinimumDistanceFromCueBall / RenderConstants.TileScale());
 
-            this._anchor = Vector2.Add(cueBall.GetCenter(), relativeDistance);
-            this._particleEmitter.SetDirection(this._angle);
-        }
+			_anchor = Vector2.Add(cueBall.GetCenter(), relativeDistance);
+			_particleEmitter.SetDirection(_angle);
+		}
 
-        private void UpdateBallsInMotion(Ball cueBall)
-        {
-            if (!this._striking)
-            {
-                this._cueBallPosition = cueBall.GetCenter();
-                this._striking = true;
-                Timer.StartTimer($"{this.GetId()}-striking");
-            }
+		private void UpdateBallsInMotion(Ball cueBall)
+		{
+			if (!_striking)
+			{
+				_cueBallPosition = cueBall.GetCenter();
+				_striking = true;
+				Timer.StartTimer($"{GetId()}-striking");
+			}
 
-            int timeRemaining = (int)(GameConstants.Cue.STRIKING_SPEED - Timer.CheckTimer($"{this.GetId()}-striking"));
+			var timeRemaining = (int) (GameConstants.Cue.StrikingSpeed - Timer.CheckTimer($"{GetId()}-striking"));
 
-            Vector2 relativeDistance = Vector2.Multiply(
-                this._angle,
-                this._power * ((GameConstants.Cue.MAXIMUM_DISTANCE_FROM_BALL - GameConstants.Cue.MINIMUM_DISTANCE_FROM_BALL) / RenderConstants.TileScale()) + (GameConstants.Cue.MINIMUM_DISTANCE_FROM_BALL / RenderConstants.TileScale()));
+			var relativeDistance = Vector2.Multiply(
+				_angle,
+				_power *
+				((GameConstants.Cue.MaximumDistanceFromCueBall - GameConstants.Cue.MinimumDistanceFromCueBall) /
+					RenderConstants.TileScale()) +
+				GameConstants.Cue.MinimumDistanceFromCueBall / RenderConstants.TileScale());
 
-            this._anchor = Vector2.Add(
-                this._cueBallPosition,
-                relativeDistance * (timeRemaining / GameConstants.Cue.STRIKING_SPEED));
+			_anchor = Vector2.Add(
+				_cueBallPosition,
+				relativeDistance * (timeRemaining / GameConstants.Cue.StrikingSpeed));
 
-            if (timeRemaining <= 0)
-            {
-                Sound.PlaySound(SoundConstants.Ball.COLLIDING);
+			if (timeRemaining <= 0)
+			{
+				Sound.PlaySound(SoundConstants.Ball.Colliding);
 
-                cueBall.SetVelocity(Vector2.Multiply(this._angle, this._power * GameConstants.Cue.MOMENTUM_TRANSFER * -1));
+				cueBall.SetVelocity(Vector2.Multiply(_angle, _power * GameConstants.Cue.MomentumTransfer * -1));
 
-                this.SetTransitionState(TransitionState.Exiting, true);
-                Timer.EndTimer($"{this.GetId()}-striking");
-            }
-        }
+				SetTransitionState(TransitionState.Exiting, true);
+				Timer.EndTimer($"{GetId()}-striking");
+			}
+		}
 
-        private void UpdatePower(Ball cueBall)
-        {
-            Vector2 difference = Vector2.Subtract(Mouse.Position, RenderConstants.ConvertMinigameWindowToRaw(cueBall.GetPosition()));
-            this._power = (float)((Math.Sqrt(Math.Pow(difference.X, 2) + Math.Pow(difference.Y, 2)) - GameConstants.Cue.MINIMUM_DISTANCE_FROM_BALL) / (GameConstants.Cue.MAXIMUM_DISTANCE_FROM_BALL - GameConstants.Cue.MINIMUM_DISTANCE_FROM_BALL));
+		private void UpdatePower(Ball cueBall)
+		{
+			var difference = Vector2.Subtract(Mouse.Position,
+				RenderConstants.ConvertAdjustedScreenToRaw(cueBall.GetPosition()));
+			_power =
+				(float) ((Math.Sqrt(Math.Pow(difference.X, 2) + Math.Pow(difference.Y, 2)) -
+					GameConstants.Cue.MinimumDistanceFromCueBall) / (GameConstants.Cue.MaximumDistanceFromCueBall -
+					GameConstants.Cue.MinimumDistanceFromCueBall));
 
-            if (this._power < 0.1f)
-            {
-                this._power = 0.1f;
-            }
-            else if (this._power > 1f)
-            {
-                this._power = 1f;
-            }
+			if (_power < 0.1f)
+				_power = 0.1f;
+			else if (_power > 1f) _power = 1f;
 
-            Vector2 relativeDistance = Vector2.Multiply(
-                this._angle,
-                this._power * ((GameConstants.Cue.MAXIMUM_DISTANCE_FROM_BALL - GameConstants.Cue.MINIMUM_DISTANCE_FROM_BALL) / RenderConstants.TileScale()) + (GameConstants.Cue.MINIMUM_DISTANCE_FROM_BALL / RenderConstants.TileScale()));
+			var relativeDistance = Vector2.Multiply(
+				_angle,
+				_power *
+				((GameConstants.Cue.MaximumDistanceFromCueBall - GameConstants.Cue.MinimumDistanceFromCueBall) /
+					RenderConstants.TileScale()) +
+				GameConstants.Cue.MinimumDistanceFromCueBall / RenderConstants.TileScale());
 
-            this._anchor = Vector2.Add(cueBall.GetCenter(), relativeDistance);
+			_anchor = Vector2.Add(cueBall.GetCenter(), relativeDistance);
 
-            if (this._power > GameConstants.Cue.PARTICLE_MINIMUM_POWER_TRIGGER)
-            {
-                if (!this._particleEmitter.IsActive())
-                {
-                    Sound.PlaySound(SoundConstants.Cue.FULL_CHARGE);
-                }
-                this._particleEmitter.SetActive(true);
-                this._particleEmitter.SetAnchor(this._anchor);
-                this._particleEmitter.SetRate(GameConstants.Cue.PARTICLE_RATE_PER_POWER / ((this._power - GameConstants.Cue.PARTICLE_MINIMUM_POWER_TRIGGER) / (1 - GameConstants.Cue.PARTICLE_MINIMUM_POWER_TRIGGER)));
-            }
-            else
-            {
-                this._particleEmitter.SetActive(false);
-            }
-        }
-    }
+			if (_power > GameConstants.Cue.ParticleMinimumPowerTrigger)
+			{
+				if (!_particleEmitter.IsActive()) Sound.PlaySound(SoundConstants.Cue.FullCharge);
+				_particleEmitter.SetActive(true);
+				_particleEmitter.SetAnchor(_anchor);
+				_particleEmitter.SetRate(GameConstants.Cue.ParticleRatePerPower /
+					((_power - GameConstants.Cue.ParticleMinimumPowerTrigger) /
+						(1 - GameConstants.Cue.ParticleMinimumPowerTrigger)));
+			}
+			else
+			{
+				_particleEmitter.SetActive(false);
+			}
+		}
+	}
 }

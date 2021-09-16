@@ -6,13 +6,13 @@ namespace StardropPoolMinigame.Render.Filters
 {
     internal class PortraitFireAnimation : Animation
     {
-        public PortraitFireAnimation(string key) : base(key, RenderConstants.Entities.PortraitFire.FRAMES * RenderConstants.Entities.PortraitFire.FRAME_DURATION)
+        public PortraitFireAnimation(string key) : base(key, RenderConstants.Entities.PortraitFire.Frames * RenderConstants.Entities.PortraitFire.FrameDuration)
         {
         }
 
         public override Rectangle ExecuteSource(Rectangle source)
         {
-            switch (Math.Floor(this.GetProgress() * RenderConstants.Entities.PortraitFire.FRAMES))
+            switch (Math.Floor(this.GetProgress() * RenderConstants.Entities.PortraitFire.Frames))
             {
                 case 1:
                     return Textures.PortraitFire.FRAME_2;

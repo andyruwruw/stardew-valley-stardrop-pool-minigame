@@ -15,22 +15,22 @@ namespace StardropPoolMinigame.Scenes.Dialog.Scripts
             this._recitations.Add(new Recitation(
                 NPCName.Gus,
                 PortraitEmotion.Laugh,
-                Translations.GetTranslation(StringConstants.Quotes.Reveal.Gus.LINE1)));
+                Translations.GetTranslation(StringConstants.Quotes.Reveal.Gus.Line1)));
 
             this._recitations.Add(new Recitation(
                 NPCName.Gus,
                 PortraitEmotion.Smurk,
-                Translations.GetTranslation(StringConstants.Quotes.Reveal.Gus.LINE2)));
+                Translations.GetTranslation(StringConstants.Quotes.Reveal.Gus.Line2)));
 
             this._recitations.Add(new Recitation(
                 NPCName.Gus,
                 PortraitEmotion.Laugh,
-                Translations.GetTranslation(StringConstants.Quotes.Reveal.Gus.LINE3)));
+                Translations.GetTranslation(StringConstants.Quotes.Reveal.Gus.Line3)));
 
             this._recitations.Add(new Recitation(
                 NPCName.Gus,
                 PortraitEmotion.Glare,
-                Translations.GetTranslation(StringConstants.Quotes.Reveal.Gus.LINE4),
+                Translations.GetTranslation(StringConstants.Quotes.Reveal.Gus.Line4),
                 hasFire: true,
                 isDarker: true));
         }

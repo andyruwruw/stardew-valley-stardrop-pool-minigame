@@ -73,7 +73,7 @@ namespace StardropPoolMinigame.Structures
         ) : base(
             Origin.TopLeft,
             boundary.GetNorthWestCorner(),
-            RenderConstants.Scenes.General.LayerDepth.QUAD_TREE,
+            RenderConstants.Scenes.General.LayerDepth.QuadTree,
             null,
             null)
         {

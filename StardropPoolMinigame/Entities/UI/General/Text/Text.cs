@@ -8,240 +8,237 @@ using StardropPoolMinigame.Render.Filters;
 
 namespace StardropPoolMinigame.Entities
 {
-    internal class Text : Entity
-    {
-        private IList<Character> _characters;
+	internal class Text : Entity
+	{
+		private IList<Character> _characters;
 
-        private bool _isCentered;
+		private readonly bool _isCentered;
 
-        private bool _isHoverable;
+		private readonly bool _isHoverable;
 
-        private int _maxWidth;
+		private readonly int _maxWidth;
 
-        private float _resultingHeight;
+		private float _resultingHeight;
 
-        private float _scale;
+		private readonly float _scale;
 
-        private string _text;
+		private string _text;
 
-        public Text(
-            Origin origin,
-            Vector2 anchor,
-            float layerDepth,
-            IFilter enteringTransition,
-            IFilter exitingTransition,
-            string text,
-            int maxWidth,
-            float scale = 1f,
-            bool isCentered = false,
-            bool isHoverable = false
-        ) : base(
-            origin,
-            anchor,
-            layerDepth,
-            enteringTransition,
-            exitingTransition)
-        {
-            this._text = text;
-            this._maxWidth = maxWidth;
-            this._scale = scale;
-            this._isCentered = isCentered;
-            this._isHoverable = isHoverable;
+		public Text(
+			Origin origin,
+			Vector2 anchor,
+			float layerDepth,
+			IFilter enteringTransition,
+			IFilter exitingTransition,
+			string text,
+			int maxWidth,
+			float scale = 1f,
+			bool isCentered = false,
+			bool isHoverable = false
+		) : base(
+			origin,
+			anchor,
+			layerDepth,
+			enteringTransition,
+			exitingTransition)
+		{
+			_text = text;
+			_maxWidth = maxWidth;
+			_scale = scale;
+			_isCentered = isCentered;
+			_isHoverable = isHoverable;
 
-            this.SetDrawer(new TextDrawer(this));
-            this.InicializeCharacters();
-        }
+			SetDrawer(new TextDrawer(this));
+			InitializeCharacters();
+		}
 
-        public override void ClickCallback()
-        {
-        }
+		public override void ClickCallback()
+		{
+		}
 
-        public IList<Character> GetCharacters()
-        {
-            return this._characters;
-        }
+		public IList<Character> GetCharacters()
+		{
+			return _characters;
+		}
 
-        public override string GetId()
-        {
-            return $"text-{this._id}";
-        }
+		public override string GetId()
+		{
+			return $"text-{_id}";
+		}
 
-        public float GetScale()
-        {
-            return this._scale;
-        }
+		public float GetScale()
+		{
+			return _scale;
+		}
 
-        public override float GetTotalHeight()
-        {
-            return this._resultingHeight;
-        }
+		public override float GetTotalHeight()
+		{
+			return _resultingHeight;
+		}
 
-        public override float GetTotalWidth()
-        {
-            return this._maxWidth;
-        }
+		public override float GetTotalWidth()
+		{
+			return _maxWidth;
+		}
 
-        public override void HoverCallback()
-        {
-        }
+		public override void HoverCallback()
+		{
+		}
 
-        public bool IsHoverable()
-        {
-            return this._isHoverable;
-        }
+		public bool IsHoverable()
+		{
+			return _isHoverable;
+		}
 
-        public override void SetAnchor(Vector2 anchor)
-        {
-            this._anchor = anchor;
-            this.InicializeCharacters();
-        }
+		public override void SetAnchor(Vector2 anchor)
+		{
+			_anchor = anchor;
+			InitializeCharacters();
+		}
 
-        public void SetText(string text)
-        {
-            this._text = text;
-            this.InicializeCharacters();
-        }
+		public void SetText(string text)
+		{
+			_text = text;
+			InitializeCharacters();
+		}
 
-        public override void SetTransitionState(TransitionState transitionState, bool start = false)
-        {
-            base.SetTransitionState(transitionState, start);
+		public override void SetTransitionState(TransitionState transitionState, bool start = false)
+		{
+			base.SetTransitionState(transitionState, start);
 
-            foreach (Character character in this._characters)
-            {
-                character.SetTransitionState(transitionState, true);
-            }
-        }
+			foreach (var character in _characters) character.SetTransitionState(transitionState, true);
+		}
 
-        private void InicializeCharacters()
-        {
-            string word = "";
-            float wordLength = 0;
+		private void InitializeCharacters()
+		{
+			var word = "";
+			float wordLength = 0;
 
-            string line = "";
-            float lineLength = 0;
+			var line = "";
+			float lineLength = 0;
 
-            int lineIndex = 0;
+			var lineIndex = 0;
 
-            this._characters = new List<Character>();
-            this._resultingHeight = 0;
+			_characters = new List<Character>();
+			_resultingHeight = 0;
 
-            int characterIndex = 0;
+			var characterIndex = 0;
 
-            foreach (char character in this._text)
-            {
-                IList<string> finishedLines = new List<string>();
-                IList<float> finishedLineLengths = new List<float>();
+			foreach (var character in _text)
+			{
+				IList<string> finishedLines = new List<string>();
+				IList<float> finishedLineLengths = new List<float>();
 
-                if (character == ' ' || character == '\n' || characterIndex == this._text.Length - 1)
-                {
-                    if (characterIndex == this._text.Length - 1)
-                    {
-                        Rectangle characterBounds = Textures.GetCharacterBoundsFromChar(character);
+				if (character == ' ' || character == '\n' || characterIndex == _text.Length - 1)
+				{
+					if (characterIndex == _text.Length - 1)
+					{
+						var characterBounds = Textures.GetCharacterBoundsFromChar(character);
 
-                        word = $"{word}{character}";
-                        wordLength += RenderConstants.Font.SPACE_BETWEEN_CHARACTERS * this._scale + characterBounds.Width * this._scale;
-                    }
+						word = $"{word}{character}";
+						wordLength += RenderConstants.Font.SpaceBetweenCharacters * _scale +
+							characterBounds.Width * _scale;
+					}
 
-                    if (lineLength + RenderConstants.Font.SPACE_WIDTH * this._scale + wordLength > this._maxWidth)
-                    {
-                        finishedLines.Add(line);
-                        finishedLineLengths.Add(lineLength);
+					if (lineLength + RenderConstants.Font.SpaceWidth * _scale + wordLength > _maxWidth)
+					{
+						finishedLines.Add(line);
+						finishedLineLengths.Add(lineLength);
 
-                        if (characterIndex == this._text.Length - 1)
-                        {
-                            finishedLines.Add(word);
-                            finishedLineLengths.Add(wordLength);
-                        }
-                        else
-                        {
-                            line = word;
-                            lineLength = wordLength;
-                        }
-                    }
-                    else if (character == '\n' || characterIndex == this._text.Length - 1)
-                    {
-                        if (line != "")
-                        {
-                            finishedLines.Add($"{line} {word}");
-                            finishedLineLengths.Add(lineLength + RenderConstants.Font.SPACE_WIDTH * this._scale + wordLength);
-                        }
-                        else
-                        {
-                            finishedLines.Add(word);
-                            finishedLineLengths.Add(wordLength);
-                        }
+						if (characterIndex == _text.Length - 1)
+						{
+							finishedLines.Add(word);
+							finishedLineLengths.Add(wordLength);
+						}
+						else
+						{
+							line = word;
+							lineLength = wordLength;
+						}
+					}
+					else if (character == '\n' || characterIndex == _text.Length - 1)
+					{
+						if (line != "")
+						{
+							finishedLines.Add($"{line} {word}");
+							finishedLineLengths.Add(lineLength + RenderConstants.Font.SpaceWidth * _scale + wordLength);
+						}
+						else
+						{
+							finishedLines.Add(word);
+							finishedLineLengths.Add(wordLength);
+						}
 
-                        if (character == '\n')
-                        {
-                            finishedLines.Add(" ");
-                            finishedLineLengths.Add(0);
-                        }
+						if (character == '\n')
+						{
+							finishedLines.Add(" ");
+							finishedLineLengths.Add(0);
+						}
 
-                        line = "";
-                        lineLength = 0;
-                    }
-                    else
-                    {
-                        line = $"{line} {word}";
-                        lineLength += RenderConstants.Font.SPACE_WIDTH * this._scale + wordLength;
-                    }
+						line = "";
+						lineLength = 0;
+					}
+					else
+					{
+						line = $"{line} {word}";
+						lineLength += RenderConstants.Font.SpaceWidth * _scale + wordLength;
+					}
 
-                    word = "";
-                    wordLength = 0;
-                }
-                else
-                {
-                    Rectangle characterBounds = Textures.GetCharacterBoundsFromChar(character);
+					word = "";
+					wordLength = 0;
+				}
+				else
+				{
+					var characterBounds = Textures.GetCharacterBoundsFromChar(character);
 
-                    word = $"{word}{character}";
-                    wordLength += characterBounds.Width * this._scale;
-                    if (word != "")
-                    {
-                        wordLength += RenderConstants.Font.SPACE_BETWEEN_CHARACTERS * this._scale;
-                    }
-                }
+					word = $"{word}{character}";
+					wordLength += characterBounds.Width * _scale;
+					if (word != "") wordLength += RenderConstants.Font.SpaceBetweenCharacters * _scale;
+				}
 
-                if (finishedLines.Count > 0)
-                {
-                    for (int i = 0; i < finishedLines.Count; i++)
-                    {
-                        float cursor = 0;
-                        float leftMargin = this._isCentered ? (this._maxWidth - finishedLineLengths[i]) / 2 : 0;
+				if (finishedLines.Count > 0)
+				{
+					for (var i = 0; i < finishedLines.Count; i++)
+					{
+						float cursor = 0;
+						var leftMargin = _isCentered ? (_maxWidth - finishedLineLengths[i]) / 2 : 0;
 
-                        foreach (char lineCharacter in finishedLines[i])
-                        {
-                            if (lineCharacter == ' ')
-                            {
-                                cursor += RenderConstants.Font.SPACE_WIDTH * this._scale;
-                            }
-                            else
-                            {
-                                Rectangle characterBounds = Textures.GetCharacterBoundsFromChar(lineCharacter);
+						foreach (var lineCharacter in finishedLines[i])
+							if (lineCharacter == ' ')
+							{
+								cursor += RenderConstants.Font.SpaceWidth * _scale;
+							}
+							else
+							{
+								var characterBounds = Textures.GetCharacterBoundsFromChar(lineCharacter);
 
-                                this._characters.Add(new Character(
-                                    Origin.TopLeft,
-                                    new Vector2(
-                                        this.GetTopLeft().X + cursor + RenderConstants.Font.SPACE_BETWEEN_CHARACTERS * this._scale + leftMargin,
-                                        this.GetTopLeft().Y + lineIndex * (RenderConstants.Font.CHARACTER_HEIGHT * this._scale + RenderConstants.Font.LINE_SPACING * this._scale)),
-                                    this._layerDepth,
-                                    this._enteringTransition,
-                                    this._exitingTransition,
-                                    lineCharacter));
+								_characters.Add(new Character(
+									Origin.TopLeft,
+									new Vector2(
+										GetTopLeft().X + cursor + RenderConstants.Font.SpaceBetweenCharacters * _scale +
+										leftMargin,
+										GetTopLeft().Y + lineIndex * (RenderConstants.Font.CharacterHeight * _scale +
+											RenderConstants.Font.LineSpacing * _scale)),
+									_layerDepth,
+									_enteringTransition,
+									_exitingTransition,
+									lineCharacter));
 
-                                cursor += RenderConstants.Font.SPACE_BETWEEN_CHARACTERS * this._scale + characterBounds.Width * this._scale;
-                            }
-                        }
+								cursor += RenderConstants.Font.SpaceBetweenCharacters * _scale +
+									characterBounds.Width * _scale;
+							}
 
-                        lineIndex += 1;
-                        this._resultingHeight += RenderConstants.Font.CHARACTER_HEIGHT * this._scale + RenderConstants.Font.LINE_SPACING * this._scale;
-                    }
+						lineIndex += 1;
+						_resultingHeight += RenderConstants.Font.CharacterHeight * _scale +
+							RenderConstants.Font.LineSpacing * _scale;
+					}
 
-                    finishedLines.Clear();
-                    finishedLineLengths.Clear();
-                }
+					finishedLines.Clear();
+					finishedLineLengths.Clear();
+				}
 
-                characterIndex += 1;
-            }
-        }
-    }
+				characterIndex += 1;
+			}
+		}
+	}
 }

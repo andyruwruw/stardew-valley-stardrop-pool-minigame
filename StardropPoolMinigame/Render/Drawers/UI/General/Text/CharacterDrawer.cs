@@ -30,7 +30,7 @@ namespace StardropPoolMinigame.Render.Drawers
         protected override Vector2 GetRawDestination()
         {
             Vector2 destination = base.GetRawDestination();
-            return new Vector2(destination.X, destination.Y + (RenderConstants.Font.Y_OFFSET * RenderConstants.TileScale()));
+            return new Vector2(destination.X, destination.Y + (RenderConstants.Font.YOffset * RenderConstants.TileScale()));
         }
 
         protected override Rectangle GetRawSource()

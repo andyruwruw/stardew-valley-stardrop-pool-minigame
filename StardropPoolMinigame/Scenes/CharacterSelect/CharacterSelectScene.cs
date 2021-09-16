@@ -31,14 +31,14 @@ namespace StardropPoolMinigame.Scenes
         /// <inheritdoc cref="Scene.GetKey"/>
         public override string GetKey()
         {
-            return "charater-select-scene";
+            return "character-select-scene";
         }
 
         /// <inheritdoc cref="Scene.ReceiveLeftClick"/>
         public override void ReceiveLeftClick()
         {
             // Check if buttons are clicked
-            foreach (string key in StringConstants.Entities.CharacterSelect.PORTRAITS)
+            foreach (string key in StringConstants.Entities.CharacterSelect.Portraits)
             {
                 if (this._entities[key].IsHovered())
                 {
@@ -49,11 +49,11 @@ namespace StardropPoolMinigame.Scenes
                 }
             }
 
-            if (this._entities[StringConstants.Entities.CharacterSelect.CHALLENGE_BUTTON].IsHovered()
+            if (this._entities[StringConstants.Entities.CharacterSelect.ChallengeButton].IsHovered()
                 && (this._opponentName != NPCName.Abigail || Save.IsAbigailUnlocked())
                 && (this._opponentName != NPCName.Gus || Save.IsGusUnlocked()))
             {
-                this._entities[StringConstants.Entities.CharacterSelect.CHALLENGE_BUTTON].ClickCallback();
+                this._entities[StringConstants.Entities.CharacterSelect.ChallengeButton].ClickCallback();
                 Sound.StopMusic();
                 this.CharacterSelected();
             }
@@ -70,7 +70,7 @@ namespace StardropPoolMinigame.Scenes
         {
             // Background
             this._entities.Add(
-                StringConstants.Entities.CharacterSelect.BAR_SHELVES,
+                StringConstants.Entities.CharacterSelect.BarShelves,
                 new BarShelves(
                     Origin.TopLeft,
                     new Vector2(0, 0),
@@ -79,24 +79,24 @@ namespace StardropPoolMinigame.Scenes
                     TransitionConstants.CharacterSelect.Exiting()));
 
             this._entities.Add(
-                StringConstants.Entities.CharacterSelect.BOTTOM_BACKGROUND,
+                StringConstants.Entities.CharacterSelect.BottomBackground,
                 new Solid(
                     new Primitives.Rectangle(
                         new Vector2(0, Textures.BAR_SHELVES.Height),
-                        (int)RenderConstants.MinigameScreen.WIDTH,
-                        (int)RenderConstants.MinigameScreen.HEIGHT - Textures.BAR_SHELVES.Height),
+                        (int)RenderConstants.MinigameScreen.Width,
+                        (int)RenderConstants.MinigameScreen.Height - Textures.BAR_SHELVES.Height),
                     0.0031f,
                     null,
                     TransitionConstants.CharacterSelect.Exiting(),
                     Color.Black));
 
             // Buttons
-            float centerX = RenderConstants.MinigameScreen.WIDTH / 2;
+            float centerX = RenderConstants.MinigameScreen.Width / 2;
             float portraitTopMargin = Textures.BAR_SHELVES.Height - Textures.Portrait.Sam.DEFAULT.Height;
             float portraitSeparation = Textures.Portrait.Sam.DEFAULT.Width;
 
             this._entities.Add(
-                StringConstants.Entities.CharacterSelect.SAM_PORTRAIT,
+                StringConstants.Entities.CharacterSelect.SamPortrait,
                 new Portrait(
                     Origin.TopLeft,
                     new Vector2(centerX - (portraitSeparation * 2), portraitTopMargin),
@@ -107,7 +107,7 @@ namespace StardropPoolMinigame.Scenes
                     isHoverable: true));
 
             this._entities.Add(
-                StringConstants.Entities.CharacterSelect.SEBASTIAN_PORTRAIT,
+                StringConstants.Entities.CharacterSelect.SebastianPortrait,
                 new Portrait(
                     Origin.TopLeft,
                     new Vector2(centerX - portraitSeparation, portraitTopMargin),
@@ -119,7 +119,7 @@ namespace StardropPoolMinigame.Scenes
                     isDarker: true));
 
             this._entities.Add(
-                StringConstants.Entities.CharacterSelect.ABIGAIL_PORTRAIT,
+                StringConstants.Entities.CharacterSelect.AbigailPortrait,
                 new Portrait(
                     Origin.TopLeft,
                     new Vector2(centerX, portraitTopMargin),
@@ -132,7 +132,7 @@ namespace StardropPoolMinigame.Scenes
                     isSilhouette: !Save.IsAbigailUnlocked()));
 
             this._entities.Add(
-                StringConstants.Entities.CharacterSelect.GUS_PORTRAIT,
+                StringConstants.Entities.CharacterSelect.GusPortrait,
                 new Portrait(
                     Origin.TopLeft,
                     new Vector2(centerX + portraitSeparation, portraitTopMargin),
@@ -145,21 +145,21 @@ namespace StardropPoolMinigame.Scenes
                     isSilhouette: !Save.IsGusUnlocked()));
 
             this._entities.Add(
-                StringConstants.Entities.CharacterSelect.CHALLENGE_BUTTON,
+                StringConstants.Entities.CharacterSelect.ChallengeButton,
                 new SubmitButton(
                     Origin.TopCenter,
-                    new Vector2(RenderConstants.MinigameScreen.WIDTH / 2, RenderConstants.MinigameScreen.HEIGHT - RenderConstants.Scenes.CharacterSelect.SelectedName.TOP_MARGIN - RenderConstants.Font.CHARACTER_HEIGHT),
+                    new Vector2(RenderConstants.MinigameScreen.Width / 2, RenderConstants.MinigameScreen.Height - RenderConstants.Scenes.CharacterSelect.SelectedName.TopMargin - RenderConstants.Font.CharacterHeight),
                     0.0050f,
                     TransitionConstants.CharacterSelect.OpponentName.Entering(),
                     null,
-                    Translations.GetTranslation(StringConstants.Buttons.CharacterSelect.CHALLENGE),
+                    Translations.GetTranslation(StringConstants.Buttons.CharacterSelect.Challenge),
                     80));
 
             // Feedback
-            float cursorTopMargin = Textures.BAR_SHELVES.Height - Textures.Portrait.Sam.DEFAULT.Height - RenderConstants.Scenes.CharacterSelect.Cursor.BOTTOM_MARGIN;
+            float cursorTopMargin = Textures.BAR_SHELVES.Height - Textures.Portrait.Sam.DEFAULT.Height - RenderConstants.Scenes.CharacterSelect.Cursor.BottomMargin;
 
             this._entities.Add(
-                StringConstants.Entities.CharacterSelect.CURSOR,
+                StringConstants.Entities.CharacterSelect.Cursor,
                 new Cursor(
                     Origin.TopCenter,
                     new Vector2(centerX - (portraitSeparation * 1.5f), cursorTopMargin),
@@ -169,21 +169,21 @@ namespace StardropPoolMinigame.Scenes
 
             // Titles
             this._entities.Add(
-                StringConstants.Entities.CharacterSelect.PAGE_TITLE,
+                StringConstants.Entities.CharacterSelect.PageTitle,
                 new PageTitle(
                     Origin.TopCenter,
-                    new Vector2(RenderConstants.MinigameScreen.WIDTH / 2, RenderConstants.Scenes.MainMenu.GameTitle.TOP_MARGIN),
+                    new Vector2(RenderConstants.MinigameScreen.Width / 2, RenderConstants.Scenes.MainMenu.GameTitle.TopMargin),
                     0.0050f,
                     TransitionConstants.CharacterSelect.PageTitle.Entering(),
                     TransitionConstants.CharacterSelect.Exiting(),
-                    Translations.GetTranslation(StringConstants.Titles.CHARACTER_SELECT),
+                    Translations.GetTranslation(StringConstants.Titles.CharacterSelect),
                     200));
 
             this._entities.Add(
-                StringConstants.Entities.CharacterSelect.SELECTED_NAME,
+                StringConstants.Entities.CharacterSelect.SelectedName,
                 new Text(
                     Origin.TopCenter,
-                    new Vector2(RenderConstants.MinigameScreen.WIDTH / 2, RenderConstants.Scenes.MainMenu.GameTitle.TOP_MARGIN + RenderConstants.Scenes.CharacterSelect.SelectedName.TOP_MARGIN),
+                    new Vector2(RenderConstants.MinigameScreen.Width / 2, RenderConstants.Scenes.MainMenu.GameTitle.TopMargin + RenderConstants.Scenes.CharacterSelect.SelectedName.TopMargin),
                     0.0050f,
                     TransitionConstants.CharacterSelect.OpponentName.Entering(),
                     TransitionConstants.CharacterSelect.Exiting(),
@@ -198,11 +198,11 @@ namespace StardropPoolMinigame.Scenes
         /// </summary>
         private void CharacterSelected()
         {
-            this._challengeButton.SetTransitionState(TransitionState.Dead);
+            this.GetChallengeButton().SetTransitionState(TransitionState.Dead);
 
-            foreach (Portrait portrait in this._portraits)
+            foreach (string key in StringConstants.Entities.CharacterSelect.Portraits)
             {
-                if (this._opponentName == portrait.GetName())
+                if (this._opponentName == ((Portrait)this._entities[key]).GetName())
                 {
                     PortraitEmotion emotion = PortraitEmotion.Laugh;
 
@@ -215,8 +215,8 @@ namespace StardropPoolMinigame.Scenes
                         emotion = PortraitEmotion.Smurk;
                     }
 
-                    portrait.SetEmotion(emotion);
-                    portrait.SetExitingTransition(TransitionConstants.CharacterSelect.Portrait.ActiveExiting());
+                    ((Portrait)this._entities[key]).SetEmotion(emotion);
+                    this._entities[key].SetExitingTransition(TransitionConstants.CharacterSelect.Portrait.ActiveExiting());
 
                     this._opponent = ComputerOpponent.GetComputerOpponentFromName(this._opponentName);
 
@@ -224,14 +224,32 @@ namespace StardropPoolMinigame.Scenes
                     Sound.PlayMusic(this._opponent.GetMusicId());
                 }
 
-                portrait.SetTransitionState(TransitionState.Exiting, true);
+                this._entities[key].SetTransitionState(TransitionState.Exiting, true);
             }
 
-            this._cursor.SetExitingTransition(TransitionConstants.CharacterSelect.Portrait.ActiveExiting());
-            this._cursor.SetTransitionState(TransitionState.Exiting, true);
+            this.GetCursor().SetExitingTransition(TransitionConstants.CharacterSelect.Portrait.ActiveExiting());
+            this.GetCursor().SetTransitionState(TransitionState.Exiting, true);
 
             ISceneCreator gameSceneCreator = new GameSceneCreator(Player.GetMainPlayer(), this._opponent);
             this._newScene = new DialogScene(gameSceneCreator);
+        }
+
+        /// <summary>
+        /// Retrieves <see cref="SubmitButton"/> that finalizes selection.
+        /// </summary>
+        /// <returns><see cref="SubmitButton"/> that finalizes selection</returns>
+        private SubmitButton GetChallengeButton()
+        {
+            return (SubmitButton)this._entities[StringConstants.Entities.CharacterSelect.ChallengeButton];
+        }
+
+        /// <summary>
+        /// Retrieves <see cref="Cursor"/> that hovers over selected <see cref="Portrait"/>.
+        /// </summary>
+        /// <returns><see cref="Cursor"/> that hovers over selected <see cref="Portrait"/></returns>
+        private Cursor GetCursor()
+        {
+            return (Cursor)this._entities[StringConstants.Entities.CharacterSelect.Cursor];
         }
 
         /// <summary>
@@ -240,7 +258,7 @@ namespace StardropPoolMinigame.Scenes
         private void UpdatePortraits()
         {
             // Darken out unselected portraits
-            foreach (string key in StringConstants.Entities.CharacterSelect.PORTRAITS)
+            foreach (string key in StringConstants.Entities.CharacterSelect.Portraits)
             {
                 if (((Portrait)this._entities[key]).GetName() == NPCName.Abigail)
                 {
@@ -259,8 +277,8 @@ namespace StardropPoolMinigame.Scenes
             }
 
             // Reposition cursor and set name to selected opponent
-            float centerX = RenderConstants.MinigameScreen.WIDTH / 2;
-            float cursorTopMargin = Textures.BAR_SHELVES.Height - Textures.Portrait.Sam.DEFAULT.Height - RenderConstants.Scenes.CharacterSelect.Cursor.BOTTOM_MARGIN;
+            float centerX = RenderConstants.MinigameScreen.Width / 2;
+            float cursorTopMargin = Textures.BAR_SHELVES.Height - Textures.Portrait.Sam.DEFAULT.Height - RenderConstants.Scenes.CharacterSelect.Cursor.BottomMargin;
             float portraitSeparation = Textures.Portrait.Sam.DEFAULT.Width;
 
             Vector2 cursorAnchor = new Vector2(centerX - (portraitSeparation * 1.5f), cursorTopMargin);
@@ -271,7 +289,7 @@ namespace StardropPoolMinigame.Scenes
                 case NPCName.Sebastian:
                     cursorAnchor = new Vector2(centerX - (portraitSeparation * 0.55f), cursorTopMargin);
                     selectedOpponentName = Sebastian.Name;
-                    ((SubmitButton)this._entities[StringConstants.Entities.CharacterSelect.CHALLENGE_BUTTON]).SetDisabled(false);
+                    ((SubmitButton)this._entities[StringConstants.Entities.CharacterSelect.ChallengeButton]).SetDisabled(false);
                     break;
 
                 case NPCName.Abigail:
@@ -279,12 +297,12 @@ namespace StardropPoolMinigame.Scenes
                     if (Save.IsAbigailUnlocked())
                     {
                         selectedOpponentName = Abigail.Name;
-                        ((SubmitButton)this._entities[StringConstants.Entities.CharacterSelect.CHALLENGE_BUTTON]).SetDisabled(false);
+                        ((SubmitButton)this._entities[StringConstants.Entities.CharacterSelect.ChallengeButton]).SetDisabled(false);
                     }
                     else
                     {
                         selectedOpponentName = "????";
-                        ((SubmitButton)this._entities[StringConstants.Entities.CharacterSelect.CHALLENGE_BUTTON]).SetDisabled(true);
+                        ((SubmitButton)this._entities[StringConstants.Entities.CharacterSelect.ChallengeButton]).SetDisabled(true);
                     }
                     break;
 
@@ -293,24 +311,24 @@ namespace StardropPoolMinigame.Scenes
                     if (Save.IsGusUnlocked())
                     {
                         selectedOpponentName = Gus.Name;
-                        ((SubmitButton)this._entities[StringConstants.Entities.CharacterSelect.CHALLENGE_BUTTON]).SetDisabled(false);
+                        ((SubmitButton)this._entities[StringConstants.Entities.CharacterSelect.ChallengeButton]).SetDisabled(false);
                     }
                     else
                     {
                         selectedOpponentName = "????";
-                        ((SubmitButton)this._entities[StringConstants.Entities.CharacterSelect.CHALLENGE_BUTTON]).SetDisabled(true);
+                        ((SubmitButton)this._entities[StringConstants.Entities.CharacterSelect.ChallengeButton]).SetDisabled(true);
                     }
                     break;
 
                 default:
-                    ((SubmitButton)this._entities[StringConstants.Entities.CharacterSelect.CHALLENGE_BUTTON]).SetDisabled(false);
+                    ((SubmitButton)this._entities[StringConstants.Entities.CharacterSelect.ChallengeButton]).SetDisabled(false);
                     break;
             }
 
-            this._entities[StringConstants.Entities.CharacterSelect.CURSOR].SetAnchor(cursorAnchor);
-            this._entities[StringConstants.Entities.CharacterSelect.CURSOR].SetTransitionState(TransitionState.Entering, true);
-            ((Text)this._entities[StringConstants.Entities.CharacterSelect.CURSOR]).SetText(selectedOpponentName);
-            ((Text)this._entities[StringConstants.Entities.CharacterSelect.CURSOR]).SetTransitionState(TransitionState.Entering, true);
+            this._entities[StringConstants.Entities.CharacterSelect.Cursor].SetAnchor(cursorAnchor);
+            this._entities[StringConstants.Entities.CharacterSelect.Cursor].SetTransitionState(TransitionState.Entering, true);
+            ((Text)this._entities[StringConstants.Entities.CharacterSelect.Cursor]).SetText(selectedOpponentName);
+            ((Text)this._entities[StringConstants.Entities.CharacterSelect.Cursor]).SetTransitionState(TransitionState.Entering, true);
         }
     }
 }

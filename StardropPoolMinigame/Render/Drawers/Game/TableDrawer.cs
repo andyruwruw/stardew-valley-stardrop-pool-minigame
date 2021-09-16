@@ -48,7 +48,7 @@ namespace StardropPoolMinigame.Render.Drawers
 
         protected override void DrawDebugVisuals(SpriteBatch batch)
         {
-            DrawDebugLine(batch, Vector2.Zero, new Vector2(RenderConstants.MinigameScreen.WIDTH, RenderConstants.MinigameScreen.HEIGHT), Color.Coral, 1);
+            DrawDebugLine(batch, Vector2.Zero, new Vector2(RenderConstants.MinigameScreen.Width, RenderConstants.MinigameScreen.Height), Color.Coral, 1);
         }
 
         protected override Rectangle GetRawSource()

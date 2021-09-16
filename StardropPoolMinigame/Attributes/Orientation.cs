@@ -4,17 +4,17 @@ using System;
 namespace StardropPoolMinigame.Attributes
 {
     /// <summary>
-    /// Polar coordinates for orientation of balls
+    /// Polar coordinates for orientation of <see cref="Ball"/>.
     /// </summary>
     internal class Orientation
     {
         /// <summary>
-        /// The circumference of the ball
+        /// The circumference of the <see cref="Ball"/>.
         /// </summary>
         private float _circumference;
 
         /// <summary>
-        /// Longitude and latitude degrees
+        /// Longitude and latitude degrees.
         /// </summary>
         private Vector2 _orientation;
 
@@ -28,7 +28,7 @@ namespace StardropPoolMinigame.Attributes
         }
 
         /// <summary>
-        /// Retrieves the simplified orientation
+        /// Retrieves the simplified orientation.
         /// </summary>
         /// <returns>Longitude and latitude degrees</returns>
         public Vector2 GetFace()
@@ -45,7 +45,16 @@ namespace StardropPoolMinigame.Attributes
         }
 
         /// <summary>
-        /// Rotates the orientation based on velocity and circumfrance
+        /// Retrieves the circumference of the <see cref="Ball"/>.
+        /// </summary>
+        /// <returns>The circumference of the <see cref="Ball"/></returns>
+        public float GetCircumference()
+        {
+            return this._circumference;
+        }
+
+        /// <summary>
+        /// Rotates the orientation based on velocity and circumference.
         /// </summary>
         /// <param name="velocity"></param>
         public void Roll(Vector2 velocity)
@@ -57,7 +66,7 @@ namespace StardropPoolMinigame.Attributes
         }
 
         /// <summary>
-        /// Simplifies the orientation to not go above 180
+        /// Simplifies the orientation to not go above <c>180</c>.
         /// </summary>
         private void Limit()
         {

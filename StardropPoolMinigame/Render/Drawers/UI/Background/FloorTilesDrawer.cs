@@ -23,8 +23,8 @@ namespace StardropPoolMinigame.Render.Drawers
             SpriteEffects? overrideEffects = null,
             float? overrideLayerDepth = null)
         {
-            int rows = (int)Math.Ceiling((double)(RenderConstants.MinigameScreen.HEIGHT / this.GetSource(overrideSource).Height));
-            int cols = (int)Math.Ceiling((double)(RenderConstants.MinigameScreen.WIDTH / this.GetSource(overrideSource).Width));
+            int rows = (int)Math.Ceiling((double)(RenderConstants.MinigameScreen.Height / this.GetSource(overrideSource).Height));
+            int cols = (int)Math.Ceiling((double)(RenderConstants.MinigameScreen.Width / this.GetSource(overrideSource).Width));
 
             for (int i = 0; i <= rows; i++)
             {
