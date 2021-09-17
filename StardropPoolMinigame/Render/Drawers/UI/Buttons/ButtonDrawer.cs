@@ -4,51 +4,47 @@ using StardropPoolMinigame.Entities;
 
 namespace StardropPoolMinigame.Render.Drawers
 {
-    internal class ButtonDrawer : Drawer
-    {
-        public ButtonDrawer(Button button) : base(button)
-        {
-        }
+	internal class ButtonDrawer : Drawer
+	{
+		public ButtonDrawer(Button button) : base(button)
+		{
+		}
 
-        public override void Draw(
-            SpriteBatch batch,
-            Vector2? overrideDestination = null,
-            Rectangle? overrideSource = null,
-            Color? overrideColor = null,
-            float? overrideRotation = null,
-            Vector2? overrideOrigin = null,
-            float? overrideScale = null,
-            SpriteEffects? overrideEffects = null,
-            float? overrideLayerDepth = null)
-        {
-            ((Button)this._entity).GetText().GetDrawer().Draw(
-                batch,
-                overrideDestination,
-                overrideSource,
-                this.GetRawColor(),
-                overrideRotation,
-                overrideOrigin,
-                overrideScale,
-                overrideEffects,
-                overrideLayerDepth);
-        }
+		public override void Draw(
+			SpriteBatch batch,
+			Vector2? overrideDestination = null,
+			Rectangle? overrideSource = null,
+			Color? overrideColor = null,
+			float? overrideRotation = null,
+			Vector2? overrideOrigin = null,
+			float? overrideScale = null,
+			SpriteEffects? overrideEffects = null,
+			float? overrideLayerDepth = null)
+		{
+			((Button) _entity).GetText().GetDrawer().Draw(
+				batch,
+				overrideDestination,
+				overrideSource,
+				GetRawColor(),
+				overrideRotation,
+				overrideOrigin,
+				overrideScale,
+				overrideEffects,
+				overrideLayerDepth);
+		}
 
-        protected override Color GetRawColor()
-        {
-            if (((Button)this._entity).IsDisabled())
-            {
-                return Textures.Color.Solid.DISABLED;
-            }
-            if (this._entity.IsHovered())
-            {
-                return Textures.Color.Solid.HOVER_ACCENT;
-            }
-            return Color.White;
-        }
+		protected override Color GetRawColor()
+		{
+			if (((Button) _entity).IsDisabled()) return Textures.Color.Solid.DISABLED;
 
-        protected override Rectangle GetRawSource()
-        {
-            return Textures.Characters.LOWERCASE_A;
-        }
-    }
+			if (_entity.IsHovered()) return Textures.Color.Solid.HOVER_ACCENT;
+
+			return Color.White;
+		}
+
+		protected override Rectangle GetRawSource()
+		{
+			return Textures.Characters.LowercaseA;
+		}
+	}
 }

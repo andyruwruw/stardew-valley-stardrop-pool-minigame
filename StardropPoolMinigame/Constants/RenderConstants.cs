@@ -9,11 +9,11 @@ namespace StardropPoolMinigame.Constants
 		public static int TileSize = 16;
 
 		/// <summary>
-		///     Converts <see cref="Vector2" /> coordinates relative to <see cref="AdjustedScreen" />, to
-		///     <see cref="Vector2" /> relative to <see cref="Viewport" />.
+		/// Converts <see cref="Vector2"/> coordinates relative to <see cref="AdjustedScreen"/>, to
+		/// <see cref="Vector2"/> relative to <see cref="Viewport"/>.
 		/// </summary>
-		/// <param name="point"><see cref="Vector2" /> relative to <see cref="AdjustedScreen" /></param>
-		/// <returns><see cref="Vector2" /> relative to <see cref="Viewport" /></returns>
+		/// <param name="point"><see cref="Vector2"/> relative to <see cref="AdjustedScreen"/></param>
+		/// <returns><see cref="Vector2"/> relative to <see cref="Viewport"/></returns>
 		public static Vector2 ConvertAdjustedScreenToRaw(Vector2 point)
 		{
 			return Vector2.Add(
@@ -24,11 +24,11 @@ namespace StardropPoolMinigame.Constants
 		}
 
 		/// <summary>
-		///     Converts <see cref="Vector2" /> coordinates relative to <see cref="Viewport" />, to <see cref="Vector2" />
-		///     relative to <see cref="AdjustedScreen" />.
+		/// Converts <see cref="Vector2"/> coordinates relative to <see cref="Viewport"/>, to <see cref="Vector2"/>
+		/// relative to <see cref="AdjustedScreen"/>.
 		/// </summary>
-		/// <param name="point"><see cref="Vector2" /> relative to <see cref="Viewport" /></param>
-		/// <returns><see cref="Vector2" /> relative to <see cref="AdjustedScreen" /></returns>
+		/// <param name="point"><see cref="Vector2"/> relative to <see cref="Viewport"/></param>
+		/// <returns><see cref="Vector2"/> relative to <see cref="AdjustedScreen"/></returns>
 		public static Vector2 ConvertRawToAdjustedScreen(Vector2 point)
 		{
 			return Vector2.Divide(
@@ -96,32 +96,32 @@ namespace StardropPoolMinigame.Constants
 				return MinigameScreen.Width * TileScale();
 			}
 
-			/// <summary>Difference between the <see cref="Viewport" /> and <see cref="AdjustedScreen" />.</summary>
+			/// <summary>Difference between the <see cref="Viewport"/> and <see cref="AdjustedScreen"/>.</summary>
 			public class Difference
 			{
-				/// <summary>Difference in height between the <see cref="Viewport" /> and <see cref="AdjustedScreen" />.</summary>
+				/// <summary>Difference in height between the <see cref="Viewport"/> and <see cref="AdjustedScreen"/>.</summary>
 				public static float Height()
 				{
 					return Viewport.Height() - AdjustedScreen.Height();
 				}
 
-				/// <summary>Difference in width between the <see cref="Viewport" /> and <see cref="AdjustedScreen" />.</summary>
+				/// <summary>Difference in width between the <see cref="Viewport"/> and <see cref="AdjustedScreen"/>.</summary>
 				public static float Width()
 				{
 					return Viewport.Width() - AdjustedScreen.Width();
 				}
 			}
 
-			/// <summary>Space between <see cref="Viewport" /> and <see cref="AdjustedScreen" />.</summary>
+			/// <summary>Space between <see cref="Viewport"/> and <see cref="AdjustedScreen"/>.</summary>
 			public class Margin
 			{
-				/// <summary>Space between top of <see cref="Viewport" /> and top of <see cref="AdjustedScreen" />.</summary>
+				/// <summary>Space between top of <see cref="Viewport"/> and top of <see cref="AdjustedScreen"/>.</summary>
 				public static float Height()
 				{
 					return Difference.Height() / 2;
 				}
 
-				/// <summary>Space between left of <see cref="Viewport" /> and left of <see cref="AdjustedScreen" />.</summary>
+				/// <summary>Space between left of <see cref="Viewport"/> and left of <see cref="AdjustedScreen"/>.</summary>
 				public static float Width()
 				{
 					return Difference.Width() / 2;
@@ -129,10 +129,10 @@ namespace StardropPoolMinigame.Constants
 			}
 		}
 
-		/// <summary><see cref="Entities.IEntity" /> related render constants</summary>
+		/// <summary><see cref="Entities.IEntity"/> related render constants</summary>
 		public class Entities
 		{
-			/// <summary><see cref="Entities.Ball" /> related render constants</summary>
+			/// <summary><see cref="Entities.Ball"/> related render constants</summary>
 			public class Ball
 			{
 				public static float MarginLeft = 3f;
@@ -140,7 +140,7 @@ namespace StardropPoolMinigame.Constants
 				public static float MarginTop = 2f;
 			}
 
-			/// <summary><see cref="Entities.BallButton" /> related render constants</summary>
+			/// <summary><see cref="Entities.BallButton"/> related render constants</summary>
 			public class BallButton
 			{
 				public static float InnerPadding = 8f;
@@ -148,7 +148,7 @@ namespace StardropPoolMinigame.Constants
 				public static float LeftOffset = 4f;
 			}
 
-			/// <summary><see cref="Entities.Particle" /> related render constants</summary>
+			/// <summary><see cref="Entities.Particle"/> related render constants</summary>
 			public class Particle
 			{
 				public class Spark
@@ -163,7 +163,7 @@ namespace StardropPoolMinigame.Constants
 				}
 			}
 
-			/// <summary><see cref="Entities.PocketedBalls" /> related render constants</summary>
+			/// <summary><see cref="Entities.PocketedBalls"/> related render constants</summary>
 			public class PocketedBalls
 			{
 				public static int Padding = 4;
@@ -173,7 +173,7 @@ namespace StardropPoolMinigame.Constants
 				public static float SupportUpperMargin = -3f;
 			}
 
-			/// <summary><see cref="Entities.PortraitFire" /> related render constants</summary>
+			/// <summary><see cref="Entities.PortraitFire"/> related render constants</summary>
 			public class PortraitFire
 			{
 				public static int FrameDuration = 4;
@@ -181,7 +181,7 @@ namespace StardropPoolMinigame.Constants
 				public static int Frames = 8;
 			}
 
-			/// <summary><see cref="Entities.TableSegment" /> related render constants</summary>
+			/// <summary><see cref="Entities.TableSegment"/> related render constants</summary>
 			public class TableSegment
 			{
 				public static int AngledPocketBareEdgeLength = 6;
@@ -204,35 +204,35 @@ namespace StardropPoolMinigame.Constants
 
 				public static int PocketRadius = 7;
 
-				public static int SpaceToBounceableSurface = Margin + Border + UnpassableLip;
-
 				public static int UnpassableLip = 3;
+
+				public static int SpaceToBounceableSurface = Margin + Border + UnpassableLip;
 
 				public static int VerticalPocketStraightEdgeHeight = 2;
 			}
 		}
 
-		/// <summary><see cref="Character" /> Font related render constants.</summary>
+		/// <summary><see cref="Character"/> Font related render constants.</summary>
 		public class Font
 		{
-			/// <summary>Height of each <see cref="Character" />.</summary>
+			/// <summary>Height of each <see cref="Character"/>.</summary>
 			public static int CharacterHeight = 13;
 
 			/// <summary>Spacing between lines</summary>
 			public static int LineSpacing = 3;
 
-			/// <summary>Space between each <see cref="Character" />.</summary>
+			/// <summary>Space between each <see cref="Character"/>.</summary>
 			public static int SpaceBetweenCharacters = 1;
 
-			/// <summary>Space between each <see cref="Character" /> on tilesheet.</summary>
+			/// <summary>Space between each <see cref="Character"/> on tilesheet.</summary>
 			public static int SpaceBetweenCharactersOnTileset = 1;
 
-			/// <summary>Width of a space <see cref="Character" />.</summary>
+			/// <summary>Width of a space <see cref="Character"/>.</summary>
 			public static int SpaceWidth = 4;
 
 			/// <summary>
-			///     Amount to offset characters in the Y direction to account for
-			///     <see href="https://en.wikipedia.org/wiki/Descender">descenders</see>.
+			/// Amount to offset characters in the Y direction to account for
+			/// <see href="https://en.wikipedia.org/wiki/Descender">descenders</see>.
 			/// </summary>
 			public static int YOffset = 1;
 		}

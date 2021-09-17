@@ -9,7 +9,7 @@
 		/// <summary>
 		/// On game start, skip menus and go right into a game.
 		/// </summary>
-		public static bool AutoStartAIGame = true;
+		public static bool AutoStartAIGame = false;
 
 		/// <summary>
 		/// On game start, skip menus and go right into dialog.

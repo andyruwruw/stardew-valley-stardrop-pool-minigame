@@ -220,34 +220,6 @@ namespace StardropPoolMinigame.Constants
 
 		public class Crammed
 		{
-			/// <summary>
-			/// Location of the cue ball in classic gamemodes
-			/// </summary>
-			public static Vector2 CueBallStart = new Vector2(
-				Layout[0].Count * Textures.Table.Edge.Back.NORTH.Width - 2 *
-				(RenderConstants.Entities.TableSegment.Margin + RenderConstants.Entities.TableSegment.Border) / 4,
-				Layout.Count * Textures.Table.Edge.Back.NORTH.Width / 2);
-
-			/// <summary>
-			/// Starting place to rack the balls
-			/// </summary>
-			public static Vector2 FootSpot = new Vector2(
-				Layout[0].Count * Textures.Table.Edge.Back.NORTH.Width - 2 *
-				(RenderConstants.Entities.TableSegment.Margin + RenderConstants.Entities.TableSegment.Border) / 2,
-				Layout.Count * Textures.Table.Edge.Back.NORTH.Width / 2);
-
-			/// <summary>
-			/// Area in which ball in hand shots can be made from
-			/// </summary>
-			public static Rectangle Kitchen = new Rectangle(
-				new Vector2(
-					RenderConstants.Entities.TableSegment.Margin + RenderConstants.Entities.TableSegment.Border,
-					RenderConstants.Entities.TableSegment.Margin + RenderConstants.Entities.TableSegment.Border),
-				Layout[0].Count * Textures.Table.Edge.Back.NORTH.Width - 2 *
-				(RenderConstants.Entities.TableSegment.Margin + RenderConstants.Entities.TableSegment.Border) / 4,
-				Layout.Count * Textures.Table.Edge.Back.NORTH.Width - 2 *
-				(RenderConstants.Entities.TableSegment.Margin + RenderConstants.Entities.TableSegment.Border));
-
 			public static IList<IList<TableSegmentType>> Layout = new List<IList<TableSegmentType>>
 			{
 				new List<TableSegmentType>
@@ -291,6 +263,34 @@ namespace StardropPoolMinigame.Constants
 					TableSegmentType.SouthEastPocket
 				}
 			};
+
+			/// <summary>
+			/// Location of the cue ball in classic gamemodes
+			/// </summary>
+			public static Vector2 CueBallStart = new Vector2(
+				Layout[0].Count * Textures.Table.Edge.Back.NORTH.Width - 2 *
+				(RenderConstants.Entities.TableSegment.Margin + RenderConstants.Entities.TableSegment.Border) / 4,
+				Layout.Count * Textures.Table.Edge.Back.NORTH.Width / 2);
+
+			/// <summary>
+			/// Starting place to rack the balls
+			/// </summary>
+			public static Vector2 FootSpot = new Vector2(
+				Layout[0].Count * Textures.Table.Edge.Back.NORTH.Width - 2 *
+				(RenderConstants.Entities.TableSegment.Margin + RenderConstants.Entities.TableSegment.Border) / 2,
+				Layout.Count * Textures.Table.Edge.Back.NORTH.Width / 2);
+
+			/// <summary>
+			/// Area in which ball in hand shots can be made from
+			/// </summary>
+			public static Rectangle Kitchen = new Rectangle(
+				new Vector2(
+					RenderConstants.Entities.TableSegment.Margin + RenderConstants.Entities.TableSegment.Border,
+					RenderConstants.Entities.TableSegment.Margin + RenderConstants.Entities.TableSegment.Border),
+				Layout[0].Count * Textures.Table.Edge.Back.NORTH.Width - 2 *
+				(RenderConstants.Entities.TableSegment.Margin + RenderConstants.Entities.TableSegment.Border) / 4,
+				Layout.Count * Textures.Table.Edge.Back.NORTH.Width - 2 *
+				(RenderConstants.Entities.TableSegment.Margin + RenderConstants.Entities.TableSegment.Border));
 
 			/// <summary>
 			/// Location of first cue ball in gamemodes where there are two balls

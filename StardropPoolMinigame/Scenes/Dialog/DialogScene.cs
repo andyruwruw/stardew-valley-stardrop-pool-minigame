@@ -2,148 +2,155 @@
 using StardropPoolMinigame.Constants;
 using StardropPoolMinigame.Entities;
 using StardropPoolMinigame.Enums;
-using StardropPoolMinigame.Helpers;
 using StardropPoolMinigame.Scenes.Dialog.Scripts;
 using StardropPoolMinigame.Utilities;
 
 namespace StardropPoolMinigame.Scenes
 {
-    internal class DialogScene : Scene
-    {
-        /// <summary>
-        /// Current line of dialog from <see cref="Script"/>.
-        /// </summary>
-        private IRecitation _currentRecitation;
+	internal class DialogScene : Scene
+	{
+		/// <summary>
+		/// <see cref="ISceneCreator"/> to generate next <see cref="IScene"/>.
+		/// </summary>
+		private readonly ISceneCreator _sceneCreator;
 
-        /// <summary>
-        /// Portrait <see cref="IEntity"/> of active speaker in <see cref="Script"/>.
-        /// </summary>
-        private Portrait _portrait;
+		/// <summary>
+		/// Current dialog <see cref="Script"/>.
+		/// </summary>
+		private readonly IScript _script;
 
-        /// <summary>
-        /// <see cref="ISceneCreator"/> to generate next <see cref="IScene"/>.
-        /// </summary>
-        private ISceneCreator _sceneCreator;
+		/// <summary>
+		/// Current line of dialog from <see cref="Script"/>.
+		/// </summary>
+		private IRecitation _currentRecitation;
 
-        /// <summary>
-        /// Current dialog <see cref="Script"/>.
-        /// </summary>
-        private IScript _script;
+		/// <summary>
+		/// Instantiates <see cref="DialogScene"/>.
+		/// </summary>
+		/// <param name="sceneCreator"><see cref="ISceneCreator"/> to generate next <see cref="IScene"/></param>
+		public DialogScene(ISceneCreator sceneCreator)
+		{
+			_sceneCreator = sceneCreator;
+			_script = Script.GetScript(sceneCreator);
+			_currentRecitation = _script.GetNext();
 
-        /// <summary>
-        /// Text <see cref="IEntity"/> of current line of dialog from <see cref="Script"/>.
-        /// </summary>
-        private Text _text;
+			AddDependentEntities();
 
-        /// <summary>
-        /// Instantiates <see cref="DialogScene"/>.
-        /// </summary>
-        /// <param name="sceneCreator"><see cref="ISceneCreator"/> to generate next <see cref="IScene"/></param>
-        public DialogScene(ISceneCreator sceneCreator) : base()
-        {
-            this._sceneCreator = sceneCreator;
-            this._script = Script.GetScript(sceneCreator);
-            this._currentRecitation = this._script.GetNext();
+			Sound.PlaySound(SoundConstants.Feedback.DialogStart);
+		}
 
-            this.AddDependentEntities();
+		/// <inheritdoc cref="IScene.GetKey"/>
+		public override string GetKey()
+		{
+			return "dialog-scene";
+		}
 
-            Sound.PlaySound(SoundConstants.Feedback.DialogStart);
-        }
+		/// <inheritdoc cref="IScene.ReceiveLeftClick"/>
+		public override void ReceiveLeftClick()
+		{
+			Sound.PlaySound(SoundConstants.Feedback.DialogNext);
 
-        /// <inheritdoc cref="IScene.GetKey"/>
-        public override string GetKey()
-        {
-            return "dialog-scene";
-        }
+			var next = _script.GetNext();
 
-        /// <inheritdoc cref="IScene.ReceiveLeftClick"/>
-        public override void ReceiveLeftClick()
-        {
-            Sound.PlaySound(SoundConstants.Feedback.DialogNext);
+			if (next == null)
+			{
+				TriggerNextScene();
+			}
+			else
+			{
+				_currentRecitation = next;
 
-            IRecitation next = this._script.GetNext();
+				GetPortrait().SetEmotion(_currentRecitation.GetEmotion());
+				GetPortrait().SetIsOnFire(_currentRecitation.HasFire());
+				GetPortrait().SetIsShining(_currentRecitation.HasShine());
 
-            if (next == null)
-            {
-                this.TriggerNextScene();
-            }
-            else
-            {
-                this._currentRecitation = next;
+				_entities.Remove(StringConstants.Entities.Dialog.Text);
+				_entities.Add(
+					StringConstants.Entities.Dialog.Text,
+					new Text(
+						Origin.TopCenter,
+						new Vector2(
+							RenderConstants.MinigameScreen.Width / 2,
+							RenderConstants.MinigameScreen.Height / 2 + RenderConstants.Scenes.Dialog.Text.TopMargin),
+						0.0040f,
+						TransitionConstants.Dialog.Text.Entering(),
+						TransitionConstants.Dialog.Text.Exiting(),
+						_currentRecitation.GetText(),
+						RenderConstants.Scenes.Dialog.Text.MaxWidth,
+						0.6f,
+						true));
+			}
+		}
 
-                this._portrait.SetEmotion(this._currentRecitation.GetEmotion());
-                this._portrait.SetIsOnFire(this._currentRecitation.HasFire());
-                this._portrait.SetIsShining(this._currentRecitation.HasShine());
+		/// <inheritdoc cref="IScene.ReceiveRightClick"/>
+		public override void ReceiveRightClick()
+		{
+			_currentRecitation = _script.GetLast();
+		}
 
-                this._entities.Remove(StringConstants.Entities.Dialog.Text);
-                this._entities.Add(
-                    StringConstants.Entities.Dialog.Text,
-                    new Text(
-                        Origin.TopCenter,
-                        new Vector2(
-                            RenderConstants.MinigameScreen.Width / 2,
-                            RenderConstants.MinigameScreen.Height / 2 + RenderConstants.Scenes.Dialog.Text.TopMargin),
-                        0.0040f,
-                        TransitionConstants.Dialog.Text.Entering(),
-                        TransitionConstants.Dialog.Text.Exiting(),
-                        this._currentRecitation.GetText(),
-                        RenderConstants.Scenes.Dialog.Text.MaxWidth,
-                        0.6f,
-                        isCentered: true));
-            }
-        }
+		/// <inheritdoc cref="Scene.AddDependentEntities"/>
+		protected override void AddDependentEntities()
+		{
+			_entities.Add(
+				StringConstants.Entities.Dialog.Portrait,
+				new Portrait(
+					Origin.BottomCenter,
+					new Vector2(
+						RenderConstants.MinigameScreen.Width / 2,
+						RenderConstants.MinigameScreen.Height / 2),
+					0.0030f,
+					TransitionConstants.Dialog.Portrait.Entering(),
+					null,
+					_currentRecitation.GetName(),
+					_currentRecitation.GetEmotion(),
+					isOnFire: _currentRecitation.HasFire(),
+					isShining: _currentRecitation.HasShine()));
 
-        /// <inheritdoc cref="IScene.ReceiveRightClick"/>
-        public override void ReceiveRightClick()
-        {
-            this._currentRecitation = this._script.GetLast();
-        }
+			_entities.Add(
+				StringConstants.Entities.Dialog.Text,
+				new Text(
+					Origin.TopCenter,
+					new Vector2(
+						RenderConstants.MinigameScreen.Width / 2,
+						RenderConstants.MinigameScreen.Height / 2 + RenderConstants.Scenes.Dialog.Text.TopMargin),
+					0.0040f,
+					TransitionConstants.Dialog.Text.FirstEntering(),
+					TransitionConstants.Dialog.Text.Exiting(),
+					_currentRecitation.GetText(),
+					RenderConstants.Scenes.Dialog.Text.MaxWidth,
+					0.6f,
+					true));
+		}
 
-        /// <inheritdoc cref="Scene.AddDependentEntities"/>
-        protected override void AddDependentEntities()
-        {
-            this._entities.Add(
-                StringConstants.Entities.Dialog.Portrait,
-                new Portrait(
-                    Origin.BottomCenter,
-                    new Vector2(
-                        RenderConstants.MinigameScreen.Width / 2,
-                        RenderConstants.MinigameScreen.Height / 2),
-                    0.0030f,
-                    TransitionConstants.Dialog.Portrait.Entering(),
-                    null,
-                    this._currentRecitation.GetName(),
-                    this._currentRecitation.GetEmotion(),
-                    isOnFire: this._currentRecitation.HasFire(),
-                    isShining: this._currentRecitation.HasShine()));
+		/// <inheritdoc cref="Scene.AddEntities"/>
+		protected override void AddEntities()
+		{
+		}
 
-            this._entities.Add(
-                StringConstants.Entities.Dialog.Text,
-                new Text(
-                    Origin.TopCenter,
-                    new Vector2(
-                        RenderConstants.MinigameScreen.Width / 2,
-                        RenderConstants.MinigameScreen.Height / 2 + RenderConstants.Scenes.Dialog.Text.TopMargin),
-                    0.0040f,
-                    TransitionConstants.Dialog.Text.FirstEntering(),
-                    TransitionConstants.Dialog.Text.Exiting(),
-                    this._currentRecitation.GetText(),
-                    RenderConstants.Scenes.Dialog.Text.MaxWidth,
-                    0.6f,
-                    isCentered: true));
-        }
+		/// <summary>
+		/// Generates next <see cref="IScene"/> to replace <see cref="DialogScene"/>
+		/// </summary>
+		private void TriggerNextScene()
+		{
+			_newScene = _sceneCreator.GetScene();
+		}
 
-        /// <inheritdoc cref="Scene.AddEntities"/>
-        protected override void AddEntities()
-        {
-        }
+		/// <summary>
+		/// Retrieves Portrait <see cref="IEntity"/> of active speaker in <see cref="Script"/>.
+		/// </summary>
+		/// <returns>Portrait <see cref="IEntity"/> of active speaker in <see cref="Script"/></returns>
+		private Portrait GetPortrait()
+		{
+			return (Portrait) _entities[StringConstants.Entities.Dialog.Portrait];
+		}
 
-        /// <summary>
-        /// Generates next <see cref="IScene"/> to replace <see cref="DialogScene"/>
-        /// </summary>
-        private void TriggerNextScene()
-        {
-            this._newScene = this._sceneCreator.GetScene();
-        }
-    }
+		/// <summary>
+		/// Retrieves <see cref="Text"/> of current line of dialog from <see cref="Script"/>.
+		/// </summary>
+		/// <returns><see cref="Text"/> of current line of dialog from <see cref="Script"/></returns>
+		private Text GetText()
+		{
+			return (Text) _entities[StringConstants.Entities.Dialog.Text];
+		}
+	}
 }
