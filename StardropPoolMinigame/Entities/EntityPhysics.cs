@@ -14,12 +14,12 @@ namespace StardropPoolMinigame.Entities
 		/// <summary>
 		/// Tracks velocity and acceleration.
 		/// </summary>
-		private readonly PhysicsObject _physics;
+		protected readonly PhysicsObject _physics;
 
 		/// <summary>
 		/// Radius of perception for intangible interactions.
 		/// </summary>
-		private float _intangibleRadius;
+		protected float _intangibleRadius;
 
 		/// <summary>
 		/// Instantiates an <see cref="EntityPhysics"/>.
@@ -208,7 +208,7 @@ namespace StardropPoolMinigame.Entities
 		/// <inheritdoc cref="PhysicsObject.SetAcceleration"/>
 		public void SetAcceleration(Vector2 acceleration)
 		{
-			_physics.DividePosition(acceleration);
+			_physics.SetAcceleration(acceleration);
 		}
 
 		/// <summary>
@@ -282,6 +282,12 @@ namespace StardropPoolMinigame.Entities
 		{
 			_physics.Update();
 			_anchor = _physics.GetPosition();
+		}
+
+		/// <inheritdoc cref="IEntity.SetAnchor(Vector2)"/>
+		public override void SetAnchor(Vector2 anchor)
+		{
+			this.SetPosition(anchor);
 		}
 	}
 }

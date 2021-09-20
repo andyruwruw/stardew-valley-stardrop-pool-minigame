@@ -22,8 +22,11 @@ namespace StardropPoolMinigame.Render.Drawers
 		protected override void DrawDebugVisuals(SpriteBatch batch)
 		{
 			DrawDebugPoint(batch, _entity.GetAnchor());
+
 			DrawDebugCircle(batch, _entity.GetAnchor(),
 				(int) Math.Round(((EntityPhysics) _entity).GetIntangibleRadius()), Color.Purple);
+
+			DrawDebugVelocity(batch, (EntityPhysics)this._entity);
 		}
 
 		protected override Color GetRawColor()

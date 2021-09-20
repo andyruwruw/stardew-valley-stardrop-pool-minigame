@@ -25,12 +25,12 @@ namespace StardropPoolMinigame.Constants
             /// <summary>
             /// Amount of acceleration halt applies.
             /// </summary>
-            public static float HaltAcceleration = (float)-.005;
+            public static float HaltAcceleration = (float)-.03;
 
             /// <summary>
             /// <see cref="Entities.Ball"/> velocity at which halt begins.
             /// </summary>
-            public static float HaltBeginVelocity = (float).05;
+            public static float HaltBeginVelocity = (float).08;
 
             /// <summary>
             /// Mass of pool <see cref="Entities.Ball"/>.
@@ -40,7 +40,7 @@ namespace StardropPoolMinigame.Constants
             /// <summary>
             /// Minimum velocity for a <see cref="Entities.Ball"/> to bounce.
             /// </summary>
-            public static float MinimumBounceVelocity = .05f;
+            public static float MinimumBounceVelocity = .02f;
 
             /// <summary>
             /// Minimum velocity of <see cref="Entities.Ball"/>.

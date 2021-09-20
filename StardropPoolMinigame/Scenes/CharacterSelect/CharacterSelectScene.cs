@@ -41,8 +41,6 @@ namespace StardropPoolMinigame.Scenes
 			// Check if buttons are clicked
 			foreach (var key in StringConstants.Entities.CharacterSelect.Portraits)
 			{
-				Logger.Info($"this is what {key}");
-
 				if (_entities[key].IsHovered())
 				{
 					_entities[key].ClickCallback();

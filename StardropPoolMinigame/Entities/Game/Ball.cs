@@ -30,7 +30,7 @@ namespace StardropPoolMinigame.Entities
 
 		private bool _isPocketed;
 
-		private float radius;
+		private float _radius;
 
 		public Ball(
 			Vector2 center,
@@ -49,9 +49,10 @@ namespace StardropPoolMinigame.Entities
 			exitingTransition,
 			GameConstants.Ball.Mass)
 		{
-			_number = number;
-			_orientation = new Orientation(GameConstants.Ball.Radius, orientation.X, orientation.Y);
-			_massMultiplier = 1;
+			this._radius = GameConstants.Ball.Radius;
+			this._number = number;
+			this._orientation = new Orientation(this._radius, orientation.X, orientation.Y);
+			this._massMultiplier = 1;
 
 			_isHighlighted = isHighlighted;
 			_isFlashing = isFlashing;
@@ -76,6 +77,7 @@ namespace StardropPoolMinigame.Entities
 			exitingTransition,
 			GameConstants.Ball.Mass)
 		{
+			this._radius = GameConstants.Ball.Radius;
 			_number = number;
 			_orientation = new Orientation(GameConstants.Ball.Radius);
 			_massMultiplier = 1;
@@ -191,7 +193,6 @@ namespace StardropPoolMinigame.Entities
 		public override void Update()
 		{
 			base.Update();
-
 			_orientation.Roll(Vector2.Negate(GetVelocity()));
 		}
 
@@ -201,6 +202,17 @@ namespace StardropPoolMinigame.Entities
 			if (against is Ball)
 				Sound.PlaySound(SoundConstants.Ball.Colliding);
 			else if (against is Line) Sound.PlaySound(SoundConstants.Ball.Bounce);
+		}
+
+		public float GetRadius()
+		{
+			return this._radius;
+		}
+
+		/// <inheritdoc cref="Entity.GetBoundary"/>
+		public override IRange GetBoundary()
+		{
+			return new Circle(this._anchor, this.GetRadius());
 		}
 	}
 }

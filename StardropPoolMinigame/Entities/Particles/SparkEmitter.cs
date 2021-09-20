@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
+using StardropPoolMinigame.Behaviors.Physics;
 using StardropPoolMinigame.Constants;
 using StardropPoolMinigame.Helpers;
 
@@ -16,7 +17,12 @@ namespace StardropPoolMinigame.Entities
 			anchor,
 			radius,
 			layerDepth,
-			rate)
+			rate,
+			false,
+			new FlockingPhysics(
+				GameConstants.Particle.Spark.AlignmentStrength,
+				GameConstants.Particle.Spark.SeparationStrength,
+				GameConstants.Particle.Spark.CohesionStrength))
 		{
 		}
 

@@ -86,20 +86,18 @@ namespace StardropPoolMinigame.Scenes
 		/// <inheritdoc cref="Scene.GetEntities"/>
 		public override IList<IEntity> GetEntities()
 		{
+			IList<IEntity> entities = new List<IEntity>();
+
+			foreach (var entity in _entities.Values) entities.Add(entity);
+
+			foreach (Ball ball in GetQuadTree().Query()) entities.Add(ball);
+
 			if (_turn.GetTurnState() == TurnState.BallsInMotion
 				|| _turn.GetTurnState() == TurnState.SelectingAngle
 				|| _turn.GetTurnState() == TurnState.SelectingPower)
-			{
-				IList<IEntity> entities = new List<IEntity>();
-
 				entities.Add(_turn.GetCurrentPlayer().GetCue());
 
-				foreach (var entity in _entities.Values) entities.Add(entity);
-
-				return entities;
-			}
-
-			return new List<IEntity>(_entities.Values);
+			return entities;
 		}
 
 		/// <inheritdoc cref="Scene.GetKey"/>
@@ -172,7 +170,7 @@ namespace StardropPoolMinigame.Scenes
 		/// <summary>
 		/// Retrieves reference to <see cref="Table"/>.
 		/// </summary>
-		/// <returns>Teference to <see cref="Table"/></returns>
+		/// <returns>Reference to <see cref="Table"/></returns>
 		public Table GetTable()
 		{
 			return (Table) _entities[StringConstants.Entities.Game.Table];
@@ -282,6 +280,7 @@ namespace StardropPoolMinigame.Scenes
 				setup.Item2);
 
 			if (_players[1].IsComputer())
+			{
 				_entities.Add(
 					StringConstants.Entities.Game.Portrait,
 					new Portrait(
@@ -291,7 +290,8 @@ namespace StardropPoolMinigame.Scenes
 						RenderConstants.Scenes.Game.LayerDepth.Portrait,
 						TransitionConstants.Game.Portrait.Entering(),
 						null,
-						((ComputerOpponent) _players[1]).GetNPCName()));
+						((ComputerOpponent)_players[1]).GetNPCName()));
+			}
 		}
 
 		/// <inheritdoc cref="Scene.AddEntities"/>
@@ -341,7 +341,10 @@ namespace StardropPoolMinigame.Scenes
 		/// <param name="ball"><see cref="Ball"/> pockted</param>
 		/// <param name="balls"><see cref="Ball"/> remaining</param>
 		/// <param name="tableSegment"><see cref="TableSegment"/> ball was pockted in</param>
-		private void BallPocketed(Ball ball, IList<IEntity> balls, TableSegment tableSegment)
+		private void BallPocketed(
+			Ball ball,
+			IList<IEntity> balls,
+			TableSegment tableSegment)
 		{
 			IList<Ball> remaining = new List<Ball>();
 
@@ -423,9 +426,12 @@ namespace StardropPoolMinigame.Scenes
 				var tangibleInteractionResults = _physics.TangibleInteractions(GetQuadTree(), GetTable());
 
 				SetQuadTree((QuadTree<EntityPhysics>) tangibleInteractionResults.Item1);
+
 				if (tangibleInteractionResults.Item2 &&
 					_turn.GetCurrentPlayer().GetCue().GetTransitionState() == TransitionState.Dead)
+				{
 					_turn.SetTurnState(TurnState.Results);
+				}
 			}
 		}
 	}

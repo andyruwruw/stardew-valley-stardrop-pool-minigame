@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using StardropPoolMinigame.Constants;
 using StardropPoolMinigame.Controller;
 using StardropPoolMinigame.Enums;
+using StardropPoolMinigame.Primitives;
 using StardropPoolMinigame.Render.Drawers;
 using StardropPoolMinigame.Render.Filters;
 using Rectangle = StardropPoolMinigame.Primitives.Rectangle;
@@ -102,8 +103,8 @@ namespace StardropPoolMinigame.Entities
 			return _anchor;
 		}
 
-		/// <inheritdoc cref="IEntity.GetCenter"/>
-		public virtual Rectangle GetBoundary()
+		/// <inheritdoc cref="IEntity.GetBoundary"/>
+		public virtual IRange GetBoundary()
 		{
 			return new Rectangle(
 				GetTopLeft(),

@@ -23,7 +23,8 @@ namespace StardropPoolMinigame.Behaviors.Physics
 		}
 
 		/// <inheritdoc cref="Physics.TangibleInteractions(IGraph{EntityPhysics}, Table)"/>
-		public override Tuple<IGraph<EntityPhysics>, bool> TangibleInteractions(IGraph<EntityPhysics> graph,
+		public override Tuple<IGraph<EntityPhysics>, bool> TangibleInteractions(
+			IGraph<EntityPhysics> graph,
 			Table table)
 		{
 			var newGraph = new QuadTree<EntityPhysics>(
@@ -33,35 +34,47 @@ namespace StardropPoolMinigame.Behaviors.Physics
 					RenderConstants.MinigameScreen.Height));
 
 			var balls = ((QuadTree<EntityPhysics>) graph).Query();
-			IDictionary<EntityPhysics, IList<EntityPhysics>> collisionsHandled =
-				new Dictionary<EntityPhysics, IList<EntityPhysics>>();
+			IDictionary<EntityPhysics, IList<EntityPhysics>> collisionsHandled = new Dictionary<EntityPhysics, IList<EntityPhysics>>();
 
 			var finishedMoving = true;
 
 			foreach (Ball ball in balls)
-			{
-				if (finishedMoving && VectorHelper.GetMagnitude(ball.GetVelocity()) != 0) finishedMoving = false;
+            {
+				if (finishedMoving && VectorHelper.GetMagnitude(ball.GetVelocity()) != 0)
+				{
+					finishedMoving = false;
+				}
 
-				var neighbors = ((QuadTree<EntityPhysics>) graph).Query(GetTangiblePerception(ball));
+				var boundary = GetTangiblePerception(ball);
+				var neighbors = ((QuadTree<EntityPhysics>) graph).Query(new Circle(boundary.GetCenter(), ((Circle)boundary).GetRadius() * 2));
+
 				IList<EntityPhysics> filteredNeighbors = new List<EntityPhysics>();
 
 				var tableSegment = table.GetTableSegmentFromPosition(ball.GetAnchor());
 				var barriers = tableSegment.GetBounceableSurfaces();
 
 				foreach (Ball neighbor in neighbors)
-					if (HasTangibleInteractions() && collisionsHandled.ContainsKey(neighbor) &&
-						!collisionsHandled[neighbor].Contains(ball)
+				{
+					if (HasTangibleInteractions()
+						&& collisionsHandled.ContainsKey(neighbor)
+						&& !collisionsHandled[neighbor].Contains(ball)
 						|| !collisionsHandled.ContainsKey(neighbor))
+					{
 						filteredNeighbors.Add(neighbor);
+					}
+				}
 
 				InteractWithTangible(ball, filteredNeighbors, barriers);
 				CheckIfPocketed(ball, tableSegment);
 				collisionsHandled.Add(ball, neighbors);
 
-				if (!ball.IsPocketed()) newGraph.Insert(ball.GetAnchor(), ball);
+				if (!ball.IsPocketed())
+				{
+					newGraph.Insert(ball.GetAnchor(), ball);
+				}
 			}
 
-			return new Tuple<IGraph<EntityPhysics>, bool>(newGraph, finishedMoving);
+            return new Tuple<IGraph<EntityPhysics>, bool>(newGraph, finishedMoving);
 		}
 
 		/// <inheritdoc cref="IPhysics.GetTangiblePerception(EntityPhysics)"/>
@@ -71,7 +84,9 @@ namespace StardropPoolMinigame.Behaviors.Physics
 		}
 
 		/// <inheritdoc cref="Physics.InteractWithTangible(EntityPhysics, IList{EntityPhysics}, IList{IRange})"/>
-		protected override void InteractWithTangible(EntityPhysics entity, IList<EntityPhysics> neighbors,
+		protected override void InteractWithTangible(
+			EntityPhysics entity,
+			IList<EntityPhysics> neighbors,
 			IList<IRange> barriers)
 		{
 			BounceAllNeighbors(entity, neighbors);

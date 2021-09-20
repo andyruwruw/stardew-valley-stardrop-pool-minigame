@@ -28,6 +28,7 @@ namespace StardropPoolMinigame.Entities
 			startingAcceleration,
 			intangibleRadius)
 		{
+			Logger.Info($"I was created {Logger.LogVector2(this._physics.GetPosition())} {Logger.LogVector2(this._physics.GetVelocity())} {Logger.LogVector2(this._physics.GetAcceleration())}");
 		}
 
 		public override string GetId()

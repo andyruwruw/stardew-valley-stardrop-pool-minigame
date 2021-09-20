@@ -301,9 +301,9 @@ namespace StardropPoolMinigame.Attributes
         /// Sets acceleration of <see cref="PhysicsObject"/> as <see cref="Vector2"/>.
         /// </summary>
         /// <param name="acceleration">New acceleration of <see cref="PhysicsObject"/> as <see cref="Vector2"/></param>
-        public void SetAcceleration(Vector2 velocity)
+        public void SetAcceleration(Vector2 acceleration)
         {
-            this._velocity = velocity;
+			this._acceleration = acceleration;
         }
 
         /// <summary>
@@ -348,7 +348,7 @@ namespace StardropPoolMinigame.Attributes
         /// <param name="velocity">New velocity of <see cref="PhysicsObject"/> as <see cref="Vector2"/></param>
         public void SetVelocity(Vector2 velocity)
         {
-            this._velocity = velocity;
+			this._velocity = velocity;
         }
 
         /// <summary>
@@ -383,7 +383,7 @@ namespace StardropPoolMinigame.Attributes
         /// </summary>
         public void Update()
         {
-            this._position = Vector2.Add(this._position, this._velocity);
+			this._position = Vector2.Add(this._position, this._velocity);
             this._velocity = Vector2.Add(this._velocity, this._acceleration);
             this._acceleration = Vector2.Zero;
         }

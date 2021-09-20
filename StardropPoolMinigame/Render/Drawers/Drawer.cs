@@ -20,103 +20,7 @@ namespace StardropPoolMinigame.Render.Drawers
             this._entity = entity;
         }
 
-        public static void DrawDebugCircle(SpriteBatch batch, Vector2 center, float radius, Color? color = null, int size = 1, bool isRaw = false)
-        {
-            int maxLineLength = 3;
-            float circumference = (float)(radius * 2 * Math.PI);
-            int segments = (int)Math.Floor(circumference / maxLineLength);
-
-            float angle = (float)(2 * Math.PI) / segments;
-            Vector2 firstPoint = new Vector2(center.X + radius, center.Y);
-            Vector2 lastPoint = firstPoint;
-
-            for (int i = 1; i < segments; i++)
-            {
-                Vector2 newPoint = Vector2.Add(center, Vector2.Multiply(Vector2.Normalize(VectorHelper.RadiansToVector(angle * i)), radius));
-                DrawDebugLine(
-                    batch,
-                    lastPoint,
-                    newPoint,
-                    color,
-                    size,
-                    isRaw);
-                lastPoint = newPoint;
-            }
-
-            DrawDebugLine(
-                batch,
-                lastPoint,
-                firstPoint,
-                color,
-                size,
-                isRaw);
-        }
-
-        public static void DrawDebugLine(SpriteBatch batch, Vector2 point1, Vector2 point2, Color? color = null, int size = 4, bool isRaw = false)
-        {
-            Color? adjustedColor = color;
-            if (color == null)
-            {
-                adjustedColor = Color.Yellow;
-            }
-
-            Vector2 adjustedPoint1 = point1;
-            Vector2 adjustedPoint2 = point2;
-            if (!isRaw)
-            {
-                adjustedPoint1 = RenderConstants.ConvertAdjustedScreenToRaw(point1);
-                adjustedPoint2 = RenderConstants.ConvertAdjustedScreenToRaw(point2);
-            }
-
-            Vector2 difference = Vector2.Subtract(adjustedPoint2, adjustedPoint1);
-
-            batch.Draw(
-                Game1.staminaRect,
-                new Rectangle(
-                    (int)Math.Round(adjustedPoint1.X - (size / 2)),
-                    (int)Math.Round(adjustedPoint1.Y - (size / 2)),
-                    (int)Math.Round(VectorHelper.Pythagorean(
-                        adjustedPoint1,
-                        adjustedPoint2)),
-                    size),
-                Game1.staminaRect.Bounds,
-                (Color)adjustedColor,
-                VectorHelper.VectorToRadians(difference),
-                Vector2.Zero,
-                SpriteEffects.None,
-                1f);
-        }
-
-        public static void DrawDebugPoint(SpriteBatch batch, Vector2 point, Color? color = null, int size = 4, bool isRaw = false)
-        {
-            Color? adjustedColor = color;
-            if (color == null)
-            {
-                adjustedColor = Color.GreenYellow;
-            }
-
-            Vector2 adjustedPoint = point;
-            if (!isRaw)
-            {
-                adjustedPoint = RenderConstants.ConvertAdjustedScreenToRaw(adjustedPoint);
-            }
-
-            batch.Draw(
-                Game1.staminaRect,
-                new Rectangle(
-                    (int)Math.Round(adjustedPoint.X - (size / 2)),
-                    (int)Math.Round(adjustedPoint.Y - (size / 2)),
-                    size,
-                    size),
-                Game1.staminaRect.Bounds,
-                (Color)adjustedColor,
-                0f,
-                Vector2.Zero,
-                SpriteEffects.None,
-                0.90000f);
-        }
-
-        public virtual void Draw(
+		public virtual void Draw(
                                     SpriteBatch batch,
             Vector2? overrideDestination = null,
             Rectangle? overrideSource = null,
@@ -333,6 +237,127 @@ namespace StardropPoolMinigame.Render.Drawers
         protected TransitionState GetTransitionState()
         {
             return this._entity.GetTransitionState();
+        }
+
+        public static void DrawDebugPoint(SpriteBatch batch, Vector2 point, Color? color = null, int size = 4, bool isRaw = false)
+        {
+            Color? adjustedColor = color;
+            if (color == null)
+            {
+                adjustedColor = Color.GreenYellow;
+            }
+
+            Vector2 adjustedPoint = point;
+            if (!isRaw)
+            {
+                adjustedPoint = RenderConstants.ConvertAdjustedScreenToRaw(adjustedPoint);
+            }
+
+            batch.Draw(
+                Game1.staminaRect,
+                new Rectangle(
+                    (int)Math.Round(adjustedPoint.X - (size / 2)),
+                    (int)Math.Round(adjustedPoint.Y - (size / 2)),
+                    size,
+                    size),
+                Game1.staminaRect.Bounds,
+                (Color)adjustedColor,
+                0f,
+                Vector2.Zero,
+                SpriteEffects.None,
+                0.90000f);
+        }
+        public static void DrawDebugCircle(SpriteBatch batch, Vector2 center, float radius, Color? color = null, int size = 1, bool isRaw = false)
+        {
+            int maxLineLength = 3;
+            float circumference = (float)(radius * 2 * Math.PI);
+            int segments = (int)Math.Floor(circumference / maxLineLength);
+
+            float angle = (float)(2 * Math.PI) / segments;
+            Vector2 firstPoint = new Vector2(center.X + radius, center.Y);
+            Vector2 lastPoint = firstPoint;
+
+            for (int i = 1; i < segments; i++)
+            {
+                Vector2 newPoint = Vector2.Add(center, Vector2.Multiply(Vector2.Normalize(VectorHelper.RadiansToVector(angle * i)), radius));
+                DrawDebugLine(
+                    batch,
+                    lastPoint,
+                    newPoint,
+                    color,
+                    size,
+                    isRaw);
+                lastPoint = newPoint;
+            }
+
+            DrawDebugLine(
+                batch,
+                lastPoint,
+                firstPoint,
+                color,
+                size,
+                isRaw);
+        }
+
+        public static void DrawDebugLine(
+            SpriteBatch batch,
+            Vector2 point1,
+            Vector2 point2,
+            Color? color = null,
+            int size = 4,
+            bool isRaw = false)
+        {
+            Color? adjustedColor = color;
+            if (color == null)
+            {
+                adjustedColor = Color.Yellow;
+            }
+
+            Vector2 adjustedPoint1 = point1;
+            Vector2 adjustedPoint2 = point2;
+            if (!isRaw)
+            {
+                adjustedPoint1 = RenderConstants.ConvertAdjustedScreenToRaw(point1);
+                adjustedPoint2 = RenderConstants.ConvertAdjustedScreenToRaw(point2);
+            }
+
+            Vector2 difference = Vector2.Subtract(adjustedPoint2, adjustedPoint1);
+
+            batch.Draw(
+                Game1.staminaRect,
+                new Rectangle(
+                    (int)Math.Round(adjustedPoint1.X - (size / 2)),
+                    (int)Math.Round(adjustedPoint1.Y - (size / 2)),
+                    (int)Math.Round(VectorHelper.Pythagorean(
+                        adjustedPoint1,
+                        adjustedPoint2)),
+                    size),
+                Game1.staminaRect.Bounds,
+                (Color)adjustedColor,
+                VectorHelper.VectorToRadians(difference),
+                Vector2.Zero,
+                SpriteEffects.None,
+                1f);
+        }
+
+        public static void DrawDebugVelocity(
+            SpriteBatch batch,
+            EntityPhysics entity,
+            Color? color = null,
+            int size = 1,
+            bool isRaw = false)
+        {
+            DrawDebugLine(
+                batch,
+                entity.GetAnchor(),
+                Vector2.Add(
+                    entity.GetAnchor(),
+                    Vector2.Multiply(
+                        entity.GetVelocity(),
+                        4)),
+                color == null ? Color.Red : color,
+                size,
+                isRaw);
         }
     }
 }

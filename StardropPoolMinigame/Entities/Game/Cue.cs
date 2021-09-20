@@ -167,7 +167,6 @@ namespace StardropPoolMinigame.Entities
 			if (timeRemaining <= 0)
 			{
 				Sound.PlaySound(SoundConstants.Ball.Colliding);
-
 				cueBall.SetVelocity(Vector2.Multiply(_angle, _power * GameConstants.Cue.MomentumTransfer * -1));
 
 				SetTransitionState(TransitionState.Exiting, true);

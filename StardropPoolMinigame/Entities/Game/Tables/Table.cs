@@ -57,13 +57,12 @@ namespace StardropPoolMinigame.Entities
             return Textures.Table.Edge.Back.NORTH.Width;
         }
 
-        public TableSegment GetTableSegmentFromPosition(Vector2 postition)
+        public TableSegment GetTableSegmentFromPosition(Vector2 position)
         {
             Vector2 topLeft = this.GetTopLeft();
-            int row = (int)Math.Floor((postition.Y - topLeft.Y) / this.GetSegmentSize());
-            int col = (int)Math.Floor((postition.X - topLeft.X) / this.GetSegmentSize());
-
-            return this._layout[row][col];
+            int row = (int)Math.Floor((position.Y - topLeft.Y) / this.GetSegmentSize());
+            int col = (int)Math.Floor((position.X - topLeft.X) / this.GetSegmentSize());
+			return this._layout[row][col];
         }
 
         /// <summary>

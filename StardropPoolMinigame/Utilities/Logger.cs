@@ -1,5 +1,6 @@
 ﻿using StardewModdingAPI;
 using System;
+using Microsoft.Xna.Framework;
 
 namespace StardropPoolMinigame
 {
@@ -48,5 +49,15 @@ namespace StardropPoolMinigame
         {
             Monitor.Log(message, LogLevel.Trace);
         }
+
+        /// <summary>
+        /// Returns string of <see cref="Vector2"/> value.
+        /// </summary>
+        /// <param name="vector"><see cref="Vector2"/> to stringify</param>
+        /// <returns>String of <see cref="Vector2"/> value</returns>
+		public static string LogVector2(Vector2 vector)
+		{
+			return $"[X: {vector.X} Y: {vector.Y}]";
+		}
     }
 }

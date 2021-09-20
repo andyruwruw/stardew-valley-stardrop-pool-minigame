@@ -90,7 +90,7 @@ namespace StardropPoolMinigame.Structures
         /// <summary>
         /// <see cref="IRange"/> of <see cref="QuadTree{T}"/>.
         /// </summary>
-        public override Primitives.Rectangle GetBoundary()
+        public override IRange GetBoundary()
         {
             return this._boundary;
         }
@@ -151,7 +151,18 @@ namespace StardropPoolMinigame.Structures
             return this._boundary.GetWidth();
         }
 
-        /// <inheritdoc cref="IGraph{T}.Insert(Vector2, T)"/>
+		public override void Update()
+		{
+			foreach (T data in this.Query())
+			{
+				if (data is IEntity)
+				{
+					((IEntity)data).Update();
+				}
+			}
+		}
+
+		/// <inheritdoc cref="IGraph{T}.Insert(Vector2, T)"/>
         public bool Insert(Vector2 position, T data)
         {
             if (!this._boundary.Contains(position))
@@ -287,5 +298,5 @@ namespace StardropPoolMinigame.Structures
 
             this._isDivided = true;
         }
-    }
+	}
 }

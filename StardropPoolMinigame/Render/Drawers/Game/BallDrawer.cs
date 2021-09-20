@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using StardropPoolMinigame.Constants;
 using StardropPoolMinigame.Entities;
 using StardropPoolMinigame.Enums;
+using StardropPoolMinigame.Primitives;
 using StardropPoolMinigame.Render.Filters;
 
 namespace StardropPoolMinigame.Render.Drawers
@@ -19,7 +20,7 @@ namespace StardropPoolMinigame.Render.Drawers
         public override void Draw(
             SpriteBatch batch,
             Vector2? overrideDestination = null,
-            Rectangle? overrideSource = null,
+			Microsoft.Xna.Framework.Rectangle? overrideSource = null,
             Color? overrideColor = null,
             float? overrideRotation = null,
             Vector2? overrideOrigin = null,
@@ -88,12 +89,16 @@ namespace StardropPoolMinigame.Render.Drawers
 
         protected override void DrawDebugVisuals(SpriteBatch batch)
         {
-            // DrawDebugPoint(batch, this._entity.GetAnchor());
+            DrawDebugPoint(batch, this._entity.GetAnchor());
 
-            DrawDebugCircle(batch, this._entity.GetAnchor(), GameConstants.Ball.Radius, Color.Yellow);
+			Circle boundary = (Circle)this._entity.GetBoundary();
 
-            DrawDebugCircle(batch, this._entity.GetAnchor(), GameConstants.Ball.Radius * 2, Color.Red);
-        }
+            DrawDebugCircle(batch, boundary.GetCenter(), boundary.GetRadius(), Color.Yellow);
+
+            DrawDebugCircle(batch, boundary.GetCenter(), boundary.GetRadius() * 2, Color.Purple);
+
+            DrawDebugVelocity(batch, (EntityPhysics)this._entity);
+		}
 
         protected override Vector2 GetRawDestination()
         {
@@ -103,7 +108,7 @@ namespace StardropPoolMinigame.Render.Drawers
                 (topLeft.Y - RenderConstants.Entities.Ball.MarginTop) * RenderConstants.TileScale() + RenderConstants.AdjustedScreen.Margin.Height());
         }
 
-        protected override Rectangle GetRawSource()
+        protected override Microsoft.Xna.Framework.Rectangle GetRawSource()
         {
             switch (((Ball)this._entity).GetBallColor())
             {
@@ -131,7 +136,7 @@ namespace StardropPoolMinigame.Render.Drawers
         private void DrawBase(
             SpriteBatch batch,
             Vector2? overrideDestination = null,
-            Rectangle? overrideSource = null,
+			Microsoft.Xna.Framework.Rectangle? overrideSource = null,
             Color? overrideColor = null,
             float? overrideRotation = null,
             Vector2? overrideOrigin = null,
@@ -238,12 +243,12 @@ namespace StardropPoolMinigame.Render.Drawers
             }
         }
 
-        private Rectangle GetCoreSource()
+        private Microsoft.Xna.Framework.Rectangle GetCoreSource()
         {
             return Textures.GetBallCoreBounds(((Ball)this._entity).GetOrientation().GetFace());
         }
 
-        private Rectangle GetStripeSource()
+        private Microsoft.Xna.Framework.Rectangle GetStripeSource()
         {
             return Textures.GetBallStripesBounds(((Ball)this._entity).GetOrientation().GetFace());
         }

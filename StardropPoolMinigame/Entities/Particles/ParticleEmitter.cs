@@ -141,7 +141,7 @@ namespace StardropPoolMinigame.Entities
 
 		public void SetDirection(Vector2 direction)
 		{
-			_direction = VectorHelper.RadiansToVector(VectorHelper.VectorToRadians(direction) + (float) (Math.PI / 3));
+			_direction = VectorHelper.RadiansToVector(VectorHelper.VectorToRadians(direction) + (float) (Math.PI / 51));
 		}
 
 		public void SetRadius(float radius)
@@ -158,24 +158,26 @@ namespace StardropPoolMinigame.Entities
 		{
 			base.Update();
 
-			var particles = _quadTree.Query();
-
-			if (_physics.HasIntangibleInteractions())
+			if (this._physics.HasIntangibleInteractions())
 			{
-				var results = _physics.IntangibleInteractions(_quadTree, null);
-				_quadTree = (QuadTree<EntityPhysics>) results.Item1;
+				var results = this._physics.IntangibleInteractions(this._quadTree, null);
+				this._quadTree = (QuadTree<EntityPhysics>)results.Item1;
 			}
 
-			if (_physics.HasTangibleInteractions())
+			if (this._physics.HasTangibleInteractions())
 			{
-				var results = _physics.TangibleInteractions(_quadTree, null);
-				_quadTree = (QuadTree<EntityPhysics>) results.Item1;
+				var results = this._physics.TangibleInteractions(this._quadTree, null);
+				this._quadTree = (QuadTree<EntityPhysics>) results.Item1;
 			}
+
+			this._quadTree.Update();
 
 			if (_active && Timer.CheckTimer($"{GetId()}-creation-cycle") > _rate)
 			{
 				Timer.EndTimer($"{GetId()}-creation-cycle");
 				Timer.StartTimer($"{GetId()}-creation-cycle");
+
+				Logger.Info("Creating Particle");
 
 				AddParticle();
 			}

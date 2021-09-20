@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using StardropPoolMinigame.Enums;
+using StardropPoolMinigame.Primitives;
 using StardropPoolMinigame.Render.Drawers;
 using StardropPoolMinigame.Render.Filters;
 using System.Collections.Generic;
@@ -26,7 +27,7 @@ namespace StardropPoolMinigame.Entities
         /// Retrieves the boundary, or <see cref="Primitives.Rectangle"/>, of the <see cref="IEntity"/>.
         /// </summary>
         /// <returns>Boundary of the <see cref="IEntity"/></returns>
-        Primitives.Rectangle GetBoundary();
+        IRange GetBoundary();
 
         /// <summary>
         /// Retrieves <see cref="Vector2"/> of the center of the <see cref="IEntity"/>.
