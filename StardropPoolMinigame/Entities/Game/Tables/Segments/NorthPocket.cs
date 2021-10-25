@@ -52,18 +52,18 @@ namespace StardropPoolMinigame.Entities
                             RenderConstants.Entities.TableSegment.SpaceToBounceableSurface))));
 
             // North West Pocket Angle
-            this._bounceableSurfaces.Add(
-                new Line(
-                    Vector2.Add(
-                        this._anchor,
-                        new Vector2(
-                            RenderConstants.Entities.TableSegment.VerticalPocketStraightEdgeHeight,
-                            RenderConstants.Entities.TableSegment.SpaceToBounceableSurface)),
-                    Vector2.Add(
-                        this._anchor,
-                        new Vector2(
-                            RenderConstants.Entities.TableSegment.VerticalPocketStraightEdgeHeight + RenderConstants.Entities.TableSegment.PocketAngledEdgeHeight,
-                            RenderConstants.Entities.TableSegment.SpaceToBounceableSurface - RenderConstants.Entities.TableSegment.UnpassableLip))));
+            //this._bounceableSurfaces.Add(
+            //    new Line(
+            //        Vector2.Add(
+            //            this._anchor,
+            //            new Vector2(
+            //                RenderConstants.Entities.TableSegment.VerticalPocketStraightEdgeHeight,
+            //                RenderConstants.Entities.TableSegment.SpaceToBounceableSurface)),
+            //        Vector2.Add(
+            //            this._anchor,
+            //            new Vector2(
+            //                RenderConstants.Entities.TableSegment.VerticalPocketStraightEdgeHeight + RenderConstants.Entities.TableSegment.PocketAngledEdgeHeight,
+            //                RenderConstants.Entities.TableSegment.SpaceToBounceableSurface - RenderConstants.Entities.TableSegment.UnpassableLip))));
 
             // North West Bare Edge
             this._bounceableSurfaces.Add(
@@ -94,18 +94,18 @@ namespace StardropPoolMinigame.Entities
                             RenderConstants.Entities.TableSegment.SpaceToBounceableSurface))));
 
             // North East Pocket Angle
-            this._bounceableSurfaces.Add(
-                new Line(
-                    Vector2.Add(
-                        this._anchor,
-                        new Vector2(
-                            this.GetTotalWidth() - RenderConstants.Entities.TableSegment.VerticalPocketStraightEdgeHeight,
-                            RenderConstants.Entities.TableSegment.SpaceToBounceableSurface)),
-                    Vector2.Add(
-                        this._anchor,
-                        new Vector2(
-                            this.GetTotalWidth() - RenderConstants.Entities.TableSegment.VerticalPocketStraightEdgeHeight - RenderConstants.Entities.TableSegment.PocketAngledEdgeHeight,
-                            RenderConstants.Entities.TableSegment.SpaceToBounceableSurface - RenderConstants.Entities.TableSegment.UnpassableLip))));
+            //this._bounceableSurfaces.Add(
+            //    new Line(
+            //        Vector2.Add(
+            //            this._anchor,
+            //            new Vector2(
+            //                this.GetTotalWidth() - RenderConstants.Entities.TableSegment.VerticalPocketStraightEdgeHeight,
+            //                RenderConstants.Entities.TableSegment.SpaceToBounceableSurface)),
+            //        Vector2.Add(
+            //            this._anchor,
+            //            new Vector2(
+            //                this.GetTotalWidth() - RenderConstants.Entities.TableSegment.VerticalPocketStraightEdgeHeight - RenderConstants.Entities.TableSegment.PocketAngledEdgeHeight,
+            //                RenderConstants.Entities.TableSegment.SpaceToBounceableSurface - RenderConstants.Entities.TableSegment.UnpassableLip))));
 
             // North East Bare Edge
             this._bounceableSurfaces.Add(

@@ -1,5 +1,6 @@
 ﻿using StardropPoolMinigame.Entities;
 using StardropPoolMinigame.Primitives;
+using StardropPoolMinigame.Scenes.States;
 using StardropPoolMinigame.Structures;
 using System;
 using System.Collections.Generic;
@@ -26,19 +27,29 @@ namespace StardropPoolMinigame.Behaviors.Physics
         bool HasTangibleInteractions();
 
         /// <summary>
-        /// Simulates intangible interactions for <see cref="IGraph{T}"/>, generating a new <see cref="IGraph{T}"/> in its place.
+        /// 
         /// </summary>
-        /// <param name="graph"><see cref="IGraph{T}"/> of <see cref="EntityPhysics"/></param>
-        /// <param name="table"></param>
-        /// <returns>New <see cref="IGraph{T}"/></returns>
-        Tuple<IGraph<EntityPhysics>, bool> IntangibleInteractions(IGraph<EntityPhysics> graph, Table table);
+        /// <param name="entity"></param>
+        /// <param name="graph"></param>
+        /// <param name="ignoreEntitiesKeys"></param>
+        /// <returns></returns>
+		InteractionsResults IntangibleInteractions(
+			EntityPhysics entity,
+			IGraph<EntityPhysics> graph,
+			IList<string> ignoreEntitiesKeys = null);
 
         /// <summary>
-        /// Simulates tangible interactions for <see cref="IGraph{T}"/>, generating a new <see cref="IGraph{T}"/> in its place.
+        /// 
         /// </summary>
-        /// <param name="graph"><see cref="IGraph{T}"/> of <see cref="EntityPhysics"/></param>
-        /// <param name="table"></param>
-        /// <returns>New <see cref="IGraph{T}"/></returns>
-        Tuple<IGraph<EntityPhysics>, bool> TangibleInteractions(IGraph<EntityPhysics> graph, Table table);
+        /// <param name="entity"></param>
+        /// <param name="graph"></param>
+        /// <param name="tableSegment"></param>
+        /// <param name="ignoreEntitiesKeys"></param>
+        /// <returns></returns>
+		InteractionsResults TangibleInteractions(
+			EntityPhysics entity,
+			IGraph<EntityPhysics> graph,
+			TableSegment tableSegment = null,
+			IList<string> ignoreEntitiesKeys = null);
     }
 }

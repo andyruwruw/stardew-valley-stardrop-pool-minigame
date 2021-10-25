@@ -5,6 +5,7 @@ using StardropPoolMinigame.Constants;
 using StardropPoolMinigame.Entities;
 using StardropPoolMinigame.Helpers;
 using StardropPoolMinigame.Primitives;
+using StardropPoolMinigame.Scenes.States;
 using StardropPoolMinigame.Structures;
 
 namespace StardropPoolMinigame.Behaviors.Physics
@@ -24,20 +25,23 @@ namespace StardropPoolMinigame.Behaviors.Physics
 			return false;
 		}
 
-		/// <inheritdoc cref="IPhysics.IntangibleInteractions(IGraph{EntityPhysics}, Table)"/>
-		public virtual Tuple<IGraph<EntityPhysics>, bool> IntangibleInteractions(
+		/// <inheritdoc cref="IPhysics.IntangibleInteractions"/>
+		public virtual InteractionsResults IntangibleInteractions(
+			EntityPhysics entity,
 			IGraph<EntityPhysics> graph,
-			Table table)
+			IList<string> ignoreEntitiesKeys = null)
 		{
-			return new Tuple<IGraph<EntityPhysics>, bool>(graph, true);
+			return new InteractionsResults();
 		}
 
-		/// <inheritdoc cref="IPhysics.TangibleInteractions(IGraph{EntityPhysics}, Table)"/>
-		public virtual Tuple<IGraph<EntityPhysics>, bool> TangibleInteractions(
+		/// <inheritdoc cref="IPhysics.TangibleInteractions"/>
+		public virtual InteractionsResults TangibleInteractions(
+			EntityPhysics entity,
 			IGraph<EntityPhysics> graph,
-			Table table)
+			TableSegment tableSegment = null,
+			IList<string> ignoreEntitiesKeys = null)
 		{
-			return new Tuple<IGraph<EntityPhysics>, bool>(graph, true);
+			return new InteractionsResults();
 		}
 
 		/// <summary>
@@ -294,8 +298,12 @@ namespace StardropPoolMinigame.Behaviors.Physics
 			var pocketBounds = tableSegement.GetPockets();
 
 			foreach (var pocketBound in pocketBounds)
+			{
 				if (pocketBound.Contains(entity.GetAnchor()))
+				{
 					((Ball) entity).SetPocketed(true);
+				}
+			}
 		}
 
 		/// <summary>

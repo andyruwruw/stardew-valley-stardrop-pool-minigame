@@ -81,7 +81,7 @@ namespace StardropPoolMinigame.Constants
             /// <summary>
             /// Multiplier from <see cref="Entities.Cue"/> power to <see cref="Entities.Ball"/> speed.
             /// </summary>
-            public static float MomentumTransfer = 4;
+            public static float MomentumTransfer = 5;
 
             /// <summary>
             /// Minimum <see cref="Entities.Cue"/> power to trigger <see cref="Entities.ParticleEmitter"/>.

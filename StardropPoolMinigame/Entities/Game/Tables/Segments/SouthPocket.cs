@@ -52,18 +52,18 @@ namespace StardropPoolMinigame.Entities
                             this.GetTotalHeight() - RenderConstants.Entities.TableSegment.SpaceToBounceableSurface))));
 
             // South West Pocket Angle
-            this._bounceableSurfaces.Add(
-                new Line(
-                    Vector2.Add(
-                        this._anchor,
-                        new Vector2(
-                            RenderConstants.Entities.TableSegment.VerticalPocketStraightEdgeHeight,
-                            this.GetTotalHeight() - RenderConstants.Entities.TableSegment.SpaceToBounceableSurface)),
-                    Vector2.Add(
-                        this._anchor,
-                        new Vector2(
-                            RenderConstants.Entities.TableSegment.VerticalPocketStraightEdgeHeight + RenderConstants.Entities.TableSegment.PocketAngledEdgeHeight,
-                            this.GetTotalHeight() - RenderConstants.Entities.TableSegment.SpaceToBounceableSurface + RenderConstants.Entities.TableSegment.UnpassableLip))));
+            //this._bounceableSurfaces.Add(
+            //    new Line(
+            //        Vector2.Add(
+            //            this._anchor,
+            //            new Vector2(
+            //                RenderConstants.Entities.TableSegment.VerticalPocketStraightEdgeHeight,
+            //                this.GetTotalHeight() - RenderConstants.Entities.TableSegment.SpaceToBounceableSurface)),
+            //        Vector2.Add(
+            //            this._anchor,
+            //            new Vector2(
+            //                RenderConstants.Entities.TableSegment.VerticalPocketStraightEdgeHeight + RenderConstants.Entities.TableSegment.PocketAngledEdgeHeight,
+            //                this.GetTotalHeight() - RenderConstants.Entities.TableSegment.SpaceToBounceableSurface + RenderConstants.Entities.TableSegment.UnpassableLip))));
 
             // South West Bare Edge
             this._bounceableSurfaces.Add(
@@ -94,18 +94,18 @@ namespace StardropPoolMinigame.Entities
                             this.GetTotalHeight() - RenderConstants.Entities.TableSegment.SpaceToBounceableSurface))));
 
             // South East Pocket Angle
-            this._bounceableSurfaces.Add(
-                new Line(
-                    Vector2.Add(
-                        this._anchor,
-                        new Vector2(
-                            this.GetTotalWidth() - RenderConstants.Entities.TableSegment.VerticalPocketStraightEdgeHeight,
-                            this.GetTotalHeight() - RenderConstants.Entities.TableSegment.SpaceToBounceableSurface)),
-                    Vector2.Add(
-                        this._anchor,
-                        new Vector2(
-                            this.GetTotalWidth() - RenderConstants.Entities.TableSegment.VerticalPocketStraightEdgeHeight - RenderConstants.Entities.TableSegment.PocketAngledEdgeHeight,
-                            this.GetTotalHeight() - RenderConstants.Entities.TableSegment.SpaceToBounceableSurface + RenderConstants.Entities.TableSegment.UnpassableLip))));
+            //this._bounceableSurfaces.Add(
+            //    new Line(
+            //        Vector2.Add(
+            //            this._anchor,
+            //            new Vector2(
+            //                this.GetTotalWidth() - RenderConstants.Entities.TableSegment.VerticalPocketStraightEdgeHeight,
+            //                this.GetTotalHeight() - RenderConstants.Entities.TableSegment.SpaceToBounceableSurface)),
+            //        Vector2.Add(
+            //            this._anchor,
+            //            new Vector2(
+            //                this.GetTotalWidth() - RenderConstants.Entities.TableSegment.VerticalPocketStraightEdgeHeight - RenderConstants.Entities.TableSegment.PocketAngledEdgeHeight,
+            //                this.GetTotalHeight() - RenderConstants.Entities.TableSegment.SpaceToBounceableSurface + RenderConstants.Entities.TableSegment.UnpassableLip))));
 
             // South East Bare Edge
             this._bounceableSurfaces.Add(

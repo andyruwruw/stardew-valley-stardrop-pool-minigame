@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.Xna.Framework;
-using StardropPoolMinigame.Constants;
+﻿using System.Collections.Generic;
 using StardropPoolMinigame.Entities;
-using StardropPoolMinigame.Helpers;
 using StardropPoolMinigame.Primitives;
 using StardropPoolMinigame.Structures;
-using Rectangle = StardropPoolMinigame.Primitives.Rectangle;
 
 namespace StardropPoolMinigame.Behaviors.Physics
 {
@@ -22,68 +17,45 @@ namespace StardropPoolMinigame.Behaviors.Physics
 			return true;
 		}
 
-		/// <inheritdoc cref="Physics.TangibleInteractions(IGraph{EntityPhysics}, Table)"/>
-		public override Tuple<IGraph<EntityPhysics>, bool> TangibleInteractions(
+		/// <inheritdoc cref="Physics.TangibleInteractions"/>
+		public override InteractionsResults TangibleInteractions(
+			EntityPhysics entity,
 			IGraph<EntityPhysics> graph,
-			Table table)
+			TableSegment tableSegment = null,
+			IList<string> ignoreEntitiesKeys = null)
 		{
-			var newGraph = new QuadTree<EntityPhysics>(
-				new Rectangle(
-					Vector2.Zero,
-					RenderConstants.MinigameScreen.Width,
-					RenderConstants.MinigameScreen.Height));
+			InteractionsResults results = new InteractionsResults();
 
-			var balls = ((QuadTree<EntityPhysics>) graph).Query();
-			IDictionary<EntityPhysics, IList<EntityPhysics>> collisionsHandled = new Dictionary<EntityPhysics, IList<EntityPhysics>>();
+			var boundary = GetTangiblePerception(entity);
+			var neighbors = ((QuadTree<EntityPhysics>) graph).Query(new Circle(boundary.GetCenter(), ((Circle)boundary).GetRadius() * 2));
 
-			var finishedMoving = true;
+			IList<EntityPhysics> filteredNeighbors = new List<EntityPhysics>();
 
-			foreach (Ball ball in balls)
-            {
-				if (finishedMoving && VectorHelper.GetMagnitude(ball.GetVelocity()) != 0)
+			var barriers = tableSegment.GetBounceableSurfaces();
+
+			foreach (Ball neighbor in neighbors)
+			{
+				if (HasTangibleInteractions()
+					&& (ignoreEntitiesKeys == null
+					|| (!ignoreEntitiesKeys.Contains(neighbor.GetId()))))
 				{
-					finishedMoving = false;
-				}
-
-				var boundary = GetTangiblePerception(ball);
-				var neighbors = ((QuadTree<EntityPhysics>) graph).Query(new Circle(boundary.GetCenter(), ((Circle)boundary).GetRadius() * 2));
-
-				IList<EntityPhysics> filteredNeighbors = new List<EntityPhysics>();
-
-				var tableSegment = table.GetTableSegmentFromPosition(ball.GetAnchor());
-				var barriers = tableSegment.GetBounceableSurfaces();
-
-				foreach (Ball neighbor in neighbors)
-				{
-					if (HasTangibleInteractions()
-						&& collisionsHandled.ContainsKey(neighbor)
-						&& !collisionsHandled[neighbor].Contains(ball)
-						|| !collisionsHandled.ContainsKey(neighbor))
-					{
-						filteredNeighbors.Add(neighbor);
-					}
-				}
-
-				InteractWithTangible(ball, filteredNeighbors, barriers);
-				CheckIfPocketed(ball, tableSegment);
-				collisionsHandled.Add(ball, neighbors);
-
-				if (!ball.IsPocketed())
-				{
-					newGraph.Insert(ball.GetAnchor(), ball);
+					filteredNeighbors.Add(neighbor);
 				}
 			}
 
-            return new Tuple<IGraph<EntityPhysics>, bool>(newGraph, finishedMoving);
+			InteractWithTangible(entity, filteredNeighbors, barriers);
+
+			results.SetInteractedWith(filteredNeighbors);
+			return results;
 		}
 
-		/// <inheritdoc cref="IPhysics.GetTangiblePerception(EntityPhysics)"/>
+		/// <inheritdoc cref="Physics.GetTangiblePerception"/>
 		protected override IRange GetTangiblePerception(EntityPhysics entity)
 		{
 			return entity.GetBoundary();
 		}
 
-		/// <inheritdoc cref="Physics.InteractWithTangible(EntityPhysics, IList{EntityPhysics}, IList{IRange})"/>
+		/// <inheritdoc cref="Physics.InteractWithTangible"/>
 		protected override void InteractWithTangible(
 			EntityPhysics entity,
 			IList<EntityPhysics> neighbors,

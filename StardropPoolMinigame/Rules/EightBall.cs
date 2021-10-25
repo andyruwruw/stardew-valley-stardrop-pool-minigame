@@ -1,166 +1,94 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.Xna.Framework;
-using StardropPoolMinigame.Constants;
+﻿using System.Collections.Generic;
 using StardropPoolMinigame.Entities;
 using StardropPoolMinigame.Enums;
-using StardropPoolMinigame.Players;
-using StardropPoolMinigame.Structures;
-using Rectangle = StardropPoolMinigame.Primitives.Rectangle;
+using StardropPoolMinigame.Scenes.States;
 
 namespace StardropPoolMinigame.Rules
 {
 	internal class EightBall : RuleSet
 	{
-		public override IList<GameEvent> BallPocketed(
-			IPlayer player,
+		/// <inheritdoc cref="RuleSet.BallPocketed"/>
+		public override void BallPocketed(
+			Turn turn,
 			Ball ball,
 			TableSegment pocket,
-			IList<Ball> remaining,
-			TableSegment target = null)
+			IList<EntityPhysics> remaining)
 		{
-			IList<GameEvent> events = new List<GameEvent>();
-
 			if (ball.GetNumber() == 0)
 			{
-				events.Add(GameEvent.NextPlayer);
-				events.Add(GameEvent.Scratch);
+				turn.SetIsScratch();
 
-				return events;
+				if (turn.IsVictory())
+				{
+					turn.SetVictory(false);
+					turn.SetDefeat();
+				}
 			}
-
-			if (player.GetBallType() == BallType.Any)
-			{
-				player.SetBallType(ball.GetBallType());
-
-				if (ball.GetBallType() == BallType.Stripped)
-					events.Add(GameEvent.ChoseStripes);
-				else
-					events.Add(GameEvent.ChoseSolids);
-			}
-
-			if (ball.GetBallType() == player.GetBallType())
-				events.Add(GameEvent.ScoredPoint);
 			else
-				events.Add(GameEvent.GavePoint);
-			events.Add(GameEvent.SamePlayer);
-
-			return events;
-		}
-
-		public override IList<GameEvent> FirstBallHit(IPlayer player, Ball ball)
-		{
-			IList<GameEvent> events = new List<GameEvent>();
-
-			if (ball.GetBallType() != player.GetBallType())
 			{
-				events.Add(GameEvent.NextPlayer);
-				events.Add(GameEvent.Scratch);
-			}
-
-			return events;
-		}
-
-		public override Tuple<IList<Ball>, QuadTree<EntityPhysics>> GenerateInitialBalls(
-			Vector2 tableTopLeft,
-			Vector2 cueBallStart,
-			Vector2 footSpot,
-			Direction rackOrientation)
-		{
-			var quadTree = new QuadTree<EntityPhysics>(
-				new Rectangle(
-					new Vector2(0, 0),
-					RenderConstants.MinigameScreen.Width,
-					RenderConstants.MinigameScreen.Height));
-
-			var cueBall = new Ball(
-				Vector2.Add(tableTopLeft, cueBallStart),
-				RenderConstants.Scenes.Game.LayerDepth.Ball,
-				null,
-				null,
-				0);
-			quadTree.Insert(cueBall.GetAnchor(), cueBall);
-
-			var ballsInRow = 1;
-			var ballsFinishedInRow = 0;
-			var row = 0;
-
-			for (var ballNumber = 1; ballNumber <= 15; ballNumber++)
-			{
-				var adjustedBallNumber = ballNumber;
-
-				if (ballNumber == 5)
+				if (ball.GetNumber() == 8)
 				{
-					adjustedBallNumber = 8;
-				}
-				else if (ballNumber > 5 && ballNumber <= 8)
-				{
-					adjustedBallNumber = ballNumber - 1;
-				}
+					if (turn.GetCurrentPlayer().GetBallType() == BallType.Any)
+					{
+						turn.SetDefeat();
+					}
+					else
+					{
+						foreach (Ball reaminingBall in remaining)
+						{
+							if (reaminingBall.GetBallType() == turn.GetCurrentPlayer().GetBallType())
+							{
+								turn.SetDefeat();
+							}
+						}
 
-				var startingPosition = Vector2.Add(tableTopLeft, footSpot);
-
-				var totalRowWidth = ballsInRow * GameConstants.Ball.Radius * 2 + (ballsInRow - 1);
-				var halfRowWidth = totalRowWidth / 2;
-
-				var finishedRowWidth = ballsFinishedInRow * GameConstants.Ball.Radius * 2 + ballsFinishedInRow;
-
-				var rowOffset = row * GameConstants.Ball.Radius * 2 / 11 * 10 *
-					(rackOrientation == Direction.West || rackOrientation == Direction.North ? -1 : 1);
-				var colOffset =
-					halfRowWidth * (rackOrientation == Direction.West || rackOrientation == Direction.North ? 1 : -1) +
-					finishedRowWidth *
-					(rackOrientation == Direction.West || rackOrientation == Direction.North ? -1 : 1) +
-					GameConstants.Ball.Radius;
-
-				if (rackOrientation == Direction.West || rackOrientation == Direction.East)
-				{
-					var anchor = Vector2.Add(startingPosition, new Vector2(rowOffset, colOffset));
-
-					quadTree.Insert(
-						anchor,
-						new Ball(
-							anchor,
-							RenderConstants.Scenes.Game.LayerDepth.Ball,
-							null,
-							null,
-							adjustedBallNumber));
+						if (!turn.IsDefeat())
+						{
+							turn.IsVictory();
+						}
+					}
 				}
 				else
 				{
-					var anchor = Vector2.Add(startingPosition, new Vector2(colOffset, rowOffset));
+					if (turn.GetCurrentPlayer().GetBallType() == BallType.Any)
+					{
+						turn.GetCurrentPlayer().SetBallType(ball.GetBallType());
+						turn.GetCurrentPlayersOpponent().SetBallType(ball.GetBallType() == BallType.Solid ? BallType.Stripped : BallType.Solid);
 
-					quadTree.Insert(
-						anchor,
-						new Ball(
-							anchor,
-							RenderConstants.Scenes.Game.LayerDepth.Ball,
-							null,
-							null,
-							adjustedBallNumber));
-				}
-
-				ballsFinishedInRow += 1;
-
-				if (ballsFinishedInRow >= ballsInRow)
-				{
-					ballsInRow += 1;
-					ballsFinishedInRow = 0;
-					row += 1;
+						turn.SetIsNewBallTypes();
+						turn.AddPointScored();
+					}
+					else
+					{
+						if (ball.GetBallType() == turn.GetCurrentPlayer().GetBallType())
+						{
+							turn.AddPointScored();
+						}
+						else
+						{
+							turn.AddPointGiven();
+						}
+					}
 				}
 			}
-
-			return new Tuple<IList<Ball>, QuadTree<EntityPhysics>>(new List<Ball> {cueBall}, quadTree);
 		}
 
-		public override IList<GameEvent> NoBallHit(IList<Ball> remaining)
+		/// <inheritdoc cref="RuleSet.FirstBallHit"/>
+		public override void FirstBallHit(Turn turn, Ball ball)
 		{
-			IList<GameEvent> events = new List<GameEvent>();
+			if (turn.GetCurrentPlayer().GetBallType() != BallType.Any)
+			{
+				if (turn.GetCurrentPlayer().GetBallType() != ball.GetBallType())
+				{
+					turn.SetIsScratch();
+				}
+			}
+		}
 
-			events.Add(GameEvent.NextPlayer);
-			events.Add(GameEvent.Scratch);
-
-			return events;
+		/// <inheritdoc cref="RuleSet.NoBallHit"/>
+		public override void NoBallHit(Turn turn)
+		{
+			turn.SetIsScratch();
 		}
 	}
 }

@@ -37,22 +37,7 @@ namespace StardropPoolMinigame.Players
             this._powerAccuracy = powerAccuracy;
         }
 
-        public static ComputerOpponent GetComputerOpponentFromName(NPCName name)
-        {
-            switch (name)
-            {
-                case NPCName.Sebastian:
-                    return new Sebastian();
-                case NPCName.Abigail:
-                    return new Abigail();
-                case NPCName.Gus:
-                    return new Gus();
-                default:
-                    return new Sam();
-            }
-        }
-
-        public int GetAngleAccuracy()
+		public int GetAngleAccuracy()
         {
             return this._angleAccuracy;
         }
@@ -76,5 +61,20 @@ namespace StardropPoolMinigame.Players
         {
             return this._powerAccuracy;
         }
+
+		public static ComputerOpponent GetComputerOpponentFromName(NPCName name)
+		{
+			switch (name)
+			{
+				case NPCName.Sebastian:
+					return new Sebastian();
+				case NPCName.Abigail:
+					return new Abigail();
+				case NPCName.Gus:
+					return new Gus();
+				default:
+					return new Sam();
+			}
+		}
     }
 }

@@ -53,6 +53,7 @@
     <Compile Include="Entities\EntityPhysics.cs" />
     <Compile Include="Multiplayer\Messages\IModMessage.cs" />
     <Compile Include="Physics\FlockingNewtonianPhysics.cs" />
+    <Compile Include="Physics\InteractionsResults.cs" />
     <Compile Include="Physics\Physics.cs" />
     <Compile Include="Utilities\Config.cs" />
     <Compile Include="Multiplayer\Messages\ChallengeAccepted.cs" />
@@ -197,7 +198,6 @@
     <Compile Include="Scenes\Game\GameScene.cs" />
     <Compile Include="Scenes\Game\GameSceneCreator.cs" />
     <Compile Include="Scenes\Game\States\Turn.cs" />
-    <Compile Include="Scenes\Game\States\TurnResults.cs" />
     <Compile Include="Scenes\IScene.cs" />
     <Compile Include="Scenes\ISceneCreator.cs" />
     <Compile Include="Scenes\CharacterSelect\CharacterSelectScene.cs" />

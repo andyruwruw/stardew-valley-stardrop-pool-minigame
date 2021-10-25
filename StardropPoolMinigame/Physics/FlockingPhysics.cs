@@ -5,6 +5,7 @@ using StardropPoolMinigame.Primitives;
 using System.Collections.Generic;
 using StardropPoolMinigame.Structures;
 using StardropPoolMinigame.Constants;
+using StardropPoolMinigame.Scenes.States;
 
 namespace StardropPoolMinigame.Behaviors.Physics
 {
@@ -45,15 +46,18 @@ namespace StardropPoolMinigame.Behaviors.Physics
             return true;
         }
 
-        /// <inheritdoc cref="Physics.GetIntangiblePerception(EntityPhysics)"/>
+        /// <inheritdoc cref="Physics.GetIntangiblePerception"/>
         protected override IRange GetIntangiblePerception(EntityPhysics entity)
         {
             return new Circle(entity.GetAnchor(), entity.GetIntangibleRadius());
         }
 
-		/// <inheritdoc />
-		public override Tuple<IGraph<EntityPhysics>, bool> IntangibleInteractions(IGraph<EntityPhysics> graph, Table table)
-		{
+        /// <inheritdoc cref="IntangibleInteractions"/>
+        public override InteractionsResults IntangibleInteractions(
+			EntityPhysics entity,
+			IGraph<EntityPhysics> graph,
+			IList<string> ignoreEntitiesKeys = null)
+        {
 			var newGraph = new QuadTree<EntityPhysics>(
 				new Primitives.Rectangle(
 					Vector2.Zero,
@@ -71,11 +75,14 @@ namespace StardropPoolMinigame.Behaviors.Physics
 				newGraph.Insert(boid.GetAnchor(), boid);
 			}
 
-			return new Tuple<IGraph<EntityPhysics>, bool>(newGraph, false);
+			return new InteractionsResults();
         }
 
-		/// <inheritdoc cref="Physics.InteractWithIntangible(EntityPhysics, IList{EntityPhysics}, IList{IRange})"/>
-        protected override void InteractWithIntangible(EntityPhysics entity, IList<EntityPhysics> neighbors, IList<IRange> barriers)
+		/// <inheritdoc cref="Physics.InteractWithIntangible"/>
+        protected override void InteractWithIntangible(
+			EntityPhysics entity,
+			IList<EntityPhysics> neighbors,
+			IList<IRange> barriers)
 		{
 			Vector2 alignment = Vector2.Multiply(
 				this.Align(entity, neighbors),

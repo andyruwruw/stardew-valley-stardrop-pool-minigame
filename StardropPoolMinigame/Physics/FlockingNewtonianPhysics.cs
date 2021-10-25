@@ -23,7 +23,10 @@ namespace StardropPoolMinigame.Behaviors.Physics
         }
 
         /// <inheritdoc cref="Physics.InteractWithTangible(EntityPhysics, IList{EntityPhysics}, IList{IRange})"/>
-        protected override void InteractWithTangible(EntityPhysics entity, IList<EntityPhysics> neighbors, IList<IRange> barriers)
+        protected override void InteractWithTangible(
+			EntityPhysics entity,
+			IList<EntityPhysics> neighbors,
+			IList<IRange> barriers)
         {
             this.BounceAllNeighbors(entity, neighbors);
             this.BounceAllBarriers(entity, barriers);

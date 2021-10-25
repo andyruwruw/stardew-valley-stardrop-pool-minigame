@@ -158,26 +158,40 @@ namespace StardropPoolMinigame.Entities
 		{
 			base.Update();
 
-			if (this._physics.HasIntangibleInteractions())
+			IList<EntityPhysics> boids = this._quadTree.Query();
+
+			QuadTree<EntityPhysics> newQuadTree = new QuadTree<EntityPhysics>(
+				new Rectangle(
+					new Vector2(0, 0),
+					RenderConstants.MinigameScreen.Width,
+					RenderConstants.MinigameScreen.Height));
+
+			foreach (EntityPhysics boid in boids)
 			{
-				var results = this._physics.IntangibleInteractions(this._quadTree, null);
-				this._quadTree = (QuadTree<EntityPhysics>)results.Item1;
+				if (this._physics.HasIntangibleInteractions())
+				{
+					this._physics.IntangibleInteractions(boid, this._quadTree);
+				}
+
+				if (this._physics.HasTangibleInteractions())
+				{
+					this._physics.TangibleInteractions(boid, this._quadTree);
+				}
+
+				boid.Update();
+
+				if (boid.GetTransitionState() != TransitionState.Dead)
+				{
+					newQuadTree.Insert(boid.GetAnchor(), boid);
+				}
 			}
 
-			if (this._physics.HasTangibleInteractions())
-			{
-				var results = this._physics.TangibleInteractions(this._quadTree, null);
-				this._quadTree = (QuadTree<EntityPhysics>) results.Item1;
-			}
-
-			this._quadTree.Update();
+			this._quadTree = newQuadTree;
 
 			if (_active && Timer.CheckTimer($"{GetId()}-creation-cycle") > _rate)
 			{
 				Timer.EndTimer($"{GetId()}-creation-cycle");
 				Timer.StartTimer($"{GetId()}-creation-cycle");
-
-				Logger.Info("Creating Particle");
 
 				AddParticle();
 			}

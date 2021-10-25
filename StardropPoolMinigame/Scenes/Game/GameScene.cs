@@ -4,6 +4,7 @@ using StardropPoolMinigame.Behaviors.Physics;
 using StardropPoolMinigame.Constants;
 using StardropPoolMinigame.Entities;
 using StardropPoolMinigame.Enums;
+using StardropPoolMinigame.Helpers;
 using StardropPoolMinigame.Players;
 using StardropPoolMinigame.Render;
 using StardropPoolMinigame.Rules;
@@ -17,19 +18,9 @@ namespace StardropPoolMinigame.Scenes
 	internal class GameScene : Scene
 	{
 		/// <summary>
-		/// Current <see cref="Turn"/> state.
+		/// <see cref="IRules"/> for current game.
 		/// </summary>
-		private readonly Turn _turn;
-
-		/// <summary>
-		/// References to cue <see cref="Ball"/>.
-		/// </summary>
-		private IList<Ball> _cueBalls;
-
-		/// <summary>
-		/// Whether the game is finished.
-		/// </summary>
-		private bool _isFinished;
+		private IRules _rules;
 
 		/// <summary>
 		/// <see cref="IPhysics"/> system of rules applied to balls.
@@ -42,9 +33,19 @@ namespace StardropPoolMinigame.Scenes
 		private IList<IPlayer> _players;
 
 		/// <summary>
-		/// <see cref="IRules"/> for current game.
+		/// Whether the game is finished.
 		/// </summary>
-		private IRules _rules;
+		private bool _isFinished;
+
+		/// <summary>
+		/// Current <see cref="Turn"/> state.
+		/// </summary>
+		private Turn _turn;
+
+		/// <summary>
+		/// References to cue <see cref="Ball"/>.
+		/// </summary>
+		private IList<Ball> _cueBalls;
 
 		/// <summary>
 		/// Instantiates <see cref="GameScene"/>.
@@ -68,19 +69,14 @@ namespace StardropPoolMinigame.Scenes
 				physics);
 			AddDependentEntities();
 
-			_turn = new Turn(_players, 0);
+			_turn = new Turn(_players);
 			_entities[StringConstants.Entities.Game.FadeIn].SetTransitionState(TransitionState.Exiting, true);
 		}
 
-		/// <summary>
-		/// Retrieves current cue <see cref="Ball"/>.
-		/// </summary>
-		/// <returns>Current cue <see cref="Ball"/></returns>
-		public Ball GetCueBall()
+		/// <inheritdoc cref="Scene.GetKey"/>
+		public override string GetKey()
 		{
-			if (_rules.HasPlayerSpecificCueBalls()) return _cueBalls[_turn.GetCurrentPlayerIndex()];
-
-			return _cueBalls[0];
+			return "game-scene";
 		}
 
 		/// <inheritdoc cref="Scene.GetEntities"/>
@@ -100,30 +96,6 @@ namespace StardropPoolMinigame.Scenes
 			return entities;
 		}
 
-		/// <inheritdoc cref="Scene.GetKey"/>
-		public override string GetKey()
-		{
-			return "game-scene";
-		}
-
-		/// <summary>
-		/// Retrieves <see cref="PocketedBalls"/> for <see cref="IPlayer"/> 1.
-		/// </summary>
-		/// <returns><see cref="PocketedBalls"/> for <see cref="IPlayer"/> 1</returns>
-		public PocketedBalls GetPlayer1PocketedBalls()
-		{
-			return (PocketedBalls) _entities[StringConstants.Entities.Game.PocketedBallsPlayer1];
-		}
-
-		/// <summary>
-		/// Retrieves <see cref="PocketedBalls"/> for <see cref="IPlayer"/> 2.
-		/// </summary>
-		/// <returns><see cref="PocketedBalls"/> for <see cref="IPlayer"/> 2</returns>
-		public PocketedBalls GetPlayer2PocketedBalls()
-		{
-			return (PocketedBalls) _entities[StringConstants.Entities.Game.PocketedBallsPlayer2];
-		}
-
 		/// <summary>
 		/// Retrieves <see cref="IList"/> of <see cref="IPlayer"/>.
 		/// </summary>
@@ -131,6 +103,55 @@ namespace StardropPoolMinigame.Scenes
 		public IList<IPlayer> GetPlayers()
 		{
 			return _players;
+		}
+
+		/// <summary>
+		/// Retrieves current <see cref="Turn"/>.
+		/// </summary>
+		/// <returns>Current <see cref="Turn"/></returns>
+		public Turn GetTurn()
+		{
+			return _turn;
+		}
+
+		/// <summary>
+		/// Retrieves reference to <see cref="Table"/>.
+		/// </summary>
+		/// <returns>Reference to <see cref="Table"/></returns>
+		public Table GetTable()
+		{
+			return (Table)_entities[StringConstants.Entities.Game.Table];
+		}
+
+		/// <summary>
+		/// Retrieves reference to <see cref="QuadTree{T}"/> of <see cref="Ball"/>.
+		/// </summary>
+		/// <returns>Reference to <see cref="QuadTree{T}"/> of <see cref="Ball"/></returns>
+		public QuadTree<EntityPhysics> GetQuadTree()
+		{
+			return (QuadTree<EntityPhysics>)_entities[StringConstants.Entities.Game.QuadTree];
+		}
+
+		/// <summary>
+		/// Whether the game is finished.
+		/// </summary>
+		/// <returns>Whether the game is finished</returns>
+		public bool IsGameFinished()
+		{
+			return _isFinished;
+		}
+
+		/// <summary>
+		/// Retrieves current cue <see cref="Ball"/>.
+		/// </summary>
+		/// <returns>Current cue <see cref="Ball"/></returns>
+		public Ball GetCueBall()
+		{
+			if (_rules.HasPlayerSpecificCueBalls())
+			{
+				return _cueBalls[_turn.GetCurrentPlayerIndex()];
+			}
+			return _cueBalls[0];
 		}
 
 		/// <summary>
@@ -150,6 +171,24 @@ namespace StardropPoolMinigame.Scenes
 		}
 
 		/// <summary>
+		/// Retrieves <see cref="PocketedBalls"/> for <see cref="IPlayer"/> 1.
+		/// </summary>
+		/// <returns><see cref="PocketedBalls"/> for <see cref="IPlayer"/> 1</returns>
+		public PocketedBalls GetPlayer1PocketedBalls()
+		{
+			return (PocketedBalls)_entities[StringConstants.Entities.Game.PocketedBallsPlayer1];
+		}
+
+		/// <summary>
+		/// Retrieves <see cref="PocketedBalls"/> for <see cref="IPlayer"/> 2.
+		/// </summary>
+		/// <returns><see cref="PocketedBalls"/> for <see cref="IPlayer"/> 2</returns>
+		public PocketedBalls GetPlayer2PocketedBalls()
+		{
+			return (PocketedBalls)_entities[StringConstants.Entities.Game.PocketedBallsPlayer2];
+		}
+
+		/// <summary>
 		/// Retrieves <see cref="Portrait"/> for <see cref="ComputerOpponent"/>.
 		/// </summary>
 		/// <returns><see cref="Portrait"/> for <see cref="ComputerOpponent"/></returns>
@@ -158,46 +197,10 @@ namespace StardropPoolMinigame.Scenes
 			return (Portrait) _entities[StringConstants.Entities.Game.Portrait];
 		}
 
-		/// <summary>
-		/// Retrieves reference to <see cref="QuadTree{T}"/> of <see cref="Ball"/>.
-		/// </summary>
-		/// <returns>Reference to <see cref="QuadTree{T}"/> of <see cref="Ball"/></returns>
-		public QuadTree<EntityPhysics> GetQuadTree()
-		{
-			return (QuadTree<EntityPhysics>) _entities[StringConstants.Entities.Game.QuadTree];
-		}
-
-		/// <summary>
-		/// Retrieves reference to <see cref="Table"/>.
-		/// </summary>
-		/// <returns>Reference to <see cref="Table"/></returns>
-		public Table GetTable()
-		{
-			return (Table) _entities[StringConstants.Entities.Game.Table];
-		}
-
-		/// <summary>
-		/// Retrieves current <see cref="Turn"/>.
-		/// </summary>
-		/// <returns>Current <see cref="Turn"/></returns>
-		public Turn GetTurn()
-		{
-			return _turn;
-		}
-
-		/// <summary>
-		/// Whether the game is finished.
-		/// </summary>
-		/// <returns>Whether the game is finished</returns>
-		public bool IsGameFinished()
-		{
-			return _isFinished;
-		}
-
 		/// <inheritdoc cref="Scene.ReceiveLeftClick"/>
 		public override void ReceiveLeftClick()
 		{
-			if (_turn.GetTurnState() == TurnState.SelectingPocket && _turn.IsMyTurn())
+			if (_turn.IsSelectingPocket() && _turn.IsMyTurn())
 			{
 				Sound.PlaySound(SoundConstants.Feedback.BottonPress);
 				if (_turn.NeedsToPlaceCueBall())
@@ -205,12 +208,12 @@ namespace StardropPoolMinigame.Scenes
 				else
 					_turn.SetTurnState(TurnState.Idle);
 			}
-			else if (_turn.GetTurnState() == TurnState.PlacingBall && _turn.IsMyTurn())
+			else if (_turn.IsPlacingBall() && _turn.IsMyTurn())
 			{
 				Sound.PlaySound(SoundConstants.Feedback.BottonPress);
 				_turn.SetTurnState(TurnState.Idle);
 			}
-			else if (_turn.GetTurnState() == TurnState.Idle && _turn.IsMyTurn())
+			else if (_turn.IsIdle() && _turn.IsMyTurn())
 			{
 				if (GetCueBall().IsHovered())
 				{
@@ -218,12 +221,12 @@ namespace StardropPoolMinigame.Scenes
 					_turn.SetTurnState(TurnState.SelectingAngle);
 				}
 			}
-			else if (_turn.GetTurnState() == TurnState.SelectingAngle && _turn.IsMyTurn())
+			else if (_turn.IsSelectingAngle() && _turn.IsMyTurn())
 			{
 				Sound.PlaySound(SoundConstants.Cue.LockAngle);
 				_turn.SetTurnState(TurnState.SelectingPower);
 			}
-			else if (_turn.GetTurnState() == TurnState.SelectingPower && _turn.IsMyTurn())
+			else if (_turn.IsSelectingPower() && _turn.IsMyTurn())
 			{
 				Sound.PlaySound(SoundConstants.Cue.LockPower);
 				_turn.SetTurnState(TurnState.BallsInMotion);
@@ -233,12 +236,12 @@ namespace StardropPoolMinigame.Scenes
 		/// <inheritdoc cref="Scene.ReceiveRightClick"/>
 		public override void ReceiveRightClick()
 		{
-			if (_turn.GetTurnState() == TurnState.SelectingAngle && _turn.IsMyTurn())
+			if (_turn.IsSelectingAngle() && _turn.IsMyTurn())
 			{
 				Sound.PlaySound(SoundConstants.Feedback.GameCancel);
 				_turn.SetTurnState(TurnState.Idle);
 			}
-			else if (_turn.GetTurnState() == TurnState.SelectingPower && _turn.IsMyTurn())
+			else if (_turn.IsSelectingPower() && _turn.IsMyTurn())
 			{
 				Sound.PlaySound(SoundConstants.Feedback.GameCancel);
 				_turn.SetTurnState(TurnState.SelectingAngle);
@@ -336,28 +339,6 @@ namespace StardropPoolMinigame.Scenes
 		}
 
 		/// <summary>
-		/// Handles <see cref="Ball"/> being pocketed.
-		/// </summary>
-		/// <param name="ball"><see cref="Ball"/> pockted</param>
-		/// <param name="balls"><see cref="Ball"/> remaining</param>
-		/// <param name="tableSegment"><see cref="TableSegment"/> ball was pockted in</param>
-		private void BallPocketed(
-			Ball ball,
-			IList<IEntity> balls,
-			TableSegment tableSegment)
-		{
-			IList<Ball> remaining = new List<Ball>();
-
-			foreach (Ball filterBall in balls)
-				if (filterBall.GetId() != ball.GetId() && !filterBall.IsPocketed())
-					remaining.Add(filterBall);
-			Sound.PlaySound(SoundConstants.Ball.Pocketed);
-			var newEvents = _rules.BallPocketed(_turn.GetCurrentPlayer(), ball, tableSegment, remaining);
-
-			GetPocketedBalls(_turn.GetCurrentPlayerIndex()).Add(ball);
-		}
-
-		/// <summary>
 		/// Sets default values
 		/// </summary>
 		/// <param name="rules">Provided <see cref="RuleSet"/> or null for default</param>
@@ -394,7 +375,9 @@ namespace StardropPoolMinigame.Scenes
 			if (_turn.GetTurnState() == TurnState.SelectingAngle
 				|| _turn.GetTurnState() == TurnState.SelectingPower
 				|| _turn.GetTurnState() == TurnState.BallsInMotion)
+			{
 				_turn.GetCurrentPlayer().GetCue().Update(_turn.GetTurnState(), GetCueBall());
+			}
 		}
 
 		/// <summary>
@@ -405,9 +388,13 @@ namespace StardropPoolMinigame.Scenes
 			if (_turn.GetTurnState() == TurnState.Idle)
 			{
 				if (GetCueBall().IsHovered())
+				{
 					GetCueBall().SetIsHighlighted(true);
+				}
 				else
+				{
 					GetCueBall().SetIsFlashing(true);
+				}
 			}
 			else
 			{
@@ -417,22 +404,100 @@ namespace StardropPoolMinigame.Scenes
 		}
 
 		/// <summary>
-		/// Updates all <see cref="Ball"/> in <see cref="QuadTree{T}"/>.
+		/// Updates all <see cref="Ball">Balls</see> in <see cref="QuadTree{T}"/>.
 		/// </summary>
 		private void UpdateQuadTree()
 		{
 			if (_turn.GetTurnState() == TurnState.BallsInMotion)
 			{
-				var tangibleInteractionResults = _physics.TangibleInteractions(GetQuadTree(), GetTable());
+				var newGraph = new QuadTree<EntityPhysics>(
+				new Rectangle(
+					Vector2.Zero,
+					RenderConstants.MinigameScreen.Width,
+					RenderConstants.MinigameScreen.Height));
 
-				SetQuadTree((QuadTree<EntityPhysics>) tangibleInteractionResults.Item1);
+				IList<EntityPhysics> balls = GetQuadTree().Query();
+				IDictionary<string, IList<string>> collisionsHandled = new Dictionary<string, IList<string>>();
 
-				if (tangibleInteractionResults.Item2 &&
-					_turn.GetCurrentPlayer().GetCue().GetTransitionState() == TransitionState.Dead)
+				bool finishedMoving = true;
+
+				foreach (Ball ball in balls)
 				{
-					_turn.SetTurnState(TurnState.Results);
+					if (finishedMoving && VectorHelper.GetMagnitude(ball.GetVelocity()) != 0)
+					{
+						finishedMoving = false;
+					}
+
+					var tableSegment = GetTable().GetTableSegmentFromPosition(ball.GetAnchor());
+
+					var physicsResults = _physics.TangibleInteractions(ball, GetQuadTree(), tableSegment, collisionsHandled[ball.GetId()]);
+
+					if (CheckIfPocketed(ball, tableSegment))
+					{
+						BallPocketed(ball, balls, tableSegment);
+					}
+					else
+					{
+						newGraph.Insert(ball.GetAnchor(), ball);
+					}
+				}
+
+				SetQuadTree(newGraph);
+
+				if (finishedMoving && _turn.GetCurrentPlayer().GetCue().GetTransitionState() == TransitionState.Dead)
+				{
+					Logger.Info("New Turn");
+
+					_turn = _turn.GetNextTurn();
 				}
 			}
+		}
+
+		/// <summary>
+		/// Checks whether a <see cref="Ball"/> has been pocketed.
+		/// </summary>
+		/// <param name="ball"><see cref="Ball"/> in question</param>
+		/// <param name="tableSegment"><see cref="TableSegment"/> <see cref="Ball"/> is currently in</param>
+		/// <returns>Whether a <see cref="Ball"/> has been pocketed</returns>
+		private bool CheckIfPocketed(Ball ball, TableSegment tableSegment)
+		{
+			var pocketBounds = tableSegment.GetPockets();
+
+			foreach (var pocketBound in pocketBounds)
+			{
+				if (pocketBound.Contains(ball.GetAnchor()))
+				{
+					ball.SetPocketed(true);
+				}
+			}
+			return false;
+		}
+
+		/// <summary>
+		/// Handles <see cref="Ball"/> being pocketed.
+		/// </summary>
+		/// <param name="ball"><see cref="Ball"/> pocketed</param>
+		/// <param name="balls"><see cref="Ball"/> remaining</param>
+		/// <param name="tableSegment"><see cref="TableSegment"/> ball was pocketed in</param>
+		private void BallPocketed(
+			Ball ball,
+			IList<EntityPhysics> balls,
+			TableSegment tableSegment)
+		{
+			IList<EntityPhysics> remaining = new List<EntityPhysics>();
+
+			foreach (Ball filteredBall in balls)
+			{
+				if (filteredBall.GetId() != ball.GetId() && !filteredBall.IsPocketed())
+				{
+					remaining.Add(filteredBall);
+				}
+			}
+
+			Sound.PlaySound(SoundConstants.Ball.Pocketed);
+			_rules.BallPocketed(_turn, ball, tableSegment, remaining);
+
+			GetPocketedBalls(_turn.GetCurrentPlayerIndex()).Add(ball);
 		}
 	}
 }
