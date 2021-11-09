@@ -55,6 +55,8 @@
     <Compile Include="Physics\FlockingNewtonianPhysics.cs" />
     <Compile Include="Physics\InteractionsResults.cs" />
     <Compile Include="Physics\Physics.cs" />
+    <Compile Include="Players\Opponents\Shot.cs" />
+    <Compile Include="Structures\Graphs\Graph.cs" />
     <Compile Include="Utilities\Config.cs" />
     <Compile Include="Multiplayer\Messages\ChallengeAccepted.cs" />
     <Compile Include="Multiplayer\Messages\ChallengeRequest.cs" />

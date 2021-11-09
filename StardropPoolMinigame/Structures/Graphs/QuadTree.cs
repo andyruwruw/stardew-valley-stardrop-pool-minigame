@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace StardropPoolMinigame.Structures
 {
-    internal class QuadTree<T> : Entity, IGraph<T>
+	class QuadTree<T> : Entity, IGraph<T>
     {
         /// <summary>
         /// <see cref="IRange"/> of <see cref="QuadTree{T}"/>.

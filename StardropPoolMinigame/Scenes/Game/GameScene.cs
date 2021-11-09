@@ -446,11 +446,16 @@ namespace StardropPoolMinigame.Scenes
 
 				if (finishedMoving && _turn.GetCurrentPlayer().GetCue().GetTransitionState() == TransitionState.Dead)
 				{
-					Logger.Info("New Turn");
-
-					_turn = _turn.GetNextTurn();
+					NewTurn();
 				}
 			}
+		}
+
+		private void NewTurn()
+		{
+			Logger.Info("New Turn");
+			_turn = _turn.GetNextTurn();
+			_turn.GetCurrentPlayer().StartTurn();
 		}
 
 		/// <summary>

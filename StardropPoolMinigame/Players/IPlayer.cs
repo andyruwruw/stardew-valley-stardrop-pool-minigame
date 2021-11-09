@@ -18,5 +18,7 @@ namespace StardropPoolMinigame.Players
         bool IsMe();
 
         void SetBallType(BallType ballType);
-    }
+
+		void StartTurn();
+	}
 }

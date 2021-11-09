@@ -90,5 +90,10 @@ namespace StardropPoolMinigame.Players
         {
             this._ballType = ballType;
         }
+
+		public virtual void StartTurn()
+		{
+
+		}
     }
 }

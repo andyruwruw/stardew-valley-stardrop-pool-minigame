@@ -76,5 +76,10 @@ namespace StardropPoolMinigame.Players
 					return new Sam();
 			}
 		}
+
+		public override void StartTurn()
+		{
+
+		}
     }
 }
