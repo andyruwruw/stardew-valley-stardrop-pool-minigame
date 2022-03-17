@@ -200,34 +200,47 @@ namespace StardropPoolMinigame.Scenes
 		/// <inheritdoc cref="Scene.ReceiveLeftClick"/>
 		public override void ReceiveLeftClick()
 		{
+			Logger.Info("Right click recieved");
 			if (_turn.IsSelectingPocket() && _turn.IsMyTurn())
 			{
+				Logger.Info("Selecting Pocket");
 				Sound.PlaySound(SoundConstants.Feedback.BottonPress);
+
 				if (_turn.NeedsToPlaceCueBall())
+				{
 					_turn.SetTurnState(TurnState.PlacingBall);
+				}
 				else
+				{
 					_turn.SetTurnState(TurnState.Idle);
+				}
+					
 			}
 			else if (_turn.IsPlacingBall() && _turn.IsMyTurn())
 			{
+				Logger.Info("Placing Ball");
 				Sound.PlaySound(SoundConstants.Feedback.BottonPress);
 				_turn.SetTurnState(TurnState.Idle);
 			}
 			else if (_turn.IsIdle() && _turn.IsMyTurn())
 			{
+				Logger.Info("Idle");
 				if (GetCueBall().IsHovered())
 				{
+					Logger.Info("Cue Ball is Hovered");
 					Sound.PlaySound(SoundConstants.Feedback.BottonPress);
 					_turn.SetTurnState(TurnState.SelectingAngle);
 				}
 			}
 			else if (_turn.IsSelectingAngle() && _turn.IsMyTurn())
 			{
+				Logger.Info("Angle Selected");
 				Sound.PlaySound(SoundConstants.Cue.LockAngle);
 				_turn.SetTurnState(TurnState.SelectingPower);
 			}
 			else if (_turn.IsSelectingPower() && _turn.IsMyTurn())
 			{
+				Logger.Info("Selecting Power");
 				Sound.PlaySound(SoundConstants.Cue.LockPower);
 				_turn.SetTurnState(TurnState.BallsInMotion);
 			}

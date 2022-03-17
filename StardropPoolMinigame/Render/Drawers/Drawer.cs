@@ -21,7 +21,7 @@ namespace StardropPoolMinigame.Render.Drawers
         }
 
 		public virtual void Draw(
-                                    SpriteBatch batch,
+            SpriteBatch batch,
             Vector2? overrideDestination = null,
             Rectangle? overrideSource = null,
             Color? overrideColor = null,
