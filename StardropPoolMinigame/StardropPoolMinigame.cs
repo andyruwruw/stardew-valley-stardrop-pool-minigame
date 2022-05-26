@@ -3,176 +3,182 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using StardewValley;
 using StardewValley.Minigames;
+using StardropPoolMinigame.Enums;
 using StardropPoolMinigame.Render;
 using StardropPoolMinigame.Scenes;
+using StardropPoolMinigame.Utilities;
 
 namespace StardropPoolMinigame
 {
-    class StardropPoolMinigame : IMinigame
+    /// <summary>
+    /// Stardrop Pool <see cref="IMinigame"/> class.
+    /// </summary>
+    internal class StardropPoolMinigame : IMinigame
     {
-        private IScene _title;
-        private IScene _dialogue;
-        private IScene _game;
-        private IScene _summary;
+        /// <summary>
+        /// Current scene
+        /// </summary>
+        private IScene _currentScene;
 
-        private DrawProxy _drawer;
+        /// <summary>
+        /// Scene undergoing entering transition
+        /// </summary>
+        private IScene _enteringScene;
 
-        private GameState _gameState;
+        /// <summary>
+        /// Scene undergoing exiting transition
+        /// </summary>
+        private IScene _exitingScene;
 
-        private Vector2 _mouse;
+        /// <summary>
+        /// Renders scene entities
+        /// </summary>
+        private Renderer _renderer;
 
         public StardropPoolMinigame()
         {
-            Textures.LoadTextures();
+            this._enteringScene = Scene.GetDefaultScene();
+            this._currentScene = null;
+            this._exitingScene = null;
 
-            this.InitializeScenes();
-            this.InitializeState();
-
-            DrawMath.ChangeScreenSize();
-
-            this._drawer = new DrawProxy();
-            this.GetCurrentScene().Start();
+            this._renderer = new Renderer();
         }
 
-		public bool tick(GameTime time)
+        public void changeScreenSize()
         {
-            this._mouse = new Vector2(Game1.getMouseX(), Game1.getMouseY());
+        }
+
+        public bool doMainGameUpdates()
+        {
+            this.CheckForNewScenes();
+            this.ShuffleScenes();
+            this.UpdateScenes();
             return false;
         }
 
-		public bool overrideFreeMouseMovement()
+        public void draw(SpriteBatch batch)
         {
-            return true;
+            this._renderer.Draw(batch, this._enteringScene, this._currentScene, this._exitingScene);
         }
 
-		public bool doMainGameUpdates()
-        {
-            if (this.GetCurrentScene().HasNewScene())
-            {
-                IScene newScene = this.GetCurrentScene().GetNewScene();
-
-                if (newScene is TitleScene)
-                {
-                    this._title = newScene;
-                    this._gameState = GameState.Title;
-                } else if (newScene is DialogueScene && this.GetCurrentScene() is TitleScene)
-                {
-                    this._dialogue = newScene;
-                    this._gameState = GameState.Prebattle;
-                } else if (newScene is DialogueScene && this.GetCurrentScene() is GameScene)
-                {
-                    this._dialogue = newScene;
-                    this._gameState = GameState.Postbattle;
-                } else if (newScene is GameScene)
-                {
-                    this._game = newScene;
-                    this._gameState = GameState.Ingame;
-                } else if (newScene is SummaryScene)
-                {
-                    this._summary = newScene;
-                    this._gameState = GameState.Summary;
-                }
-            }
-            this.GetCurrentScene().Update();
-            return false;
-        }
-
-		public void receiveLeftClick(int x, int y, bool playSound = true)
-        {
-            this.GetCurrentScene().ReceiveLeftClick(x, y, playSound);
-        }
-
-		public void leftClickHeld(int x, int y)
-        {
-        }
-
-		public void receiveRightClick(int x, int y, bool playSound = true)
-        {
-        }
-
-		public void releaseLeftClick(int x, int y)
-        {
-        }
-
-		public void releaseRightClick(int x, int y)
-        {
-        }
-
-		public void receiveKeyPress(Keys k)
-        {
-            Console.Info($"Recieved Key release {k.ToString()}");
-            if (k.ToString() == "Escape")
-            {
-                Console.Info("Force Quit");
-                this.forceQuit();
-            }
-        }
-
-		public void receiveKeyRelease(Keys k)
-        {
-        }
-
-		public void draw(SpriteBatch b)
-        {
-            this._drawer.draw(this._gameState, this.GetCurrentScene(), b);
-        }
-
-		public void changeScreenSize()
-        {
-            DrawMath.ChangeScreenSize();
-        }
-
-		public void unload()
-        {
-            Game1.stopMusicTrack(Game1.MusicContext.MiniGame);
-            Game1.player.faceDirection(0);
-        }
-
-		public void receiveEventPoke(int data)
-        {
-        }
-
-		public string minigameId()
-        {
-			return "StarDropPoolMinigame";
-        }
-
-		public bool forceQuit()
+        public bool forceQuit()
         {
             this.unload();
             Game1.currentMinigame = null;
             return true;
         }
 
-        public GameState GetGameState()
+        public void leftClickHeld(int x, int y)
         {
-            return this._gameState;
         }
 
-        private void InitializeScenes()
+        /// <summary>
+        /// Unique identifier for minigame
+        /// </summary>
+        /// <returns></returns>
+        public string minigameId()
         {
-            this._title = new TitleScene();
+            return "StarDropPoolMinigame";
         }
 
-        private void InitializeState()
+        public bool overrideFreeMouseMovement()
         {
-            this._gameState = GameState.Title;
+            return true;
         }
 
-        private IScene GetCurrentScene()
+        public void receiveEventPoke(int data)
         {
-            switch (this._gameState)
+        }
+
+        public void receiveKeyPress(Keys k)
+        {
+            switch (k)
             {
-                case GameState.Prebattle:
-                    return this._dialogue;
-                case GameState.Ingame:
-                    return this._game;
-                case GameState.Postbattle:
-                    return this._dialogue;
-                case GameState.Summary:
-                    return this._summary;
-                default:
-                    return this._title;
+                case Keys.Escape:
+                    this.forceQuit();
+                    break;
+            }
+        }
+
+        public void receiveKeyRelease(Keys k)
+        {
+        }
+
+        public void receiveLeftClick(int x, int y, bool playSound = true)
+        {
+            if (this._currentScene != null)
+            {
+                this._currentScene.ReceiveLeftClick();
+            }
+        }
+
+        public void receiveRightClick(int x, int y, bool playSound = true)
+        {
+            if (this._currentScene != null)
+            {
+                this._currentScene.ReceiveRightClick();
+            }
+        }
+
+        public void releaseLeftClick(int x, int y)
+        {
+        }
+
+        public void releaseRightClick(int x, int y)
+        {
+        }
+
+        public bool tick(GameTime time)
+        {
+            Controller.Mouse.SetPosition(Game1.getMouseX(), Game1.getMouseY());
+            return false;
+        }
+
+        public void unload()
+        {
+            Sound.StopMusic();
+            Game1.player.faceDirection(0);
+        }
+
+        private void CheckForNewScenes()
+        {
+            if (this._currentScene != null && this._currentScene.HasNewScene())
+            {
+                this._enteringScene = this._currentScene.GetNewScene();
+                this._exitingScene = this._currentScene;
+                this._currentScene = null;
+                this._exitingScene.SetTransitionState(TransitionState.Exiting);
+
+                Logger.Trace($"Transitioning to New Scene: {this._exitingScene.GetType()} => {this._enteringScene.GetType()}");
+            }
+        }
+
+        private void ShuffleScenes()
+        {
+            if (this._exitingScene != null && this._exitingScene.GetTransitionState() == TransitionState.Dead)
+            {
+                this._exitingScene = null;
+            }
+            if (this._enteringScene != null && this._enteringScene.GetTransitionState() == TransitionState.Present)
+            {
+                this._currentScene = this._enteringScene;
+                this._enteringScene = null;
+            }
+        }
+
+        private void UpdateScenes()
+        {
+            if (this._exitingScene != null)
+            {
+                this._exitingScene.Update();
+            }
+            if (this._currentScene != null)
+            {
+                this._currentScene.Update();
+            }
+            if (this._enteringScene != null)
+            {
+                this._enteringScene.Update();
             }
         }
     }

@@ -6,5 +6,5 @@
   "UniqueID": "andyruwruw.StardropPoolMinigame",
   "EntryDll": "StardropPoolMinigame.dll",
   "MinimumApiVersion": "3.0.0",
-  "UpdateKeys": []
+  "UpdateKeys": [ "GitHub:andyruwruw/stardew-valley-stardrop-pool-minigame", "Nexus:???" ]
 }

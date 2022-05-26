@@ -1,59 +1,69 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using Microsoft.Xna.Framework;
-using StardewModdingAPI;
+﻿using StardewModdingAPI;
 using StardewModdingAPI.Events;
-using StardewModdingAPI.Utilities;
 using StardewValley;
-using StardewValley.Objects;
-using StardewValley.TerrainFeatures;
-using StardropPoolMinigame.Messages;
-using xTile.Tiles;
+using StardropPoolMinigame.Data;
+using StardropPoolMinigame.Detect.Hover;
+using StardropPoolMinigame.Multiplayer;
+using StardropPoolMinigame.Render;
+using StardropPoolMinigame.Utilities;
 
 namespace StardropPoolMinigame
 {
-    public class ModEntry : Mod
-    {
-        public override void Entry(IModHelper helper)
-        {
-            Multiplayer.SetHelper(helper);
-            Console.SetMonitor(this.Monitor);
+	public class ModEntry : Mod
+	{
+		/// <summary>
+		/// Provides <see cref="IModHelper"/> to other classes and sets events.
+		/// </summary>
+		public override void Entry(IModHelper helper)
+		{
+			// Initialize helper classes
+			Config.SetConfig(Helper.ReadConfig<ModConfig>());
+			MultiplayerHelper.SetHelper(Helper.Multiplayer);
+			Translations.SetHelper(Helper.Translation);
+			Logger.SetMonitor(Monitor);
 
-            helper.Events.Input.ButtonPressed += this.OnButtonPressed;
-        }
+			// Set event handlers
+			helper.Events.Input.ButtonPressed += OnButtonPressed;
+			helper.Events.GameLoop.SaveLoaded += OnSaveLoaded;
+			helper.Events.GameLoop.Saving += OnSaving;
+		}
 
-        private void OnButtonPressed(object sender, ButtonPressedEventArgs e)
-        {
-            if (!Context.IsWorldReady)
-                return;
+		/// <summary>
+		/// Detects if pool table is right clicked.
+		/// </summary>
+		private void OnButtonPressed(object sender, ButtonPressedEventArgs e)
+		{
+			if (!Context.IsWorldReady) return;
 
-            if (e.Button.IsActionButton()) //  && PoolTableDetector.IsPoolTable()
-            {
-                this.startGame();
-            }
-        }
+			if (e.Button.IsActionButton()
+				&& new PoolTableHoverDetector().IsHovering()
+				&& Game1.currentMinigame == null)
+				StartGame();
+		}
 
-        private void startGame()
-        {
-            Game1.currentMinigame = new StardropPoolMinigame();
-        }
+		/// <summary>
+		/// Loads mod save data.
+		/// </summary>
+		private void OnSaveLoaded(object sender, SaveLoadedEventArgs e)
+		{
+			Save.SetData(Helper.Data);
+			Textures.LoadTextures();
+		}
 
-        private void OnModMessageRecieved(object sender, ModMessageReceivedEventArgs e)
-        {
-            if (e.FromModID == this.ModManifest.UniqueID)
-            {
-                IModMessage message;
+		/// <summary>
+		/// Saves mod data.
+		/// </summary>
+		private void OnSaving(object sender, SavingEventArgs e)
+		{
+			Save.WriteSaveData();
+		}
 
-                switch(e.Type)
-                {
-                    case "Test":
-                        message = e.ReadAs<IModMessage>();
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
-    }
+		/// <summary>
+		/// Begins the <see cref="StardropPoolMinigame"/>.
+		/// </summary>
+		private void StartGame()
+		{
+			Game1.currentMinigame = new StardropPoolMinigame();
+		}
+	}
 }

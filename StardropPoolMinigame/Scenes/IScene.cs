@@ -1,21 +1,62 @@
-﻿using System;
+﻿using StardropPoolMinigame.Entities;
+using StardropPoolMinigame.Enums;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StardropPoolMinigame.Scenes
 {
-    interface IScene
+    /// <summary>
+    /// An interactable page, comprised of <see cref="IEntity">IEntities</see> and logic for handling events
+    /// </summary>
+    internal interface IScene
     {
-        void Start();
+        /// <summary>
+        /// Gets all <see cref="IScene">IScene's</see> <see cref="IEntity">IEntities</see>
+        /// </summary>
+        IList<IEntity> GetEntities();
 
-        void Update();
+        /// <summary>
+        /// Unique identifier for <see cref="IScene"/>
+        /// </summary>
+        /// <returns>ID of <see cref="IScene"/></returns>
+        string GetKey();
 
-        void ReceiveLeftClick(int x, int y, bool playSound = true);
+        /// <summary>
+        /// Gets the new <see cref="IScene"/> to replace this <see cref="IScene"/>
+        /// </summary>
+        /// <returns>New <see cref="IScene"/></returns>
+        IScene GetNewScene();
 
+        /// <summary>
+        /// Gets the <see cref="TransitionState"/> of the <see cref="IScene"/>
+        /// </summary>
+        /// <returns><see cref="TransitionState"/> of <see cref="IScene"/></returns>
+        TransitionState GetTransitionState();
+
+        /// <summary>
+        /// Whether the <see cref="IScene"/> is finished and a new <see cref="IScene"/> ready
+        /// </summary>
+        /// <returns>Whether new <see cref="IScene"/> is ready</returns>
         bool HasNewScene();
 
-        IScene GetNewScene();
+        /// <summary>
+        /// Handles left click event for <see cref="IScene"/>
+        /// </summary>
+        void ReceiveLeftClick();
+
+        /// <summary>
+        /// Handles right click event for <see cref="IScene"/>
+        /// </summary>
+        void ReceiveRightClick();
+
+        /// <summary>
+        /// Sets the <see cref="TransitionState"/> of the <see cref="IScene"/>
+        /// </summary>
+        /// <param name="transitionState">New <see cref="TransitionState"/></param>
+        void SetTransitionState(TransitionState transitionState);
+
+        /// <summary>
+        /// Updates all <see cref="IScene">IScene's</see> <see cref="IEntity">IEntities</see> and runs all <see cref="IScene"/> specific logic
+        /// </summary>
+        void Update();
     }
 }
