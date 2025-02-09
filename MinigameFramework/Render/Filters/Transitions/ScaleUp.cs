@@ -68,6 +68,7 @@ namespace MinigameFramework.Render.Filters.Transitions
                     (byte)Math.Round(progress * color.G),
                     (byte)Math.Round(progress * color.B),
                     (byte)Math.Round(progress * 255));
+
             }
             return color;
         }

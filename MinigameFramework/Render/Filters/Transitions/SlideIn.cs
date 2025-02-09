@@ -85,12 +85,12 @@ namespace MinigameFramework.Render.Filters.Transitions
                 this.EaseOut(
                     progress * this._duration,
                     destination.X,
-                    this._difference.X * RenderConstants.TileScale(),
+                    this._difference.X * GenericRenderConstants.TileScale(),
                     this._duration),
                 this.EaseOut(
                     progress * this._duration,
                     destination.Y,
-                    this._difference.Y * RenderConstants.TileScale(),
+                    this._difference.Y * GenericRenderConstants.TileScale(),
                     this._duration));
         }
 
