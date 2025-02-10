@@ -1,0 +1,236 @@
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using MinigameFramework.Attributes;
+using MinigameFramework.Constants;
+using MinigameFramework.Enums;
+using MinigameFramework.Helpers;
+using MinigameFramework.Render.Filters;
+using MinigameFramework.Structures.Primitives;
+using MinigameFramework.Utilities;
+using StardewValley;
+
+namespace MinigameFramework.Entities.UI
+{
+    /// <summary>
+    /// A solid rectangle of a choice color.
+    /// </summary>
+    class Solid : Entity
+    {
+        /// <summary>
+        /// Color of the solid.
+        /// </summary>
+        protected Color _color;
+
+        /// <summary>
+        /// Where to display the solid.
+        /// </summary>
+        protected Structures.Primitives.Rectangle _destination;
+
+        /// <summary>
+        /// Instantiates a solid.
+        /// </summary>
+        /// <param name="color">Color of the solid.</param>
+        /// <param name="anchor"><see cref="Entity">Entity's</see> anchor, or position<inheritdoc cref="_anchor"/></param>
+        /// <param name="width">Width of the solid.</param>
+        /// <param name="height">Height of the solid.</param>
+		/// <param name="layerDepth"><see cref="Entity">Entity's</see> layer depth for rendering</param>
+		/// <param name="origin">Anchor's relation to <see cref="Entity">Entity's</see> position</param>
+		/// <param name="enteringTransition"><see cref="Entity">Entity's</see> entering <see cref="Transition"/></param>
+		/// <param name="exitingTransition"><see cref="Entity">Entity's</see> exiting <see cref="Transition"/></param>
+        public Solid(
+            Color color,
+            Vector2 anchor,
+            float width,
+            float height,
+            float layerDepth = 0,
+            Origin origin = Origin.TopLeft,
+            IFilter? enteringTransition = null,
+            IFilter? exitingTransition = null
+        ) : base(
+            anchor,
+            layerDepth,
+            origin,
+            enteringTransition,
+            exitingTransition
+        )
+        {
+            _destination = new Structures.Primitives.Rectangle(
+                anchor,
+                width,
+                height
+            );
+            _color = color;
+        }
+
+        /// <summary>
+        /// Instantiates a solid.
+        /// </summary>
+        /// <param name="color">Color of the solid.</param>
+        /// <param name="destination">Destination of the solid.</param>
+		/// <param name="layerDepth"><see cref="Entity">Entity's</see> layer depth for rendering</param>
+		/// <param name="origin">Anchor's relation to <see cref="Entity">Entity's</see> position</param>
+		/// <param name="enteringTransition"><see cref="Entity">Entity's</see> entering <see cref="Transition"/></param>
+		/// <param name="exitingTransition"><see cref="Entity">Entity's</see> exiting <see cref="Transition"/></param>
+        public Solid(
+            Color color,
+            Structures.Primitives.Rectangle destination,
+            float layerDepth = 0,
+            Origin origin = Origin.TopLeft,
+            IFilter? enteringTransition = null,
+            IFilter? exitingTransition = null
+        ) : base(
+            destination.GetAnchor(),
+            layerDepth,
+            origin,
+            enteringTransition,
+            exitingTransition
+        )
+        {
+            _destination = destination;
+            _color = color;
+        }
+
+        /// <summary>
+        /// Instantiates a solid.
+        /// </summary>
+        /// <param name="color">Color of the solid.</param>
+        /// <param name="destination">Destination of the solid.</param>
+		/// <param name="layerDepth"><see cref="Entity">Entity's</see> layer depth for rendering</param>
+		/// <param name="origin">Anchor's relation to <see cref="Entity">Entity's</see> position</param>
+		/// <param name="enteringTransition"><see cref="Entity">Entity's</see> entering <see cref="Transition"/></param>
+		/// <param name="exitingTransition"><see cref="Entity">Entity's</see> exiting <see cref="Transition"/></param>
+        public Solid(
+            Color color,
+            Microsoft.Xna.Framework.Rectangle destination,
+            float layerDepth = 0,
+            Origin origin = Origin.TopLeft,
+            IFilter? enteringTransition = null,
+            IFilter? exitingTransition = null
+        ) : base(
+            new Vector2(
+                destination.X,
+                destination.Y
+            ),
+            layerDepth,
+            origin,
+            enteringTransition,
+            exitingTransition
+        )
+        {
+            _destination = new Structures.Primitives.Rectangle(destination);
+            _color = color;
+        }
+
+        /// <inheritdoc cref="IEntity.Draw"/>
+        public override void Draw(
+            SpriteBatch batch,
+            Vector2? overrideDestination = null,
+            Microsoft.Xna.Framework.Rectangle? overrideSource = null,
+            Color? overrideColor = null,
+            float? overrideRotation = null,
+            Vector2? overrideOrigin = null,
+            float? overrideScale = null,
+            SpriteEffects? overrideEffects = null,
+            float? overrideLayerDepth = null
+        )
+        {
+            if (!ShouldDraw())
+            {
+                return;
+            }
+
+            batch.Draw(
+                GetTileset(),
+                GetRectangleDestination(),
+                GetSource(overrideSource),
+                GetColor(overrideColor),
+                GetRotation(overrideRotation),
+                GetOrigin(overrideOrigin),
+                GetEffects(overrideEffects),
+                GetLayerDepth(overrideLayerDepth)
+            );
+
+            if (DevConstants.DebugVisuals)
+            {
+                DrawDebug(batch);
+            }
+        }
+
+        /// <inheritdoc cref="IEntity.GetBoundary()"/>
+        public override IRange GetBoundary()
+        {
+            return _destination;
+        }
+
+        /// <inheritdoc cref="IEntity.GetHeight"/>
+        public override float GetHeight()
+        {
+            return _destination.GetHeight();
+        }
+
+        /// <inheritdoc cref="IEntity.GetId"/>
+        public override string GetId()
+        {
+            return $"solid-{_id}";
+        }
+
+        /// <inheritdoc cref="Entity.GetRawSource"/>
+        public override Microsoft.Xna.Framework.Rectangle GetRawSource()
+        {
+            return Game1.staminaRect.Bounds;
+        }
+
+        /// <inheritdoc cref="IEntity.GetWidth"/>
+        public override float GetWidth()
+        {
+            return _destination.GetWidth();
+        }
+
+        /// <summary>
+        /// Sets the solid color to a new color.
+        /// </summary>
+        /// <param name="color">The new color.</param>
+        public void SetColor(Color color)
+        {
+            _color = color;
+        }
+
+        /// <inheritdoc cref="Entity.DrawDebug"/>
+        protected override void DrawDebug(SpriteBatch batch)
+        {
+            RenderHelpers.DrawDebugRectangle(
+                batch,
+                (Structures.Primitives.Rectangle)GetBoundary()
+            );
+        }
+
+        /// <inheritdoc cref="Entity.GetRawColor()"/>
+        protected override Color GetRawColor()
+        {
+            return _color;
+        }
+
+        /// <summary>
+        /// We need a rectangle as a destination.
+        /// </summary>
+        protected virtual Microsoft.Xna.Framework.Rectangle GetRawRectangleDestination()
+        {
+            return _destination.GetRawXnaRectangle();
+        }
+
+        /// <summary>
+        /// We need a rectangle as a destination.
+        /// </summary>
+        protected virtual Microsoft.Xna.Framework.Rectangle GetRectangleDestination(Microsoft.Xna.Framework.Rectangle? overrideDestination = null)
+        {
+            // We aren't really set up to filter rectangles.
+            return overrideDestination == null ? GetRawRectangleDestination() : (Microsoft.Xna.Framework.Rectangle)overrideDestination;
+        }
+
+        /// <inheritdoc cref="Entity.GetTileset"/>
+        protected override Texture2D? GetTileset()
+        {
+            return Game1.staminaRect;
+        }
+    }
+}

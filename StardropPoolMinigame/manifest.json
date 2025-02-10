@@ -1,0 +1,10 @@
+{
+  "Name": "StardropPoolMinigame",
+  "Author": "andyruwruw",
+  "Version": "1.0.0",
+  "Description": "Fully functioning 8-Ball Pool Minigame within Stardew Valley. Play with multiplayer friends, or against NPCs!",
+  "UniqueID": "andyruwruw.StardropPoolMinigame",
+  "EntryDll": "StardopPoolMinigame.dll",
+  "MinimumApiVersion": "4.0.0",
+  "UpdateKeys": []
+}
