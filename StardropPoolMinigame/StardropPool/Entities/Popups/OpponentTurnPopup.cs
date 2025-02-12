@@ -12,10 +12,10 @@ namespace StardopPoolMinigame.Entities.Popups
         {
         }
 
-        /// <inheritdoc cref="IEntity.GetId"/>
-        public override string GetId()
+        /// <inheritdoc cref="IEntity.GetName"/>
+        public override string GetName()
         {
-            return $"opponent-turn-popup-{_id}";
+            return $"opponent-turn-popup-{_key}";
         }
 
         /// <summary>

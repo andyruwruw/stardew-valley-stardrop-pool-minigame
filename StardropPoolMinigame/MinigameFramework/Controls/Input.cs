@@ -1,11 +1,12 @@
 ﻿using Microsoft.Xna.Framework;
+using MinigameFramework.Helpers;
 
 namespace MinigameFramework.Controls
 {
     /// <summary>
     /// Tracks the position of the player's cursor.
     /// </summary>
-    internal class Mouse
+    class Input
     {
         /// <summary>
         /// <see cref="Vector2"/> of position of the cursor.
@@ -20,11 +21,12 @@ namespace MinigameFramework.Controls
         public static void SetPosition(
             int x = 0,
             int y = 0
-        ) {
-            Position = new Vector2(
+        )
+        {
+            Position = RenderHelpers.ConvertRawToAdjustedScreen(new Vector2(
                 x,
                 y
-            );
+            ));
         }
     }
 }

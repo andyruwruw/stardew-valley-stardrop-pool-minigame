@@ -1,18 +1,12 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Media;
+using StardewValley;
 using MinigameFramework.Constants;
 using MinigameFramework.Enums;
 using MinigameFramework.Render.Filters;
-using MinigameFramework.Structures.Primitives;
-using StardewValley;
-using StardewValley.BellsAndWhistles;
-using StardewValley.Buildings;
-using StardewValley.TerrainFeatures;
-using StardewValley.Tools;
-using static MinigameFramework.Constants.GenericTextureConstants.Portrait;
-using static MinigameFramework.Helpers.RenderHelpers.AdjustedScreen;
-using System.Diagnostics.Metrics;
+using MinigameFramework.Utilities;
+using xTile.Tiles;
+using MinigameFramework.Helpers;
 
 namespace MinigameFramework.Entities.UI.Portraits
 {
@@ -21,6 +15,11 @@ namespace MinigameFramework.Entities.UI.Portraits
     /// </summary>
     class Portrait : Entity
     {
+        /// <summary>
+        /// Loaded texture.
+        /// </summary>
+        protected Texture2D? _texture = null;
+
         /// <summary>
         /// NPC being displayed.
         /// </summary>
@@ -42,11 +41,6 @@ namespace MinigameFramework.Entities.UI.Portraits
         protected bool _isDarker;
 
         /// <summary>
-        /// Whether the portrait can be hovered.
-        /// </summary>
-        protected bool _isHoverable;
-
-        /// <summary>
         /// Whether the portrait is on fire.
         /// </summary>
         protected bool _isOnFire;
@@ -62,7 +56,7 @@ namespace MinigameFramework.Entities.UI.Portraits
         protected bool _isSilhouette;
 
         /// <summary>
-        /// 
+        /// Instantiates a portrait display.
         /// </summary>
         /// <param name="name">NPC's name.</param>
         /// <param name="anchor"><see cref="Entity">Entity's</see> anchor, or position<inheritdoc cref="_anchor"/></param>
@@ -108,21 +102,21 @@ namespace MinigameFramework.Entities.UI.Portraits
         /// </summary>
         public PortraitEmotion GetEmotion()
         {
-            return this._emotion;
+            return _emotion;
         }
 
-        /// <inheritdoc cref="IEntity.GetId"/>
-        public override string GetId()
+        /// <inheritdoc cref="IEntity.GetName"/>
+        public override string GetName()
         {
-            return $"portrait-{this._id}";
+            return $"portrait-{_key}";
         }
 
         /// <summary>
         /// Retrieve who this portrait is of.
         /// </summary>
-        public DisplayableNPC GetNPC()
+        public DisplayableNPC GetNpc()
         {
-            return this._name;
+            return _name;
         }
 
         /// <summary>
@@ -130,25 +124,57 @@ namespace MinigameFramework.Entities.UI.Portraits
         /// </summary>
         public float GetScale()
         {
-            return this._scale;
+            return _scale;
         }
 
         /// <inheritdoc cref="IEntity.GetHeight"/>
         public override float GetHeight()
         {
-            return GenericTextureConstants.Portrait.Sam.Default.Height;
+            return GenericTextureConstants.Portrait.Size;
         }
 
         /// <inheritdoc cref="IEntity.GetWidth"/>
         public override float GetWidth()
         {
-            return GenericTextureConstants.Portrait.Sam.Default.Width;
+            return GenericTextureConstants.Portrait.Size;
+        }
+
+        /// <summary>
+        /// Whether the portrait is displayed darker.
+        /// </summary>
+        public bool IsDarker()
+        {
+            return _isDarker;
+        }
+
+        /// <summary>
+        /// Whether the portrait is flaming.
+        /// </summary>
+        public bool IsOnFire()
+        {
+            return _isOnFire;
+        }
+
+        /// <summary>
+        /// Whether the portrait is shining.
+        /// </summary>
+        public bool IsShining()
+        {
+            return _isShining;
+        }
+
+        /// <summary>
+        /// Whether the portrait is a silhouette.
+        /// </summary>
+        public bool IsSilhouette()
+        {
+            return _isSilhouette;
         }
 
         /// <summary>
         /// Retrieves the NPC's name.
         /// </summary>
-        protected string GetName()
+        protected string GetNpcName()
         {
             switch (_name)
             {
@@ -251,10 +277,59 @@ namespace MinigameFramework.Entities.UI.Portraits
             }
         }
 
+        /// <summary>
+        /// Color before filters.
+        /// </summary>
+        protected override Color GetRawColor()
+        {
+            if (IsSilhouette())
+            {
+                return Color.Black;
+            }
+            if (IsDarker())
+            {
+                return GenericTextureConstants.Color.Shader.Shadowed;
+            }
+            return Color.White;
+        }
+
+        /// <inheritdoc cref="Entity.GetRawSource"/>
+        protected override Microsoft.Xna.Framework.Rectangle GetRawSource()
+        {
+            Texture2D tileSheet = GetTileset();
+            int size = GenericTextureConstants.Portrait.Size;
+
+            if (tileSheet == null)
+            {
+                return new Rectangle(
+                    0,
+                    0,
+                    size,
+                    size
+                );
+            }
+
+            int index = PortraitHelper.GetPortraitIndex(
+                GetNpc(),
+                GetEmotion()
+            );
+
+            return new Microsoft.Xna.Framework.Rectangle(
+                index * size % tileSheet.Width,
+                index * size / tileSheet.Width * size,
+                size,
+                size
+            );
+        }
+
         /// <inheritdoc cref="Entity.GetTileset"/>
         protected override Texture2D? GetTileset()
         {
-            return Game1.content.Load<Texture2D>("Portraits\\" + NPC.getTextureNameForCharacter(GetName()));
+            if (_texture == null) {
+                Logger.Debug($"Loading Texture for {NPC.getTextureNameForCharacter(GetNpcName())}");
+                _texture = Game1.content.Load<Texture2D>("Portraits\\" + NPC.getTextureNameForCharacter(GetNpcName()));
+            }
+            return _texture;
         }
     }
 }

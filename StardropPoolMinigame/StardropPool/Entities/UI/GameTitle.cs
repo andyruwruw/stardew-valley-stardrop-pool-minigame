@@ -42,22 +42,22 @@ namespace StardopPoolMinigame.Entities.UI
             return TextureConstants.GameTitle.Height;
         }
 
-        /// <inheritdoc cref="IEntity.GetId"/>
-        public override string GetId()
+        /// <inheritdoc cref="IEntity.GetName"/>
+        public override string GetName()
         {
-            return $"game-title-{_id}";
-        }
-
-        /// <inheritdoc cref="IEntity.GetRawSource"/>
-        public override Rectangle GetRawSource()
-        {
-            return TextureConstants.GameTitle;
+            return $"game-title-{_key}";
         }
 
         /// <inheritdoc cref="IEntity.GetWidth"/>
         public override float GetWidth()
         {
             return TextureConstants.GameTitle.Width;
+        }
+
+        /// <inheritdoc cref="Entity.GetRawSource"/>
+        protected override Rectangle GetRawSource()
+        {
+            return TextureConstants.GameTitle;
         }
 
         /// <inheritdoc cref="Entity.GetTileset"/>

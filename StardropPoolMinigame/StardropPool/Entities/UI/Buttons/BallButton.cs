@@ -8,7 +8,6 @@ using MinigameFramework.Render.Filters;
 using MinigameFramework.Utilities;
 using StardopPoolMinigame.Constants;
 using StardopPoolMinigame.Entities.Game;
-using static StardopPoolMinigame.Constants.RenderConstants;
 
 namespace StardopPoolMinigame.Entities.UI.Buttons
 {
@@ -47,8 +46,71 @@ namespace StardopPoolMinigame.Entities.UI.Buttons
             IFilter? exitingTransition = null,
             float maxWidth = float.MaxValue,
             float scale = 1f,
+            bool isCentered = false,
+            bool? isHoverable = true,
+            bool? isInteractable = true
+        ) : base(
+            anchor,
+            layerDepth,
+            origin,
+            enteringTransition,
+            exitingTransition,
+            isHoverable,
+            isInteractable
+        )
+        {
+            _button = CreateButtonEntity(
+                text,
+                anchor,
+                layerDepth,
+                enteringTransition,
+                exitingTransition,
+                maxWidth,
+                scale,
+                isCentered
+            );
+            _ball = CreateBallEntity(
+                anchor,
+                number,
+                layerDepth,
+                enteringTransition,
+                exitingTransition
+            );
+
+            SetAnchor(anchor);
+
+            _children.Add(_ball);
+            _children.Add(_button);
+        }
+
+        /// <summary>
+        /// Instantiates a ball themed button.
+        /// </summary>
+        /// <param name="key">Specify a custom ID.</param>
+        /// <param name="text"><see cref="Text"/> displayed for <see cref="Button"/></param>
+        /// <param name="anchor"><see cref="IEntity">IEntity's</see> anchor, or position<inheritdoc cref="_anchor"/></param>
+        /// <param name="number">Ball number.</param>
+        /// <param name="layerDepth"><see cref="IEntity">IEntity's</see> layer depth for rendering</param>
+        /// <param name="origin">Anchor's relation to <see cref="IEntity">IEntity's</see> position</param>
+        /// <param name="enteringTransition"><see cref="IEntity">IEntity's</see> entering <see cref="Transition"/></param>
+        /// <param name="exitingTransition"><see cref="IEntity">IEntity's</see> exiting <see cref="Transition"/></param>
+        /// <param name="maxWidth">Max width of <see cref="Text"/> to break lines</param>
+        /// <param name="scale">Scale of the button.</param>
+        /// <param name="isCentered">Whether the <see cref="Text"/> is centered</param>
+        public BallButton(
+            string key,
+            string text,
+            Vector2 anchor,
+            int number = 0,
+            float layerDepth = 0,
+            Origin origin = Origin.TopLeft,
+            IFilter? enteringTransition = null,
+            IFilter? exitingTransition = null,
+            float maxWidth = float.MaxValue,
+            float scale = 1f,
             bool isCentered = false
         ) : base(
+            key,
             anchor,
             layerDepth,
             origin,
@@ -56,40 +118,25 @@ namespace StardopPoolMinigame.Entities.UI.Buttons
             exitingTransition
         )
         {
-            _button = new Button(
+            _button = CreateButtonEntity(
                 text,
-                anchor: new Vector2(
-                    anchor.X + (GameConstants.Ball.Radius * 2) + RenderConstants.Entities.BallButton.InnerPadding,
-                    anchor.Y
-                ),
+                anchor,
                 layerDepth,
-                Origin.TopLeft,
                 enteringTransition,
                 exitingTransition,
                 maxWidth,
                 scale,
                 isCentered
             );
-            _ball = new Ball(
-                new Vector2(
-                    anchor.X + GameConstants.Ball.Radius,
-                    anchor.Y + (_button.GetHeight() / 2)
-                ),
+            _ball = CreateBallEntity(
+                anchor,
                 number,
                 layerDepth,
-                Origin.TopLeft,
                 enteringTransition,
                 exitingTransition
             );
 
-            _button.SetAnchor(new Vector2(
-                GetTopLeft().X + (GameConstants.Ball.Radius * 2) + RenderConstants.Entities.BallButton.InnerPadding,
-                GetTopLeft().Y + ((GetHeight() - _button.GetHeight()) / 2)
-            ));
-            _ball.SetAnchor(new Vector2(
-                GetTopLeft().X + GameConstants.Ball.Radius,
-                GetTopLeft().Y + ((GetHeight() - _ball.GetHeight()) / 2)
-            ));
+            SetAnchor(anchor);
 
             _children.Add(_ball);
             _children.Add(_button);
@@ -137,7 +184,7 @@ namespace StardopPoolMinigame.Entities.UI.Buttons
         /// </summary>
         public void Disable()
         {
-            this._button.Disable();
+            _button.Disable();
         }
 
         /// <summary>
@@ -145,7 +192,7 @@ namespace StardopPoolMinigame.Entities.UI.Buttons
         /// </summary>
         public void Enable()
         {
-            this._button.Enable();
+            _button.Enable();
         }
 
         /// <summary>
@@ -153,7 +200,7 @@ namespace StardopPoolMinigame.Entities.UI.Buttons
         /// </summary>
         public Ball GetBall()
         {
-            return this._ball;
+            return _ball;
         }
 
         /// <summary>
@@ -173,10 +220,10 @@ namespace StardopPoolMinigame.Entities.UI.Buttons
             );
         }
 
-        /// <inheritdoc cref="Entity.GetId"/>
-        public override string GetId()
+        /// <inheritdoc cref="Entity.GetName"/>
+        public override string GetName()
         {
-            return $"ball-button-{_id}";
+            return $"ball-button-{_key}";
         }
 
         /// <summary>
@@ -193,9 +240,29 @@ namespace StardopPoolMinigame.Entities.UI.Buttons
             return _ball.GetWidth() + RenderConstants.Entities.BallButton.InnerPadding  + _button.GetWidth();
         }
 
-        /// <inheritdoc cref="Entity.HandleLeftClick"/>
-        public override void HandleLeftClick()
+        /// <inheritdoc cref="IEntity.HandleHover"/>
+		public override void HandleHover()
         {
+            base.HandleHover();
+
+            _ball.SetSpinning(true);
+            _button.HandleHover();
+        }
+
+        /// <inheritdoc cref="IEntity.HandleUnhover"/>
+		public override void HandleUnhover()
+        {
+            base.HandleUnhover();
+
+            _ball.SetSpinning(false);
+            _button.HandleUnhover();
+        }
+
+        /// <inheritdoc cref="Entity.HandleClick"/>
+        public override void HandleClick()
+        {
+            base.HandleClick();
+
             Sounds.PlaySound(GenericSoundConstants.ButtonClick);
         }
 
@@ -205,6 +272,33 @@ namespace StardopPoolMinigame.Entities.UI.Buttons
         public bool isDisabled()
         {
             return _button.isDisabled();
+        }
+
+        /// <inheritdoc cref="IEntity.IsHoverable"/>
+        public override bool IsHoverable()
+        {
+            return true;
+        }
+
+        /// <inheritdoc cref="IEntity.IsInteractable"/>
+        public override bool IsInteractable()
+        {
+            return true;
+        }
+
+        /// <inheritdoc cref="IEntity.SetAnchor"/>
+        public override void SetAnchor(Vector2 anchor)
+        {
+            base.SetAnchor(anchor);
+
+            _button.SetAnchor(new Vector2(
+                GetTopLeft().X + (GameConstants.Ball.Radius * 2) + RenderConstants.Entities.BallButton.InnerPadding,
+                GetTopLeft().Y + ((GetHeight() - _button.GetHeight()) / 2)
+            ));
+            _ball.SetAnchor(new Vector2(
+                GetTopLeft().X + GameConstants.Ball.Radius,
+                GetTopLeft().Y + ((GetHeight() - _ball.GetHeight()) / 2)
+            ));
         }
 
         /// <inheritdoc cref="IEntity.ShouldDrawChildren"/>
@@ -219,13 +313,58 @@ namespace StardopPoolMinigame.Entities.UI.Buttons
             return false;
         }
 
-        /// <inheritdoc cref="IEntity.Update"/>
-		public override void Update(GameTime time)
+        /// <summary>
+        /// Creates the button entity.
+        /// </summary>
+        protected Button CreateButtonEntity(
+            string text,
+            Vector2 anchor,
+            float layerDepth = 0,
+            IFilter? enteringTransition = null,
+            IFilter? exitingTransition = null,
+            float maxWidth = float.MaxValue,
+            float scale = 1f,
+            bool isCentered = false
+        )
         {
-            base.Update(time);
+            return new Button(
+                text,
+                anchor: new Vector2(
+                    anchor.X + (GameConstants.Ball.Radius * 2) + RenderConstants.Entities.BallButton.InnerPadding,
+                    anchor.Y
+                ),
+                layerDepth,
+                Origin.TopLeft,
+                enteringTransition,
+                exitingTransition,
+                maxWidth,
+                scale,
+                isCentered
+            );
+        }
 
-            _ball.Update(time);
-            _button.Update(time);
+        /// <summary>
+        /// Creates the ball entity.
+        /// </summary>
+        protected Ball CreateBallEntity(
+            Vector2 anchor,
+            int number = 0,
+            float layerDepth = 0,
+            IFilter? enteringTransition = null,
+            IFilter? exitingTransition = null
+        )
+        {
+            return new Ball(
+                new Vector2(
+                    anchor.X + GameConstants.Ball.Radius,
+                    anchor.Y + (_button.GetHeight() / 2)
+                ),
+                number,
+                layerDepth,
+                Origin.TopLeft,
+                enteringTransition,
+                exitingTransition
+            );
         }
     }
 }

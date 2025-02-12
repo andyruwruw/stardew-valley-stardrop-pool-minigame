@@ -7,7 +7,6 @@ using MinigameFramework.Enums;
 using MinigameFramework.Helpers;
 using MinigameFramework.Render.Filters;
 using MinigameFramework.Structures.Primitives;
-using MinigameFramework.Utilities;
 using StardopPoolMinigame.Constants;
 using StardopPoolMinigame.Enums;
 using StardopPoolMinigame.Render;
@@ -58,6 +57,11 @@ namespace StardopPoolMinigame.Entities.Game
         protected bool _isPocketed;
 
         /// <summary>
+        /// Graphical spinning unrelated to gameplay.
+        /// </summary>
+        protected bool _isSpinning;
+
+        /// <summary>
         /// Instantiates a ball.
         /// </summary>
         /// <param name="anchor"><see cref="Entity">Entity's</see> anchor, or position<inheritdoc cref="_anchor"/></param>
@@ -74,7 +78,8 @@ namespace StardopPoolMinigame.Entities.Game
             IFilter? exitingTransition = null,
             bool isFlashing = false,
             bool isHighlighted = false,
-            bool isPocketed = false
+            bool isPocketed = false,
+            bool isSpinning = false
         ) : base(
             anchor,
             layerDepth,
@@ -86,6 +91,7 @@ namespace StardopPoolMinigame.Entities.Game
             _isFlashing = isFlashing;
             _isHighlighted = isHighlighted;
             _isPocketed= isPocketed;
+            _isSpinning = isSpinning;
             _radius = GameConstants.Ball.Radius;
 
             _orientation = new Orientation(_radius);
@@ -239,10 +245,10 @@ namespace StardopPoolMinigame.Entities.Game
             return TextureConstants.Ball.Base.White.Height;
         }
 
-        /// <inheritdoc cref="IEntity.GetId"/>
-        public override string GetId()
+        /// <inheritdoc cref="IEntity.GetName"/>
+        public override string GetName()
         {
-            return $"ball-{GetBallType()}-{_number}-{_id}";
+            return $"ball-{GetBallType()}-{_number}-{_key}";
         }
 
         /// <summary>
@@ -259,12 +265,6 @@ namespace StardopPoolMinigame.Entities.Game
         public float GetRadius()
         {
             return _radius;
-        }
-
-        /// <inheritdoc cref="IEntity.GetRawSource"/>
-        public override Microsoft.Xna.Framework.Rectangle GetRawSource()
-        {
-            return Textures.GetBallBase(GetBallColor());
         }
 
         /// <inheritdoc cref="IEntity.GetWidth"/>
@@ -298,6 +298,14 @@ namespace StardopPoolMinigame.Entities.Game
         }
 
         /// <summary>
+        /// Whether the pool ball is spinning.
+        /// </summary>
+        public bool IsSpinning()
+        {
+            return _isSpinning;
+        }
+
+        /// <summary>
         /// Sets whether the ball is flashing.
         /// </summary>
         public void SetFlashing(bool isFlashing)
@@ -322,11 +330,24 @@ namespace StardopPoolMinigame.Entities.Game
         }
 
         /// <summary>
-        /// Sets whether the ball is pocketed..
+        /// Sets whether the ball is pocketed.
         /// </summary>
         public void SetPocketed(bool isPocketed)
         {
             _isPocketed = isPocketed;
+        }
+
+        /// <summary>
+        /// Sets whether the ball is spinning.
+        /// </summary>
+        public void SetSpinning(bool isSpinning)
+        {
+            _isSpinning = isSpinning;
+
+            if (!_isSpinning)
+            {
+                _orientation = new Orientation(_radius);
+            }
         }
 
         /// <summary>
@@ -356,6 +377,16 @@ namespace StardopPoolMinigame.Entities.Game
 		public override void Update(GameTime time)
         {
             base.Update(time);
+
+            if (IsSpinning()) {
+                _orientation.Roll(Vector2.Multiply(
+                    new Vector2(
+                        GameConstants.BallButton.HoverRotationalSpeed,
+                        0
+                    ),
+                    (float)time.ElapsedGameTime.Milliseconds / 16f
+                ));
+            }
         }
 
         /// <summary>
@@ -532,6 +563,12 @@ namespace StardopPoolMinigame.Entities.Game
                 topLeft.X - RenderConstants.Entities.Ball.MarginLeft,
                 topLeft.Y - RenderConstants.Entities.Ball.MarginTop
             ));
+        }
+
+        /// <inheritdoc cref="Entity.GetRawSource"/>
+        protected override Microsoft.Xna.Framework.Rectangle GetRawSource()
+        {
+            return Textures.GetBallBase(GetBallColor());
         }
 
         /// <summary>

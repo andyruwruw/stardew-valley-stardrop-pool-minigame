@@ -1,4 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
+using MinigameFramework.Enums;
+using StardewValley.Objects;
+using StardewValley;
+using static MinigameFramework.Constants.GenericTextureConstants.Portrait;
 
 namespace MinigameFramework.Constants
 {
@@ -864,203 +868,122 @@ namespace MinigameFramework.Constants
 		/// </summary>
 		public class Portrait
         {
-            public class Abigail
+            /// <summary>
+            /// Size of portraits generally.
+            /// </summary>
+            public static int Size = GenericRenderConstants.TileSize * 4;
+
+            public static IDictionary<PortraitEmotion, int> Abigail = new Dictionary<PortraitEmotion, int>()
             {
-                public static Rectangle Blush = new Rectangle(
-                    0,
-                    GenericRenderConstants.TileSize * 8,
-                    GenericRenderConstants.TileSize * 4,
-                    GenericRenderConstants.TileSize * 4
-                );
+                { PortraitEmotion.Default, 0},
+                { PortraitEmotion.Laugh, 1},
+                { PortraitEmotion.Sad, 2},
+                { PortraitEmotion.Devious, 3},
+                { PortraitEmotion.Blush, 4},
+                { PortraitEmotion.Glare, 5},
+                { PortraitEmotion.StraightFace, 6},
+                { PortraitEmotion.StraightFace2, 8},
+                { PortraitEmotion.StraightFace3, 9},
+                { PortraitEmotion.Shock, 7},
+                { PortraitEmotion.Football, 4},
+                { PortraitEmotion.Determined, 5},
+                { PortraitEmotion.Eating, 9},
+                { PortraitEmotion.Hazmat, 0},
+                { PortraitEmotion.Religious, 1},
+                { PortraitEmotion.Mocking, 1},
+                { PortraitEmotion.Music, 1},
+                { PortraitEmotion.Phone, 0},
+                { PortraitEmotion.Notes, 3},
+                { PortraitEmotion.Tired, 3},
+                { PortraitEmotion.Embarassed, 7},
+                { PortraitEmotion.PassedOut, 0},
+                { PortraitEmotion.Chicken, 1},
+                { PortraitEmotion.Powerful, 3},
+            };
 
-                public static Rectangle Confused = new Rectangle(
-                    GenericRenderConstants.TileSize * 4,
-                    GenericRenderConstants.TileSize * 4,
-                    GenericRenderConstants.TileSize * 4,
-                    GenericRenderConstants.TileSize * 4
-                );
-
-                public static Rectangle Default =
-                    new Rectangle(
-                        0,
-                        0,
-                        GenericRenderConstants.TileSize * 4,
-                        GenericRenderConstants.TileSize * 4
-                    );
-
-                public static Rectangle Glare = new Rectangle(
-                    GenericRenderConstants.TileSize * 4,
-                    GenericRenderConstants.TileSize * 8,
-                    GenericRenderConstants.TileSize * 4,
-                    GenericRenderConstants.TileSize * 4
-                );
-
-                public static Rectangle Laugh = new Rectangle(
-                    GenericRenderConstants.TileSize * 4,
-                    0,
-                    GenericRenderConstants.TileSize * 4,
-                    GenericRenderConstants.TileSize * 4
-                );
-
-                public static Rectangle Sad = new Rectangle(
-                    0,
-                    GenericRenderConstants.TileSize * 4,
-                    GenericRenderConstants.TileSize * 4,
-                    GenericRenderConstants.TileSize * 4
-                );
-
-                public static Rectangle Suprised = new Rectangle(
-                    GenericRenderConstants.TileSize * 4,
-                    GenericRenderConstants.TileSize * 12,
-                    GenericRenderConstants.TileSize * 4,
-                    GenericRenderConstants.TileSize * 4
-                );
-            }
-
-            public class Gus
+            public static IDictionary<PortraitEmotion, int> Gus = new Dictionary<PortraitEmotion, int>()
             {
-                public static Rectangle Blush = new Rectangle(
-                    0,
-                    GenericRenderConstants.TileSize * 4,
-                    GenericRenderConstants.TileSize * 4,
-                    GenericRenderConstants.TileSize * 4
-                );
+                { PortraitEmotion.Default, 0},
+                { PortraitEmotion.Laugh, 1},
+                { PortraitEmotion.Sad, 2},
+                { PortraitEmotion.Devious, 3},
+                { PortraitEmotion.Blush, 2},
+                { PortraitEmotion.Glare, 3},
+                { PortraitEmotion.StraightFace, 3},
+                { PortraitEmotion.StraightFace2, 3},
+                { PortraitEmotion.StraightFace3, 3},
+                { PortraitEmotion.Shock, 3},
+                { PortraitEmotion.Football, 1},
+                { PortraitEmotion.Determined, 3},
+                { PortraitEmotion.Eating, 1},
+                { PortraitEmotion.Hazmat, 0},
+                { PortraitEmotion.Religious, 0},
+                { PortraitEmotion.Mocking, 1},
+                { PortraitEmotion.Music, 0},
+                { PortraitEmotion.Phone, 0},
+                { PortraitEmotion.Notes, 2},
+                { PortraitEmotion.Tired, 2},
+                { PortraitEmotion.Embarassed, 2},
+                { PortraitEmotion.PassedOut, 2},
+                { PortraitEmotion.Chicken, 1},
+                { PortraitEmotion.Powerful, 3},
+            };
 
-                public static Rectangle Default =
-                    new Rectangle(
-                        0,
-                        0,
-                        GenericRenderConstants.TileSize * 4,
-                        GenericRenderConstants.TileSize * 4
-                    );
-
-                public static Rectangle Glare = new Rectangle(
-                    GenericRenderConstants.TileSize * 4,
-                    GenericRenderConstants.TileSize * 4,
-                    GenericRenderConstants.TileSize * 4,
-                    GenericRenderConstants.TileSize * 4
-                );
-
-                public static Rectangle Laugh = new Rectangle(
-                    GenericRenderConstants.TileSize * 4,
-                    0,
-                    GenericRenderConstants.TileSize * 4,
-                    GenericRenderConstants.TileSize * 4
-                );
-            }
-
-            public class Sam
+            public static IDictionary<PortraitEmotion, int> Sam = new Dictionary<PortraitEmotion, int>()
             {
-                public static Rectangle Default =
-                    new Rectangle(
-                        0,
-                        0,
-                        GenericRenderConstants.TileSize * 4,
-                        GenericRenderConstants.TileSize * 4
-                    );
+                { PortraitEmotion.Default, 0},
+                { PortraitEmotion.Laugh, 1},
+                { PortraitEmotion.Sad, 2},
+                { PortraitEmotion.Devious, 3},
+                { PortraitEmotion.Blush, 4},
+                { PortraitEmotion.Glare, 5},
+                { PortraitEmotion.StraightFace, 7},
+                { PortraitEmotion.StraightFace2, 7},
+                { PortraitEmotion.StraightFace3, 7},
+                { PortraitEmotion.Shock, 8},
+                { PortraitEmotion.Football, 0},
+                { PortraitEmotion.Determined, 3},
+                { PortraitEmotion.Eating, 1},
+                { PortraitEmotion.Hazmat, 0},
+                { PortraitEmotion.Religious, 1},
+                { PortraitEmotion.Mocking, 1},
+                { PortraitEmotion.Music, 1},
+                { PortraitEmotion.Phone, 0},
+                { PortraitEmotion.Notes, 6},
+                { PortraitEmotion.Tired, 9},
+                { PortraitEmotion.Embarassed, 10},
+                { PortraitEmotion.PassedOut, 9},
+                { PortraitEmotion.Chicken, 1},
+                { PortraitEmotion.Powerful, 11},
+            };
 
-                public static Rectangle Embarassed = new Rectangle(
-                    0,
-                    GenericRenderConstants.TileSize * 20,
-                    GenericRenderConstants.TileSize * 4,
-                    GenericRenderConstants.TileSize * 4
-                );
-
-                public static Rectangle Frustrated = new Rectangle(
-                    GenericRenderConstants.TileSize * 4,
-                    GenericRenderConstants.TileSize * 4,
-                    GenericRenderConstants.TileSize * 4,
-                    GenericRenderConstants.TileSize * 4
-                );
-
-                public static Rectangle Glare = new Rectangle(
-                    GenericRenderConstants.TileSize * 4,
-                    GenericRenderConstants.TileSize * 8,
-                    GenericRenderConstants.TileSize * 4,
-                    GenericRenderConstants.TileSize * 4
-                );
-
-                public static Rectangle Laugh = new Rectangle(
-                    GenericRenderConstants.TileSize * 4,
-                    0,
-                    GenericRenderConstants.TileSize * 4,
-                    GenericRenderConstants.TileSize * 4
-                );
-
-                public static Rectangle Oops = new Rectangle(
-                    0,
-                    GenericRenderConstants.TileSize * 8,
-                    GenericRenderConstants.TileSize * 4,
-                    GenericRenderConstants.TileSize * 4
-                );
-
-                public static Rectangle Sad = new Rectangle(
-                    0,
-                    GenericRenderConstants.TileSize * 4,
-                    GenericRenderConstants.TileSize * 4,
-                    GenericRenderConstants.TileSize * 4
-                );
-
-                public static Rectangle SHOCK = new Rectangle(
-                    0,
-                    GenericRenderConstants.TileSize * 16,
-                    GenericRenderConstants.TileSize * 4,
-                    GenericRenderConstants.TileSize * 4
-                );
-
-                public static Rectangle STRAIGHT_FACE = new Rectangle(
-                    GenericRenderConstants.TileSize * 4,
-                    GenericRenderConstants.TileSize * 12,
-                    GenericRenderConstants.TileSize * 4,
-                    GenericRenderConstants.TileSize * 4
-                );
-            }
-
-            public class Sebastian
+            public static IDictionary<PortraitEmotion, int> Sebastian = new Dictionary<PortraitEmotion, int>()
             {
-                public static Rectangle Blush = new Rectangle(
-                    0,
-                    GenericRenderConstants.TileSize * 8,
-                    GenericRenderConstants.TileSize * 4,
-                    GenericRenderConstants.TileSize * 4
-                );
-
-                public static Rectangle Default =
-                    new Rectangle(
-                        0,
-                        0,
-                        GenericRenderConstants.TileSize * 4,
-                        GenericRenderConstants.TileSize * 4
-                    );
-
-                public static Rectangle Glad = new Rectangle(
-                    GenericRenderConstants.TileSize * 4,
-                    0,
-                    GenericRenderConstants.TileSize * 4,
-                    GenericRenderConstants.TileSize * 4
-                );
-
-                public static Rectangle Glare = new Rectangle(
-                    GenericRenderConstants.TileSize * 4,
-                    GenericRenderConstants.TileSize * 8,
-                    GenericRenderConstants.TileSize * 4,
-                    GenericRenderConstants.TileSize * 4
-                );
-
-                public static Rectangle Sad = new Rectangle(
-                    GenericRenderConstants.TileSize * 4,
-                    GenericRenderConstants.TileSize * 4,
-                    GenericRenderConstants.TileSize * 4,
-                    GenericRenderConstants.TileSize * 4
-                );
-
-                public static Rectangle Smurk = new Rectangle(
-                    GenericRenderConstants.TileSize * 4,
-                    GenericRenderConstants.TileSize * 12,
-                    GenericRenderConstants.TileSize * 4,
-                    GenericRenderConstants.TileSize * 4
-                );
-            }
+                { PortraitEmotion.Default, 0},
+                { PortraitEmotion.Laugh, 1},
+                { PortraitEmotion.Sad, 2},
+                { PortraitEmotion.Devious, 3},
+                { PortraitEmotion.Blush, 4},
+                { PortraitEmotion.Glare, 5},
+                { PortraitEmotion.StraightFace, 6},
+                { PortraitEmotion.StraightFace2, 7},
+                { PortraitEmotion.StraightFace3, 7},
+                { PortraitEmotion.Shock, 5},
+                { PortraitEmotion.Football, 1},
+                { PortraitEmotion.Determined, 5},
+                { PortraitEmotion.Eating, 1},
+                { PortraitEmotion.Hazmat, 0},
+                { PortraitEmotion.Religious, 1},
+                { PortraitEmotion.Mocking, 1},
+                { PortraitEmotion.Music, 1},
+                { PortraitEmotion.Phone, 0},
+                { PortraitEmotion.Notes, 2},
+                { PortraitEmotion.Tired, 2},
+                { PortraitEmotion.Embarassed, 2},
+                { PortraitEmotion.PassedOut, 2},
+                { PortraitEmotion.Chicken, 1},
+                { PortraitEmotion.Powerful, 3},
+            };
         }
     }
 }

@@ -28,8 +28,8 @@ namespace MinigameFramework.Attributes
             float longitude = 0,
             float latitude = 0
         ) {
-            this._circumference = (float)(2 * Math.PI * radius);
-            this._orientation = new Vector2(
+            _circumference = (float)(2 * Math.PI * radius);
+            _orientation = new Vector2(
                 longitude,
                 latitude
             );
@@ -41,7 +41,7 @@ namespace MinigameFramework.Attributes
         /// <returns>The circumference of the object</returns>
         public float GetCircumference()
         {
-            return this._circumference;
+            return _circumference;
         }
 
         /// <summary>
@@ -52,11 +52,11 @@ namespace MinigameFramework.Attributes
         {
             float LATITUDE_DIFF = 30;
 
-            float simplifiedLatitude = (float)Math.Round(this._orientation.Y / LATITUDE_DIFF) * LATITUDE_DIFF;
+            float simplifiedLatitude = (float)Math.Round(_orientation.Y / LATITUDE_DIFF) * LATITUDE_DIFF;
 
             float longitudeDiff = Math.Abs(simplifiedLatitude) != 60 ? 30 : 45;
 
-            float simplifiedLongitude = (float)Math.Round(this._orientation.X / longitudeDiff) * longitudeDiff;
+            float simplifiedLongitude = (float)Math.Round(_orientation.X / longitudeDiff) * longitudeDiff;
 
             return new Vector2(
                 simplifiedLongitude == 180 ? 0 : simplifiedLongitude,
@@ -71,15 +71,15 @@ namespace MinigameFramework.Attributes
         public void Roll(Vector2 velocity)
         {
             Vector2 degrees = new Vector2(
-                velocity.X / this._circumference * 360,
-                velocity.Y / this._circumference * 360
+                velocity.X / _circumference * 360,
+                velocity.Y / _circumference * 360
             );
-            this._orientation = Vector2.Add(
-                this._orientation,
+            _orientation = Vector2.Add(
+                _orientation,
                 degrees
             );
 
-            this.Limit();
+            Limit();
         }
 
         /// <summary>
@@ -89,7 +89,7 @@ namespace MinigameFramework.Attributes
         {
             float LATITUDE_DIFF = 30;
             float latitudeChanges = 0;
-            float simplifiedLatitude = (float)Math.Round(this._orientation.Y / LATITUDE_DIFF) * LATITUDE_DIFF;
+            float simplifiedLatitude = (float)Math.Round(_orientation.Y / LATITUDE_DIFF) * LATITUDE_DIFF;
 
             while (simplifiedLatitude > 90)
             {
@@ -105,7 +105,7 @@ namespace MinigameFramework.Attributes
 
             float longitudeDiff = Math.Abs(simplifiedLatitude) != 60 ? 30 : 45;
             float longitudeChanges = 0;
-            float simplifiedLongitude = (float)Math.Round(this._orientation.X / longitudeDiff) * longitudeDiff;
+            float simplifiedLongitude = (float)Math.Round(_orientation.X / longitudeDiff) * longitudeDiff;
 
             float maxLongitude = Math.Abs(simplifiedLatitude) != 60 ? 150 : 135;
 
@@ -123,9 +123,9 @@ namespace MinigameFramework.Attributes
 
             if (latitudeChanges != 0 || longitudeChanges != 0)
             {
-                this._orientation = new Vector2(
-                    this._orientation.X + longitudeChanges,
-                    this._orientation.Y + latitudeChanges
+                _orientation = new Vector2(
+                    _orientation.X + longitudeChanges,
+                    _orientation.Y + latitudeChanges
                 );
             }
         }

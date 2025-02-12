@@ -35,9 +35,9 @@ namespace MinigameFramework.Structures.Primitives
             float width,
             float height
         ) {
-            this._anchor = anchor;
-            this._width = width;
-            this._height = height;
+            _anchor = anchor;
+            _width = width;
+            _height = height;
         }
 
         /// <summary>
@@ -53,12 +53,12 @@ namespace MinigameFramework.Structures.Primitives
             float width,
             float height
         ) {
-            this._anchor = new Vector2(
+            _anchor = new Vector2(
                 x,
                 y
             );
-            this._width = width;
-            this._height = height;
+            _width = width;
+            _height = height;
         }
 
         /// <summary>
@@ -71,9 +71,9 @@ namespace MinigameFramework.Structures.Primitives
             Vector2 oppositeCorner
         )
         {
-            this._anchor = anchor;
-            this._width = oppositeCorner.X - anchor.X;
-            this._height = oppositeCorner.Y - anchor.Y;
+            _anchor = anchor;
+            _width = oppositeCorner.X - anchor.X;
+            _height = oppositeCorner.Y - anchor.Y;
         }
 
         /// <summary>
@@ -82,30 +82,30 @@ namespace MinigameFramework.Structures.Primitives
         /// <param name="rectangle">XNA <see cref="Microsoft.Xna.Framework.Rectangle"/>.</param>
         public Rectangle(Microsoft.Xna.Framework.Rectangle rectangle)
         {
-            this._anchor = new Vector2(
+            _anchor = new Vector2(
                 rectangle.X,
                 rectangle.Y
             );
-            this._width = rectangle.Width;
-            this._height = rectangle.Height;
+            _width = rectangle.Width;
+            _height = rectangle.Height;
         }
 
         /// <inheritdoc cref="IRange.GetCenter(IRange)"/>
         public Vector2 GetCenter()
         {
             return new Vector2(
-                this.GetCenterX(),
-                this.GetCenterY()
+                GetCenterX(),
+                GetCenterY()
             );
         }
 
         /// <inheritdoc cref="IRange.Contains(Vector2)"/>
         public bool Contains(Vector2 point)
         {
-            return (point.X >= this.GetWestX() &&
-                point.X <= this.GetEastX() &&
-                point.Y <= this.GetSouthY() &&
-                point.Y >= this.GetNorthY());
+            return (point.X >= GetWestX() &&
+                point.X <= GetEastX() &&
+                point.Y <= GetSouthY() &&
+                point.Y >= GetNorthY());
         }
 
         /// <inheritdoc cref="IRange.Intersects(IRange)"/>
@@ -123,7 +123,7 @@ namespace MinigameFramework.Structures.Primitives
         /// <returns>Top-left of <see cref="Rectangle"/></returns>
         public Vector2 GetAnchor()
         {
-            return this._anchor;
+            return _anchor;
         }
 
         /// <summary>
@@ -132,10 +132,10 @@ namespace MinigameFramework.Structures.Primitives
         /// <param name="anchor">New top-left point of the rectangle.</param>
         public void SetAnchor(Vector2 anchor)
         {
-            this._width = this._width + (anchor.X - this._anchor.X);
-            this._height = this._height + (anchor.Y - this._anchor.Y);
+            _width = _width + (anchor.X - _anchor.X);
+            _height = _height + (anchor.Y - _anchor.Y);
 
-            this._anchor = anchor;
+            _anchor = anchor;
         }
 
         /// <summary>
@@ -144,7 +144,7 @@ namespace MinigameFramework.Structures.Primitives
         /// <param name="anchor">New top-left point of the rectangle.</param>
         public void TransformAnchor(Vector2 anchor)
         {
-            this._anchor = anchor;
+            _anchor = anchor;
         }
 
         /// <summary>
@@ -153,7 +153,7 @@ namespace MinigameFramework.Structures.Primitives
         /// <returns>Height of <see cref="Rectangle"/></returns>
         public float GetHeight()
         {
-            return this._height;
+            return _height;
         }
 
         /// <summary>
@@ -162,7 +162,7 @@ namespace MinigameFramework.Structures.Primitives
         /// <param name="height">New height.</param>
         public void SetHeight(float height)
         {
-            this._height = height;
+            _height = height;
         }
 
         /// <summary>
@@ -171,7 +171,7 @@ namespace MinigameFramework.Structures.Primitives
         /// <returns>Half the height</returns>
         public float GetHalfHeight()
         {
-            return this._height / 2;
+            return _height / 2;
         }
 
         /// <summary>
@@ -180,7 +180,7 @@ namespace MinigameFramework.Structures.Primitives
         /// <returns>Width of <see cref="Rectangle"/></returns>
         public float GetWidth()
         {
-            return this._width;
+            return _width;
         }
 
         /// <summary>
@@ -189,7 +189,7 @@ namespace MinigameFramework.Structures.Primitives
         /// <param name="width">New width.</param>
         public void SetWidth(float width)
         {
-            this._width = width;
+            _width = width;
         }
 
         /// <summary>
@@ -198,7 +198,7 @@ namespace MinigameFramework.Structures.Primitives
         /// <returns>Half the width</returns>
         public float GetHalfWidth()
         {
-            return this._width / 2;
+            return _width / 2;
         }
 
         /// <summary>
@@ -207,7 +207,7 @@ namespace MinigameFramework.Structures.Primitives
         /// <returns>Center X value></returns>
         public float GetCenterX()
         {
-            return this._anchor.X + this.GetHalfWidth();
+            return _anchor.X + GetHalfWidth();
         }
 
         /// <summary>
@@ -216,7 +216,7 @@ namespace MinigameFramework.Structures.Primitives
         /// <returns>Center Y value></returns>
         public float GetCenterY()
         {
-            return this._anchor.Y + this.GetHalfHeight();
+            return _anchor.Y + GetHalfHeight();
         }
 
         /// <summary>
@@ -225,7 +225,7 @@ namespace MinigameFramework.Structures.Primitives
         /// <returns>Right-most X value></returns>
         public float GetEastX()
         {
-            return this._anchor.X + this._width;
+            return _anchor.X + _width;
         }
 
         /// <summary>
@@ -235,8 +235,8 @@ namespace MinigameFramework.Structures.Primitives
         public Vector2 GetNorthEastCorner()
         {
             return new Vector2(
-                this.GetEastX(),
-                this._anchor.Y
+                GetEastX(),
+                _anchor.Y
             );
         }
 
@@ -248,13 +248,13 @@ namespace MinigameFramework.Structures.Primitives
         {
             Vector2 newAnchor = new Vector2(
                 GetCenterX(),
-                this._anchor.Y
+                _anchor.Y
             );
 
             return new Rectangle(
                 newAnchor,
-                this.GetHalfWidth(),
-                this.GetHalfHeight()
+                GetHalfWidth(),
+                GetHalfHeight()
             );
         }
 
@@ -264,7 +264,7 @@ namespace MinigameFramework.Structures.Primitives
         /// <returns>Top-left of <see cref="Rectangle"/></returns>
         public Vector2 GetNorthWestCorner()
         {
-            return this._anchor;
+            return _anchor;
         }
 
         /// <summary>
@@ -274,9 +274,9 @@ namespace MinigameFramework.Structures.Primitives
         public Rectangle GetNorthWestQuadrant()
         {
             return new Rectangle(
-                this._anchor,
-                this.GetHalfWidth(),
-                this.GetHalfHeight()
+                _anchor,
+                GetHalfWidth(),
+                GetHalfHeight()
             );
         }
 
@@ -286,7 +286,7 @@ namespace MinigameFramework.Structures.Primitives
         /// <returns>Top Y value></returns>
         public float GetNorthY()
         {
-            return this._anchor.Y;
+            return _anchor.Y;
         }
 
         /// <summary>
@@ -296,10 +296,10 @@ namespace MinigameFramework.Structures.Primitives
         public Microsoft.Xna.Framework.Rectangle GetRawXnaRectangle()
         {
             return new Microsoft.Xna.Framework.Rectangle(
-                (int)(this._anchor.X * RenderHelpers.TileScale() + RenderHelpers.AdjustedScreen.Margin.Width()),
-                (int)(this._anchor.Y * RenderHelpers.TileScale() + RenderHelpers.AdjustedScreen.Margin.Height()),
-                (int)(this._width * RenderHelpers.TileScale()),
-                (int)(this._height * RenderHelpers.TileScale()));
+                (int)(_anchor.X * RenderHelpers.TileScale() + RenderHelpers.AdjustedScreen.Margin.Width()),
+                (int)(_anchor.Y * RenderHelpers.TileScale() + RenderHelpers.AdjustedScreen.Margin.Height()),
+                (int)(_width * RenderHelpers.TileScale()),
+                (int)(_height * RenderHelpers.TileScale()));
         }
 
         /// <summary>
@@ -309,8 +309,8 @@ namespace MinigameFramework.Structures.Primitives
         public Vector2 GetSouthEastCorner()
         {
             return new Vector2(
-                this.GetEastX(),
-                this.GetSouthY()
+                GetEastX(),
+                GetSouthY()
             );
         }
 
@@ -322,13 +322,13 @@ namespace MinigameFramework.Structures.Primitives
         {
             Vector2 newAnchor = new Vector2(
                 GetCenterX(),
-                this.GetCenterY()
+                GetCenterY()
             );
 
             return new Rectangle(
                 newAnchor,
-                this.GetHalfWidth(),
-                this.GetHalfHeight()
+                GetHalfWidth(),
+                GetHalfHeight()
             );
         }
 
@@ -339,8 +339,8 @@ namespace MinigameFramework.Structures.Primitives
         public Vector2 GetSouthWestCorner()
         {
             return new Vector2(
-                this._anchor.X,
-                this.GetSouthY()
+                _anchor.X,
+                GetSouthY()
             );
         }
 
@@ -351,14 +351,14 @@ namespace MinigameFramework.Structures.Primitives
         public Rectangle GetSouthWestQuadrant()
         {
             Vector2 newAnchor = new Vector2(
-                this._anchor.X,
-                this.GetCenterY()
+                _anchor.X,
+                GetCenterY()
             );
 
             return new Rectangle(
                 newAnchor,
-                this.GetHalfWidth(),
-                this.GetHalfHeight()
+                GetHalfWidth(),
+                GetHalfHeight()
             );
         }
 
@@ -368,7 +368,7 @@ namespace MinigameFramework.Structures.Primitives
         /// <returns>Bottom Y value></returns>
         public float GetSouthY()
         {
-            return this._anchor.Y + this._height;
+            return _anchor.Y + _height;
         }
 
         /// <summary>
@@ -377,7 +377,7 @@ namespace MinigameFramework.Structures.Primitives
         /// <returns>Left-most X value></returns>
         public float GetWestX()
         {
-            return this._anchor.X;
+            return _anchor.X;
         }
 
         /// <summary>
@@ -387,10 +387,10 @@ namespace MinigameFramework.Structures.Primitives
         public Microsoft.Xna.Framework.Rectangle GetXnaRectangle()
         {
             return new Microsoft.Xna.Framework.Rectangle(
-                (int)this._anchor.X,
-                (int)this._anchor.Y,
-                (int)this._width,
-                (int)this._height
+                (int)_anchor.X,
+                (int)_anchor.Y,
+                (int)_width,
+                (int)_height
             );
         }
     }

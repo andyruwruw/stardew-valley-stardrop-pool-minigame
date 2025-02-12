@@ -48,10 +48,10 @@ namespace MinigameFramework.Entities.UI.Text
         {
         }
 
-        /// <inheritdoc cref="IEntity.GetId"/>
-        public override string GetId()
+        /// <inheritdoc cref="IEntity.GetName"/>
+        public override string GetName()
         {
-            return $"page-title-{_text}-{_id}";
+            return $"page-title-{_text}-{_key}";
         }
     }
 }

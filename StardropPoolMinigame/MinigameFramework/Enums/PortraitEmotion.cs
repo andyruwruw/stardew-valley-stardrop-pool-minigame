@@ -5,32 +5,52 @@
     /// </summary>
     public enum PortraitEmotion
     {
-        Default = 0,
+        Default,
 
-        Laugh = 1,
+        Laugh,
 
-        Sad = 2,
+        Sad,
 
-        Confused = 3,
+        Devious,
 
-        Blush = 4,
+        Blush,
 
-        Glare = 5,
+        Glare,
 
-        Suprised = 6,
+        StraightFace,
 
-        Frustrated = 7,
+        StraightFace2,
 
-        Oops = 8,
+        StraightFace3,
+        
+        Shock,
 
-        StraightFace = 9,
+        Football,
 
-        Shock = 10,
+        Determined,
 
-        Embarassed = 11,
+        Eating,
 
-        Glad = 12,
+        Hazmat,
 
-        Smurk = 13,
+        Religious,
+
+        Mocking,
+
+        Music,
+
+        Phone,
+
+        Notes,
+
+        Tired,
+
+        Embarassed,
+
+        PassedOut,
+
+        Chicken,
+
+        Powerful,
     }
 }

@@ -1,39 +1,17 @@
 ﻿using Microsoft.Xna.Framework;
-using MinigameFramework.Entities.UI;
-using MinigameFramework.Enums;
 using MinigameFramework.Render.Filters;
 
-namespace MinigameFramework.Entities.Popups
+namespace MinigameFramework.Entities.UI
 {
     /// <summary>
-    /// A general popup, any entities that appear for a short time over everything else.
+    /// Container of entities!
     /// </summary>
-    class Popup : Section
+    class Section : Entity
     {
         /// <summary>
-        /// Delay before showing the popup.
+        /// Instantiates a new <see cref="Section"/>.
         /// </summary>
-        protected float _delay = 0;
-
-        /// <summary>
-        /// How long to show before disappearing.
-        /// </summary>
-        protected int _lifetime = 100;
-
-        /// <summary>
-        /// Whether to show the popup instantly.
-        /// </summary>
-        protected bool _visible = false;
-
-        /// <summary>
-        /// Whether the popup can be dismissed.
-        /// </summary>
-        protected bool _dismissable = true;
-
-        /// <summary>
-        /// Instantiates a new <see cref="Popup"/>.
-        /// </summary>
-        public Popup(
+        public Section(
             IEntity? parent = null,
             string? key = null,
             IList<IEntity>? children = null,
@@ -46,7 +24,7 @@ namespace MinigameFramework.Entities.Popups
             bool? centerContent = false,
             bool? center = false,
             Vector2? contentOffset = null,
-            bool? fixedPosition = true,
+            bool? fixedPosition = false,
             float? gap = 0f,
             float? height = -1f,
             float? margin = 0f,           
@@ -64,11 +42,7 @@ namespace MinigameFramework.Entities.Popups
             float? paddingLeft = 0f,
             float? paddingRight = 0f,
             float? paddingTop = 0f,
-            float? width = -1f,
-            bool? visible = false,
-            int? delay = 0,
-            int? lifetime = 100,
-            bool? dismissable = true
+            float? width = -1f
         ) : base(
             parent,
             key,
@@ -103,39 +77,15 @@ namespace MinigameFramework.Entities.Popups
             width
         )
         {
-            _delay = delay ?? 0;
-            _lifetime = lifetime ?? 100;
-            _visible = visible ?? false;
-            _dismissable = dismissable ?? true;
-        }
-
-        /// <summary>
-        /// Closes the popup.
-        /// </summary>
-        public void Dismiss() {
-            _visible = false;
-
-            SetTransitionState(TransitionState.Exiting);
+            InitializeEntities();
+            
+            HandleChildUpdate();
         }
 
         /// <inheritdoc cref="IEntity.GetName"/>
         public override string GetName()
         {
-            return $"popup-{_key}";
-        }
-
-        /// <summary>
-        /// Whether the popup is dismissable.
-        /// </summary>
-        public bool IsDismissable() {
-            return _dismissable;
-        }
-
-        /// <summary>
-        /// Whether the popup is visible.
-        /// </summary>
-        public bool IsVisible() {
-            return _visible;
+            return $"section-{_key}";
         }
 
         /// <inheritdoc cref="IEntity.ShouldDrawChildren"/>
@@ -151,12 +101,10 @@ namespace MinigameFramework.Entities.Popups
         }
 
         /// <summary>
-        /// Shows the popup.
+        /// Setup default entities.
         /// </summary>
-        public void Show() {
-            _visible = true;
-
-            SetTransitionState(TransitionState.Entering);
+        protected virtual void InitializeEntities()
+        {
         }
     }
 }

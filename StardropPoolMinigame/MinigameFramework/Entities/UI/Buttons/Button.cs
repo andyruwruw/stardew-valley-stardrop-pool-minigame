@@ -5,6 +5,7 @@ using MinigameFramework.Enums;
 using MinigameFramework.Helpers;
 using MinigameFramework.Render.Filters;
 using MinigameFramework.Utilities;
+using StardopPoolMinigame.Constants;
 
 namespace MinigameFramework.Entities.UI.Buttons
 {
@@ -48,18 +49,22 @@ namespace MinigameFramework.Entities.UI.Buttons
             IFilter? exitingTransition = null,
             float maxWidth = float.MaxValue,
             float scale = 1f,
-            bool isCentered = false
+            bool isCentered = false,
+            bool? isHoverable = true,
+            bool? isInteractable = true
         ) : base(
             anchor,
             layerDepth,
             origin,
             enteringTransition,
-            exitingTransition
+            exitingTransition,
+            isHoverable,
+            isInteractable
         ) {
             _disabled = false;
 
             _text = text;
-            _content = new Text.Text(
+            _content = CreateTextEntity(
                 text,
                 anchor,
                 layerDepth,
@@ -68,8 +73,7 @@ namespace MinigameFramework.Entities.UI.Buttons
                 exitingTransition,
                 maxWidth,
                 scale,
-                isCentered,
-                true
+                isCentered
             );
 
             _children.Add(_content);
@@ -97,10 +101,10 @@ namespace MinigameFramework.Entities.UI.Buttons
             return _content.GetHeight();
         }
 
-        /// <inheritdoc cref="Entity.GetId"/>
-        public override string GetId()
+        /// <inheritdoc cref="Entity.GetName"/>
+        public override string GetName()
         {
-            return $"basic-button-{_id}";
+            return $"basic-button-{_key}";
         }
 
         /// <summary>
@@ -117,10 +121,26 @@ namespace MinigameFramework.Entities.UI.Buttons
             return _content.GetWidth() + 2f;
         }
 
-        /// <inheritdoc cref="Entity.HandleLeftClick"/>
-        public override void HandleLeftClick()
+        /// <inheritdoc cref="Entity.HandleClick"/>
+        public override void HandleClick()
         {
             Sounds.PlaySound(GenericSoundConstants.ButtonClick);
+        }
+
+        /// <inheritdoc cref="IEntity.HandleHover"/>
+		public override void HandleHover()
+        {
+            base.HandleHover();
+            _content.HandleHover();
+
+            Sounds.PlaySound(GenericSoundConstants.ButtonHover);
+        }
+
+        /// <inheritdoc cref="IEntity.HandleUnhover"/>
+		public override void HandleUnhover()
+        {
+            base.HandleUnhover();
+            _content.HandleUnhover();
         }
 
         /// <summary>
@@ -129,6 +149,14 @@ namespace MinigameFramework.Entities.UI.Buttons
         public bool isDisabled()
         {
             return _disabled;
+        }
+
+        /// <inheritdoc cref="IEntity.SetAnchor"/>
+        public override void SetAnchor(Vector2 anchor)
+        {
+            base.SetAnchor(anchor);
+
+            _content.SetAnchor(anchor);
         }
 
         /// <inheritdoc cref="Entity.SetTransitionState"/>
@@ -140,7 +168,7 @@ namespace MinigameFramework.Entities.UI.Buttons
                 transitionState,
                 start
             );
-            this._content.SetTransitionState(
+            _content.SetTransitionState(
                 transitionState,
                 true
             );
@@ -156,6 +184,35 @@ namespace MinigameFramework.Entities.UI.Buttons
         public override bool ShouldDrawSelf()
         {
             return false;
+        }
+
+        /// <summary>
+        /// Creates the text entity.
+        /// </summary>
+        protected Text.Text CreateTextEntity(
+            string text,
+            Vector2 anchor,
+            float layerDepth = 0,
+            Origin origin = Origin.TopLeft,
+            IFilter? enteringTransition = null,
+            IFilter? exitingTransition = null,
+            float maxWidth = float.MaxValue,
+            float scale = 1f,
+            bool isCentered = false
+        )
+        {
+            return new Text.Text(
+                text,
+                anchor,
+                layerDepth,
+                origin,
+                enteringTransition,
+                exitingTransition,
+                maxWidth,
+                scale,
+                isCentered,
+                true
+            );
         }
 
         /// <inheritdoc cref="Entity.DrawDebug"/>

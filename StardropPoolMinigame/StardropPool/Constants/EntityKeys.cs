@@ -1,9 +1,13 @@
-﻿namespace StardopPoolMinigame.StardropPool.Constants
+﻿namespace StardopPoolMinigame.Constants
 {
     static class EntityKeys
     {
         public static class MainMenu
         {
+            public static string MenuSection = "menu.button.main.section";
+
+            public static string Custom = "menu.button.main.custom";
+
             public static string Gallery = "menu.button.main.gallery";
 
             public static string Multiplayer = "menu.button.main.multiplayer";

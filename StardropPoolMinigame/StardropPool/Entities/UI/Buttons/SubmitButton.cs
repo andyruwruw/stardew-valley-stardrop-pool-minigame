@@ -45,16 +45,16 @@ namespace StardopPoolMinigame.Entities.UI.Buttons
         }
 
         /// <inheritdoc cref="Button.ClickCallback"/>
-        public override void HandleLeftClick()
+        public override void HandleClick()
         {
             Sounds.PlaySound(GenericSoundConstants.SubmitClick);
             Sounds.StopMusic();
         }
 
-        /// <inheritdoc cref="Button.GetId"/>
-        public override string GetId()
+        /// <inheritdoc cref="Button.GetName"/>
+        public override string GetName()
         {
-            return $"submit-button-{this._id}";
+            return $"submit-button-{_key}";
         }
     }
 }

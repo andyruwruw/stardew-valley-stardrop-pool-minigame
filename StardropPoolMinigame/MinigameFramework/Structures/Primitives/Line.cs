@@ -28,8 +28,8 @@ namespace MinigameFramework.Structures.Primitives
             Vector2 start,
             Vector2 end
         ) {
-            this._start = start;
-            this._end = end;
+            _start = start;
+            _end = end;
         }
 
         /// <summary>
@@ -45,11 +45,11 @@ namespace MinigameFramework.Structures.Primitives
             float endX,
             float endY
         ) {
-            this._start = new Vector2(
+            _start = new Vector2(
                 startX,
                 startY
             );
-            this._end = new Vector2(
+            _end = new Vector2(
                 endX,
                 endY
             );
@@ -59,11 +59,11 @@ namespace MinigameFramework.Structures.Primitives
         public Vector2 GetCenter()
         {
             return Vector2.Add(
-                this._start,
+                _start,
                 Vector2.Multiply(
                     Vector2.Subtract(
-                        this._start,
-                        this._end
+                        _start,
+                        _end
                     ),
                     0.5f
                 )
@@ -73,7 +73,7 @@ namespace MinigameFramework.Structures.Primitives
         /// <inheritdoc cref="IRange.Contains(Vector2)"/>
         public bool Contains(Vector2 point)
         {
-            return this.GetValue(point.X) == point.Y;
+            return GetValue(point.X) == point.Y;
         }
 
         /// <inheritdoc cref="IRange.Intersects(IRange)"/>
@@ -92,8 +92,8 @@ namespace MinigameFramework.Structures.Primitives
         public float GetLength()
         {
             return (float)DistanceHelpers.Pythagorean(
-                this._start,
-                this._end
+                _start,
+                _end
             );
         }
 
@@ -103,10 +103,10 @@ namespace MinigameFramework.Structures.Primitives
         /// <param name="length">Length of the line.</param>
         public void SetLength(float length)
         {
-            this._end = Vector2.Add(
-                this._start,
+            _end = Vector2.Add(
+                _start,
                 Vector2.Multiply(
-                    this.GetSlope(),
+                    GetSlope(),
                     length
                 )
             );
@@ -118,7 +118,7 @@ namespace MinigameFramework.Structures.Primitives
         /// <returns><see cref="Vector2"/> of start of line.</returns>
         public Vector2 GetStart()
         {
-            return this._start;
+            return _start;
         }
 
         /// <summary>
@@ -127,7 +127,7 @@ namespace MinigameFramework.Structures.Primitives
         /// <param name="start"><see cref="Vector2"/> of start of line.</param>
         public void SetStart(Vector2 start)
         {
-            this._start = start;
+            _start = start;
         }
 
         /// <summary>
@@ -136,11 +136,11 @@ namespace MinigameFramework.Structures.Primitives
         /// <param name="start"><see cref="Vector2"/> of start of line.</param>
         public void TransformStart(Vector2 start)
         {
-            this._end = Vector2.Add(
-                this._start,
-                this.GetSlope()
+            _end = Vector2.Add(
+                _start,
+                GetSlope()
             );
-            this._start = start;
+            _start = start;
         }
 
         /// <summary>
@@ -149,7 +149,7 @@ namespace MinigameFramework.Structures.Primitives
         /// <returns><see cref="Vector2"/> of end of line.</returns>
         public Vector2 GetEnd()
         {
-            return this._end;
+            return _end;
         }
 
         /// <summary>
@@ -158,7 +158,7 @@ namespace MinigameFramework.Structures.Primitives
         /// <param name="end"><see cref="Vector2"/> of end of line.</param>
         public void SetEnd(Vector2 end)
         {
-            this._end = end;
+            _end = end;
         }
 
         /// <summary>
@@ -167,11 +167,11 @@ namespace MinigameFramework.Structures.Primitives
         /// <param name="end"><see cref="Vector2"/> of end of line.</param>
         public void TransformEnd(Vector2 end)
         {
-            this._start = Vector2.Subtract(
-                this._end,
-                this.GetSlope()
+            _start = Vector2.Subtract(
+                _end,
+                GetSlope()
             );
-            this._end = end;
+            _end = end;
         }
 
         /// <summary>
@@ -181,8 +181,8 @@ namespace MinigameFramework.Structures.Primitives
         public Vector2 GetSlope()
         {
             return Vector2.Subtract(
-                this._start,
-                this._end
+                _start,
+                _end
             );
         }
 
@@ -194,8 +194,8 @@ namespace MinigameFramework.Structures.Primitives
         public float GetValue(float x)
         {
             // Following point slope form: y - y1 = m(x - x1) : y = (slopeY / slopeX) * (x - x1) - y1
-            Vector2 slope = this.GetSlope();
-            return ((slope.Y / slope.X) * (x - this._start.X)) + this._start.Y;
+            Vector2 slope = GetSlope();
+            return ((slope.Y / slope.X) * (x - _start.X)) + _start.Y;
         }
     }
 }

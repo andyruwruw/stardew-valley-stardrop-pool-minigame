@@ -30,7 +30,7 @@ namespace MinigameFramework.Render.Filters.Transitions
             keyframeOpacity,
             type
         ) {
-            this._startingScale = startingScale;
+            _startingScale = startingScale;
         }
 
         /// <summary>
@@ -53,15 +53,15 @@ namespace MinigameFramework.Render.Filters.Transitions
             type,
             delay
         ) {
-            this._startingScale = startingScale;
+            _startingScale = startingScale;
         }
 
         /// <inheritdoc cref="IFilter.GetColor"/>
         public override Color GetColor(Color color)
         {
-            if (this._keyframeOpacity)
+            if (_keyframeOpacity)
             {
-                float progress = this._type == TransitionState.Entering ? this.GetProgress() : this.GetInvertedProgress();
+                float progress = _type == TransitionState.Entering ? GetProgress() : GetInvertedProgress();
 
                 return new Color(
                     (byte)Math.Round(progress * color.R),
@@ -76,9 +76,9 @@ namespace MinigameFramework.Render.Filters.Transitions
         /// <inheritdoc cref="IFilter.GetScale"/>
         public override float GetScale(float scale)
         {
-            float progress = this._type == TransitionState.Entering ? this.GetProgress() : this.GetInvertedProgress();
+            float progress = _type == TransitionState.Entering ? GetProgress() : GetInvertedProgress();
 
-            return this._startingScale + ((1 - this._startingScale) * progress) + 0.001f;
+            return _startingScale + ((1 - _startingScale) * progress) + 0.001f;
         }
 
         /// <inheritdoc cref="IFilter.GetName"/>

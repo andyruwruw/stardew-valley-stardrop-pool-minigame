@@ -5,7 +5,6 @@ using MinigameFramework.Enums;
 using MinigameFramework.Helpers;
 using MinigameFramework.Render;
 using MinigameFramework.Render.Filters;
-using StardopPoolMinigame.Constants;
 
 namespace MinigameFramework.Entities.UI.Text
 {
@@ -41,22 +40,75 @@ namespace MinigameFramework.Entities.UI.Text
 		/// <param name="exitingTransition"><see cref="Entity">Entity's</see> exiting <see cref="Transition"/></param>
         public Character(
             char character,
-            float scale,
-            Vector2 anchor,
-            float layerDepth = 0,
-            Origin origin = Origin.TopLeft,
+            IEntity? parent = null,
+            string? key = null,
+            IList<IEntity>? children = null,
+            float? layerDepth = null,
+            bool? isHoverable = false,
+            bool? isInteractable = false,
             IFilter? enteringTransition = null,
-            IFilter? exitingTransition = null
+            IFilter? exitingTransition = null,
+            bool? isRow = false,
+            bool? centerContent = false,
+            bool? center = false,
+            Vector2? contentOffset = null,
+            bool? fixedPosition = true,
+            float? gap = 0f,
+            float? height = -1f,
+            float? margin = 0f,           
+            float? marginBottom = 0f,
+            float? marginLeft = 0f,
+            float? marginRight = 0f,
+            float? marginTop = 0f,
+            float? maxHeight = -1f,
+            float? maxWidth = -1f,
+            float? minHeight = -1f,
+            float? minWidth = -1f,
+            bool? overflow = false,
+            float? padding = 0f,
+            float? paddingBottom = 0f,
+            float? paddingLeft = 0f,
+            float? paddingRight = 0f,
+            float? paddingTop = 0f,
+            float? width = -1f,
+            float? scale = 1f
         ) : base(
-            anchor,
+            parent,
+            key,
+            children,
             layerDepth,
-            origin,
+            isHoverable,
+            isInteractable,
             enteringTransition,
-            exitingTransition
+            exitingTransition,
+            isRow,
+            centerContent,
+            center,
+            contentOffset,
+            fixedPosition,
+            gap,
+            height,
+            margin,
+            marginBottom,
+            marginLeft,
+            marginRight,
+            marginTop,
+            maxHeight,
+            maxWidth,
+            minHeight,
+            minWidth,
+            overflow,
+            padding,
+            paddingBottom,
+            paddingLeft,
+            paddingRight,
+            paddingTop,
+            width
         )
         {
             _character = character;
-            _scale = scale;
+            _scale = scale ?? 1f;
+            
             _charBounds = GenericTextures.GetCharacterBoundsFromChar(character);
         }
 
@@ -66,22 +118,28 @@ namespace MinigameFramework.Entities.UI.Text
             return _charBounds.Height * _scale;
         }
 
-        /// <inheritdoc cref="IEntity.GetId"/>
-        public override string GetId()
+        /// <inheritdoc cref="IEntity.GetName"/>
+        public override string GetName()
         {
-            return $"text-character-{_id}";
-        }
-
-        /// <inheritdoc cref="IEntity.GetRawSource"/>
-        public override Microsoft.Xna.Framework.Rectangle GetRawSource()
-        {
-            return _charBounds;
+            return $"text-character-{_key}";
         }
 
         /// <inheritdoc cref="IEntity.GetWidth"/>
         public override float GetWidth()
         {
             return _charBounds.Width * _scale;
+        }
+
+        /// <inheritdoc cref="IEntity.HandleHover"/>
+		public override void HandleHover()
+        {
+            _isHovered = true;
+        }
+
+        /// <inheritdoc cref="IEntity.HandleHover"/>
+		public override void HandleUnhover()
+        {
+            _isHovered = false;
         }
 
         /// <summary>
@@ -100,6 +158,18 @@ namespace MinigameFramework.Entities.UI.Text
             return GenericTextures.Tileset.Default;
         }
 
+        /// <summary>
+        /// Color before filters.
+        /// </summary>
+        protected override Color GetRawColor()
+        {
+            if (IsHovered())
+            {
+                return GenericTextureConstants.Color.Solid.HoverAccent;
+            }
+            return Color.White;
+        }
+
         /// <inheritdoc cref="Entity.GetRawDestination"/>
         protected override Vector2 GetRawDestination()
         {
@@ -109,6 +179,12 @@ namespace MinigameFramework.Entities.UI.Text
                 destination.X,
                 destination.Y + (GenericRenderConstants.Font.YOffset * RenderHelpers.TileScale())
             );
+        }
+
+        /// <inheritdoc cref="Entity.GetRawSource"/>
+        protected override Microsoft.Xna.Framework.Rectangle GetRawSource()
+        {
+            return _charBounds;
         }
     }
 }

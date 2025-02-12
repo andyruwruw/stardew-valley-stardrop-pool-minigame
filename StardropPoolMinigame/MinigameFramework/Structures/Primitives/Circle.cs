@@ -28,8 +28,8 @@ namespace MinigameFramework.Structures.Primitives
             Vector2 center,
             float radius
         ) {
-            this._center = center;
-            this._radius = radius;
+            _center = center;
+            _radius = radius;
         }
 
         /// <summary>
@@ -43,17 +43,17 @@ namespace MinigameFramework.Structures.Primitives
             float y,
             float radius
         ) {
-            this._center = new Vector2(
+            _center = new Vector2(
                 x,
                 y
             );
-            this._radius = radius;
+            _radius = radius;
         }
 
         /// <inheritdoc cref="IRange.GetCenter"/>
         public Vector2 GetCenter()
         {
-            return this._center;
+            return _center;
         }
 
         /// <inheritdoc cref="IRange.Contains(Vector2)"/>
@@ -61,8 +61,8 @@ namespace MinigameFramework.Structures.Primitives
         {
             return DistanceHelpers.Pythagorean(
                 point,
-                this._center
-            ) <= this._radius;
+                _center
+            ) <= _radius;
         }
 
         /// <inheritdoc cref="IRange.Intersects(IRange)"/>
@@ -80,7 +80,7 @@ namespace MinigameFramework.Structures.Primitives
         /// <param name="center"><see cref="Vector2"/> of new center.</param>
         public void SetCenter(Vector2 center)
         {
-            this._center = center;
+            _center = center;
         }
 
         /// <summary>
@@ -89,7 +89,7 @@ namespace MinigameFramework.Structures.Primitives
         /// <returns>Radius of <see cref="Circle"/>.</returns>
         public float GetRadius()
         {
-            return this._radius;
+            return _radius;
         }
 
         /// <summary>
@@ -98,7 +98,7 @@ namespace MinigameFramework.Structures.Primitives
         /// <param name="radius">New radius.</param>
         public void SetRadius(float radius)
         {
-            this._radius = radius;
+            _radius = radius;
         }
 
         /// <summary>
@@ -106,7 +106,7 @@ namespace MinigameFramework.Structures.Primitives
         /// </summary>
         public float GetCircumference()
         {
-            return 2 * (float)Math.PI * this._radius;
+            return 2 * (float)Math.PI * _radius;
         }
 
         /// <summary>
@@ -114,7 +114,7 @@ namespace MinigameFramework.Structures.Primitives
         /// </summary>
         public float GetArea()
         {
-            return (float)(Math.PI * Math.Pow(this._radius, 2));
+            return (float)(Math.PI * Math.Pow(_radius, 2));
         }
 
         /// <summary>
@@ -135,10 +135,10 @@ namespace MinigameFramework.Structures.Primitives
             }
 
             return Vector2.Add(
-                this._center,
+                _center,
                 Vector2.Multiply(
                     normalized,
-                    this._radius
+                    _radius
                 )
             );
         }
@@ -153,43 +153,43 @@ namespace MinigameFramework.Structures.Primitives
             switch (direction)
             {
                 case Direction.NorthEast:
-                    return this.GetPointByDirection(new Vector2(
+                    return GetPointByDirection(new Vector2(
                         1,
                         -1
                     ));
                 case Direction.East:
-                    return this.GetPointByDirection(new Vector2(
+                    return GetPointByDirection(new Vector2(
                         1,
                         0
                     ));
                 case Direction.SouthEast:
-                    return this.GetPointByDirection(new Vector2(
+                    return GetPointByDirection(new Vector2(
                         1,
                         1
                     ));
                 case Direction.South:
-                    return this.GetPointByDirection(new Vector2(
+                    return GetPointByDirection(new Vector2(
                         0,
                         1
                     ));
                 case Direction.SouthWest:
-                    return this.GetPointByDirection(new Vector2(
+                    return GetPointByDirection(new Vector2(
                         -1,
                         1
                     ));
                 case Direction.West:
-                    return this.GetPointByDirection(new Vector2(
+                    return GetPointByDirection(new Vector2(
                         -1,
                         0
                     ));
                 case Direction.NorthWest:
-                    return this.GetPointByDirection(new Vector2(
+                    return GetPointByDirection(new Vector2(
                         -1,
                         -1
                     ));
                 case Direction.North:
                 default:
-                    return this.GetPointByDirection(new Vector2(
+                    return GetPointByDirection(new Vector2(
                         0,
                         -1
                     ));

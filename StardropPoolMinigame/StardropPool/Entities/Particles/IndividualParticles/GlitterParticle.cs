@@ -2,8 +2,8 @@
 using Microsoft.Xna.Framework;
 using MinigameFramework.Enums;
 using MinigameFramework.Render.Filters;
-using StardopPoolMinigame.Constants;
 using MinigameFramework.Entities.Particles;
+using StardopPoolMinigame.Constants;
 using StardopPoolMinigame.Render;
 
 namespace StardopPoolMinigame.Entities.Particles.IndividualParticles
@@ -50,10 +50,10 @@ namespace StardopPoolMinigame.Entities.Particles.IndividualParticles
             return TextureConstants.Particle.Glimmer.Frame1.Height;
         }
 
-        /// <inheritdoc cref="IEntity.GetId"/>
-        public override string GetId()
+        /// <inheritdoc cref="IEntity.GetName"/>
+        public override string GetName()
         {
-            return $"particle-glitter-{_id}";
+            return $"particle-glitter-{_key}";
         }
 
         /// <inheritdoc cref="IEntity.GetWidth"/>

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using MinigameFramework.Enums;
 using MinigameFramework.Render.Filters;
 using MinigameFramework.Structures.Primitives;
@@ -12,65 +13,92 @@ namespace MinigameFramework.Entities
     interface IEntity
     {
         /// <summary>
-        /// General update for a scene.
+        /// Adds an on click handler.
         /// </summary>
-		void Update(GameTime time);
+        void AddOnClickHandler(EventHandler<string> handler);
+
+        /// <summary>
+        /// Adds an on click held handler.
+        /// </summary>
+        void AddOnClickHeldHandler(EventHandler<string> handler);
+
+        /// <summary>
+        /// Adds an on click released handler.
+        /// </summary>
+        void AddOnClickReleasedHandler(EventHandler<string> handler);
+
+        /// <summary>
+        /// Adds an on hover handler.
+        /// </summary>
+        void AddOnHoverHandler(EventHandler<string> handler);
+
+        /// <summary>
+        /// Adds an on key press handler.
+        /// </summary>
+        void AddOnKeyPressHandler(EventHandler<string> handler);
+
+        /// <summary>
+        /// Adds an on key release handler.
+        /// </summary>
+        void AddOnKeyReleaseHandler(EventHandler<string> handler);
+
+        /// <summary>
+        /// Adds an on right-click handler.
+        /// </summary>
+        void AddOnRightClickHandler(EventHandler<string> handler);
+
+        /// <summary>
+        /// Adds an on right-click held handler.
+        /// </summary>
+        void AddOnRightClickHeldHandler(EventHandler<string> handler);
+
+        /// <summary>
+        /// Adds an on right-click released handler.
+        /// </summary>
+        void AddOnRightClickReleasedHandler(EventHandler<string> handler);
+
+        /// <summary>
+        /// Adds an on unhover handler.
+        /// </summary>
+        void AddOnUnhoverHandler(EventHandler<string> handler);
+
+        /// <summary>
+        /// Clears the entity of children.
+        /// </summary>
+        void Clear();
 
         /// <summary>
         /// Draws the entity.
         /// </summary>
-        /// <param name="batch">Active sprite batch.</param>
-        /// <param name="overrideDestination">Custom override for destination.</param>
-        /// <param name="overrideSource">Custom override for source.</param>
-        /// <param name="overrideColor">Custom override for color.</param>
-        /// <param name="overrideRotation">Custom override for rotation.</param>
-        /// <param name="overrideOrigin">Custom override for origin.</param>
-        /// <param name="overrideScale">Custom override for scale.</param>
-        /// <param name="overrideEffects">Custom override for effects.</param>
-        /// <param name="overrideLayerDepth">Custom override for layer depth.</param>
-        void Draw(
+        /// <param name="batch">Sprite batch to draw to.</param>
+        /// <param name="offset">Parent draw offset.</param>
+        /// <param name="color">Parent draw color.</param>
+        /// <param name="rotation">Parent draw rotation.</param>
+        /// <param name="origin">Parent draw origin.</param>
+        /// <param name="scale">Parent draw scale.</param>
+        /// <param name="effects">Parent draw effects.</param>
+        /// <param name="layerDepth">Parent draw layer effect.</param>
+        Vector2 Draw(
             SpriteBatch batch,
-            Vector2? overrideDestination = null,
-            Microsoft.Xna.Framework.Rectangle? overrideSource = null,
-            Color? overrideColor = null,
-            float? overrideRotation = null,
-            Vector2? overrideOrigin = null,
-            float? overrideScale = null,
-            SpriteEffects? overrideEffects = null,
-            float? overrideLayerDepth = null
+            Vector2? offset = null,
+            Color? color = null,
+            float? rotation = null,
+            Vector2? origin = null,
+            float? scale = 1f,
+            SpriteEffects? effects = null,
+            float? layerDepth = null
         );
 
         /// <summary>
-        /// Callback when <see cref="IEntity"/> is hovered.
+        /// Tests for equality.
         /// </summary>
-        void HandleHover();
-
-        /// <summary>
-        /// Callback when <see cref="IEntity"/> is clicked.
-        /// </summary>
-        void HandleLeftClick();
-
-        /// <summary>
-        /// Callback when <see cref="IEntity"/> is right-clicked.
-        /// </summary>
-        void HandleRightClick();
-
-        /// <summary>
-        /// Whether the entity is currently hovered.
-        /// </summary>
-        bool IsHovered();
+        bool Equals(object? obj);
 
         /// <summary>
         /// Retrieves <see cref="IEntity">IEntity's</see> anchor, or position.
         /// </summary>
         /// <returns><see cref="IEntity">IEntity's</see> anchor</returns>
         Vector2 GetAnchor();
-
-        /// <summary>
-        /// Sets <see cref="IEntity">IEntity's</see> anchor, or position.
-        /// </summary>
-        /// <param name="anchor">New anchor as <see cref="Vector2"/></param>
-        void SetAnchor(Vector2 anchor);
 
         /// <summary>
         /// Retrieves the boundary, or <see cref="Rectangle"/>, of the <see cref="IEntity"/>.
@@ -85,56 +113,254 @@ namespace MinigameFramework.Entities
         Vector2 GetCenter();
 
         /// <summary>
-        /// Retrieves <see cref="IEntity">IEntity's</see> entering <see cref="Transition"/>.
-        /// </summary>
-        /// <returns><see cref="IEntity">IEntity's</see> entering <see cref="Transition"/></returns>
-        IFilter? GetEnteringTransition();
-
-        /// <summary>
         /// Retrieves internal entities.
         /// </summary>
         IList<IEntity> GetChildren();
 
         /// <summary>
-        /// Retrieves <see cref="IEntity">IEntity's</see> exiting <see cref="Transition"/>.
+        /// Retrieves the entity's entering transition.
         /// </summary>
-        /// <returns><see cref="IEntity">IEntity's</see> exiting <see cref="Transition"/></returns>
+		IFilter? GetEnteringTransition();
+
+        /// <summary>
+        /// Retrieves the entity's exiting transition.
+        /// </summary>
         IFilter? GetExitingTransition();
 
         /// <summary>
-        /// Retrieves <see cref="IEntity">IEntity's</see> perminant <see cref="IFilter">IFilters</see>.
+        /// Retrieves the total height of the <see cref="IEntity"/>.
         /// </summary>
-        /// <returns><see cref="IEntity">IEntity's</see> perminant <see cref="IFilter">IFilters</see></returns>
-        IList<IFilter> GetFilters();
+        /// <returns>Total height of the <see cref="IEntity"/></returns>
+        float GetHeight();
+
+        /// <summary>
+        /// Retrieves the item's hash code.
+        /// </summary>
+        int GetHashCode();
 
         /// <summary>
         /// Retrieves <see cref="IEntity">IEntity's</see> unique identifier.
         /// </summary>
         /// <returns>Unique identifier</returns>
-        string GetId();
+        string GetKey();
 
         /// <summary>
-        /// Retrieves <see cref="IEntity">IEntity's</see> layer depth for rendering.
+        /// Retrieves layer depth after filters for drawing.
         /// </summary>
-        /// <returns><see cref="IEntity">IEntity's</see> layer depth</returns>
         float GetLayerDepth();
 
         /// <summary>
-        /// Retrieves anchor's relation to <see cref="IEntity">IEntity's</see> position.
+        /// Retrieves <see cref="IEntity">IEntity's</see> name with key.
         /// </summary>
-        /// <returns>Anchor's relation to <see cref="IEntity">IEntity's</see> position</returns>
-        Origin GetOrigin();
+        /// <returns>Unique identifier</returns>
+        string GetName();
 
         /// <summary>
-        /// Retrieves the sprite's raw source.
+        /// Retrieves the margin on bottom.
         /// </summary>
-        Microsoft.Xna.Framework.Rectangle GetRawSource();
+        float GetMarginBottom();
 
         /// <summary>
-        /// Retrieves the raw boundary, or <see cref="Rectangle"/>, of the <see cref="IEntity"/>.
+        /// Retrieves the margin on the left.
         /// </summary>
-        /// <returns>Raw boundary of the <see cref="IEntity"/></returns>
-        Structures.Primitives.Rectangle GetRawBoundary();
+        float GetMarginLeft();
+
+        /// <summary>
+        /// Retrieves the margin on the right.
+        /// </summary>
+        float GetMarginRight();
+
+        /// <summary>
+        /// Retrieves the margin on top.
+        /// </summary>
+        float GetMarginTop();
+
+        /// <summary>
+        /// Retrieves the maximum height of the entity.
+        /// </summary>
+        float GetMaxHeight();
+
+        /// <summary>
+        /// Retrieves the maximum width of the entity.
+        /// </summary>
+        float GetMaxWidth();
+
+        /// <summary>
+        /// Retrieves the maximum height of the entity.
+        /// </summary>
+        float GetMinHeight();
+
+        /// <summary>
+        /// Retrieves the minimum width of the entity.
+        /// </summary>
+        float GetMinWidth();
+
+        /// <summary>
+        /// Retrieves the padding on bottom.
+        /// </summary>
+        float GetPaddingBottom();
+
+        /// <summary>
+        /// Retrieves the padding on the left.
+        /// </summary>
+        float GetPaddingLeft();
+
+        /// <summary>
+        /// Retrieves the padding on the right.
+        /// </summary>
+        float GetPaddingRight();
+
+        /// <summary>
+        /// Retrieves the padding on top.
+        /// </summary>
+        float GetPaddingTop();
+
+        /// <summary>
+        /// Get's the entity's scroll position.
+        /// </summary>
+        Vector2 GetScroll();
+
+        /// <summary>
+        /// Retrieves <see cref="IEntity">IEntity's</see> current <see cref="TransitionState"/>.
+        /// </summary>
+        /// <returns><see cref="IEntity">IEntity's</see> current <see cref="TransitionState"/></returns>
+        TransitionState GetTransitionState();
+
+        /// <summary>
+        /// Retrieves the width of the <see cref="IEntity"/>.
+        /// </summary>
+        /// <returns>Width of the <see cref="IEntity"/></returns>
+        float GetWidth();
+
+        /// <summary>
+        /// Insert a new child at a desired index.
+        /// </summary>
+        /// <param name="entity">Entity to insert.</param>
+        /// <param name="index">Index to insert, -1 by default appends.</param>
+        void Insert(
+            IEntity entity,
+            int? index = -1
+        );
+
+        /// <summary>
+        /// Handles a given event and calls delegates.
+        /// </summary>
+        void HandleChildUpdate();
+
+        /// <summary>
+        /// Handles a given event and calls delegates.
+        /// </summary>
+		void HandleClick();
+
+        /// <summary>
+        /// Handles a given event and calls delegates.
+        /// </summary>
+		void HandleClickHeld();
+
+        /// <summary>
+        /// Handles a given event and calls delegates.
+        /// </summary>
+		void HandleClickReleased();
+
+        /// <summary>
+        /// Handles a given event and calls delegates.
+        /// </summary>
+		void HandleHover();
+
+        /// <summary>
+        /// Handles a given event and calls delegates.
+        /// </summary>
+		void HandleKeyPress();
+
+        /// <summary>
+        /// Handles a given event and calls delegates.
+        /// </summary>
+		void HandleKeyRelease();
+
+        /// <summary>
+        /// Handles a given event and calls delegates.
+        /// </summary>
+		void HandleRightClick();
+
+        /// <summary>
+        /// Handles a given event and calls delegates.
+        /// </summary>
+		void HandleRightClickHeld();
+
+        /// <summary>
+        /// Handles a given event and calls delegates.
+        /// </summary>
+		void HandleRightClickReleased();
+
+        /// <summary>
+        /// Handles a given event and calls delegates.
+        /// </summary>
+		void HandleUnhover();
+
+        /// <summary>
+        /// Whether this entity should be centered in its parent.
+        /// </summary>
+        bool IsCentered();
+
+        /// <summary>
+        /// Whether children of this entity should be centered.
+        /// </summary>
+        bool IsContentCentered();
+
+        /// <summary>
+        /// Whether this component has a fixed position independant of siblings.
+        /// </summary>
+        bool IsFixed();
+
+        /// <summary>
+        /// Whether an element should check for hover events.
+        /// </summary>
+        bool IsHoverable();
+
+        /// <summary>
+        /// Whether the entity is currently hovered.
+        /// </summary>
+        bool IsHovered();
+
+        /// <summary>
+        /// Whether the entity should check for click events.
+        /// </summary>
+        bool IsInteractable();
+
+        /// <summary>
+        /// Whether the entity is currently selected.
+        /// </summary>
+        bool IsSelected();
+
+        /// <summary>
+        /// Whether children of this entity should appear in a row.
+        /// </summary>
+        bool IsRow();
+
+        /// <summary>
+        /// Removes a child from the entity.
+        /// </summary>
+        /// <param name="key">Key of the child.</param>
+        void Remove(string key);
+
+        /// <summary>
+        /// Removes a child from the entity.
+        /// </summary>
+        /// <param name="entity">Entity to remove</param>
+        void Remove(IEntity entity);
+
+        /// <summary>
+        /// Sets the entity's children.
+        /// </summary>
+        /// <param name="children">Children to set.</param>
+        void SetChildren(IList<IEntity> children);
+
+        /// <summary>
+        /// Sets <see cref="IEntity">IEntity's</see> current <see cref="TransitionState"/>.
+        /// </summary>
+        /// <param name="transitionState">New <see cref="TransitionState"/></param>
+        /// <param name="start">Whether to trigger <see cref="Transition">Transition's</see> start.</param>
+        void SetTransitionState(TransitionState transitionState, bool start = false);
 
         /// <summary>
         /// Whether this entity should be drawn.
@@ -152,46 +378,58 @@ namespace MinigameFramework.Entities
         bool ShouldDrawSelf();
 
         /// <summary>
-        /// Retrieves the total height of the <see cref="IEntity"/>.
+        /// Whether children of this entity should be drawn when out of bounds.
         /// </summary>
-        /// <returns>Total height of the <see cref="IEntity"/></returns>
-        float GetHeight();
+        bool ShouldOverflow();
 
         /// <summary>
-        /// Retrieves the width of the <see cref="IEntity"/>.
+        /// General update for a scene.
         /// </summary>
-        /// <returns>Width of the <see cref="IEntity"/></returns>
-        float GetWidth();
+		void Update(GameTime time);
 
         /// <summary>
-        /// Retrieves <see cref="IEntity">IEntity's</see> current <see cref="TransitionState"/>.
+        /// Updates based on an event.
         /// </summary>
-        /// <returns><see cref="IEntity">IEntity's</see> current <see cref="TransitionState"/></returns>
-        TransitionState GetTransitionState();
+        void UpdateClick();
 
         /// <summary>
-        /// Sets <see cref="IEntity">IEntity's</see> entering <see cref="Transition"/>.
+        /// Updates based on an event.
         /// </summary>
-        /// <param name="transition">New entering <see cref="Transition"/></param>
-        void SetEnteringTransition(IFilter transition);
+        void UpdateClickHeld();
 
         /// <summary>
-        /// Sets <see cref="IEntity">IEntity's</see> exiting <see cref="Transition"/>.
+        /// Updates based on an event.
         /// </summary>
-        /// <param name="transition">New exiting <see cref="Transition"/></param>
-        void SetExitingTransition(IFilter transition);
+        void UpdateClickReleased();
 
         /// <summary>
-        /// Sets <see cref="IEntity">IEntity's</see> current <see cref="TransitionState"/>.
+        /// Updates based on an event.
         /// </summary>
-        /// <param name="transitionState">New <see cref="TransitionState"/></param>
-        /// <param name="start">Whether to trigger <see cref="Transition">Transition's</see> start.</param>
-        void SetTransitionState(TransitionState transitionState, bool start = false);
+		void UpdateHover();
 
         /// <summary>
-        /// Retrieves <see cref="Vector2"/> of the top-left of the <see cref="IEntity"/>.
+        /// Updates based on an event.
         /// </summary>
-        /// <returns>Top-left of the <see cref="IEntity"/> as <see cref="Vector2"/></returns>
-        Vector2 GetTopLeft();
+        void UpdateKeyPress(Keys key);
+
+        /// <summary>
+        /// Updates based on an event.
+        /// </summary>
+        void UpdateKeyReleased(Keys key);
+
+        /// <summary>
+        /// Updates based on an event.
+        /// </summary>
+        void UpdateRightClick();
+
+        /// <summary>
+        /// Updates based on an event.
+        /// </summary>
+        void UpdateRightClickHeld();
+
+        /// <summary>
+        /// Updates based on an event.
+        /// </summary>
+        void UpdateRightClickReleased();
     }
 }

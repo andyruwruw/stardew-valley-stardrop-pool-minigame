@@ -1,5 +1,8 @@
 ﻿namespace StardopPoolMinigame.Enums
 {
+    /// <summary>
+    /// Enumerates the style of cue.
+    /// </summary>
     public enum CueType
     {
         Basic = 0,

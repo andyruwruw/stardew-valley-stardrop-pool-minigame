@@ -1,12 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using MinigameFramework.Constants;
 using MinigameFramework.Enums;
 using MinigameFramework.Render;
 using MinigameFramework.Render.Filters;
-using MinigameFramework.Utilities;
-using StardopPoolMinigame.Constants;
-using StardopPoolMinigame.Render;
 
 namespace MinigameFramework.Entities.UI.Text
 {
@@ -24,11 +20,6 @@ namespace MinigameFramework.Entities.UI.Text
         /// Whether to center the text.
         /// </summary>
         protected bool _isCentered;
-
-        /// <summary>
-        /// Whether the text is hoverable.
-        /// </summary>
-        protected bool _isHoverable;
 
         /// <summary>
         /// Maximum width to allow the text to span.
@@ -107,10 +98,10 @@ namespace MinigameFramework.Entities.UI.Text
             return _resultingHeight;
         }
 
-        /// <inheritdoc cref="IEntity.GetId"/>
-        public override string GetId()
+        /// <inheritdoc cref="IEntity.GetName"/>
+        public override string GetName()
         {
-            return $"text-{_text}-{_id}";
+            return $"text-{_text}-{_key}";
         }
 
         /// <summary>
@@ -157,12 +148,34 @@ namespace MinigameFramework.Entities.UI.Text
             return maximum - minimum;
         }
 
-        /// <summary>
-        /// Whether the text is hoverable.
-        /// </summary>
-        public bool IsHoverable()
+        /// <inheritdoc cref="IEntity.HandleHover"/>
+		public override void HandleHover()
         {
-            return _isHoverable;
+            base.HandleHover();
+
+            foreach (Character entity in GetChildren())
+            {
+                entity.HandleHover();
+            }
+        }
+
+        /// <inheritdoc cref="IEntity.HandleUnhover"/>
+		public override void HandleUnhover()
+        {
+            base.HandleUnhover();
+            
+            foreach (Character entity in GetChildren())
+            {
+                entity.HandleUnhover();
+            }
+        }
+
+        /// <inheritdoc cref="IEntity.SetAnchor"/>
+        public override void SetAnchor(Vector2 anchor)
+        {
+            base.SetAnchor(anchor);
+
+            InitializeCharacters();
         }
 
         /// <summary>
@@ -215,6 +228,8 @@ namespace MinigameFramework.Entities.UI.Text
         /// </summary>
         protected void InitializeCharacters()
         {
+            _children.Clear();
+
             float top = float.MaxValue;
             float bottom = float.MinValue;
             float left = float.MaxValue;

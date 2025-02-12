@@ -1,13 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using MinigameFramework.Attributes;
+using StardewValley;
 using MinigameFramework.Constants;
 using MinigameFramework.Enums;
 using MinigameFramework.Helpers;
 using MinigameFramework.Render.Filters;
 using MinigameFramework.Structures.Primitives;
-using MinigameFramework.Utilities;
-using StardewValley;
 
 namespace MinigameFramework.Entities.UI
 {
@@ -168,16 +166,10 @@ namespace MinigameFramework.Entities.UI
             return _destination.GetHeight();
         }
 
-        /// <inheritdoc cref="IEntity.GetId"/>
-        public override string GetId()
+        /// <inheritdoc cref="IEntity.GetName"/>
+        public override string GetName()
         {
-            return $"solid-{_id}";
-        }
-
-        /// <inheritdoc cref="Entity.GetRawSource"/>
-        public override Microsoft.Xna.Framework.Rectangle GetRawSource()
-        {
-            return Game1.staminaRect.Bounds;
+            return $"solid-{_key}";
         }
 
         /// <inheritdoc cref="IEntity.GetWidth"/>
@@ -198,9 +190,11 @@ namespace MinigameFramework.Entities.UI
         /// <inheritdoc cref="Entity.DrawDebug"/>
         protected override void DrawDebug(SpriteBatch batch)
         {
+            Structures.Primitives.Rectangle boundary = (Structures.Primitives.Rectangle)GetBoundary();
+
             RenderHelpers.DrawDebugRectangle(
                 batch,
-                (Structures.Primitives.Rectangle)GetBoundary()
+                new Structures.Primitives.Rectangle(boundary.GetRawXnaRectangle())
             );
         }
 
@@ -216,6 +210,12 @@ namespace MinigameFramework.Entities.UI
         protected virtual Microsoft.Xna.Framework.Rectangle GetRawRectangleDestination()
         {
             return _destination.GetRawXnaRectangle();
+        }
+
+        /// <inheritdoc cref="Entity.GetRawSource"/>
+        protected override Microsoft.Xna.Framework.Rectangle GetRawSource()
+        {
+            return Game1.staminaRect.Bounds;
         }
 
         /// <summary>

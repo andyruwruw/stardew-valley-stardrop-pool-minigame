@@ -5,11 +5,11 @@ using StardewValley;
 using StardewValley.Minigames;
 using MinigameFramework.Scenes;
 using MinigameFramework.Utilities;
-using StardopPoolMinigame.
-    Render;
-using StardopPoolMinigame.
-    Scenes;
 using MinigameFramework.Render;
+using MinigameFramework.Controls;
+using StardopPoolMinigame.Render;
+using StardopPoolMinigame.Scenes;
+using MinigameFramework.Enums;
 
 namespace StardopPoolMinigame
 {
@@ -18,7 +18,12 @@ namespace StardopPoolMinigame
         /// <summary>
         /// The current playing scene.
         /// </summary>
-        private Scene? _scene;
+        private IScene? _scene;
+
+        /// <summary>
+        /// The previous scene.
+        /// </summary>
+        private IScene? _exitingScene;
 
         /// <summary>
         /// Instantiates the minigame.
@@ -66,16 +71,21 @@ namespace StardopPoolMinigame
         /// <returns></returns>
         public bool tick(GameTime time)
         {
+            Input.SetPosition(
+                Game1.getMouseX(),
+                Game1.getMouseY()
+            );
+
+            CheckForNewScene();
+
             if (_scene != null)
             {
-                if (_scene.HasNewScene())
-                {
-                    IScene? newScene = _scene.GetNewScene();
-                }
-
                 _scene.Update(time);
             }
-            
+            if (_exitingScene != null)
+            {
+                _exitingScene.Update(time);
+            }
 
             return false;
         }
@@ -111,7 +121,7 @@ namespace StardopPoolMinigame
         {
             if (_scene != null)
             {
-                _scene.HandleLeftClick(
+                _scene.HandleClick(
                     x,
                     y
                 );
@@ -129,7 +139,7 @@ namespace StardopPoolMinigame
         ) {
             if (_scene != null)
             {
-                _scene.HandleLeftClickHeld(
+                _scene.HandleClickHeld(
                     x,
                     y
                 );
@@ -168,7 +178,7 @@ namespace StardopPoolMinigame
         {
             if (_scene != null)
             {
-                _scene.HandleLeftClickReleased(
+                _scene.HandleClickReleased(
                     x,
                     y
                 );
@@ -200,9 +210,9 @@ namespace StardopPoolMinigame
         /// <param name="key"><see cref="Keys">Key</see> representation of the key pressed.</param>
         public void receiveKeyPress(Keys key)
         {
-            // Console.Info($"Recieved Key release {k.ToString()}");
+            Logger.Debug($"Recieved Key {key.ToString()}");
 
-            if (key.ToString() == "Escape")
+            if (key.ToString() == "Escape" || key.ToString() == "E")
             {
                 Logger.Info("Force Quit");
 
@@ -222,9 +232,10 @@ namespace StardopPoolMinigame
         /// <param name="key"><see cref="Keys">Key</see> representation of the key pressed.</param>
         public void receiveKeyRelease(Keys key)
         {
+            Logger.Debug($"Recieved Key Release {key.ToString()}");
             if (_scene != null)
             {
-                _scene.HandleKeyRelease(key);
+                _scene.HandleKeyReleased(key);
             }
         }
 
@@ -240,8 +251,8 @@ namespace StardopPoolMinigame
         /// </summary>
         public void unload()
         {
-            // Game1.stopMusicTrack(Game1.MusicContext.MiniGame);
-            // Game1.player.faceDirection(0);
+            Game1.stopMusicTrack(StardewValley.GameData.MusicContext.MiniGame);
+            Game1.player.faceDirection(0);
         }
 
         /// <summary>
@@ -269,6 +280,27 @@ namespace StardopPoolMinigame
             Game1.currentMinigame = null;
 
             return true;
+        }
+
+        /// <summary>
+        /// Checks if a scene transition is necessary.
+        /// </summary>
+        protected void CheckForNewScene()
+        {
+            // If the current scene has a new scene, transition to it.
+            if (_scene != null && _scene.HasNewScene())
+            {
+                _exitingScene = _scene;
+                _scene = _scene.GetNewScene();
+
+                _exitingScene.SetTransitionState(TransitionState.Exiting);
+            }
+            
+            // If the last scene has finished transitioning out, remove it.
+            if (_exitingScene != null && _exitingScene.GetTransitionState() == TransitionState.Dead)
+            {
+                _exitingScene = null;
+            }
         }
 
         /// <summary>

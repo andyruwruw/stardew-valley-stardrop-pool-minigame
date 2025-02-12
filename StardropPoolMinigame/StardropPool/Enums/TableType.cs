@@ -4,13 +4,13 @@
     {
         Classic = 0,
 
-        Crammed = 1,
+        TugOfWar = 1,
 
-        Goalkeeper = 2,
+        Crammed = 2,
 
         SingleLane = 3,
 
-        TugOfWar = 4,
+        CenterPockets = 4,
 
         Custom = 99,
     }

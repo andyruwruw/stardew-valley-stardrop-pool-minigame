@@ -2,8 +2,8 @@
 using Microsoft.Xna.Framework;
 using MinigameFramework.Enums;
 using MinigameFramework.Render.Filters;
-using StardopPoolMinigame.Constants;
 using MinigameFramework.Entities;
+using StardopPoolMinigame.Constants;
 using StardopPoolMinigame.Render;
 
 namespace StardopPoolMinigame.Entities.Game
@@ -108,10 +108,10 @@ namespace StardopPoolMinigame.Entities.Game
             return TextureConstants.PocketedBalls.BorderBox.Height + TextureConstants.PocketedBalls.Supports.Height;
         }
 
-        /// <inheritdoc cref="IEntity.GetId"/>
-        public override string GetId()
+        /// <inheritdoc cref="IEntity.GetName"/>
+        public override string GetName()
         {
-            return $"pocketed-balls-indicator-{_id}";
+            return $"pocketed-balls-indicator-{_key}";
         }
 
         /// <inheritdoc cref="IEntity.GetWidth"/>

@@ -25,7 +25,7 @@ namespace StardopPoolMinigame.Render.Filters.Animations
         /// <inheritdoc cref="IFilter.GetColor"/>
         public override Color GetColor(Color color)
         {
-            float progress = this.GetProgress();
+            float progress = GetProgress();
 
             bool firstHalf = progress <= 0.5f;
             float doubleProgress = progress * 2;

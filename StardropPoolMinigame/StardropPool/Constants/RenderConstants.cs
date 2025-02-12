@@ -8,14 +8,14 @@ namespace StardopPoolMinigame.Constants
         {
             public static class Portraits
             {
-                public static float TopMargin = TextureConstants.BarShelves.Height - GenericTextureConstants.Portrait.Sam.Default.Height;
+                public static float TopMargin = TextureConstants.BarShelves.Height - GenericTextureConstants.Portrait.Size;
 
-                public static float Gap = GenericTextureConstants.Portrait.Sam.Default.Width;
+                public static float Gap = GenericTextureConstants.Portrait.Size;
             }
 
             public static class Buttons
             {
-                public static float TopMargin = (((GenericRenderConstants.MinigameScreen.Height - TextureConstants.BarShelves.Height) - (GenericRenderConstants.Font.CharacterHeight * 4)  - RenderConstants.MainMenuScene.Buttons.Gap * 3) + TextureConstants.BarShelves.Height);
+                public static float TopMargin = TextureConstants.BarShelves.Height + 12f;
 
                 public static float Gap = 4f;
 

@@ -65,10 +65,10 @@ namespace StardopPoolMinigame.Entities.Game
             return TextureConstants.Cue.Basic.Height;
         }
 
-        /// <inheritdoc cref="IEntity.GetId"/>
-        public override string GetId()
+        /// <inheritdoc cref="IEntity.GetName"/>
+        public override string GetName()
         {
-            return $"cue-{_type}-{_isPlayers}-{_id}";
+            return $"cue-{_type}-{_isPlayers}-{_key}";
         }
 
         /// <inheritdoc cref="IEntity.GetWidth"/>

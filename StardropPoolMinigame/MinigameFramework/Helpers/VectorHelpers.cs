@@ -49,5 +49,28 @@ namespace MinigameFramework.Helpers
                 (float)Math.Sin(radians)
             );
         }
+
+        /// <summary>
+        /// Pulls a position towards a location based on progress.
+        /// </summary>
+        /// <param name="position">Original position.</param>
+        /// <param name="destination">Desired destination.</param>
+        /// <param name="progress">Progress to destination.</param>
+        public static Vector2 PullVector(
+            Vector2 position,
+            Vector2 destination,
+            float progress
+        ) {
+            return Vector2.Add(
+                position,
+                Vector2.Multiply(
+                    Vector2.Subtract(
+                        destination,
+                        position
+                    ),
+                    progress
+                )
+            );
+        }
     }
 }

@@ -31,7 +31,7 @@ namespace StardopPoolMinigame
                 return;
             }
 
-            if (e.Button.IsActionButton()) //  && PoolTableDetector.IsPoolTable()
+            if (e.Button.IsActionButton() && !typeof(StardropPoolMinigame).IsInstanceOfType(Game1.currentMinigame)) //  && PoolTableDetector.IsPoolTable()
             {
                 Logger.Debug("StardropPoolMinigame recieved Action Button");
                 StartGame();

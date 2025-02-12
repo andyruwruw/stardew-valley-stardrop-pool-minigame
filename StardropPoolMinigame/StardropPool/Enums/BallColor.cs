@@ -1,5 +1,8 @@
 ﻿namespace StardopPoolMinigame.Enums
 {
+    /// <summary>
+    /// Enumerates the colors of the balls.
+    /// </summary>
     enum BallColor
     {
         White = 0,

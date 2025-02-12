@@ -19,9 +19,9 @@
             string key,
             int intervalLength
         ) : base(key) {
-            this._intervalLength = intervalLength;
+            _intervalLength = intervalLength;
 
-            this.Start();
+            Start();
         }
 
         /// <summary>
@@ -34,13 +34,13 @@
                 SetKey();
             }
 
-            float progress = (float)Utilities.Timer.CheckTimer($"{_key}") / this._intervalLength;
+            float progress = (float)Utilities.Timer.CheckTimer($"{_key}") / _intervalLength;
 
             if (progress > 1f)
             {
                 Utilities.Timer.EndTimer($"{_key}");
 
-                this.Start();
+                Start();
 
                 return 1f;
             }

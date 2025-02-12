@@ -2,7 +2,7 @@
 {
     class GenericSoundConstants
     {
-        public static string ButtonClick = "select";
+        public static string ButtonClick = "smallSelect";
 
         public static string ButtonHover = "shiny4";
 

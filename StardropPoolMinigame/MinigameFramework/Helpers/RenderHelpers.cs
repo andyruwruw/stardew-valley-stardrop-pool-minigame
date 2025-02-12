@@ -1,9 +1,9 @@
-﻿using StardewValley;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using StardewValley;
 using static MinigameFramework.Constants.GenericRenderConstants;
 using MinigameFramework.Attributes;
-using MinigameFramework.Utilities;
+using MinigameFramework.Entities;
 
 namespace MinigameFramework.Helpers
 {
@@ -466,6 +466,72 @@ namespace MinigameFramework.Helpers
                 color,
                 size,
                 true
+            );
+        }
+
+        /// <summary>
+        /// Get the bounding box of a series of entities.
+        /// </summary>
+        /// <param name="entities">List of entities.</param>
+        /// <returns>Bounding box.</returns>
+        public static Rectangle FindBoundingBox(IList<IEntity> entities)
+        {
+            float top = float.MaxValue;
+            float bottom = float.MinValue;
+            float left = float.MaxValue;
+            float right = float.MinValue;
+
+            foreach (IEntity entity in entities)
+            {
+                float width = entity.GetWidth();
+                float height = entity.GetHeight();
+                Vector2 topLeft = entity.GetTopLeft();
+
+                if (topLeft.X < left)
+                {
+                    left = topLeft.X;
+                }
+                if (topLeft.X + width > right)
+                {
+                    right = topLeft.X + width;
+                }
+                if (topLeft.Y < top)
+                {
+                    top = topLeft.Y;
+                }
+                if (topLeft.Y + height > bottom)
+                {
+                    bottom = topLeft.Y + height;
+                }
+            }
+
+            return new Rectangle(
+                (int)Math.Round(left),
+                (int)Math.Round(top),
+                (int)Math.Round(right - left),
+                (int)Math.Round(bottom - top)
+            );
+        }
+
+        /// <summary>
+        /// Combines two colors.
+        /// </summary>
+        /// <param name="color1">First color, controlled by weight.</param>
+        /// <param name="color2">Second color.</param>
+        /// <param name="weight">How much to weight the first color.</param>
+        public static Color CombineColors(
+            Color color1,
+            Color color2,
+            float weight = 0.5f
+        )
+        {
+            float counterWeight = 1f - weight;
+
+            return new Color(
+                color1.R * weight + color2.R * counterWeight,
+                color1.G * weight + color2.G * counterWeight,
+                color1.B * weight + color2.B * counterWeight,
+                color1.A < color1.A ? color1.A : color1.A
             );
         }
     }

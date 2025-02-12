@@ -1,9 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using MinigameFramework.Enums;
 using MinigameFramework.Entities;
 using MinigameFramework.Render.Filters;
 using StardopPoolMinigame.Constants;
-using Microsoft.Xna.Framework.Graphics;
 using StardopPoolMinigame.Render;
 
 namespace StardopPoolMinigame.Entities.UI.Backgrounds
@@ -41,22 +41,22 @@ namespace StardopPoolMinigame.Entities.UI.Backgrounds
             return TextureConstants.FloorTiles.Height;
         }
 
-        /// <inheritdoc cref="IEntity.GetId"/>
-        public override string GetId()
+        /// <inheritdoc cref="IEntity.GetName"/>
+        public override string GetName()
         {
-            return $"floor-tile-{_id}";
-        }
-
-        /// <inheritdoc cref="Entity.GetRawSource"/>
-        public override Rectangle GetRawSource()
-        {
-            return TextureConstants.FloorTiles;
+            return $"floor-tile-{_key}";
         }
 
         /// <inheritdoc cref="IEntity.GetWidth"/>
         public override float GetWidth()
         {
             return TextureConstants.FloorTiles.Width;
+        }
+
+        /// <inheritdoc cref="Entity.GetRawSource"/>
+        protected override Rectangle GetRawSource()
+        {
+            return TextureConstants.FloorTiles;
         }
 
         /// <inheritdoc cref="Entity.GetTileset"/>

@@ -6,7 +6,6 @@ using MinigameFramework.Render.Filters;
 using StardopPoolMinigame.Constants;
 using StardopPoolMinigame.Enums;
 using StardopPoolMinigame.Render;
-using StardewValley;
 
 namespace StardopPoolMinigame.Entities.Game.Table
 {
@@ -58,10 +57,10 @@ namespace StardopPoolMinigame.Entities.Game.Table
             return TextureConstants.Table.Felt.Height;
         }
 
-        /// <inheritdoc cref="IEntity.GetId"/>
-        public override string GetId()
+        /// <inheritdoc cref="IEntity.GetName"/>
+        public override string GetName()
         {
-            return $"table-segment-{_row}-{_column}-{_type}-{_id}";
+            return $"table-segment-{_row}-{_column}-{_type}-{_key}";
         }
 
         /// <inheritdoc cref="IEntity.GetWidth"/>
@@ -76,8 +75,8 @@ namespace StardopPoolMinigame.Entities.Game.Table
             base.Update(time);
         }
 
-        /// <inheritdoc cref="IEntity.GetRawSource"/>
-        public override Microsoft.Xna.Framework.Rectangle GetRawSource()
+        /// <inheritdoc cref="Entity.GetRawSource"/>
+        protected override Microsoft.Xna.Framework.Rectangle GetRawSource()
         {
             return Textures.GetTableSegmentBackFromType(_type);
         }

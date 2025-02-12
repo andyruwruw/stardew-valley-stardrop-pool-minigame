@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework;
+using MinigameFramework.Entities;
+using MinigameFramework.Enums;
 
 namespace MinigameFramework.Scenes
 {
@@ -40,7 +42,7 @@ namespace MinigameFramework.Scenes
         /// </summary>
         /// <param name="x">X coordinate of the mouse click.</param>
         /// <param name="y">Y coordinate of the mouse click.</param>
-        void HandleLeftClick(
+        void HandleClick(
             int x,
             int y
         );
@@ -65,14 +67,14 @@ namespace MinigameFramework.Scenes
         /// General key release handler.
         /// </summary>
         /// <param name="x"><see cref="Keys">Key</see> representation of the key pressed.</param>
-        void HandleKeyRelease(Keys k);
+        void HandleKeyReleased(Keys k);
 
         /// <summary>
         /// Left click held handler.
         /// </summary>
         /// <param name="x">X coordinate of the mouse click.</param>
         /// <param name="y">Y coordinate of the mouse click.</param>
-        void HandleLeftClickHeld(
+        void HandleClickHeld(
             int x,
             int y
         );
@@ -92,7 +94,7 @@ namespace MinigameFramework.Scenes
         /// </summary>
         /// <param name="x">X coordinate of the mouse click.</param>
         /// <param name="y">Y coordinate of the mouse click.</param>
-        void HandleLeftClickReleased(
+        void HandleClickReleased(
             int x,
             int y
         );
@@ -106,5 +108,21 @@ namespace MinigameFramework.Scenes
             int x,
             int y
         );
+
+        /// <summary>
+        /// Retrieves the scene name.
+        /// </summary>
+        /// <returns></returns>
+        string GetKey();
+
+        /// <summary>
+        /// Retrieves the transition state of the scene.
+        /// </summary>
+        TransitionState GetTransitionState();
+
+        /// <summary>
+        /// Sets the transition state of the scene.
+        /// </summary>
+        void SetTransitionState(TransitionState state);
     }
 }

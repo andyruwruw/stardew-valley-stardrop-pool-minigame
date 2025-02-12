@@ -54,12 +54,12 @@ namespace MinigameFramework.Attributes
             float maxVelocity = float.MaxValue,
             float maxAcceleration = float.MaxValue)
         {
-            this._position = position;
-            this._velocity = velocity;
-            this._acceleration = acceleration;
-            this._mass = mass;
-            this._maxVelocity = maxVelocity;
-            this._maxAcceleration = maxAcceleration;
+            _position = position;
+            _velocity = velocity;
+            _acceleration = acceleration;
+            _mass = mass;
+            _maxVelocity = maxVelocity;
+            _maxAcceleration = maxAcceleration;
         }
 
         /// <summary>
@@ -78,12 +78,12 @@ namespace MinigameFramework.Attributes
             float maxVelocity = float.MaxValue,
             float maxAcceleration = float.MaxValue)
         {
-            this._position = position;
-            this._velocity = velocity;
-            this._acceleration = Vector2.Zero;
-            this._mass = mass;
-            this._maxVelocity = maxVelocity;
-            this._maxAcceleration = maxAcceleration;
+            _position = position;
+            _velocity = velocity;
+            _acceleration = Vector2.Zero;
+            _mass = mass;
+            _maxVelocity = maxVelocity;
+            _maxAcceleration = maxAcceleration;
         }
 
         /// <summary>
@@ -100,12 +100,12 @@ namespace MinigameFramework.Attributes
             float maxVelocity = float.MaxValue,
             float maxAcceleration = float.MaxValue)
         {
-            this._position = position;
-            this._velocity = Vector2.Zero;
-            this._acceleration = Vector2.Zero;
-            this._mass = mass;
-            this._maxVelocity = maxVelocity;
-            this._maxAcceleration = maxAcceleration;
+            _position = position;
+            _velocity = Vector2.Zero;
+            _acceleration = Vector2.Zero;
+            _mass = mass;
+            _maxVelocity = maxVelocity;
+            _maxAcceleration = maxAcceleration;
         }
 
         /// <summary>
@@ -114,7 +114,7 @@ namespace MinigameFramework.Attributes
         /// <returns>Acceleration of the object as <see cref="Vector2"/></returns>
         public Vector2 GetAcceleration()
         {
-            return this._acceleration;
+            return _acceleration;
         }
 
         /// <summary>
@@ -123,7 +123,7 @@ namespace MinigameFramework.Attributes
         /// <param name="acceleration">New acceleration of the object as <see cref="Vector2"/></param>
         public void SetAcceleration(Vector2 acceleration)
         {
-            this._acceleration = acceleration;
+            _acceleration = acceleration;
         }
 
         /// <summary>
@@ -132,7 +132,7 @@ namespace MinigameFramework.Attributes
         /// <returns>Velocity of the object as <see cref="Vector2"/></returns>
         public Vector2 GetVelocity()
         {
-            return this._velocity;
+            return _velocity;
         }
 
         /// <summary>
@@ -141,7 +141,7 @@ namespace MinigameFramework.Attributes
         /// <param name="velocity">New velocity of the object as <see cref="Vector2"/></param>
         public void SetVelocity(Vector2 velocity)
         {
-            this._velocity = velocity;
+            _velocity = velocity;
         }
 
         /// <summary>
@@ -150,7 +150,7 @@ namespace MinigameFramework.Attributes
         /// <returns>Position of the object as <see cref="Vector2"/></returns>
         public Vector2 GetPosition()
         {
-            return this._velocity;
+            return _velocity;
         }
 
         /// <summary>
@@ -159,7 +159,7 @@ namespace MinigameFramework.Attributes
         /// <param name="position">New position of the object as <see cref="Vector2"/></param>
         public void SetPosition(Vector2 position)
         {
-            this._position = position;
+            _position = position;
         }
 
         /// <summary>
@@ -168,7 +168,7 @@ namespace MinigameFramework.Attributes
         /// <returns>Mass of the object</returns>
         public float GetMass()
         {
-            return this._mass;
+            return _mass;
         }
 
         /// <summary>
@@ -177,7 +177,7 @@ namespace MinigameFramework.Attributes
         /// <param name="mass">New mass of the the object</param>
         public void SetMass(float mass)
         {
-            this._mass = mass;
+            _mass = mass;
         }
 
         /// <summary>
@@ -186,7 +186,7 @@ namespace MinigameFramework.Attributes
         /// <returns>Maximum acceleration the object can speed up</returns>
         public float GetMaxAcceleration()
         {
-            return this._maxAcceleration;
+            return _maxAcceleration;
         }
 
         /// <summary>
@@ -195,7 +195,7 @@ namespace MinigameFramework.Attributes
         /// <param name="maxAcceleration">New maximum acceleration the object can speed up</param>
         public void SetMaxAcceleration(float maxAcceleration)
         {
-            this._maxAcceleration = maxAcceleration;
+            _maxAcceleration = maxAcceleration;
         }
 
         /// <summary>
@@ -204,7 +204,7 @@ namespace MinigameFramework.Attributes
         /// <returns>Maximum velocity the object can travel</returns>
         public float GetMaxVelocity()
         {
-            return this._maxVelocity;
+            return _maxVelocity;
         }
 
         /// <summary>
@@ -213,7 +213,7 @@ namespace MinigameFramework.Attributes
         /// <param name="maxVelocity">New maximum acceleration the object can speed up</param>
         public void SetMaxVelocity(float maxVelocity)
         {
-            this._maxVelocity = maxVelocity;
+            _maxVelocity = maxVelocity;
         }
 
         /// <summary>
@@ -222,15 +222,15 @@ namespace MinigameFramework.Attributes
         /// <param name="time">Game time.</param>
         public void Update(GameTime time)
         {
-            this._position = Vector2.Add(
-                this._position,
-                this._velocity
+            _position = Vector2.Add(
+                _position,
+                _velocity
             );
-            this._velocity = Vector2.Add(
-                this._velocity,
-                this._acceleration
+            _velocity = Vector2.Add(
+                _velocity,
+                _acceleration
             );
-            this._acceleration = Vector2.Zero;
+            _acceleration = Vector2.Zero;
         }
     }
 }

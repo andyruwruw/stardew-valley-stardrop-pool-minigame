@@ -14,7 +14,7 @@
         /// <summary>
 		/// Displays physics and drawing debugging visuals.
 		/// </summary>
-		public static bool DebugVisuals = true;
+		public static bool DebugVisuals = false;
 
         /// <summary>
         /// Useful for finding sprites outside the minigame window.

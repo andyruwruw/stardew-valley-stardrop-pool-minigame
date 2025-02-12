@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using MinigameFramework.Enums;
-using MinigameFramework.Constants;
 using MinigameFramework.Helpers;
 
 namespace MinigameFramework.Render.Filters.Transitions
@@ -32,7 +31,7 @@ namespace MinigameFramework.Render.Filters.Transitions
             keyframeOpacity,
             type
         ) {
-            this._difference = difference;
+            _difference = difference;
         }
 
         /// <summary>
@@ -58,15 +57,15 @@ namespace MinigameFramework.Render.Filters.Transitions
             delay,
             delayOnce
         ) {
-            this._difference = difference;
+            _difference = difference;
         }
 
         /// <inheritdoc cref="IFilter.GetColor"/>
         public override Color GetColor(Color color)
         {
-            if (this._keyframeOpacity)
+            if (_keyframeOpacity)
             {
-                float progress = this._type == TransitionState.Entering ? this.GetProgress() : this.GetInvertedProgress();
+                float progress = _type == TransitionState.Entering ? GetProgress() : GetInvertedProgress();
 
                 return new Color(
                     (byte)Math.Round(progress * color.R),
@@ -80,20 +79,20 @@ namespace MinigameFramework.Render.Filters.Transitions
         /// <inheritdoc cref="IFilter.GetDestination"/>
         public override Vector2 GetDestination(Vector2 destination)
         {
-            float progress = this._type == TransitionState.Entering ? this.GetInvertedProgress() : this.GetProgress();
+            float progress = _type == TransitionState.Entering ? GetInvertedProgress() : GetProgress();
 
             return new Vector2(
-                this.EaseOut(
-                    progress * this._duration,
+                EaseOut(
+                    progress * _duration,
                     destination.X,
-                    this._difference.X * RenderHelpers.TileScale(),
-                    this._duration
+                    _difference.X * RenderHelpers.TileScale(),
+                    _duration
                 ),
-                this.EaseOut(
-                    progress * this._duration,
+                EaseOut(
+                    progress * _duration,
                     destination.Y,
-                    this._difference.Y * RenderHelpers.TileScale(),
-                    this._duration)
+                    _difference.Y * RenderHelpers.TileScale(),
+                    _duration)
                 );
         }
 

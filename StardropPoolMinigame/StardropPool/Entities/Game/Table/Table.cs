@@ -1,12 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using MinigameFramework.Entities;
 using MinigameFramework.Enums;
-using MinigameFramework.Render;
 using MinigameFramework.Render.Filters;
 using StardopPoolMinigame.Constants;
 using StardopPoolMinigame.Enums;
-using StardopPoolMinigame.Render;
 
 namespace StardopPoolMinigame.Entities.Game.Table
 {
@@ -59,10 +56,10 @@ namespace StardopPoolMinigame.Entities.Game.Table
             return TextureConstants.Ball.Base.White.Height;
         }
 
-        /// <inheritdoc cref="IEntity.GetId"/>
-        public override string GetId()
+        /// <inheritdoc cref="IEntity.GetName"/>
+        public override string GetName()
         {
-            return $"table-{_id}";
+            return $"table-{_key}";
         }
 
         /// <inheritdoc cref="IEntity.GetWidth"/>

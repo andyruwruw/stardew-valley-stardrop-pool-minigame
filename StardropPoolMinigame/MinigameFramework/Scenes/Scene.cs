@@ -4,12 +4,9 @@ using Microsoft.Xna.Framework.Input;
 using MinigameFramework.Enums;
 using MinigameFramework.Entities;
 using MinigameFramework.Render.Filters.Transitions;
-using MinigameFramework.Utilities;
-using StardopPoolMinigame.Constants;
 using MinigameFramework.Entities.UI;
 using MinigameFramework.Helpers;
 using MinigameFramework.Constants;
-using StardopPoolMinigame.Render;
 
 namespace MinigameFramework.Scenes
 {
@@ -25,6 +22,11 @@ namespace MinigameFramework.Scenes
         /// New scene to replace 
         /// </summary>
         protected IScene? _newScene = null;
+
+        /// <summary>
+        /// Main section entity.
+        /// </summary>
+        protected Section? _section = null;
 
         /// <summary>
         /// Dictionary of <see cref="Scene">Scene's</see> <see cref="IEntity">IEntities</see>
@@ -51,8 +53,14 @@ namespace MinigameFramework.Scenes
         /// </summary>
         public Scene()
         {
-            AddEntities();
-            AddStaticEntities();
+            // Create container section.
+            _section = new Section(
+                parent: null,
+                key: GetKey(),
+                children: InitializeEntities(),
+                layerDepth: 0.0010f
+            );
+            InitializeStaticEntities();
         }
 
         /// <inheritdoc cref="IScene.GetKey"/>
@@ -90,19 +98,21 @@ namespace MinigameFramework.Scenes
                 entity.Draw(batch);
             }
 
-            IList<IEntity> entities = GetEntities();
-
-            foreach (IEntity entity in entities)
+            if (_section != null)
             {
-                entity.Draw(batch);
+                _section.Draw(batch);
             }
         }
 
-        /// <inheritdoc cref="IScene.HandleLeftClick"/>
-        public virtual void HandleLeftClick(
+        /// <inheritdoc cref="IScene.HandleClick"/>
+        public virtual void HandleClick(
             int x,
             int y
         ) {
+            if (_section != null)
+            {
+                _section.UpdateClick();
+            }
         }
 
         /// <inheritdoc cref="IScene.HandleRightClick"/>
@@ -110,49 +120,95 @@ namespace MinigameFramework.Scenes
             int x,
             int y
         ) {
+            if (_section != null)
+            {
+                _section.UpdateRightClick();
+            }
         }
 
         /// <inheritdoc cref="IScene.HandleKeyPress"/>
-        public virtual void HandleKeyPress(Keys k) {
-        }
-
-        /// <inheritdoc cref="IScene.HandleKeyRelease"/>
-        public virtual void HandleKeyRelease(Keys k)
+        public virtual void HandleKeyPress(Keys key)
         {
+            if (_section != null)
+            {
+                _section.UpdateKeyPress(key);
+            }
         }
 
-        /// <inheritdoc cref="IScene.HandleLeftClickHeld"/>
-        public virtual void HandleLeftClickHeld(
+        /// <inheritdoc cref="IScene.HandleKeyReleased"/>
+        public virtual void HandleKeyReleased(Keys key)
+        {
+            if (_section != null)
+            {
+                _section.UpdateKeyReleased(key);
+            }
+        }
+
+        /// <inheritdoc cref="IScene.HandleClickHeld"/>
+        public virtual void HandleClickHeld(
             int x,
             int y
-        ) {
+        )
+        {
+            if (_section != null)
+            {
+                _section.HandleClickHeld();
+            }
         }
 
         /// <inheritdoc cref="IScene.HandleRightClickHeld"/>
         public virtual void HandleRightClickHeld(
             int x,
             int y
-        ) {
+        )
+        {
+            if (_section != null)
+            {
+                _section.HandleRightClickHeld();
+            }
         }
 
-        /// <inheritdoc cref="IScene.HandleLeftClickReleased"/>
-        public virtual void HandleLeftClickReleased (
+        /// <inheritdoc cref="IScene.HandleClickReleased"/>
+        public virtual void HandleClickReleased (
             int x,
             int y
-        ) {
+        )
+        {
+            if (_section != null)
+            {
+                _section.UpdateClickReleased();
+            }
         }
 
         /// <inheritdoc cref="IScene.HandleRightClickReleased"/>
         public virtual void HandleRightClickReleased(
             int x,
             int y
-        ) {
+        )
+        {
+            if (_section != null)
+            {
+                _section.UpdateRightClickReleased();
+            }
         }
 
-        /// <inheritdoc cref="IScene.GetEntities"/>
-        public virtual IList<IEntity> GetEntities()
+        /// <inheritdoc cref="IScene.GetTransitionState"/>
+        public virtual TransitionState GetTransitionState()
         {
-            return new List<IEntity>(_entities.Values);
+            return _transitionState;
+        }
+
+        /// <inheritdoc cref="IScene.GetTransitionState"/>
+        public virtual void SetTransitionState(TransitionState state) {
+            _transitionState = state;
+
+            if (state == TransitionState.Entering || state == TransitionState.Exiting)
+            {
+                foreach (IEntity entity in _entities.Values)
+                {
+                    entity.SetTransitionState(TransitionState.Entering, true);
+                }
+            }
         }
 
         /// <summary>
@@ -160,14 +216,15 @@ namespace MinigameFramework.Scenes
         /// <para>Automatically called in <see cref="Scene"/> constructor</para>
         /// <para>Should add <see cref="IEntity">IEntities</see> to <see cref="_entities"/> protected <see cref="IList"/>, which will already be instantiated</para>
         /// </summary>
-        protected virtual void AddEntities()
+        protected virtual IList<IEntity> InitializeEntities()
         {
+            return new List<IEntity>();
         }
 
         /// <summary>
         /// Add a set of static entities.
         /// </summary>
-        protected virtual void AddStaticEntities()
+        protected virtual void InitializeStaticEntities()
         {
             // Background
             _staticEntities.Add(new Solid(

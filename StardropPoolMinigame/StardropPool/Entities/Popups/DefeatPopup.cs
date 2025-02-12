@@ -1,6 +1,5 @@
 ﻿using MinigameFramework.Entities;
 using MinigameFramework.Entities.Popups;
-using System.Security.Cryptography;
 
 namespace StardopPoolMinigame.Entities.Popups
 {
@@ -13,10 +12,10 @@ namespace StardopPoolMinigame.Entities.Popups
         {
         }
 
-        /// <inheritdoc cref="IEntity.GetId"/>
-        public override string GetId()
+        /// <inheritdoc cref="IEntity.GetName"/>
+        public override string GetName()
         {
-            return $"defeat-popup-{_id}";
+            return $"defeat-popup-{_key}";
         }
 
         /// <summary>

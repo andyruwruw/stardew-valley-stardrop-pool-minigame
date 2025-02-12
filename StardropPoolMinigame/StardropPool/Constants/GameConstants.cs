@@ -1,5 +1,4 @@
-﻿using MinigameFramework.Constants;
-using MinigameFramework.Helpers;
+﻿using MinigameFramework.Helpers;
 
 namespace StardopPoolMinigame.Constants
 {
@@ -63,7 +62,7 @@ namespace StardopPoolMinigame.Constants
             /// <summary>
             /// Rotation speed of <see cref="Entities.BallButton"/> <see cref="Entities.Ball"/>.
             /// </summary>
-            public static float HoverRotationalSpeed = -.4f;
+            public static float HoverRotationalSpeed = .4f;
         }
 
         public class Cue

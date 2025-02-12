@@ -41,7 +41,7 @@ namespace MinigameFramework.Constants
             /// Amount to offset characters in the Y direction to account for
             /// <see href="https://en.wikipedia.org/wiki/Descender">descenders</see>.
             /// </summary>
-            public static int YOffset = 1;
+            public static int YOffset = -1;
         }
     }
 }

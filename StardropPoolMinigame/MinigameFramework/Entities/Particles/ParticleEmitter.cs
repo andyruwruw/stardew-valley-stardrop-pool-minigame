@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using MinigameFramework.Constants;
 using MinigameFramework.Entities.Particles.ParticleRules;
-using MinigameFramework.Enums;
 using MinigameFramework.Helpers;
 using MinigameFramework.Render.Filters;
 using MinigameFramework.Structures;
@@ -52,23 +51,86 @@ namespace MinigameFramework.Entities.Particles
 		/// <param name="enteringTransition"><see cref="Entity">Entity's</see> entering <see cref="Transition"/></param>
 		/// <param name="exitingTransition"><see cref="Entity">Entity's</see> exiting <see cref="Transition"/></param>
 		public ParticleEmitter(
-            Vector2 anchor,
-            float layerDepth = 0,
-            Origin origin = Origin.TopLeft,
+            IEntity? parent = null,
+            string? key = null,
+            IList<IEntity>? children = null,
+            float? layerDepth = null,
+            bool? isHoverable = false,
+            bool? isInteractable = false,
             IFilter? enteringTransition = null,
-            IFilter? exitingTransition = null
+            IFilter? exitingTransition = null,
+            bool? isRow = false,
+            bool? centerContent = false,
+            bool? center = false,
+            Vector2? contentOffset = null,
+            bool? fixedPosition = false,
+            float? gap = 0f,
+            float? height = -1f,
+            float? margin = 0f,           
+            float? marginBottom = 0f,
+            float? marginLeft = 0f,
+            float? marginRight = 0f,
+            float? marginTop = 0f,
+            float? maxHeight = -1f,
+            float? maxWidth = -1f,
+            float? minHeight = -1f,
+            float? minWidth = -1f,
+            bool? overflow = false,
+            float? padding = 0f,
+            float? paddingBottom = 0f,
+            float? paddingLeft = 0f,
+            float? paddingRight = 0f,
+            float? paddingTop = 0f,
+            float? width = -1f,
+            bool? active = false,
+            Vector2? direction = null,
+            IParticleRules? rules = null,
+            float? radius = 0f,
+            float? rate = 0f
         ) : base(
-            anchor,
+            parent,
+            key,
+            children,
             layerDepth,
-            origin,
+            isHoverable,
+            isInteractable,
             enteringTransition,
-            exitingTransition
+            exitingTransition,
+            isRow,
+            centerContent,
+            center,
+            contentOffset,
+            fixedPosition,
+            gap,
+            height,
+            margin,
+            marginBottom,
+            marginLeft,
+            marginRight,
+            marginTop,
+            maxHeight,
+            maxWidth,
+            minHeight,
+            minWidth,
+            overflow,
+            padding,
+            paddingBottom,
+            paddingLeft,
+            paddingRight,
+            paddingTop,
+            width
         ) {
             _graph = new QuadTree(new Structures.Primitives.Rectangle(
                 new Vector2(0, 0),
                 GenericRenderConstants.MinigameScreen.Width,
                 GenericRenderConstants.MinigameScreen.Height
             ));
+
+            _active = active ?? false;
+            _direction = direction ?? new Vector2(0, 0);
+            _rules = rules;
+            _radius = radius ?? 0f;
+            _rate = rate ?? 0f;
         }
 
         /// <summary>
@@ -78,7 +140,7 @@ namespace MinigameFramework.Entities.Particles
         {
             _active = true;
 
-            Utilities.Timer.StartTimer($"{GetId()}-creation-cycle");
+            Utilities.Timer.StartTimer($"{GetName()}-creation-cycle");
         }
 
         /// <summary>
@@ -88,7 +150,7 @@ namespace MinigameFramework.Entities.Particles
         {
             _active = false;
 
-            Utilities.Timer.EndTimer($"{GetId()}-creation-cycle");
+            Utilities.Timer.EndTimer($"{GetName()}-creation-cycle");
         }
 
         /// <inheritdoc cref="IEntity.GetEntities"/>
@@ -111,10 +173,10 @@ namespace MinigameFramework.Entities.Particles
             return _graph.GetBoundary().GetHeight();
         }
 
-        /// <inheritdoc cref="IEntity.GetId"/>
-        public override string GetId()
+        /// <inheritdoc cref="IEntity.GetName"/>
+        public override string GetName()
         {
-            return $"particle-emitter-{_id}";
+            return $"particle-emitter-{_key}";
         }
 
         /// <summary>

@@ -50,10 +50,10 @@ namespace StardopPoolMinigame.Entities.Portraits.Effects
             return TextureConstants.PortraitRays.Height;
         }
 
-        /// <inheritdoc cref="IEntity.GetId"/>
-        public override string GetId()
+        /// <inheritdoc cref="IEntity.GetName"/>
+        public override string GetName()
         {
-            return $"portrait-fire-{_id}";
+            return $"portrait-fire-{_key}";
         }
 
         /// <inheritdoc cref="IEntity.GetWidth"/>
