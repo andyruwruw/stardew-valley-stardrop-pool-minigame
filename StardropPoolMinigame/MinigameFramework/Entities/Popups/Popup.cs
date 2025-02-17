@@ -36,6 +36,7 @@ namespace MinigameFramework.Entities.Popups
         public Popup(
             IEntity? parent = null,
             string? key = null,
+            Vector2? anchor = null,
             IList<IEntity>? children = null,
             float? layerDepth = null,
             bool? isHoverable = false,
@@ -72,6 +73,7 @@ namespace MinigameFramework.Entities.Popups
         ) : base(
             parent,
             key,
+            anchor,
             children,
             layerDepth,
             isHoverable,

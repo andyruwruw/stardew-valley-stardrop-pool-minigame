@@ -69,6 +69,7 @@ namespace MinigameFramework.Entities.UI.Portraits
         public Portrait(
             DisplayableNPC name,
             IEntity? parent = null,
+            Vector2? anchor = null,
             string? key = null,
             IList<IEntity>? children = null,
             float? layerDepth = null,
@@ -102,13 +103,13 @@ namespace MinigameFramework.Entities.UI.Portraits
             PortraitEmotion emotion = PortraitEmotion.Default,
             float scale = 1f,
             bool isDarker = false,
-            bool isHoverable = false,
             bool isOnFire = false,
             bool isShining = false,
             bool isSilhouette = false
         ) : base(
             parent,
             key,
+            anchor,
             children,
             layerDepth,
             isHoverable,

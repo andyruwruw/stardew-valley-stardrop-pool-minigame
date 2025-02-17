@@ -5,7 +5,6 @@ using MinigameFramework.Enums;
 using MinigameFramework.Helpers;
 using MinigameFramework.Render.Filters;
 using MinigameFramework.Utilities;
-using StardopPoolMinigame.Constants;
 
 namespace MinigameFramework.Entities.UI.Buttons
 {
@@ -44,6 +43,7 @@ namespace MinigameFramework.Entities.UI.Buttons
             string text,
             IEntity? parent = null,
             string? key = null,
+            Vector2? anchor = null,
             IList<IEntity>? children = null,
             float? layerDepth = null,
             bool? isHoverable = false,
@@ -73,10 +73,11 @@ namespace MinigameFramework.Entities.UI.Buttons
             float? paddingRight = 0f,
             float? paddingTop = 0f,
             float? width = -1f,
-            float scale = 1f,
+            float scale = 1f
         ) : base(
             parent,
             key,
+            anchor,
             children,
             layerDepth,
             isHoverable,

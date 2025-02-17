@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MinigameFramework.Constants;
-using MinigameFramework.Enums;
 using MinigameFramework.Helpers;
 using MinigameFramework.Render;
 using MinigameFramework.Render.Filters;
@@ -42,6 +41,7 @@ namespace MinigameFramework.Entities.UI.Text
             char character,
             IEntity? parent = null,
             string? key = null,
+            Vector2? anchor = null,
             IList<IEntity>? children = null,
             float? layerDepth = null,
             bool? isHoverable = false,
@@ -75,6 +75,7 @@ namespace MinigameFramework.Entities.UI.Text
         ) : base(
             parent,
             key,
+            anchor,
             children,
             layerDepth,
             isHoverable,

@@ -61,27 +61,77 @@ namespace MinigameFramework.Entities.UI.Text
         /// <param name="isHoverable">Whether this component is hoverable.</param>
         public Text(
             string text,
-            Vector2 anchor,
-            float layerDepth = 0,
-            Origin origin = Origin.TopLeft,
+            IEntity? parent = null,
+            string? key = null,
+            Vector2? anchor = null,
+            IList<IEntity>? children = null,
+            float? layerDepth = null,
+            bool? isHoverable = false,
+            bool? isInteractable = false,
             IFilter? enteringTransition = null,
             IFilter? exitingTransition = null,
-            float maxWidth = float.MaxValue,
+            bool? isRow = false,
+            bool? centerContent = false,
+            bool? center = false,
+            Vector2? contentOffset = null,
+            bool? fixedPosition = false,
+            float? gap = 0f,
+            float? height = -1f,
+            float? margin = 0f,           
+            float? marginBottom = 0f,
+            float? marginLeft = 0f,
+            float? marginRight = 0f,
+            float? marginTop = 0f,
+            float? maxHeight = -1f,
+            float? maxWidth = -1f,
+            float? minHeight = -1f,
+            float? minWidth = -1f,
+            bool? overflow = false,
+            float? padding = 0f,
+            float? paddingBottom = 0f,
+            float? paddingLeft = 0f,
+            float? paddingRight = 0f,
+            float? paddingTop = 0f,
+            float? width = -1f,
             float scale = 1f,
-            bool isCentered = false,
-            bool isHoverable = false
+            bool isCentered = false
         ) : base(
+            parent,
+            key,
             anchor,
+            children,
             layerDepth,
-            origin,
+            isHoverable,
+            isInteractable,
             enteringTransition,
-            exitingTransition
+            exitingTransition,
+            isRow,
+            centerContent,
+            center,
+            contentOffset,
+            fixedPosition,
+            gap,
+            height,
+            margin,
+            marginBottom,
+            marginLeft,
+            marginRight,
+            marginTop,
+            maxHeight,
+            maxWidth,
+            minHeight,
+            minWidth,
+            overflow,
+            padding,
+            paddingBottom,
+            paddingLeft,
+            paddingRight,
+            paddingTop,
+            width
         ) {
             _text = text;
-            _maxWidth = maxWidth;
             _scale = scale;
             _isCentered = isCentered;
-            _isHoverable = isHoverable;
             _resultingHeight = 0;
 
             InitializeCharacters();

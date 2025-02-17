@@ -17,6 +17,7 @@ namespace MinigameFramework.Entities.Particles
 		public Particle(
             IEntity? parent = null,
             string? key = null,
+            Vector2? anchor = null,
             IList<IEntity>? children = null,
             float? layerDepth = null,
             bool? isHoverable = false,
@@ -49,6 +50,7 @@ namespace MinigameFramework.Entities.Particles
         ) : base(
             parent,
             key,
+            anchor,
             children,
             layerDepth,
             isHoverable,
