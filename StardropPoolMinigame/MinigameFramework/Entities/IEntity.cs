@@ -350,6 +350,12 @@ namespace MinigameFramework.Entities
         void Remove(IEntity entity);
 
         /// <summary>
+        /// Sets the component's anchor.
+        /// </summary>
+        /// <param name="anchor">New anchor.</param>
+        void SetAnchor(Vector2 anchor)
+
+        /// <summary>
         /// Sets the entity's children.
         /// </summary>
         /// <param name="children">Children to set.</param>

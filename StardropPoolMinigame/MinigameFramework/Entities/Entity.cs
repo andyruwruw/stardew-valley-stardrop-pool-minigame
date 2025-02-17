@@ -256,6 +256,7 @@ namespace MinigameFramework.Entities
 		public Entity(
             IEntity? parent = null,
             string? key = null,
+            Vector2? anchor = null,
             IList<IEntity>? children = null,
             float? layerDepth = null,
             bool? isHoverable = false,
@@ -288,6 +289,7 @@ namespace MinigameFramework.Entities
         ) {
             _parent = parent ?? null;
             _key = key ?? Guid.NewGuid().ToString();
+            _anchor = anchor ?? Vector2.Zero;
             _children = children ?? new List<IEntity>();
             _layerDepth = layerDepth ?? 0.001f;
             _isHoverable = isHoverable ?? false;
@@ -841,6 +843,12 @@ namespace MinigameFramework.Entities
         public virtual void Remove(IEntity entity)
         {
             _children.Remove(entity);
+        }
+
+        /// <inheritdoc cref="IEntity.SetAnchor"/>
+        public virtual void SetAnchor(Vector2 anchor)
+        {
+            _anchor = anchor;
         }
 
         /// <inheritdoc cref="IEntity.SetChildren"/>
