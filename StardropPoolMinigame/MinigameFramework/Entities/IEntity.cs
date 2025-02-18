@@ -353,7 +353,7 @@ namespace MinigameFramework.Entities
         /// Sets the component's anchor.
         /// </summary>
         /// <param name="anchor">New anchor.</param>
-        void SetAnchor(Vector2 anchor)
+        void SetAnchor(Vector2 anchor);
 
         /// <summary>
         /// Sets the entity's children.

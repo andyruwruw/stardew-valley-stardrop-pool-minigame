@@ -5,7 +5,6 @@ using MinigameFramework.Constants;
 using MinigameFramework.Enums;
 using MinigameFramework.Render.Filters;
 using MinigameFramework.Utilities;
-using xTile.Tiles;
 using MinigameFramework.Helpers;
 
 namespace MinigameFramework.Entities.UI.Portraits
