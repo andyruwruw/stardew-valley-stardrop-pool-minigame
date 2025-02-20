@@ -5,6 +5,7 @@ using MinigameFramework.Entities.Particles;
 using StardopPoolMinigame.Constants;
 using StardopPoolMinigame.Render;
 using MinigameFramework.Entities;
+using MinigameFramework.Enums;
 
 namespace StardopPoolMinigame.Entities.Particles.IndividualParticles
 {
@@ -15,8 +16,9 @@ namespace StardopPoolMinigame.Entities.Particles.IndividualParticles
         /// </summary>
         public GlitterParticle(
             IEntity? parent = null,
-            Vector2? anchor = null,
             string? key = null,
+            Vector2? anchor = null,
+            Position? position = Position.Fixed,
             IList<IEntity>? children = null,
             float? layerDepth = null,
             bool? isHoverable = false,
@@ -50,6 +52,7 @@ namespace StardopPoolMinigame.Entities.Particles.IndividualParticles
             parent,
             key,
             anchor,
+            position,
             children,
             layerDepth,
             isHoverable,

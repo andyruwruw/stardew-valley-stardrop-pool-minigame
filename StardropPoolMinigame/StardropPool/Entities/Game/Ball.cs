@@ -7,6 +7,7 @@ using MinigameFramework.Enums;
 using MinigameFramework.Helpers;
 using MinigameFramework.Render.Filters;
 using MinigameFramework.Structures.Primitives;
+using StardewValley;
 using StardopPoolMinigame.Constants;
 using StardopPoolMinigame.Enums;
 using StardopPoolMinigame.Render;
@@ -71,8 +72,9 @@ namespace StardopPoolMinigame.Entities.Game
 		/// <param name="exitingTransition"><see cref="Entity">Entity's</see> exiting <see cref="Transition"/></param>
         public Ball(
             IEntity? parent = null,
-            Vector2? anchor = null,
             string? key = null,
+            Vector2? anchor = null,
+            Position? position = Position.Relative,
             IList<IEntity>? children = null,
             float? layerDepth = null,
             bool? isHoverable = false,
@@ -111,6 +113,7 @@ namespace StardopPoolMinigame.Entities.Game
             parent,
             key,
             anchor,
+            position,
             children,
             layerDepth,
             isHoverable,
@@ -152,79 +155,87 @@ namespace StardopPoolMinigame.Entities.Game
             _physics = new Physics(GetCenter());
         }
 
-        /// <inheritdoc cref="IEntity.Draw"/>
-        public override void Draw(
+        /// <inheritdoc cref="Entity.DrawSelf"/>
+        protected override void DrawSelf(
             SpriteBatch batch,
-            Vector2? overrideDestination = null,
-            Microsoft.Xna.Framework.Rectangle? overrideSource = null,
-            Color? overrideColor = null,
-            float? overrideRotation = null,
-            Vector2? overrideOrigin = null,
-            float? overrideScale = null,
-            SpriteEffects? overrideEffects = null,
-            float? overrideLayerDepth = null
-        ) {
+            Vector2 destination,
+            Microsoft.Xna.Framework.Rectangle source,
+            Color color,
+            float rotation,
+            Vector2 origin,
+            float scale,
+            SpriteEffects effects,
+            float layerDepth
+        )
+        {
+            Vector2 adjustedDestination = Vector2.Subtract(
+                destination,
+                new Vector2(
+                    RenderConstants.Entities.Ball.MarginLeft,
+                    RenderConstants.Entities.Ball.MarginTop
+                )
+            );
+
             DrawBase(
                 batch,
-                overrideDestination,
-                overrideSource,
-                overrideColor,
-                overrideRotation,
-                overrideOrigin,
-                overrideScale,
-                overrideEffects,
-                overrideLayerDepth
+                adjustedDestination,
+                source,
+                color,
+                rotation,
+                origin,
+                scale,
+                effects,
+                layerDepth
             );
 
             if (GetBallType() != BallType.White)
             {
                 DrawCore(
                     batch,
-                    overrideDestination,
-                    overrideRotation,
-                    overrideOrigin,
-                    overrideScale,
-                    overrideEffects,
-                    overrideLayerDepth
+                    adjustedDestination,
+                    color,
+                    rotation,
+                    origin,
+                    scale,
+                    effects,
+                    layerDepth
                 );
 
                 DrawStripes(
                     batch,
-                    overrideDestination,
-                    overrideRotation,
-                    overrideOrigin,
-                    overrideScale,
-                    overrideEffects,
-                    overrideLayerDepth
+                    adjustedDestination,
+                    color,
+                    rotation,
+                    origin,
+                    scale,
+                    effects,
+                    layerDepth
                 );
             }
 
             DrawShadows(
                 batch,
-                overrideDestination,
-                overrideRotation,
-                overrideOrigin,
-                overrideScale,
-                overrideEffects,
-                overrideLayerDepth
+                adjustedDestination,
+                color,
+                rotation,
+                origin,
+                scale,
+                effects,
+                layerDepth
             );
 
             if (IsHighlighted() || IsFlashing())
             {
                 DrawHighlight(
                     batch,
-                    overrideDestination,
-                    overrideRotation,
-                    overrideOrigin,
-                    overrideScale,
-                    overrideEffects,
-                    overrideLayerDepth
+                    adjustedDestination,
+                    color,
+                    rotation,
+                    origin,
+                    scale,
+                    effects,
+                    layerDepth
                 );
-            }
-
-            if (DevConstants.DebugVisuals)
-            {
-                DrawDebug(batch);
             }
         }
 
@@ -448,25 +459,25 @@ namespace StardopPoolMinigame.Entities.Game
         /// </summary>
         protected void DrawBase(
             SpriteBatch batch,
-            Vector2? overrideDestination = null,
-            Microsoft.Xna.Framework.Rectangle? overrideSource = null,
-            Color? overrideColor = null,
-            float? overrideRotation = null,
-            Vector2? overrideOrigin = null,
-            float? overrideScale = null,
-            SpriteEffects? overrideEffects = null,
-            float? overrideLayerDepth = null
+            Vector2 destination,
+            Microsoft.Xna.Framework.Rectangle source,
+            Color color,
+            float rotation,
+            Vector2 origin,
+            float scale,
+            SpriteEffects effects,
+            float layerDepth
         ) {
             batch.Draw(
                 GetTileset(),
-                GetDestination(overrideDestination),
-                GetSource(overrideSource),
-                GetColor(overrideColor),
-                GetRotation(overrideRotation),
-                GetOrigin(overrideOrigin),
-                GetScale(overrideScale),
-                GetEffects(overrideEffects),
-                GetLayerDepth(overrideLayerDepth)
+                destination,
+                source,
+                color,
+                rotation,
+                origin,
+                scale,
+                effects,
+                layerDepth
             );
         }
 
@@ -475,23 +486,24 @@ namespace StardopPoolMinigame.Entities.Game
         /// </summary>
         protected void DrawCore(
             SpriteBatch batch,
-            Vector2? overrideDestination = null,
-            float? overrideRotation = null,
-            Vector2? overrideOrigin = null,
-            float? overrideScale = null,
-            SpriteEffects? overrideEffects = null,
-            float? overrideLayerDepth = null
+            Vector2 destination,
+            Color color,
+            float rotation,
+            Vector2 origin,
+            float scale,
+            SpriteEffects effects,
+            float layerDepth
         ) {
             batch.Draw(
                 GetTileset(),
-                GetDestination(overrideDestination),
+                destination,
                 GetCoreSource(),
-                GetColor(),
-                GetRotation(overrideRotation),
-                GetOrigin(overrideOrigin),
-                GetScale(overrideScale),
-                GetEffects(overrideEffects),
-                GetLayerDepth(overrideLayerDepth) + 0.0001f
+                color,
+                rotation,
+                origin,
+                scale,
+                effects,
+                layerDepth + 0.0001f
             );
         }
 
@@ -528,23 +540,24 @@ namespace StardopPoolMinigame.Entities.Game
         /// </summary>
         protected void DrawHighlight(
             SpriteBatch batch,
-            Vector2? overrideDestination = null,
-            float? overrideRotation = null,
-            Vector2? overrideOrigin = null,
-            float? overrideScale = null,
-            SpriteEffects? overrideEffects = null,
-            float? overrideLayerDepth = null
+            Vector2 destination,
+            Color color,
+            float rotation,
+            Vector2 origin,
+            float scale,
+            SpriteEffects effects,
+            float layerDepth
         ) {
             batch.Draw(
                 GetTileset(),
-                GetDestination(overrideDestination),
+                destination,
                 TextureConstants.Ball.Highlight,
-                IsFlashing() ? Ball._flashingFilter.GetColor(GetColor()) : GetColor(),
-                GetRotation(overrideRotation),
-                GetOrigin(overrideOrigin),
-                GetScale(overrideScale),
-                GetEffects(overrideEffects),
-                GetLayerDepth(overrideLayerDepth) + 0.0003f
+                IsFlashing() ? Ball._flashingFilter.GetColor(color) : color,
+                rotation,
+                origin,
+                scale,
+                effects,
+                layerDepth + 0.0003f
             );
         }
 
@@ -553,23 +566,24 @@ namespace StardopPoolMinigame.Entities.Game
         /// </summary>
         protected void DrawShadows(
             SpriteBatch batch,
-            Vector2? overrideDestination = null,
-            float? overrideRotation = null,
-            Vector2? overrideOrigin = null,
-            float? overrideScale = null,
-            SpriteEffects? overrideEffects = null,
-            float? overrideLayerDepth = null
+            Vector2 destination,
+            Color color,
+            float rotation,
+            Vector2 origin,
+            float scale,
+            SpriteEffects effects,
+            float layerDepth
         ) {
             batch.Draw(
                 GetTileset(),
-                GetDestination(overrideDestination),
+                destination,
                 TextureConstants.Ball.Shadow,
-                GetColor(),
-                GetRotation(overrideRotation),
-                GetOrigin(overrideOrigin),
-                GetScale(overrideScale),
-                GetEffects(overrideEffects),
-                GetLayerDepth(overrideLayerDepth) + 0.0002f
+                color,
+                rotation,
+                origin,
+                scale,
+                effects,
+                layerDepth + 0.0002f
             );
         }
 
@@ -578,25 +592,26 @@ namespace StardopPoolMinigame.Entities.Game
         /// </summary>
         protected void DrawStripes(
             SpriteBatch batch,
-            Vector2? overrideDestination = null,
-            float? overrideRotation = null,
-            Vector2? overrideOrigin = null,
-            float? overrideScale = null,
-            SpriteEffects? overrideEffects = null,
-            float? overrideLayerDepth = null
+            Vector2 destination,
+            Color color,
+            float rotation,
+            Vector2 origin,
+            float scale,
+            SpriteEffects effects,
+            float layerDepth
         ) {
             if (GetBallType() == BallType.Stripped)
             {
                 batch.Draw(
                     GetTileset(),
-                    GetDestination(overrideDestination),
+                    destination,
                     GetStripeSource(),
-                    GetColor(),
-                    GetRotation(overrideRotation),
-                    GetOrigin(overrideOrigin),
-                    GetScale(overrideScale),
-                    GetEffects(overrideEffects),
-                    GetLayerDepth(overrideLayerDepth) + 0.0001f);
+                    color,
+                    rotation,
+                    origin,
+                    scale,
+                    effects,
+                    layerDepth + 0.0001f);
             }
         }
 
@@ -609,18 +624,18 @@ namespace StardopPoolMinigame.Entities.Game
         }
 
         /// <inheritdoc cref="Entity.GetRawDestination"/>
-        protected override Vector2 GetRawDestination()
-        {
-            Vector2 topLeft = GetTopLeft();
+        //protected override Vector2 GetRawDestination()
+        //{
+        //    Vector2 topLeft = GetTopLeft();
 
-            return RenderHelpers.ConvertAdjustedScreenToRaw(new Vector2(
-                topLeft.X - RenderConstants.Entities.Ball.MarginLeft,
-                topLeft.Y - RenderConstants.Entities.Ball.MarginTop
-            ));
-        }
+        //    return RenderHelpers.ConvertAdjustedScreenToRaw(new Vector2(
+        //        topLeft.X - RenderConstants.Entities.Ball.MarginLeft,
+        //        topLeft.Y - RenderConstants.Entities.Ball.MarginTop
+        //    ));
+        //}
 
         /// <inheritdoc cref="Entity.GetRawSource"/>
-        protected override Microsoft.Xna.Framework.Rectangle GetRawSource()
+        protected override Microsoft.Xna.Framework.Rectangle GetSource(Microsoft.Xna.Framework.Rectangle? overrideSource = null)
         {
             return Textures.GetBallBase(GetBallColor());
         }

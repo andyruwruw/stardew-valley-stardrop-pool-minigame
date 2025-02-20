@@ -1,3 +1,4 @@
+using MinigameFramework.Entities;
 using MinigameFramework.Enums;
 using MinigameFramework.Scenes;
 using MinigameFramework.Utilities;
@@ -50,9 +51,10 @@ namespace StardopPoolMinigame.Scenes
             return "game-setup-scene";
         }
 
-        /// <inheritdoc cref="Scene.AddEntities"/>
-        protected override void AddEntities()
+        /// <inheritdoc cref="Scene.InitializeEntities"/>
+        protected override IList<IEntity> InitializeEntities()
         {
+            return new List<IEntity>();
         }
     }
 }

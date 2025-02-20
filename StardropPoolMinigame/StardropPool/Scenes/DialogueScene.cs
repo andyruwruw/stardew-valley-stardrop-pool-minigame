@@ -1,4 +1,5 @@
-﻿using MinigameFramework.Scenes;
+﻿using MinigameFramework.Entities;
+using MinigameFramework.Scenes;
 using MinigameFramework.Utilities;
 using StardopPoolMinigame.Constants;
 
@@ -23,10 +24,10 @@ namespace StardopPoolMinigame.Scenes
             return "dialogue-scene";
         }
 
-        /// <inheritdoc cref="Scene.AddEntities"/>
-        protected override void AddEntities()
+        /// <inheritdoc cref="Scene.InitializeEntities"/>
+        protected override IList<IEntity> InitializeEntities()
         {
-
+            return new List<IEntity>();
         }
     }
 }

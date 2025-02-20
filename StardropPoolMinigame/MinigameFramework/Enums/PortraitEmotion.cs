@@ -2,6 +2,8 @@
 {
     /// <summary>
     /// Emotions depicted by computer opponent portraits.
+    /// 
+    /// Kinda just went through various vanilla portraits and picked out the unique emotions.
     /// </summary>
     public enum PortraitEmotion
     {

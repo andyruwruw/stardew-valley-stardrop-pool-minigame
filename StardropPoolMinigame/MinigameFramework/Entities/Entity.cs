@@ -70,11 +70,6 @@ namespace MinigameFramework.Entities
         protected Vector2 _anchor = Vector2.Zero;
 
         /// <summary>
-        /// Whether this item display children in a row.
-        /// </summary>
-        protected bool _row = false;
-
-        /// <summary>
         /// Whether children should be centered.
         /// </summary>
         protected bool _centerContent = false;
@@ -230,9 +225,19 @@ namespace MinigameFramework.Entities
         protected IEntity? _parent = null;
 
         /// <summary>
+        /// How to position the entity relative to its parent.
+        /// </summary>
+        protected Position? _position = Position.Relative;
+
+        /// <summary>
         /// Unused :)
         /// </summary>
         protected float _rotation = 0f;
+
+        /// <summary>
+        /// Whether this item display children in a row.
+        /// </summary>
+        protected bool _row = false;
 
         /// <summary>
         /// Unused :)
@@ -257,6 +262,7 @@ namespace MinigameFramework.Entities
             IEntity? parent = null,
             string? key = null,
             Vector2? anchor = null,
+            Position? position = Position.Relative,
             IList<IEntity>? children = null,
             float? layerDepth = null,
             bool? isHoverable = false,
@@ -290,6 +296,7 @@ namespace MinigameFramework.Entities
             _parent = parent ?? null;
             _key = key ?? Guid.NewGuid().ToString();
             _anchor = anchor ?? Vector2.Zero;
+            _position = position ?? Position.Relative;
             _children = children ?? new List<IEntity>();
             _layerDepth = layerDepth ?? 0.001f;
             _isHoverable = isHoverable ?? false;
@@ -470,8 +477,8 @@ namespace MinigameFramework.Entities
             }
 
             if (ShouldDrawSelf()) {
-                batch.Draw(
-                    GetTileset(),
+                DrawSelf(
+                    batch,
                     FilterDestination(contentOffset),
                     FilterSource(GetSource()),
                     FilterColor(color ?? Color.White),
@@ -643,6 +650,12 @@ namespace MinigameFramework.Entities
         public virtual float GetPaddingTop()
         {
             return _paddingTop;
+        }
+
+        /// <inheritdoc cref="IEntity.GetPosition"/>
+        public virtual Position GetPosition()
+        {
+            return _position ?? Position.Relative;
         }
 
         /// <inheritdoc cref="IEntity.GetScroll"/>
@@ -1035,6 +1048,186 @@ namespace MinigameFramework.Entities
         protected virtual void DrawDebug(SpriteBatch batch) { }
 
         /// <summary>
+        /// Draws this entity. The draw function contains a lot of logic about drawing children, so this just separates out that logic.
+        /// </summary>
+        protected virtual void DrawSelf(
+            SpriteBatch batch,
+            Vector2 destination,
+            Microsoft.Xna.Framework.Rectangle source,
+            Color color,
+            float rotation,
+            Vector2 origin,
+            float scale,
+            SpriteEffects effects,
+            float layerDepth
+        )
+        {
+            batch.Draw(
+                GetTileset(),
+                destination,
+                source,
+                color,
+                rotation,
+                origin,
+                scale,
+                effects,
+                layerDepth
+            );
+        }
+
+        /// <summary>
+        /// Applies filters to a color.
+        /// </summary>
+        /// <param name="color">Desired color.</param>
+        /// <returns>Filtered color.</returns>
+        protected virtual Color FilterColor(Color color)
+        {
+            Color filtered = new Color(
+                color.R,
+                color.G,
+                color.B,
+                color.A
+            );
+
+            foreach (IFilter filter in GetFilters())
+            {
+                filtered = filter.GetColor(filtered);
+            }
+
+            return filtered;
+        }
+
+        /// <summary>
+        /// Applies filters to a destination vector.
+        /// </summary>
+        /// <param name="destination">Desired destination.</param>
+        /// <returns>Filtered destination.</returns>
+        protected virtual Vector2 FilterDestination(Vector2 destination)
+        {
+            Vector2 filtered = new Vector2(
+                destination.X,
+                destination.Y
+            );
+
+            foreach (IFilter filter in GetFilters())
+            {
+                filtered = filter.GetDestination(filtered);
+            }
+
+            return filtered;
+        }
+
+        /// <summary>
+        /// Applies filters to sprite effects.
+        /// </summary>
+        /// <param name="effects">Desired effects.</param>
+        /// <returns>Filtered effects.</returns>
+        protected virtual SpriteEffects FilterEffects(SpriteEffects scale)
+        {
+            SpriteEffects filtered = scale;
+
+            foreach (IFilter filter in GetFilters())
+            {
+                filtered = filter.GetEffects(filtered);
+            }
+
+            return filtered;
+        }
+
+        /// <summary>
+        /// Applies filters to layer depth.
+        /// </summary>
+        /// <param name="layerDepth">Desired layer depth.</param>
+        /// <returns>Filtered layer depth.</returns>
+        protected virtual float FilterLayerDepth(float layerDepth)
+        {
+            float filtered = layerDepth;
+
+            foreach (IFilter filter in GetFilters())
+            {
+                filtered = filter.GetLayerDepth(filtered);
+            }
+
+            return filtered;
+        }
+
+        /// <summary>
+        /// Applies filters to a origin vector.
+        /// </summary>
+        /// <param name="origin">Desired origin.</param>
+        /// <returns>Filtered origin.</returns>
+        protected virtual Vector2 FilterOrigin(Vector2 origin)
+        {
+            Vector2 filtered = new Vector2(
+                origin.X,
+                origin.Y
+            );
+
+            foreach (IFilter filter in GetFilters())
+            {
+                filtered = filter.GetOrigin(filtered);
+            }
+
+            return filtered;
+        }
+
+        /// <summary>
+        /// Applies filters to a rotation.
+        /// </summary>
+        /// <param name="rotation">Desired rotation.</param>
+        /// <returns>Filtered rotation.</returns>
+        protected virtual float FilterRotation(float rotation)
+        {
+            float filtered = rotation;
+
+            foreach (IFilter filter in GetFilters())
+            {
+                filtered = filter.GetRotation(filtered);
+            }
+
+            return filtered;
+        }
+
+        /// <summary>
+        /// Applies filters to a scale.
+        /// </summary>
+        /// <param name="scale">Desired scale.</param>
+        /// <returns>Filtered scale.</returns>
+        protected virtual float FilterScale(float scale)
+        {
+            float filtered = scale;
+
+            foreach (IFilter filter in GetFilters())
+            {
+                filtered = filter.GetScale(filtered);
+            }
+
+            return filtered;
+        }
+
+        /// <summary>
+        /// Applies filters to a source bound.
+        /// </summary>
+        /// <param name="source">Desired source.</param>
+        /// <returns>Filtered source.</returns>
+        protected virtual Microsoft.Xna.Framework.Rectangle FilterSource(Microsoft.Xna.Framework.Rectangle source)
+        {
+            Microsoft.Xna.Framework.Rectangle filtered = new Microsoft.Xna.Framework.Rectangle(
+                source.X,
+                source.Y,
+                source.Width,
+                source.Height
+            );
+
+            foreach (IFilter filter in GetFilters())
+            {
+                filtered = filter.GetSource(filtered);
+            }
+
+            return filtered;
+        }
+
+        /// <summary>
         /// Retrieves where we should begin drawing children.
         /// </summary>
         /// <param name="offset">Parent content offset.</param>
@@ -1165,158 +1358,6 @@ namespace MinigameFramework.Entities
                 && (_exitingTransition != null && ((Transition)_exitingTransition).IsFinished()
                     || _exitingTransition == null))
                 _transitionState = TransitionState.Dead;
-        }
-
-        /// <summary>
-        /// Applies filters to a destination vector.
-        /// </summary>
-        /// <param name="destination">Desired destination.</param>
-        /// <returns>Filtered destination.</returns>
-        protected virtual Vector2 FilterDestination(Vector2 destination)
-        {
-            Vector2 filtered = new Vector2(
-                destination.X,
-                destination.Y
-            );
-
-            foreach (IFilter filter in GetFilters())
-            {
-                filtered = filter.GetDestination(filtered);
-            }
-
-            return filtered;
-        }
-
-        /// <summary>
-        /// Applies filters to a source bound.
-        /// </summary>
-        /// <param name="source">Desired source.</param>
-        /// <returns>Filtered source.</returns>
-        protected virtual Microsoft.Xna.Framework.Rectangle FilterSource(Microsoft.Xna.Framework.Rectangle source)
-        {
-            Microsoft.Xna.Framework.Rectangle filtered = new Microsoft.Xna.Framework.Rectangle(
-                source.X,
-                source.Y,
-                source.Width,
-                source.Height
-            );
-
-            foreach (IFilter filter in GetFilters())
-            {
-                filtered = filter.GetSource(filtered);
-            }
-
-            return filtered;
-        }
-
-        /// <summary>
-        /// Applies filters to a color.
-        /// </summary>
-        /// <param name="color">Desired color.</param>
-        /// <returns>Filtered color.</returns>
-        protected virtual Color FilterColor(Color color)
-        {
-            Color filtered = new Color(
-                color.R,
-                color.G,
-                color.B,
-                color.A
-            );
-
-            foreach (IFilter filter in GetFilters())
-            {
-                filtered = filter.GetColor(filtered);
-            }
-
-            return filtered;
-        }
-
-        /// <summary>
-        /// Applies filters to a rotation.
-        /// </summary>
-        /// <param name="rotation">Desired rotation.</param>
-        /// <returns>Filtered rotation.</returns>
-        protected virtual float FilterRotation(float rotation)
-        {
-            float filtered = rotation;
-            
-            foreach (IFilter filter in GetFilters())
-            {
-                filtered = filter.GetRotation(filtered);
-            }
-
-            return filtered;
-        }
-
-        /// <summary>
-        /// Applies filters to a origin vector.
-        /// </summary>
-        /// <param name="origin">Desired origin.</param>
-        /// <returns>Filtered origin.</returns>
-        protected virtual Vector2 FilterOrigin(Vector2 origin)
-        {
-            Vector2 filtered = new Vector2(
-                origin.X,
-                origin.Y
-            );
-
-            foreach (IFilter filter in GetFilters())
-            {
-                filtered = filter.GetOrigin(filtered);
-            }
-
-            return filtered;
-        }
-
-        /// <summary>
-        /// Applies filters to a scale.
-        /// </summary>
-        /// <param name="scale">Desired scale.</param>
-        /// <returns>Filtered scale.</returns>
-        protected virtual float FilterScale(float scale)
-        {
-            float filtered = scale;
-            
-            foreach (IFilter filter in GetFilters())
-            {
-                filtered = filter.GetScale(filtered);
-            }
-
-            return filtered;
-        }
-
-        /// <summary>
-        /// Applies filters to sprite effects.
-        /// </summary>
-        /// <param name="effects">Desired effects.</param>
-        /// <returns>Filtered effects.</returns>
-        protected virtual SpriteEffects FilterEffects(SpriteEffects scale)
-        {
-            SpriteEffects filtered = scale;
-            
-            foreach (IFilter filter in GetFilters())
-            {
-                filtered = filter.GetEffects(filtered);
-            }
-
-            return filtered;
-        }
-
-        /// <summary>
-        /// Applies filters to layer depth.
-        /// </summary>
-        /// <param name="layerDepth">Desired layer depth.</param>
-        /// <returns>Filtered layer depth.</returns>
-        protected virtual float FilterLayerDepth(float layerDepth)
-        {
-            float filtered = layerDepth;
-            
-            foreach (IFilter filter in GetFilters())
-            {
-                filtered = filter.GetLayerDepth(filtered);
-            }
-
-            return filtered;
         }
     }
 }

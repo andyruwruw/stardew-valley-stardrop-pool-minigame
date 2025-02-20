@@ -1,5 +1,8 @@
-﻿using MinigameFramework.Entities;
+﻿using Microsoft.Xna.Framework;
+using MinigameFramework.Entities;
 using MinigameFramework.Entities.Popups;
+using MinigameFramework.Enums;
+using MinigameFramework.Render.Filters;
 
 namespace StardopPoolMinigame.Entities.Popups
 {
@@ -12,6 +15,7 @@ namespace StardopPoolMinigame.Entities.Popups
             IEntity? parent = null,
             string? key = null,
             Vector2? anchor = null,
+            Position? position = Position.Fixed,
             IList<IEntity>? children = null,
             float? layerDepth = null,
             bool? isHoverable = false,
@@ -49,6 +53,7 @@ namespace StardopPoolMinigame.Entities.Popups
             parent,
             key,
             anchor,
+            position,
             children,
             layerDepth,
             isHoverable,

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using MinigameFramework.Constants;
 using MinigameFramework.Entities.Particles.ParticleRules;
+using MinigameFramework.Enums;
 using MinigameFramework.Helpers;
 using MinigameFramework.Render.Filters;
 using MinigameFramework.Structures;
@@ -54,6 +55,7 @@ namespace MinigameFramework.Entities.Particles
             IEntity? parent = null,
             string? key = null,
             Vector2? anchor = null,
+            Position? position = Position.Relative,
             IList<IEntity>? children = null,
             float? layerDepth = null,
             bool? isHoverable = false,
@@ -92,6 +94,7 @@ namespace MinigameFramework.Entities.Particles
             parent,
             key,
             anchor,
+            position,
             children,
             layerDepth,
             isHoverable,

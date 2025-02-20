@@ -216,6 +216,11 @@ namespace MinigameFramework.Entities
         float GetPaddingTop();
 
         /// <summary>
+        /// Retrieves the entity's position relative to its parent.
+        /// </summary>
+        Position GetPosition();
+
+        /// <summary>
         /// Get's the entity's scroll position.
         /// </summary>
         Vector2 GetScroll();

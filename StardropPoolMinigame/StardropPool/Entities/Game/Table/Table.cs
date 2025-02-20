@@ -27,8 +27,9 @@ namespace StardopPoolMinigame.Entities.Game.Table
         /// </summary>
         public Table(
             IEntity? parent = null,
-            Vector2? anchor = null,
             string? key = null,
+            Vector2? anchor = null,
+            Position? position = Position.Relative,
             IList<IEntity>? children = null,
             float? layerDepth = null,
             bool? isHoverable = false,
@@ -63,6 +64,7 @@ namespace StardopPoolMinigame.Entities.Game.Table
             parent,
             key,
             anchor,
+            position,
             children,
             layerDepth,
             isHoverable,

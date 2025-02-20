@@ -23,8 +23,9 @@ namespace StardopPoolMinigame.Entities.Game
         /// </summary>
         public PocketedBallsIndicator(
             IEntity? parent = null,
-            Vector2? anchor = null,
             string? key = null,
+            Vector2? anchor = null,
+            Position? position = Position.Relative,
             IList<IEntity>? children = null,
             float? layerDepth = null,
             bool? isHoverable = false,
@@ -58,6 +59,7 @@ namespace StardopPoolMinigame.Entities.Game
             parent,
             key,
             anchor,
+            position,
             children,
             layerDepth,
             isHoverable,

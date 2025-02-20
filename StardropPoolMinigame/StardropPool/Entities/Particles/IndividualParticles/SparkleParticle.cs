@@ -16,8 +16,9 @@ namespace StardopPoolMinigame.Entities.Particles.IndividualParticles
         /// </summary>
         public SparkleParticle(
             IEntity? parent = null,
-            Vector2? anchor = null,
             string? key = null,
+            Vector2? anchor = null,
+            Position? position = Position.Fixed,
             IList<IEntity>? children = null,
             float? layerDepth = null,
             bool? isHoverable = false,
@@ -51,6 +52,7 @@ namespace StardopPoolMinigame.Entities.Particles.IndividualParticles
             parent,
             key,
             anchor,
+            position,
             children,
             layerDepth,
             isHoverable,
